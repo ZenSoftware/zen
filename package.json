@@ -7,6 +7,7 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "nx": "nx",
     "start": "ng serve",
+    "start:api": "ng serve api",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
@@ -65,8 +66,6 @@
     "jest": "26.2.2",
     "@types/jest": "26.0.8",
     "ts-jest": "26.1.4",
-    "cypress": "^4.1.0",
-    "@nrwl/cypress": "10.1.0",
     "@nrwl/node": "10.1.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0"
