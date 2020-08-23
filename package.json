@@ -28,36 +28,34 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
   },
   "dependencies": {
-    "@angular/animations": "^10.0.0",
-    "@angular/common": "^10.0.0",
-    "@angular/compiler": "^10.0.0",
-    "@angular/core": "^10.0.0",
-    "@angular/forms": "^10.0.0",
-    "@angular/platform-browser": "^10.0.0",
-    "@angular/platform-browser-dynamic": "^10.0.0",
-    "@angular/router": "^10.0.0",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
-    "@nrwl/angular": "10.1.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "~6.5.5",
-    "zone.js": "^0.10.2"
+    "rxjs": "~6.5.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.0",
+    "@angular/animations": "^10.0.0",
     "@angular/cli": "~10.0.0",
+    "@angular/common": "^10.0.0",
+    "@angular/compiler": "^10.0.0",
     "@angular/compiler-cli": "^10.0.0",
+    "@angular/core": "^10.0.0",
+    "@angular/forms": "^10.0.0",
     "@angular/language-service": "^10.0.0",
+    "@angular/platform-browser": "^10.0.0",
+    "@angular/platform-browser-dynamic": "^10.0.0",
+    "@angular/router": "^10.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",
+    "@nrwl/angular": "10.1.0",
     "@nrwl/jest": "10.1.0",
     "@nrwl/nest": "10.1.0",
     "@nrwl/node": "10.1.0",
     "@nrwl/workspace": "10.1.0",
     "@types/jest": "26.0.8",
     "@types/node": "~8.9.4",
-    "codelyzer": "~5.0.1",
     "dotenv": "6.2.0",
     "eslint": "6.8.0",
     "jest": "26.2.2",
@@ -66,6 +64,7 @@
     "ts-jest": "26.1.4",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "typescript": "~3.9.3"
+    "typescript": "~3.9.3",
+    "zone.js": "^0.10.2"
   }
 }
