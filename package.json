@@ -1,11 +1,9 @@
 {
-  "name": "site",
+  "name": "zen",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "ng": "nx",
-    "nx": "nx",
     "start": "ng serve",
     "start:api": "ng serve api",
     "build": "ng build",
