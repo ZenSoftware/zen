@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Message } from '@site/api-interfaces';
+import { Message } from '@zen/api-interfaces';
 
 @Component({
   selector: 'site-root',
