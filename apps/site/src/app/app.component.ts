@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Message } from '@zen/api-interfaces';
+import { Environment } from '@zen/common';
 
 @Component({
   selector: 'site-root',
@@ -8,9 +9,9 @@ import { Message } from '@zen/api-interfaces';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
+  hello$ = this.http.get<Message>(`${this.env.appUrl.api}/hello`);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private env: Environment) {
     document.title = 'Zen Software';
   }
 }
