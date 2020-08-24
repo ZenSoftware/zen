@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from './config';
+import { ToolsController } from './controllers';
+// import { AuthModule } from './auth';
+import { ZenGraphQLModule } from './graphql';
+import { JwtModule } from './jwt';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [ConfigModule, JwtModule, ZenGraphQLModule],
+  controllers: [ToolsController],
 })
 export class AppModule {}
