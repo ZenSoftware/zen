@@ -2,3 +2,8 @@
 
 /dist
 /coverage
+*.html
+*.yml
+*.yaml
+*.md
+*.prisma

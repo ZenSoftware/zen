@@ -30,6 +30,12 @@
     "help": "nx help",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
   },
+  "importSort": {
+    ".js, .ts": {
+      "style": "module",
+      "parser": "typescript"
+    }
+  },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
@@ -62,9 +68,11 @@
     "codelyzer": "~5.0.1",
     "dotenv": "6.2.0",
     "eslint": "6.8.0",
+    "import-sort-style-module": "^6.0.0",
     "jest": "26.2.2",
     "jest-preset-angular": "8.2.1",
-    "prettier": "2.0.4",
+    "prettier": "^2.0.4",
+    "prettier-plugin-import-sort": "0.0.4",
     "ts-jest": "26.1.4",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
