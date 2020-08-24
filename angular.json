@@ -1,36 +1,36 @@
 {
   "version": 1,
   "projects": {
-    "site": {
+    "portal": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/site",
-      "sourceRoot": "apps/site/src",
-      "prefix": "site",
+      "root": "apps/portal",
+      "sourceRoot": "apps/portal/src",
+      "prefix": "portal",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/site",
-            "index": "apps/site/src/index.html",
-            "main": "apps/site/src/main.ts",
-            "polyfills": "apps/site/src/polyfills.ts",
-            "tsConfig": "apps/site/tsconfig.app.json",
+            "outputPath": "dist/apps/portal",
+            "index": "apps/portal/src/index.html",
+            "main": "apps/portal/src/main.ts",
+            "polyfills": "apps/portal/src/polyfills.ts",
+            "tsConfig": "apps/portal/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/site/src/favicon.ico", "apps/site/src/assets"],
-            "styles": ["apps/site/src/styles.scss"],
+            "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
+            "styles": ["apps/portal/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/site/src/environments/environment.ts",
-                  "with": "apps/site/src/environments/environment.prod.ts"
+                  "replace": "apps/portal/src/environments/environment.ts",
+                  "with": "apps/portal/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -59,65 +59,62 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "site:build",
-            "proxyConfig": "apps/site/proxy.conf.json"
+            "browserTarget": "portal:build",
+            "proxyConfig": "apps/portal/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "site:build:production"
+              "browserTarget": "portal:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "site:build"
+            "browserTarget": "portal:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/site/tsconfig.app.json",
-              "apps/site/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/site/**/*"]
+            "tsConfig": ["apps/portal/tsconfig.app.json", "apps/portal/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/portal/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/site/jest.config.js",
-            "tsConfig": "apps/site/tsconfig.spec.json",
+            "jestConfig": "apps/portal/jest.config.js",
+            "tsConfig": "apps/portal/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "apps/site/src/test-setup.ts"
+            "setupFile": "apps/portal/src/test-setup.ts"
           }
         }
       }
     },
-    "site-e2e": {
-      "root": "apps/site-e2e",
-      "sourceRoot": "apps/site-e2e/src",
+    "portal-e2e": {
+      "root": "apps/portal-e2e",
+      "sourceRoot": "apps/portal-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/site-e2e/cypress.json",
-            "tsConfig": "apps/site-e2e/tsconfig.e2e.json",
-            "devServerTarget": "site:serve"
+            "cypressConfig": "apps/portal-e2e/cypress.json",
+            "tsConfig": "apps/portal-e2e/tsconfig.e2e.json",
+            "devServerTarget": "portal:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "site:serve:production"
+              "devServerTarget": "portal:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/site-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/site-e2e/**/*"]
+            "tsConfig": ["apps/portal-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/portal-e2e/**/*"]
           }
         }
       }
@@ -160,10 +157,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/api/tsconfig.app.json",
-              "apps/api/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/api/**/*"]
           }
         },
@@ -212,10 +206,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/common/tsconfig.lib.json",
-              "libs/common/tsconfig.spec.json"
-            ],
+            "tsConfig": ["libs/common/tsconfig.lib.json", "libs/common/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!libs/common/**/*"]
           }
         },
@@ -303,5 +294,5 @@
       "strict": true
     }
   },
-  "defaultProject": "site"
+  "defaultProject": "portal"
 }

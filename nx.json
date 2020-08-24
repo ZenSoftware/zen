@@ -22,12 +22,12 @@
     }
   },
   "projects": {
-    "site": {
+    "portal": {
       "tags": []
     },
-    "site-e2e": {
+    "portal-e2e": {
       "tags": [],
-      "implicitDependencies": ["site"]
+      "implicitDependencies": ["portal"]
     },
     "api": {
       "tags": []

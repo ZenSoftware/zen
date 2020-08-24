@@ -4,7 +4,7 @@ import { Message } from '@zen/api-interfaces';
 import { Environment } from '@zen/common';
 
 @Component({
-  selector: 'site-root',
+  selector: 'portal-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
