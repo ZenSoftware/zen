@@ -22,7 +22,7 @@
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
     "format": "nx format:write",
-    "format:write": "nx format:write",
+    "format:all": "nx format:write --all",
     "format:check": "nx format:check",
     "update": "ng update @nrwl/workspace",
     "workspace-schematic": "nx workspace-schematic",
