@@ -12,10 +12,10 @@ export const environment: EnvironmentBase = {
   },
   postgres: {
     host: 'localhost',
-    port: 5444,
+    port: 5445,
     user: 'ZenAdmin',
     password: 'temp',
-    database: 'prisma', // TODO: changed this to database created by prisma migrate
+    database: 'zen',
   },
   jwtOptions: {
     secret: 'dev secret',
