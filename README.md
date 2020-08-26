@@ -1,12 +1,12 @@
 # ⛩ Zen ⛩
 ## Modern Full Stack Web Portal built with Nest and Angular
-### 🤹 Currently under development 🌱
+### 🤹 Currently under development - New Contributors are Welcome!🌱
 
 ---
 
 ## GraphQL Ambitions
 - [ ] [Nest GraphQL](https://docs.nestjs.com/graphql/resolvers) resolvers as a gateway to [Prisma Client](https://www.prisma.io/docs/understand-prisma/prisma-in-your-stack/graphql).
-
+- [ ] [Prisma Case Insensitive Filtering](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/case-sensitivity) To allow for less strict text-search features.
 - [ ] [Prisma relay cursor connections](https://github.com/devoxa/prisma-relay-cursor-connection#readme) for robust, and correct pagination of data.
 - [ ] [PrismaSelect](https://paljs.com/plugins/select/) to solve the N+1 problem.
 - [ ] [PrismaDelete](https://paljs.com/plugins/delete) to add `CASCADE` and `SET_NULL` deletion capabilities to Prisma. These features have yet to be implemented by the core Prisma team.  This project will convert to the approach directly supported by Prisma when the official feature becomes available.
@@ -19,7 +19,7 @@
 - [ ] Angular route guards and Angular directives to show/hide content depending on user permissions.
 - [ ] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
 - [ ] For performance reasons, the [Nest Fastify adapter](https://docs.nestjs.com/techniques/performance#performance-fastify) has been chosen over the Express adapter.
-- [ ] 100% stateless authentication system using [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality) to enable horizontal scaling of container replicas of the Nest api in production.
+- [x] 100% stateless authentication system using [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality) to enable horizontal scaling of container replicas of the Nest api in production.
 
 ---
 
