@@ -1,5 +1,6 @@
-# ⛩ Zen ⛩ Nest + Angular - Modern, Full Stack, Web Portal Starter Project
-## 🤹 Currently under development 🌱
+# ⛩ Zen ⛩
+## Nest + Angular - Modern, Full Stack, Web Portal Starter Project
+### 🤹 Currently under development 🌱
 
 ---
 
