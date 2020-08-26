@@ -1,5 +1,5 @@
 # ⛩ Zen ⛩
-## Modern, Full Stack, Web Portal Starter Project built with Nest and Angular
+## Modern Full Stack Web Portal built with Nest and Angular
 ### 🤹 Currently under development 🌱
 
 ---
@@ -10,7 +10,7 @@
 - [ ] [Prisma relay cursor connections](https://github.com/devoxa/prisma-relay-cursor-connection#readme) for robust, and correct pagination of data.
 - [ ] [PrismaSelect](https://paljs.com/plugins/select/) to solve the N+1 problem.
 - [ ] [PrismaDelete](https://paljs.com/plugins/delete) to add `CASCADE` and `SET_NULL` deletion capabilities to Prisma. These features have yet to be implemented by the core Prisma team.  This project will convert to the approach directly supported by Prisma when the official feature becomes available.
-- [ ] [Nest GraphQL SDL generation](https://docs.nestjs.com/graphql/generating-sdl) to enable auto-completion in the creation of GraphQL queries by using something like [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/)
+- [ ] [Nest GraphQL SDL generation](https://docs.nestjs.com/graphql/generating-sdl) to enable auto-completion using something like [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/)
 - [ ] [Code generation](https://graphql-code-generator.com/docs/plugins/typescript-apollo-angular) of [apollo-angular](https://www.apollographql.com/docs/angular/) services to enable simple, type safe access to the GraphQL API within Angular.
 ---
 
