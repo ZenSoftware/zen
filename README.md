@@ -15,7 +15,7 @@
 ---
 
 ## API Authentication, Performance & Scaling Ambitions
-- [ ] [Nest authentication](https://docs.nestjs.com/techniques/authentication) integration, user creation, and login system designed specifically to work with an [Angular SPA (single page application)](https://angular.io/).  This project will provide responsive, "mobile first" interfaces for the varying authentication components (register, sign-up, & login).  
+- [ ] [Nest authentication](https://docs.nestjs.com/techniques/authentication) integration, user creation, and login system designed specifically to work with an [Angular SPA (single page application)](https://angular.io/).  This project will provide responsive, "mobile first" interfaces for the varying authentication components (sign-up, login, password reset).  
 - [ ] Angular route guards and Angular directives to show/hide content depending on user permissions.
 - [ ] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
 - [ ] For performance reasons, the [Nest Fastify adapter](https://docs.nestjs.com/techniques/performance#performance-fastify) has been chosen over the Express adapter.
