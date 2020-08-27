@@ -9,7 +9,7 @@ import { Environment } from '@zen/common';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>(`${this.env.appUrl.api}/hello`);
+  hello$ = this.http.get<Message>(`${this.env.appUrl.api}/tools/hello`);
 
   constructor(private http: HttpClient, private env: Environment) {
     document.title = 'Zen Software';
