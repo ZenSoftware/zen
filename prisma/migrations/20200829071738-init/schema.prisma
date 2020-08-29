@@ -8,6 +8,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["insensitiveFilters"]
 }
 
 model Post {
@@ -28,7 +29,7 @@ model Profile {
 model User {
   id      Int      @default(autoincrement()) @id
   email   String   @unique
-  name    String?
+  name    String? 
   posts   Post[]
   profile Profile?
 }

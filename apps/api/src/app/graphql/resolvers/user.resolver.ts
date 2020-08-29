@@ -1,19 +1,24 @@
-import { Args, Int, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { PrismaService } from '../../prisma';
-import { User, UserWhereUniqueInput } from '../prisma';
+import { User } from '../models';
 
 @Resolver(of => User)
 export class UserResolver {
   constructor(private readonly prisma: PrismaService) {}
 
   @Query(returns => User)
-  async user(@Args('where', { type: () => UserWhereUniqueInput }) where: UserWhereUniqueInput) {
-    return this.prisma.user.findOne({ where });
+  async user(@Args('id', { type: () => Int }) id: number) {
+    return this.prisma.user.findOne({ where: { id: id } });
   }
 
-  @Query(returns => User)
-  async userById(@Args('id', { type: () => Int }) id: number) {
-    return this.prisma.user.findOne({ where: { id: id } });
+  @Mutation(returns => User)
+  async createUser() {
+    return this.prisma.user.create({
+      data: {
+        email: 'peter@zensoftware.ca',
+        name: 'peter',
+      },
+    });
   }
 }

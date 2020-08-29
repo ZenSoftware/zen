@@ -11,11 +11,6 @@ generator client {
   previewFeatures = ["insensitiveFilters"]
 }
 
-generator nestgraphql {
-  provider = "node node_modules/prisma-nestjs-graphql"
-  output = "../apps/api/src/app/graphql/prisma"
-}
-
 model Post {
   id        Int      @default(autoincrement()) @id
   createdAt DateTime @default(now())

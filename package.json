@@ -106,7 +106,6 @@
     "js-cookie": "^2.2.1",
     "prettier": "^2.1.1",
     "prettier-plugin-import-sort": "0.0.4",
-    "prisma-nestjs-graphql": "^1.1.4",
     "ts-jest": "26.1.4",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
