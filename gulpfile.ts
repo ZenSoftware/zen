@@ -8,6 +8,8 @@ import * as gulp from 'gulp';
 import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 
 const execAsync = promisify(exec);
+const execReaddir = promisify(fs.readdir);
+const execWriteFile = promisify(fs.writeFile);
 
 @Gulpclass()
 export class Gulpfile {
@@ -61,6 +63,7 @@ export class Gulpfile {
   //---------------------------------------------------------------------------
   @Task('gqlschema:copy')
   gqlschemaCopy() {
+    // Copy the GraphQL schema file to dist
     return gulp.src(CONFIG.gqlSchema.src).pipe(gulp.dest(CONFIG.gqlSchema.destCron));
   }
   //---------------------------------------------------------------------------
@@ -95,6 +98,30 @@ export class Gulpfile {
     });
 
     await Promise.all(promises);
+    cb();
+  }
+
+  @Task('gen:prisma-index')
+  async genPrismaIndex(cb) {
+    const nestGraphQLPrismaPath = CONFIG.gqlSchema.nestGraphQLPrismaPath;
+    const prismaFiles = [];
+    let folders = await execReaddir(nestGraphQLPrismaPath);
+    folders = folders.filter(f => path.extname(f) !== '.ts'); // Filter out index.ts
+
+    for (const folder of folders) {
+      const files = await execReaddir(`${nestGraphQLPrismaPath}/${folder}`);
+      for (const file of files) {
+        const fileName = path.basename(file, '.ts');
+        prismaFiles.push(`${folder}/${fileName}`);
+      }
+    }
+
+    const importStatements = prismaFiles
+      .map(p => `export * from './${p}';`)
+      .reduce((prev, curr, i, []) => prev + '\n' + curr);
+
+    await execWriteFile(`${nestGraphQLPrismaPath}/index.ts`, importStatements);
+    console.log(importStatements);
     cb();
   }
 
@@ -158,6 +185,7 @@ const CONFIG = {
   },
 
   gqlSchema: {
+    nestGraphQLPrismaPath: 'apps/api/src/app/graphql/prisma',
     src: 'apps/api/src/app/graphql/schema/**/*.graphql',
     destCron: 'dist/apps/api-cron/schema',
   },
