@@ -100,10 +100,103 @@ export class Gulpfile {
     await Promise.all(promises);
     cb();
   }
+  @Task('gen:nest-resolvers')
+  async genNestResolvers(cb) {
+    const nestGraphQLPrismaPath = CONFIG.gqlSchema.graphQLPath + '/prisma';
+    let folders = await execReaddir(nestGraphQLPrismaPath);
+    folders = folders.filter(f => path.extname(f) !== '.ts'); // Filter out .ts files
+
+    const regExpName = new RegExp(/^[ \t]*[a-zA-Z0-9]+\:/);
+    const queryToken = 'Query: {';
+    const mutationToken = 'Mutation: {';
+
+    for (const folder of folders) {
+      const pathName = path.join(__dirname, nestGraphQLPrismaPath, folder, 'resolvers.ts');
+      const resolversScript = fs.readFileSync(pathName).toString();
+
+      const queryStartIndex = resolversScript.indexOf(queryToken) + queryToken.length + 1;
+      const queryEndIndex = resolversScript.indexOf(mutationToken) - mutationToken.length;
+      const querySection = resolversScript.substr(
+        queryStartIndex,
+        queryEndIndex - queryStartIndex + 2
+      );
+      const querySectionLines = querySection.split('\n');
+
+      const queryNames = [];
+      for (const line of querySectionLines) {
+        if (regExpName.test(line)) {
+          queryNames.push(line.substr(0, line.indexOf(':')).trim());
+        }
+      }
+
+      let querySource = '';
+      for (const queryName of queryNames) {
+        querySource += `  @Query()
+  async ${queryName}(@Parent() parent, @Info() info, @Args() args, @Context() context) {
+    return resolvers.Query.${queryName}(parent, PrismaSelectArgs(info, args), context);
+  }\n\n`;
+      }
+
+      const mutationStartIndex = resolversScript.indexOf(mutationToken) + mutationToken.length + 1;
+      const mutationEndIndex = resolversScript.length - mutationStartIndex - 1;
+      const mutationSection = resolversScript.substr(mutationStartIndex, mutationEndIndex);
+      const mutationSectionLines = mutationSection.split('\n');
+      const mutationNames = [];
+      for (const line of mutationSectionLines) {
+        if (regExpName.test(line)) {
+          mutationNames.push(line.substr(0, line.indexOf(':')).trim());
+        }
+      }
+
+      let mutationSource = '';
+      for (const mutationName of mutationNames) {
+        mutationSource += `  @Mutation()
+  async ${mutationName}(@Parent() parent, @Info() info, @Args() args, @Context() context) {
+    return resolvers.Mutation.${mutationName}(parent, PrismaSelectArgs(info, args), context);
+  }\n\n`;
+      }
+      mutationSource = mutationSource.trimRight();
+
+      const resolverSource = `import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+
+import { PrismaSelectArgs } from '../prisma-select';
+import resolvers from '../prisma/${folder}/resolvers';
+
+@Resolver('${folder}')
+export class ${folder}Resolver {
+${querySource}${mutationSource}
+}
+`;
+
+      const resolverPath = path.join(
+        __dirname,
+        CONFIG.gqlSchema.graphQLPath,
+        'resolvers',
+        `${folder}.ts`
+      );
+
+      await execWriteFile(resolverPath, resolverSource);
+      // await this.execLocal(`prettier --write ${resolverPath}`);
+    }
+
+    const nestResolversPath = `${CONFIG.gqlSchema.graphQLPath}/resolvers`;
+    let resolverFiles = await execReaddir(nestResolversPath);
+    resolverFiles = resolverFiles.filter(f => path.basename(f) !== 'index.ts'); // Filter out index.ts
+
+    let exportStatements = resolverFiles
+      .map(p => `export * from './${path.basename(p, '.ts')}';`)
+      .reduce((prev, curr, i, []) => prev + '\n' + curr);
+    exportStatements += '\n';
+
+    await execWriteFile(`${nestResolversPath}/index.ts`, exportStatements);
+    // await this.execLocal(`prettier --write ${nestResolversPath}/index.ts`);
+
+    cb();
+  }
 
   @Task('gen:prisma-index')
   async genPrismaIndex(cb) {
-    const nestGraphQLPrismaPath = CONFIG.gqlSchema.nestGraphQLPrismaPath;
+    const nestGraphQLPrismaPath = CONFIG.gqlSchema.graphQLPath + '/prisma';
     const prismaFiles = [];
     let folders = await execReaddir(nestGraphQLPrismaPath);
     folders = folders.filter(f => path.extname(f) !== '.ts'); // Filter out index.ts
@@ -185,7 +278,8 @@ const CONFIG = {
   },
 
   gqlSchema: {
-    nestGraphQLPrismaPath: 'apps/api/src/app/graphql/prisma',
+    graphQLPath: 'apps/api/src/app/graphql',
+    // nestGraphQLPrismaPath: 'apps/api/src/app/graphql/prisma',
     src: 'apps/api/src/app/graphql/schema/**/*.graphql',
     destCron: 'dist/apps/api-cron/schema',
   },
