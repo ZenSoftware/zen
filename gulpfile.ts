@@ -175,8 +175,7 @@ ${querySource}${mutationSource}
 
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
     await execWriteFile(indexPath, indexFile);
-    console.log(`- Wrote: ${indexPath}`);
-    console.log(`-----------------------------------------------------\n`);
+    console.log(`- Wrote: ${indexPath}\n`);
 
     cb();
   }
