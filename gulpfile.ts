@@ -190,9 +190,9 @@ ${querySource}${mutationSource}
     const bulkExportString = resolverFiles
       .map(f => `${f}Resolver`)
       .toString()
-      .replace(/,/g, ', ');
+      .replace(/,/g, ',\n  ');
     // Create a bulk export for easy importing of all resolvers
-    exportStatements += `\nexport const ALL_RESOLVERS = [${bulkExportString}];\n`;
+    exportStatements += `\nexport const ALL_RESOLVERS = [\n  ${bulkExportString}\n];\n`;
 
     await execWriteFile(`${nestResolversPath}/index.ts`, exportStatements);
 
