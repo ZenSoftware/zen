@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
-import { PrismaSelect } from '@paljs/plugins';
-import { GraphQLResolveInfo } from 'graphql';
 
 import { ConfigService } from '../config';
-import { Context, createContext } from './context';
+import { createContext } from './context';
 import typeDefs from './prisma/typeDefs';
 
 @Injectable()
@@ -32,14 +30,3 @@ export class GqlConfigService implements GqlOptionsFactory {
     };
   }
 }
-
-const middleware = async (resolve, root, args, context: Context, info: GraphQLResolveInfo) => {
-  const result = new PrismaSelect(info).value;
-  if (!result.select || Object.keys(result.select).length > 0) {
-    args = {
-      ...args,
-      ...result,
-    };
-  }
-  return resolve(root, args, context, info);
-};

@@ -78,6 +78,8 @@
     "@angular/platform-browser-dynamic": "^10.0.14",
     "@angular/router": "^10.0.14",
     "@apollo/client": "^3.0.0",
+    "@graphql-codegen/cli": "^1.17.8",
+    "@graphql-codegen/typescript-apollo-angular": "^2.0.1",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",
     "@nrwl/angular": "10.1.0",
