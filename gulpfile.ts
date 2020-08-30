@@ -156,7 +156,7 @@ ${querySource}${mutationSource}
 
     console.log(`* Total resolver files wrote: ${wroteCount}`);
 
-    // Get the object names via the filename of the "resolver" directory
+    // Get the data type names via the filename of the "resolvers" directory
     let dataTypeNames = (await execReaddir(RESOLVERS_PATH))
       .filter(f => path.basename(f) !== 'index.ts') // Filter out any "index.ts"
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
