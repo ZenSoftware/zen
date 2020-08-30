@@ -1305,10 +1305,10 @@ export type UserCommentsArgs = {
   distinct?: Maybe<CommentDistinctFieldEnum>;
 };
 
-export type FindOneUserQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type FindOneUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindOneUserQueryQuery = (
+export type FindOneUserQuery = (
   { __typename?: 'Query' }
   & { findOneUser?: Maybe<(
     { __typename?: 'User' }
@@ -1316,8 +1316,8 @@ export type FindOneUserQueryQuery = (
   )> }
 );
 
-export const FindOneUserQueryDocument = gql`
-    query FindOneUserQuery {
+export const FindOneUserDocument = gql`
+    query FindOneUser {
   findOneUser(where: {id: 1}) {
     id
     email
@@ -1329,8 +1329,8 @@ export const FindOneUserQueryDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindOneUserQueryGQL extends Apollo.Query<FindOneUserQueryQuery, FindOneUserQueryQueryVariables> {
-    document = FindOneUserQueryDocument;
+  export class FindOneUserGQL extends Apollo.Query<FindOneUserQuery, FindOneUserQueryVariables> {
+    document = FindOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

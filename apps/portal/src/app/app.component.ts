@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FindOneUserQueryGQL } from '@zen/graphql';
+import { FindOneUserGQL } from '@zen/graphql';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'portal-root',
@@ -7,7 +8,7 @@ import { FindOneUserQueryGQL } from '@zen/graphql';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  apolloQuery$ = this.findOneUserQueryGQL.watch().valueChanges;
+  findOneUserGQL$ = this.findOneUserGQL.watch().valueChanges.pipe(map(r => r.data.findOneUser));
 
-  constructor(private findOneUserQueryGQL: FindOneUserQueryGQL) {}
+  constructor(private findOneUserGQL: FindOneUserGQL) {}
 }
