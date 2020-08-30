@@ -100,8 +100,8 @@ export class Gulpfile {
     await Promise.all(promises);
     cb();
   }
-  @Task('gen:nest-resolvers')
-  async genNestResolvers(cb) {
+  @Task('prisma:gen-nest')
+  async prismaGenNest(cb) {
     const nestGraphQLPrismaPath = CONFIG.gqlSchema.graphQLPath + '/prisma';
     let folders = await execReaddir(nestGraphQLPrismaPath);
     folders = folders.filter(f => path.extname(f) !== '.ts'); // Filter out .ts files
@@ -182,14 +182,18 @@ ${querySource}${mutationSource}
     const nestResolversPath = `${CONFIG.gqlSchema.graphQLPath}/resolvers`;
     let resolverFiles = await execReaddir(nestResolversPath);
     resolverFiles = resolverFiles.filter(f => path.basename(f) !== 'index.ts'); // Filter out index.ts
+    resolverFiles = resolverFiles.map(f => path.basename(f, '.ts')); // Remove ".ts" in all names
 
     let exportStatements = resolverFiles
-      .map(p => `export * from './${path.basename(p, '.ts')}';`)
+      .map(f => `import { ${f}Resolver } from './${f}';`)
       .reduce((prev, curr, i, []) => prev + '\n' + curr);
-    exportStatements += '\n';
+
+    const bulkExportString = resolverFiles.map(f => `${f}Resolver`).toString();
+    // Create a bulk export for easy importing of all resolvers
+    exportStatements += `export const ALL_RESOLVERS = [${bulkExportString}];\n`;
 
     await execWriteFile(`${nestResolversPath}/index.ts`, exportStatements);
-    // await this.execLocal(`prettier --write ${nestResolversPath}/index.ts`);
+    await this.execLocal(`prettier --write ${nestResolversPath}/index.ts`);
 
     cb();
   }
@@ -209,12 +213,12 @@ ${querySource}${mutationSource}
       }
     }
 
-    const importStatements = prismaFiles
+    const exportStatements = prismaFiles
       .map(p => `export * from './${p}';`)
       .reduce((prev, curr, i, []) => prev + '\n' + curr);
 
-    await execWriteFile(`${nestGraphQLPrismaPath}/index.ts`, importStatements);
-    console.log(importStatements);
+    await execWriteFile(`${nestGraphQLPrismaPath}/index.ts`, exportStatements);
+    console.log(exportStatements);
     cb();
   }
 

@@ -2,7 +2,7 @@ import { Global, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { GqlConfigService } from './gql-config.service';
-import { CommentResolver, GroupResolver, PostResolver, UserResolver } from './resolvers';
+import { ALL_RESOLVERS } from './resolvers';
 
 @Global()
 @Module({
@@ -11,6 +11,6 @@ import { CommentResolver, GroupResolver, PostResolver, UserResolver } from './re
       useClass: GqlConfigService,
     }),
   ],
-  providers: [CommentResolver, GroupResolver, PostResolver, UserResolver],
+  providers: [...ALL_RESOLVERS],
 })
 export class ZenGraphQLModule {}
