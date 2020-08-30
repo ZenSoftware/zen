@@ -1,37 +1,37 @@
-import { Context } from '../../context';
+import { Context } from '../../context'
 
 export default {
   Query: {
     findOnePost: (_parent, args, { prisma }: Context) => {
-      return prisma.post.findOne(args);
+      return prisma.post.findOne(args)
     },
     findManyPost: (_parent, args, { prisma }: Context) => {
-      return prisma.post.findMany(args);
+      return prisma.post.findMany(args)
     },
     findManyPostCount: (_parent, args, { prisma }: Context) => {
-      return prisma.post.count(args);
+      return prisma.post.count(args)
     },
   },
   Mutation: {
     createOnePost: (_parent, args, { prisma }: Context) => {
-      return prisma.post.create(args);
+      return prisma.post.create(args)
     },
     updateOnePost: (_parent, args, { prisma }: Context) => {
-      return prisma.post.update(args);
+      return prisma.post.update(args)
     },
     deleteOnePost: async (_parent, args, { prisma }: Context) => {
-      await prisma.onDelete({ model: 'Post', where: args.where });
-      return prisma.post.delete(args);
+      await prisma.onDelete({ model: 'Post', where: args.where })
+      return prisma.post.delete(args)
     },
     upsertOnePost: async (_parent, args, { prisma }: Context) => {
-      return prisma.post.upsert(args);
+      return prisma.post.upsert(args)
     },
     deleteManyPost: async (_parent, args, { prisma }: Context) => {
-      await prisma.onDelete({ model: 'Post', where: args.where });
-      return prisma.post.deleteMany(args);
+      await prisma.onDelete({ model: 'Post', where: args.where })
+      return prisma.post.deleteMany(args)
     },
     updateManyPost: (_parent, args, { prisma }: Context) => {
-      return prisma.post.updateMany(args);
+      return prisma.post.updateMany(args)
     },
   },
-};
+}
