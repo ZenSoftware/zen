@@ -195,7 +195,7 @@ ${querySource}${mutationSource}
       .toString()
       .replace(/,/g, ',\n  ');
     // Create a bulk export for easy importing of all resolvers
-    exportStatements += `\nexport const ALL_RESOLVERS = [\n  ${bulkExportString}\n];\n`;
+    exportStatements += `\n\nexport const ALL_RESOLVERS = [\n  ${bulkExportString}\n];\n`;
 
     await execWriteFile(`${nestResolversPath}/index.ts`, exportStatements);
 
