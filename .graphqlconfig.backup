@@ -1,9 +1,0 @@
-config:
-  namingConvention: keep
-
-generates:
-  path/to/output.ts:
-    plugins:
-      - typescript
-      - typescript-operations
-      - typescript-apollo-angular

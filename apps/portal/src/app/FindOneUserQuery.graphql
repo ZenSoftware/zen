@@ -1,7 +1,0 @@
-query FindOneUserQuery {
-  findOneUser(where: { id: 1 }) {
-    id
-    email
-    name
-  }
-}

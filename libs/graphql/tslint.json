@@ -1,10 +1,6 @@
 {
   "extends": "../../tslint.json",
-  "rules": {
-    "directive-selector": [true, "attribute", "zen", "camelCase"],
-    "component-selector": [true, "element", "zen", "kebab-case"]
-  },
   "linterOptions": {
-    "exclude": ["!**/*"]
+    "exclude": ["./lib/apollo-angular.ts"]
   }
 }

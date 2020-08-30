@@ -1,0 +1,11 @@
+overwrite: true
+schema: "http://localhost:7080/graphql"
+documents: "libs/**/*.gql.ts"
+config:
+  ngModule: ./graphql.module#GraphQLModule
+generates:
+  libs/graphql/src/lib/apollo-angular.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-apollo-angular"
