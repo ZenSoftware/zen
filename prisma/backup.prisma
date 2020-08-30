@@ -1,4 +1,0 @@
-generator nestgraphql {
-  provider = "node node_modules/prisma-nestjs-graphql"
-  output = "../apps/api/src/app/graphql/prisma"
-}
