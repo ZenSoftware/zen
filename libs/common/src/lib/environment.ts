@@ -23,7 +23,7 @@ export class EnvironmentCommonProd implements Environment {
   assetRoot = './assets';
   appUrl = {
     api: 'https://api.zensoftware.ca',
-    portal: 'https://learn.zensoftware.ca/#/',
+    portal: 'https://zensoftware.ca/#/',
     graphql: 'https://api.zensoftware.ca/graphql',
     graphqlSubscriptions: 'wss://api.zensoftware.ca/graphql',
   };
