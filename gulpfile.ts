@@ -170,6 +170,7 @@ ${querySource}${mutationSource}
       .map(n => `${n}Resolver`)
       .toString()
       .replace(/,/g, ',\n  ');
+
     indexSource += `\n\nexport const ALL_RESOLVERS = [\n  ${bulkExportString}\n];\n`;
 
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
