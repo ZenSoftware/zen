@@ -161,7 +161,7 @@ ${querySource}${mutationSource}
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
     // Construct the "resolvers" directory's "index.ts"
-    let indexFile = dataTypeNames
+    let indexSource = dataTypeNames
       .map(n => `import { ${n}Resolver } from './${n}';`)
       .reduce((prev, curr, i, []) => prev + '\n' + curr);
 
@@ -170,10 +170,10 @@ ${querySource}${mutationSource}
       .map(n => `${n}Resolver`)
       .toString()
       .replace(/,/g, ',\n  ');
-    indexFile += `\n\nexport const ALL_RESOLVERS = [\n  ${bulkExportString}\n];\n`;
+    indexSource += `\n\nexport const ALL_RESOLVERS = [\n  ${bulkExportString}\n];\n`;
 
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
-    await execWriteFile(indexPath, indexFile);
+    await execWriteFile(indexPath, indexSource);
     console.log(`- Wrote: ${indexPath}\n`);
 
     cb();
