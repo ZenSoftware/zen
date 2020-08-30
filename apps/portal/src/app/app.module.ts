@@ -11,7 +11,12 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, GraphQLModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    GraphQLModule.forRoot({ enableSubscriptions: true }),
+  ],
   providers: [
     Location,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
