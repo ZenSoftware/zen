@@ -18,7 +18,7 @@ const CONFIG = {
   cleanGlobs: ['dist/apps/'],
 
   gql: {
-    path: 'apps/api/src/app/graphql',
+    apiPath: 'apps/api/src/app/graphql',
   },
 
   // handlebars: {
@@ -69,8 +69,8 @@ export class Gulpfile {
   //---------------------------------------------------------------------------
   @Task('gen:prisma-nest')
   async genPrismaNest(cb) {
-    const PRISMA_PATH = `${CONFIG.gql.path}/prisma`;
-    const RESOLVERS_PATH = `${CONFIG.gql.path}/resolvers`;
+    const PRISMA_PATH = `${CONFIG.gql.apiPath}/prisma`;
+    const RESOLVERS_PATH = `${CONFIG.gql.apiPath}/resolvers`;
 
     console.log(`---------------- @paljs/cli generate ----------------`);
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g'); //
@@ -87,7 +87,7 @@ export class Gulpfile {
 
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
-      const outPath = path.join(__dirname, CONFIG.gql.path, 'resolvers', `${prismaName}.ts`);
+      const outPath = path.join(__dirname, CONFIG.gql.apiPath, 'resolvers', `${prismaName}.ts`);
 
       // Guard to prevent the overwriting of existing files
       if (!fs.existsSync(outPath)) {
