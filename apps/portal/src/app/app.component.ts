@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Message } from '@zen/api-interfaces';
-import { Environment } from '@zen/common';
+import { Apollo, gql } from 'apollo-angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'portal-root',
@@ -9,9 +8,22 @@ import { Environment } from '@zen/common';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>(`${this.env.appUrl.api}/tools/hello`);
+  apolloQuery$: Observable<any>;
 
-  constructor(private http: HttpClient, private env: Environment) {
-    document.title = 'Zen Software';
+  constructor(private apollo: Apollo) {
+    this.apolloQuery$ = this.apollo.watchQuery({
+      query: gql`
+        query {
+          findOneUser(where: { id: 1 }) {
+            id
+            email
+            password
+            posts {
+              id
+            }
+          }
+        }
+      `,
+    }).valueChanges;
   }
 }
