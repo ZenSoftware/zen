@@ -115,6 +115,7 @@ export class Gulpfile {
     const mutationToken = 'Mutation: {';
 
     console.log(`---- Writing Nest GraphQL Resolvers ----`);
+
     for (const folder of folders) {
       const outPath = path.join(
         __dirname,
@@ -174,7 +175,7 @@ export class Gulpfile {
 
         const resolverSource = `import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
 
-import { PrismaSelectArgs } from '../prisma-select';
+import PrismaSelectArgs from '../prisma-select-args';
 import resolvers from '../prisma/${folder}/resolvers';
 
 @Resolver('${folder}')
