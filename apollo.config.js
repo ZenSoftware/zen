@@ -5,6 +5,6 @@ module.exports = {
       url: 'http://localhost:7080/graphql',
     },
 
-    includes: ['apps/portal/src/app/**/*.gql.ts', 'libs/**/*.gql.ts'],
+    includes: ['apps/portal/src/**/*.gql.ts', 'libs/**/*.gql.ts'],
   },
 };
