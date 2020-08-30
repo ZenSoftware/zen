@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   type Comment {
@@ -31,10 +31,7 @@ export default gql`
   }
   type Mutation {
     createOneComment(data: CommentCreateInput!): Comment!
-    updateOneComment(
-      where: CommentWhereUniqueInput!
-      data: CommentUpdateInput!
-    ): Comment!
+    updateOneComment(where: CommentWhereUniqueInput!, data: CommentUpdateInput!): Comment!
     deleteOneComment(where: CommentWhereUniqueInput!): Comment
     upsertOneComment(
       where: CommentWhereUniqueInput!
@@ -42,9 +39,6 @@ export default gql`
       update: CommentUpdateInput!
     ): Comment
     deleteManyComment(where: CommentWhereInput): BatchPayload
-    updateManyComment(
-      where: CommentWhereInput
-      data: CommentUpdateManyMutationInput
-    ): BatchPayload
+    updateManyComment(where: CommentWhereInput, data: CommentUpdateManyMutationInput): BatchPayload
   }
-`
+`;

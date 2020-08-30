@@ -1,5 +1,5 @@
-import { PrismaClient, PrismaClientOptions } from "@prisma/client";
-import { PrismaDelete, onDeleteArgs } from "@paljs/plugins";
+import { PrismaDelete, onDeleteArgs } from '@paljs/plugins';
+import { PrismaClient, PrismaClientOptions } from '@prisma/client';
 
 class Prisma extends PrismaClient {
   constructor(options?: PrismaClientOptions) {

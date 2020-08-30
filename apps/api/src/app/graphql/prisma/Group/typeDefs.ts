@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   type Group {
@@ -35,10 +35,7 @@ export default gql`
   }
   type Mutation {
     createOneGroup(data: GroupCreateInput!): Group!
-    updateOneGroup(
-      where: GroupWhereUniqueInput!
-      data: GroupUpdateInput!
-    ): Group!
+    updateOneGroup(where: GroupWhereUniqueInput!, data: GroupUpdateInput!): Group!
     deleteOneGroup(where: GroupWhereUniqueInput!): Group
     upsertOneGroup(
       where: GroupWhereUniqueInput!
@@ -46,9 +43,6 @@ export default gql`
       update: GroupUpdateInput!
     ): Group
     deleteManyGroup(where: GroupWhereInput): BatchPayload
-    updateManyGroup(
-      where: GroupWhereInput
-      data: GroupUpdateManyMutationInput
-    ): BatchPayload
+    updateManyGroup(where: GroupWhereInput, data: GroupUpdateManyMutationInput): BatchPayload
   }
-`
+`;

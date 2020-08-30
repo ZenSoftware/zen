@@ -1,37 +1,37 @@
-import { Context } from '../../context'
+import { Context } from '../../context';
 
 export default {
   Query: {
     findOneUser: (_parent, args, { prisma }: Context) => {
-      return prisma.user.findOne(args)
+      return prisma.user.findOne(args);
     },
     findManyUser: (_parent, args, { prisma }: Context) => {
-      return prisma.user.findMany(args)
+      return prisma.user.findMany(args);
     },
     findManyUserCount: (_parent, args, { prisma }: Context) => {
-      return prisma.user.count(args)
+      return prisma.user.count(args);
     },
   },
   Mutation: {
     createOneUser: (_parent, args, { prisma }: Context) => {
-      return prisma.user.create(args)
+      return prisma.user.create(args);
     },
     updateOneUser: (_parent, args, { prisma }: Context) => {
-      return prisma.user.update(args)
+      return prisma.user.update(args);
     },
     deleteOneUser: async (_parent, args, { prisma }: Context) => {
-      await prisma.onDelete({ model: 'User', where: args.where })
-      return prisma.user.delete(args)
+      await prisma.onDelete({ model: 'User', where: args.where });
+      return prisma.user.delete(args);
     },
     upsertOneUser: async (_parent, args, { prisma }: Context) => {
-      return prisma.user.upsert(args)
+      return prisma.user.upsert(args);
     },
     deleteManyUser: async (_parent, args, { prisma }: Context) => {
-      await prisma.onDelete({ model: 'User', where: args.where })
-      return prisma.user.deleteMany(args)
+      await prisma.onDelete({ model: 'User', where: args.where });
+      return prisma.user.deleteMany(args);
     },
     updateManyUser: (_parent, args, { prisma }: Context) => {
-      return prisma.user.updateMany(args)
+      return prisma.user.updateMany(args);
     },
   },
-}
+};

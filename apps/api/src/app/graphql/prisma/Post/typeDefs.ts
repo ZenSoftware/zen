@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   type Post {
@@ -46,9 +46,6 @@ export default gql`
       update: PostUpdateInput!
     ): Post
     deleteManyPost(where: PostWhereInput): BatchPayload
-    updateManyPost(
-      where: PostWhereInput
-      data: PostUpdateManyMutationInput
-    ): BatchPayload
+    updateManyPost(where: PostWhereInput, data: PostUpdateManyMutationInput): BatchPayload
   }
-`
+`;

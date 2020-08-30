@@ -1,8 +1,8 @@
 module.exports = {
   backend: {
-    generator: "sdl",
+    generator: 'sdl',
     onDelete: true,
-    excludeQueriesAndMutations: ["aggregate"],
-    output: "apps/api/src/app/graphql/prisma",
+    excludeQueriesAndMutations: ['aggregate'],
+    output: 'apps/api/src/app/graphql/prisma',
   },
 };
