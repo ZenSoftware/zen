@@ -74,7 +74,6 @@ export class Gulpfile {
 
     console.log(`---------------- @paljs/cli generate ----------------`);
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g'); //
-
     // await this.execLocal(`prettier --write "${PRISMA_PATH}/**/*.ts"`);
 
     console.log(`---------- Generate Nest GraphQL Resolvers ----------`);
