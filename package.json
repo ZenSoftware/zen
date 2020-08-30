@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ng serve",
     "start:api": "ng serve api",
-    "prod:api": "prisma generate && ng build api --prod && npm run dockerize:api",
+    "prod:api": "prisma generate && gulp clean && ng build api --prod && npm run dockerize:api",
     "dockerize:api": "docker build -f deploy/api/Dockerfile -t zen-api . && docker tag zen-api tuspeak.azurecr.io/zen-api:latest",
     "docker:run-api": "docker run -d --name zen-api -p 7080:7080 zen-api",
     "prisma:generate": "prisma generate && gulp gen:prisma-nest",
