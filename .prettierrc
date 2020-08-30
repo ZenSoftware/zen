@@ -1,13 +1,5 @@
 {
   "singleQuote": true,
   "printWidth": 100,
-  "arrowParens": "avoid",
-  "overrides": [
-    {
-      "files": "*.graphql",
-      "options": {
-        "printWidth": 1000
-      }
-    }
-  ]
+  "arrowParens": "avoid"
 }
