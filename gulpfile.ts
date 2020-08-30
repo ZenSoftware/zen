@@ -114,54 +114,65 @@ export class Gulpfile {
     const queryToken = 'Query: {';
     const mutationToken = 'Mutation: {';
 
+    console.log(`---- Writing Nest GraphQL Resolvers ----`);
     for (const folder of folders) {
-      const pathName = path.join(__dirname, nestGraphQLPrismaPath, folder, 'resolvers.ts');
-      const resolversScript = fs.readFileSync(pathName).toString();
-
-      const queryStartIndex = resolversScript.indexOf(queryToken) + queryToken.length + 1;
-      const queryEndIndex = resolversScript.indexOf(mutationToken) - mutationToken.length;
-      const querySection = resolversScript.substr(
-        queryStartIndex,
-        queryEndIndex - queryStartIndex + 2
+      const outPath = path.join(
+        __dirname,
+        CONFIG.gqlSchema.graphQLPath,
+        'resolvers',
+        `${folder}.ts`
       );
-      const querySectionLines = querySection.split('\n');
 
-      const queryNames = [];
-      for (const line of querySectionLines) {
-        if (regExpName.test(line)) {
-          queryNames.push(line.substr(0, line.indexOf(':')).trim());
+      if (!fs.existsSync(outPath)) {
+        console.log(`- Creating '${folder}Resolver'`);
+        const pathName = path.join(__dirname, nestGraphQLPrismaPath, folder, 'resolvers.ts');
+        const resolversScript = fs.readFileSync(pathName).toString();
+
+        const queryStartIndex = resolversScript.indexOf(queryToken) + queryToken.length + 1;
+        const queryEndIndex = resolversScript.indexOf(mutationToken) - mutationToken.length;
+        const querySection = resolversScript.substr(
+          queryStartIndex,
+          queryEndIndex - queryStartIndex + 2
+        );
+        const querySectionLines = querySection.split('\n');
+
+        const queryNames = [];
+        for (const line of querySectionLines) {
+          if (regExpName.test(line)) {
+            queryNames.push(line.substr(0, line.indexOf(':')).trim());
+          }
         }
-      }
 
-      let querySource = '';
-      for (const queryName of queryNames) {
-        querySource += `  @Query()
+        let querySource = '';
+        for (const queryName of queryNames) {
+          querySource += `  @Query()
   async ${queryName}(@Parent() parent, @Info() info, @Args() args, @Context() context) {
     return resolvers.Query.${queryName}(parent, PrismaSelectArgs(info, args), context);
   }\n\n`;
-      }
-
-      const mutationStartIndex = resolversScript.indexOf(mutationToken) + mutationToken.length + 1;
-      const mutationEndIndex = resolversScript.length - mutationStartIndex - 1;
-      const mutationSection = resolversScript.substr(mutationStartIndex, mutationEndIndex);
-      const mutationSectionLines = mutationSection.split('\n');
-      const mutationNames = [];
-      for (const line of mutationSectionLines) {
-        if (regExpName.test(line)) {
-          mutationNames.push(line.substr(0, line.indexOf(':')).trim());
         }
-      }
 
-      let mutationSource = '';
-      for (const mutationName of mutationNames) {
-        mutationSource += `  @Mutation()
+        const mutationStartIndex =
+          resolversScript.indexOf(mutationToken) + mutationToken.length + 1;
+        const mutationEndIndex = resolversScript.length - mutationStartIndex - 1;
+        const mutationSection = resolversScript.substr(mutationStartIndex, mutationEndIndex);
+        const mutationSectionLines = mutationSection.split('\n');
+        const mutationNames = [];
+        for (const line of mutationSectionLines) {
+          if (regExpName.test(line)) {
+            mutationNames.push(line.substr(0, line.indexOf(':')).trim());
+          }
+        }
+
+        let mutationSource = '';
+        for (const mutationName of mutationNames) {
+          mutationSource += `  @Mutation()
   async ${mutationName}(@Parent() parent, @Info() info, @Args() args, @Context() context) {
     return resolvers.Mutation.${mutationName}(parent, PrismaSelectArgs(info, args), context);
   }\n\n`;
-      }
-      mutationSource = mutationSource.trimRight();
+        }
+        mutationSource = mutationSource.trimRight();
 
-      const resolverSource = `import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+        const resolverSource = `import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
 
 import { PrismaSelectArgs } from '../prisma-select';
 import resolvers from '../prisma/${folder}/resolvers';
@@ -172,14 +183,8 @@ ${querySource}${mutationSource}
 }
 `;
 
-      const resolverPath = path.join(
-        __dirname,
-        CONFIG.gqlSchema.graphQLPath,
-        'resolvers',
-        `${folder}.ts`
-      );
-
-      await execWriteFile(resolverPath, resolverSource);
+        await execWriteFile(outPath, resolverSource);
+      }
     }
 
     const nestResolversPath = `${CONFIG.gqlSchema.graphQLPath}/resolvers`;
