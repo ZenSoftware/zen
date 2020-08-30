@@ -100,8 +100,11 @@ export class Gulpfile {
     await Promise.all(promises);
     cb();
   }
-  @Task('prisma:gen-nest')
-  async prismaGenNest(cb) {
+  @Task('gen:prisma-nest')
+  async genPrismaNest(cb) {
+    await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
+    await this.execLocal(`prettier --write "apps/api/src/app/graphql/prisma/**/*.ts"`);
+
     const nestGraphQLPrismaPath = CONFIG.gqlSchema.graphQLPath + '/prisma';
     let folders = await execReaddir(nestGraphQLPrismaPath);
     folders = folders.filter(f => path.extname(f) !== '.ts'); // Filter out .ts files

@@ -1,5 +1,4 @@
-// import { Context } from '../../context'
-declare type Context = any;
+import { Context } from '../../context';
 
 export default {
   Query: {
