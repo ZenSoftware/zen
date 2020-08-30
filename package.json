@@ -11,7 +11,7 @@
     "docker:run-api": "docker run --name zen-api -p 7080:7080 zen-api",
     "prisma:generate": "prisma generate && pal g && gulp prisma:gen-nest",
     "prisma:migrate": "prisma migrate up --experimental",
-    "gen:apollo-angular": "graphql-codegen --config apollo-angular.yml",
+    "apollo-angular:gen": "graphql-codegen --config apollo-angular.yml",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",

@@ -176,7 +176,6 @@ ${querySource}${mutationSource}
       );
 
       await execWriteFile(resolverPath, resolverSource);
-      // await this.execLocal(`prettier --write ${resolverPath}`);
     }
 
     const nestResolversPath = `${CONFIG.gqlSchema.graphQLPath}/resolvers`;
@@ -188,12 +187,14 @@ ${querySource}${mutationSource}
       .map(f => `import { ${f}Resolver } from './${f}';`)
       .reduce((prev, curr, i, []) => prev + '\n' + curr);
 
-    const bulkExportString = resolverFiles.map(f => `${f}Resolver`).toString();
+    const bulkExportString = resolverFiles
+      .map(f => `${f}Resolver`)
+      .toString()
+      .replace(/,/g, ', ');
     // Create a bulk export for easy importing of all resolvers
-    exportStatements += `export const ALL_RESOLVERS = [${bulkExportString}];\n`;
+    exportStatements += `\nexport const ALL_RESOLVERS = [${bulkExportString}];\n`;
 
     await execWriteFile(`${nestResolversPath}/index.ts`, exportStatements);
-    await this.execLocal(`prettier --write ${nestResolversPath}/index.ts`);
 
     cb();
   }
