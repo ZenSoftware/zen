@@ -1,6 +1,6 @@
 export abstract class Environment {
   abstract readonly production: boolean;
-  abstract readonly appUrl: {
+  abstract readonly url: {
     readonly api: string;
     readonly portal: string;
     readonly graphql: string;
@@ -10,7 +10,7 @@ export abstract class Environment {
 
 export class EnvironmentCommonDev implements Environment {
   production = false;
-  appUrl = {
+  url = {
     api: 'http://localhost:7080',
     portal: 'http://localhost:4200/#/',
     graphql: 'http://localhost:7080/graphql',
@@ -21,7 +21,7 @@ export class EnvironmentCommonDev implements Environment {
 export class EnvironmentCommonProd implements Environment {
   production = true;
   assetRoot = './assets';
-  appUrl = {
+  url = {
     api: 'https://api.zensoftware.ca',
     portal: 'https://zensoftware.ca/#/',
     graphql: 'https://api.zensoftware.ca/graphql',

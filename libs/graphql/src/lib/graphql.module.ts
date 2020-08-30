@@ -11,7 +11,7 @@ export function createApollo(
   const links: ApolloLink[] = [];
 
   const batch_link = httpBatchLink.create({
-    uri: env.appUrl.graphql,
+    uri: env.url.graphql,
     withCredentials: true,
     batchMax: 500,
   });
