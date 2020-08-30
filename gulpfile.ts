@@ -86,13 +86,12 @@ export class Gulpfile {
     const MUTATION_TOKEN = 'Mutation: {';
     const regExpHasResolverName = new RegExp(/^[ \t]*[a-zA-Z0-9]+\:/);
 
-    let createdCount = 0;
+    let wroteCount = 0;
     for (const prismaName of prismaNames) {
       const outPath = path.join(__dirname, CONFIG.gql.path, 'resolvers', `${prismaName}.ts`);
 
       // Guard to prevent the overwriting of existing files
       if (!fs.existsSync(outPath)) {
-        createdCount++;
         const pathName = path.join(__dirname, PRISMA_PATH, prismaName, 'resolvers.ts');
         const prismaScript = fs.readFileSync(pathName).toString();
 
@@ -151,11 +150,11 @@ ${querySource}${mutationSource}
 `;
         await execWriteFile(outPath, outSource);
         console.log(`- Wrote: ${outPath}`);
+        wroteCount++;
       }
     }
 
-    console.log(`* Total resolvers generated: ${createdCount}`);
-    console.log(`* Out directory: ${RESOLVERS_PATH}`);
+    console.log(`* Total resolver files wrote: ${wroteCount}`);
 
     // Get the object names via the filename of the "resolver" directory
     let dataTypeNames = (await execReaddir(RESOLVERS_PATH))
