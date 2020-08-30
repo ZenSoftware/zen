@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  findOneUserGQL$ = this.findOneUserGQL.watch().valueChanges.pipe(map(r => r.data.findOneUser));
+  findOneUser$ = this.findOneUserGQL.watch().valueChanges.pipe(map(r => r.data.findOneUser));
 
   constructor(private findOneUserGQL: FindOneUserGQL) {}
 }
