@@ -93,6 +93,7 @@
     "@nrwl/workspace": "10.1.0",
     "@paljs/cli": "^1.2.6",
     "@prisma/cli": "^2.5.1",
+    "@types/apollo-upload-client": "^14.1.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.7",

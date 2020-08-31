@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { ApolloClientOptions, ApolloLink, InMemoryCache, split } from '@apollo/client/core';
 import { WebSocketLink } from '@apollo/client/link/ws';
-import { getMainDefinition } from '@apollo/client/utilities';
+import { getMainDefinition, getOperationName } from '@apollo/client/utilities';
 import { Environment } from '@zen/common';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpBatchLink } from 'apollo-angular/http';
@@ -10,6 +10,8 @@ import { OperationDefinitionNode } from 'graphql';
 import * as Cookies from 'js-cookie';
 import { cloneDeep, merge } from 'lodash-es';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
+
+import { commonResolvers } from './common-resolvers';
 
 export abstract class GraphQLOptions {
   clientResolvers?: any;
@@ -32,7 +34,7 @@ export class GraphQLModule {
 
   constructor(@Optional() @SkipSelf() parentModule?: GraphQLModule) {
     if (parentModule) {
-      throw new Error('GraphQLModule is already loaded. Import it in the AppModule only');
+      throw new Error('GraphQLModule is already loaded. Import it in the AppModule only.');
     }
   }
 
@@ -70,7 +72,73 @@ export function createApollo(
     batchMax: 500,
   });
 
-  links.push(batch_link);
+  if (!options) {
+    links.push(batch_link);
+  } else {
+    if (options.enableSubscriptions) {
+      const websocket_link = new WebSocketLink({
+        uri: env.url.graphqlSubscriptions,
 
-  return { link: ApolloLink.from(links), cache: new InMemoryCache() };
+        options: {
+          reconnect: true,
+          connectionParams: () => ({ token: Cookies.get('jwt') }),
+        },
+      });
+
+      GraphQLModule.subscriptionClient = (<any>websocket_link).subscriptionClient;
+
+      const websocket_batch_link = split(
+        ({ query }) => {
+          const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
+          return kind === 'OperationDefinition' && operation === 'subscription';
+        },
+        websocket_link,
+        batch_link
+      );
+
+      if (!options.multipartMutations) {
+        links.push(websocket_batch_link);
+      } else {
+        const upload_link = createUploadLink({
+          uri: env.url.graphql,
+          credentials: 'include',
+        });
+
+        const upload_websocket_batch_link = split(
+          ({ query }) =>
+            (options.multipartMutations as string[]).includes(getOperationName(query) as string),
+          upload_link,
+          websocket_batch_link
+        );
+
+        links.push(upload_websocket_batch_link);
+      }
+    } else {
+      if (!options.multipartMutations) {
+        links.push(batch_link);
+      } else {
+        const upload_link = createUploadLink({
+          uri: env.url.graphql,
+          credentials: 'include',
+        });
+
+        const upload_batch_link = split(
+          ({ query }) =>
+            (options.multipartMutations as string[]).includes(getOperationName(query) as string),
+          upload_link,
+          batch_link
+        );
+
+        links.push(upload_batch_link);
+      }
+    }
+  }
+
+  const resolvers = cloneDeep(commonResolvers);
+
+  if (options?.clientResolvers) merge(resolvers, options.clientResolvers);
+
+  const cache = new InMemoryCache();
+
+  return { link: ApolloLink.from(links), cache, resolvers };
 }

@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    GraphQLModule.forRoot({ enableSubscriptions: true }),
+    GraphQLModule.forRoot({ enableSubscriptions: true, multipartMutations: [] }),
   ],
   providers: [
     Location,
