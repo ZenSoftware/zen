@@ -63,7 +63,8 @@ export enum GroupDistinctFieldEnum {
   Id = 'id',
   Name = 'name',
   CreatedAt = 'createdAt',
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
+  Some = 'some'
 }
 
 export type NestedIntFilter = {
@@ -265,6 +266,7 @@ export type GroupWhereInput = {
   createdAt?: Maybe<DateTimeFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
   users?: Maybe<UserListRelationFilter>;
+  some?: Maybe<StringFilter>;
 };
 
 export type GroupRelationFilter = {
@@ -332,6 +334,7 @@ export type GroupOrderByInput = {
   name?: Maybe<SortOrder>;
   createdAt?: Maybe<SortOrder>;
   updatedAt?: Maybe<SortOrder>;
+  some?: Maybe<SortOrder>;
 };
 
 export type GroupWhereUniqueInput = {
@@ -342,6 +345,7 @@ export type GroupCreateWithoutUsersInput = {
   name: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  some: Scalars['String'];
 };
 
 export type GroupCreateOneWithoutUsersInput = {
@@ -441,6 +445,7 @@ export type GroupUpdateWithoutUsersDataInput = {
   name?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  some?: Maybe<Scalars['String']>;
 };
 
 export type GroupUpsertWithoutUsersInput = {
@@ -743,6 +748,7 @@ export type GroupCreateInput = {
   name: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  some: Scalars['String'];
   users?: Maybe<UserCreateManyWithoutGroupInput>;
 };
 
@@ -806,6 +812,7 @@ export type GroupUpdateInput = {
   name?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  some?: Maybe<Scalars['String']>;
   users?: Maybe<UserUpdateManyWithoutGroupInput>;
 };
 
@@ -813,6 +820,7 @@ export type GroupUpdateManyMutationInput = {
   name?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  some?: Maybe<Scalars['String']>;
 };
 
 export type UserAvgAggregateOutputType = {
@@ -1260,6 +1268,7 @@ export type Group = {
   createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
   users: Array<User>;
+  some: Scalars['String'];
 };
 
 

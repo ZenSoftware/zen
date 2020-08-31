@@ -14,6 +14,7 @@ export default gql`
       skip: Int
       distinct: UserDistinctFieldEnum
     ): [User!]!
+    some: String!
   }
 
   type Query {
