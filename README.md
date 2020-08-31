@@ -39,4 +39,4 @@
 - [x] [Angular Language Service for VSCode](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for modern IDE tooling.
 - [x] NPM scripts for versioned releases of the **api** server as a containerized Docker image.  [node:14-alpine](https://hub.docker.com/_/node?tab=description&ref=hackernoon.com) is used as the Docker container base image, and the appropriate `tsconfig.app.json` configurations are being applied for the Node v14 Nest app.
 - [x] Enforced code formatting via [Prettier](https://prettier.io/) & [import-sort](https://www.npmjs.com/package/prettier-plugin-import-sort), guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.
-- [ ] [Compodoc](https://compodoc.app/) to generate Nest & Angular documentation.
+- [X] [Compodoc](https://compodoc.app/) to generate Nest & Angular documentation.

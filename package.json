@@ -6,6 +6,7 @@
   "scripts": {
     "start": "ng serve",
     "start:api": "ng serve api",
+    "compodoc": "ng run api:compodoc && ng run portal:compodoc",
     "prod:api": "prisma generate && gulp clean && ng build api --prod && npm run dockerize:api",
     "apollo-angular:watch": "graphql-codegen -c apollo-angular.yml -w",
     "apollo-angular:generate": "graphql-codegen -c apollo-angular.yml",

@@ -56,6 +56,12 @@
             }
           }
         },
+        "compodoc": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [{ "command": "npx compodoc -p apps/portal/tsconfig.app.json" }]
+          }
+        },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
@@ -146,6 +152,12 @@
                 }
               ]
             }
+          }
+        },
+        "compodoc": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [{ "command": "npx compodoc -p apps/api/tsconfig.app.json" }]
           }
         },
         "serve": {
