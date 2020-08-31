@@ -16,8 +16,8 @@ import { commonResolvers } from './common-resolvers';
 export abstract class GraphQLOptions {
   clientResolvers?: any;
   enableSubscriptions?: boolean;
-  multipartMutations?: string[];
-  multipartOptions?: UploadLinkOptions;
+  uploadMutations?: string[];
+  uploadOptions?: UploadLinkOptions;
   batchOptions?: BatchOptions;
   websocketOptions?: WsOptions;
 }
@@ -81,8 +81,8 @@ export function createApollo(
   if (!options) {
     links.push(batch_link);
   } else {
-    const uploadLinkOptions = options?.multipartOptions
-      ? options.multipartOptions
+    const uploadLinkOptions = options?.uploadOptions
+      ? options.uploadOptions
       : {
           uri: env.url.graphql,
           credentials: 'include',
@@ -111,14 +111,14 @@ export function createApollo(
         batch_link
       );
 
-      if (!options.multipartMutations) {
+      if (!options.uploadMutations) {
         links.push(websocket_batch_link);
       } else {
         const upload_link = createUploadLink(uploadLinkOptions);
 
         const upload_websocket_batch_link = split(
           ({ query }) =>
-            (options.multipartMutations as string[]).includes(getOperationName(query) as string),
+            (options.uploadMutations as string[]).includes(getOperationName(query) as string),
           upload_link,
           websocket_batch_link
         );
@@ -126,14 +126,14 @@ export function createApollo(
         links.push(upload_websocket_batch_link);
       }
     } else {
-      if (!options.multipartMutations) {
+      if (!options.uploadMutations) {
         links.push(batch_link);
       } else {
         const upload_link = createUploadLink(uploadLinkOptions);
 
         const upload_batch_link = split(
           ({ query }) =>
-            (options.multipartMutations as string[]).includes(getOperationName(query) as string),
+            (options.uploadMutations as string[]).includes(getOperationName(query) as string),
           upload_link,
           batch_link
         );
