@@ -6,7 +6,6 @@
   "scripts": {
     "start": "ng serve",
     "start:api": "ng serve api",
-    "compodoc": "ng run api:compodoc && ng run portal:compodoc",
     "prod:api": "prisma generate && gulp clean && ng build api --prod && npm run dockerize:api",
     "apollo-angular:watch": "graphql-codegen -c apollo-angular.yml -w",
     "apollo-angular:generate": "graphql-codegen -c apollo-angular.yml",
@@ -14,6 +13,7 @@
     "prisma:migrate": "prisma migrate up --experimental && npm run prisma:generate",
     "dockerize:api": "docker build -f deploy/api/Dockerfile -t zen-api . && docker tag zen-api tuspeak.azurecr.io/zen-api:latest",
     "docker:run-api": "docker run -d --name zen-api -p 7080:7080 zen-api",
+    "compodoc": "ng run api:compodoc && ng run portal:compodoc",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
