@@ -9,7 +9,7 @@ import { UploadLinkOptions, createUploadLink } from 'apollo-upload-client';
 import { OperationDefinitionNode } from 'graphql';
 import * as Cookies from 'js-cookie';
 import { cloneDeep, merge } from 'lodash-es';
-import { SubscriptionClient, ClientOptions as WsOptions } from 'subscriptions-transport-ws';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 import { commonResolvers } from './common-resolvers';
 
@@ -17,9 +17,9 @@ export abstract class GraphQLOptions {
   clientResolvers?: any;
   enableSubscriptions?: boolean;
   uploadMutations?: string[];
-  uploadOptions?: UploadLinkOptions;
+  uploadOptions?: UploadLinkOptions & { mutations: string[] };
   batchOptions?: BatchOptions;
-  websocketOptions?: WsOptions;
+  websocketOptions?: WebSocketLink.Configuration;
 }
 
 @NgModule({
@@ -89,16 +89,18 @@ export function createApollo(
         };
 
     if (options.enableSubscriptions) {
-      const websocket_link = new WebSocketLink({
-        uri: env.url.graphqlSubscriptions,
+      const websocketOptions = options?.websocketOptions
+        ? options.websocketOptions
+        : {
+            uri: env.url.graphqlSubscriptions,
 
-        options: options?.websocketOptions
-          ? options.websocketOptions
-          : {
+            options: {
               reconnect: true,
               connectionParams: () => ({ token: Cookies.get('jwt') }),
             },
-      });
+          };
+
+      const websocket_link = new WebSocketLink(websocketOptions);
 
       GraphQLModule.subscriptionClient = (<any>websocket_link).subscriptionClient;
 
