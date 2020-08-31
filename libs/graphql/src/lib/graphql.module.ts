@@ -4,20 +4,22 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition, getOperationName } from '@apollo/client/utilities';
 import { Environment } from '@zen/common';
 import { APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpBatchLink } from 'apollo-angular/http';
-import { createUploadLink } from 'apollo-upload-client';
+import { BatchOptions, HttpBatchLink } from 'apollo-angular/http';
+import { UploadLinkOptions, createUploadLink } from 'apollo-upload-client';
 import { OperationDefinitionNode } from 'graphql';
 import * as Cookies from 'js-cookie';
 import { cloneDeep, merge } from 'lodash-es';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { SubscriptionClient, ClientOptions as WsOptions } from 'subscriptions-transport-ws';
 
 import { commonResolvers } from './common-resolvers';
 
 export abstract class GraphQLOptions {
   clientResolvers?: any;
-  clientDefaults?: any;
   enableSubscriptions?: boolean;
   multipartMutations?: string[];
+  multipartOptions?: UploadLinkOptions;
+  batchOptions?: BatchOptions;
+  websocketOptions?: WsOptions;
 }
 
 @NgModule({
@@ -66,23 +68,36 @@ export function createApollo(
 ): ApolloClientOptions<any> {
   const links: ApolloLink[] = [];
 
-  const batch_link = httpBatchLink.create({
-    uri: env.url.graphql,
-    withCredentials: true,
-    batchMax: 500,
-  });
+  const batchOptions = options?.batchOptions
+    ? options.batchOptions
+    : {
+        uri: env.url.graphql,
+        withCredentials: true,
+        batchMax: 250,
+      };
+
+  const batch_link = httpBatchLink.create(batchOptions);
 
   if (!options) {
     links.push(batch_link);
   } else {
+    const uploadLinkOptions = options?.multipartOptions
+      ? options.multipartOptions
+      : {
+          uri: env.url.graphql,
+          credentials: 'include',
+        };
+
     if (options.enableSubscriptions) {
       const websocket_link = new WebSocketLink({
         uri: env.url.graphqlSubscriptions,
 
-        options: {
-          reconnect: true,
-          connectionParams: () => ({ token: Cookies.get('jwt') }),
-        },
+        options: options?.websocketOptions
+          ? options.websocketOptions
+          : {
+              reconnect: true,
+              connectionParams: () => ({ token: Cookies.get('jwt') }),
+            },
       });
 
       GraphQLModule.subscriptionClient = (<any>websocket_link).subscriptionClient;
@@ -99,10 +114,7 @@ export function createApollo(
       if (!options.multipartMutations) {
         links.push(websocket_batch_link);
       } else {
-        const upload_link = createUploadLink({
-          uri: env.url.graphql,
-          credentials: 'include',
-        });
+        const upload_link = createUploadLink(uploadLinkOptions);
 
         const upload_websocket_batch_link = split(
           ({ query }) =>
@@ -117,10 +129,7 @@ export function createApollo(
       if (!options.multipartMutations) {
         links.push(batch_link);
       } else {
-        const upload_link = createUploadLink({
-          uri: env.url.graphql,
-          credentials: 'include',
-        });
+        const upload_link = createUploadLink(uploadLinkOptions);
 
         const upload_batch_link = split(
           ({ query }) =>
