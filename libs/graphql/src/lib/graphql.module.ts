@@ -1,22 +1,22 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { ApolloClientOptions, ApolloLink, InMemoryCache, split } from '@apollo/client/core';
+import {
+  ApolloCache,
+  ApolloClientOptions,
+  ApolloLink,
+  InMemoryCache,
+  split,
+} from '@apollo/client/core';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition, getOperationName } from '@apollo/client/utilities';
-import { Environment } from '@zen/common';
 import { APOLLO_OPTIONS } from 'apollo-angular';
-import { BatchOptions, HttpBatchLink } from 'apollo-angular/http';
+import { BatchOptions, HttpBatchLink, HttpBatchLinkHandler } from 'apollo-angular/http';
 import { UploadLinkOptions, createUploadLink } from 'apollo-upload-client';
 import { OperationDefinitionNode } from 'graphql';
-import * as Cookies from 'js-cookie';
-import { cloneDeep, merge } from 'lodash-es';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
-import { commonResolvers } from './common-resolvers';
-
 export abstract class GraphQLOptions {
-  clientResolvers?: any;
-  enableSubscriptions?: boolean;
-  uploadMutations?: string[];
+  resolvers?: any;
+  cache?: ApolloCache<any>;
   uploadOptions?: UploadLinkOptions & { mutations: string[] };
   batchOptions?: BatchOptions;
   websocketOptions?: WebSocketLink.Configuration;
@@ -27,7 +27,7 @@ export abstract class GraphQLOptions {
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpBatchLink, Environment, [new Optional(), GraphQLOptions]],
+      deps: [HttpBatchLink, [new Optional(), GraphQLOptions]],
     },
   ],
 })
@@ -63,44 +63,19 @@ export class GraphQLModule {
 
 export function createApollo(
   httpBatchLink: HttpBatchLink,
-  env: Environment,
-  options: GraphQLOptions
+  options: GraphQLOptions | undefined
 ): ApolloClientOptions<any> {
-  const links: ApolloLink[] = [];
+  let link: ApolloLink;
 
-  const batchOptions = options?.batchOptions
-    ? options.batchOptions
-    : {
-        uri: env.url.graphql,
-        withCredentials: true,
-        batchMax: 250,
-      };
-
-  const batch_link = httpBatchLink.create(batchOptions);
+  let batch_link: HttpBatchLinkHandler;
+  if (options?.batchOptions) batch_link = httpBatchLink.create(options.batchOptions);
+  else throw Error('No GraphQLOptions.batchOptions provided');
 
   if (!options) {
-    links.push(batch_link);
+    link = batch_link;
   } else {
-    const uploadLinkOptions = options?.uploadOptions
-      ? options.uploadOptions
-      : {
-          uri: env.url.graphql,
-          credentials: 'include',
-        };
-
-    if (options.enableSubscriptions) {
-      const websocketOptions = options?.websocketOptions
-        ? options.websocketOptions
-        : {
-            uri: env.url.graphqlSubscriptions,
-
-            options: {
-              reconnect: true,
-              connectionParams: () => ({ token: Cookies.get('jwt') }),
-            },
-          };
-
-      const websocket_link = new WebSocketLink(websocketOptions);
+    if (options.websocketOptions) {
+      const websocket_link = new WebSocketLink(options.websocketOptions);
 
       GraphQLModule.subscriptionClient = (<any>websocket_link).subscriptionClient;
 
@@ -113,43 +88,45 @@ export function createApollo(
         batch_link
       );
 
-      if (!options.uploadMutations) {
-        links.push(websocket_batch_link);
+      if (!options.uploadOptions) {
+        link = websocket_batch_link;
       } else {
-        const upload_link = createUploadLink(uploadLinkOptions);
+        const upload_link = createUploadLink(options.uploadOptions);
 
         const upload_websocket_batch_link = split(
           ({ query }) =>
-            (options.uploadMutations as string[]).includes(getOperationName(query) as string),
+            (options.uploadOptions?.mutations as string[])?.includes(
+              getOperationName(query) as string
+            ),
           upload_link,
           websocket_batch_link
         );
 
-        links.push(upload_websocket_batch_link);
+        link = upload_websocket_batch_link;
       }
     } else {
-      if (!options.uploadMutations) {
-        links.push(batch_link);
+      if (!options.uploadOptions) {
+        link = batch_link;
       } else {
-        const upload_link = createUploadLink(uploadLinkOptions);
+        const upload_link = createUploadLink(options.uploadOptions);
 
         const upload_batch_link = split(
           ({ query }) =>
-            (options.uploadMutations as string[]).includes(getOperationName(query) as string),
+            (options.uploadOptions?.mutations as string[])?.includes(
+              getOperationName(query) as string
+            ),
           upload_link,
           batch_link
         );
 
-        links.push(upload_batch_link);
+        link = upload_batch_link;
       }
     }
   }
 
-  const resolvers = cloneDeep(commonResolvers);
-
-  if (options?.clientResolvers) merge(resolvers, options.clientResolvers);
-
-  const cache = new InMemoryCache();
-
-  return { link: ApolloLink.from(links), cache, resolvers };
+  return {
+    link,
+    cache: options?.cache ? options.cache : new InMemoryCache(),
+    resolvers: options?.resolvers,
+  };
 }
