@@ -77,6 +77,7 @@ export class Gulpfile {
     // await this.execLocal(`prettier --write "${PRISMA_PATH}/**/*.ts"`);
 
     console.log(`---------- Generate Nest GraphQL Resolvers ----------`);
+    if (!fs.existsSync(RESOLVERS_PATH)) fs.mkdirSync(RESOLVERS_PATH);
 
     let prismaNames = await execReaddir(PRISMA_PATH);
     prismaNames = prismaNames.filter(f => path.extname(f) !== '.ts'); // Filter out .ts files
