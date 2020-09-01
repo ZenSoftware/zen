@@ -67,8 +67,8 @@ export class Gulpfile {
   }
 
   //---------------------------------------------------------------------------
-  @Task('gen:graphql')
-  async genGraphQL(cb) {
+  @Task('gen:graphql-api')
+  async genGraphQLAPI(cb) {
     const PRISMA_PATH = `${CONFIG.gql.apiPath}/prisma`;
     const RESOLVERS_PATH = `${CONFIG.gql.apiPath}/resolvers`;
 
