@@ -11,7 +11,7 @@ generator client {
   binaryTargets = ["native", "linux-musl"]
   previewFeatures = ["insensitiveFilters"]
 }
-// models examples
+
 model User {
   id        Int       @default(autoincrement()) @id
   createdAt DateTime  @default(now())
