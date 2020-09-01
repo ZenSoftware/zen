@@ -27,7 +27,7 @@ export abstract class GraphQLOptions {
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpBatchLink, [new Optional(), GraphQLOptions]],
+      deps: [HttpBatchLink, GraphQLOptions],
     },
   ],
 })
@@ -63,70 +63,71 @@ export class GraphQLModule {
 
 export function createApollo(
   httpBatchLink: HttpBatchLink,
-  options: GraphQLOptions | undefined
+  options: GraphQLOptions
 ): ApolloClientOptions<any> {
   let link: ApolloLink;
 
   let batch_link: HttpBatchLinkHandler;
-  if (options?.batchOptions) batch_link = httpBatchLink.create(options.batchOptions);
-  else throw Error('No GraphQLOptions.batchOptions provided');
+  if (options.batchOptions) batch_link = httpBatchLink.create(options.batchOptions);
+  else throw Error('No GraphQLOptions.batchOptions provided. You must set at least the uri.');
 
-  if (!options) {
-    link = batch_link;
-  } else {
-    if (options.websocketOptions) {
-      const websocket_link = new WebSocketLink(options.websocketOptions);
+  if (!options.websocketOptions) {
+    if (!options.uploadOptions) {
+      link = batch_link;
+    } else {
+      if (!options.uploadOptions.mutations)
+        throw new Error(
+          'GraphQLOptions.uploadOptions.mutations required when providing uploadOptions.'
+        );
 
-      GraphQLModule.subscriptionClient = (<any>websocket_link).subscriptionClient;
+      const upload_link = createUploadLink(options.uploadOptions);
 
-      const websocket_batch_link = split(
-        ({ query }) => {
-          const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
-          return kind === 'OperationDefinition' && operation === 'subscription';
-        },
-        websocket_link,
+      const upload_batch_link = split(
+        ({ query }) =>
+          (options.uploadOptions?.mutations as string[])?.includes(
+            getOperationName(query) as string
+          ),
+        upload_link,
         batch_link
       );
 
-      if (!options.uploadOptions) {
-        link = websocket_batch_link;
-      } else {
-        const upload_link = createUploadLink(options.uploadOptions);
+      link = upload_batch_link;
+    }
+  } else {
+    const websocket_link = new WebSocketLink(options.websocketOptions);
 
-        const upload_websocket_batch_link = split(
-          ({ query }) =>
-            (options.uploadOptions?.mutations as string[])?.includes(
-              getOperationName(query) as string
-            ),
-          upload_link,
-          websocket_batch_link
-        );
+    GraphQLModule.subscriptionClient = (<any>websocket_link).subscriptionClient;
 
-        link = upload_websocket_batch_link;
-      }
+    const websocket_batch_link = split(
+      ({ query }) => {
+        const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
+        return kind === 'OperationDefinition' && operation === 'subscription';
+      },
+      websocket_link,
+      batch_link
+    );
+
+    if (!options.uploadOptions) {
+      link = websocket_batch_link;
     } else {
-      if (!options.uploadOptions) {
-        link = batch_link;
-      } else {
-        const upload_link = createUploadLink(options.uploadOptions);
+      const upload_link = createUploadLink(options.uploadOptions);
 
-        const upload_batch_link = split(
-          ({ query }) =>
-            (options.uploadOptions?.mutations as string[])?.includes(
-              getOperationName(query) as string
-            ),
-          upload_link,
-          batch_link
-        );
+      const upload_websocket_batch_link = split(
+        ({ query }) =>
+          (options.uploadOptions?.mutations as string[])?.includes(
+            getOperationName(query) as string
+          ),
+        upload_link,
+        websocket_batch_link
+      );
 
-        link = upload_batch_link;
-      }
+      link = upload_websocket_batch_link;
     }
   }
 
   return {
     link,
-    cache: options?.cache ? options.cache : new InMemoryCache(),
-    resolvers: options?.resolvers,
+    cache: options.cache ? options.cache : new InMemoryCache(),
+    resolvers: options.resolvers,
   };
 }
