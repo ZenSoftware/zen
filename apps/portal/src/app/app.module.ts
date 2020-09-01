@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Environment, HttpRequestInterceptor } from '@zen/common';
 import { GraphQLModule } from '@zen/graphql';
+import { MainModule } from '@zen/main';
 import Cookies from 'js-cookie';
 
 import { environment } from '../environments/environment';
@@ -16,6 +17,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MainModule,
     GraphQLModule.forRoot({
       batchOptions: {
         uri: environment.url.graphql,

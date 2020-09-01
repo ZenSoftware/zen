@@ -18,7 +18,8 @@
     "paths": {
       "@zen/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@zen/common": ["libs/common/src/index.ts"],
-      "@zen/graphql": ["libs/graphql/src/index.ts"]
+      "@zen/graphql": ["libs/graphql/src/index.ts"],
+      "@zen/main": ["libs/main/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true
   },

@@ -59,7 +59,11 @@
         "compodoc": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [{ "command": "npx compodoc -p apps/portal/tsconfig.app.json" }]
+            "commands": [
+              {
+                "command": "npx compodoc -p apps/portal/tsconfig.app.json"
+              }
+            ]
           }
         },
         "serve": {
@@ -157,7 +161,11 @@
         "compodoc": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [{ "command": "npx compodoc -p apps/api/tsconfig.app.json" }]
+            "commands": [
+              {
+                "command": "npx compodoc -p apps/api/tsconfig.app.json"
+              }
+            ]
           }
         },
         "serve": {
@@ -249,6 +257,35 @@
           "options": {
             "tsConfig": ["libs/graphql/tsconfig.lib.json"],
             "exclude": ["**/node_modules/**", "!libs/graphql/**/*"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "main": {
+      "projectType": "library",
+      "root": "libs/main",
+      "sourceRoot": "libs/main/src",
+      "prefix": "zen",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/main/tsconfig.lib.json", "libs/main/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/main/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/main/jest.config.js",
+            "tsConfig": "libs/main/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/main/src/test-setup.ts"
           }
         }
       },
