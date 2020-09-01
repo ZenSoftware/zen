@@ -40,7 +40,7 @@ export class GraphQLModule {
     }
   }
 
-  static forRoot(options?: GraphQLOptions): ModuleWithProviders<GraphQLModule> {
+  static forRoot(options: GraphQLOptions): ModuleWithProviders<GraphQLModule> {
     return {
       ngModule: GraphQLModule,
       providers: [
