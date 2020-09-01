@@ -61,7 +61,7 @@
           "options": {
             "commands": [
               {
-                "command": "npx compodoc -p apps/portal/tsconfig.app.json"
+                "command": "npx compodoc -p apps/portal/tsconfig.app.json -s"
               }
             ]
           }
@@ -163,7 +163,7 @@
           "options": {
             "commands": [
               {
-                "command": "npx compodoc -p apps/api/tsconfig.app.json"
+                "command": "npx compodoc -p apps/api/tsconfig.app.json -s"
               }
             ]
           }
