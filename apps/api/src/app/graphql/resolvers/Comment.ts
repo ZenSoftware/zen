@@ -1,7 +1,21 @@
 import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+import gql from 'graphql-tag';
 
 import PrismaSelectArgs from '../prisma-select-args';
 import resolvers from '../prisma/Comment/resolvers';
+
+export const CommentTypeDef = null;
+// export const CommentTypeDef = gql`
+//   extend type Query {
+//     sampleCommentQuery: Comment!
+//   }
+//   extend type Mutation {
+//     sampleCommentMutation(args: Int!): Boolean
+//   }
+//   extend type Comment {
+//     sampleCommentField: String
+//   }
+// `;
 
 @Resolver('Comment')
 export class CommentResolver {

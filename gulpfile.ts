@@ -139,9 +139,23 @@ export class Gulpfile {
         mutationSource = mutationSource.trimRight();
 
         const outSource = `import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+import gql from 'graphql-tag';
 
 import PrismaSelectArgs from '../prisma-select-args';
 import resolvers from '../prisma/${prismaName}/resolvers';
+
+export const ${prismaName}TypeDef = null;
+// export const ${prismaName}TypeDef = gql\`
+//   extend type Query {
+//     sample${prismaName}Query: ${prismaName}!
+//   }
+//   extend type Mutation {
+//     sample${prismaName}Mutation(args: Int!): Boolean
+//   }
+//   extend type ${prismaName} {
+//     sample${prismaName}Field: String
+//   }
+// \`;
 
 @Resolver('${prismaName}')
 export class ${prismaName}Resolver {
@@ -163,7 +177,7 @@ ${querySource}${mutationSource}
 
     // Construct the "resolvers" directory's "index.ts"
     let indexSource = dataTypeNames
-      .map(n => `import { ${n}Resolver } from './${n}';`)
+      .map(n => `import { ${n}Resolver, ${n}TypeDef } from './${n}';`)
       .reduce((prev, curr, i, []) => prev + '\n' + curr);
 
     // Create an ES6 export to automate the importing of all Nest resolvers in bulk
@@ -171,8 +185,13 @@ ${querySource}${mutationSource}
       .map(n => `${n}Resolver`)
       .toString()
       .replace(/,/g, ',\n  ');
+    indexSource += `\n\nexport const ALL_RESOLVERS = [\n  ${bulkExportString}\n];`;
 
-    indexSource += `\n\nexport const ALL_RESOLVERS = [\n  ${bulkExportString}\n];\n`;
+    const bulkTypeDefExportString = dataTypeNames
+      .map(n => `${n}TypeDef`)
+      .toString()
+      .replace(/,/g, ',\n  ');
+    indexSource += `\n\nexport const ALL_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x);\n`;
 
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
     await execWriteFile(indexPath, indexSource);

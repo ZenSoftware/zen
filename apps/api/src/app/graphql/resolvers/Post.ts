@@ -1,7 +1,21 @@
 import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+import gql from 'graphql-tag';
 
 import PrismaSelectArgs from '../prisma-select-args';
 import resolvers from '../prisma/Post/resolvers';
+
+export const PostTypeDef = null;
+// export const PostTypeDef = gql`
+//   extend type Query {
+//     samplePostQuery: Post!
+//   }
+//   extend type Mutation {
+//     samplePostMutation(args: Int!): Boolean
+//   }
+//   extend type Post {
+//     samplePostField: String
+//   }
+// `;
 
 @Resolver('Post')
 export class PostResolver {

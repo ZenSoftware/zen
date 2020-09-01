@@ -1,7 +1,21 @@
 import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+import gql from 'graphql-tag';
 
 import PrismaSelectArgs from '../prisma-select-args';
 import resolvers from '../prisma/Group/resolvers';
+
+export const GroupTypeDef = null;
+// export const GroupTypeDef = gql`
+//   extend type Query {
+//     sampleGroupQuery: Group!
+//   }
+//   extend type Mutation {
+//     sampleGroupMutation(args: Int!): Boolean
+//   }
+//   extend type Group {
+//     sampleGroupField: String
+//   }
+// `;
 
 @Resolver('Group')
 export class GroupResolver {

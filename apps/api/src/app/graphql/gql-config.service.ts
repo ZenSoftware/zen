@@ -4,8 +4,8 @@ import { mergeTypes } from 'merge-graphql-schemas';
 
 import { ConfigService } from '../config';
 import { createContext } from './context';
-import prismaTypeDefs from './prisma/typeDefs';
-import extendedTypeDefs from './schema-extended.gql';
+import PRISMA_TYPE_DEFS from './prisma/typeDefs';
+import { ALL_TYPE_DEFS } from './resolvers';
 
 @Injectable()
 export class GqlConfigService implements GqlOptionsFactory {
@@ -13,7 +13,7 @@ export class GqlConfigService implements GqlOptionsFactory {
 
   createGqlOptions(): GqlModuleOptions {
     return {
-      typeDefs: mergeTypes([prismaTypeDefs, extendedTypeDefs]),
+      typeDefs: mergeTypes([PRISMA_TYPE_DEFS, ...ALL_TYPE_DEFS]),
       installSubscriptionHandlers: true,
       debug: !this.config.production,
       playground: this.config.graphql.playground,

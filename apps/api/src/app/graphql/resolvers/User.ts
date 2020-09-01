@@ -1,7 +1,21 @@
 import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+import gql from 'graphql-tag';
 
 import PrismaSelectArgs from '../prisma-select-args';
 import resolvers from '../prisma/User/resolvers';
+
+export const UserTypeDef = null;
+// export const UserTypeDef = gql`
+//   extend type Query {
+//     sampleUserQuery: User!
+//   }
+//   extend type Mutation {
+//     sampleUserMutation(args: Int!): Boolean
+//   }
+//   extend type User {
+//     sampleUserField: String
+//   }
+// `;
 
 @Resolver('User')
 export class UserResolver {
