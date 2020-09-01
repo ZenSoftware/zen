@@ -17,7 +17,7 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 export abstract class GraphQLOptions {
   resolvers?: any;
   cache?: ApolloCache<any>;
-  uploadOptions?: UploadLinkOptions & { mutations: string[] };
+  uploadOptions?: UploadLinkOptions & { mutationNames: string[] };
   batchOptions?: BatchOptions;
   websocketOptions?: WebSocketLink.Configuration;
 }
@@ -75,16 +75,16 @@ export function createApollo(
     if (!options.uploadOptions) {
       link = batch_link;
     } else {
-      if (!options.uploadOptions.mutations)
+      if (!options.uploadOptions.mutationNames)
         throw new Error(
-          'GraphQLOptions.uploadOptions.mutations required when providing uploadOptions.'
+          'GraphQLOptions.uploadOptions.mutationNames required when providing uploadOptions to list the mutation names to be sent as multi-part requests.'
         );
 
       const upload_link = createUploadLink(options.uploadOptions);
 
       const upload_batch_link = split(
         ({ query }) =>
-          (options.uploadOptions?.mutations as string[])?.includes(
+          (options.uploadOptions?.mutationNames as string[])?.includes(
             getOperationName(query) as string
           ),
         upload_link,
@@ -114,7 +114,7 @@ export function createApollo(
 
       const upload_websocket_batch_link = split(
         ({ query }) =>
-          (options.uploadOptions?.mutations as string[])?.includes(
+          (options.uploadOptions?.mutationNames as string[])?.includes(
             getOperationName(query) as string
           ),
         upload_link,

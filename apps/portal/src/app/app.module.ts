@@ -24,7 +24,7 @@ import { AppComponent } from './app.component';
       },
       uploadOptions: {
         uri: environment.url.graphql,
-        mutations: [],
+        mutationNames: [],
         credentials: 'include',
       },
       websocketOptions: {
