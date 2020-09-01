@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { Route, RouterModule } from '@angular/router';
 
-export const mainRoutes: Route[] = [];
+import { MainRoutingModule } from './main-routing.module';
+import { ZenMainComponent } from './zen-main/zen-main.component';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, MainRoutingModule],
+  declarations: [ZenMainComponent],
+  exports: [ZenMainComponent],
 })
 export class MainModule {}

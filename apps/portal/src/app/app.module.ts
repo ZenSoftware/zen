@@ -3,6 +3,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { Environment, HttpRequestInterceptor } from '@zen/common';
 import { GraphQLModule } from '@zen/graphql';
 import { MainModule } from '@zen/main';
@@ -17,6 +18,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    RouterModule.forRoot([]),
     MainModule,
     GraphQLModule.forRoot({
       batchOptions: {

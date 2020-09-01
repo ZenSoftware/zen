@@ -1314,6 +1314,11 @@ export type UserCommentsArgs = {
   distinct?: Maybe<CommentDistinctFieldEnum>;
 };
 
+export type UserFieldsFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'id' | 'email' | 'name'>
+);
+
 export type FindAnotherUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1321,7 +1326,7 @@ export type FindAnotherUserQuery = (
   { __typename?: 'Query' }
   & { findOneUser?: Maybe<(
     { __typename?: 'User' }
-    & UserFragmentFragment
+    & UserFieldsFragment
   )> }
 );
 
@@ -1332,17 +1337,12 @@ export type FindOneUserQuery = (
   { __typename?: 'Query' }
   & { findOneUser?: Maybe<(
     { __typename?: 'User' }
-    & UserFragmentFragment
+    & UserFieldsFragment
   )> }
 );
 
-export type UserFragmentFragment = (
-  { __typename?: 'User' }
-  & Pick<User, 'id' | 'email' | 'name'>
-);
-
-export const UserFragmentFragmentDoc = gql`
-    fragment UserFragment on User {
+export const UserFieldsFragmentDoc = gql`
+    fragment UserFields on User {
   id
   email
   name
@@ -1351,10 +1351,10 @@ export const UserFragmentFragmentDoc = gql`
 export const FindAnotherUserDocument = gql`
     query FindAnotherUser {
   findOneUser(where: {id: 2}) {
-    ...UserFragment
+    ...UserFields
   }
 }
-    ${UserFragmentFragmentDoc}`;
+    ${UserFieldsFragmentDoc}`;
 
   @Injectable({
     providedIn: GraphQLModule
@@ -1369,10 +1369,10 @@ export const FindAnotherUserDocument = gql`
 export const FindOneUserDocument = gql`
     query FindOneUser {
   findOneUser(where: {id: 1}) {
-    ...UserFragment
+    ...UserFields
   }
 }
-    ${UserFragmentFragmentDoc}`;
+    ${UserFieldsFragmentDoc}`;
 
   @Injectable({
     providedIn: GraphQLModule
