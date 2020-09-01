@@ -141,7 +141,7 @@ export class Gulpfile {
         const outSource = `import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 
-import PrismaSelectArgs from '../prisma-select-args';
+import { PrismaSelectArgs } from '../prisma-select-args';
 import resolvers from '../prisma/${prismaName}/resolvers';
 
 export const ${prismaName}TypeDef = null;
