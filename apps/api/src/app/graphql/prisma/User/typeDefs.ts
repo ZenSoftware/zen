@@ -25,6 +25,7 @@ export default gql`
       skip: Int
       distinct: CommentDistinctFieldEnum
     ): [Comment!]!
+    changed: String
   }
 
   type Query {

@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -24,7 +24,6 @@ model User {
   groupId   Int?
   /// @onDelete(SET_NULL)
   comments  Comment[]
-  changed   String?
 }
 
 model Post {
@@ -57,4 +56,5 @@ model Group {
   updatedAt DateTime @updatedAt
   /// @onDelete(SET_NULL)
   users     User[]
+  changed      String
 }
