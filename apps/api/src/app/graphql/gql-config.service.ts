@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
+import { mergeTypes } from 'merge-graphql-schemas';
 
 import { ConfigService } from '../config';
 import { createContext } from './context';
-import typeDefs from './prisma/typeDefs';
+import prismaTypeDefs from './prisma/typeDefs';
+import extendedTypeDefs from './schema-extended.gql';
 
 @Injectable()
 export class GqlConfigService implements GqlOptionsFactory {
@@ -11,7 +13,7 @@ export class GqlConfigService implements GqlOptionsFactory {
 
   createGqlOptions(): GqlModuleOptions {
     return {
-      typeDefs: typeDefs,
+      typeDefs: mergeTypes([prismaTypeDefs, extendedTypeDefs]),
       installSubscriptionHandlers: true,
       debug: !this.config.production,
       playground: this.config.graphql.playground,
