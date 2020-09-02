@@ -2,7 +2,7 @@ module.exports = {
   client: {
     service: {
       name: 'zen',
-      url: 'http://localhost:7080/graphql',
+      localSchemaFile: 'schema.graphql',
     },
 
     includes: ['apps/portal/src/**/*.gql.ts', 'libs/**/*.gql.ts'],
