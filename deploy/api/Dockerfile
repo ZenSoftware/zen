@@ -4,6 +4,10 @@ WORKDIR /usr/src/api
 
 COPY dist/apps/api ./
 COPY package*.json ./
+
+# Install the required bcrypt packages before npm
+RUN apk --no-cache add --virtual builds-deps build-base python
+
 RUN npm ci --production --loglevel warn
 
 COPY node_modules/.prisma/client node_modules/.prisma/client
