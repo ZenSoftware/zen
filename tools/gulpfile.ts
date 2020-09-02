@@ -8,9 +8,9 @@ import * as gulp from 'gulp';
 import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 
 const execAsync = promisify(exec);
-const execReaddir = promisify(fs.readdir);
-const execWriteFile = promisify(fs.writeFile);
-const execReadFile = promisify(fs.readFile);
+const readdirAsync = promisify(fs.readdir);
+const writeFileAsync = promisify(fs.writeFile);
+const readFileAsync = promisify(fs.readFile);
 
 //=============================================================================
 // Configuration
@@ -37,7 +37,7 @@ export class Gulpfile {
   //---------------------------------------------------------------------------
   @Task('increment-version')
   async incrementVersion(cb) {
-    const packageFile = await execReadFile('package.json');
+    const packageFile = await readFileAsync('package.json');
     const packageJson = JSON.parse(packageFile.toString());
     const currentVersion: string = packageJson.version;
     const minorVersionIndex = 1 + currentVersion.lastIndexOf('.');
@@ -52,7 +52,7 @@ export class Gulpfile {
 
   @Task('deploy:api')
   async deployApi(cb) {
-    const packageFile = await execReadFile('package.json');
+    const packageFile = await readFileAsync('package.json');
     const packageJson = JSON.parse(packageFile.toString());
     const versionAddress = `zen.azurecr.io/api:${packageJson.version}`;
     const latestAddress = `zen.azurecr.io/api:latest`;
@@ -83,7 +83,7 @@ export class Gulpfile {
     if (!fs.existsSync(RESOLVERS_PATH)) fs.mkdirSync(RESOLVERS_PATH);
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
-    const dirents = await execReaddir(PRISMA_PATH, { withFileTypes: true });
+    const dirents = await readdirAsync(PRISMA_PATH, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
 
     const QUERY_TOKEN = 'Query: {';
@@ -166,7 +166,7 @@ export class ${prismaName}Resolver {
 ${querySource}${mutationSource}
 }
 `;
-        await execWriteFile(outPath, outSource);
+        await writeFileAsync(outPath, outSource);
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }
@@ -175,7 +175,7 @@ ${querySource}${mutationSource}
     console.log(`* Total resolver files wrote: ${wroteCount}`);
 
     // Get the data type names via the filename of the "resolvers" directory
-    let dataTypeNames = (await execReaddir(RESOLVERS_PATH))
+    let dataTypeNames = (await readdirAsync(RESOLVERS_PATH))
       .filter(f => path.basename(f) !== 'index.ts') // Filter out any "index.ts"
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
@@ -207,30 +207,30 @@ export const GRAPHQL_SCHEMA = makeExecutableSchema({ typeDefs: ALL_TYPE_DEFS });
 export const PRISMA_SCHEMA = makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS });\n`;
 
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
-    await execWriteFile(indexPath, indexSource);
+    await writeFileAsync(indexPath, indexSource);
     console.log(`- Wrote: ${indexPath}\n`);
 
     cb();
   }
   //---------------------------------------------------------------------------
-  async parseResolverNames(sourcePath: string) {
-    const QUERY_TOKEN = '@Query(';
-    const MUTATION_TOKEN = '@Mutation(';
+  // async parseResolverNames(sourcePath: string) {
+  //   const QUERY_TOKEN = '@Query(';
+  //   const MUTATION_TOKEN = '@Mutation(';
 
-    const source = (await execReadFile(sourcePath)).toString();
+  //   const source = (await readFileAsync(sourcePath)).toString();
 
-    const lines = source.split('\n');
+  //   const lines = source.split('\n');
 
-    for (const line of lines) {
-      if (line.includes(QUERY_TOKEN)) {
-      }
+  //   for (const line of lines) {
+  //     if (line.includes(QUERY_TOKEN)) {
+  //     }
 
-      if (line.includes(MUTATION_TOKEN)) {
-      }
-    }
+  //     if (line.includes(MUTATION_TOKEN)) {
+  //     }
+  //   }
 
-    return { queries: [], mutations: [] };
-  }
+  //   return { queries: [], mutations: [] };
+  // }
   //---------------------------------------------------------------------------
   // @Task('handlebars:copy')
   // handlebarsCopy() {
