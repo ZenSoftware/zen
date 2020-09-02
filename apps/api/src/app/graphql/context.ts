@@ -1,21 +1,9 @@
-import { PrismaDelete, onDeleteArgs } from '@paljs/plugins';
-import { PrismaClient, PrismaClientOptions } from '@prisma/client';
+import { PrismaService } from '../prisma';
 
-class Prisma extends PrismaClient {
-  constructor(options?: PrismaClientOptions) {
-    super(options);
-  }
-
-  async onDelete(args: onDeleteArgs) {
-    const prismaDelete = new PrismaDelete(this);
-    await prismaDelete.onDelete(args);
-  }
-}
-
-const prisma = new Prisma();
+const prisma = new PrismaService();
 
 export interface Context {
-  prisma: Prisma;
+  prisma: PrismaService;
 }
 
 export function createContext(): Context {

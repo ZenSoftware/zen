@@ -1011,6 +1011,7 @@ export type Query = {
   findOneGroup?: Maybe<Group>;
   findManyGroup?: Maybe<Array<Group>>;
   findManyGroupCount: Scalars['Int'];
+  sampleUserQuery: User;
 };
 
 
@@ -1131,6 +1132,7 @@ export type Mutation = {
   upsertOneGroup?: Maybe<Group>;
   deleteManyGroup?: Maybe<BatchPayload>;
   updateManyGroup?: Maybe<BatchPayload>;
+  sampleUserMutation?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1267,6 +1269,11 @@ export type MutationDeleteManyGroupArgs = {
 export type MutationUpdateManyGroupArgs = {
   where?: Maybe<GroupWhereInput>;
   data?: Maybe<GroupUpdateManyMutationInput>;
+};
+
+
+export type MutationSampleUserMutationArgs = {
+  args: Scalars['Int'];
 };
 
 export type Post = {
