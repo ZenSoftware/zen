@@ -8,10 +8,10 @@ import { GRAPHQL_SCHEMA, PRISMA_SCHEMA, WriteGraphQLSchema } from './app/graphql
 import { environment } from './environments/environment';
 
 async function bootstrap() {
-  if (!environment.production) {
-    await WriteGraphQLSchema('apps/api/src/app/graphql/prisma/prisma.graphql', PRISMA_SCHEMA);
-    // await WriteGraphQLSchema('schema.graphql', GRAPHQL_SCHEMA);
-  }
+  // if (!environment.production) {
+  //   await WriteGraphQLSchema('apps/api/src/app/graphql/prisma/prisma.graphql', PRISMA_SCHEMA);
+  //   await WriteGraphQLSchema('schema.graphql', GRAPHQL_SCHEMA);
+  // }
 
   const port = process.env.PORT || environment.expressPort;
   const nestOptions: NestApplicationOptions = {
