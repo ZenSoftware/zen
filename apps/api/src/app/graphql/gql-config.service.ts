@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 
 import { ConfigService } from '../config';
-import { createContext } from './context';
+import { PrismaService } from '../prisma';
 import { ALL_TYPE_DEFS } from './resolvers';
 
 @Injectable()
@@ -20,8 +20,8 @@ export class GqlConfigService implements GqlOptionsFactory {
       cors: this.config.production ? undefined : { credentials: true, origin: true },
       context: ctx => {
         return ctx.connection
-          ? { ...ctx, req: ctx.connection.context, ...createContext() }
-          : { ...ctx, ...createContext() };
+          ? { ...ctx, req: ctx.connection.context, prisma: new PrismaService() }
+          : { ...ctx, prisma: new PrismaService() };
       },
       uploads: {
         maxFileSize: 20_000_000, // 20 MB
