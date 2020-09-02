@@ -28,8 +28,7 @@ export enum UserDistinctFieldEnum {
   Email = 'email',
   Name = 'name',
   Password = 'password',
-  GroupId = 'groupId',
-  TravisField = 'travisField'
+  GroupId = 'groupId'
 }
 
 export enum PostDistinctFieldEnum {
@@ -80,7 +79,6 @@ export type UserWhereInput = {
   group?: Maybe<GroupWhereInput>;
   groupId?: Maybe<IntNullableFilter>;
   comments?: Maybe<CommentListRelationFilter>;
-  travisField?: Maybe<StringNullableFilter>;
 };
 
 export type UserOrderByInput = {
@@ -90,7 +88,6 @@ export type UserOrderByInput = {
   name?: Maybe<SortOrder>;
   password?: Maybe<SortOrder>;
   groupId?: Maybe<SortOrder>;
-  travisField?: Maybe<SortOrder>;
 };
 
 export type UserWhereUniqueInput = {
@@ -179,7 +176,6 @@ export type UserCreateInput = {
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
-  travisField?: Maybe<Scalars['String']>;
   posts?: Maybe<PostCreateManyWithoutAuthorInput>;
   group?: Maybe<GroupCreateOneWithoutUsersInput>;
   comments?: Maybe<CommentCreateManyWithoutAuthorInput>;
@@ -190,7 +186,6 @@ export type UserUpdateInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
-  travisField?: Maybe<NullableStringFieldUpdateOperationsInput>;
   posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
   group?: Maybe<GroupUpdateOneWithoutUsersInput>;
   comments?: Maybe<CommentUpdateManyWithoutAuthorInput>;
@@ -201,7 +196,6 @@ export type UserUpdateManyMutationInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
-  travisField?: Maybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type PostCreateInput = {
@@ -669,7 +663,6 @@ export type UserCreateWithoutPostsInput = {
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
-  travisField?: Maybe<Scalars['String']>;
   group?: Maybe<GroupCreateOneWithoutUsersInput>;
   comments?: Maybe<CommentCreateManyWithoutAuthorInput>;
 };
@@ -686,7 +679,6 @@ export type UserUpdateWithoutPostsDataInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
-  travisField?: Maybe<NullableStringFieldUpdateOperationsInput>;
   group?: Maybe<GroupUpdateOneWithoutUsersInput>;
   comments?: Maybe<CommentUpdateManyWithoutAuthorInput>;
 };
@@ -720,7 +712,6 @@ export type UserCreateWithoutCommentsInput = {
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
-  travisField?: Maybe<Scalars['String']>;
   posts?: Maybe<PostCreateManyWithoutAuthorInput>;
   group?: Maybe<GroupCreateOneWithoutUsersInput>;
 };
@@ -743,7 +734,6 @@ export type UserUpdateWithoutCommentsDataInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
-  travisField?: Maybe<NullableStringFieldUpdateOperationsInput>;
   posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
   group?: Maybe<GroupUpdateOneWithoutUsersInput>;
 };
@@ -758,7 +748,6 @@ export type UserCreateWithoutGroupInput = {
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
-  travisField?: Maybe<Scalars['String']>;
   posts?: Maybe<PostCreateManyWithoutAuthorInput>;
   comments?: Maybe<CommentCreateManyWithoutAuthorInput>;
 };
@@ -783,7 +772,6 @@ export type UserScalarWhereInput = {
   name?: Maybe<StringNullableFilter>;
   password?: Maybe<StringFilter>;
   groupId?: Maybe<IntNullableFilter>;
-  travisField?: Maybe<StringNullableFilter>;
 };
 
 export type UserUpsertWithWhereUniqueWithoutGroupInput = {
@@ -832,7 +820,6 @@ export type UserUpdateWithoutGroupDataInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
-  travisField?: Maybe<NullableStringFieldUpdateOperationsInput>;
   posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
   comments?: Maybe<CommentUpdateManyWithoutAuthorInput>;
 };
@@ -842,7 +829,6 @@ export type UserUpdateManyDataInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
-  travisField?: Maybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type AggregateUser = {
@@ -988,7 +974,6 @@ export type User = {
   group?: Maybe<Group>;
   groupId?: Maybe<Scalars['Int']>;
   comments: Array<Comment>;
-  travisField?: Maybe<Scalars['String']>;
 };
 
 

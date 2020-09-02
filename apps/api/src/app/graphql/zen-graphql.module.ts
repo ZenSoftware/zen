@@ -2,7 +2,7 @@ import { Global, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { GqlConfigService } from './gql-config.service';
-import { ALL_RESOLVERS } from './resolvers';
+import { NEST_RESOLVERS } from './resolvers';
 
 @Global()
 @Module({
@@ -11,6 +11,6 @@ import { ALL_RESOLVERS } from './resolvers';
       useClass: GqlConfigService,
     }),
   ],
-  providers: [...ALL_RESOLVERS],
+  providers: [...NEST_RESOLVERS],
 })
 export class ZenGraphQLModule {}

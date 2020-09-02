@@ -79,8 +79,9 @@ export class Gulpfile {
     console.log(`---------- Generate Nest GraphQL Resolvers ----------`);
     if (!fs.existsSync(RESOLVERS_PATH)) fs.mkdirSync(RESOLVERS_PATH);
 
-    let prismaNames = await execReaddir(PRISMA_PATH);
-    prismaNames = prismaNames.filter(f => path.extname(f) !== '.ts'); // Filter out .ts files
+    // Get Prisma type names via the directory names under the 'prisma' folder;
+    const dirents = await execReaddir(PRISMA_PATH, { withFileTypes: true });
+    let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
 
     const QUERY_TOKEN = 'Query: {';
     const MUTATION_TOKEN = 'Mutation: {';
@@ -175,8 +176,12 @@ ${querySource}${mutationSource}
       .filter(f => path.basename(f) !== 'index.ts') // Filter out any "index.ts"
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
+    let indexSource = `import { makeExecutableSchema } from 'graphql-tools';
+
+import PRISMA_TYPE_DEFS from '../prisma/typeDefs';\n`;
+
     // Construct the "resolvers" directory's "index.ts"
-    let indexSource = dataTypeNames
+    indexSource += dataTypeNames
       .map(n => `import { ${n}Resolver, ${n}TypeDef } from './${n}';`)
       .reduce((prev, curr, i, []) => prev + '\n' + curr);
 
@@ -185,13 +190,17 @@ ${querySource}${mutationSource}
       .map(n => `${n}Resolver`)
       .toString()
       .replace(/,/g, ',\n  ');
-    indexSource += `\n\nexport const ALL_RESOLVERS = [\n  ${bulkExportString}\n];`;
+    indexSource += `\n\nexport const NEST_RESOLVERS = [\n  ${bulkExportString}\n];`;
 
     const bulkTypeDefExportString = dataTypeNames
       .map(n => `${n}TypeDef`)
       .toString()
       .replace(/,/g, ',\n  ');
-    indexSource += `\n\nexport const ALL_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x);\n`;
+    indexSource += `\n\nexport const NEST_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x);\n\n`;
+
+    indexSource += `export const ALL_TYPE_DEFS = [PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS];\n
+export const GRAPHQL_SCHEMA = makeExecutableSchema({ typeDefs: ALL_TYPE_DEFS });
+export const PRISMA_SCHEMA = makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS });\n`;
 
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
     await execWriteFile(indexPath, indexSource);

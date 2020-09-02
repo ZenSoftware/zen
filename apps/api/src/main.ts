@@ -4,9 +4,15 @@ import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
 
 import { AppModule } from './app/app.module';
+import { GRAPHQL_SCHEMA, PRISMA_SCHEMA, WriteGraphQLSchema } from './app/graphql';
 import { environment } from './environments/environment';
 
 async function bootstrap() {
+  if (!environment.production) {
+    await WriteGraphQLSchema('apps/api/src/app/graphql/prisma/schema.graphql', PRISMA_SCHEMA);
+    // await WriteGraphQLSchema('apps/api/src/app/graphql/schema.graphql', GRAPHQL_SCHEMA);
+  }
+
   const port = process.env.PORT || environment.expressPort;
   const nestOptions: NestApplicationOptions = {
     cors: environment.production ? undefined : { credentials: true, origin: true },
