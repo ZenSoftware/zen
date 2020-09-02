@@ -6,5 +6,6 @@ module.exports = {
     },
 
     includes: ['apps/portal/src/**/*.gql.ts', 'libs/**/*.gql.ts'],
+    excludes: ['apps/api/**/*'],
   },
 };

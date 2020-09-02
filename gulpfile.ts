@@ -177,6 +177,7 @@ ${querySource}${mutationSource}
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
     let indexSource = `import { makeExecutableSchema } from 'graphql-tools';
+import { mergeTypes } from 'merge-graphql-schemas';
 
 import PRISMA_TYPE_DEFS from '../prisma/typeDefs';\n`;
 
@@ -198,7 +199,7 @@ import PRISMA_TYPE_DEFS from '../prisma/typeDefs';\n`;
       .replace(/,/g, ',\n  ');
     indexSource += `\n\nexport const NEST_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x);\n\n`;
 
-    indexSource += `export const ALL_TYPE_DEFS = [PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS];\n
+    indexSource += `export const ALL_TYPE_DEFS = mergeTypes([PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS]);\n
 export const GRAPHQL_SCHEMA = makeExecutableSchema({ typeDefs: ALL_TYPE_DEFS });
 export const PRISMA_SCHEMA = makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS });\n`;
 

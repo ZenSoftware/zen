@@ -11,7 +11,6 @@ enum UserDistinctFieldEnum {
   name
   password
   groupId
-  testA
 }
 
 enum PostDistinctFieldEnum {
@@ -62,7 +61,6 @@ input UserWhereInput {
   group: GroupWhereInput
   groupId: IntNullableFilter
   comments: CommentListRelationFilter
-  testA: StringNullableFilter
 }
 
 input UserOrderByInput {
@@ -72,7 +70,6 @@ input UserOrderByInput {
   name: SortOrder
   password: SortOrder
   groupId: SortOrder
-  testA: SortOrder
 }
 
 input UserWhereUniqueInput {
@@ -161,7 +158,6 @@ input UserCreateInput {
   email: String!
   name: String
   password: String!
-  testA: String
   posts: PostCreateManyWithoutAuthorInput
   group: GroupCreateOneWithoutUsersInput
   comments: CommentCreateManyWithoutAuthorInput
@@ -172,7 +168,6 @@ input UserUpdateInput {
   email: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  testA: NullableStringFieldUpdateOperationsInput
   posts: PostUpdateManyWithoutAuthorInput
   group: GroupUpdateOneWithoutUsersInput
   comments: CommentUpdateManyWithoutAuthorInput
@@ -183,7 +178,6 @@ input UserUpdateManyMutationInput {
   email: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  testA: NullableStringFieldUpdateOperationsInput
 }
 
 input PostCreateInput {
@@ -651,7 +645,6 @@ input UserCreateWithoutPostsInput {
   email: String!
   name: String
   password: String!
-  testA: String
   group: GroupCreateOneWithoutUsersInput
   comments: CommentCreateManyWithoutAuthorInput
 }
@@ -668,7 +661,6 @@ input UserUpdateWithoutPostsDataInput {
   email: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  testA: NullableStringFieldUpdateOperationsInput
   group: GroupUpdateOneWithoutUsersInput
   comments: CommentUpdateManyWithoutAuthorInput
 }
@@ -702,7 +694,6 @@ input UserCreateWithoutCommentsInput {
   email: String!
   name: String
   password: String!
-  testA: String
   posts: PostCreateManyWithoutAuthorInput
   group: GroupCreateOneWithoutUsersInput
 }
@@ -725,7 +716,6 @@ input UserUpdateWithoutCommentsDataInput {
   email: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  testA: NullableStringFieldUpdateOperationsInput
   posts: PostUpdateManyWithoutAuthorInput
   group: GroupUpdateOneWithoutUsersInput
 }
@@ -740,7 +730,6 @@ input UserCreateWithoutGroupInput {
   email: String!
   name: String
   password: String!
-  testA: String
   posts: PostCreateManyWithoutAuthorInput
   comments: CommentCreateManyWithoutAuthorInput
 }
@@ -765,7 +754,6 @@ input UserScalarWhereInput {
   name: StringNullableFilter
   password: StringFilter
   groupId: IntNullableFilter
-  testA: StringNullableFilter
 }
 
 input UserUpsertWithWhereUniqueWithoutGroupInput {
@@ -814,7 +802,6 @@ input UserUpdateWithoutGroupDataInput {
   email: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  testA: NullableStringFieldUpdateOperationsInput
   posts: PostUpdateManyWithoutAuthorInput
   comments: CommentUpdateManyWithoutAuthorInput
 }
@@ -824,7 +811,6 @@ input UserUpdateManyDataInput {
   email: StringFieldUpdateOperationsInput
   name: NullableStringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  testA: NullableStringFieldUpdateOperationsInput
 }
 
 type AggregateUser {
@@ -949,7 +935,6 @@ type User {
   group: Group
   groupId: Int
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, cursor: CommentWhereUniqueInput, take: Int, skip: Int, distinct: CommentDistinctFieldEnum): [Comment!]!
-  testA: String
 }
 
 type Query {

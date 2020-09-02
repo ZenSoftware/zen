@@ -24,7 +24,6 @@ model User {
   groupId   Int?
   /// @onDelete(SET_NULL)
   comments  Comment[]
-  testA     String?
 }
 
 model Post {

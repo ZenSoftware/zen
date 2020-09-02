@@ -1,24 +1,38 @@
-import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Context,
+  Info,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import gql from 'graphql-tag';
 
 import { PrismaSelectArgs } from '../prisma-select-args';
 import resolvers from '../prisma/User/resolvers';
 
-export const UserTypeDef = null;
-// export const UserTypeDef = gql`
-//   extend type Query {
-//     sampleUserQuery: User!
-//   }
-//   extend type Mutation {
-//     sampleUserMutation(args: Int!): Boolean
-//   }
-//   extend type User {
-//     sampleUserField: String
-//   }
-// `;
+// export const UserTypeDef = null;
+export const UserTypeDef = gql`
+  # extend type Query {
+  #   sampleUserQuery: User!
+  # }
+  # extend type Mutation {
+  #   sampleUserMutation(args: Int!): Boolean
+  # }
+  extend type User {
+    sampleUserField: String
+  }
+`;
 
 @Resolver('User')
 export class UserResolver {
+  @ResolveField()
+  async sampleUserField(@Parent() parent) {
+    console.log('resolving sampleUserField');
+    return 'sampleUserField!!!!';
+  }
   @Query()
   async findOneUser(@Parent() parent, @Info() info, @Args() args, @Context() context) {
     return resolvers.Query.findOneUser(parent, PrismaSelectArgs(info, args), context);
