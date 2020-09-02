@@ -28,7 +28,8 @@ export enum UserDistinctFieldEnum {
   Email = 'email',
   Name = 'name',
   Password = 'password',
-  GroupId = 'groupId'
+  GroupId = 'groupId',
+  TestA = 'testA'
 }
 
 export enum PostDistinctFieldEnum {
@@ -79,6 +80,7 @@ export type UserWhereInput = {
   group?: Maybe<GroupWhereInput>;
   groupId?: Maybe<IntNullableFilter>;
   comments?: Maybe<CommentListRelationFilter>;
+  testA?: Maybe<StringNullableFilter>;
 };
 
 export type UserOrderByInput = {
@@ -88,6 +90,7 @@ export type UserOrderByInput = {
   name?: Maybe<SortOrder>;
   password?: Maybe<SortOrder>;
   groupId?: Maybe<SortOrder>;
+  testA?: Maybe<SortOrder>;
 };
 
 export type UserWhereUniqueInput = {
@@ -176,6 +179,7 @@ export type UserCreateInput = {
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
+  testA?: Maybe<Scalars['String']>;
   posts?: Maybe<PostCreateManyWithoutAuthorInput>;
   group?: Maybe<GroupCreateOneWithoutUsersInput>;
   comments?: Maybe<CommentCreateManyWithoutAuthorInput>;
@@ -186,6 +190,7 @@ export type UserUpdateInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
+  testA?: Maybe<NullableStringFieldUpdateOperationsInput>;
   posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
   group?: Maybe<GroupUpdateOneWithoutUsersInput>;
   comments?: Maybe<CommentUpdateManyWithoutAuthorInput>;
@@ -196,6 +201,7 @@ export type UserUpdateManyMutationInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
+  testA?: Maybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type PostCreateInput = {
@@ -663,6 +669,7 @@ export type UserCreateWithoutPostsInput = {
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
+  testA?: Maybe<Scalars['String']>;
   group?: Maybe<GroupCreateOneWithoutUsersInput>;
   comments?: Maybe<CommentCreateManyWithoutAuthorInput>;
 };
@@ -679,6 +686,7 @@ export type UserUpdateWithoutPostsDataInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
+  testA?: Maybe<NullableStringFieldUpdateOperationsInput>;
   group?: Maybe<GroupUpdateOneWithoutUsersInput>;
   comments?: Maybe<CommentUpdateManyWithoutAuthorInput>;
 };
@@ -712,6 +720,7 @@ export type UserCreateWithoutCommentsInput = {
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
+  testA?: Maybe<Scalars['String']>;
   posts?: Maybe<PostCreateManyWithoutAuthorInput>;
   group?: Maybe<GroupCreateOneWithoutUsersInput>;
 };
@@ -734,6 +743,7 @@ export type UserUpdateWithoutCommentsDataInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
+  testA?: Maybe<NullableStringFieldUpdateOperationsInput>;
   posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
   group?: Maybe<GroupUpdateOneWithoutUsersInput>;
 };
@@ -748,6 +758,7 @@ export type UserCreateWithoutGroupInput = {
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
+  testA?: Maybe<Scalars['String']>;
   posts?: Maybe<PostCreateManyWithoutAuthorInput>;
   comments?: Maybe<CommentCreateManyWithoutAuthorInput>;
 };
@@ -772,6 +783,7 @@ export type UserScalarWhereInput = {
   name?: Maybe<StringNullableFilter>;
   password?: Maybe<StringFilter>;
   groupId?: Maybe<IntNullableFilter>;
+  testA?: Maybe<StringNullableFilter>;
 };
 
 export type UserUpsertWithWhereUniqueWithoutGroupInput = {
@@ -820,6 +832,7 @@ export type UserUpdateWithoutGroupDataInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
+  testA?: Maybe<NullableStringFieldUpdateOperationsInput>;
   posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
   comments?: Maybe<CommentUpdateManyWithoutAuthorInput>;
 };
@@ -829,6 +842,7 @@ export type UserUpdateManyDataInput = {
   email?: Maybe<StringFieldUpdateOperationsInput>;
   name?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
+  testA?: Maybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type AggregateUser = {
@@ -974,6 +988,7 @@ export type User = {
   group?: Maybe<Group>;
   groupId?: Maybe<Scalars['Int']>;
   comments: Array<Comment>;
+  testA?: Maybe<Scalars['String']>;
 };
 
 
