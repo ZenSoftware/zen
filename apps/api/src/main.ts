@@ -9,8 +9,8 @@ import { environment } from './environments/environment';
 
 async function bootstrap() {
   if (!environment.production) {
-    await WriteGraphQLSchema('apps/api/src/app/graphql/prisma/schema.graphql', PRISMA_SCHEMA);
-    await WriteGraphQLSchema('schema.graphql', GRAPHQL_SCHEMA);
+    await WriteGraphQLSchema('apps/api/src/app/graphql/prisma/prisma.graphql', PRISMA_SCHEMA);
+    // await WriteGraphQLSchema('schema.graphql', GRAPHQL_SCHEMA);
   }
 
   const port = process.env.PORT || environment.expressPort;
