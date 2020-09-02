@@ -5,6 +5,5 @@ export const UserFields = gql`
     id
     email
     name
-    sampleUserField
   }
 `;
