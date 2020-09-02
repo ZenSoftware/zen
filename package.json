@@ -106,7 +106,7 @@
     "@types/passport": "^1.0.4",
     "@types/passport-jwt": "^3.0.3",
     "@types/pg": "^7.14.4",
-    "apollo-angular": "^2.0.3",
+    "apollo-angular": "^2.0.4",
     "apollo-upload-client": "^14.1.1",
     "codelyzer": "~6.0.0",
     "del": "^5.1.0",
