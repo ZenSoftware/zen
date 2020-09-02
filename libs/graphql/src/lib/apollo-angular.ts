@@ -1338,7 +1338,7 @@ export type GroupUsersArgs = {
 
 export type UserFieldsFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'email' | 'name' | 'travisField'>
+  & Pick<User, 'id' | 'email' | 'name'>
 );
 
 export type FindAnotherUserQueryVariables = Exact<{ [key: string]: never; }>;
@@ -1368,7 +1368,6 @@ export const UserFieldsFragmentDoc = gql`
   id
   email
   name
-  travisField
 }
     `;
 export const FindAnotherUserDocument = gql`
