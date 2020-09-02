@@ -1345,7 +1345,9 @@ export type FindAnotherUserQuery = (
   )> }
 );
 
-export type FindOneUserQueryVariables = Exact<{ [key: string]: never; }>;
+export type FindOneUserQueryVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
 
 
 export type FindOneUserQuery = (
@@ -1382,8 +1384,8 @@ export const FindAnotherUserDocument = gql`
     }
   }
 export const FindOneUserDocument = gql`
-    query FindOneUser {
-  findOneUser(where: {id: 1}) {
+    query FindOneUser($where: UserWhereUniqueInput!) {
+  findOneUser(where: $where) {
     ...UserFields
   }
 }

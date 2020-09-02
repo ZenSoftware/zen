@@ -7,7 +7,13 @@ import { map } from 'rxjs/operators';
   templateUrl: 'zen-main.component.html',
 })
 export class ZenMainComponent {
-  findOneUser$ = this.findOneUserGQL.watch().valueChanges.pipe(map(r => r.data?.findOneUser));
+  findOneUser$ = this.findOneUserGQL
+    .watch({
+      where: {
+        id: 1,
+      },
+    })
+    .valueChanges.pipe(map(r => r.data?.findOneUser));
 
   constructor(private findOneUserGQL: FindOneUserGQL) {}
 }

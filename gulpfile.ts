@@ -10,6 +10,7 @@ import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 const execAsync = promisify(exec);
 const execReaddir = promisify(fs.readdir);
 const execWriteFile = promisify(fs.writeFile);
+const execReadFile = promisify(fs.readFile);
 
 //=============================================================================
 // Configuration
@@ -36,7 +37,8 @@ export class Gulpfile {
   //---------------------------------------------------------------------------
   @Task('increment-version')
   async incrementVersion(cb) {
-    const packageJson = JSON.parse(fs.readFileSync('package.json').toString());
+    const packageFile = await execReadFile('package.json');
+    const packageJson = JSON.parse(packageFile.toString());
     const currentVersion: string = packageJson.version;
     const minorVersionIndex = 1 + currentVersion.lastIndexOf('.');
     const currentMinorVersion = +currentVersion.substr(minorVersionIndex, currentVersion.length);
@@ -50,7 +52,8 @@ export class Gulpfile {
 
   @Task('deploy:api')
   async deployApi(cb) {
-    const packageJson = JSON.parse(fs.readFileSync('package.json').toString());
+    const packageFile = await execReadFile('package.json');
+    const packageJson = JSON.parse(packageFile.toString());
     const versionAddress = `zen.azurecr.io/api:${packageJson.version}`;
     const latestAddress = `zen.azurecr.io/api:latest`;
     await this.execGlobal(`docker tag tu-api ${versionAddress}`);
@@ -208,6 +211,25 @@ export const PRISMA_SCHEMA = makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS }
     console.log(`- Wrote: ${indexPath}\n`);
 
     cb();
+  }
+  //---------------------------------------------------------------------------
+  async parseResolverNames(sourcePath: string) {
+    const QUERY_TOKEN = '@Query(';
+    const MUTATION_TOKEN = '@Mutation(';
+
+    const source = (await execReadFile(sourcePath)).toString();
+
+    const lines = source.split('\n');
+
+    for (const line of lines) {
+      if (line.includes(QUERY_TOKEN)) {
+      }
+
+      if (line.includes(MUTATION_TOKEN)) {
+      }
+    }
+
+    return { queries: [], mutations: [] };
   }
   //---------------------------------------------------------------------------
   // @Task('handlebars:copy')
