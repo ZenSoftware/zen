@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FindManyUserGQL, FindOneUserGQL, SortOrder } from '@zen/graphql';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'zen-main',
@@ -15,12 +15,18 @@ export class ZenMainComponent {
         id: 1,
       },
     })
-    .valueChanges.pipe(map(r => r.data?.findOneUser));
+    .valueChanges.pipe(
+      map(r => r.data?.findOneUser),
+      shareReplay(1)
+    );
 
   users$ = this.findManyUserGQL
     .watch({
       orderBy: [{ name: SortOrder.Asc }],
       cursor: { id: 1 },
     })
-    .valueChanges.pipe(map(r => r.data?.findManyUser));
+    .valueChanges.pipe(
+      map(r => r.data?.findManyUser),
+      shareReplay(1)
+    );
 }
