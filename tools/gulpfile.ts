@@ -7,10 +7,17 @@ import * as del from 'del';
 import * as gulp from 'gulp';
 import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 
+const resolversTemplate = require(path.join(
+  __dirname,
+  'tools/graphql-codegen/resolvers-template.js'
+));
+const fieldsTemplate = require(path.join(__dirname, 'tools/graphql-codegen/fields-template.js'));
+
 const execAsync = promisify(exec);
 const readdirAsync = promisify(fs.readdir);
 const writeFileAsync = promisify(fs.writeFile);
 const readFileAsync = promisify(fs.readFile);
+const appendFileAsync = promisify(fs.appendFile);
 
 //=============================================================================
 // Configuration
@@ -37,6 +44,11 @@ const CONFIG = {
 //=============================================================================
 @Gulpclass()
 export class Gulpfile {
+  @Task('test')
+  async test(cb) {
+    cb();
+  }
+
   //---------------------------------------------------------------------------
   @Task('increment-version')
   async incrementVersion(cb) {
@@ -72,10 +84,33 @@ export class Gulpfile {
     return del(CONFIG.cleanGlobs, { force: true });
   }
   //---------------------------------------------------------------------------
-  async createApolloAngularPrismaFile(prismaName: string, resolverNames: string[]) {
-    const filePath = path.join(CONFIG.gql.clientPrismaPath, `${prismaName}.gql.ts`);
-    if (!fs.existsSync(filePath)) {
-      console.log(`${prismaName} hit with resolvers`, resolverNames);
+  async createApolloAngularPrismaFile(prismaNames: string[]) {
+    console.log(
+      `---------------- Generate Prisma Client Resolvers & Fields Templates ----------------`
+    );
+
+    const fieldsIndexPath = path.join(CONFIG.gql.clientFieldsPath, `index.ts`);
+    let fieldsIndexSource = (await readFileAsync(fieldsIndexPath)).toString();
+
+    for (const prismaName of prismaNames) {
+      const prismaPath = path.join(CONFIG.gql.clientPrismaPath, `${prismaName}.gql.ts`);
+      const fieldsPath = path.join(CONFIG.gql.clientFieldsPath, `${prismaName}.gql.ts`);
+
+      const exportScript = `export * from './${prismaName}.gql';`;
+      if (!fieldsIndexSource.includes(exportScript)) {
+        await appendFileAsync(fieldsIndexPath, exportScript + '\n');
+        fieldsIndexSource += exportScript + '\n';
+      }
+
+      if (!fs.existsSync(fieldsPath)) {
+        await writeFileAsync(fieldsPath, fieldsTemplate(prismaName));
+        console.log(`- Wrote: ${fieldsPath}`);
+      }
+
+      if (!fs.existsSync(prismaPath)) {
+        await writeFileAsync(prismaPath, resolversTemplate(prismaName));
+        console.log(`- Wrote: ${prismaPath}`);
+      }
     }
   }
   //---------------------------------------------------------------------------
@@ -124,8 +159,6 @@ export class Gulpfile {
             resolverNames.push(line.substr(0, line.indexOf(':')).trim());
           }
         }
-
-        await this.createApolloAngularPrismaFile(prismaName, resolverNames);
 
         let querySource = '';
         for (const resolverName of resolverNames) {
@@ -222,6 +255,8 @@ export const PRISMA_SCHEMA = makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS }
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
     await writeFileAsync(indexPath, indexSource);
     console.log(`- Wrote: ${indexPath}\n`);
+
+    await this.createApolloAngularPrismaFile(prismaNames);
 
     cb();
   }
