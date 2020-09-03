@@ -96,15 +96,15 @@ export class Gulpfile {
       const prismaPath = path.join(CONFIG.gql.clientPrismaPath, `${prismaName}.gql.ts`);
       const fieldsPath = path.join(CONFIG.gql.clientFieldsPath, `${prismaName}.gql.ts`);
 
+      if (!fs.existsSync(fieldsPath)) {
+        await writeFileAsync(fieldsPath, fieldsTemplate(prismaName));
+        console.log(`- Wrote: ${fieldsPath}`);
+      }
+
       const exportScript = `export * from './${prismaName}.gql';`;
       if (!fieldsIndexSource.includes(exportScript)) {
         await appendFileAsync(fieldsIndexPath, exportScript + '\n');
         fieldsIndexSource += exportScript + '\n';
-      }
-
-      if (!fs.existsSync(fieldsPath)) {
-        await writeFileAsync(fieldsPath, fieldsTemplate(prismaName));
-        console.log(`- Wrote: ${fieldsPath}`);
       }
 
       if (!fs.existsSync(prismaPath)) {
