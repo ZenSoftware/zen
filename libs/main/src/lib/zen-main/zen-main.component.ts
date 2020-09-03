@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-import {
-  FindManyUserGQL,
-  FindOneUserGQL,
-  SortOrder,
-  UpdateOneUserGQL,
-  UpdateOneUserMutationVariables,
-} from '@zen/graphql';
+import { FindOneUserGQL, UpdateOneUserGQL, UpdateOneUserMutationVariables } from '@zen/graphql';
+import { connectOverMany, connectOverOne } from '@zen/graphql/tools';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
@@ -17,7 +12,11 @@ export class ZenMainComponent {
 
   constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {
     this.userUpdateInput.comments = {
-      connect: [{ id: 1 }],
+      ...connectOverMany([{ id: 1, example: '' }]),
+    };
+
+    this.userUpdateInput.group = {
+      ...connectOverOne({ id: 1, example: '' }),
     };
   }
 

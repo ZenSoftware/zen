@@ -20,6 +20,7 @@
       "@zen/common": ["libs/common/src/index.ts"],
       "@zen/graphql": ["libs/graphql/src/index.ts"],
       "@zen/graphql/fields": ["libs/graphql/src/lib/fields"],
+      "@zen/graphql/tools": ["libs/graphql/src/lib/tools"],
       "@zen/main": ["libs/main/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true
