@@ -7,7 +7,6 @@
 ## GraphQL Ambitions
 - [X] [Nest GraphQL](https://docs.nestjs.com/graphql/resolvers) resolvers as a gateway to [Prisma Client](https://www.prisma.io/docs/understand-prisma/prisma-in-your-stack/graphql).
 - [X] [Prisma Case Insensitive Filtering](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/case-sensitivity) For case-insensitive querying of text.
-- [ ] [Prisma cursor based pagination](https://github.com/devoxa/prisma-relay-cursor-connection#readme) for robust, and correct pagination of data.
 - [X] [PrismaSelect](https://paljs.com/plugins/select/) to solve the N+1 problem for all queries for free.
 - [X] [PrismaDelete](https://paljs.com/plugins/delete) to add `CASCADE` and `SET_NULL` deletion capabilities to Prisma. These features have yet to be implemented by the core Prisma team.  This project will convert to the approach directly supported by Prisma when the official feature becomes available.
 - [X] [Nest GraphQL SDL generation](https://docs.nestjs.com/graphql/generating-sdl) to enable auto-completion using a tool like [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/)
