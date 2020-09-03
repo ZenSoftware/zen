@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { FindOneUserGQL, UpdateOneUserGQL, UpdateOneUserMutationVariables } from '@zen/graphql';
-import { connectOverMany, connectOverOne } from '@zen/graphql/tools';
+import {
+  FindOneUserGQL,
+  UpdateOneUserGQL,
+  UpdateOneUserMutationVariables,
+  connectOverMany,
+  connectOverOne,
+} from '@zen/graphql';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
