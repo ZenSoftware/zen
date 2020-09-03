@@ -13,15 +13,12 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: 'zen-main.component.html',
 })
 export class ZenMainComponent {
-  userInput: UpdateOneUserMutationVariables['data'] = {};
+  userInput: UpdateOneUserMutationVariables['data'];
 
   constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {
-    this.userInput.comments = {
-      ...connectOverMany([{ id: 1, example: '' }]),
-    };
-
-    this.userInput.group = {
-      ...connectOverOne({ id: 1, example: '' }),
+    this.userInput = {
+      comments: { ...connectOverMany([{ id: 1, example: '' }]) },
+      group: { ...connectOverOne({ id: 1, example: '' }) },
     };
   }
 
