@@ -1334,17 +1334,6 @@ export type UserFieldsFragment = (
   & Pick<User, 'id' | 'email' | 'name'>
 );
 
-export type FindAnotherUserQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FindAnotherUserQuery = (
-  { __typename?: 'Query' }
-  & { findOneUser?: Maybe<(
-    { __typename?: 'User' }
-    & UserFieldsFragment
-  )> }
-);
-
 export type FindOneUserQueryVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
@@ -1358,6 +1347,119 @@ export type FindOneUserQuery = (
   )> }
 );
 
+export type FindManyUserQueryVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByInput>>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type FindManyUserQuery = (
+  { __typename?: 'Query' }
+  & { findManyUser?: Maybe<Array<(
+    { __typename?: 'User' }
+    & UserFieldsFragment
+  )>> }
+);
+
+export type FindManyUserCountQueryVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByInput>>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type FindManyUserCountQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'findManyUserCount'>
+);
+
+export type CreateOneUserMutationVariables = Exact<{
+  data: UserCreateInput;
+}>;
+
+
+export type CreateOneUserMutation = (
+  { __typename?: 'Mutation' }
+  & { createOneUser: (
+    { __typename?: 'User' }
+    & UserFieldsFragment
+  ) }
+);
+
+export type UpdateOneUserMutationVariables = Exact<{
+  where: UserWhereUniqueInput;
+  data: UserUpdateInput;
+}>;
+
+
+export type UpdateOneUserMutation = (
+  { __typename?: 'Mutation' }
+  & { updateOneUser: (
+    { __typename?: 'User' }
+    & UserFieldsFragment
+  ) }
+);
+
+export type DeleteOneUserMutationVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type DeleteOneUserMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteOneUser?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+  )> }
+);
+
+export type UpsertOneUserMutationVariables = Exact<{
+  where: UserWhereUniqueInput;
+  create: UserCreateInput;
+  update: UserUpdateInput;
+}>;
+
+
+export type UpsertOneUserMutation = (
+  { __typename?: 'Mutation' }
+  & { upsertOneUser?: Maybe<(
+    { __typename?: 'User' }
+    & UserFieldsFragment
+  )> }
+);
+
+export type DeleteManyUserMutationVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+}>;
+
+
+export type DeleteManyUserMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteManyUser?: Maybe<(
+    { __typename?: 'BatchPayload' }
+    & Pick<BatchPayload, 'count'>
+  )> }
+);
+
+export type UpdateManyUserMutationVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+  data?: Maybe<UserUpdateManyMutationInput>;
+}>;
+
+
+export type UpdateManyUserMutation = (
+  { __typename?: 'Mutation' }
+  & { updateManyUser?: Maybe<(
+    { __typename?: 'BatchPayload' }
+    & Pick<BatchPayload, 'count'>
+  )> }
+);
+
 export const UserFieldsFragmentDoc = gql`
     fragment UserFields on User {
   id
@@ -1365,24 +1467,6 @@ export const UserFieldsFragmentDoc = gql`
   name
 }
     `;
-export const FindAnotherUserDocument = gql`
-    query FindAnotherUser {
-  findOneUser(where: {id: 2}) {
-    ...UserFields
-  }
-}
-    ${UserFieldsFragmentDoc}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class FindAnotherUserGQL extends Apollo.Query<FindAnotherUserQuery, FindAnotherUserQueryVariables> {
-    document = FindAnotherUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
 export const FindOneUserDocument = gql`
     query FindOneUser($where: UserWhereUniqueInput!) {
   findOneUser(where: $where) {
@@ -1396,6 +1480,148 @@ export const FindOneUserDocument = gql`
   })
   export class FindOneUserGQL extends Apollo.Query<FindOneUserQuery, FindOneUserQueryVariables> {
     document = FindOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const FindManyUserDocument = gql`
+    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $skip: Int, $take: Int) {
+  findManyUser(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    ...UserFields
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class FindManyUserGQL extends Apollo.Query<FindManyUserQuery, FindManyUserQueryVariables> {
+    document = FindManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const FindManyUserCountDocument = gql`
+    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $skip: Int, $take: Int) {
+  findManyUserCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCountQuery, FindManyUserCountQueryVariables> {
+    document = FindManyUserCountDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateOneUserDocument = gql`
+    mutation CreateOneUser($data: UserCreateInput!) {
+  createOneUser(data: $data) {
+    ...UserFields
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUserMutation, CreateOneUserMutationVariables> {
+    document = CreateOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateOneUserDocument = gql`
+    mutation UpdateOneUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
+  updateOneUser(where: $where, data: $data) {
+    ...UserFields
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUserMutation, UpdateOneUserMutationVariables> {
+    document = UpdateOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteOneUserDocument = gql`
+    mutation DeleteOneUser($where: UserWhereUniqueInput!) {
+  deleteOneUser(where: $where) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUserMutation, DeleteOneUserMutationVariables> {
+    document = DeleteOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpsertOneUserDocument = gql`
+    mutation UpsertOneUser($where: UserWhereUniqueInput!, $create: UserCreateInput!, $update: UserUpdateInput!) {
+  upsertOneUser(where: $where, create: $create, update: $update) {
+    ...UserFields
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUserMutation, UpsertOneUserMutationVariables> {
+    document = UpsertOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteManyUserDocument = gql`
+    mutation DeleteManyUser($where: UserWhereInput) {
+  deleteManyUser(where: $where) {
+    count
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUserMutation, DeleteManyUserMutationVariables> {
+    document = DeleteManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateManyUserDocument = gql`
+    mutation UpdateManyUser($where: UserWhereInput, $data: UserUpdateManyMutationInput) {
+  updateManyUser(where: $where, data: $data) {
+    count
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUserMutation, UpdateManyUserMutationVariables> {
+    document = UpdateManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

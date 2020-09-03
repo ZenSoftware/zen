@@ -1,1 +1,1 @@
-export * from './user-fields.gql';
+export * from './User.gql';

@@ -20,6 +20,9 @@ const CONFIG = {
 
   gql: {
     apiPath: 'apps/api/src/app/graphql',
+    clientPrismaPath: 'libs/graphql/src/lib/prisma',
+    clientFieldsPath: 'libs/graphql/src/lib/fields',
+    //graphql.module.ts
   },
 
   // handlebars: {
@@ -68,7 +71,13 @@ export class Gulpfile {
   clean() {
     return del(CONFIG.cleanGlobs, { force: true });
   }
-
+  //---------------------------------------------------------------------------
+  async createApolloAngularPrismaFile(prismaName: string, resolverNames: string[]) {
+    const filePath = path.join(CONFIG.gql.clientPrismaPath, `${prismaName}.gql.ts`);
+    if (!fs.existsSync(filePath)) {
+      console.log(`${prismaName} hit with resolvers`, resolverNames);
+    }
+  }
   //---------------------------------------------------------------------------
   @Task('gen:gql')
   async genGqlApi(cb) {
@@ -81,6 +90,8 @@ export class Gulpfile {
 
     console.log(`---------- Generate Nest GraphQL Resolvers ----------`);
     if (!fs.existsSync(RESOLVERS_PATH)) fs.mkdirSync(RESOLVERS_PATH);
+    if (!fs.existsSync(CONFIG.gql.clientFieldsPath)) fs.mkdirSync(CONFIG.gql.clientFieldsPath);
+    if (!fs.existsSync(CONFIG.gql.clientPrismaPath)) fs.mkdirSync(CONFIG.gql.clientPrismaPath);
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
     const dirents = await readdirAsync(PRISMA_PATH, { withFileTypes: true });
@@ -113,6 +124,8 @@ export class Gulpfile {
             resolverNames.push(line.substr(0, line.indexOf(':')).trim());
           }
         }
+
+        await this.createApolloAngularPrismaFile(prismaName, resolverNames);
 
         let querySource = '';
         for (const resolverName of resolverNames) {
