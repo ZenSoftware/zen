@@ -13,14 +13,14 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: 'zen-main.component.html',
 })
 export class ZenMainComponent {
-  userUpdateInput: UpdateOneUserMutationVariables['data'] = {};
+  userInput: UpdateOneUserMutationVariables['data'] = {};
 
   constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {
-    this.userUpdateInput.comments = {
+    this.userInput.comments = {
       ...connectOverMany([{ id: 1, example: '' }]),
     };
 
-    this.userUpdateInput.group = {
+    this.userInput.group = {
       ...connectOverOne({ id: 1, example: '' }),
     };
   }
@@ -37,6 +37,6 @@ export class ZenMainComponent {
     );
 
   test() {
-    this.updateOneUserGQL.mutate({ where: { id: 1 }, data: this.userUpdateInput });
+    this.updateOneUserGQL.mutate({ where: { id: 1 }, data: this.userInput });
   }
 }
