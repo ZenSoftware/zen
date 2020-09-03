@@ -73,5 +73,5 @@ export const ${Name}TypeDefs = gql\`
   }
 
   \${${Name}Fields}
-\`;`;
+\`;\n`;
 };

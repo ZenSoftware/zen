@@ -1346,7 +1346,7 @@ export type PostFieldsFragment = (
 
 export type UserFieldsFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'email'>
+  & Pick<User, 'id'>
 );
 
 export type FindOneCommentQueryVariables = Exact<{
@@ -1871,7 +1871,6 @@ export const PostFieldsFragmentDoc = gql`
 export const UserFieldsFragmentDoc = gql`
     fragment UserFields on User {
   id
-  email
 }
     `;
 export const FindOneCommentDocument = gql`
