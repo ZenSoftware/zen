@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
   templateUrl: 'zen-main.component.html',
 })
 export class ZenMainComponent {
+  constructor(private findOneUserGQL: FindOneUserGQL, private findManyUserGQL: FindManyUserGQL) {}
+
   user$ = this.findOneUserGQL
     .watch({
       where: {
@@ -21,6 +23,4 @@ export class ZenMainComponent {
       cursor: { id: 1 },
     })
     .valueChanges.pipe(map(r => r.data?.findManyUser));
-
-  constructor(private findOneUserGQL: FindOneUserGQL, private findManyUserGQL: FindManyUserGQL) {}
 }
