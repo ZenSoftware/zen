@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FindManyUserGQL, FindOneUserGQL, SortOrder } from '@zen/graphql';
+import {
+  FindManyUserGQL,
+  FindOneUserGQL,
+  SortOrder,
+  UpdateOneUserGQL,
+  UpdateOneUserMutationVariables,
+} from '@zen/graphql';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
@@ -7,7 +13,13 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: 'zen-main.component.html',
 })
 export class ZenMainComponent {
-  constructor(private findOneUserGQL: FindOneUserGQL, private findManyUserGQL: FindManyUserGQL) {}
+  userUpdateInput: UpdateOneUserMutationVariables['data'] = {};
+
+  constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {
+    this.userUpdateInput.comments = {
+      connect: [{ id: 1 }],
+    };
+  }
 
   user$ = this.findOneUserGQL
     .watch({
@@ -20,13 +32,7 @@ export class ZenMainComponent {
       shareReplay(1)
     );
 
-  users$ = this.findManyUserGQL
-    .watch({
-      orderBy: [{ name: SortOrder.Asc }],
-      cursor: { id: 1 },
-    })
-    .valueChanges.pipe(
-      map(r => r.data?.findManyUser),
-      shareReplay(1)
-    );
+  test() {
+    this.updateOneUserGQL.mutate({ where: { id: 1 }, data: this.userUpdateInput });
+  }
 }
