@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   templateUrl: 'zen-main.component.html',
 })
 export class ZenMainComponent {
-  findOneUser$ = this.findOneUserGQL
+  user$ = this.findOneUserGQL
     .watch({
       where: {
         id: 1,
@@ -15,9 +15,10 @@ export class ZenMainComponent {
     })
     .valueChanges.pipe(map(r => r.data?.findOneUser));
 
-  findManyUserGQL$ = this.findManyUserGQL
+  manyUser$ = this.findManyUserGQL
     .watch({
       orderBy: [{ name: SortOrder.Asc }],
+      cursor: { id: 1 },
     })
     .valueChanges.pipe(map(r => r.data?.findManyUser));
 
