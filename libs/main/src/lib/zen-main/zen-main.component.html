@@ -5,7 +5,9 @@
 
   <div class="card text-info bg-primary mb-4">
     <div class="card-body">
-      <pre><code>{{ user$ | async | json }}</code></pre>
+      <pre *ngIf="(user$ | async) as user">
+        <code>{{ user | json }}</code>
+      </pre>
     </div>
   </div>
 
