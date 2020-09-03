@@ -29,7 +29,6 @@ const CONFIG = {
     apiPath: 'apps/api/src/app/graphql',
     clientPrismaPath: 'libs/graphql/src/lib/prisma',
     clientFieldsPath: 'libs/graphql/src/lib/fields',
-    //graphql.module.ts
   },
 
   // handlebars: {
