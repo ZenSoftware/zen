@@ -90,7 +90,11 @@ export class Gulpfile {
     );
 
     const fieldsIndexPath = path.join(CONFIG.gql.clientFieldsPath, `index.ts`);
-    if (!fs.existsSync(fieldsIndexPath)) await writeFileAsync(fieldsIndexPath, '');
+    if (!fs.existsSync(fieldsIndexPath)) {
+      await writeFileAsync(fieldsIndexPath, '');
+      console.log(`- Wrote: ${fieldsIndexPath}`);
+    }
+
     let fieldsIndexSource = (await readFileAsync(fieldsIndexPath)).toString();
 
     for (const prismaName of prismaNames) {
@@ -132,6 +136,7 @@ export class Gulpfile {
     // Get Prisma type names via the directory names under the 'prisma' folder;
     const dirents = await readdirAsync(PRISMA_PATH, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
+    prismaNames = prismaNames.sort();
 
     const QUERY_TOKEN = 'Query: {';
     const MUTATION_TOKEN = 'Mutation: {';
