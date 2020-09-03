@@ -1,7 +1,4 @@
-type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<T, Exclude<keyof T, Keys>> &
-  {
-    [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
-  }[Keys];
+import { RequireAtLeastOne } from './type-pickers';
 
 export function connectOverMany(obj: Array<RequireAtLeastOne<any, 'id'>>) {
   if (obj)
