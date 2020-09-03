@@ -17,7 +17,7 @@ export class ZenMainComponent {
     })
     .valueChanges.pipe(map(r => r.data?.findOneUser));
 
-  manyUser$ = this.findManyUserGQL
+  users$ = this.findManyUserGQL
     .watch({
       orderBy: [{ name: SortOrder.Asc }],
       cursor: { id: 1 },
