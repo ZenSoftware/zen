@@ -90,6 +90,7 @@ export class Gulpfile {
     );
 
     const fieldsIndexPath = path.join(CONFIG.gql.clientFieldsPath, `index.ts`);
+    if (!fs.existsSync(fieldsIndexPath)) await writeFileAsync(fieldsIndexPath, '');
     let fieldsIndexSource = (await readFileAsync(fieldsIndexPath)).toString();
 
     for (const prismaName of prismaNames) {
