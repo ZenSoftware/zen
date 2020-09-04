@@ -36,7 +36,7 @@ export class ZenMainComponent {
   }
 
   userInput: UpdateOneUserMutationVariables['data'] = {
-    comments: set([5]),
+    comments: set([5, 7]),
     group: connectOne(7),
     posts: connectMany([1, 2, 3]),
   };
