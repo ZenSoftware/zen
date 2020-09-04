@@ -17,12 +17,13 @@ import { map, shareReplay } from 'rxjs/operators';
 export class ZenMainComponent {
   constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {
     const manyTestList = [
+      { id: undefined },
       { id: null },
+      { id: '' },
       undefined,
+      null,
       { id: '1' },
       { id: '2', ex: '' },
-      { id: '' },
-      null,
       { id: '3', ex: '' },
     ];
 
