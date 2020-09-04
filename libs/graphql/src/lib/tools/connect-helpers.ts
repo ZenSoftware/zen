@@ -32,7 +32,30 @@ export function connectMany(
           } else if (typeof item === 'number' || typeof item === 'string') {
             return { id: item };
           }
-          throw new Error('Could not serialize item for connection.');
+          throw new Error(`Could not serialize item for 'connect' paramater.`);
+        }),
+      };
+    }
+  }
+
+  return undefined;
+}
+
+export function set(
+  list: Array<RequireAtLeastOne<any, 'id'>> | Array<number> | Array<string> | null | undefined
+) {
+  if (list) {
+    const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
+
+    if (cleanedList.length > 0) {
+      return {
+        set: cleanedList.map(item => {
+          if (typeof item === 'object') {
+            return { id: item.id };
+          } else if (typeof item === 'number' || typeof item === 'string') {
+            return { id: item };
+          }
+          throw new Error(`Could not serialize item for 'set' paramater.`);
         }),
       };
     }
@@ -55,7 +78,7 @@ export function disconnectMany(
           } else if (typeof item === 'number' || typeof item === 'string') {
             return { id: item };
           }
-          throw new Error('Could not serialize item for disconnection.');
+          throw new Error(`Could not serialize item for 'disconnect' paramater.`);
         }),
       };
     }

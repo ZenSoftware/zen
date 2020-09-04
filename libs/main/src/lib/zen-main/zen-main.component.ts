@@ -5,6 +5,7 @@ import {
   UpdateOneUserMutationVariables,
   connectMany,
   connectOne,
+  set,
 } from '@zen/graphql';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -16,10 +17,11 @@ export class ZenMainComponent {
   constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {}
 
   userInput: UpdateOneUserMutationVariables['data'] = {
-    comments: connectMany([
-      { id: 1, example: '' },
-      { id: 2, example: '' },
-    ]),
+    // comments: connectMany([
+    //   { id: 1, example: '' },
+    //   { id: 2, example: '' },
+    // ]),
+    comments: set([{ id: 3 }]),
     group: connectOne(7),
   };
 
