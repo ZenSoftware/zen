@@ -47,7 +47,8 @@ export function connectMany(
     const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
 
     if (cleanedList.length > 0) {
-      return { connect: createManyParams(cleanedList) };
+      const result = createManyParams(cleanedList);
+      if (result) return { connect: result };
     }
   }
 
@@ -66,7 +67,8 @@ export function set(
     const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
 
     if (cleanedList.length > 0) {
-      return { connect: createManyParams(cleanedList) };
+      const result = createManyParams(cleanedList);
+      if (result) return { set: result };
     }
   }
 
@@ -85,7 +87,8 @@ export function disconnectMany(
     const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
 
     if (cleanedList.length > 0) {
-      return { connect: createManyParams(cleanedList) };
+      const result = createManyParams(cleanedList);
+      if (result) return { disconnect: result };
     }
   }
 
