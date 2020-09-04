@@ -1,1 +1,1 @@
-export * from './connect-helpers';
+export * from './prisma-helpers';
