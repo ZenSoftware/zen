@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {
   FindOneUserGQL,
-  UpdateOneUserGQL,
   UpdateOneUserVariables,
   connectMany,
   connectOne,
@@ -15,25 +14,7 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: 'zen-main.component.html',
 })
 export class ZenMainComponent {
-  constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {
-    const manyTestList = [
-      { id: undefined },
-      { id: null },
-      { id: '' },
-      undefined,
-      null,
-      { id: '1' },
-      { id: '2', ex: '' },
-      { id: '3', ex: '' },
-    ];
-
-    // const manyTestList = ['', '1'];
-
-    console.log('connectOneTest', connectOne({ id: 77, junk: 'sdsds' }));
-    console.log('connectManyTest', connectMany(null));
-    console.log('disconnectManyTest', disconnectMany(manyTestList));
-    console.log('setTest', set(manyTestList));
-  }
+  constructor(private findOneUserGQL: FindOneUserGQL) {}
 
   userInput: UpdateOneUserVariables['data'] = {
     comments: set([5, 7]),
@@ -53,6 +34,22 @@ export class ZenMainComponent {
     );
 
   test() {
-    this.updateOneUserGQL.mutate({ where: { id: 1 }, data: this.userInput });
+    const manyTestList = [
+      { id: undefined },
+      { id: null },
+      { id: '' },
+      undefined,
+      null,
+      { id: '1' },
+      { id: '2', ex: '' },
+      { id: '3', ex: '' },
+    ];
+
+    console.log('connectOneTest', connectOne({ id: 77, junk: 'sdsds' }));
+    console.log('connectManyTest', connectMany(null));
+    console.log('disconnectManyTest', disconnectMany(manyTestList));
+    console.log('setTest', set(manyTestList));
+
+    // this.updateOneUserGQL.mutate({ where: { id: 1 }, data: this.userInput });
   }
 }
