@@ -3,8 +3,8 @@ import {
   FindOneUserGQL,
   UpdateOneUserGQL,
   UpdateOneUserMutationVariables,
-  connectOverMany,
-  connectOverOne,
+  connectMany,
+  connectOne,
 } from '@zen/graphql';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -16,8 +16,8 @@ export class ZenMainComponent {
   constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {}
 
   userInput: UpdateOneUserMutationVariables['data'] = {
-    comments: connectOverMany([{ id: 1, example: '' }]),
-    group: connectOverOne({ id: 1, example: '' }),
+    comments: connectMany([{ id: 1, example: '' }]),
+    group: connectOne({ id: 1, example: '' }),
   };
 
   user$ = this.findOneUserGQL
