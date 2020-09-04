@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
   FindOneUserGQL,
   UpdateOneUserGQL,
-  UpdateOneUserMutationVariables,
+  UpdateOneUserVariables,
   connectMany,
   connectOne,
   disconnectMany,
@@ -35,7 +35,7 @@ export class ZenMainComponent {
     console.log('setTest', set(manyTestList));
   }
 
-  userInput: UpdateOneUserMutationVariables['data'] = {
+  userInput: UpdateOneUserVariables['data'] = {
     comments: set([5, 7]),
     group: connectOne(7),
     posts: connectMany([1, 2, 3]),

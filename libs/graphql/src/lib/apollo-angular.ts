@@ -1329,40 +1329,40 @@ export type GroupUsersArgs = {
   distinct?: Maybe<UserDistinctFieldEnum>;
 };
 
-export type CommentFieldsFragment = (
+export type CommentFields = (
   { __typename?: 'Comment' }
   & Pick<Comment, 'id'>
 );
 
-export type GroupFieldsFragment = (
+export type GroupFields = (
   { __typename?: 'Group' }
   & Pick<Group, 'id'>
 );
 
-export type PostFieldsFragment = (
+export type PostFields = (
   { __typename?: 'Post' }
   & Pick<Post, 'id'>
 );
 
-export type UserFieldsFragment = (
+export type UserFields = (
   { __typename?: 'User' }
   & Pick<User, 'id'>
 );
 
-export type FindOneCommentQueryVariables = Exact<{
+export type FindOneCommentVariables = Exact<{
   where: CommentWhereUniqueInput;
 }>;
 
 
-export type FindOneCommentQuery = (
+export type FindOneComment = (
   { __typename?: 'Query' }
   & { findOneComment?: Maybe<(
     { __typename?: 'Comment' }
-    & CommentFieldsFragment
+    & CommentFields
   )> }
 );
 
-export type FindManyCommentQueryVariables = Exact<{
+export type FindManyCommentVariables = Exact<{
   where?: Maybe<CommentWhereInput>;
   orderBy?: Maybe<Array<CommentOrderByInput>>;
   cursor?: Maybe<CommentWhereUniqueInput>;
@@ -1371,15 +1371,15 @@ export type FindManyCommentQueryVariables = Exact<{
 }>;
 
 
-export type FindManyCommentQuery = (
+export type FindManyComment = (
   { __typename?: 'Query' }
   & { findManyComment?: Maybe<Array<(
     { __typename?: 'Comment' }
-    & CommentFieldsFragment
+    & CommentFields
   )>> }
 );
 
-export type FindManyCommentCountQueryVariables = Exact<{
+export type FindManyCommentCountVariables = Exact<{
   where?: Maybe<CommentWhereInput>;
   orderBy?: Maybe<Array<CommentOrderByInput>>;
   cursor?: Maybe<CommentWhereUniqueInput>;
@@ -1388,44 +1388,44 @@ export type FindManyCommentCountQueryVariables = Exact<{
 }>;
 
 
-export type FindManyCommentCountQuery = (
+export type FindManyCommentCount = (
   { __typename?: 'Query' }
   & Pick<Query, 'findManyCommentCount'>
 );
 
-export type CreateOneCommentMutationVariables = Exact<{
+export type CreateOneCommentVariables = Exact<{
   data: CommentCreateInput;
 }>;
 
 
-export type CreateOneCommentMutation = (
+export type CreateOneComment = (
   { __typename?: 'Mutation' }
   & { createOneComment: (
     { __typename?: 'Comment' }
-    & CommentFieldsFragment
+    & CommentFields
   ) }
 );
 
-export type UpdateOneCommentMutationVariables = Exact<{
+export type UpdateOneCommentVariables = Exact<{
   where: CommentWhereUniqueInput;
   data: CommentUpdateInput;
 }>;
 
 
-export type UpdateOneCommentMutation = (
+export type UpdateOneComment = (
   { __typename?: 'Mutation' }
   & { updateOneComment: (
     { __typename?: 'Comment' }
-    & CommentFieldsFragment
+    & CommentFields
   ) }
 );
 
-export type DeleteOneCommentMutationVariables = Exact<{
+export type DeleteOneCommentVariables = Exact<{
   where: CommentWhereUniqueInput;
 }>;
 
 
-export type DeleteOneCommentMutation = (
+export type DeleteOneComment = (
   { __typename?: 'Mutation' }
   & { deleteOneComment?: Maybe<(
     { __typename?: 'Comment' }
@@ -1433,27 +1433,27 @@ export type DeleteOneCommentMutation = (
   )> }
 );
 
-export type UpsertOneCommentMutationVariables = Exact<{
+export type UpsertOneCommentVariables = Exact<{
   where: CommentWhereUniqueInput;
   create: CommentCreateInput;
   update: CommentUpdateInput;
 }>;
 
 
-export type UpsertOneCommentMutation = (
+export type UpsertOneComment = (
   { __typename?: 'Mutation' }
   & { upsertOneComment?: Maybe<(
     { __typename?: 'Comment' }
-    & CommentFieldsFragment
+    & CommentFields
   )> }
 );
 
-export type DeleteManyCommentMutationVariables = Exact<{
+export type DeleteManyCommentVariables = Exact<{
   where?: Maybe<CommentWhereInput>;
 }>;
 
 
-export type DeleteManyCommentMutation = (
+export type DeleteManyComment = (
   { __typename?: 'Mutation' }
   & { deleteManyComment?: Maybe<(
     { __typename?: 'BatchPayload' }
@@ -1461,13 +1461,13 @@ export type DeleteManyCommentMutation = (
   )> }
 );
 
-export type UpdateManyCommentMutationVariables = Exact<{
+export type UpdateManyCommentVariables = Exact<{
   where?: Maybe<CommentWhereInput>;
   data?: Maybe<CommentUpdateManyMutationInput>;
 }>;
 
 
-export type UpdateManyCommentMutation = (
+export type UpdateManyComment = (
   { __typename?: 'Mutation' }
   & { updateManyComment?: Maybe<(
     { __typename?: 'BatchPayload' }
@@ -1475,20 +1475,20 @@ export type UpdateManyCommentMutation = (
   )> }
 );
 
-export type FindOneGroupQueryVariables = Exact<{
+export type FindOneGroupVariables = Exact<{
   where: GroupWhereUniqueInput;
 }>;
 
 
-export type FindOneGroupQuery = (
+export type FindOneGroup = (
   { __typename?: 'Query' }
   & { findOneGroup?: Maybe<(
     { __typename?: 'Group' }
-    & GroupFieldsFragment
+    & GroupFields
   )> }
 );
 
-export type FindManyGroupQueryVariables = Exact<{
+export type FindManyGroupVariables = Exact<{
   where?: Maybe<GroupWhereInput>;
   orderBy?: Maybe<Array<GroupOrderByInput>>;
   cursor?: Maybe<GroupWhereUniqueInput>;
@@ -1497,15 +1497,15 @@ export type FindManyGroupQueryVariables = Exact<{
 }>;
 
 
-export type FindManyGroupQuery = (
+export type FindManyGroup = (
   { __typename?: 'Query' }
   & { findManyGroup?: Maybe<Array<(
     { __typename?: 'Group' }
-    & GroupFieldsFragment
+    & GroupFields
   )>> }
 );
 
-export type FindManyGroupCountQueryVariables = Exact<{
+export type FindManyGroupCountVariables = Exact<{
   where?: Maybe<GroupWhereInput>;
   orderBy?: Maybe<Array<GroupOrderByInput>>;
   cursor?: Maybe<GroupWhereUniqueInput>;
@@ -1514,44 +1514,44 @@ export type FindManyGroupCountQueryVariables = Exact<{
 }>;
 
 
-export type FindManyGroupCountQuery = (
+export type FindManyGroupCount = (
   { __typename?: 'Query' }
   & Pick<Query, 'findManyGroupCount'>
 );
 
-export type CreateOneGroupMutationVariables = Exact<{
+export type CreateOneGroupVariables = Exact<{
   data: GroupCreateInput;
 }>;
 
 
-export type CreateOneGroupMutation = (
+export type CreateOneGroup = (
   { __typename?: 'Mutation' }
   & { createOneGroup: (
     { __typename?: 'Group' }
-    & GroupFieldsFragment
+    & GroupFields
   ) }
 );
 
-export type UpdateOneGroupMutationVariables = Exact<{
+export type UpdateOneGroupVariables = Exact<{
   where: GroupWhereUniqueInput;
   data: GroupUpdateInput;
 }>;
 
 
-export type UpdateOneGroupMutation = (
+export type UpdateOneGroup = (
   { __typename?: 'Mutation' }
   & { updateOneGroup: (
     { __typename?: 'Group' }
-    & GroupFieldsFragment
+    & GroupFields
   ) }
 );
 
-export type DeleteOneGroupMutationVariables = Exact<{
+export type DeleteOneGroupVariables = Exact<{
   where: GroupWhereUniqueInput;
 }>;
 
 
-export type DeleteOneGroupMutation = (
+export type DeleteOneGroup = (
   { __typename?: 'Mutation' }
   & { deleteOneGroup?: Maybe<(
     { __typename?: 'Group' }
@@ -1559,27 +1559,27 @@ export type DeleteOneGroupMutation = (
   )> }
 );
 
-export type UpsertOneGroupMutationVariables = Exact<{
+export type UpsertOneGroupVariables = Exact<{
   where: GroupWhereUniqueInput;
   create: GroupCreateInput;
   update: GroupUpdateInput;
 }>;
 
 
-export type UpsertOneGroupMutation = (
+export type UpsertOneGroup = (
   { __typename?: 'Mutation' }
   & { upsertOneGroup?: Maybe<(
     { __typename?: 'Group' }
-    & GroupFieldsFragment
+    & GroupFields
   )> }
 );
 
-export type DeleteManyGroupMutationVariables = Exact<{
+export type DeleteManyGroupVariables = Exact<{
   where?: Maybe<GroupWhereInput>;
 }>;
 
 
-export type DeleteManyGroupMutation = (
+export type DeleteManyGroup = (
   { __typename?: 'Mutation' }
   & { deleteManyGroup?: Maybe<(
     { __typename?: 'BatchPayload' }
@@ -1587,13 +1587,13 @@ export type DeleteManyGroupMutation = (
   )> }
 );
 
-export type UpdateManyGroupMutationVariables = Exact<{
+export type UpdateManyGroupVariables = Exact<{
   where?: Maybe<GroupWhereInput>;
   data?: Maybe<GroupUpdateManyMutationInput>;
 }>;
 
 
-export type UpdateManyGroupMutation = (
+export type UpdateManyGroup = (
   { __typename?: 'Mutation' }
   & { updateManyGroup?: Maybe<(
     { __typename?: 'BatchPayload' }
@@ -1601,20 +1601,20 @@ export type UpdateManyGroupMutation = (
   )> }
 );
 
-export type FindOnePostQueryVariables = Exact<{
+export type FindOnePostVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type FindOnePostQuery = (
+export type FindOnePost = (
   { __typename?: 'Query' }
   & { findOnePost?: Maybe<(
     { __typename?: 'Post' }
-    & PostFieldsFragment
+    & PostFields
   )> }
 );
 
-export type FindManyPostQueryVariables = Exact<{
+export type FindManyPostVariables = Exact<{
   where?: Maybe<PostWhereInput>;
   orderBy?: Maybe<Array<PostOrderByInput>>;
   cursor?: Maybe<PostWhereUniqueInput>;
@@ -1623,15 +1623,15 @@ export type FindManyPostQueryVariables = Exact<{
 }>;
 
 
-export type FindManyPostQuery = (
+export type FindManyPost = (
   { __typename?: 'Query' }
   & { findManyPost?: Maybe<Array<(
     { __typename?: 'Post' }
-    & PostFieldsFragment
+    & PostFields
   )>> }
 );
 
-export type FindManyPostCountQueryVariables = Exact<{
+export type FindManyPostCountVariables = Exact<{
   where?: Maybe<PostWhereInput>;
   orderBy?: Maybe<Array<PostOrderByInput>>;
   cursor?: Maybe<PostWhereUniqueInput>;
@@ -1640,44 +1640,44 @@ export type FindManyPostCountQueryVariables = Exact<{
 }>;
 
 
-export type FindManyPostCountQuery = (
+export type FindManyPostCount = (
   { __typename?: 'Query' }
   & Pick<Query, 'findManyPostCount'>
 );
 
-export type CreateOnePostMutationVariables = Exact<{
+export type CreateOnePostVariables = Exact<{
   data: PostCreateInput;
 }>;
 
 
-export type CreateOnePostMutation = (
+export type CreateOnePost = (
   { __typename?: 'Mutation' }
   & { createOnePost: (
     { __typename?: 'Post' }
-    & PostFieldsFragment
+    & PostFields
   ) }
 );
 
-export type UpdateOnePostMutationVariables = Exact<{
+export type UpdateOnePostVariables = Exact<{
   where: PostWhereUniqueInput;
   data: PostUpdateInput;
 }>;
 
 
-export type UpdateOnePostMutation = (
+export type UpdateOnePost = (
   { __typename?: 'Mutation' }
   & { updateOnePost: (
     { __typename?: 'Post' }
-    & PostFieldsFragment
+    & PostFields
   ) }
 );
 
-export type DeleteOnePostMutationVariables = Exact<{
+export type DeleteOnePostVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type DeleteOnePostMutation = (
+export type DeleteOnePost = (
   { __typename?: 'Mutation' }
   & { deleteOnePost?: Maybe<(
     { __typename?: 'Post' }
@@ -1685,27 +1685,27 @@ export type DeleteOnePostMutation = (
   )> }
 );
 
-export type UpsertOnePostMutationVariables = Exact<{
+export type UpsertOnePostVariables = Exact<{
   where: PostWhereUniqueInput;
   create: PostCreateInput;
   update: PostUpdateInput;
 }>;
 
 
-export type UpsertOnePostMutation = (
+export type UpsertOnePost = (
   { __typename?: 'Mutation' }
   & { upsertOnePost?: Maybe<(
     { __typename?: 'Post' }
-    & PostFieldsFragment
+    & PostFields
   )> }
 );
 
-export type DeleteManyPostMutationVariables = Exact<{
+export type DeleteManyPostVariables = Exact<{
   where?: Maybe<PostWhereInput>;
 }>;
 
 
-export type DeleteManyPostMutation = (
+export type DeleteManyPost = (
   { __typename?: 'Mutation' }
   & { deleteManyPost?: Maybe<(
     { __typename?: 'BatchPayload' }
@@ -1713,13 +1713,13 @@ export type DeleteManyPostMutation = (
   )> }
 );
 
-export type UpdateManyPostMutationVariables = Exact<{
+export type UpdateManyPostVariables = Exact<{
   where?: Maybe<PostWhereInput>;
   data?: Maybe<PostUpdateManyMutationInput>;
 }>;
 
 
-export type UpdateManyPostMutation = (
+export type UpdateManyPost = (
   { __typename?: 'Mutation' }
   & { updateManyPost?: Maybe<(
     { __typename?: 'BatchPayload' }
@@ -1727,20 +1727,20 @@ export type UpdateManyPostMutation = (
   )> }
 );
 
-export type FindOneUserQueryVariables = Exact<{
+export type FindOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type FindOneUserQuery = (
+export type FindOneUser = (
   { __typename?: 'Query' }
   & { findOneUser?: Maybe<(
     { __typename?: 'User' }
-    & UserFieldsFragment
+    & UserFields
   )> }
 );
 
-export type FindManyUserQueryVariables = Exact<{
+export type FindManyUserVariables = Exact<{
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
@@ -1749,15 +1749,15 @@ export type FindManyUserQueryVariables = Exact<{
 }>;
 
 
-export type FindManyUserQuery = (
+export type FindManyUser = (
   { __typename?: 'Query' }
   & { findManyUser?: Maybe<Array<(
     { __typename?: 'User' }
-    & UserFieldsFragment
+    & UserFields
   )>> }
 );
 
-export type FindManyUserCountQueryVariables = Exact<{
+export type FindManyUserCountVariables = Exact<{
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
@@ -1766,44 +1766,44 @@ export type FindManyUserCountQueryVariables = Exact<{
 }>;
 
 
-export type FindManyUserCountQuery = (
+export type FindManyUserCount = (
   { __typename?: 'Query' }
   & Pick<Query, 'findManyUserCount'>
 );
 
-export type CreateOneUserMutationVariables = Exact<{
+export type CreateOneUserVariables = Exact<{
   data: UserCreateInput;
 }>;
 
 
-export type CreateOneUserMutation = (
+export type CreateOneUser = (
   { __typename?: 'Mutation' }
   & { createOneUser: (
     { __typename?: 'User' }
-    & UserFieldsFragment
+    & UserFields
   ) }
 );
 
-export type UpdateOneUserMutationVariables = Exact<{
+export type UpdateOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
   data: UserUpdateInput;
 }>;
 
 
-export type UpdateOneUserMutation = (
+export type UpdateOneUser = (
   { __typename?: 'Mutation' }
   & { updateOneUser: (
     { __typename?: 'User' }
-    & UserFieldsFragment
+    & UserFields
   ) }
 );
 
-export type DeleteOneUserMutationVariables = Exact<{
+export type DeleteOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type DeleteOneUserMutation = (
+export type DeleteOneUser = (
   { __typename?: 'Mutation' }
   & { deleteOneUser?: Maybe<(
     { __typename?: 'User' }
@@ -1811,27 +1811,27 @@ export type DeleteOneUserMutation = (
   )> }
 );
 
-export type UpsertOneUserMutationVariables = Exact<{
+export type UpsertOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
   create: UserCreateInput;
   update: UserUpdateInput;
 }>;
 
 
-export type UpsertOneUserMutation = (
+export type UpsertOneUser = (
   { __typename?: 'Mutation' }
   & { upsertOneUser?: Maybe<(
     { __typename?: 'User' }
-    & UserFieldsFragment
+    & UserFields
   )> }
 );
 
-export type DeleteManyUserMutationVariables = Exact<{
+export type DeleteManyUserVariables = Exact<{
   where?: Maybe<UserWhereInput>;
 }>;
 
 
-export type DeleteManyUserMutation = (
+export type DeleteManyUser = (
   { __typename?: 'Mutation' }
   & { deleteManyUser?: Maybe<(
     { __typename?: 'BatchPayload' }
@@ -1839,13 +1839,13 @@ export type DeleteManyUserMutation = (
   )> }
 );
 
-export type UpdateManyUserMutationVariables = Exact<{
+export type UpdateManyUserVariables = Exact<{
   where?: Maybe<UserWhereInput>;
   data?: Maybe<UserUpdateManyMutationInput>;
 }>;
 
 
-export type UpdateManyUserMutation = (
+export type UpdateManyUser = (
   { __typename?: 'Mutation' }
   & { updateManyUser?: Maybe<(
     { __typename?: 'BatchPayload' }
@@ -1853,22 +1853,22 @@ export type UpdateManyUserMutation = (
   )> }
 );
 
-export const CommentFieldsFragmentDoc = gql`
+export const CommentFields = gql`
     fragment CommentFields on Comment {
   id
 }
     `;
-export const GroupFieldsFragmentDoc = gql`
+export const GroupFields = gql`
     fragment GroupFields on Group {
   id
 }
     `;
-export const PostFieldsFragmentDoc = gql`
+export const PostFields = gql`
     fragment PostFields on Post {
   id
 }
     `;
-export const UserFieldsFragmentDoc = gql`
+export const UserFields = gql`
     fragment UserFields on User {
   id
 }
@@ -1879,12 +1879,12 @@ export const FindOneCommentDocument = gql`
     ...CommentFields
   }
 }
-    ${CommentFieldsFragmentDoc}`;
+    ${CommentFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindOneCommentGQL extends Apollo.Query<FindOneCommentQuery, FindOneCommentQueryVariables> {
+  export class FindOneCommentGQL extends Apollo.Query<FindOneComment, FindOneCommentVariables> {
     document = FindOneCommentDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -1897,12 +1897,12 @@ export const FindManyCommentDocument = gql`
     ...CommentFields
   }
 }
-    ${CommentFieldsFragmentDoc}`;
+    ${CommentFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindManyCommentGQL extends Apollo.Query<FindManyCommentQuery, FindManyCommentQueryVariables> {
+  export class FindManyCommentGQL extends Apollo.Query<FindManyComment, FindManyCommentVariables> {
     document = FindManyCommentDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -1918,7 +1918,7 @@ export const FindManyCommentCountDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindManyCommentCountGQL extends Apollo.Query<FindManyCommentCountQuery, FindManyCommentCountQueryVariables> {
+  export class FindManyCommentCountGQL extends Apollo.Query<FindManyCommentCount, FindManyCommentCountVariables> {
     document = FindManyCommentCountDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -1931,12 +1931,12 @@ export const CreateOneCommentDocument = gql`
     ...CommentFields
   }
 }
-    ${CommentFieldsFragmentDoc}`;
+    ${CommentFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class CreateOneCommentGQL extends Apollo.Mutation<CreateOneCommentMutation, CreateOneCommentMutationVariables> {
+  export class CreateOneCommentGQL extends Apollo.Mutation<CreateOneComment, CreateOneCommentVariables> {
     document = CreateOneCommentDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -1949,12 +1949,12 @@ export const UpdateOneCommentDocument = gql`
     ...CommentFields
   }
 }
-    ${CommentFieldsFragmentDoc}`;
+    ${CommentFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpdateOneCommentGQL extends Apollo.Mutation<UpdateOneCommentMutation, UpdateOneCommentMutationVariables> {
+  export class UpdateOneCommentGQL extends Apollo.Mutation<UpdateOneComment, UpdateOneCommentVariables> {
     document = UpdateOneCommentDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -1972,7 +1972,7 @@ export const DeleteOneCommentDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class DeleteOneCommentGQL extends Apollo.Mutation<DeleteOneCommentMutation, DeleteOneCommentMutationVariables> {
+  export class DeleteOneCommentGQL extends Apollo.Mutation<DeleteOneComment, DeleteOneCommentVariables> {
     document = DeleteOneCommentDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -1985,12 +1985,12 @@ export const UpsertOneCommentDocument = gql`
     ...CommentFields
   }
 }
-    ${CommentFieldsFragmentDoc}`;
+    ${CommentFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpsertOneCommentGQL extends Apollo.Mutation<UpsertOneCommentMutation, UpsertOneCommentMutationVariables> {
+  export class UpsertOneCommentGQL extends Apollo.Mutation<UpsertOneComment, UpsertOneCommentVariables> {
     document = UpsertOneCommentDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2008,7 +2008,7 @@ export const DeleteManyCommentDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class DeleteManyCommentGQL extends Apollo.Mutation<DeleteManyCommentMutation, DeleteManyCommentMutationVariables> {
+  export class DeleteManyCommentGQL extends Apollo.Mutation<DeleteManyComment, DeleteManyCommentVariables> {
     document = DeleteManyCommentDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2026,7 +2026,7 @@ export const UpdateManyCommentDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpdateManyCommentGQL extends Apollo.Mutation<UpdateManyCommentMutation, UpdateManyCommentMutationVariables> {
+  export class UpdateManyCommentGQL extends Apollo.Mutation<UpdateManyComment, UpdateManyCommentVariables> {
     document = UpdateManyCommentDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2039,12 +2039,12 @@ export const FindOneGroupDocument = gql`
     ...GroupFields
   }
 }
-    ${GroupFieldsFragmentDoc}`;
+    ${GroupFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindOneGroupGQL extends Apollo.Query<FindOneGroupQuery, FindOneGroupQueryVariables> {
+  export class FindOneGroupGQL extends Apollo.Query<FindOneGroup, FindOneGroupVariables> {
     document = FindOneGroupDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2057,12 +2057,12 @@ export const FindManyGroupDocument = gql`
     ...GroupFields
   }
 }
-    ${GroupFieldsFragmentDoc}`;
+    ${GroupFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindManyGroupGQL extends Apollo.Query<FindManyGroupQuery, FindManyGroupQueryVariables> {
+  export class FindManyGroupGQL extends Apollo.Query<FindManyGroup, FindManyGroupVariables> {
     document = FindManyGroupDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2078,7 +2078,7 @@ export const FindManyGroupCountDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindManyGroupCountGQL extends Apollo.Query<FindManyGroupCountQuery, FindManyGroupCountQueryVariables> {
+  export class FindManyGroupCountGQL extends Apollo.Query<FindManyGroupCount, FindManyGroupCountVariables> {
     document = FindManyGroupCountDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2091,12 +2091,12 @@ export const CreateOneGroupDocument = gql`
     ...GroupFields
   }
 }
-    ${GroupFieldsFragmentDoc}`;
+    ${GroupFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class CreateOneGroupGQL extends Apollo.Mutation<CreateOneGroupMutation, CreateOneGroupMutationVariables> {
+  export class CreateOneGroupGQL extends Apollo.Mutation<CreateOneGroup, CreateOneGroupVariables> {
     document = CreateOneGroupDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2109,12 +2109,12 @@ export const UpdateOneGroupDocument = gql`
     ...GroupFields
   }
 }
-    ${GroupFieldsFragmentDoc}`;
+    ${GroupFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpdateOneGroupGQL extends Apollo.Mutation<UpdateOneGroupMutation, UpdateOneGroupMutationVariables> {
+  export class UpdateOneGroupGQL extends Apollo.Mutation<UpdateOneGroup, UpdateOneGroupVariables> {
     document = UpdateOneGroupDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2132,7 +2132,7 @@ export const DeleteOneGroupDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class DeleteOneGroupGQL extends Apollo.Mutation<DeleteOneGroupMutation, DeleteOneGroupMutationVariables> {
+  export class DeleteOneGroupGQL extends Apollo.Mutation<DeleteOneGroup, DeleteOneGroupVariables> {
     document = DeleteOneGroupDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2145,12 +2145,12 @@ export const UpsertOneGroupDocument = gql`
     ...GroupFields
   }
 }
-    ${GroupFieldsFragmentDoc}`;
+    ${GroupFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpsertOneGroupGQL extends Apollo.Mutation<UpsertOneGroupMutation, UpsertOneGroupMutationVariables> {
+  export class UpsertOneGroupGQL extends Apollo.Mutation<UpsertOneGroup, UpsertOneGroupVariables> {
     document = UpsertOneGroupDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2168,7 +2168,7 @@ export const DeleteManyGroupDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class DeleteManyGroupGQL extends Apollo.Mutation<DeleteManyGroupMutation, DeleteManyGroupMutationVariables> {
+  export class DeleteManyGroupGQL extends Apollo.Mutation<DeleteManyGroup, DeleteManyGroupVariables> {
     document = DeleteManyGroupDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2186,7 +2186,7 @@ export const UpdateManyGroupDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpdateManyGroupGQL extends Apollo.Mutation<UpdateManyGroupMutation, UpdateManyGroupMutationVariables> {
+  export class UpdateManyGroupGQL extends Apollo.Mutation<UpdateManyGroup, UpdateManyGroupVariables> {
     document = UpdateManyGroupDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2199,12 +2199,12 @@ export const FindOnePostDocument = gql`
     ...PostFields
   }
 }
-    ${PostFieldsFragmentDoc}`;
+    ${PostFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindOnePostGQL extends Apollo.Query<FindOnePostQuery, FindOnePostQueryVariables> {
+  export class FindOnePostGQL extends Apollo.Query<FindOnePost, FindOnePostVariables> {
     document = FindOnePostDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2217,12 +2217,12 @@ export const FindManyPostDocument = gql`
     ...PostFields
   }
 }
-    ${PostFieldsFragmentDoc}`;
+    ${PostFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindManyPostGQL extends Apollo.Query<FindManyPostQuery, FindManyPostQueryVariables> {
+  export class FindManyPostGQL extends Apollo.Query<FindManyPost, FindManyPostVariables> {
     document = FindManyPostDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2238,7 +2238,7 @@ export const FindManyPostCountDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindManyPostCountGQL extends Apollo.Query<FindManyPostCountQuery, FindManyPostCountQueryVariables> {
+  export class FindManyPostCountGQL extends Apollo.Query<FindManyPostCount, FindManyPostCountVariables> {
     document = FindManyPostCountDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2251,12 +2251,12 @@ export const CreateOnePostDocument = gql`
     ...PostFields
   }
 }
-    ${PostFieldsFragmentDoc}`;
+    ${PostFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class CreateOnePostGQL extends Apollo.Mutation<CreateOnePostMutation, CreateOnePostMutationVariables> {
+  export class CreateOnePostGQL extends Apollo.Mutation<CreateOnePost, CreateOnePostVariables> {
     document = CreateOnePostDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2269,12 +2269,12 @@ export const UpdateOnePostDocument = gql`
     ...PostFields
   }
 }
-    ${PostFieldsFragmentDoc}`;
+    ${PostFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpdateOnePostGQL extends Apollo.Mutation<UpdateOnePostMutation, UpdateOnePostMutationVariables> {
+  export class UpdateOnePostGQL extends Apollo.Mutation<UpdateOnePost, UpdateOnePostVariables> {
     document = UpdateOnePostDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2292,7 +2292,7 @@ export const DeleteOnePostDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class DeleteOnePostGQL extends Apollo.Mutation<DeleteOnePostMutation, DeleteOnePostMutationVariables> {
+  export class DeleteOnePostGQL extends Apollo.Mutation<DeleteOnePost, DeleteOnePostVariables> {
     document = DeleteOnePostDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2305,12 +2305,12 @@ export const UpsertOnePostDocument = gql`
     ...PostFields
   }
 }
-    ${PostFieldsFragmentDoc}`;
+    ${PostFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpsertOnePostGQL extends Apollo.Mutation<UpsertOnePostMutation, UpsertOnePostMutationVariables> {
+  export class UpsertOnePostGQL extends Apollo.Mutation<UpsertOnePost, UpsertOnePostVariables> {
     document = UpsertOnePostDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2328,7 +2328,7 @@ export const DeleteManyPostDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class DeleteManyPostGQL extends Apollo.Mutation<DeleteManyPostMutation, DeleteManyPostMutationVariables> {
+  export class DeleteManyPostGQL extends Apollo.Mutation<DeleteManyPost, DeleteManyPostVariables> {
     document = DeleteManyPostDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2346,7 +2346,7 @@ export const UpdateManyPostDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpdateManyPostGQL extends Apollo.Mutation<UpdateManyPostMutation, UpdateManyPostMutationVariables> {
+  export class UpdateManyPostGQL extends Apollo.Mutation<UpdateManyPost, UpdateManyPostVariables> {
     document = UpdateManyPostDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2359,12 +2359,12 @@ export const FindOneUserDocument = gql`
     ...UserFields
   }
 }
-    ${UserFieldsFragmentDoc}`;
+    ${UserFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindOneUserGQL extends Apollo.Query<FindOneUserQuery, FindOneUserQueryVariables> {
+  export class FindOneUserGQL extends Apollo.Query<FindOneUser, FindOneUserVariables> {
     document = FindOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2377,12 +2377,12 @@ export const FindManyUserDocument = gql`
     ...UserFields
   }
 }
-    ${UserFieldsFragmentDoc}`;
+    ${UserFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindManyUserGQL extends Apollo.Query<FindManyUserQuery, FindManyUserQueryVariables> {
+  export class FindManyUserGQL extends Apollo.Query<FindManyUser, FindManyUserVariables> {
     document = FindManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2398,7 +2398,7 @@ export const FindManyUserCountDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCountQuery, FindManyUserCountQueryVariables> {
+  export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCount, FindManyUserCountVariables> {
     document = FindManyUserCountDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2411,12 +2411,12 @@ export const CreateOneUserDocument = gql`
     ...UserFields
   }
 }
-    ${UserFieldsFragmentDoc}`;
+    ${UserFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUserMutation, CreateOneUserMutationVariables> {
+  export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUser, CreateOneUserVariables> {
     document = CreateOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2429,12 +2429,12 @@ export const UpdateOneUserDocument = gql`
     ...UserFields
   }
 }
-    ${UserFieldsFragmentDoc}`;
+    ${UserFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUserMutation, UpdateOneUserMutationVariables> {
+  export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUser, UpdateOneUserVariables> {
     document = UpdateOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2452,7 +2452,7 @@ export const DeleteOneUserDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUserMutation, DeleteOneUserMutationVariables> {
+  export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
     document = DeleteOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2465,12 +2465,12 @@ export const UpsertOneUserDocument = gql`
     ...UserFields
   }
 }
-    ${UserFieldsFragmentDoc}`;
+    ${UserFields}`;
 
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUserMutation, UpsertOneUserMutationVariables> {
+  export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUser, UpsertOneUserVariables> {
     document = UpsertOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2488,7 +2488,7 @@ export const DeleteManyUserDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUserMutation, DeleteManyUserMutationVariables> {
+  export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUser, DeleteManyUserVariables> {
     document = DeleteManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
@@ -2506,7 +2506,7 @@ export const UpdateManyUserDocument = gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUserMutation, UpdateManyUserMutationVariables> {
+  export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
     document = UpdateManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
