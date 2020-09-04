@@ -19,7 +19,7 @@ export class ZenMainComponent {
   userInput: UpdateOneUserMutationVariables['data'] = {
     comments: set([null, undefined, { id: '', example: '' }]),
     group: connectOne(7),
-    posts: connectMany([1]),
+    posts: connectMany([1, 2, 3]),
   };
 
   user$ = this.findOneUserGQL
