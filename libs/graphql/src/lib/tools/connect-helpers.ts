@@ -9,7 +9,6 @@ function createManyParams(list: any[]) {
     } else if (typeof item === 'number' || typeof item === 'string') {
       accum.push({ id: item });
     }
-    throw new Error(`Could not serialize item for 'id' paramater.`);
   }, []);
 
   if (result.length > 0) return result;
