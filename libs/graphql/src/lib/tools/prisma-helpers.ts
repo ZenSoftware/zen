@@ -1,22 +1,41 @@
 import { RequireAtLeastOne } from './type-pickers';
 
-function createManyParams(list: any[]) {
-  const result = list.reduce((accum: any[], item) => {
-    const typeofItem = typeof item;
+type ManyArgs =
+  | Array<RequireAtLeastOne<any, 'id'> | null | undefined>
+  | Array<number | null | undefined>
+  | Array<string | null | undefined>
+  | null
+  | undefined;
 
-    if (typeofItem === 'object' && item.id !== null && item.id !== undefined && item.id !== '') {
-      accum.push({ id: item.id });
-    } else if (typeofItem === 'number') {
-      accum.push({ id: item });
-    } else if (typeofItem === 'string') {
-      if (item !== '') accum.push({ id: item });
+function createManyParams(input: any[] | null | undefined) {
+  if (input) {
+    const items = (input as any[]).filter(x => x !== null && x !== undefined);
+
+    if (items.length > 0) {
+      const result = items.reduce((accum: any[], item) => {
+        const typeofItem = typeof item;
+
+        if (
+          typeofItem === 'object' &&
+          item.id !== null &&
+          item.id !== undefined &&
+          item.id !== ''
+        ) {
+          accum.push({ id: item.id });
+        } else if (typeofItem === 'number') {
+          accum.push({ id: item });
+        } else if (typeofItem === 'string') {
+          if (item !== '') accum.push({ id: item });
+        }
+
+        return accum;
+      }, []);
+
+      if (result.length > 0) return result as Array<{ id: any }>;
     }
+  }
 
-    return accum;
-  }, []);
-
-  if (result.length > 0) return result;
-  else return undefined;
+  return undefined;
 }
 
 export function connectOne(
@@ -42,62 +61,26 @@ export function connectOne(
   return undefined;
 }
 
-export function connectMany(
-  list:
-    | Array<RequireAtLeastOne<any, 'id'> | null | undefined>
-    | Array<number | null | undefined>
-    | Array<string | null | undefined>
-    | null
-    | undefined
-) {
-  if (list) {
-    const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
-
-    if (cleanedList.length > 0) {
-      const result = createManyParams(cleanedList);
-      if (result) return { connect: result };
-    }
-  }
-
-  return undefined;
+export function connectMany(list: ManyArgs) {
+  const result = createManyParams(list);
+  if (result) return { connect: result };
+  else return undefined;
 }
 
-export function set(
-  list:
-    | Array<RequireAtLeastOne<any, 'id'> | null | undefined>
-    | Array<number | null | undefined>
-    | Array<string | null | undefined>
-    | null
-    | undefined
-) {
-  if (list) {
-    const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
-
-    if (cleanedList.length > 0) {
-      const result = createManyParams(cleanedList);
-      if (result) return { set: result };
-    }
-  }
-
-  return undefined;
+export function deleteMany(list: ManyArgs) {
+  const result = createManyParams(list);
+  if (result) return { delete: result };
+  else return undefined;
 }
 
-export function disconnectMany(
-  list:
-    | Array<RequireAtLeastOne<any, 'id'> | null | undefined>
-    | Array<number | null | undefined>
-    | Array<string | null | undefined>
-    | null
-    | undefined
-) {
-  if (list) {
-    const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
+export function set(list: ManyArgs) {
+  const result = createManyParams(list);
+  if (result) return { set: result };
+  else return undefined;
+}
 
-    if (cleanedList.length > 0) {
-      const result = createManyParams(cleanedList);
-      if (result) return { disconnect: result };
-    }
-  }
-
-  return undefined;
+export function disconnectMany(list: ManyArgs) {
+  const result = createManyParams(list);
+  if (result) return { disconnect: result };
+  else return undefined;
 }
