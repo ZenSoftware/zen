@@ -1,10 +1,26 @@
 import { RequireAtLeastOne } from './type-pickers';
 
+function createManyParams(list: any[]) {
+  const result = list.reduce((accum: any[], item) => {
+    if (typeof item === 'object') {
+      if (item.id !== null && item.id !== undefined) {
+        accum.push({ id: item.id });
+      }
+    } else if (typeof item === 'number' || typeof item === 'string') {
+      accum.push({ id: item });
+    }
+    throw new Error(`Could not serialize item for 'id' paramater.`);
+  }, []);
+
+  if (result.length > 0) return result;
+  else return undefined;
+}
+
 export function connectOne(
   item: RequireAtLeastOne<any, 'id'> | number | string | null | undefined
 ) {
   if (item !== undefined || item !== null) {
-    if (typeof item === 'object') {
+    if (typeof item === 'object' && item?.id !== null && item?.id !== undefined) {
       return {
         connect: { id: (item as any).id },
       };
@@ -30,16 +46,7 @@ export function connectMany(
     const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
 
     if (cleanedList.length > 0) {
-      return {
-        connect: cleanedList.map(item => {
-          if (typeof item === 'object') {
-            return { id: item.id };
-          } else if (typeof item === 'number' || typeof item === 'string') {
-            return { id: item };
-          }
-          throw new Error(`Could not serialize item for 'connect' paramater.`);
-        }),
-      };
+      return { connect: createManyParams(cleanedList) };
     }
   }
 
@@ -58,16 +65,7 @@ export function set(
     const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
 
     if (cleanedList.length > 0) {
-      return {
-        set: cleanedList.map(item => {
-          if (typeof item === 'object') {
-            return { id: item.id };
-          } else if (typeof item === 'number' || typeof item === 'string') {
-            return { id: item };
-          }
-          throw new Error(`Could not serialize item for 'set' paramater.`);
-        }),
-      };
+      return { connect: createManyParams(cleanedList) };
     }
   }
 
@@ -86,16 +84,7 @@ export function disconnectMany(
     const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
 
     if (cleanedList.length > 0) {
-      return {
-        disconnect: cleanedList.map(item => {
-          if (typeof item === 'object') {
-            return { id: item.id };
-          } else if (typeof item === 'number' || typeof item === 'string') {
-            return { id: item };
-          }
-          throw new Error(`Could not serialize item for 'disconnect' paramater.`);
-        }),
-      };
+      return { connect: createManyParams(cleanedList) };
     }
   }
 
