@@ -6,8 +6,10 @@ function createManyParams(list: any[]) {
       if (item.id !== null && item.id !== undefined && item.id !== '') {
         accum.push({ id: item.id });
       }
-    } else if (typeof item === 'number' || typeof item === 'string') {
+    } else if (typeof item === 'number') {
       accum.push({ id: item });
+    } else if (typeof item === 'string') {
+      if (item !== '') accum.push({ id: item });
     }
 
     return accum;
@@ -27,11 +29,11 @@ export function connectOne(
       item?.id !== undefined &&
       item?.id !== ''
     ) {
-      return {
-        connect: { id: (item as any).id },
-      };
-    } else if (typeof item === 'number' || typeof item === 'string') {
+      return { connect: { id: (item as any).id } };
+    } else if (typeof item === 'number') {
       return { connect: { id: item } };
+    } else if (typeof item === 'string') {
+      if (item !== '') return { connect: { id: item } };
     }
   }
 

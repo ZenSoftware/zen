@@ -18,12 +18,15 @@ export class ZenMainComponent {
   constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {
     const manyTestList = [
       { id: null },
-      { id: 4, ex: '' },
-      { id: 1 },
       undefined,
+      { id: '1' },
+      { id: '2', ex: '' },
+      { id: '' },
       null,
-      { id: 2, ex: '' },
+      { id: '3', ex: '' },
     ];
+
+    // const manyTestList = ['', '1'];
 
     console.log('connectOneTest', connectOne({ id: 77, junk: 'sdsds' }));
     console.log('connectManyTest', connectMany(manyTestList));
