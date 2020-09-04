@@ -4,10 +4,8 @@ function createManyParams(list: any[]) {
   const result = list.reduce((accum: any[], item) => {
     const typeofItem = typeof item;
 
-    if (typeofItem === 'object') {
-      if (item.id !== null && item.id !== undefined && item.id !== '') {
-        accum.push({ id: item.id });
-      }
+    if (typeofItem === 'object' && item.id !== null && item.id !== undefined && item.id !== '') {
+      accum.push({ id: item.id });
     } else if (typeofItem === 'number') {
       accum.push({ id: item });
     } else if (typeofItem === 'string') {

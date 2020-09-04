@@ -29,7 +29,7 @@ export class ZenMainComponent {
     // const manyTestList = ['', '1'];
 
     console.log('connectOneTest', connectOne({ id: 77, junk: 'sdsds' }));
-    console.log('connectManyTest', connectMany(manyTestList));
+    console.log('connectManyTest', connectMany(null));
     console.log('disconnectManyTest', disconnectMany(manyTestList));
     console.log('setTest', set(manyTestList));
   }
