@@ -4,6 +4,7 @@ import {
   UpdateOneUserVariables,
   connectMany,
   connectOne,
+  deleteMany,
   disconnectMany,
   set,
 } from '@zen/graphql';
@@ -17,8 +18,8 @@ export class ZenMainComponent {
   constructor(private findOneUserGQL: FindOneUserGQL) {}
 
   userInput: UpdateOneUserVariables['data'] = {
-    comments: set([5, 7]),
-    group: connectOne(7),
+    comments: deleteMany([{ id: 1 }]),
+    group: connectOne({ id: 1, ex: 1 }),
     posts: connectMany([1, 2, 3]),
   };
 
@@ -49,7 +50,5 @@ export class ZenMainComponent {
     console.log('connectManyTest', connectMany(null));
     console.log('disconnectManyTest', disconnectMany(manyTestList));
     console.log('setTest', set(manyTestList));
-
-    // this.updateOneUserGQL.mutate({ where: { id: 1 }, data: this.userInput });
   }
 }
