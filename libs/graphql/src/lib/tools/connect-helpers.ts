@@ -19,7 +19,12 @@ export function connectOne(
 }
 
 export function connectMany(
-  list: Array<RequireAtLeastOne<any, 'id'>> | Array<number> | Array<string> | null | undefined
+  list:
+    | Array<RequireAtLeastOne<any, 'id'> | null | undefined>
+    | Array<number | null | undefined>
+    | Array<string | null | undefined>
+    | null
+    | undefined
 ) {
   if (list) {
     const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
@@ -42,7 +47,12 @@ export function connectMany(
 }
 
 export function set(
-  list: Array<RequireAtLeastOne<any, 'id'>> | Array<number> | Array<string> | null | undefined
+  list:
+    | Array<RequireAtLeastOne<any, 'id'> | null | undefined>
+    | Array<number | null | undefined>
+    | Array<string | null | undefined>
+    | null
+    | undefined
 ) {
   if (list) {
     const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
@@ -65,7 +75,12 @@ export function set(
 }
 
 export function disconnectMany(
-  list: Array<RequireAtLeastOne<any, 'id'>> | Array<number> | Array<string> | null | undefined
+  list:
+    | Array<RequireAtLeastOne<any, 'id'> | null | undefined>
+    | Array<number | null | undefined>
+    | Array<string | null | undefined>
+    | null
+    | undefined
 ) {
   if (list) {
     const cleanedList = (list as any[]).filter(x => x !== null && x !== undefined);
