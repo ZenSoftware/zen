@@ -3,14 +3,14 @@ import { RequireAtLeastOne } from './type-pickers';
 function createManyParams(list: any[]) {
   const result = list.reduce((accum: any[], item) => {
     if (typeof item === 'object') {
-      if (item.id !== null && item.id !== undefined) {
+      if (item.id !== null && item.id !== undefined && item.id !== '') {
         accum.push({ id: item.id });
       }
-    } else if (typeof item === 'number') {
+    } else if (typeof item === 'number' || typeof item === 'string') {
       accum.push({ id: item });
-    } else if (typeof item === 'string') {
-      if (item !== '') accum.push({ id: item });
     }
+
+    return accum;
   }, []);
 
   if (result.length > 0) return result;
@@ -21,14 +21,17 @@ export function connectOne(
   item: RequireAtLeastOne<any, 'id'> | number | string | null | undefined
 ) {
   if (item !== undefined || item !== null) {
-    if (typeof item === 'object' && item?.id !== null && item?.id !== undefined) {
+    if (
+      typeof item === 'object' &&
+      item?.id !== null &&
+      item?.id !== undefined &&
+      item?.id !== ''
+    ) {
       return {
         connect: { id: (item as any).id },
       };
-    } else if (typeof item === 'number') {
+    } else if (typeof item === 'number' || typeof item === 'string') {
       return { connect: { id: item } };
-    } else if (typeof item === 'string') {
-      if (item !== '') return { connect: { id: item } };
     }
   }
 
