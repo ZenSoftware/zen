@@ -16,8 +16,8 @@ export class ZenMainComponent {
   constructor(private findOneUserGQL: FindOneUserGQL, private updateOneUserGQL: UpdateOneUserGQL) {}
 
   userInput: UpdateOneUserMutationVariables['data'] = {
-    comments: { ...connectOverMany([{ id: 1, example: '' }]) },
-    group: { ...connectOverOne({ id: 1, example: '' }) },
+    comments: connectOverMany([{ id: 1, example: '' }]),
+    group: connectOverOne({ id: 1, example: '' }),
   };
 
   user$ = this.findOneUserGQL
