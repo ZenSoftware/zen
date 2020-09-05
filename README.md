@@ -12,7 +12,7 @@
 + [Node v14](https://nodejs.org/)
 ```bash
 git clone https://github.com/ZenSoftware/Zen.git --depth=1
-cd zen
+cd Zen
 npm i
 docker-compose up -d
 npm run prisma:save
