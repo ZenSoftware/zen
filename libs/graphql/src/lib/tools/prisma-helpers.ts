@@ -1,3 +1,48 @@
+/**
+ * ## Clean & transform input into a select object
+ *
+ * @example
+ * selectOne(1); // Defaults to 'id'
+ * {id: 1}
+ *
+ * @example
+ * selectOne('a'); // Defaults to 'id'
+ * {id: 'a'}
+ *
+ * @example
+ * selectOne({id: 2, ex: 'example'}); // Defaults to 'id'
+ * {id: 2}
+ *
+ * @example
+ * selectOne({id: 2, ex: 'example'}, 'ex');
+ * {ex: 'example'}
+ *
+ * @example
+ * selectOne({id: 2, ex: 'example'}, 'ex', 'out');
+ * {out: 'example'}
+ *
+ * @example
+ * selectOne(-1);
+ * undefined
+ *
+ * @example
+ * selectOne('');
+ * undefined
+ *
+ * @example
+ * selectOne(null);
+ * undefined
+ *
+ * @example
+ * selectOne(undefined);
+ * undefined
+ *
+ * @param input - Array of items to be cleaned and serialized
+ * @param inputFieldName - The input field name to select over. Defaults to `'id'`
+ * @param outputFieldName  - The output field name of the return objects. Defaults to `'id'`
+ * @return `{outputFieldName: number | string} | undefined` - Cleaned and serialized array of select objects.
+ * The `inputFieldName` will be used for the output objects if the `outputFieldName` is not specified.
+ */
 export function selectOne<T, R>(
   item: T | number | string | null | undefined,
   inputFieldName?: keyof T,
@@ -34,18 +79,17 @@ export function selectOne<T, R>(
 }
 
 /**
- * ## Clean and serialize a dynamic array of items
- * Takes a dynamic array of items and transforms them into a cleaned array of select objects.
+ * ## Clean & transform array into select objects
  *
  * @example
- * selectMany([1, 2, -1, null, undefined]);
+ * selectMany([1, 2, -1, null, undefined]); // Defaults to 'id'
  * [
  *   {id: 1},
  *   {id: 2},
  * ]
  *
  * @example
- * selectMany(['a', 'b', '', null, undefined]);
+ * selectMany(['a', 'b', '', null, undefined]); // Defaults to 'id'
  * [
  *   {id: "a"},
  *   {id: "b"},
@@ -65,7 +109,7 @@ export function selectOne<T, R>(
  * ];
  *
  * @example
- * selectMany(exampleArray); // Defaults to the 'id' field
+ * selectMany(exampleArray); // Defaults to 'id'
  * [
  *   {id: 1},
  *   {id: 2},
