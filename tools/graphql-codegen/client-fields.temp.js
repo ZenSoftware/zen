@@ -1,8 +1,8 @@
-module.exports = Name => {
+module.exports = name => {
   return `import gql from 'graphql-tag';
 
-export const ${Name}Fields = gql\`
-  fragment ${Name}Fields on ${Name} {
+export const ${name}Fields = gql\`
+  fragment ${name}Fields on ${name} {
     id
   }
 \`;\n`;

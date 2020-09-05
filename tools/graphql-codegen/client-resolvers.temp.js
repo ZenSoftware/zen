@@ -1,77 +1,77 @@
-module.exports = Name => {
+module.exports = name => {
   return `import gql from 'graphql-tag';
 
-import { ${Name}Fields } from '../fields';
+import { ${name}Fields } from '../fields';
 
-export const ${Name}TypeDefs = gql\`
-  query FindOne${Name}($where: ${Name}WhereUniqueInput!) {
-    findOne${Name}(where: $where) {
-      ...${Name}Fields
+export const ${name}TypeDefs = gql\`
+  query FindOne${name}($where: ${name}WhereUniqueInput!) {
+    findOne${name}(where: $where) {
+      ...${name}Fields
     }
   }
 
-  query FindMany${Name}(
-    $where: ${Name}WhereInput
-    $orderBy: [${Name}OrderByInput!]
-    $cursor: ${Name}WhereUniqueInput
+  query FindMany${name}(
+    $where: ${name}WhereInput
+    $orderBy: [${name}OrderByInput!]
+    $cursor: ${name}WhereUniqueInput
     $skip: Int
     $take: Int
   ) {
-    findMany${Name}(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
-      ...${Name}Fields
+    findMany${name}(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+      ...${name}Fields
     }
   }
 
-  query FindMany${Name}Count(
-    $where: ${Name}WhereInput
-    $orderBy: [${Name}OrderByInput!]
-    $cursor: ${Name}WhereUniqueInput
+  query FindMany${name}Count(
+    $where: ${name}WhereInput
+    $orderBy: [${name}OrderByInput!]
+    $cursor: ${name}WhereUniqueInput
     $skip: Int
     $take: Int
   ) {
-    findMany${Name}Count(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+    findMany${name}Count(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
   }
 
-  mutation CreateOne${Name}($data: ${Name}CreateInput!) {
-    createOne${Name}(data: $data) {
-      ...${Name}Fields
+  mutation CreateOne${name}($data: ${name}CreateInput!) {
+    createOne${name}(data: $data) {
+      ...${name}Fields
     }
   }
 
-  mutation UpdateOne${Name}($where: ${Name}WhereUniqueInput!, $data: ${Name}UpdateInput!) {
-    updateOne${Name}(where: $where, data: $data) {
-      ...${Name}Fields
+  mutation UpdateOne${name}($where: ${name}WhereUniqueInput!, $data: ${name}UpdateInput!) {
+    updateOne${name}(where: $where, data: $data) {
+      ...${name}Fields
     }
   }
 
-  mutation DeleteOne${Name}($where: ${Name}WhereUniqueInput!) {
-    deleteOne${Name}(where: $where) {
+  mutation DeleteOne${name}($where: ${name}WhereUniqueInput!) {
+    deleteOne${name}(where: $where) {
       id
     }
   }
 
-  mutation UpsertOne${Name}(
-    $where: ${Name}WhereUniqueInput!
-    $create: ${Name}CreateInput!
-    $update: ${Name}UpdateInput!
+  mutation UpsertOne${name}(
+    $where: ${name}WhereUniqueInput!
+    $create: ${name}CreateInput!
+    $update: ${name}UpdateInput!
   ) {
-    upsertOne${Name}(where: $where, create: $create, update: $update) {
-      ...${Name}Fields
+    upsertOne${name}(where: $where, create: $create, update: $update) {
+      ...${name}Fields
     }
   }
 
-  mutation DeleteMany${Name}($where: ${Name}WhereInput) {
-    deleteMany${Name}(where: $where) {
+  mutation DeleteMany${name}($where: ${name}WhereInput) {
+    deleteMany${name}(where: $where) {
       count
     }
   }
 
-  mutation UpdateMany${Name}($where: ${Name}WhereInput, $data: ${Name}UpdateManyMutationInput) {
-    updateMany${Name}(where: $where, data: $data) {
+  mutation UpdateMany${name}($where: ${name}WhereInput, $data: ${name}UpdateManyMutationInput) {
+    updateMany${name}(where: $where, data: $data) {
       count
     }
   }
 
-  \${${Name}Fields}
+  \${${name}Fields}
 \`;\n`;
 };
