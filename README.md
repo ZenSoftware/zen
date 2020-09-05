@@ -3,11 +3,8 @@
 ### 🤹 Currently under development - New contributors are welcome!🌱
 You may open a git issue if you are interested in contributing! 🍰
 
-<h4 style="text-align:center"><a href="https://zensoftware.github.io/Zen/">Zen Docs</a><h4>
-
-<h4 style="text-align:center"><a href="https://github.com/ZenSoftware/Zen">GitHub repo ZenSoftware/Zen</a><h4>
-
-
+### [Zen Docs](https://zensoftware.github.io/Zen/)
+### [GitHub repo ZenSoftware/Zen](https://github.com/ZenSoftware/Zen)
 ---
 
 ## GraphQL Ambitions
