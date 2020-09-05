@@ -33,12 +33,15 @@ export class ZenMainComponent {
       { id: '3', ex: 'b' },
       { id: undefined },
       { id: null },
+      { id: -1 },
       { id: '' },
       undefined,
       null,
     ];
 
-    console.log('selectMany:', selectMany(manyTestList, 'ex', 'out'));
-    console.log(`selectOne:`, selectOne({ id: 7, example: 'Hello' }, 'example'));
+    console.log(`selectMany(manyTestList)`, selectMany(manyTestList));
+    console.log(`selectMany(manyTestList, 'ex', 'out')`, selectMany(manyTestList, 'ex', 'out'));
+
+    console.log(`selectOne({ id: 7, ex: 'c' }, 'ex')`, selectOne({ id: 7, ex: 'c' }, 'ex'));
   }
 }
