@@ -39,7 +39,7 @@ export class ZenMainComponent {
       null,
     ];
 
-    console.log(`selectMany(manyTestList)`, selectMany(exampleList, 'id'));
+    console.log(`selectMany(manyTestList)`, selectMany(exampleList));
 
     console.log(`selectMany(manyTestList, 'ex', 'out')`, selectMany(exampleList, 'ex', 'out'));
 
