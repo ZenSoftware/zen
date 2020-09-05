@@ -1845,29 +1845,29 @@ export type UpdateManyUser = (
   )> }
 );
 
-export const CommentFields = gql`
+export const CommentFields = /*#__PURE__*/ gql`
     fragment CommentFields on Comment {
   id
 }
     `;
-export const GroupFields = gql`
+export const GroupFields = /*#__PURE__*/ gql`
     fragment GroupFields on Group {
   id
 }
     `;
-export const PostFields = gql`
+export const PostFields = /*#__PURE__*/ gql`
     fragment PostFields on Post {
   id
 }
     `;
-export const UserFields = gql`
+export const UserFields = /*#__PURE__*/ gql`
     fragment UserFields on User {
   id
   email
   name
 }
     `;
-export const FindOneCommentDocument = gql`
+export const FindOneCommentDocument = /*#__PURE__*/ gql`
     query FindOneComment($where: CommentWhereUniqueInput!) {
   findOneComment(where: $where) {
     ...CommentFields
@@ -1885,7 +1885,7 @@ export const FindOneCommentDocument = gql`
       super(apollo);
     }
   }
-export const FindManyCommentDocument = gql`
+export const FindManyCommentDocument = /*#__PURE__*/ gql`
     query FindManyComment($where: CommentWhereInput, $orderBy: [CommentOrderByInput!], $cursor: CommentWhereUniqueInput, $skip: Int, $take: Int) {
   findManyComment(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
     ...CommentFields
@@ -1903,7 +1903,7 @@ export const FindManyCommentDocument = gql`
       super(apollo);
     }
   }
-export const FindManyCommentCountDocument = gql`
+export const FindManyCommentCountDocument = /*#__PURE__*/ gql`
     query FindManyCommentCount($where: CommentWhereInput, $orderBy: [CommentOrderByInput!], $cursor: CommentWhereUniqueInput, $skip: Int, $take: Int) {
   findManyCommentCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
 }
@@ -1919,7 +1919,7 @@ export const FindManyCommentCountDocument = gql`
       super(apollo);
     }
   }
-export const CreateOneCommentDocument = gql`
+export const CreateOneCommentDocument = /*#__PURE__*/ gql`
     mutation CreateOneComment($data: CommentCreateInput!) {
   createOneComment(data: $data) {
     ...CommentFields
@@ -1937,7 +1937,7 @@ export const CreateOneCommentDocument = gql`
       super(apollo);
     }
   }
-export const UpdateOneCommentDocument = gql`
+export const UpdateOneCommentDocument = /*#__PURE__*/ gql`
     mutation UpdateOneComment($where: CommentWhereUniqueInput!, $data: CommentUpdateInput!) {
   updateOneComment(where: $where, data: $data) {
     ...CommentFields
@@ -1955,7 +1955,7 @@ export const UpdateOneCommentDocument = gql`
       super(apollo);
     }
   }
-export const DeleteOneCommentDocument = gql`
+export const DeleteOneCommentDocument = /*#__PURE__*/ gql`
     mutation DeleteOneComment($where: CommentWhereUniqueInput!) {
   deleteOneComment(where: $where) {
     id
@@ -1973,7 +1973,7 @@ export const DeleteOneCommentDocument = gql`
       super(apollo);
     }
   }
-export const UpsertOneCommentDocument = gql`
+export const UpsertOneCommentDocument = /*#__PURE__*/ gql`
     mutation UpsertOneComment($where: CommentWhereUniqueInput!, $create: CommentCreateInput!, $update: CommentUpdateInput!) {
   upsertOneComment(where: $where, create: $create, update: $update) {
     ...CommentFields
@@ -1991,7 +1991,7 @@ export const UpsertOneCommentDocument = gql`
       super(apollo);
     }
   }
-export const DeleteManyCommentDocument = gql`
+export const DeleteManyCommentDocument = /*#__PURE__*/ gql`
     mutation DeleteManyComment($where: CommentWhereInput) {
   deleteManyComment(where: $where) {
     count
@@ -2009,7 +2009,7 @@ export const DeleteManyCommentDocument = gql`
       super(apollo);
     }
   }
-export const UpdateManyCommentDocument = gql`
+export const UpdateManyCommentDocument = /*#__PURE__*/ gql`
     mutation UpdateManyComment($where: CommentWhereInput, $data: CommentUpdateManyMutationInput) {
   updateManyComment(where: $where, data: $data) {
     count
@@ -2027,7 +2027,7 @@ export const UpdateManyCommentDocument = gql`
       super(apollo);
     }
   }
-export const FindOneGroupDocument = gql`
+export const FindOneGroupDocument = /*#__PURE__*/ gql`
     query FindOneGroup($where: GroupWhereUniqueInput!) {
   findOneGroup(where: $where) {
     ...GroupFields
@@ -2045,7 +2045,7 @@ export const FindOneGroupDocument = gql`
       super(apollo);
     }
   }
-export const FindManyGroupDocument = gql`
+export const FindManyGroupDocument = /*#__PURE__*/ gql`
     query FindManyGroup($where: GroupWhereInput, $orderBy: [GroupOrderByInput!], $cursor: GroupWhereUniqueInput, $skip: Int, $take: Int) {
   findManyGroup(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
     ...GroupFields
@@ -2063,7 +2063,7 @@ export const FindManyGroupDocument = gql`
       super(apollo);
     }
   }
-export const FindManyGroupCountDocument = gql`
+export const FindManyGroupCountDocument = /*#__PURE__*/ gql`
     query FindManyGroupCount($where: GroupWhereInput, $orderBy: [GroupOrderByInput!], $cursor: GroupWhereUniqueInput, $skip: Int, $take: Int) {
   findManyGroupCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
 }
@@ -2079,7 +2079,7 @@ export const FindManyGroupCountDocument = gql`
       super(apollo);
     }
   }
-export const CreateOneGroupDocument = gql`
+export const CreateOneGroupDocument = /*#__PURE__*/ gql`
     mutation CreateOneGroup($data: GroupCreateInput!) {
   createOneGroup(data: $data) {
     ...GroupFields
@@ -2097,7 +2097,7 @@ export const CreateOneGroupDocument = gql`
       super(apollo);
     }
   }
-export const UpdateOneGroupDocument = gql`
+export const UpdateOneGroupDocument = /*#__PURE__*/ gql`
     mutation UpdateOneGroup($where: GroupWhereUniqueInput!, $data: GroupUpdateInput!) {
   updateOneGroup(where: $where, data: $data) {
     ...GroupFields
@@ -2115,7 +2115,7 @@ export const UpdateOneGroupDocument = gql`
       super(apollo);
     }
   }
-export const DeleteOneGroupDocument = gql`
+export const DeleteOneGroupDocument = /*#__PURE__*/ gql`
     mutation DeleteOneGroup($where: GroupWhereUniqueInput!) {
   deleteOneGroup(where: $where) {
     id
@@ -2133,7 +2133,7 @@ export const DeleteOneGroupDocument = gql`
       super(apollo);
     }
   }
-export const UpsertOneGroupDocument = gql`
+export const UpsertOneGroupDocument = /*#__PURE__*/ gql`
     mutation UpsertOneGroup($where: GroupWhereUniqueInput!, $create: GroupCreateInput!, $update: GroupUpdateInput!) {
   upsertOneGroup(where: $where, create: $create, update: $update) {
     ...GroupFields
@@ -2151,7 +2151,7 @@ export const UpsertOneGroupDocument = gql`
       super(apollo);
     }
   }
-export const DeleteManyGroupDocument = gql`
+export const DeleteManyGroupDocument = /*#__PURE__*/ gql`
     mutation DeleteManyGroup($where: GroupWhereInput) {
   deleteManyGroup(where: $where) {
     count
@@ -2169,7 +2169,7 @@ export const DeleteManyGroupDocument = gql`
       super(apollo);
     }
   }
-export const UpdateManyGroupDocument = gql`
+export const UpdateManyGroupDocument = /*#__PURE__*/ gql`
     mutation UpdateManyGroup($where: GroupWhereInput, $data: GroupUpdateManyMutationInput) {
   updateManyGroup(where: $where, data: $data) {
     count
@@ -2187,7 +2187,7 @@ export const UpdateManyGroupDocument = gql`
       super(apollo);
     }
   }
-export const FindOnePostDocument = gql`
+export const FindOnePostDocument = /*#__PURE__*/ gql`
     query FindOnePost($where: PostWhereUniqueInput!) {
   findOnePost(where: $where) {
     ...PostFields
@@ -2205,7 +2205,7 @@ export const FindOnePostDocument = gql`
       super(apollo);
     }
   }
-export const FindManyPostDocument = gql`
+export const FindManyPostDocument = /*#__PURE__*/ gql`
     query FindManyPost($where: PostWhereInput, $orderBy: [PostOrderByInput!], $cursor: PostWhereUniqueInput, $skip: Int, $take: Int) {
   findManyPost(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
     ...PostFields
@@ -2223,7 +2223,7 @@ export const FindManyPostDocument = gql`
       super(apollo);
     }
   }
-export const FindManyPostCountDocument = gql`
+export const FindManyPostCountDocument = /*#__PURE__*/ gql`
     query FindManyPostCount($where: PostWhereInput, $orderBy: [PostOrderByInput!], $cursor: PostWhereUniqueInput, $skip: Int, $take: Int) {
   findManyPostCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
 }
@@ -2239,7 +2239,7 @@ export const FindManyPostCountDocument = gql`
       super(apollo);
     }
   }
-export const CreateOnePostDocument = gql`
+export const CreateOnePostDocument = /*#__PURE__*/ gql`
     mutation CreateOnePost($data: PostCreateInput!) {
   createOnePost(data: $data) {
     ...PostFields
@@ -2257,7 +2257,7 @@ export const CreateOnePostDocument = gql`
       super(apollo);
     }
   }
-export const UpdateOnePostDocument = gql`
+export const UpdateOnePostDocument = /*#__PURE__*/ gql`
     mutation UpdateOnePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
   updateOnePost(where: $where, data: $data) {
     ...PostFields
@@ -2275,7 +2275,7 @@ export const UpdateOnePostDocument = gql`
       super(apollo);
     }
   }
-export const DeleteOnePostDocument = gql`
+export const DeleteOnePostDocument = /*#__PURE__*/ gql`
     mutation DeleteOnePost($where: PostWhereUniqueInput!) {
   deleteOnePost(where: $where) {
     id
@@ -2293,7 +2293,7 @@ export const DeleteOnePostDocument = gql`
       super(apollo);
     }
   }
-export const UpsertOnePostDocument = gql`
+export const UpsertOnePostDocument = /*#__PURE__*/ gql`
     mutation UpsertOnePost($where: PostWhereUniqueInput!, $create: PostCreateInput!, $update: PostUpdateInput!) {
   upsertOnePost(where: $where, create: $create, update: $update) {
     ...PostFields
@@ -2311,7 +2311,7 @@ export const UpsertOnePostDocument = gql`
       super(apollo);
     }
   }
-export const DeleteManyPostDocument = gql`
+export const DeleteManyPostDocument = /*#__PURE__*/ gql`
     mutation DeleteManyPost($where: PostWhereInput) {
   deleteManyPost(where: $where) {
     count
@@ -2329,7 +2329,7 @@ export const DeleteManyPostDocument = gql`
       super(apollo);
     }
   }
-export const UpdateManyPostDocument = gql`
+export const UpdateManyPostDocument = /*#__PURE__*/ gql`
     mutation UpdateManyPost($where: PostWhereInput, $data: PostUpdateManyMutationInput) {
   updateManyPost(where: $where, data: $data) {
     count
@@ -2347,7 +2347,7 @@ export const UpdateManyPostDocument = gql`
       super(apollo);
     }
   }
-export const FindOneUserDocument = gql`
+export const FindOneUserDocument = /*#__PURE__*/ gql`
     query FindOneUser($where: UserWhereUniqueInput!) {
   findOneUser(where: $where) {
     ...UserFields
@@ -2365,7 +2365,7 @@ export const FindOneUserDocument = gql`
       super(apollo);
     }
   }
-export const FindManyUserDocument = gql`
+export const FindManyUserDocument = /*#__PURE__*/ gql`
     query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $skip: Int, $take: Int) {
   findManyUser(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
     ...UserFields
@@ -2383,7 +2383,7 @@ export const FindManyUserDocument = gql`
       super(apollo);
     }
   }
-export const FindManyUserCountDocument = gql`
+export const FindManyUserCountDocument = /*#__PURE__*/ gql`
     query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $skip: Int, $take: Int) {
   findManyUserCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
 }
@@ -2399,7 +2399,7 @@ export const FindManyUserCountDocument = gql`
       super(apollo);
     }
   }
-export const CreateOneUserDocument = gql`
+export const CreateOneUserDocument = /*#__PURE__*/ gql`
     mutation CreateOneUser($data: UserCreateInput!) {
   createOneUser(data: $data) {
     ...UserFields
@@ -2417,7 +2417,7 @@ export const CreateOneUserDocument = gql`
       super(apollo);
     }
   }
-export const UpdateOneUserDocument = gql`
+export const UpdateOneUserDocument = /*#__PURE__*/ gql`
     mutation UpdateOneUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
   updateOneUser(where: $where, data: $data) {
     ...UserFields
@@ -2435,7 +2435,7 @@ export const UpdateOneUserDocument = gql`
       super(apollo);
     }
   }
-export const DeleteOneUserDocument = gql`
+export const DeleteOneUserDocument = /*#__PURE__*/ gql`
     mutation DeleteOneUser($where: UserWhereUniqueInput!) {
   deleteOneUser(where: $where) {
     id
@@ -2453,7 +2453,7 @@ export const DeleteOneUserDocument = gql`
       super(apollo);
     }
   }
-export const UpsertOneUserDocument = gql`
+export const UpsertOneUserDocument = /*#__PURE__*/ gql`
     mutation UpsertOneUser($where: UserWhereUniqueInput!, $create: UserCreateInput!, $update: UserUpdateInput!) {
   upsertOneUser(where: $where, create: $create, update: $update) {
     ...UserFields
@@ -2471,7 +2471,7 @@ export const UpsertOneUserDocument = gql`
       super(apollo);
     }
   }
-export const DeleteManyUserDocument = gql`
+export const DeleteManyUserDocument = /*#__PURE__*/ gql`
     mutation DeleteManyUser($where: UserWhereInput) {
   deleteManyUser(where: $where) {
     count
@@ -2489,7 +2489,7 @@ export const DeleteManyUserDocument = gql`
       super(apollo);
     }
   }
-export const UpdateManyUserDocument = gql`
+export const UpdateManyUserDocument = /*#__PURE__*/ gql`
     mutation UpdateManyUser($where: UserWhereInput, $data: UserUpdateManyMutationInput) {
   updateManyUser(where: $where, data: $data) {
     count

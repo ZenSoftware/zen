@@ -6,6 +6,7 @@ documents:
 config:
   ngModule: ./graphql.module#GraphQLModule
   omitOperationSuffix: true
+  pureMagicComment: true
 generates:
   libs/graphql/src/lib/apollo-angular.ts:
     plugins:
