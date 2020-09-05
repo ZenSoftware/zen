@@ -130,6 +130,10 @@ export function selectOne<T, R>(
  *   {out: "b"},
  * ]
  *
+ * @example
+ * selectMany([]);
+ * undefined
+ *
  * @param input - Array of items to be cleaned and serialized
  * @param inputFieldName - The input field name to select over. Defaults to `'id'`
  * @param outputFieldName  - The output field name of the return objects. Defaults to `'id'`
