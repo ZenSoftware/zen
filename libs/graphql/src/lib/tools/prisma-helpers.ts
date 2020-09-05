@@ -7,7 +7,7 @@
  *
  * @example
  * selectOne('a'); // Defaults to 'id'
- * {id: 'a'}
+ * {id: "a"}
  *
  * @example
  * selectOne({id: 2, ex: 'example'}); // Defaults to 'id'
@@ -15,11 +15,11 @@
  *
  * @example
  * selectOne({id: 2, ex: 'example'}, 'ex');
- * {ex: 'example'}
+ * {ex: "example"}
  *
  * @example
  * selectOne({id: 2, ex: 'example'}, 'ex', 'out');
- * {out: 'example'}
+ * {out: "example"}
  *
  * @example
  * selectOne(-1);
