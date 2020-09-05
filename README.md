@@ -7,6 +7,24 @@
 
 ---
 
+## Project setup instructions
+```bash
+git clone https://github.com/ZenSoftware/Zen.git --depth=1
+cd zen
+npm i
+docker-compose up -d
+npm run prisma:save
+npm run start:api
+
+# After api server has started
+npm run apollo:watch
+npm run start
+```
+
+Reload GraphQL schema for Apollo extension via VSCode command palette after the api server has started: `>Apollo: Reload schema`
+
+---
+
 ## GraphQL Ambitions
 - [X] [Nest GraphQL](https://docs.nestjs.com/graphql/resolvers) resolvers as a gateway to [Prisma Client](https://www.prisma.io/docs/understand-prisma/prisma-in-your-stack/graphql).
 - [X] [Prisma Case Insensitive Filtering](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/case-sensitivity) For case-insensitive querying of text.

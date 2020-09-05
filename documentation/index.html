@@ -37,6 +37,18 @@
 <h3 id="🤹-currently-under-development---new-contributors-are-welcome🌱">🤹 Currently under development - New contributors are welcome!🌱</h3>
 <p>🍧 You may open a git issue if you are interested in contributing! 🍰</p>
 <hr>
+<h2 id="project-setup-instructions">Project setup instructions</h2>
+<div><pre class="line-numbers"><code class="language-bash">git clone https://github.com/ZenSoftware/Zen.git --depth=1
+cd zen
+npm i
+docker-compose up -d
+npm run prisma:save
+npm run start:api
+
+# After api server has started
+npm run apollo:watch
+npm run start</code></pre></div><p>Reload GraphQL schema for Apollo extension via VSCode command palette after the api server has started: <code>&gt;Apollo: Reload schema</code></p>
+<hr>
 <h2 id="graphql-ambitions">GraphQL Ambitions</h2>
 <ul>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://docs.nestjs.com/graphql/resolvers">Nest GraphQL</a> resolvers as a gateway to <a href="https://www.prisma.io/docs/understand-prisma/prisma-in-your-stack/graphql">Prisma Client</a>.</li>
