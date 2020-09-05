@@ -1,0 +1,555 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>zen documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">zen documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+<ol class="breadcrumb">
+  <li>Miscellaneous</li>
+  <li>Variables</li>
+</ol>
+
+<section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#ALL_TYPE_DEFS" title="apps/api/src/app/graphql/resolvers/index.ts"><b>ALL_TYPE_DEFS</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CommentTypeDef" title="apps/api/src/app/graphql/resolvers/Comment.ts"><b>CommentTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../Comment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="apps/api/src/environments/environment.prod.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(apps/.../environment.prod.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="apps/api/src/environments/environment.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(apps/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#execWriteFile" title="apps/api/src/app/graphql/write-schema.ts"><b>execWriteFile</b>&nbsp;&nbsp;&nbsp;(apps/.../write-schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GRAPHQL_SCHEMA" title="apps/api/src/app/graphql/resolvers/index.ts"><b>GRAPHQL_SCHEMA</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GroupTypeDef" title="apps/api/src/app/graphql/resolvers/Group.ts"><b>GroupTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../Group.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NEST_RESOLVERS" title="apps/api/src/app/graphql/resolvers/index.ts"><b>NEST_RESOLVERS</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NEST_TYPE_DEFS" title="apps/api/src/app/graphql/resolvers/index.ts"><b>NEST_TYPE_DEFS</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PostTypeDef" title="apps/api/src/app/graphql/resolvers/Post.ts"><b>PostTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../Post.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#prisma" title="apps/api/src/app/graphql/context.ts"><b>prisma</b>&nbsp;&nbsp;&nbsp;(apps/.../context.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PRISMA_SCHEMA" title="apps/api/src/app/graphql/resolvers/index.ts"><b>PRISMA_SCHEMA</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UserTypeDef" title="apps/api/src/app/graphql/resolvers/User.ts"><b>UserTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../User.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>apps/api/src/app/graphql/resolvers/index.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ALL_TYPE_DEFS"></a>
+                        <span class="name">
+                            <b>
+                            ALL_TYPE_DEFS</b>
+                            <a href="#ALL_TYPE_DEFS"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>mergeTypes([PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS])</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="GRAPHQL_SCHEMA"></a>
+                        <span class="name">
+                            <b>
+                            GRAPHQL_SCHEMA</b>
+                            <a href="#GRAPHQL_SCHEMA"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>makeExecutableSchema({ typeDefs: ALL_TYPE_DEFS })</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="NEST_RESOLVERS"></a>
+                        <span class="name">
+                            <b>
+                            NEST_RESOLVERS</b>
+                            <a href="#NEST_RESOLVERS"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+  CommentResolver,
+  GroupResolver,
+  PostResolver,
+  UserResolver
+]</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="NEST_TYPE_DEFS"></a>
+                        <span class="name">
+                            <b>
+                            NEST_TYPE_DEFS</b>
+                            <a href="#NEST_TYPE_DEFS"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+  CommentTypeDef,
+  GroupTypeDef,
+  PostTypeDef,
+  UserTypeDef
+].filter(x &#x3D;&gt; x)</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="PRISMA_SCHEMA"></a>
+                        <span class="name">
+                            <b>
+                            PRISMA_SCHEMA</b>
+                            <a href="#PRISMA_SCHEMA"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS })</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/app/graphql/resolvers/Comment.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="CommentTypeDef"></a>
+                        <span class="name">
+                            <b>
+                            CommentTypeDef</b>
+                            <a href="#CommentTypeDef"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>null</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/environments/environment.prod.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="environment"></a>
+                        <span class="name">
+                            <b>
+                            environment</b>
+                            <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/EnvironmentBase.html" target="_self" >EnvironmentBase</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+  production: true,
+  expressPort: process.env.PORT,
+  graphql: {
+    playground: false,
+  },
+  postgres: {
+    host: &#x27;postgres-svc&#x27;,
+    port: 5432,
+    user: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
+    database: &#x27;prisma&#x27;,
+  },
+  jwtOptions: {
+    privateKey: process.env.JWT_PRIVATE_KEY,
+    publicKey: process.env.JWT_PUBLIC_KEY,
+    signOptions: {
+      algorithm: &#x27;RS256&#x27;,
+      expiresIn: 3600, // 1 hour (in seconds)
+    },
+  },
+  rememberMeExpiresIn: 2592000, // 30 days (in seconds)
+  cookieDomain: &#x27;zensoftware.ca&#x27;,
+}</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/environments/environment.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="environment"></a>
+                        <span class="name">
+                            <b>
+                            environment</b>
+                            <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/EnvironmentBase.html" target="_self" >EnvironmentBase</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+  production: false,
+  expressPort: 7080,
+  graphql: {
+    playground: true,
+  },
+  postgres: {
+    host: &#x27;localhost&#x27;,
+    port: 5445,
+    user: &#x27;ZenAdmin&#x27;,
+    password: &#x27;temp&#x27;,
+    database: &#x27;zen&#x27;,
+  },
+  jwtOptions: {
+    secret: &#x27;dev secret&#x27;,
+    signOptions: {
+      algorithm: &#x27;HS256&#x27;,
+      expiresIn: 3600, // 1 hour (in seconds)
+    },
+  },
+  rememberMeExpiresIn: 2592000, // 30 days (in seconds)
+  cookieDomain: undefined,
+}</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/app/graphql/write-schema.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="execWriteFile"></a>
+                        <span class="name">
+                            <b>
+                            execWriteFile</b>
+                            <a href="#execWriteFile"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>promisify(fs.writeFile)</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/app/graphql/resolvers/Group.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="GroupTypeDef"></a>
+                        <span class="name">
+                            <b>
+                            GroupTypeDef</b>
+                            <a href="#GroupTypeDef"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>null</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/app/graphql/resolvers/Post.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="PostTypeDef"></a>
+                        <span class="name">
+                            <b>
+                            PostTypeDef</b>
+                            <a href="#PostTypeDef"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>null</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/app/graphql/context.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="prisma"></a>
+                        <span class="name">
+                            <b>
+                            prisma</b>
+                            <a href="#prisma"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new PrismaService()</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/app/graphql/resolvers/User.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="UserTypeDef"></a>
+                        <span class="name">
+                            <b>
+                            UserTypeDef</b>
+                            <a href="#UserTypeDef"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>null</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

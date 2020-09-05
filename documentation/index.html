@@ -1,0 +1,142 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>zen documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">zen documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="⛩-zen-⛩">⛩ Zen ⛩</h1>
+<h2 id="modern-full-stack-web-portal-built-with-nest-and-angular">Modern Full Stack Web Portal built with Nest and Angular</h2>
+<h3 id="🤹-currently-under-development---new-contributors-are-welcome🌱">🤹 Currently under development - New Contributors are Welcome!🌱</h3>
+<hr>
+<h2 id="graphql-ambitions">GraphQL Ambitions</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://docs.nestjs.com/graphql/resolvers">Nest GraphQL</a> resolvers as a gateway to <a href="https://www.prisma.io/docs/understand-prisma/prisma-in-your-stack/graphql">Prisma Client</a>.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/case-sensitivity">Prisma Case Insensitive Filtering</a> For case-insensitive querying of text.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://paljs.com/plugins/select/">PrismaSelect</a> to solve the N+1 problem for all queries for free.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://paljs.com/plugins/delete">PrismaDelete</a> to add <code>CASCADE</code> and <code>SET_NULL</code> deletion capabilities to Prisma. These features have yet to be implemented by the core Prisma team.  This project will convert to the approach directly supported by Prisma when the official feature becomes available.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://docs.nestjs.com/graphql/generating-sdl">Nest GraphQL SDL generation</a> to enable auto-completion using a tool like <a href="https://www.apollographql.com/docs/devtools/editor-plugins/">Apollo extension for VS Code</a></li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://graphql-code-generator.com/docs/plugins/typescript-apollo-angular">Code generation</a> of <a href="https://www.apollographql.com/docs/angular/">apollo-angular</a> services to enable simple, type safe access to the GraphQL API within Angular. 🎀</li>
+<li><input checked="" disabled="" type="checkbox"> An Angular <code>GraphQLModule</code> to simplify the configuration of the <code>ApolloClient</code> to enable/disable the varying <code>ApolloLink</code> features.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://apollo-angular.com/docs/data/network#httpclient-1">HttpBatchLink</a> for batching several GraphQL requests that occur within a short debounce interval. This really helps to alleviate network congestion.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://www.npmjs.com/package/apollo-upload-client">UploadLink</a> to give <code>ApolloClient</code> HTTP multi-part form requests capabilities.  Enabling the uploading of files via <code>GraphQLUpload</code>.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://www.apollographql.com/docs/react/data/subscriptions/#2-initialize-a-websocketlink">WebSocketLink</a> for GraphQL subscriptions over websockets.</li>
+</ul>
+<hr>
+<h2 id="api-authentication-performance--scaling-ambitions">API Authentication, Performance &amp; Scaling Ambitions</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <a href="https://docs.nestjs.com/techniques/authentication">Nest authentication</a> integration, user creation, and login system designed specifically to work for an <a href="https://angular.io/">Angular SPA (single page application)</a>.  This project will provide responsive, &quot;mobile first&quot; interfaces for the standard set of authentication features (sign up, login, password change).  </li>
+<li><input disabled="" type="checkbox"> Angular route guards and Angular directives to show/hide content depending on user permissions.</li>
+<li><input disabled="" type="checkbox"> <a href="https://docs.nestjs.com/techniques/authentication#extending-guards">Nest authorization directives</a> for server side <a href="https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true">role-based access control</a> to allow for declarative, fine grained security control over all GraphQL queries and mutations.</li>
+<li><input checked="" disabled="" type="checkbox"> 100% stateless web server authentication via <a href="https://docs.nestjs.com/techniques/authentication#jwt-functionality">JWT (Javascript Web Tokens)</a>. Keeping the API stateless will enable horizontal scaling of container replicas of the api in production.</li>
+</ul>
+<hr>
+<h2 id="modern-web-components-and-styling-ambitions">Modern Web Components and Styling Ambitions</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> SASS chosen as the css transpiler of choice</li>
+<li><input disabled="" type="checkbox"> <a href="https://material.angular.io/">Angular Material</a> components &amp; theme.</li>
+<li><input disabled="" type="checkbox"> Directly import <a href="https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/">Bootstrap reset, utilities, &amp; grid</a> features through SASS imports, and exclude the Bootstrap theme and component styles. These features are missing from Angular Material, and greatly simplify the creation of responsive, mobile first applications.</li>
+</ul>
+<hr>
+<h2 id="project--dev-tools-ambitions">Project &amp; Dev Tools Ambitions</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://nx.dev/angular">Nx for project management</a> to allow for the use of <a href="https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console">Nx Console extensions for VSCode</a>.  Nx Console is a GUI interface for monorepos that adds a lot of modern developer conveniences.  It also helps to simplify the use of the various Angular &amp; Nest code generation schematics available in the ecosystem.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://marketplace.visualstudio.com/items?itemName=Angular.ng-template">Angular Language Service for VSCode</a> for modern IDE tooling.</li>
+<li><input checked="" disabled="" type="checkbox"> NPM scripts for versioned releases of the <strong>api</strong> server as a containerized Docker image.  <a href="https://hub.docker.com/_/node?tab=description&amp;ref=hackernoon.com">node:14-alpine</a> is used as the Docker container base image, and the appropriate <code>tsconfig.app.json</code> configurations are being applied for the Node v14 Nest app.</li>
+<li><input checked="" disabled="" type="checkbox"> Enforced code formatting via <a href="https://prettier.io/">Prettier</a> &amp; <a href="https://www.npmjs.com/package/prettier-plugin-import-sort">import-sort</a>, guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://compodoc.app/">Compodoc</a> to generate Nest &amp; Angular documentation.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
