@@ -10,9 +10,9 @@ export class ZenMainComponent {
   constructor(private findOneUserGQL: FindOneUserGQL) {}
 
   userInput: UpdateOneUserVariables['data'] = {
-    comments: { delete: selectMany([{ id: 1 }]) },
-    group: { connect: selectOne({ id: 1 }) },
+    comments: { delete: selectMany([{ id: 1, example: '' }]) },
     posts: { set: selectMany([1, 2, 3]) },
+    group: { connect: selectOne({ id: 1 }) },
   };
 
   user$ = this.findOneUserGQL
@@ -28,17 +28,17 @@ export class ZenMainComponent {
 
   test() {
     const manyTestList = [
+      { id: '1' },
+      { id: '2', ex: '' },
+      { id: '3', ex: '' },
       { id: undefined },
       { id: null },
       { id: '' },
       undefined,
       null,
-      { id: '1' },
-      { id: '2', ex: '' },
-      { id: '3', ex: '' },
     ];
 
     console.log('selectMany:', selectMany(manyTestList));
-    console.log(`selectOne:`, selectOne({ id: 77, junk: 'sdsds' }));
+    console.log(`selectOne:`, selectOne({ id: 7, example: '' }));
   }
 }
