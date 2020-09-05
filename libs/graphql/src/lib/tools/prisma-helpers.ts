@@ -1,36 +1,40 @@
-import { RequireAtLeastOne } from './type-pickers';
-
-type OneArgs = RequireAtLeastOne<any, 'id'> | number | string | null | undefined;
-
-export function selectOne(item: OneArgs) {
+export function selectOne(
+  item: object | number | string | null | undefined,
+  inputFieldName: string = 'id',
+  outputFieldName = inputFieldName
+) {
   if (item !== undefined || item !== null) {
     const typeofItem = typeof item;
 
     if (
       typeofItem === 'object' &&
-      (<any>item).id !== null &&
-      (<any>item).id !== undefined &&
-      (<any>item).id !== ''
+      (<any>item)[inputFieldName] !== null &&
+      (<any>item)[inputFieldName] !== undefined &&
+      (<any>item)[inputFieldName] !== -1 &&
+      (<any>item)[inputFieldName] !== ''
     ) {
-      return { id: (<any>item).id };
-    } else if (typeofItem === 'number') {
-      return { id: item };
-    } else if (typeofItem === 'string') {
-      if (item !== '') return { id: item };
+      const obj: any = new Object();
+      obj[outputFieldName] = (<any>item)[inputFieldName];
+      return obj;
+    } else if (typeofItem === 'number' && item !== -1) {
+      const obj: any = new Object();
+      obj[outputFieldName] = item;
+      return obj;
+    } else if (typeofItem === 'string' && item !== '') {
+      const obj: any = new Object();
+      obj[outputFieldName] = item;
+      return obj;
     }
   }
 
   return undefined;
 }
 
-type ManyArgs =
-  | Array<RequireAtLeastOne<any, 'id'> | null | undefined>
-  | Array<number | null | undefined>
-  | Array<string | null | undefined>
-  | null
-  | undefined;
-
-export function selectMany(input: ManyArgs) {
+export function selectMany(
+  input: any[] | null | undefined,
+  inputFieldName: string = 'id',
+  outputFieldName = inputFieldName
+) {
   if (input) {
     const items = (input as any[]).filter(x => x !== null && x !== undefined);
 
@@ -40,53 +44,30 @@ export function selectMany(input: ManyArgs) {
 
         if (
           typeofItem === 'object' &&
-          item.id !== null &&
-          item.id !== undefined &&
-          item.id !== ''
+          item[inputFieldName] !== null &&
+          item[inputFieldName] !== undefined &&
+          (<any>item)[inputFieldName] !== -1 &&
+          (<any>item)[inputFieldName] !== ''
         ) {
-          accum.push({ id: item.id });
-        } else if (typeofItem === 'number') {
-          accum.push({ id: item });
-        } else if (typeofItem === 'string') {
-          if (item !== '') accum.push({ id: item });
+          const obj: any = new Object();
+          obj[outputFieldName] = item[inputFieldName];
+          accum.push(obj);
+        } else if (typeofItem === 'number' && item !== -1) {
+          const obj: any = new Object();
+          obj[outputFieldName] = item;
+          accum.push(obj);
+        } else if (typeofItem === 'string' && item !== '') {
+          const obj: any = new Object();
+          obj[outputFieldName] = item;
+          accum.push(obj);
         }
 
         return accum;
       }, []);
 
-      if (result.length > 0) return result as Array<{ id: any }>;
+      if (result.length > 0) return result as Array<any>;
     }
   }
 
   return undefined;
 }
-
-// export function connectOne(item: OneArgs) {
-//   const result = selectOne(item);
-//   if (result) return { connect: result };
-//   else return undefined;
-// }
-
-// export function connectMany(list: ManyArgs) {
-//   const result = selectMany(list);
-//   if (result) return { connect: result };
-//   else return undefined;
-// }
-
-// export function deleteMany(list: ManyArgs) {
-//   const result = selectMany(list);
-//   if (result) return { delete: result };
-//   else return undefined;
-// }
-
-// export function setMany(list: ManyArgs) {
-//   const result = selectMany(list);
-//   if (result) return { set: result };
-//   else return undefined;
-// }
-
-// export function disconnectMany(list: ManyArgs) {
-//   const result = selectMany(list);
-//   if (result) return { disconnect: result };
-//   else return undefined;
-// }

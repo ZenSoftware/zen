@@ -29,8 +29,8 @@ export class ZenMainComponent {
   test() {
     const manyTestList = [
       { id: '1' },
-      { id: '2', ex: '' },
-      { id: '3', ex: '' },
+      { id: '2', ex: 'a' },
+      { id: '3', ex: 'b' },
       { id: undefined },
       { id: null },
       { id: '' },
@@ -38,7 +38,7 @@ export class ZenMainComponent {
       null,
     ];
 
-    console.log('selectMany:', selectMany(manyTestList));
+    console.log('selectMany:', selectMany(manyTestList, 'ex', 'out'));
     console.log(`selectOne:`, selectOne({ id: 7, example: '' }));
   }
 }
