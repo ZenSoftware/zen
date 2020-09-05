@@ -1,5 +1,5 @@
 /**
- * ## Clean & transform input into a select object
+ * ## Cleans & transforms input into a select object
  *
  * @example
  * selectOne(1); // Defaults to 'id'
@@ -79,7 +79,7 @@ export function selectOne<T, R>(
 }
 
 /**
- * ## Clean & transform array into select objects
+ * ## Cleans & transforms array into select objects
  *
  * @example
  * selectMany([1, 2, -1, null, undefined]); // Defaults to 'id'
