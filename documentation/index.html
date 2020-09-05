@@ -41,6 +41,7 @@
 <p><strong>Requirements</strong></p>
 <ul>
 <li><a href="https://nodejs.org/">Node v14</a></li>
+<li><a href="https://www.docker.com/">Docker</a></li>
 </ul>
 <div><pre class="line-numbers"><code class="language-bash">git clone https://github.com/ZenSoftware/Zen.git --depth=1
 cd Zen
@@ -57,18 +58,18 @@ npm run start</code></pre></div><p>Reload GraphQL schema for Apollo extension vi
 <li><input checked="" disabled="" type="checkbox"> <a href="https://docs.nestjs.com/graphql/resolvers">Nest GraphQL</a> resolvers as a gateway to <a href="https://www.prisma.io/docs/understand-prisma/prisma-in-your-stack/graphql">Prisma Client</a>.</li>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/case-sensitivity">Prisma Case Insensitive Filtering</a> For case-insensitive querying of text.</li>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://paljs.com/plugins/select/">PrismaSelect</a> to solve the N+1 problem for all queries for free.</li>
-<li><input checked="" disabled="" type="checkbox"> <a href="https://paljs.com/plugins/delete">PrismaDelete</a> to add <code>CASCADE</code> and <code>SET_NULL</code> deletion capabilities to Prisma. These features have yet to be implemented by the core Prisma team.  This project will convert to the approach directly supported by Prisma when the official feature becomes available.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://paljs.com/plugins/delete">PrismaDelete</a> to add <code>CASCADE</code> and <code>SET_NULL</code> deletion capabilities to Prisma. These features have yet to be implemented by the core Prisma team. This project will convert to the approach directly supported by Prisma when the official feature becomes available.</li>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://docs.nestjs.com/graphql/generating-sdl">Nest GraphQL SDL generation</a> to enable auto-completion using a tool like <a href="https://www.apollographql.com/docs/devtools/editor-plugins/">Apollo extension for VS Code</a></li>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://graphql-code-generator.com/docs/plugins/typescript-apollo-angular">Code generation</a> of <a href="https://www.apollographql.com/docs/angular/">apollo-angular</a> services to enable simple, type safe access to the GraphQL API within Angular. 🎀</li>
 <li><input checked="" disabled="" type="checkbox"> An Angular <code>GraphQLModule</code> to simplify the configuration of the <code>ApolloClient</code> to enable/disable the varying <code>ApolloLink</code> features.</li>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://apollo-angular.com/docs/data/network#httpclient-1">HttpBatchLink</a> for batching several GraphQL requests that occur within a short debounce interval. This really helps to alleviate network congestion.</li>
-<li><input checked="" disabled="" type="checkbox"> <a href="https://www.npmjs.com/package/apollo-upload-client">UploadLink</a> to give <code>ApolloClient</code> HTTP multi-part form requests capabilities.  Enabling the uploading of files via <code>GraphQLUpload</code>.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://www.npmjs.com/package/apollo-upload-client">UploadLink</a> to give <code>ApolloClient</code> HTTP multi-part form requests capabilities. Enabling the uploading of files via <code>GraphQLUpload</code>.</li>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://www.apollographql.com/docs/react/data/subscriptions/#2-initialize-a-websocketlink">WebSocketLink</a> for GraphQL subscriptions over websockets.</li>
 </ul>
 <hr>
 <h2 id="api-authentication-performance--scaling-ambitions">API Authentication, Performance &amp; Scaling Ambitions</h2>
 <ul>
-<li><input disabled="" type="checkbox"> <a href="https://docs.nestjs.com/techniques/authentication">Nest authentication</a> integration, user creation, and login system designed specifically to work for an <a href="https://angular.io/">Angular SPA (single page application)</a>.  This project will provide responsive, &quot;mobile first&quot; interfaces for the standard set of authentication features (sign up, login, password change).  </li>
+<li><input disabled="" type="checkbox"> <a href="https://docs.nestjs.com/techniques/authentication">Nest authentication</a> integration, user creation, and login system designed specifically to work for an <a href="https://angular.io/">Angular SPA (single page application)</a>. This project will provide responsive, &quot;mobile first&quot; interfaces for the standard set of authentication features (sign up, login, password change).</li>
 <li><input disabled="" type="checkbox"> Angular route guards and Angular directives to show/hide content depending on user permissions.</li>
 <li><input disabled="" type="checkbox"> <a href="https://docs.nestjs.com/techniques/authentication#extending-guards">Nest authorization directives</a> for server side <a href="https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true">role-based access control</a> to allow for declarative, fine grained security control over all GraphQL queries and mutations.</li>
 <li><input checked="" disabled="" type="checkbox"> 100% stateless web server authentication via <a href="https://docs.nestjs.com/techniques/authentication#jwt-functionality">JWT (Javascript Web Tokens)</a>. Keeping the API stateless will enable horizontal scaling of container replicas of the api in production.</li>
@@ -83,9 +84,9 @@ npm run start</code></pre></div><p>Reload GraphQL schema for Apollo extension vi
 <hr>
 <h2 id="project--dev-tools-ambitions">Project &amp; Dev Tools Ambitions</h2>
 <ul>
-<li><input checked="" disabled="" type="checkbox"> <a href="https://nx.dev/angular">Nx for project management</a> to allow for the use of <a href="https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console">Nx Console extensions for VSCode</a>.  Nx Console is a GUI interface for monorepos that adds a lot of modern developer conveniences.  It also helps to simplify the use of the various Angular &amp; Nest code generation schematics available in the ecosystem.</li>
+<li><input checked="" disabled="" type="checkbox"> <a href="https://nx.dev/angular">Nx for project management</a> to allow for the use of <a href="https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console">Nx Console extensions for VSCode</a>. Nx Console is a GUI interface for monorepos that adds a lot of modern developer conveniences. It also helps to simplify the use of the various Angular &amp; Nest code generation schematics available in the ecosystem.</li>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://marketplace.visualstudio.com/items?itemName=Angular.ng-template">Angular Language Service for VSCode</a> for modern IDE tooling.</li>
-<li><input checked="" disabled="" type="checkbox"> NPM scripts for versioned releases of the <strong>api</strong> server as a containerized Docker image.  <a href="https://hub.docker.com/_/node?tab=description&amp;ref=hackernoon.com">node:14-alpine</a> is used as the Docker container base image, and the appropriate <code>tsconfig.app.json</code> configurations are being applied for the Node v14 Nest app.</li>
+<li><input checked="" disabled="" type="checkbox"> NPM scripts for versioned releases of the <strong>api</strong> server as a containerized Docker image. <a href="https://hub.docker.com/_/node?tab=description&amp;ref=hackernoon.com">node:14-alpine</a> is used as the Docker container base image, and the appropriate <code>tsconfig.app.json</code> configurations are being applied for the Node v14 Nest app.</li>
 <li><input checked="" disabled="" type="checkbox"> Enforced code formatting via <a href="https://prettier.io/">Prettier</a> &amp; <a href="https://www.npmjs.com/package/prettier-plugin-import-sort">import-sort</a>, guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.</li>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://compodoc.app/">Compodoc</a> to generate Nest &amp; Angular documentation.</li>
 </ul>
