@@ -21,7 +21,6 @@ docker-compose up -d
 npm run prisma:save
 npm run start:api
 
-# After api server has started
 npm run apollo:watch
 npm run start
 ```
