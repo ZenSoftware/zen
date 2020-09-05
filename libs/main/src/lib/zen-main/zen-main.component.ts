@@ -26,7 +26,7 @@ export class ZenMainComponent {
       shareReplay(1)
     );
 
-  test() {
+  example() {
     const exampleList = [
       { id: '1' },
       { id: '2', ex: 'a' },
