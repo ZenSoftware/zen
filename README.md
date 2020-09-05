@@ -4,7 +4,8 @@
 You may open a git issue if you are interested in contributing! 🍰
 
 <a href="https://zensoftware.github.io/Zen/" target="_blank"><h4 style="text-align:center">Zen Docs<h4></a>
-<a href="https://github.com/ZenSoftware/Zen" target="_blank"><h4 style="text-align:center">GitHub repo @ZenSoftware/Zen<h4></a>
+
+<a href="https://github.com/ZenSoftware/Zen" target="_blank"><h4 style="text-align:center">GitHub repo ZenSoftware/Zen<h4></a>
 
 ### []()
 
