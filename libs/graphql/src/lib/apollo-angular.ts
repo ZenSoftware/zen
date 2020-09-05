@@ -1338,7 +1338,7 @@ export type PostFields = (
 
 export type UserFields = (
   { __typename?: 'User' }
-  & Pick<User, 'id'>
+  & Pick<User, 'id' | 'email' | 'name'>
 );
 
 export type FindOneCommentVariables = Exact<{
@@ -1863,6 +1863,8 @@ export const PostFields = gql`
 export const UserFields = gql`
     fragment UserFields on User {
   id
+  email
+  name
 }
     `;
 export const FindOneCommentDocument = gql`
