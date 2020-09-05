@@ -8,8 +8,11 @@
 ---
 
 ## Project Setup Instructions
+
 **Requirements**
+
 + [Node v14](https://nodejs.org/)
+
 ```bash
 git clone https://github.com/ZenSoftware/Zen.git --depth=1
 cd Zen
