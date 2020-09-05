@@ -27,11 +27,11 @@ export function selectOne(item: OneArgs) {
   return undefined;
 }
 
-export function connectOne(item: OneArgs) {
-  const result = selectOne(item);
-  if (result) return { connect: result };
-  else return undefined;
-}
+// export function connectOne(item: OneArgs) {
+//   const result = selectOne(item);
+//   if (result) return { connect: result };
+//   else return undefined;
+// }
 
 /**
  * Prisma many helpers
@@ -75,26 +75,26 @@ export function selectMany(input: ManyArgs) {
   return undefined;
 }
 
-export function connectMany(list: ManyArgs) {
-  const result = selectMany(list);
-  if (result) return { connect: result };
-  else return undefined;
-}
+// export function connectMany(list: ManyArgs) {
+//   const result = selectMany(list);
+//   if (result) return { connect: result };
+//   else return undefined;
+// }
 
-export function deleteMany(list: ManyArgs) {
-  const result = selectMany(list);
-  if (result) return { delete: result };
-  else return undefined;
-}
+// export function deleteMany(list: ManyArgs) {
+//   const result = selectMany(list);
+//   if (result) return { delete: result };
+//   else return undefined;
+// }
 
-export function setMany(list: ManyArgs) {
-  const result = selectMany(list);
-  if (result) return { set: result };
-  else return undefined;
-}
+// export function setMany(list: ManyArgs) {
+//   const result = selectMany(list);
+//   if (result) return { set: result };
+//   else return undefined;
+// }
 
-export function disconnectMany(list: ManyArgs) {
-  const result = selectMany(list);
-  if (result) return { disconnect: result };
-  else return undefined;
-}
+// export function disconnectMany(list: ManyArgs) {
+//   const result = selectMany(list);
+//   if (result) return { disconnect: result };
+//   else return undefined;
+// }

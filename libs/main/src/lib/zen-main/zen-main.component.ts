@@ -1,13 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FindOneUserGQL,
-  UpdateOneUserVariables,
-  connectMany,
-  connectOne,
-  deleteMany,
-  disconnectMany,
-  setMany,
-} from '@zen/graphql';
+import { FindOneUserGQL, UpdateOneUserVariables, selectMany, selectOne } from '@zen/graphql';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
@@ -18,9 +10,9 @@ export class ZenMainComponent {
   constructor(private findOneUserGQL: FindOneUserGQL) {}
 
   userInput: UpdateOneUserVariables['data'] = {
-    comments: deleteMany([{ id: 1 }]),
-    group: connectOne({ id: 1, ex: 1 }),
-    posts: connectMany([1, 2, 3]),
+    comments: { delete: selectMany([{ id: 1 }]) },
+    group: { connect: selectOne({ id: 1 }) },
+    posts: { set: selectMany([1, 2, 3]) },
   };
 
   user$ = this.findOneUserGQL
@@ -46,9 +38,7 @@ export class ZenMainComponent {
       { id: '3', ex: '' },
     ];
 
-    console.log('connectOneTest', connectOne({ id: 77, junk: 'sdsds' }));
-    console.log('connectManyTest', connectMany(null));
-    console.log('disconnectManyTest', disconnectMany(manyTestList));
-    console.log('setTest', setMany(manyTestList));
+    console.log('selectMany:', selectMany(manyTestList));
+    console.log(`selectOne:`, selectOne({ id: 77, junk: 'sdsds' }));
   }
 }
