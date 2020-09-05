@@ -1,8 +1,8 @@
-export function selectOne<T>(
+export function selectOne<T, R>(
   item: T | number | string | null | undefined,
   inputFieldName?: keyof T,
-  outputFieldName?: string
-) {
+  outputFieldName?: keyof R
+): { [P in keyof R]: any } | undefined {
   if (!inputFieldName) (<any>inputFieldName) = 'id';
   if (!outputFieldName) (<any>outputFieldName) = inputFieldName;
 
@@ -33,11 +33,11 @@ export function selectOne<T>(
   return undefined;
 }
 
-export function selectMany<T>(
+export function selectMany<T, R>(
   input: Array<T | null | undefined> | null | undefined,
   inputFieldName?: keyof T,
-  outputFieldName?: string
-) {
+  outputFieldName?: keyof R
+): Array<{ [P in keyof R]: any }> | undefined {
   if (!inputFieldName) (<any>inputFieldName) = 'id';
   if (!outputFieldName) (<any>outputFieldName) = inputFieldName;
 
