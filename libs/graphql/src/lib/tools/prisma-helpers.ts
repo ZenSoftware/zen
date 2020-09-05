@@ -109,7 +109,7 @@ export function selectOne<T, R>(
  * @param input - Array of items to be cleaned and serialized
  * @param inputFieldName - The input field name to select over Defaults to `'id'`
  * @param outputFieldName  - The output field name of the result. Defaults to `'id'`
- * @return `Array<{outputFieldName: number | string}>` - Cleaned and serialized array of select objects.
+ * @return `Array<{outputFieldName: number | string}> | undefined` - Cleaned and serialized array of select objects.
  * The `inputFieldName` will be used for the output objects if the `outputFieldName` is not specified.
  */
 export function selectMany<T, R>(
