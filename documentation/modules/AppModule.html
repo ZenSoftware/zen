@@ -162,15 +162,6 @@
         <div class="container-fluid module">
             <div class="row">
                 <div class="col-sm-3">
-                    <h3>Controllers<a href="https://docs.nestjs.com/controllers" target="_blank" title="Official documentation about module controllers"><span
-                                class="icon ion-ios-information-circle-outline"></a></h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a href="../controllers/ToolsController.html">ToolsController</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
                     <h3>Imports<a href="https://angular.io/api/core/NgModule#imports" target="_blank" title="Official documentation about module imports"><span
                                 class="icon ion-ios-information-circle-outline"></a></h3>
                     <ul class="list-group">
@@ -199,14 +190,12 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
 
 import { ConfigModule } from &#x27;./config&#x27;;
-import { ToolsController } from &#x27;./controllers&#x27;;
 import { ZenGraphQLModule } from &#x27;./graphql&#x27;;
 import { JwtModule } from &#x27;./jwt&#x27;;
 import { PrismaModule } from &#x27;./prisma&#x27;;
 
 @Module({
   imports: [ConfigModule, JwtModule, ZenGraphQLModule, PrismaModule],
-  controllers: [ToolsController],
 })
 export class AppModule {}
 </code></pre>
