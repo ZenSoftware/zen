@@ -1,5 +1,42 @@
 import { RequireAtLeastOne } from './type-pickers';
 
+/**
+ * Prisma one helpers
+ */
+
+type OneArgs = RequireAtLeastOne<any, 'id'> | number | string | null | undefined;
+
+export function selectOne(item: OneArgs) {
+  if (item !== undefined || item !== null) {
+    const typeofItem = typeof item;
+
+    if (
+      typeofItem === 'object' &&
+      (<any>item).id !== null &&
+      (<any>item).id !== undefined &&
+      (<any>item).id !== ''
+    ) {
+      return { id: (<any>item).id };
+    } else if (typeofItem === 'number') {
+      return { id: item };
+    } else if (typeofItem === 'string') {
+      if (item !== '') return { id: item };
+    }
+  }
+
+  return undefined;
+}
+
+export function connectOne(item: OneArgs) {
+  const result = selectOne(item);
+  if (result) return { connect: result };
+  else return undefined;
+}
+
+/**
+ * Prisma many helpers
+ */
+
 type ManyArgs =
   | Array<RequireAtLeastOne<any, 'id'> | null | undefined>
   | Array<number | null | undefined>
@@ -7,7 +44,7 @@ type ManyArgs =
   | null
   | undefined;
 
-function createManyParams(input: any[] | null | undefined) {
+export function selectMany(input: ManyArgs) {
   if (input) {
     const items = (input as any[]).filter(x => x !== null && x !== undefined);
 
@@ -38,49 +75,26 @@ function createManyParams(input: any[] | null | undefined) {
   return undefined;
 }
 
-export function connectOne(
-  item: RequireAtLeastOne<any, 'id'> | number | string | null | undefined
-) {
-  if (item !== undefined || item !== null) {
-    const typeofItem = typeof item;
-
-    if (
-      typeofItem === 'object' &&
-      (<any>item).id !== null &&
-      (<any>item).id !== undefined &&
-      (<any>item).id !== ''
-    ) {
-      return { connect: { id: (<any>item).id } };
-    } else if (typeofItem === 'number') {
-      return { connect: { id: item } };
-    } else if (typeofItem === 'string') {
-      if (item !== '') return { connect: { id: item } };
-    }
-  }
-
-  return undefined;
-}
-
 export function connectMany(list: ManyArgs) {
-  const result = createManyParams(list);
+  const result = selectMany(list);
   if (result) return { connect: result };
   else return undefined;
 }
 
 export function deleteMany(list: ManyArgs) {
-  const result = createManyParams(list);
+  const result = selectMany(list);
   if (result) return { delete: result };
   else return undefined;
 }
 
-export function set(list: ManyArgs) {
-  const result = createManyParams(list);
+export function setMany(list: ManyArgs) {
+  const result = selectMany(list);
   if (result) return { set: result };
   else return undefined;
 }
 
 export function disconnectMany(list: ManyArgs) {
-  const result = createManyParams(list);
+  const result = selectMany(list);
   if (result) return { disconnect: result };
   else return undefined;
 }

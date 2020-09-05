@@ -7,11 +7,27 @@ import * as del from 'del';
 import * as gulp from 'gulp';
 import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 
-const resolversTemplate = require(path.join(
+const clientResolversTemplate = require(path.join(
   __dirname,
-  'tools/graphql-codegen/resolvers-template.js'
+  'tools/graphql-codegen/client-resolvers.temp.js'
 ));
-const fieldsTemplate = require(path.join(__dirname, 'tools/graphql-codegen/fields-template.js'));
+const clientFieldsTemplate = require(path.join(
+  __dirname,
+  'tools/graphql-codegen/client-fields.temp.js'
+));
+const nestResolversTemplate = require(path.join(
+  __dirname,
+  'tools/graphql-codegen/nest-resolvers.temp.js'
+));
+const nestResolversIndexTemplate = require(path.join(
+  __dirname,
+  'tools/graphql-codegen/nest-resolvers-index.temp.js'
+));
+const nestQueryTemplate = require(path.join(__dirname, 'tools/graphql-codegen/nest-query.temp.js'));
+const nestMutationTemplate = require(path.join(
+  __dirname,
+  'tools/graphql-codegen/nest-mutation.temp.js'
+));
 
 const execAsync = promisify(exec);
 const readdirAsync = promisify(fs.readdir);
@@ -101,7 +117,7 @@ export class Gulpfile {
       const fieldsPath = path.join(CONFIG.gql.clientFieldsPath, `${prismaName}.gql.ts`);
 
       if (!fs.existsSync(fieldsPath)) {
-        await writeFileAsync(fieldsPath, fieldsTemplate(prismaName));
+        await writeFileAsync(fieldsPath, clientFieldsTemplate(prismaName));
         console.log(`- Wrote: ${fieldsPath}`);
       }
 
@@ -112,7 +128,7 @@ export class Gulpfile {
       }
 
       if (!fs.existsSync(prismaPath)) {
-        await writeFileAsync(prismaPath, resolversTemplate(prismaName));
+        await writeFileAsync(prismaPath, clientResolversTemplate(prismaName));
         console.log(`- Wrote: ${prismaPath}`);
       }
     }
@@ -158,19 +174,16 @@ export class Gulpfile {
         );
         const querySectionLines = querySection.split('\n');
 
-        const resolverNames = [];
+        const queryNames = [];
         for (const line of querySectionLines) {
           if (regExpHasResolverName.test(line)) {
-            resolverNames.push(line.substr(0, line.indexOf(':')).trim());
+            queryNames.push(line.substr(0, line.indexOf(':')).trim());
           }
         }
 
         let querySource = '';
-        for (const resolverName of resolverNames) {
-          querySource += `  @Query()
-  async ${resolverName}(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Query.${resolverName}(parent, PrismaSelectArgs(info, args), context);
-  }\n\n`;
+        for (const queryName of queryNames) {
+          querySource += nestQueryTemplate(queryName);
         }
 
         const mutationStartIndex = prismaScript.indexOf(MUTATION_TOKEN) + MUTATION_TOKEN.length + 1;
@@ -186,38 +199,14 @@ export class Gulpfile {
 
         let mutationSource = '';
         for (const mutationName of mutationNames) {
-          mutationSource += `  @Mutation()
-  async ${mutationName}(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Mutation.${mutationName}(parent, PrismaSelectArgs(info, args), context);
-  }\n\n`;
+          mutationSource += nestMutationTemplate(mutationName);
         }
         mutationSource = mutationSource.trimRight();
 
-        const outSource = `import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
-import gql from 'graphql-tag';
-
-import { PrismaSelectArgs } from '../prisma-select-args';
-import resolvers from '../prisma/${prismaName}/resolvers';
-
-export const ${prismaName}TypeDef = null;
-// export const ${prismaName}TypeDef = gql\`
-//   extend type Query {
-//     sample${prismaName}Query: ${prismaName}!
-//   }
-//   extend type Mutation {
-//     sample${prismaName}Mutation(args: Int!): Boolean
-//   }
-//   extend type ${prismaName} {
-//     sample${prismaName}Field: String
-//   }
-// \`;
-
-@Resolver('${prismaName}')
-export class ${prismaName}Resolver {
-${querySource}${mutationSource}
-}
-`;
-        await writeFileAsync(outPath, outSource);
+        await writeFileAsync(
+          outPath,
+          nestResolversTemplate(prismaName, querySource, mutationSource)
+        );
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }
@@ -230,35 +219,8 @@ ${querySource}${mutationSource}
       .filter(f => path.basename(f) !== 'index.ts') // Filter out any "index.ts"
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
-    let indexSource = `import { makeExecutableSchema } from 'graphql-tools';
-import { mergeTypes } from 'merge-graphql-schemas';
-
-import PRISMA_TYPE_DEFS from '../prisma/typeDefs';\n`;
-
-    // Construct the "resolvers" directory's "index.ts"
-    indexSource += dataTypeNames
-      .map(n => `import { ${n}Resolver, ${n}TypeDef } from './${n}';`)
-      .reduce((prev, curr, i, []) => prev + '\n' + curr);
-
-    // Create an ES6 export to automate the importing of all Nest resolvers in bulk
-    const bulkExportString = dataTypeNames
-      .map(n => `${n}Resolver`)
-      .toString()
-      .replace(/,/g, ',\n  ');
-    indexSource += `\n\nexport const NEST_RESOLVERS = [\n  ${bulkExportString}\n];`;
-
-    const bulkTypeDefExportString = dataTypeNames
-      .map(n => `${n}TypeDef`)
-      .toString()
-      .replace(/,/g, ',\n  ');
-    indexSource += `\n\nexport const NEST_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x);\n\n`;
-
-    indexSource += `export const ALL_TYPE_DEFS = mergeTypes([PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS]);\n
-export const GRAPHQL_SCHEMA = makeExecutableSchema({ typeDefs: ALL_TYPE_DEFS });
-export const PRISMA_SCHEMA = makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS });\n`;
-
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
-    await writeFileAsync(indexPath, indexSource);
+    await writeFileAsync(indexPath, nestResolversIndexTemplate(dataTypeNames));
     console.log(`- Wrote: ${indexPath}\n`);
 
     await this.createApolloAngularPrismaFile(prismaNames);
