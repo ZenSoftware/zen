@@ -33,6 +33,85 @@ export function selectOne<T, R>(
   return undefined;
 }
 
+/**
+ * ## Clean and serialize dynamic array of items.
+ * Takes an array of arbitrary items and transforms them into a cleaned array of select objects.
+ * ```
+ * selectMany([1, 2, -1, null, undefined]);
+ * ```
+ * Returns
+ * ```json
+ * [
+ *   {id: 1},
+ *   {id: 2},
+ * ]
+ * ```
+ * ---
+ * ```
+ * selectMany(['a', 'b', '', null, undefined]);
+ * ```
+ * Returns
+ * ```json
+ * [
+ *   {id: "a"},
+ *   {id: "b"},
+ * ]
+ * ```
+ * ---
+ * ```
+ * const exampleArray = [
+ *   { id: 1, ex: 'a' },
+ *   { id: 2, ex: 'b' },
+ *   { id: 3, ex: '' },
+ *   { id: undefined },
+ *   { id: null },
+ *   { id: -1 },
+ *   { id: '' },
+ *   undefined,
+ *   null,
+ * ];
+ * ```
+ * ---
+ * ```
+ * selectMany(exampleArray);
+ * ```
+ * Defaults to the `'id'` field.
+ * ```json
+ * [
+ *   {id: 1},
+ *   {id: 2},
+ *   {id: 3},
+ * ]
+ * ```
+ * ---
+ * ```
+ * selectMany(exampleArray, 'ex');
+ * ```
+ * Returns:
+ * ```json
+ * [
+ *   {ex: "a"},
+ *   {ex: "b"},
+ * ]
+ * ```
+ * ---
+ * ```
+ * selectMany(exampleArray, 'ex', 'out');
+ * ```
+ * Returns:
+ * ```json
+ * [
+ *   {out: "a"},
+ *   {out: "b"},
+ * ]
+ * ```
+ * ---
+ * @param input - Array of items to be cleaned and serialized
+ * @param inputFieldName - The input field name to select over Defaults to `'id'`
+ * @param outputFieldName  - The output field name of the result. Defaults to `'id'`
+ * @return `Array<{outputFieldName: number | string}>` - Cleaned and serialized array of select objects.
+ * The `inputFieldName` will be used for the output objects if the `outputFieldName` is not specified.
+ */
 export function selectMany<T, R>(
   input: Array<T | null | undefined> | null | undefined,
   inputFieldName?: keyof T,
