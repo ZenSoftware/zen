@@ -3,9 +3,9 @@
 ### 🤹 Currently under development - New contributors are welcome!🌱
 You may open a git issue if you are interested in contributing! 🍰
 
-<a href="https://zensoftware.github.io/Zen/"><h4 style="text-align:center">Zen Docs<h4></a>
+<h4 style="text-align:center"><a href="https://zensoftware.github.io/Zen/">Zen Docs</a><h4>
 
-<a href="https://github.com/ZenSoftware/Zen"><h4 style="text-align:center">GitHub repo ZenSoftware/Zen<h4></a>
+<h4 style="text-align:center"><a href="https://github.com/ZenSoftware/Zen">GitHub repo ZenSoftware/Zen</a><h4>
 
 
 ---
