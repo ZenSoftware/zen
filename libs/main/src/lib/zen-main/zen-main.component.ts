@@ -41,22 +41,32 @@ export class ZenMainComponent {
 
     /**
      * Outputs:
-     * 0: {id: "1"}
-     * 1: {id: "2"}
-     * 2: {id: "3"}
+     * ```json
+     * [
+     *   {id: "1"},
+     *   {id: "2"},
+     *   {id: "3"},
+     * ]
+     * ```
      */
     console.log(`selectMany(manyTestList)`, selectMany(exampleList));
 
     /**
      * Outputs:
-     * 0: {out: "a"}
-     * 1: {out: "b"}
+     * ```json
+     * [
+     *   {out: "a"},
+     *   {out: "b"},
+     * ]
+     * ```
      */
     console.log(`selectMany(manyTestList, 'ex', 'out')`, selectMany(exampleList, 'ex', 'out'));
 
     /**
      * Outputs:
+     * ```json
      * {ex: "c"}
+     * ```
      */
     console.log(`selectOne({ id: 7, ex: 'c' }, 'ex')`, selectOne({ id: 7, ex: 'c' }, 'ex'));
   }
