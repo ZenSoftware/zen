@@ -1,10 +1,10 @@
 # ⛩ Zen ⛩
 ## Modern Full Stack Web Portal built with Nest and Angular
-### 🤹 Currently under development - New contributors are welcome!🌱
-You may open a git issue if you are interested in contributing! 🍰
-
 ### [Zen Docs](https://zensoftware.github.io/Zen/)
 ### [GitHub repo ZenSoftware/Zen](https://github.com/ZenSoftware/Zen)
+### 🤹 Currently under development - New contributors are welcome!🌱
+🍧 You may open a git issue if you are interested in contributing! 🍰
+
 ---
 
 ## GraphQL Ambitions
