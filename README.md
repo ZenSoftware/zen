@@ -8,7 +8,7 @@
 ---
 
 ## Project Setup Instructions
-### Requirements
+**Requirements**
 + [Node v14](https://nodejs.org/)
 ```bash
 git clone https://github.com/ZenSoftware/Zen.git --depth=1
