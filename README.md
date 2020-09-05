@@ -3,8 +3,8 @@
 ### 🤹 Currently under development - New contributors are welcome!🌱
 You may open a git issue if you are interested in contributing! 🍰
 
-## [GitHub repo @ZenSoftware/Zen](https://github.com/ZenSoftware/Zen)
-## [Zen Docs](https://zensoftware.github.io/Zen/)
+### [Zen Docs](https://zensoftware.github.io/Zen/)
+### [GitHub repo @ZenSoftware/Zen](https://github.com/ZenSoftware/Zen)
 
 ---
 
