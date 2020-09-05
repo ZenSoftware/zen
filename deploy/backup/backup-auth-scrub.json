@@ -1,0 +1,18 @@
+{
+  "@nestjs/passport": "^7.1.0",
+  "bcrypt": "^5.0.0",
+  "date-fns": "^2.16.1",
+  "class-transformer": "~0.2.3",
+  "class-validator": "^0.12.2",
+  "cookie-parser": "^1.4.5",
+  "lodash-es": "^4.17.14",
+  "passport": "^0.4.1",
+  "passport-jwt": "^4.0.0",
+  "helmet": "^3.23.3",
+
+  "@types/bcryptjs": "^2.4.2",
+  "@types/cookie-parser": "^1.4.2",
+  "@types/lodash-es": "^4.17.3",
+  "@types/passport": "^1.0.4",
+  "@types/passport-jwt": "^3.0.3"
+}
