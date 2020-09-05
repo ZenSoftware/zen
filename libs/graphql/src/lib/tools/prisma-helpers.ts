@@ -85,14 +85,14 @@ export function selectOne<T, R>(
  * selectMany([1, 2, -1, null, undefined]); // Defaults to 'id'
  * [
  *   {id: 1},
- *   {id: 2},
+ *   {id: 2}
  * ]
  *
  * @example
  * selectMany(['a', 'b', '', null, undefined]); // Defaults to 'id'
  * [
  *   {id: "a"},
- *   {id: "b"},
+ *   {id: "b"}
  * ]
  *
  * @example
@@ -105,7 +105,7 @@ export function selectOne<T, R>(
  *   { id: -1 },
  *   { id: '' },
  *   undefined,
- *   null,
+ *   null
  * ];
  *
  * @example
@@ -113,21 +113,21 @@ export function selectOne<T, R>(
  * [
  *   {id: 1},
  *   {id: 2},
- *   {id: 3},
+ *   {id: 3}
  * ]
  *
  * @example
  * selectMany(exampleArray, 'ex');
  * [
  *   {ex: "a"},
- *   {ex: "b"},
+ *   {ex: "b"}
  * ]
  *
  * @example
  * selectMany(exampleArray, 'ex', 'out');
  * [
  *   {out: "a"},
- *   {out: "b"},
+ *   {out: "b"}
  * ]
  *
  * @example
