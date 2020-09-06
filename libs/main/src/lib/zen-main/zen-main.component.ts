@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {
   FindManyUserGQL,
   FindOneUserGQL,
+  QueryMode,
   UpdateOneUserVariables,
   selectMany,
   selectOne,
@@ -33,7 +34,7 @@ export class ZenMainComponent {
   users$ = this.findManyUserGQL
     .watch({
       where: {
-        name: {},
+        name: { mode: QueryMode.Insensitive },
       },
     })
     .valueChanges.pipe(map(r => r.data?.findManyUser));
