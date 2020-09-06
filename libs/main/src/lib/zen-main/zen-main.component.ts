@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FindOneUserGQL, UpdateOneUserVariables, selectMany, selectOne } from '@zen/graphql';
+import {
+  CreateOneUserGQL,
+  FindOneUserGQL,
+  UpdateOneUserVariables,
+  selectMany,
+  selectOne,
+} from '@zen/graphql';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
@@ -7,7 +13,7 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: 'zen-main.component.html',
 })
 export class ZenMainComponent {
-  constructor(private findOneUserGQL: FindOneUserGQL) {}
+  constructor(private findOneUserGQL: FindOneUserGQL, private createOneUserGQL: CreateOneUserGQL) {}
 
   userInput: UpdateOneUserVariables['data'] = {
     comments: { delete: selectMany([{ id: 1, example: '' }]) },
@@ -27,6 +33,16 @@ export class ZenMainComponent {
     );
 
   example() {
+    this.createOneUserGQL
+      .mutate({
+        data: {
+          name: 'Test User',
+          email: 'another@email.com',
+          password: '1234',
+        },
+      })
+      .subscribe(response => console.log(response));
+
     const exampleList = [
       { id: '1' },
       { id: '2', ex: 'a' },

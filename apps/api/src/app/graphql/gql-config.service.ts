@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
+import { print } from 'graphql';
 
 import { ConfigService } from '../config';
 import { PrismaService } from '../prisma';
@@ -11,7 +12,7 @@ export class GqlConfigService implements GqlOptionsFactory {
 
   createGqlOptions(): GqlModuleOptions {
     return {
-      typeDefs: ALL_TYPE_DEFS,
+      typeDefs: print(ALL_TYPE_DEFS),
       installSubscriptionHandlers: true,
       debug: !this.config.production,
       playground: this.config.graphql.playground,
