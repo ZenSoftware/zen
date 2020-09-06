@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  CreateOneUserGQL,
+  FindManyUserGQL,
   FindOneUserGQL,
   UpdateOneUserVariables,
   selectMany,
@@ -13,7 +13,7 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: 'zen-main.component.html',
 })
 export class ZenMainComponent {
-  constructor(private findOneUserGQL: FindOneUserGQL, private createOneUserGQL: CreateOneUserGQL) {}
+  constructor(private findOneUserGQL: FindOneUserGQL, private findManyUserGQL: FindManyUserGQL) {}
 
   userInput: UpdateOneUserVariables['data'] = {
     comments: { delete: selectMany([{ id: 1, example: '' }]) },
@@ -23,26 +23,22 @@ export class ZenMainComponent {
 
   user$ = this.findOneUserGQL
     .watch({
-      where: {
-        id: 1,
-      },
+      where: selectOne('', 'email'),
     })
     .valueChanges.pipe(
       map(r => r.data?.findOneUser),
       shareReplay(1)
     );
 
-  example() {
-    this.createOneUserGQL
-      .mutate({
-        data: {
-          name: 'Test User',
-          email: 'another@email.com',
-          password: '1234',
-        },
-      })
-      .subscribe(response => console.log(response));
+  users$ = this.findManyUserGQL
+    .watch({
+      where: {
+        name: {},
+      },
+    })
+    .valueChanges.pipe(map(r => r.data?.findManyUser));
 
+  example() {
     const exampleList = [
       { id: '1' },
       { id: '2', ex: 'a' },
@@ -55,13 +51,8 @@ export class ZenMainComponent {
       null,
     ];
 
-    console.log(`selectMany(manyTestList)`, selectMany(exampleList));
-
-    console.log(`selectMany(manyTestList, 'ex', 'out')`, selectMany(exampleList, 'ex', 'out'));
-
-    console.log(
-      `selectOne({ id: 7, ex: 'example' }, 'ex')`,
-      selectOne({ id: 7, ex: 'example' }, 'ex')
-    );
+    console.log(`selectMany(exampleList)`, selectMany(exampleList));
+    console.log(`selectMany(exampleList, 'out', 'ex')`, selectMany(exampleList, 'out', 'ex'));
+    console.log(`selectOne({ id: 7, ex: 'abc' }, 'ex')`, selectOne({ id: 7, ex: 'abc' }, 'ex'));
   }
 }

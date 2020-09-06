@@ -18,7 +18,7 @@
  * {ex: "example"}
  *
  * @example
- * selectOne({id: 2, ex: 'example'}, 'ex', 'out');
+ * selectOne({id: 2, ex: 'example'}, 'out', 'ex');
  * {out: "example"}
  *
  * @example
@@ -38,44 +38,44 @@
  * undefined
  *
  * @param input - Array of items to be cleaned and serialized
- * @param inputFieldName - The input field name to select over. Defaults to `'id'`
- * @param outputFieldName  - The output field name of the return objects. Defaults to `'id'`
- * @return `{outputFieldName: number | string} | undefined` - Cleaned and serialized array of select objects.
- * The `inputFieldName` will be used for the output objects if the `outputFieldName` is not specified.
+ * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
+ * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
+ * @return `{outputField: number | string} | undefined` - Cleaned and serialized array of select objects.
+ * `outputField` will be used for `inputField` if `inputField` is not specified.
  */
 export function selectOne<T, R>(
   item: T | number | string | null | undefined,
-  inputFieldName?: keyof T,
-  outputFieldName?: keyof R
-): { [P in keyof R]: any } | undefined {
-  if (!inputFieldName) (<any>inputFieldName) = 'id';
-  if (!outputFieldName) (<any>outputFieldName) = inputFieldName;
+  outputField?: keyof R,
+  inputField?: keyof T
+): { [P in keyof R]: any } {
+  if (!outputField) (<any>outputField) = 'id';
+  if (!inputField) (<any>inputField) = outputField;
 
   if (item !== undefined || item !== null) {
     const typeofItem = typeof item;
 
     if (
       typeofItem === 'object' &&
-      (<any>item)[inputFieldName] !== null &&
-      (<any>item)[inputFieldName] !== undefined &&
-      (<any>item)[inputFieldName] !== -1 &&
-      (<any>item)[inputFieldName] !== ''
+      (<any>item)[inputField] !== null &&
+      (<any>item)[inputField] !== undefined &&
+      (<any>item)[inputField] !== -1 &&
+      (<any>item)[inputField] !== ''
     ) {
       const obj: any = new Object();
-      obj[outputFieldName] = (<any>item)[inputFieldName];
+      obj[outputField] = (<any>item)[inputField];
       return obj;
     } else if (typeofItem === 'number' && item !== -1) {
       const obj: any = new Object();
-      obj[outputFieldName] = item;
+      obj[outputField] = item;
       return obj;
     } else if (typeofItem === 'string' && item !== '') {
       const obj: any = new Object();
-      obj[outputFieldName] = item;
+      obj[outputField] = item;
       return obj;
     }
   }
 
-  return undefined;
+  return <any>undefined;
 }
 
 /**
@@ -124,7 +124,7 @@ export function selectOne<T, R>(
  * ]
  *
  * @example
- * selectMany(exampleArray, 'ex', 'out');
+ * selectMany(exampleArray, 'out', 'ex');
  * [
  *   {out: "a"},
  *   {out: "b"}
@@ -135,18 +135,17 @@ export function selectOne<T, R>(
  * undefined
  *
  * @param input - Array of items to be cleaned and serialized
- * @param inputFieldName - The input field name to select over. Defaults to `'id'`
- * @param outputFieldName  - The output field name of the return objects. Defaults to `'id'`
- * @return `Array<{outputFieldName: number | string}> | undefined` - Cleaned and serialized array of select objects.
- * The `inputFieldName` will be used for the output objects if the `outputFieldName` is not specified.
+ * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
+ * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
+ * @return `Array<{outputField: number | string}> | undefined` - Cleaned and serialized array of select objects.
  */
 export function selectMany<T, R>(
   input: Array<T | null | undefined> | null | undefined,
-  inputFieldName?: keyof T,
-  outputFieldName?: keyof R
-): Array<{ [P in keyof R]: any }> | undefined {
-  if (!inputFieldName) (<any>inputFieldName) = 'id';
-  if (!outputFieldName) (<any>outputFieldName) = inputFieldName;
+  outputField?: keyof R,
+  inputField?: keyof T
+): Array<{ [P in keyof R]: any }> {
+  if (!outputField) (<any>outputField) = 'id';
+  if (!inputField) (<any>inputField) = outputField;
 
   if (input) {
     const items = (input as any[]).filter(x => x !== null && x !== undefined);
@@ -157,21 +156,21 @@ export function selectMany<T, R>(
 
         if (
           typeofItem === 'object' &&
-          item[inputFieldName] !== null &&
-          item[inputFieldName] !== undefined &&
-          item[inputFieldName] !== -1 &&
-          item[inputFieldName] !== ''
+          item[inputField] !== null &&
+          item[inputField] !== undefined &&
+          item[inputField] !== -1 &&
+          item[inputField] !== ''
         ) {
           const obj: any = new Object();
-          obj[outputFieldName] = item[inputFieldName];
+          obj[outputField] = item[inputField];
           accum.push(obj);
         } else if (typeofItem === 'number' && item !== -1) {
           const obj: any = new Object();
-          obj[outputFieldName] = item;
+          obj[outputField] = item;
           accum.push(obj);
         } else if (typeofItem === 'string' && item !== '') {
           const obj: any = new Object();
-          obj[outputFieldName] = item;
+          obj[outputField] = item;
           accum.push(obj);
         }
 
@@ -182,5 +181,5 @@ export function selectMany<T, R>(
     }
   }
 
-  return undefined;
+  return <any>undefined;
 }
