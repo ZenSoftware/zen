@@ -5,13 +5,13 @@
 
   <div class="card text-info bg-primary mb-4">
     <div class="card-body">
-      <pre *ngIf="(user$ | async) as user">
-        <code>{{ user | json }}</code>
+      <pre>
+        <code>{{ users$ | async | json }}</code>
       </pre>
     </div>
   </div>
 
   <p class="lead">
-    <button type="button" class="btn btn-primary btn-lg" (click)="example()">Learn more</button>
+    <button type="button" class="btn btn-primary btn-lg" (click)="example()">Example</button>
   </p>
 </div>
