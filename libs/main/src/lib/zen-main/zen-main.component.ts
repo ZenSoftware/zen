@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FindManyUserGQL, QueryMode } from '@zen/graphql';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'zen-main',
@@ -18,7 +18,10 @@ export class ZenMainComponent {
         },
       },
     })
-    .valueChanges.pipe(map(r => r.data?.findManyUser));
+    .valueChanges.pipe(
+      map(r => r.data?.findManyUser),
+      shareReplay(1)
+    );
 
   example() {}
 }
