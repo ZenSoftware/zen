@@ -1,17 +1,20 @@
-<div class="jumbotron">
-  <h1 class="display-3">Zen Software</h1>
+<h1>Zen Software</h1>
   
-  <hr class="my-4">
+<div class="bg-primary mb-4">
+  <pre>
+<code>{{ users$ | async | json }}</code>
+  </pre>
+</div>
 
-  <div class="card text-info bg-primary mb-4">
-    <div class="card-body">
-      <pre>
-        <code>{{ users$ | async | json }}</code>
-      </pre>
-    </div>
-  </div>
+<mat-divider></mat-divider>
 
-  <p class="lead">
-    <button type="button" class="btn btn-primary btn-lg" (click)="example()">Example</button>
-  </p>
+<mat-slider min="1" max="100" step="1" value="1" color="primary"></mat-slider>
+
+<a href="#">This is a sample link</a>
+
+<div>
+  <button mat-raised-button color="primary" (click)="example()">
+    <i class="fas fa-star"></i>
+    Example
+  </button>
 </div>
