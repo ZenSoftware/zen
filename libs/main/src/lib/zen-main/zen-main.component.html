@@ -1,9 +1,15 @@
 <h1>Zen Software</h1>
   
-<div class="bg-primary mb-4">
+<!-- <div class="bg-primary mb-4">
   <pre>
 <code>{{ users$ | async | json }}</code>
   </pre>
+</div> -->
+
+<div class="card text-info bg-primary mb-4">
+  <div class="card-body">
+    <pre class="mb-0"><code>{{ users$ | async | json }}</code></pre>
+  </div>
 </div>
 
 <mat-divider></mat-divider>
@@ -14,7 +20,6 @@
 
 <div>
   <button mat-raised-button color="primary" (click)="example()">
-    <i class="fas fa-star"></i>
     Example
   </button>
 </div>
