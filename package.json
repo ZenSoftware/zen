@@ -63,6 +63,7 @@
     "graphql": "^15.3.0",
     "graphql-tools": "^6.2.1",
     "helmet": "^4.1.0",
+    "lodash-es": "^4.17.15",
     "nodemailer": "^6.4.11",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
