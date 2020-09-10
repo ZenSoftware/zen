@@ -15,6 +15,7 @@
     "docker:build-api": "docker build -f deploy/api/Dockerfile -t zen-api . && docker tag zen-api tuspeak.azurecr.io/zen-api:latest",
     "docker:run-api": "docker run -d --name zen-api -p 7080:7080 zen-api",
     "docs": "ng run api:compodoc",
+    "deploy:docs": "git subtree push --prefix documentation origin gh-pages && git subtree push --prefix documentation origin gh-pages",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
