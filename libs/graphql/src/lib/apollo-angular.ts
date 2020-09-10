@@ -271,8 +271,8 @@ export type Query = {
   findOneRole?: Maybe<Role>;
   findManyRole?: Maybe<Array<Role>>;
   findManyRoleCount: Scalars['Int'];
-  authLogin: UserSession;
-  authExchangeToken: UserSession;
+  authLogin: AuthSession;
+  authExchangeToken: AuthSession;
   authPasswordResetRequest?: Maybe<Scalars['Boolean']>;
 };
 
@@ -440,8 +440,8 @@ export type Role = {
   name: Scalars['String'];
 };
 
-export type UserSession = {
-  __typename?: 'UserSession';
+export type AuthSession = {
+  __typename?: 'AuthSession';
   id: Scalars['Int'];
   maxAge: Scalars['String'];
   roles: Array<Scalars['String']>;
@@ -473,6 +473,35 @@ export type AuthRegisterInput = {
   firstName: Scalars['String'];
   password: Scalars['String'];
 };
+
+export type AuthExchangeTokenVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AuthExchangeToken = (
+  { __typename?: 'Query' }
+  & { authExchangeToken: (
+    { __typename?: 'AuthSession' }
+    & AuthSessionFields
+  ) }
+);
+
+export type AuthLoginVariables = Exact<{
+  data: AuthLoginInput;
+}>;
+
+
+export type AuthLogin = (
+  { __typename?: 'Query' }
+  & { authLogin: (
+    { __typename?: 'AuthSession' }
+    & AuthSessionFields
+  ) }
+);
+
+export type AuthSessionFields = (
+  { __typename?: 'AuthSession' }
+  & Pick<AuthSession, 'id' | 'maxAge' | 'rememberMe' | 'roles'>
+);
 
 export type RoleFields = (
   { __typename?: 'Role' }
@@ -736,6 +765,14 @@ export type UpdateManyUser = (
   )> }
 );
 
+export const AuthSessionFields = /*#__PURE__*/ gql`
+    fragment AuthSessionFields on AuthSession {
+  id
+  maxAge
+  rememberMe
+  roles
+}
+    `;
 export const RoleFields = /*#__PURE__*/ gql`
     fragment RoleFields on Role {
   id
@@ -746,6 +783,42 @@ export const UserFields = /*#__PURE__*/ gql`
   id
 }
     `;
+export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
+    query AuthExchangeToken {
+  authExchangeToken {
+    ...AuthSessionFields
+  }
+}
+    ${AuthSessionFields}`;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class AuthExchangeTokenGQL extends Apollo.Query<AuthExchangeToken, AuthExchangeTokenVariables> {
+    document = AuthExchangeTokenDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AuthLoginDocument = /*#__PURE__*/ gql`
+    query AuthLogin($data: AuthLoginInput!) {
+  authLogin(data: $data) {
+    ...AuthSessionFields
+  }
+}
+    ${AuthSessionFields}`;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
+    document = AuthLoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const FindOneRoleDocument = /*#__PURE__*/ gql`
     query FindOneRole($where: RoleWhereUniqueInput!) {
   findOneRole(where: $where) {

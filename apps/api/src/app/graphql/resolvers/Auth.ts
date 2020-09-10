@@ -20,8 +20,8 @@ import {
 
 export const AuthTypeDef = gql`
   extend type Query {
-    authLogin(data: AuthLoginInput!): UserSession!
-    authExchangeToken: UserSession!
+    authLogin(data: AuthLoginInput!): AuthSession!
+    authExchangeToken: AuthSession!
     authPasswordResetRequest(data: AuthPasswordResetRequestInput!): Boolean
   }
 
@@ -31,7 +31,7 @@ export const AuthTypeDef = gql`
     authRegister(data: AuthRegisterInput): User!
   }
 
-  type UserSession {
+  type AuthSession {
     id: Int!
     maxAge: String!
     roles: [String!]!

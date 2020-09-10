@@ -3,7 +3,7 @@ import { CookieOptions, Response } from 'express';
 
 import { RequestUser } from '../auth';
 import { ConfigService } from '../config';
-import { UserSession } from '../graphql/models/user-session';
+import { AuthSession } from '../graphql/models/user-session';
 import { JwtService } from '../jwt';
 
 @Injectable()
@@ -36,7 +36,7 @@ export class AuthService {
     res.cookie('jwt', token, cookieOptions);
     res.cookie('rememberMe', rememberMe, cookieOptions);
 
-    const response: UserSession = {
+    const response: AuthSession = {
       id: user.id,
       maxAge: maxAge.toString(),
       roles: user.roles,
