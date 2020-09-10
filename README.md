@@ -62,8 +62,8 @@ Reload GraphQL schema for Apollo extension via VSCode command palette after the 
 ## Modern Web Components and Styling Ambitions
 
 - [x] SASS chosen as the css transpiler of choice
-- [ ] [Angular Material](https://material.angular.io/) components & theme.
-- [ ] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SASS imports, and exclude the Bootstrap theme and component styles. These features are missing from Angular Material, and greatly simplify the creation of responsive, mobile first applications.
+- [x] [Angular Material](https://material.angular.io/) components & theme.
+- [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SASS imports, and exclude the Bootstrap theme and component styles. These features are missing from Angular Material, and greatly simplify the creation of responsive, mobile first applications.
 
 ---
 
