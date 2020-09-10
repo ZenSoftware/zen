@@ -8,7 +8,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { ZenMainComponent } from './zen-main/zen-main.component';
 
 @NgModule({
-  imports: [CommonModule, MainRoutingModule, MatSliderModule, MatButtonModule, MatDividerModule],
+  imports: [CommonModule, MainRoutingModule, MatButtonModule, MatDividerModule, MatSliderModule],
   declarations: [ZenMainComponent],
 })
 export class MainModule {}
