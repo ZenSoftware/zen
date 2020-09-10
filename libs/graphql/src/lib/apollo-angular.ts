@@ -265,20 +265,45 @@ export type User = {
 
 export type Query = {
   __typename?: 'Query';
-  findOneUser?: Maybe<User>;
+  authExchangeToken: AuthSession;
+  authLogin: AuthSession;
+  authPasswordResetRequest?: Maybe<Scalars['Boolean']>;
+  findManyRole?: Maybe<Array<Role>>;
+  findManyRoleCount: Scalars['Int'];
   findManyUser?: Maybe<Array<User>>;
   findManyUserCount: Scalars['Int'];
   findOneRole?: Maybe<Role>;
-  findManyRole?: Maybe<Array<Role>>;
-  findManyRoleCount: Scalars['Int'];
-  authLogin: AuthSession;
-  authExchangeToken: AuthSession;
-  authPasswordResetRequest?: Maybe<Scalars['Boolean']>;
+  findOneUser?: Maybe<User>;
+  loggedIn: Scalars['Boolean'];
+  userRoles: Array<Scalars['String']>;
 };
 
 
-export type QueryFindOneUserArgs = {
-  where: UserWhereUniqueInput;
+export type QueryAuthLoginArgs = {
+  data: AuthLoginInput;
+};
+
+
+export type QueryAuthPasswordResetRequestArgs = {
+  data: AuthPasswordResetRequestInput;
+};
+
+
+export type QueryFindManyRoleArgs = {
+  where?: Maybe<RoleWhereInput>;
+  orderBy?: Maybe<Array<RoleOrderByInput>>;
+  cursor?: Maybe<RoleWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryFindManyRoleCountArgs = {
+  where?: Maybe<RoleWhereInput>;
+  orderBy?: Maybe<Array<RoleOrderByInput>>;
+  cursor?: Maybe<RoleWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
 };
 
 
@@ -305,31 +330,8 @@ export type QueryFindOneRoleArgs = {
 };
 
 
-export type QueryFindManyRoleArgs = {
-  where?: Maybe<RoleWhereInput>;
-  orderBy?: Maybe<Array<RoleOrderByInput>>;
-  cursor?: Maybe<RoleWhereUniqueInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryFindManyRoleCountArgs = {
-  where?: Maybe<RoleWhereInput>;
-  orderBy?: Maybe<Array<RoleOrderByInput>>;
-  cursor?: Maybe<RoleWhereUniqueInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryAuthLoginArgs = {
-  data: AuthLoginInput;
-};
-
-
-export type QueryAuthPasswordResetRequestArgs = {
-  data: AuthPasswordResetRequestInput;
+export type QueryFindOneUserArgs = {
+  where: UserWhereUniqueInput;
 };
 
 export type Mutation = {
@@ -496,6 +498,22 @@ export type AuthLogin = (
     { __typename?: 'AuthSession' }
     & AuthSessionFields
   ) }
+);
+
+export type UserRolesVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserRoles = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'userRoles'>
+);
+
+export type LoggedInVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LoggedIn = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'loggedIn'>
 );
 
 export type AuthSessionFields = (
@@ -814,6 +832,38 @@ export const AuthLoginDocument = /*#__PURE__*/ gql`
   })
   export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
     document = AuthLoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UserRolesDocument = /*#__PURE__*/ gql`
+    query UserRoles {
+  userRoles @client
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
+    document = UserRolesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const LoggedInDocument = /*#__PURE__*/ gql`
+    query LoggedIn {
+  loggedIn @client
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class LoggedInGQL extends Apollo.Query<LoggedIn, LoggedInVariables> {
+    document = LoggedInDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

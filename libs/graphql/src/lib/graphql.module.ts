@@ -4,6 +4,7 @@ import {
   ApolloClientOptions,
   ApolloLink,
   InMemoryCache,
+  TypePolicies,
   split,
 } from '@apollo/client/core';
 import { WebSocketLink } from '@apollo/client/link/ws';
@@ -16,6 +17,7 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export abstract class GraphQLOptions {
   resolvers?: any;
+  typePolicies?: TypePolicies;
   cache?: ApolloCache<any>;
   uploadOptions?: UploadLinkOptions & { mutationNames: string[] };
   batchOptions?: BatchOptions;
@@ -127,7 +129,9 @@ export function createApollo(
 
   return {
     link,
-    cache: options.cache ? options.cache : new InMemoryCache(),
+    cache: options.cache
+      ? options.cache
+      : new InMemoryCache({ typePolicies: options.typePolicies }),
     resolvers: options.resolvers,
   };
 }

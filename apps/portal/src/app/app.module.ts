@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { Environment } from '@zen/common';
 import { GraphQLModule } from '@zen/graphql';
+import { typePolicies } from '@zen/graphql/client';
 import { MainModule } from '@zen/main';
 import Cookies from 'js-cookie';
 
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
     RouterModule.forRoot([]),
     MainModule,
     GraphQLModule.forRoot({
+      typePolicies,
       batchOptions: {
         uri: environment.url.graphql,
         batchMax: 250,

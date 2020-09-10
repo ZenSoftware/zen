@@ -19,7 +19,7 @@
       "@zen/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@zen/common": ["libs/common/src/index.ts"],
       "@zen/graphql": ["libs/graphql/src/index.ts"],
-      "@zen/graphql/fields": ["libs/graphql/src/lib/fields"],
+      "@zen/graphql/*": ["libs/graphql/src/lib/*"],
       "@zen/main": ["libs/main/src/index.ts"],
       "@zen/auth": ["libs/auth/src/index.ts"]
     },
