@@ -1,6 +1,6 @@
 import { PrismaService } from '../../prisma';
 
-export interface GqlContext {
+export interface IContext {
   req?: any;
   res?: any;
   prisma?: PrismaService;

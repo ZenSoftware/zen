@@ -12,7 +12,7 @@ import {
 import gql from 'graphql-tag';
 
 import { GqlGuard, GqlUser, RequestUser, Role, Roles } from '../../auth';
-import { GqlContext } from '../models';
+import { IContext } from '../models';
 import { PrismaSelectArgs } from '../prisma-select-args';
 import resolvers from '../prisma/User/resolvers';
 

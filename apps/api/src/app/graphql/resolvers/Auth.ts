@@ -15,7 +15,7 @@ import {
   AuthPasswordResetConfirmationInput,
   AuthPasswordResetRequestInput,
   AuthRegisterInput,
-  GqlContext,
+  IContext,
 } from '../models';
 
 export const AuthTypeDef = gql`
@@ -80,7 +80,7 @@ export class AuthResolver {
     private readonly mail: MailService
   ) {}
 
-  private async getUser(email: string, context: GqlContext) {
+  private async getUser(email: string, context: IContext) {
     const users = await context.prisma.user.findMany({
       where: {
         email: {
@@ -94,7 +94,7 @@ export class AuthResolver {
   }
 
   @Query()
-  async authLogin(@Context() context: GqlContext, @Args('data') data: AuthLoginInput) {
+  async authLogin(@Context() context: IContext, @Args('data') data: AuthLoginInput) {
     const user = await this.getUser(data.email, context);
 
     if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
@@ -107,7 +107,7 @@ export class AuthResolver {
 
   @Query()
   @UseGuards(GqlGuard)
-  async authExchangeToken(@Context() context: GqlContext, @GqlUser() reqUser: RequestUser) {
+  async authExchangeToken(@Context() context: IContext, @GqlUser() reqUser: RequestUser) {
     const user = await context.prisma.user.findOne({
       where: { id: reqUser.id },
     });
@@ -123,7 +123,7 @@ export class AuthResolver {
 
   @Query()
   async authPasswordResetRequest(
-    @Context() context: GqlContext,
+    @Context() context: IContext,
     @Args('data') data: AuthPasswordResetRequestInput
   ) {
     const user = await this.getUser(data.email, context);
@@ -134,7 +134,7 @@ export class AuthResolver {
   }
 
   @Mutation()
-  async authRegister(@Context() context: GqlContext, @Args('data') data: AuthRegisterInput) {
+  async authRegister(@Context() context: IContext, @Args('data') data: AuthRegisterInput) {
     const userFound = await this.getUser(data.email, context);
     if (userFound) throw new HttpException({ code: 'EMAIL_TAKEN' }, 400);
 
@@ -153,7 +153,7 @@ export class AuthResolver {
 
   @Mutation()
   async authPasswordResetConfirmation(
-    @Context() context: GqlContext,
+    @Context() context: IContext,
     @Args('data') data: AuthPasswordResetConfirmationInput
   ) {
     let tokenPayload;
@@ -178,7 +178,7 @@ export class AuthResolver {
   @Mutation()
   @UseGuards(GqlGuard)
   async authPasswordChange(
-    @Context() context: GqlContext,
+    @Context() context: IContext,
     @Args('data') data: AuthPasswordChangeInput,
     @GqlUser() reqUser: RequestUser
   ) {
