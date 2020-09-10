@@ -23,4 +23,11 @@ export const environment: EnvironmentBase = {
   },
   rememberMeExpiresIn: 2592000, // 30 days (in seconds)
   cookieDomain: 'zensoftware.ca',
+  smtp: {
+    server: process.env.SMTP_SERVER,
+    login: process.env.SMTP_LOGIN,
+    password: process.env.SMTP_PASSWORD,
+    fromEmail: process.env.SMTP_FROM_EMAIL,
+    fromName: 'Zen',
+  },
 };

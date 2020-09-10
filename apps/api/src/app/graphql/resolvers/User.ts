@@ -1,6 +1,18 @@
-import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import {
+  Args,
+  Context,
+  Info,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import gql from 'graphql-tag';
 
+import { GqlGuard, GqlUser, RequestUser, Role, Roles } from '../../auth';
+import { Context as GqlContext } from '../context';
 import { PrismaSelectArgs } from '../prisma-select-args';
 import resolvers from '../prisma/User/resolvers';
 
@@ -18,7 +30,14 @@ export const UserTypeDef = null;
 // `;
 
 @Resolver('User')
+@UseGuards(GqlGuard)
+@Roles(Role.Admin)
 export class UserResolver {
+  @ResolveField()
+  async password() {
+    return '';
+  }
+
   @Query()
   async findOneUser(@Parent() parent, @Info() info, @Args() args, @Context() context) {
     return resolvers.Query.findOneUser(parent, PrismaSelectArgs(info, args), context);

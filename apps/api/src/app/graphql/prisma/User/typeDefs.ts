@@ -2,29 +2,13 @@ import gql from 'graphql-tag'
 
 export default gql`
   type User {
-    id: Int!
+    id: String!
     createdAt: DateTime!
     email: String!
-    name: String
+    firstName: String
+    lastName: String
     password: String!
-    posts(
-      where: PostWhereInput
-      orderBy: PostOrderByInput
-      cursor: PostWhereUniqueInput
-      take: Int
-      skip: Int
-      distinct: PostDistinctFieldEnum
-    ): [Post!]!
-    group: Group
-    groupId: Int
-    comments(
-      where: CommentWhereInput
-      orderBy: CommentOrderByInput
-      cursor: CommentWhereUniqueInput
-      take: Int
-      skip: Int
-      distinct: CommentDistinctFieldEnum
-    ): [Comment!]!
+    roles: [String!]!
   }
 
   type Query {

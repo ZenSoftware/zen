@@ -11,4 +11,11 @@ export class EnvironmentBase {
   jwtOptions: JwtModuleOptions;
   rememberMeExpiresIn: number;
   cookieDomain: string;
+  smtp: {
+    server: string;
+    login: string;
+    password: string;
+    fromName: string;
+    fromEmail: string;
+  };
 }

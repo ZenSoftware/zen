@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 import { EnvironmentBase } from './environment.base';
 
@@ -26,4 +26,11 @@ export const environment: EnvironmentBase = {
   },
   rememberMeExpiresIn: 2592000, // 30 days (in seconds)
   cookieDomain: undefined,
+  smtp: {
+    server: 'localhost/nowhere', //process.env.SMTP_SERVER,
+    login: process.env.SMTP_LOGIN,
+    password: process.env.SMTP_PASSWORD,
+    fromEmail: process.env.SMTP_FROM_EMAIL,
+    fromName: 'Zen',
+  },
 };

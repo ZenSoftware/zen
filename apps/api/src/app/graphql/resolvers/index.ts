@@ -2,22 +2,19 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { mergeTypeDefs } from '@graphql-tools/merge'
 
 import PRISMA_TYPE_DEFS from '../prisma/typeDefs';
-import { CommentResolver, CommentTypeDef } from './Comment';
-import { GroupResolver, GroupTypeDef } from './Group';
-import { PostResolver, PostTypeDef } from './Post';
+import { AuthResolver, AuthTypeDef } from './Auth';
+import { RoleResolver, RoleTypeDef } from './Role';
 import { UserResolver, UserTypeDef } from './User';
 
 export const NEST_RESOLVERS = [
-  CommentResolver,
-  GroupResolver,
-  PostResolver,
+  AuthResolver,
+  RoleResolver,
   UserResolver
 ];
 
 export const NEST_TYPE_DEFS = [
-  CommentTypeDef,
-  GroupTypeDef,
-  PostTypeDef,
+  AuthTypeDef,
+  RoleTypeDef,
   UserTypeDef
 ].filter(x => x);
 

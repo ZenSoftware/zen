@@ -1,7 +1,5 @@
 import { PrismaService } from '../prisma';
 
-const prisma = new PrismaService();
-
 export interface Context {
   req?: any;
   res?: any;
@@ -10,6 +8,6 @@ export interface Context {
 
 export function createContext(): Context {
   return {
-    prisma,
+    prisma: new PrismaService(),
   };
 }
