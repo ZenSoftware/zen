@@ -25,47 +25,47 @@ export const RoleTypeDef = null;
 @Roles(Role.Admin)
 export class RoleResolver {
   @Query()
-  async findOneRole(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Query.findOneRole(parent, PrismaSelectArgs(info, args), context);
+  async findOneRole(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Query.findOneRole(parent, PrismaSelectArgs(info, args), ctx);
   }
 
   @Query()
-  async findManyRole(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Query.findManyRole(parent, PrismaSelectArgs(info, args), context);
+  async findManyRole(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Query.findManyRole(parent, PrismaSelectArgs(info, args), ctx);
   }
 
   @Query()
-  async findManyRoleCount(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Query.findManyRoleCount(parent, PrismaSelectArgs(info, args), context);
+  async findManyRoleCount(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Query.findManyRoleCount(parent, PrismaSelectArgs(info, args), ctx);
   }
 
   @Mutation()
-  async createOneRole(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Mutation.createOneRole(parent, PrismaSelectArgs(info, args), context);
+  async createOneRole(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Mutation.createOneRole(parent, PrismaSelectArgs(info, args), ctx);
   }
 
   @Mutation()
-  async updateOneRole(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Mutation.updateOneRole(parent, PrismaSelectArgs(info, args), context);
+  async updateOneRole(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Mutation.updateOneRole(parent, PrismaSelectArgs(info, args), ctx);
   }
 
   @Mutation()
-  async deleteOneRole(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Mutation.deleteOneRole(parent, PrismaSelectArgs(info, args), context);
+  async deleteOneRole(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Mutation.deleteOneRole(parent, PrismaSelectArgs(info, args), ctx);
   }
 
   @Mutation()
-  async upsertOneRole(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Mutation.upsertOneRole(parent, PrismaSelectArgs(info, args), context);
+  async upsertOneRole(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Mutation.upsertOneRole(parent, PrismaSelectArgs(info, args), ctx);
   }
 
   @Mutation()
-  async deleteManyRole(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Mutation.deleteManyRole(parent, PrismaSelectArgs(info, args), context);
+  async deleteManyRole(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Mutation.deleteManyRole(parent, PrismaSelectArgs(info, args), ctx);
   }
 
   @Mutation()
-  async updateManyRole(@Parent() parent, @Info() info, @Args() args, @Context() context) {
-    return resolvers.Mutation.updateManyRole(parent, PrismaSelectArgs(info, args), context);
+  async updateManyRole(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Mutation.updateManyRole(parent, PrismaSelectArgs(info, args), ctx);
   }
 }
