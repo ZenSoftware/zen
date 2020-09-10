@@ -1,10 +1,8 @@
 import { PrismaService } from '../prisma';
+import { GqlContext } from './models';
+export { GqlContext } from './models';
 
-export interface Context {
-  req?: any;
-  res?: any;
-  prisma?: PrismaService;
-}
+export type Context = GqlContext;
 
 export function createContext(): Context {
   return {

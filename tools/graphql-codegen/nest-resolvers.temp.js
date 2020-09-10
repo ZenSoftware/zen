@@ -4,7 +4,7 @@ import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/
 import gql from 'graphql-tag';
 
 import { GqlGuard, GqlUser, RequestUser, Role, Roles } from '../../auth';
-import { Context as GqlContext } from '../context';
+import { GqlContext } from '../models';
 import { PrismaSelectArgs } from '../prisma-select-args';
 import resolvers from '../prisma/${prismaName}/resolvers';
 

@@ -9,15 +9,14 @@ import { AuthService } from '../../auth/auth.service';
 import { ConfigService } from '../../config';
 import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
-import { Context as GqlContext } from '../context';
 import {
   AuthLoginInput,
   AuthPasswordChangeInput,
   AuthPasswordResetConfirmationInput,
   AuthPasswordResetRequestInput,
   AuthRegisterInput,
+  GqlContext,
 } from '../models';
-import { User } from '.prisma/client';
 
 export const AuthTypeDef = gql`
   extend type Query {
@@ -81,7 +80,7 @@ export class AuthResolver {
     private readonly mail: MailService
   ) {}
 
-  private async getUser(email: string, context: GqlContext): Promise<User> {
+  private async getUser(email: string, context: GqlContext) {
     const users = await context.prisma.user.findMany({
       where: {
         email: {
