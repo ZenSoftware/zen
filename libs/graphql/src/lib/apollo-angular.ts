@@ -528,7 +528,7 @@ export type RoleFields = (
 
 export type UserFields = (
   { __typename?: 'User' }
-  & Pick<User, 'id'>
+  & Pick<User, 'id' | 'email' | 'firstName' | 'roles'>
 );
 
 export type FindOneRoleVariables = Exact<{
@@ -799,6 +799,9 @@ export const RoleFields = /*#__PURE__*/ gql`
 export const UserFields = /*#__PURE__*/ gql`
     fragment UserFields on User {
   id
+  email
+  firstName
+  roles
 }
     `;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
