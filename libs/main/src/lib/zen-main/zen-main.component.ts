@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { CreateOneUserGQL, FindManyUserGQL, QueryMode, UserRolesGQL } from '@zen/graphql';
+import {
+  CreateOneUserGQL,
+  FindManyUserGQL,
+  QueryMode,
+  UpdateOneUserGQL,
+  UserRolesGQL,
+} from '@zen/graphql';
 import { userRolesVar } from '@zen/graphql/client';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -11,7 +17,8 @@ export class ZenMainComponent {
   constructor(
     private findManyUserGQL: FindManyUserGQL,
     private userRolesGQL: UserRolesGQL,
-    private createOneUserGQL: CreateOneUserGQL
+    private createOneUserGQL: CreateOneUserGQL,
+    private updateOneUserGQL: UpdateOneUserGQL
   ) {}
 
   userRoles$ = this.userRolesGQL.watch().valueChanges.pipe(
@@ -46,6 +53,19 @@ export class ZenMainComponent {
   }
 
   example() {
+    this.updateOneUserGQL
+      .mutate({
+        where: {
+          email: 'peter@zensoftware.ca',
+        },
+        data: {
+          test: {
+            increment: 1,
+          },
+        },
+      })
+      .subscribe();
+
     userRolesVar([...userRolesVar(), 'another']);
   }
 }

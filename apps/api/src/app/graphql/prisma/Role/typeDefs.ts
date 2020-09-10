@@ -22,6 +22,13 @@ export default gql`
       skip: Int
       take: Int
     ): Int!
+    aggregateRole(
+      where: RoleWhereInput
+      orderBy: [RoleOrderByInput!]
+      cursor: RoleWhereUniqueInput
+      skip: Int
+      take: Int
+    ): AggregateRole
   }
   type Mutation {
     createOneRole(data: RoleCreateInput!): Role!

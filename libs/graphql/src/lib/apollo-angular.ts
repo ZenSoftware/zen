@@ -29,7 +29,8 @@ export enum UserDistinctFieldEnum {
   FirstName = 'firstName',
   LastName = 'lastName',
   Password = 'password',
-  Roles = 'roles'
+  Roles = 'roles',
+  Test = 'test'
 }
 
 export enum RoleDistinctFieldEnum {
@@ -58,6 +59,7 @@ export type UserWhereInput = {
   lastName?: Maybe<StringNullableFilter>;
   password?: Maybe<StringFilter>;
   roles?: Maybe<StringNullableListFilter>;
+  test?: Maybe<IntFilter>;
 };
 
 export type UserOrderByInput = {
@@ -68,6 +70,7 @@ export type UserOrderByInput = {
   lastName?: Maybe<SortOrder>;
   password?: Maybe<SortOrder>;
   roles?: Maybe<SortOrder>;
+  test?: Maybe<SortOrder>;
 };
 
 export type UserWhereUniqueInput = {
@@ -100,6 +103,7 @@ export type UserCreateInput = {
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
   password: Scalars['String'];
+  test?: Maybe<Scalars['Int']>;
   roles?: Maybe<UserCreaterolesInput>;
 };
 
@@ -110,6 +114,7 @@ export type UserUpdateInput = {
   firstName?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastName?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
+  test?: Maybe<IntFieldUpdateOperationsInput>;
   roles?: Maybe<UserUpdaterolesInput>;
 };
 
@@ -120,6 +125,7 @@ export type UserUpdateManyMutationInput = {
   firstName?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastName?: Maybe<NullableStringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
+  test?: Maybe<IntFieldUpdateOperationsInput>;
   roles?: Maybe<UserUpdaterolesInput>;
 };
 
@@ -183,6 +189,17 @@ export type StringNullableListFilter = {
   equals?: Maybe<Array<Scalars['String']>>;
 };
 
+export type IntFilter = {
+  equals?: Maybe<Scalars['Int']>;
+  in?: Maybe<Array<Scalars['Int']>>;
+  notIn?: Maybe<Array<Scalars['Int']>>;
+  lt?: Maybe<Scalars['Int']>;
+  lte?: Maybe<Scalars['Int']>;
+  gt?: Maybe<Scalars['Int']>;
+  gte?: Maybe<Scalars['Int']>;
+  not?: Maybe<Scalars['Int']>;
+};
+
 export type UserCreaterolesInput = {
   set?: Maybe<Array<Scalars['String']>>;
 };
@@ -197,6 +214,14 @@ export type DateTimeFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['String']>;
+};
+
+export type IntFieldUpdateOperationsInput = {
+  set?: Maybe<Scalars['Int']>;
+  increment?: Maybe<Scalars['Int']>;
+  decrement?: Maybe<Scalars['Int']>;
+  multiply?: Maybe<Scalars['Int']>;
+  divide?: Maybe<Scalars['Int']>;
 };
 
 export type UserUpdaterolesInput = {
@@ -242,14 +267,49 @@ export type NestedStringNullableFilter = {
   not?: Maybe<NestedStringNullableFilter>;
 };
 
+export type NestedIntFilter = {
+  equals?: Maybe<Scalars['Int']>;
+  in?: Maybe<Array<Scalars['Int']>>;
+  notIn?: Maybe<Array<Scalars['Int']>>;
+  lt?: Maybe<Scalars['Int']>;
+  lte?: Maybe<Scalars['Int']>;
+  gt?: Maybe<Scalars['Int']>;
+  gte?: Maybe<Scalars['Int']>;
+  not?: Maybe<NestedIntFilter>;
+};
+
 export type AggregateUser = {
   __typename?: 'AggregateUser';
   count: Scalars['Int'];
+  avg?: Maybe<UserAvgAggregateOutputType>;
+  sum?: Maybe<UserSumAggregateOutputType>;
+  min?: Maybe<UserMinAggregateOutputType>;
+  max?: Maybe<UserMaxAggregateOutputType>;
 };
 
 export type AggregateRole = {
   __typename?: 'AggregateRole';
   count: Scalars['Int'];
+};
+
+export type UserAvgAggregateOutputType = {
+  __typename?: 'UserAvgAggregateOutputType';
+  test: Scalars['Float'];
+};
+
+export type UserSumAggregateOutputType = {
+  __typename?: 'UserSumAggregateOutputType';
+  test: Scalars['Int'];
+};
+
+export type UserMinAggregateOutputType = {
+  __typename?: 'UserMinAggregateOutputType';
+  test: Scalars['Int'];
+};
+
+export type UserMaxAggregateOutputType = {
+  __typename?: 'UserMaxAggregateOutputType';
+  test: Scalars['Int'];
 };
 
 export type User = {
@@ -261,10 +321,13 @@ export type User = {
   lastName?: Maybe<Scalars['String']>;
   password: Scalars['String'];
   roles: Array<Scalars['String']>;
+  test: Scalars['Int'];
 };
 
 export type Query = {
   __typename?: 'Query';
+  aggregateRole?: Maybe<AggregateRole>;
+  aggregateUser?: Maybe<AggregateUser>;
   authExchangeToken: AuthSession;
   authLogin: AuthSession;
   authPasswordResetRequest?: Maybe<Scalars['Boolean']>;
@@ -276,6 +339,24 @@ export type Query = {
   findOneUser?: Maybe<User>;
   loggedIn: Scalars['Boolean'];
   userRoles: Array<Scalars['String']>;
+};
+
+
+export type QueryAggregateRoleArgs = {
+  where?: Maybe<RoleWhereInput>;
+  orderBy?: Maybe<Array<RoleOrderByInput>>;
+  cursor?: Maybe<RoleWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryAggregateUserArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByInput>>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
 };
 
 
@@ -528,7 +609,7 @@ export type RoleFields = (
 
 export type UserFields = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'email' | 'firstName' | 'roles'>
+  & Pick<User, 'id' | 'email' | 'firstName' | 'roles' | 'test'>
 );
 
 export type FindOneRoleVariables = Exact<{
@@ -783,6 +864,17 @@ export type UpdateManyUser = (
   )> }
 );
 
+export type TestMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TestMutation = (
+  { __typename?: 'Mutation' }
+  & { updateOneUser: (
+    { __typename?: 'User' }
+    & Pick<User, 'test'>
+  ) }
+);
+
 export const AuthSessionFields = /*#__PURE__*/ gql`
     fragment AuthSessionFields on AuthSession {
   id
@@ -802,6 +894,7 @@ export const UserFields = /*#__PURE__*/ gql`
   email
   firstName
   roles
+  test
 }
     `;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
@@ -1187,6 +1280,24 @@ export const UpdateManyUserDocument = /*#__PURE__*/ gql`
   })
   export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
     document = UpdateManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const TestMutationDocument = /*#__PURE__*/ gql`
+    mutation TestMutation {
+  updateOneUser(where: {id: ""}, data: {test: {increment: 1}}) {
+    test
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class TestMutationGQL extends Apollo.Mutation<TestMutation, TestMutationVariables> {
+    document = TestMutationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

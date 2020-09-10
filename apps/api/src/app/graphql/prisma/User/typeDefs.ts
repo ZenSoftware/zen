@@ -9,6 +9,7 @@ export default gql`
     lastName: String
     password: String!
     roles: [String!]!
+    test: Int!
   }
 
   type Query {
@@ -27,6 +28,13 @@ export default gql`
       skip: Int
       take: Int
     ): Int!
+    aggregateUser(
+      where: UserWhereInput
+      orderBy: [UserOrderByInput!]
+      cursor: UserWhereUniqueInput
+      skip: Int
+      take: Int
+    ): AggregateUser
   }
   type Mutation {
     createOneUser(data: UserCreateInput!): User!

@@ -9,7 +9,7 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
   binaryTargets = ["native", "linux-musl"]
-  previewFeatures = ["insensitiveFilters"]
+  previewFeatures = ["insensitiveFilters", "atomicNumberOperations"]
 }
 
 model User {
@@ -20,6 +20,7 @@ model User {
   lastName  String?
   password  String
   roles     String[]
+  test      Int       @default(0)
 }
 
 model Role {

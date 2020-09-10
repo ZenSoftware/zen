@@ -11,6 +11,9 @@ export default {
     findManyRoleCount: (_parent, args, { prisma }: Context) => {
       return prisma.role.count(args)
     },
+    aggregateRole: (_parent, args, { prisma }: Context) => {
+      return prisma.role.aggregate(args)
+    },
   },
   Mutation: {
     createOneRole: (_parent, args, { prisma }: Context) => {

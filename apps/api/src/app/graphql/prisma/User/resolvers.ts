@@ -11,6 +11,9 @@ export default {
     findManyUserCount: (_parent, args, { prisma }: Context) => {
       return prisma.user.count(args)
     },
+    aggregateUser: (_parent, args, { prisma }: Context) => {
+      return prisma.user.aggregate(args)
+    },
   },
   Mutation: {
     createOneUser: (_parent, args, { prisma }: Context) => {
