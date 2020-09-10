@@ -1,5 +1,9 @@
 <h1>Zen Software</h1>
 
+<button mat-raised-button color="primary" (click)="example()" class="mb-4">
+  Example
+</button>
+
 <div class="card text-info mb-4">
   <div class="card-body">
     <pre class="mb-0"><code>{{ userRoles$ | async | json }}</code></pre>
@@ -11,9 +15,3 @@
 <mat-slider min="1" max="100" step="1" value="1" color="primary"></mat-slider>
 
 <a href="#">This is a sample link</a>
-
-<div>
-  <button mat-raised-button color="primary" (click)="example()">
-    Example
-  </button>
-</div>
