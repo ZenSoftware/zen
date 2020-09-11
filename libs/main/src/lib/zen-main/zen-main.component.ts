@@ -5,6 +5,7 @@ import {
   QueryMode,
   UpdateOneUserGQL,
   UserRolesGQL,
+  selectOne,
 } from '@zen/graphql';
 import { userRolesVar } from '@zen/graphql/client';
 import { map, shareReplay } from 'rxjs/operators';
@@ -49,20 +50,14 @@ export class ZenMainComponent {
           password: '1234',
         },
       })
-      .subscribe(({ data }) => console.log(data));
+      .subscribe();
   }
 
   example() {
     this.updateOneUserGQL
       .mutate({
-        where: {
-          email: 'peter@zensoftware.ca',
-        },
-        data: {
-          test: {
-            increment: 1,
-          },
-        },
+        where: selectOne('peter@zensoftware.ca', 'email'),
+        data: { test: { increment: 1 } },
       })
       .subscribe();
 
