@@ -2,7 +2,7 @@ import { Injectable, OnModuleDestroy, OnModuleInit, Optional, Scope } from '@nes
 import { PrismaDelete, onDeleteArgs } from '@paljs/plugins';
 import { PrismaClient, PrismaClientOptions } from '@prisma/client';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   constructor(@Optional() options?: PrismaClientOptions) {
     super(options);
