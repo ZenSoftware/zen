@@ -864,17 +864,6 @@ export type UpdateManyUser = (
   )> }
 );
 
-export type TestMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TestMutation = (
-  { __typename?: 'Mutation' }
-  & { updateOneUser: (
-    { __typename?: 'User' }
-    & Pick<User, 'test'>
-  ) }
-);
-
 export const AuthSessionFields = /*#__PURE__*/ gql`
     fragment AuthSessionFields on AuthSession {
   id
@@ -1280,24 +1269,6 @@ export const UpdateManyUserDocument = /*#__PURE__*/ gql`
   })
   export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
     document = UpdateManyUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const TestMutationDocument = /*#__PURE__*/ gql`
-    mutation TestMutation {
-  updateOneUser(where: {id: ""}, data: {test: {increment: 1}}) {
-    test
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class TestMutationGQL extends Apollo.Mutation<TestMutation, TestMutationVariables> {
-    document = TestMutationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
