@@ -106,6 +106,7 @@
     "@types/helmet": "0.0.48",
     "@types/jest": "26.0.8",
     "@types/js-cookie": "^2.2.6",
+    "@types/lodash-es": "^4.17.3",
     "@types/node": "^14.10.0",
     "@types/passport": "^1.0.4",
     "@types/passport-jwt": "^3.0.3",
