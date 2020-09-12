@@ -34,7 +34,7 @@
 
 <ol class="breadcrumb">
     <li>Modules</li>
-    <li>PrismaModule</li>
+    <li>MailModule</li>
 </ol>
 
 <div class="text-center module-graph-container">
@@ -62,46 +62,62 @@
 <polygon fill="#fb8072" stroke="transparent" points="406,-10 406,-30 426,-30 426,-10 406,-10"/>
 <text text-anchor="start" x="429.7258" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Exports</text>
 <g id="clust1" class="cluster">
-<title>cluster_PrismaModule</title>
-<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="165,-70 165,-268 331,-268 331,-70 165,-70"/>
+<title>cluster_MailModule</title>
+<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="123,-70 123,-268 373,-268 373,-70 123,-70"/>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_MailModule_imports</title>
+<polygon fill="none" stroke="#000000" points="271,-78 271,-130 365,-130 365,-78 271,-78"/>
 </g>
 <g id="clust4" class="cluster">
-<title>cluster_PrismaModule_exports</title>
-<polygon fill="none" stroke="#000000" points="190,-208 190,-260 306,-260 306,-208 190,-208"/>
+<title>cluster_MailModule_exports</title>
+<polygon fill="none" stroke="#000000" points="203,-208 203,-260 307,-260 307,-208 203,-208"/>
 </g>
 <g id="clust6" class="cluster">
-<title>cluster_PrismaModule_providers</title>
-<polygon fill="none" stroke="#000000" points="173,-78 173,-130 323,-130 323,-78 173,-78"/>
+<title>cluster_MailModule_providers</title>
+<polygon fill="none" stroke="#000000" points="131,-78 131,-130 263,-130 263,-78 131,-78"/>
 </g>
-<!-- PrismaService  -->
+<!-- JwtModule -->
 <g id="node1" class="node">
-<title>PrismaService </title>
-<polygon fill="#fb8072" stroke="#000000" points="298.3619,-252 197.6381,-252 197.6381,-216 298.3619,-216 298.3619,-252"/>
-<text text-anchor="middle" x="248" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">PrismaService </text>
+<title>JwtModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="357.4916,-122 354.4916,-126 333.4916,-126 330.4916,-122 278.5084,-122 278.5084,-86 357.4916,-86 357.4916,-122"/>
+<text text-anchor="middle" x="318" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">JwtModule</text>
 </g>
-<!-- PrismaModule -->
+<!-- MailModule -->
 <g id="node2" class="node">
-<title>PrismaModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="297.4344,-187 294.4344,-191 273.4344,-191 270.4344,-187 198.5656,-187 198.5656,-151 297.4344,-151 297.4344,-187"/>
-<text text-anchor="middle" x="248" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">PrismaModule</text>
+<title>MailModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="297.9902,-187 294.9902,-191 273.9902,-191 270.9902,-187 212.0098,-187 212.0098,-151 297.9902,-151 297.9902,-187"/>
+<text text-anchor="middle" x="255" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">MailModule</text>
 </g>
-<!-- PrismaModule&#45;&gt;PrismaService  -->
+<!-- JwtModule&#45;&gt;MailModule -->
 <g id="edge1" class="edge">
-<title>PrismaModule&#45;&gt;PrismaService </title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M248,-187.1061C248,-187.1061 248,-205.991 248,-205.991"/>
-<polygon fill="#000000" stroke="#000000" points="244.5001,-205.9909 248,-215.991 251.5001,-205.991 244.5001,-205.9909"/>
+<title>JwtModule&#45;&gt;MailModule</title>
+<path fill="none" stroke="#000000" d="M288.2496,-122.1061C288.2496,-122.1061 288.2496,-140.991 288.2496,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="284.7497,-140.9909 288.2496,-150.991 291.7497,-140.991 284.7497,-140.9909"/>
 </g>
-<!-- PrismaService -->
+<!-- MailService  -->
 <g id="node3" class="node">
-<title>PrismaService</title>
-<ellipse fill="#fdb462" stroke="#000000" cx="248" cy="-104" rx="66.6267" ry="18"/>
-<text text-anchor="middle" x="248" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">PrismaService</text>
+<title>MailService </title>
+<polygon fill="#fb8072" stroke="#000000" points="298.918,-252 211.082,-252 211.082,-216 298.918,-216 298.918,-252"/>
+<text text-anchor="middle" x="255" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">MailService </text>
 </g>
-<!-- PrismaService&#45;&gt;PrismaModule -->
+<!-- MailModule&#45;&gt;MailService  -->
 <g id="edge2" class="edge">
-<title>PrismaService&#45;&gt;PrismaModule</title>
-<path fill="none" stroke="#000000" d="M248,-122.1061C248,-122.1061 248,-140.991 248,-140.991"/>
-<polygon fill="#000000" stroke="#000000" points="244.5001,-140.9909 248,-150.991 251.5001,-140.991 244.5001,-140.9909"/>
+<title>MailModule&#45;&gt;MailService </title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M255,-187.1061C255,-187.1061 255,-205.991 255,-205.991"/>
+<polygon fill="#000000" stroke="#000000" points="251.5001,-205.9909 255,-215.991 258.5001,-205.991 251.5001,-205.9909"/>
+</g>
+<!-- MailService -->
+<g id="node4" class="node">
+<title>MailService</title>
+<ellipse fill="#fdb462" stroke="#000000" cx="197" cy="-104" rx="58.4609" ry="18"/>
+<text text-anchor="middle" x="197" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">MailService</text>
+</g>
+<!-- MailService&#45;&gt;MailModule -->
+<g id="edge3" class="edge">
+<title>MailService&#45;&gt;MailModule</title>
+<path fill="none" stroke="#000000" d="M233.6174,-118.104C233.6174,-118.104 233.6174,-140.7209 233.6174,-140.7209"/>
+<polygon fill="#000000" stroke="#000000" points="230.1175,-140.7209 233.6174,-150.7209 237.1175,-140.7209 230.1175,-140.7209"/>
 </g>
 </g>
 </svg>
@@ -133,7 +149,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/app/prisma/prisma.module.ts</code>
+            <code>apps/api/src/app/mail/mail.module.ts</code>
         </p>
 
 
@@ -146,7 +162,16 @@
                             title="Official documentation about module providers"><span class="icon ion-ios-information-circle-outline"></a></h3>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="../injectables/PrismaService.html">PrismaService</a>
+                            <a href="../injectables/MailService.html">MailService</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h3>Imports<a href="https://angular.io/api/core/NgModule#imports" target="_blank" title="Official documentation about module imports"><span
+                                class="icon ion-ios-information-circle-outline"></a></h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="../modules/JwtModule.html">JwtModule</a>
                         </li>
                     </ul>
                 </div>
@@ -155,7 +180,7 @@
                                 class="icon ion-ios-information-circle-outline"></a></h3>
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a href="../s/PrismaService.html">PrismaService</a>
+                            <a href="../s/MailService.html">MailService</a>
                         </li>
                     </ul>
                 </div>
@@ -167,15 +192,36 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import path from &#x27;path&#x27;;
 
-import { PrismaService } from &#x27;./prisma.service&#x27;;
+import { HandlebarsAdapter, MailerModule } from &#x27;@nest-modules/mailer&#x27;;
+import { Module } from &#x27;@nestjs/common&#x27;;
+
+import { environment } from &#x27;../../environments/environment&#x27;;
+import { JwtModule } from &#x27;../jwt&#x27;;
+import { MailService } from &#x27;./mail.service&#x27;;
 
 @Module({
-  providers: [PrismaService],
-  exports: [PrismaService],
+  imports: [
+    JwtModule,
+    MailerModule.forRootAsync({
+      useFactory: () &#x3D;&gt; ({
+        transport: &#x60;smtps://${environment.smtp.login}:${environment.smtp.password}@${environment.smtp.server}&#x60;,
+        defaults: { from: &#x60;&quot;${environment.smtp.fromName}&quot; &lt;${environment.smtp.fromEmail}&gt;&#x60; },
+        template: {
+          dir: path.join(__dirname, &#x27;mail/templates&#x27;),
+          adapter: new HandlebarsAdapter(),
+          options: {
+            strict: true,
+          },
+        },
+      }),
+    }),
+  ],
+  providers: [MailService],
+  exports: [MailService],
 })
-export class PrismaModule {}
+export class MailModule {}
 </code></pre>
     </div>
 </div>
@@ -211,7 +257,7 @@ export class PrismaModule {}
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'PrismaModule.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'MailModule.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

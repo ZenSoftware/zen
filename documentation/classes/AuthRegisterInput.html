@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>EnvironmentBase</li>
+  <li>AuthRegisterInput</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/environments/environment.base.ts</code>
+            <code>apps/api/src/app/graphql/models/auth-register-input.ts</code>
         </p>
 
 
@@ -80,28 +80,22 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#cookieDomain">cookieDomain</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#email">email</a>
                             </li>
                             <li>
-                                <a href="#expressPort">expressPort</a>
+                                    <span class="modifier">Readonly</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#firstName">firstName</a>
                             </li>
                             <li>
-                                <a href="#graphql">graphql</a>
+                                    <span class="modifier">Readonly</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#lastName">lastName</a>
                             </li>
                             <li>
-                                <a href="#jwtOptions">jwtOptions</a>
-                            </li>
-                            <li>
-                                <a href="#postgres">postgres</a>
-                            </li>
-                            <li>
-                                <a href="#production">production</a>
-                            </li>
-                            <li>
-                                <a href="#rememberMeExpiresIn">rememberMeExpiresIn</a>
-                            </li>
-                            <li>
-                                <a href="#smtp">smtp</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#password">password</a>
                             </li>
                         </ul>
                     </td>
@@ -126,11 +120,50 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="cookieDomain"></a>
+                        <a name="email"></a>
                         <span class="name">
                             <b>
-                            cookieDomain</b>
-                            <a href="#cookieDomain"><span class="icon ion-ios-link"></span></a>
+                                <span class="modifier">Readonly</span>
+                            email</b>
+                            <a href="#email"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @IsEmail()<br />@MaxLength(254)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">apps/api/src/app/graphql/models/auth-register-input.ts:7</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="firstName"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Readonly</span>
+                                <span class="modifier">Optional</span>
+                            firstName</b>
+                            <a href="#firstName"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -142,7 +175,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">apps/api/src/environments/environment.base.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">apps/api/src/app/graphql/models/auth-register-input.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -153,23 +186,25 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="expressPort"></a>
+                        <a name="lastName"></a>
                         <span class="name">
                             <b>
-                            expressPort</b>
-                            <a href="#expressPort"><span class="icon ion-ios-link"></span></a>
+                                <span class="modifier">Readonly</span>
+                                <span class="modifier">Optional</span>
+                            lastName</b>
+                            <a href="#lastName"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>string | number</code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">apps/api/src/environments/environment.base.ts:6</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">apps/api/src/app/graphql/models/auth-register-input.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -180,158 +215,33 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="graphql"></a>
+                        <a name="password"></a>
                         <span class="name">
                             <b>
-                            graphql</b>
-                            <a href="#graphql"><span class="icon ion-ios-link"></span></a>
+                                <span class="modifier">Readonly</span>
+                            password</b>
+                            <a href="#password"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>literal type</code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">apps/api/src/environments/environment.base.ts:7</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="jwtOptions"></a>
-                        <span class="name">
-                            <b>
-                            jwtOptions</b>
-                            <a href="#jwtOptions"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>JwtModuleOptions</code>
-
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Length(ApiConstants.PASSWORD_MIN_LENGTH, 100)<br />
+                            </code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">apps/api/src/environments/environment.base.ts:11</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="postgres"></a>
-                        <span class="name">
-                            <b>
-                            postgres</b>
-                            <a href="#postgres"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>PostgreSQLConfig</code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">apps/api/src/environments/environment.base.ts:10</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="production"></a>
-                        <span class="name">
-                            <b>
-                            production</b>
-                            <a href="#production"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">apps/api/src/environments/environment.base.ts:5</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="rememberMeExpiresIn"></a>
-                        <span class="name">
-                            <b>
-                            rememberMeExpiresIn</b>
-                            <a href="#rememberMeExpiresIn"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">apps/api/src/environments/environment.base.ts:12</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="smtp"></a>
-                        <span class="name">
-                            <b>
-                            smtp</b>
-                            <a href="#smtp"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>literal type</code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">apps/api/src/environments/environment.base.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">apps/api/src/app/graphql/models/auth-register-input.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -350,26 +260,20 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { JwtModuleOptions } from &#x27;@nestjs/jwt&#x27;;
-import { PoolConfig as PostgreSQLConfig } from &#x27;pg&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiConstants } from &#x27;@zen/api-interfaces&#x27;;
+import { IsEmail, IsNotEmpty, Length, MaxLength } from &#x27;class-validator&#x27;;
 
-export class EnvironmentBase {
-  production: boolean;
-  expressPort: string | number;
-  graphql: {
-    playground: boolean;
-  };
-  postgres: PostgreSQLConfig;
-  jwtOptions: JwtModuleOptions;
-  rememberMeExpiresIn: number;
-  cookieDomain: string;
-  smtp: {
-    server: string;
-    login: string;
-    password: string;
-    fromName: string;
-    fromEmail: string;
-  };
+export class AuthRegisterInput {
+  @IsEmail()
+  @MaxLength(254)
+  readonly email: string;
+
+  readonly firstName?: string;
+
+  readonly lastName?: string;
+
+  @Length(ApiConstants.PASSWORD_MIN_LENGTH, 100)
+  readonly password: string;
 }
 </code></pre>
     </div>
@@ -399,7 +303,7 @@ export class EnvironmentBase {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'EnvironmentBase.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthRegisterInput.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

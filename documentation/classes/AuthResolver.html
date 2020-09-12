@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>UserResolver</li>
+  <li>AuthResolver</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/app/graphql/resolvers/User.ts</code>
+            <code>apps/api/src/app/graphql/resolvers/Auth.ts</code>
         </p>
 
 
@@ -71,6 +71,21 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#CLEAR_COOKIE_OPTIONS">CLEAR_COOKIE_OPTIONS</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -82,43 +97,32 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#createOneUser">createOneUser</a>
+                                <a href="#authExchangeToken">authExchangeToken</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#deleteManyUser">deleteManyUser</a>
+                                <a href="#authLogin">authLogin</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#deleteOneUser">deleteOneUser</a>
+                                <a href="#authPasswordChange">authPasswordChange</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#findManyUser">findManyUser</a>
+                                <a href="#authPasswordResetConfirmation">authPasswordResetConfirmation</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#findManyUserCount">findManyUserCount</a>
+                                <a href="#authPasswordResetRequest">authPasswordResetRequest</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#findOneUser">findOneUser</a>
+                                <a href="#authRegister">authRegister</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
-                                <a href="#password">password</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#updateManyUser">updateManyUser</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#updateOneUser">updateOneUser</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#upsertOneUser">upsertOneUser</a>
+                                <a href="#getUser">getUser</a>
                             </li>
                         </ul>
                     </td>
@@ -132,7 +136,134 @@
     </table>
 </section>
 
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(auth: <a href="../injectables/AuthService.html">AuthService</a>, config: <a href="../injectables/ConfigService.html">ConfigService</a>, jwtService: JwtService, mail: <a href="../injectables/MailService.html">MailService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">apps/api/src/app/graphql/resolvers/Auth.ts:74</a></div>
+                            </td>
+                        </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>auth</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>config</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>jwtService</td>
+                                                  
+                                                        <td>
+                                                                    <code>JwtService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>mail</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MailService.html" target="_self" >MailService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="CLEAR_COOKIE_OPTIONS"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            CLEAR_COOKIE_OPTIONS</b>
+                            <a href="#CLEAR_COOKIE_OPTIONS"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>CookieOptions</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    maxAge: 0,
+    secure: this.config.production,
+    sameSite: this.config.production ? &#x27;strict&#x27; : &#x27;lax&#x27;,
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">apps/api/src/app/graphql/resolvers/Auth.ts:70</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
 
             <section>
     
@@ -143,20 +274,20 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createOneUser"></a>
+                    <a name="authExchangeToken"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Async</span>
-                            createOneUser
+                            authExchangeToken
                         </b>
-                        <a href="#createOneUser"><span class="icon ion-ios-link"></span></a>
+                        <a href="#authExchangeToken"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createOneUser(parent, info, args, ctx)</code>
+                    <code>authExchangeToken(ctx: <a href="../interfaces/IContext.html">IContext</a>, reqUser: <a href="../interfaces/RequestUser.html">RequestUser</a>)</code>
                 </td>
             </tr>
 
@@ -164,14 +295,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Mutation()<br /></code>
+                    <code>@Query()<br />@UseGuards(GqlGuard)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="57"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:57</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="110"
+                            class="link-to-prism">apps/api/src/app/graphql/resolvers/Auth.ts:110</a></div>
                 </td>
             </tr>
 
@@ -185,39 +316,28 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>parent</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>info</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>args</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
                                     <td>ctx</td>
+                                    <td>
+                                                <code><a href="../interfaces/IContext.html" target="_self" >IContext</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>reqUser</td>
+                                    <td>
+                                                <code><a href="../interfaces/RequestUser.html" target="_self" >RequestUser</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -245,224 +365,20 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="deleteManyUser"></a>
+                    <a name="authLogin"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Async</span>
-                            deleteManyUser
+                            authLogin
                         </b>
-                        <a href="#deleteManyUser"><span class="icon ion-ios-link"></span></a>
+                        <a href="#authLogin"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deleteManyUser(parent, info, args, ctx)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Mutation()<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="77"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:77</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>parent</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>info</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>args</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>ctx</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="deleteOneUser"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Async</span>
-                            deleteOneUser
-                        </b>
-                        <a href="#deleteOneUser"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deleteOneUser(parent, info, args, ctx)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Mutation()<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="67"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:67</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>parent</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>info</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>args</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>ctx</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="findManyUser"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Async</span>
-                            findManyUser
-                        </b>
-                        <a href="#findManyUser"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findManyUser(parent, info, args, ctx)</code>
+                    <code>authLogin(ctx: <a href="../interfaces/IContext.html">IContext</a>, data: <a href="../classes/AuthLoginInput.html">AuthLoginInput</a>)</code>
                 </td>
             </tr>
 
@@ -476,8 +392,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="97"
+                            class="link-to-prism">apps/api/src/app/graphql/resolvers/Auth.ts:97</a></div>
                 </td>
             </tr>
 
@@ -491,39 +407,28 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>parent</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>info</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>args</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
                                     <td>ctx</td>
+                                    <td>
+                                                <code><a href="../interfaces/IContext.html" target="_self" >IContext</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="../classes/AuthLoginInput.html" target="_self" >AuthLoginInput</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -551,20 +456,214 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="findManyUserCount"></a>
+                    <a name="authPasswordChange"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Async</span>
-                            findManyUserCount
+                            authPasswordChange
                         </b>
-                        <a href="#findManyUserCount"><span class="icon ion-ios-link"></span></a>
+                        <a href="#authPasswordChange"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findManyUserCount(parent, info, args, ctx)</code>
+                    <code>authPasswordChange(ctx: <a href="../interfaces/IContext.html">IContext</a>, data: <a href="../classes/AuthPasswordChangeInput.html">AuthPasswordChangeInput</a>, reqUser: <a href="../interfaces/RequestUser.html">RequestUser</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Mutation()<br />@UseGuards(GqlGuard)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="180"
+                            class="link-to-prism">apps/api/src/app/graphql/resolvers/Auth.ts:180</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ctx</td>
+                                    <td>
+                                                <code><a href="../interfaces/IContext.html" target="_self" >IContext</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="../classes/AuthPasswordChangeInput.html" target="_self" >AuthPasswordChangeInput</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>reqUser</td>
+                                    <td>
+                                                <code><a href="../interfaces/RequestUser.html" target="_self" >RequestUser</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authPasswordResetConfirmation"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            authPasswordResetConfirmation
+                        </b>
+                        <a href="#authPasswordResetConfirmation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>authPasswordResetConfirmation(ctx: <a href="../interfaces/IContext.html">IContext</a>, data: <a href="../classes/AuthPasswordResetConfirmationInput.html">AuthPasswordResetConfirmationInput</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Mutation()<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="155"
+                            class="link-to-prism">apps/api/src/app/graphql/resolvers/Auth.ts:155</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ctx</td>
+                                    <td>
+                                                <code><a href="../interfaces/IContext.html" target="_self" >IContext</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="../classes/AuthPasswordResetConfirmationInput.html" target="_self" >AuthPasswordResetConfirmationInput</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authPasswordResetRequest"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            authPasswordResetRequest
+                        </b>
+                        <a href="#authPasswordResetRequest"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>authPasswordResetRequest(ctx: <a href="../interfaces/IContext.html">IContext</a>, data: <a href="../classes/AuthPasswordResetRequestInput.html">AuthPasswordResetRequestInput</a>)</code>
                 </td>
             </tr>
 
@@ -578,8 +677,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:52</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="125"
+                            class="link-to-prism">apps/api/src/app/graphql/resolvers/Auth.ts:125</a></div>
                 </td>
             </tr>
 
@@ -593,39 +692,28 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>parent</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>info</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>args</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
                                     <td>ctx</td>
+                                    <td>
+                                                <code><a href="../interfaces/IContext.html" target="_self" >IContext</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="../classes/AuthPasswordResetRequestInput.html" target="_self" >AuthPasswordResetRequestInput</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -639,7 +727,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                     </div>
                     <div class="io-description">
@@ -653,170 +741,20 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="findOneUser"></a>
+                    <a name="authRegister"></a>
                     <span class="name">
                         <b>
                             <span class="modifier">Async</span>
-                            findOneUser
+                            authRegister
                         </b>
-                        <a href="#findOneUser"><span class="icon ion-ios-link"></span></a>
+                        <a href="#authRegister"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findOneUser(parent, info, args, ctx)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Query()<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="42"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:42</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>parent</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>info</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>args</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>ctx</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="password"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Async</span>
-                            password
-                        </b>
-                        <a href="#password"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>password()</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@ResolveField()<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:37</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateManyUser"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Async</span>
-                            updateManyUser
-                        </b>
-                        <a href="#updateManyUser"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateManyUser(parent, info, args, ctx)</code>
+                    <code>authRegister(ctx: <a href="../interfaces/IContext.html">IContext</a>, data: <a href="../classes/AuthRegisterInput.html">AuthRegisterInput</a>)</code>
                 </td>
             </tr>
 
@@ -830,8 +768,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="137"
+                            class="link-to-prism">apps/api/src/app/graphql/resolvers/Auth.ts:137</a></div>
                 </td>
             </tr>
 
@@ -845,39 +783,28 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>parent</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>info</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>args</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
                                     <td>ctx</td>
+                                    <td>
+                                                <code><a href="../interfaces/IContext.html" target="_self" >IContext</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="../classes/AuthRegisterInput.html" target="_self" >AuthRegisterInput</a></code>
+                                    </td>
 
                                     <td>
                                         No
@@ -905,35 +832,29 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateOneUser"></a>
+                    <a name="getUser"></a>
                     <span class="name">
                         <b>
+                            <span class="modifier">Private</span>
                             <span class="modifier">Async</span>
-                            updateOneUser
+                            getUser
                         </b>
-                        <a href="#updateOneUser"><span class="icon ion-ios-link"></span></a>
+                        <a href="#getUser"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateOneUser(parent, info, args, ctx)</code>
+                    <code>getUser(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, ctx: <a href="../interfaces/IContext.html">IContext</a>)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Mutation()<br /></code>
-                </td>
-            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="62"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:62</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">apps/api/src/app/graphql/resolvers/Auth.ts:83</a></div>
                 </td>
             </tr>
 
@@ -947,30 +868,16 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>parent</td>
-
+                                    <td>email</td>
                                     <td>
-                                        No
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>info</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>args</td>
 
                                     <td>
                                         No
@@ -980,108 +887,9 @@
                                 </tr>
                                 <tr>
                                     <td>ctx</td>
-
                                     <td>
-                                        No
+                                                <code><a href="../interfaces/IContext.html" target="_self" >IContext</a></code>
                                     </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="upsertOneUser"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Async</span>
-                            upsertOneUser
-                        </b>
-                        <a href="#upsertOneUser"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>upsertOneUser(parent, info, args, ctx)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Mutation()<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="72"
-                            class="link-to-prism">apps/api/src/app/graphql/resolvers/User.ts:72</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>parent</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>info</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>args</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>ctx</td>
 
                                     <td>
                                         No
@@ -1115,89 +923,202 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { UseGuards } from &#x27;@nestjs/common&#x27;;
-import {
-  Args,
-  Context,
-  Info,
-  Mutation,
-  Parent,
-  Query,
-  ResolveField,
-  Resolver,
-} from &#x27;@nestjs/graphql&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, UseGuards } from &#x27;@nestjs/common&#x27;;
+import { Args, Context, Mutation, Query, Resolver } from &#x27;@nestjs/graphql&#x27;;
+import bcrypt from &#x27;bcryptjs&#x27;;
+import { CookieOptions } from &#x27;express&#x27;;
 import gql from &#x27;graphql-tag&#x27;;
 
-import { GqlGuard, GqlUser, RequestUser, Role, Roles } from &#x27;../../auth&#x27;;
-import { IContext } from &#x27;../models&#x27;;
-import { PrismaSelectArgs } from &#x27;../prisma-select-args&#x27;;
-import resolvers from &#x27;../prisma/User/resolvers&#x27;;
+import { GqlGuard, GqlUser, RequestUser, Role } from &#x27;../../auth&#x27;;
+import { AuthService } from &#x27;../../auth/auth.service&#x27;;
+import { ConfigService } from &#x27;../../config&#x27;;
+import { JwtService } from &#x27;../../jwt&#x27;;
+import { MailService } from &#x27;../../mail&#x27;;
+import {
+  AuthLoginInput,
+  AuthPasswordChangeInput,
+  AuthPasswordResetConfirmationInput,
+  AuthPasswordResetRequestInput,
+  AuthRegisterInput,
+  IContext,
+} from &#x27;../models&#x27;;
 
-export const UserTypeDef &#x3D; null;
-// export const UserTypeDef &#x3D; gql&#x60;
-//   extend type Query {
-//     sampleUserQuery: User!
-//   }
-//   extend type Mutation {
-//     sampleUserMutation(args: Int!): Boolean
-//   }
-//   extend type User {
-//     sampleUserField: String
-//   }
-// &#x60;;
+export const AuthTypeDef &#x3D; gql&#x60;
+  extend type Query {
+    authLogin(data: AuthLoginInput!): AuthSession!
+    authExchangeToken: AuthSession!
+    authPasswordResetRequest(data: AuthPasswordResetRequestInput!): Boolean
+  }
 
-@Resolver(&#x27;User&#x27;)
-// @UseGuards(GqlGuard)
-@Roles(Role.Admin)
-export class UserResolver {
-  @ResolveField()
-  async password() {
-    return &#x27;&#x27;;
+  extend type Mutation {
+    authPasswordChange(data: AuthPasswordChangeInput!): Boolean
+    authPasswordResetConfirmation(data: AuthPasswordResetConfirmationInput!): Boolean
+    authRegister(data: AuthRegisterInput): User!
+  }
+
+  type AuthSession {
+    id: Int!
+    maxAge: String!
+    roles: [String!]!
+    rememberMe: Boolean!
+  }
+
+  input AuthLoginInput {
+    email: String!
+    password: String!
+    rememberMe: Boolean!
+  }
+
+  input AuthPasswordChangeInput {
+    oldPassword: String!
+    newPassword: String!
+  }
+
+  input AuthPasswordResetConfirmationInput {
+    newPassword: String!
+    token: String!
+  }
+
+  input AuthPasswordResetRequestInput {
+    email: String!
+  }
+
+  input AuthRegisterInput {
+    email: String!
+    firstName: String!
+    password: String!
+  }
+&#x60;;
+
+@Resolver(&#x27;Auth&#x27;)
+export class AuthResolver {
+  private CLEAR_COOKIE_OPTIONS: CookieOptions &#x3D; {
+    maxAge: 0,
+    secure: this.config.production,
+    sameSite: this.config.production ? &#x27;strict&#x27; : &#x27;lax&#x27;,
+  };
+
+  constructor(
+    private readonly auth: AuthService,
+    private readonly config: ConfigService,
+    private readonly jwtService: JwtService,
+    private readonly mail: MailService
+  ) {}
+
+  private async getUser(email: string, ctx: IContext) {
+    const users &#x3D; await ctx.prisma.user.findMany({
+      where: {
+        email: {
+          mode: &#x27;insensitive&#x27;,
+          equals: email,
+        },
+      },
+    });
+
+    return users[0];
   }
 
   @Query()
-  async findOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Query.findOneUser(parent, PrismaSelectArgs(info, args), ctx);
+  async authLogin(@Context() ctx: IContext, @Args(&#x27;data&#x27;) data: AuthLoginInput) {
+    const user &#x3D; await this.getUser(data.email, ctx);
+
+    if (!user) throw new HttpException({ code: &#x27;USER_NOT_FOUND&#x27; }, 400);
+
+    const correctPassword &#x3D; await bcrypt.compare(data.password, user.password);
+    if (!correctPassword) throw new HttpException({ code: &#x27;INCORRECT_PASSWORD&#x27; }, 400);
+
+    return this.auth.setJwtCookie(ctx.res, user, data.rememberMe);
   }
 
   @Query()
-  async findManyUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Query.findManyUser(parent, PrismaSelectArgs(info, args), ctx);
+  @UseGuards(GqlGuard)
+  async authExchangeToken(@Context() ctx: IContext, @GqlUser() reqUser: RequestUser) {
+    const user &#x3D; await ctx.prisma.user.findOne({
+      where: { id: reqUser.id },
+    });
+
+    if (user) {
+      return this.auth.setJwtCookie(ctx.res, user, ctx.req.cookies[&#x27;rememberMe&#x27;]);
+    } else {
+      ctx.res.clearCookie(&#x27;jwt&#x27;, this.CLEAR_COOKIE_OPTIONS);
+      ctx.res.clearCookie(&#x27;rememberMe&#x27;, this.CLEAR_COOKIE_OPTIONS);
+      throw new HttpException({ code: &#x27;USER_NOT_FOUND&#x27; }, 400);
+    }
   }
 
   @Query()
-  async findManyUserCount(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Query.findManyUserCount(parent, PrismaSelectArgs(info, args), ctx);
+  async authPasswordResetRequest(
+    @Context() ctx: IContext,
+    @Args(&#x27;data&#x27;) data: AuthPasswordResetRequestInput
+  ) {
+    const user &#x3D; await this.getUser(data.email, ctx);
+
+    if (!user) throw new HttpException({ code: &#x27;USER_NOT_FOUND&#x27; }, 400);
+
+    this.mail.sendPasswordReset(user.email);
   }
 
   @Mutation()
-  async createOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.createOneUser(parent, PrismaSelectArgs(info, args), ctx);
+  async authRegister(@Context() ctx: IContext, @Args(&#x27;data&#x27;) data: AuthRegisterInput) {
+    const userFound &#x3D; await this.getUser(data.email, ctx);
+    if (userFound) throw new HttpException({ code: &#x27;EMAIL_TAKEN&#x27; }, 400);
+
+    const hashedPassword &#x3D; await bcrypt.hash(data.password, 12);
+
+    return await ctx.prisma.user.create({
+      data: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email.trim(),
+        password: hashedPassword,
+        roles: { set: [Role.Registered] },
+      },
+    });
   }
 
   @Mutation()
-  async updateOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.updateOneUser(parent, PrismaSelectArgs(info, args), ctx);
+  async authPasswordResetConfirmation(
+    @Context() ctx: IContext,
+    @Args(&#x27;data&#x27;) data: AuthPasswordResetConfirmationInput
+  ) {
+    let tokenPayload;
+    try {
+      tokenPayload &#x3D; this.jwtService.verify(data.token);
+    } catch {
+      throw new HttpException({ code: &#x27;UNAUTHORIZED&#x27; }, 400);
+    }
+
+    const user &#x3D; await this.getUser(tokenPayload.email, ctx);
+
+    if (!user) throw new HttpException({ code: &#x27;USER_NOT_FOUND&#x27; }, 400);
+
+    const hashedPassword &#x3D; await bcrypt.hash(data.newPassword, 12);
+
+    await ctx.prisma.user.update({
+      where: { id: user.id },
+      data: { password: hashedPassword },
+    });
   }
 
   @Mutation()
-  async deleteOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.deleteOneUser(parent, PrismaSelectArgs(info, args), ctx);
-  }
+  @UseGuards(GqlGuard)
+  async authPasswordChange(
+    @Context() ctx: IContext,
+    @Args(&#x27;data&#x27;) data: AuthPasswordChangeInput,
+    @GqlUser() reqUser: RequestUser
+  ) {
+    const user &#x3D; await ctx.prisma.user.findOne({ where: { id: reqUser.id } });
+    if (!user) throw new HttpException({ code: &#x27;USER_NOT_FOUND&#x27; }, 400);
 
-  @Mutation()
-  async upsertOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.upsertOneUser(parent, PrismaSelectArgs(info, args), ctx);
-  }
+    const correctPassword &#x3D; await bcrypt.compare(data.oldPassword, user.password);
+    if (!correctPassword) throw new HttpException({ code: &#x27;WRONG_PASSWORD&#x27; }, 400);
 
-  @Mutation()
-  async deleteManyUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.deleteManyUser(parent, PrismaSelectArgs(info, args), ctx);
-  }
+    const hashedPassword &#x3D; await bcrypt.hash(data.newPassword, 12);
 
-  @Mutation()
-  async updateManyUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.updateManyUser(parent, PrismaSelectArgs(info, args), ctx);
+    await ctx.prisma.user.update({
+      where: { id: user.id },
+      data: { password: hashedPassword },
+    });
   }
 }
 </code></pre>
@@ -1228,7 +1149,7 @@ export class UserResolver {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'UserResolver.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthResolver.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -61,7 +61,7 @@
                             <a href="#ALL_TYPE_DEFS" title="apps/api/src/app/graphql/resolvers/index.ts"><b>ALL_TYPE_DEFS</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
                         </li>
                         <li>
-                            <a href="#CommentTypeDef" title="apps/api/src/app/graphql/resolvers/Comment.ts"><b>CommentTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../Comment.ts)</a>
+                            <a href="#AuthTypeDef" title="apps/api/src/app/graphql/resolvers/Auth.ts"><b>AuthTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../Auth.ts)</a>
                         </li>
                         <li>
                             <a href="#environment" title="apps/api/src/environments/environment.prod.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(apps/.../environment.prod.ts)</a>
@@ -73,10 +73,13 @@
                             <a href="#execWriteFile" title="apps/api/src/app/graphql/write-schema.ts"><b>execWriteFile</b>&nbsp;&nbsp;&nbsp;(apps/.../write-schema.ts)</a>
                         </li>
                         <li>
+                            <a href="#GqlUser" title="apps/api/src/app/auth/gql/gql-user.decorator.ts"><b>GqlUser</b>&nbsp;&nbsp;&nbsp;(apps/.../gql-user.decorator.ts)</a>
+                        </li>
+                        <li>
                             <a href="#GRAPHQL_SCHEMA" title="apps/api/src/app/graphql/resolvers/index.ts"><b>GRAPHQL_SCHEMA</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
                         </li>
                         <li>
-                            <a href="#GroupTypeDef" title="apps/api/src/app/graphql/resolvers/Group.ts"><b>GroupTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../Group.ts)</a>
+                            <a href="#HttpUser" title="apps/api/src/app/auth/http-user.decorator.ts"><b>HttpUser</b>&nbsp;&nbsp;&nbsp;(apps/.../http-user.decorator.ts)</a>
                         </li>
                         <li>
                             <a href="#NEST_RESOLVERS" title="apps/api/src/app/graphql/resolvers/index.ts"><b>NEST_RESOLVERS</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
@@ -85,13 +88,13 @@
                             <a href="#NEST_TYPE_DEFS" title="apps/api/src/app/graphql/resolvers/index.ts"><b>NEST_TYPE_DEFS</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
                         </li>
                         <li>
-                            <a href="#PostTypeDef" title="apps/api/src/app/graphql/resolvers/Post.ts"><b>PostTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../Post.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#prisma" title="apps/api/src/app/graphql/context.ts"><b>prisma</b>&nbsp;&nbsp;&nbsp;(apps/.../context.ts)</a>
-                        </li>
-                        <li>
                             <a href="#PRISMA_SCHEMA" title="apps/api/src/app/graphql/resolvers/index.ts"><b>PRISMA_SCHEMA</b>&nbsp;&nbsp;&nbsp;(apps/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Roles" title="apps/api/src/app/auth/roles.decorator.ts"><b>Roles</b>&nbsp;&nbsp;&nbsp;(apps/.../roles.decorator.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RoleTypeDef" title="apps/api/src/app/graphql/resolvers/Role.ts"><b>RoleTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../Role.ts)</a>
                         </li>
                         <li>
                             <a href="#UserTypeDef" title="apps/api/src/app/graphql/resolvers/User.ts"><b>UserTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../User.ts)</a>
@@ -119,7 +122,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>mergeTypes([PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS])</code>
+                            <i>Default value : </i><code>mergeTypeDefs([PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS])</code>
                         </td>
                     </tr>
 
@@ -168,9 +171,8 @@
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>[
-  CommentResolver,
-  GroupResolver,
-  PostResolver,
+  AuthResolver,
+  RoleResolver,
   UserResolver
 ]</code>
                         </td>
@@ -194,9 +196,8 @@
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>[
-  CommentTypeDef,
-  GroupTypeDef,
-  PostTypeDef,
+  AuthTypeDef,
+  RoleTypeDef,
   UserTypeDef
 ].filter(x &#x3D;&gt; x)</code>
                         </td>
@@ -227,29 +228,68 @@
             </tbody>
         </table>
 </section>
-    <h3>apps/api/src/app/graphql/resolvers/Comment.ts</h3>
+    <h3>apps/api/src/app/graphql/resolvers/Auth.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="CommentTypeDef"></a>
+                        <a name="AuthTypeDef"></a>
                         <span class="name">
                             <b>
-                            CommentTypeDef</b>
-                            <a href="#CommentTypeDef"><span class="icon ion-ios-link"></span></a>
+                            AuthTypeDef</b>
+                            <a href="#AuthTypeDef"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>null</code>
+                            <i>Default value : </i><code>gql&#x60;
+  extend type Query {
+    authLogin(data: AuthLoginInput!): AuthSession!
+    authExchangeToken: AuthSession!
+    authPasswordResetRequest(data: AuthPasswordResetRequestInput!): Boolean
+  }
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>null</code>
+  extend type Mutation {
+    authPasswordChange(data: AuthPasswordChangeInput!): Boolean
+    authPasswordResetConfirmation(data: AuthPasswordResetConfirmationInput!): Boolean
+    authRegister(data: AuthRegisterInput): User!
+  }
+
+  type AuthSession {
+    id: Int!
+    maxAge: String!
+    roles: [String!]!
+    rememberMe: Boolean!
+  }
+
+  input AuthLoginInput {
+    email: String!
+    password: String!
+    rememberMe: Boolean!
+  }
+
+  input AuthPasswordChangeInput {
+    oldPassword: String!
+    newPassword: String!
+  }
+
+  input AuthPasswordResetConfirmationInput {
+    newPassword: String!
+    token: String!
+  }
+
+  input AuthPasswordResetRequestInput {
+    email: String!
+  }
+
+  input AuthRegisterInput {
+    email: String!
+    firstName: String!
+    password: String!
+  }
+&#x60;</code>
                         </td>
                     </tr>
 
@@ -302,6 +342,13 @@
   },
   rememberMeExpiresIn: 2592000, // 30 days (in seconds)
   cookieDomain: &#x27;zensoftware.ca&#x27;,
+  smtp: {
+    server: process.env.SMTP_SERVER,
+    login: process.env.SMTP_LOGIN,
+    password: process.env.SMTP_PASSWORD,
+    fromEmail: process.env.SMTP_FROM_EMAIL,
+    fromName: &#x27;Zen&#x27;,
+  },
 }</code>
                         </td>
                     </tr>
@@ -354,6 +401,13 @@
   },
   rememberMeExpiresIn: 2592000, // 30 days (in seconds)
   cookieDomain: undefined,
+  smtp: {
+    server: &#x27;localhost/nowhere&#x27;, //process.env.SMTP_SERVER,
+    login: process.env.SMTP_LOGIN,
+    password: process.env.SMTP_PASSWORD,
+    fromEmail: process.env.SMTP_FROM_EMAIL,
+    fromName: &#x27;Zen&#x27;,
+  },
 }</code>
                         </td>
                     </tr>
@@ -386,17 +440,101 @@
             </tbody>
         </table>
 </section>
-    <h3>apps/api/src/app/graphql/resolvers/Group.ts</h3>
+    <h3>apps/api/src/app/auth/gql/gql-user.decorator.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="GroupTypeDef"></a>
+                        <a name="GqlUser"></a>
                         <span class="name">
                             <b>
-                            GroupTypeDef</b>
-                            <a href="#GroupTypeDef"><span class="icon ion-ios-link"></span></a>
+                            GqlUser</b>
+                            <a href="#GqlUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>createParamDecorator((data, context: ExecutionContext) &#x3D;&gt; {
+  const user &#x3D; GqlExecutionContext.create(context).getContext().req.user;
+  if (!user) {
+    throw new UnauthorizedException(&#x27;No user found for request&#x27;);
+  }
+  return user as RequestUser;
+})</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/app/auth/http-user.decorator.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="HttpUser"></a>
+                        <span class="name">
+                            <b>
+                            HttpUser</b>
+                            <a href="#HttpUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>createParamDecorator((data, context: ExecutionContext) &#x3D;&gt; {
+  const req &#x3D; context.switchToHttp().getRequest();
+  if (!req.user) {
+    throw new UnauthorizedException(&#x27;No user found for request&#x27;);
+  }
+  return req.user as RequestUser;
+})</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/app/auth/roles.decorator.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Roles"></a>
+                        <span class="name">
+                            <b>
+                            Roles</b>
+                            <a href="#Roles"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(...roles: Array&lt;Role | string&gt;) &#x3D;&gt; SetMetadata(&#x27;roles&#x27;, roles)</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>apps/api/src/app/graphql/resolvers/Role.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="RoleTypeDef"></a>
+                        <span class="name">
+                            <b>
+                            RoleTypeDef</b>
+                            <a href="#RoleTypeDef"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -409,60 +547,6 @@
                     <tr>
                         <td class="col-md-4">
                             <i>Default value : </i><code>null</code>
-                        </td>
-                    </tr>
-
-
-            </tbody>
-        </table>
-</section>
-    <h3>apps/api/src/app/graphql/resolvers/Post.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="PostTypeDef"></a>
-                        <span class="name">
-                            <b>
-                            PostTypeDef</b>
-                            <a href="#PostTypeDef"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>null</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>null</code>
-                        </td>
-                    </tr>
-
-
-            </tbody>
-        </table>
-</section>
-    <h3>apps/api/src/app/graphql/context.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="prisma"></a>
-                        <span class="name">
-                            <b>
-                            prisma</b>
-                            <a href="#prisma"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new PrismaService()</code>
                         </td>
                     </tr>
 

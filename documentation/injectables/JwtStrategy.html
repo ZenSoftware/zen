@@ -38,7 +38,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>GqlConfigService</li>
+  <li>JwtStrategy</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,7 +56,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/app/graphql/gql-config.service.ts</code>
+            <code>apps/api/src/app/auth/jwt.strategy.ts</code>
         </p>
 
 
@@ -76,7 +76,8 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createGqlOptions">createGqlOptions</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#validate">validate</a>
                             </li>
                         </ul>
                     </td>
@@ -96,12 +97,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(config: <a href="../injectables/ConfigService.html">ConfigService</a>, moduleRef: ModuleRef)</code>
+<code>constructor(config: <a href="../injectables/ConfigService.html">ConfigService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">apps/api/src/app/graphql/gql-config.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">apps/api/src/app/auth/jwt.strategy.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -130,18 +131,6 @@
                                                     </td>
                                                     
                                                 </tr>
-                                                <tr>
-                                                        <td>moduleRef</td>
-                                                  
-                                                        <td>
-                                                                    <code>ModuleRef</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -160,26 +149,28 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createGqlOptions"></a>
+                    <a name="validate"></a>
                     <span class="name">
                         <b>
-                            createGqlOptions
+                            <span class="modifier">Async</span>
+                            validate
                         </b>
-                        <a href="#createGqlOptions"><span class="icon ion-ios-link"></span></a>
+                        <a href="#validate"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createGqlOptions()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validate(payload: <a href="../interfaces/JwtPayload.html">JwtPayload</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">apps/api/src/app/graphql/gql-config.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">apps/api/src/app/auth/jwt.strategy.ts:25</a></div>
                 </td>
             </tr>
 
@@ -188,8 +179,39 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>    <code>GqlModuleOptions</code>
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>payload</td>
+                                    <td>
+                                                <code><a href="../interfaces/JwtPayload.html" target="_self" >JwtPayload</a></code>
+                                    </td>
 
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -201,40 +223,37 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
-import { ContextIdFactory, ModuleRef } from &#x27;@nestjs/core&#x27;;
-import { GqlModuleOptions, GqlOptionsFactory } from &#x27;@nestjs/graphql&#x27;;
-import { print } from &#x27;graphql&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, UnauthorizedException } from &#x27;@nestjs/common&#x27;;
+import { PassportStrategy } from &#x27;@nestjs/passport&#x27;;
+import { Request as ExReq } from &#x27;express&#x27;;
+import { Strategy } from &#x27;passport-jwt&#x27;;
 
 import { ConfigService } from &#x27;../config&#x27;;
-import { PrismaService } from &#x27;../prisma&#x27;;
-import { ALL_TYPE_DEFS } from &#x27;./resolvers&#x27;;
+import { JwtPayload } from &#x27;./jwt-payload&#x27;;
+import { RequestUser } from &#x27;./request-user&#x27;;
 
 @Injectable()
-export class GqlConfigService implements GqlOptionsFactory {
-  constructor(private readonly config: ConfigService, private moduleRef: ModuleRef) {}
-
-  createGqlOptions(): GqlModuleOptions {
-    return {
-      typeDefs: print(ALL_TYPE_DEFS),
-      installSubscriptionHandlers: true,
-      debug: !this.config.production,
-      playground: this.config.graphql.playground,
-      introspection: this.config.graphql.playground,
-      tracing: this.config.graphql.playground,
-      cors: this.config.production ? undefined : { credentials: true, origin: true },
-      context: async ctx &#x3D;&gt; {
-        const prisma &#x3D; this.moduleRef.get(PrismaService, { strict: false });
-
-        return ctx.connection
-          ? { ...ctx, req: ctx.connection.context, prisma }
-          : { ...ctx, prisma };
+export class JwtStrategy extends PassportStrategy(Strategy, &#x27;jwt&#x27;) {
+  constructor(private readonly config: ConfigService) {
+    super({
+      secretOrKey: config.production ? config.jwtOptions.publicKey : config.jwtOptions.secret,
+      jwtFromRequest: (req: ExReq &amp; { token: any }) &#x3D;&gt; {
+        if (!req.token) {
+          return req.cookies[&#x27;jwt&#x27;]; // HTTP request
+        } else {
+          return req.token; // Websocket connections
+        }
       },
-      uploads: {
-        maxFileSize: 20_000_000, // 20 MB
-        maxFiles: 5,
-      },
-    };
+    });
+  }
+
+  async validate(payload: JwtPayload) {
+    let roles: string[] &#x3D; [];
+    if (payload.roles) {
+      roles &#x3D; payload.roles.split(&#x27;,&#x27;);
+    }
+    const user: RequestUser &#x3D; { id: payload.id, roles };
+    return user;
   }
 }
 </code></pre>
@@ -270,7 +289,7 @@ export class GqlConfigService implements GqlOptionsFactory {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'GqlConfigService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'JwtStrategy.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

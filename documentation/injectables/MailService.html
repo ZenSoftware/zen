@@ -38,7 +38,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>GqlConfigService</li>
+  <li>MailService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,7 +56,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/app/graphql/gql-config.service.ts</code>
+            <code>apps/api/src/app/mail/mail.service.ts</code>
         </p>
 
 
@@ -76,7 +76,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createGqlOptions">createGqlOptions</a>
+                                <a href="#send">send</a>
+                            </li>
+                            <li>
+                                <a href="#sendPasswordReset">sendPasswordReset</a>
                             </li>
                         </ul>
                     </td>
@@ -96,12 +99,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(config: <a href="../injectables/ConfigService.html">ConfigService</a>, moduleRef: ModuleRef)</code>
+<code>constructor(mailer: MailerService, jwtService: JwtService, config: <a href="../injectables/ConfigService.html">ConfigService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">apps/api/src/app/graphql/gql-config.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">apps/api/src/app/mail/mail.service.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -119,10 +122,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>config</td>
+                                                        <td>mailer</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                                    <code>MailerService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -131,10 +134,22 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>moduleRef</td>
+                                                        <td>jwtService</td>
                                                   
                                                         <td>
-                                                                    <code>ModuleRef</code>
+                                                                    <code>JwtService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>config</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -160,26 +175,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createGqlOptions"></a>
+                    <a name="send"></a>
                     <span class="name">
                         <b>
-                            createGqlOptions
+                            send
                         </b>
-                        <a href="#createGqlOptions"><span class="icon ion-ios-link"></span></a>
+                        <a href="#send"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createGqlOptions()</code>
+<code>send(options: <a href="../undefineds/MailOptions.html">MailOptions</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">apps/api/src/app/graphql/gql-config.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">apps/api/src/app/mail/mail.service.ts:20</a></div>
                 </td>
             </tr>
 
@@ -188,8 +203,109 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>    <code>GqlModuleOptions</code>
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#MailOptions" target="_self" >MailOptions</a></code>
+                                    </td>
 
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendPasswordReset"></a>
+                    <span class="name">
+                        <b>
+                            sendPasswordReset
+                        </b>
+                        <a href="#sendPasswordReset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sendPasswordReset(to: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">apps/api/src/app/mail/mail.service.ts:24</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>to</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -201,40 +317,42 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
-import { ContextIdFactory, ModuleRef } from &#x27;@nestjs/core&#x27;;
-import { GqlModuleOptions, GqlOptionsFactory } from &#x27;@nestjs/graphql&#x27;;
-import { print } from &#x27;graphql&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ISendMailOptions, MailerService } from &#x27;@nest-modules/mailer&#x27;;
+import { Injectable } from &#x27;@nestjs/common&#x27;;
 
 import { ConfigService } from &#x27;../config&#x27;;
-import { PrismaService } from &#x27;../prisma&#x27;;
-import { ALL_TYPE_DEFS } from &#x27;./resolvers&#x27;;
+import { JwtService } from &#x27;../jwt&#x27;;
+import { PasswordResetContext } from &#x27;./templates&#x27;;
+
+type MailTemplate &#x3D; &#x27;verify-email&#x27; | &#x27;password-reset&#x27;;
+
+type MailOptions &#x3D; ISendMailOptions &amp; { template?: MailTemplate };
 
 @Injectable()
-export class GqlConfigService implements GqlOptionsFactory {
-  constructor(private readonly config: ConfigService, private moduleRef: ModuleRef) {}
+export class MailService {
+  constructor(
+    private readonly mailer: MailerService,
+    private readonly jwtService: JwtService,
+    private readonly config: ConfigService
+  ) {}
 
-  createGqlOptions(): GqlModuleOptions {
-    return {
-      typeDefs: print(ALL_TYPE_DEFS),
-      installSubscriptionHandlers: true,
-      debug: !this.config.production,
-      playground: this.config.graphql.playground,
-      introspection: this.config.graphql.playground,
-      tracing: this.config.graphql.playground,
-      cors: this.config.production ? undefined : { credentials: true, origin: true },
-      context: async ctx &#x3D;&gt; {
-        const prisma &#x3D; this.moduleRef.get(PrismaService, { strict: false });
+  send(options: MailOptions) {
+    return this.mailer.sendMail(options);
+  }
 
-        return ctx.connection
-          ? { ...ctx, req: ctx.connection.context, prisma }
-          : { ...ctx, prisma };
-      },
-      uploads: {
-        maxFileSize: 20_000_000, // 20 MB
-        maxFiles: 5,
-      },
+  sendPasswordReset(to: string) {
+    const token &#x3D; this.jwtService.sign({ email: to }, { expiresIn: &#x27;1d&#x27; });
+
+    const context: PasswordResetContext &#x3D; {
+      resetUrl: &#x27;https://zensoftware.ca/#/password-reset-confirmation?token&#x3D;&#x27; + encodeURI(token),
     };
+
+    this.send({
+      template: &#x27;password-reset&#x27;,
+      to,
+      subject: &#x60;${this.config.smtp.fromName} Password Reset&#x60;,
+      context,
+    }).then();
   }
 }
 </code></pre>
@@ -270,7 +388,7 @@ export class GqlConfigService implements GqlOptionsFactory {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'GqlConfigService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'MailService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

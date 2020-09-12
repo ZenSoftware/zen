@@ -38,7 +38,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>GqlConfigService</li>
+  <li>GqlGuard</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,7 +56,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/app/graphql/gql-config.service.ts</code>
+            <code>apps/api/src/app/auth/gql/gql.guard.ts</code>
         </p>
 
 
@@ -76,7 +76,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createGqlOptions">createGqlOptions</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#canActivate">canActivate</a>
+                            </li>
+                            <li>
+                                <a href="#getRequest">getRequest</a>
                             </li>
                         </ul>
                     </td>
@@ -96,12 +100,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(config: <a href="../injectables/ConfigService.html">ConfigService</a>, moduleRef: ModuleRef)</code>
+<code>constructor(reflector: Reflector)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">apps/api/src/app/graphql/gql-config.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">apps/api/src/app/auth/gql/gql.guard.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -119,22 +123,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>config</td>
+                                                        <td>reflector</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>moduleRef</td>
-                                                  
-                                                        <td>
-                                                                    <code>ModuleRef</code>
+                                                                    <code>Reflector</code>
                                                         </td>
                                                   
                                                     <td>
@@ -160,18 +152,20 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createGqlOptions"></a>
+                    <a name="canActivate"></a>
                     <span class="name">
                         <b>
-                            createGqlOptions
+                            <span class="modifier">Async</span>
+                            canActivate
                         </b>
-                        <a href="#createGqlOptions"><span class="icon ion-ios-link"></span></a>
+                        <a href="#canActivate"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createGqlOptions()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>canActivate(context: <a href="../undefineds/Context.html">ExecutionContext</a>)</code>
                 </td>
             </tr>
 
@@ -179,7 +173,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">apps/api/src/app/graphql/gql-config.service.ts:14</a></div>
+                            class="link-to-prism">apps/api/src/app/auth/gql/gql.guard.ts:14</a></div>
                 </td>
             </tr>
 
@@ -188,8 +182,109 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>    <code>GqlModuleOptions</code>
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>context</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#Context" target="_self" >ExecutionContext</a></code>
+                                    </td>
 
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getRequest"></a>
+                    <span class="name">
+                        <b>
+                            getRequest
+                        </b>
+                        <a href="#getRequest"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getRequest(context: <a href="../undefineds/Context.html">ExecutionContext</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">apps/api/src/app/auth/gql/gql.guard.ts:32</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>context</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#Context" target="_self" >ExecutionContext</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -201,40 +296,40 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
-import { ContextIdFactory, ModuleRef } from &#x27;@nestjs/core&#x27;;
-import { GqlModuleOptions, GqlOptionsFactory } from &#x27;@nestjs/graphql&#x27;;
-import { print } from &#x27;graphql&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ExecutionContext, Injectable } from &#x27;@nestjs/common&#x27;;
+import { Reflector } from &#x27;@nestjs/core&#x27;;
+import { GqlExecutionContext } from &#x27;@nestjs/graphql&#x27;;
+import { AuthGuard } from &#x27;@nestjs/passport&#x27;;
 
-import { ConfigService } from &#x27;../config&#x27;;
-import { PrismaService } from &#x27;../prisma&#x27;;
-import { ALL_TYPE_DEFS } from &#x27;./resolvers&#x27;;
+import { Role } from &#x27;../../auth&#x27;;
 
 @Injectable()
-export class GqlConfigService implements GqlOptionsFactory {
-  constructor(private readonly config: ConfigService, private moduleRef: ModuleRef) {}
+export class GqlGuard extends AuthGuard(&#x27;jwt&#x27;) {
+  constructor(private readonly reflector: Reflector) {
+    super();
+  }
 
-  createGqlOptions(): GqlModuleOptions {
-    return {
-      typeDefs: print(ALL_TYPE_DEFS),
-      installSubscriptionHandlers: true,
-      debug: !this.config.production,
-      playground: this.config.graphql.playground,
-      introspection: this.config.graphql.playground,
-      tracing: this.config.graphql.playground,
-      cors: this.config.production ? undefined : { credentials: true, origin: true },
-      context: async ctx &#x3D;&gt; {
-        const prisma &#x3D; this.moduleRef.get(PrismaService, { strict: false });
+  async canActivate(context: ExecutionContext) {
+    await super.canActivate(context);
 
-        return ctx.connection
-          ? { ...ctx, req: ctx.connection.context, prisma }
-          : { ...ctx, prisma };
-      },
-      uploads: {
-        maxFileSize: 20_000_000, // 20 MB
-        maxFiles: 5,
-      },
-    };
+    const ctx &#x3D; GqlExecutionContext.create(context);
+    const user &#x3D; ctx.getContext().req.user;
+
+    const classRoles &#x3D; this.reflector.get&lt;Role[]&gt;(&#x27;roles&#x27;, ctx.getClass());
+    const handlerRoles &#x3D; this.reflector.get&lt;Role[]&gt;(&#x27;roles&#x27;, ctx.getHandler());
+
+    let allowedRoles: Role[] &#x3D; [];
+    if (classRoles) allowedRoles &#x3D; classRoles;
+    if (handlerRoles) allowedRoles &#x3D; allowedRoles.concat(handlerRoles);
+
+    if (allowedRoles.length &#x3D;&#x3D;&#x3D; 0) return true;
+
+    return user.roles &amp;&amp; user.roles.some((userRole: Role) &#x3D;&gt; allowedRoles.includes(userRole));
+  }
+
+  getRequest(context: ExecutionContext) {
+    const ctx &#x3D; GqlExecutionContext.create(context);
+    return ctx.getContext().req;
   }
 }
 </code></pre>
@@ -270,7 +365,7 @@ export class GqlConfigService implements GqlOptionsFactory {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'GqlConfigService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'GqlGuard.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

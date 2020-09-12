@@ -323,7 +323,7 @@
 import { PrismaDelete, onDeleteArgs } from &#x27;@paljs/plugins&#x27;;
 import { PrismaClient, PrismaClientOptions } from &#x27;@prisma/client&#x27;;
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   constructor(@Optional() options?: PrismaClientOptions) {
     super(options);

@@ -38,7 +38,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>GqlConfigService</li>
+  <li>AuthService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,7 +56,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/app/graphql/gql-config.service.ts</code>
+            <code>apps/api/src/app/auth/auth.service.ts</code>
         </p>
 
 
@@ -76,7 +76,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createGqlOptions">createGqlOptions</a>
+                                <a href="#setJwtCookie">setJwtCookie</a>
                             </li>
                         </ul>
                     </td>
@@ -96,12 +96,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(config: <a href="../injectables/ConfigService.html">ConfigService</a>, moduleRef: ModuleRef)</code>
+<code>constructor(jwtService: JwtService, config: <a href="../injectables/ConfigService.html">ConfigService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">apps/api/src/app/graphql/gql-config.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">apps/api/src/app/auth/auth.service.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -119,10 +119,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>config</td>
+                                                        <td>jwtService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                                    <code>JwtService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -131,10 +131,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>moduleRef</td>
+                                                        <td>config</td>
                                                   
                                                         <td>
-                                                                    <code>ModuleRef</code>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -160,26 +160,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createGqlOptions"></a>
+                    <a name="setJwtCookie"></a>
                     <span class="name">
                         <b>
-                            createGqlOptions
+                            setJwtCookie
                         </b>
-                        <a href="#createGqlOptions"><span class="icon ion-ios-link"></span></a>
+                        <a href="#setJwtCookie"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createGqlOptions()</code>
+<code>setJwtCookie(res: Response, user: <a href="../interfaces/RequestUser.html">RequestUser</a>, rememberMe: boolean | string)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">apps/api/src/app/graphql/gql-config.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">apps/api/src/app/auth/auth.service.ts:13</a></div>
                 </td>
             </tr>
 
@@ -188,8 +188,71 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>    <code>GqlModuleOptions</code>
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>res</td>
+                                    <td>
+                                            <code>Response</code>
+                                    </td>
 
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../interfaces/RequestUser.html" target="_self" >RequestUser</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>rememberMe</td>
+                                    <td>
+                                            <code>boolean | string</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>false</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -202,39 +265,50 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
-import { ContextIdFactory, ModuleRef } from &#x27;@nestjs/core&#x27;;
-import { GqlModuleOptions, GqlOptionsFactory } from &#x27;@nestjs/graphql&#x27;;
-import { print } from &#x27;graphql&#x27;;
+import { CookieOptions, Response } from &#x27;express&#x27;;
 
+import { RequestUser } from &#x27;../auth&#x27;;
 import { ConfigService } from &#x27;../config&#x27;;
-import { PrismaService } from &#x27;../prisma&#x27;;
-import { ALL_TYPE_DEFS } from &#x27;./resolvers&#x27;;
+import { AuthSession } from &#x27;../graphql/models/user-session&#x27;;
+import { JwtService } from &#x27;../jwt&#x27;;
 
 @Injectable()
-export class GqlConfigService implements GqlOptionsFactory {
-  constructor(private readonly config: ConfigService, private moduleRef: ModuleRef) {}
+export class AuthService {
+  constructor(private readonly jwtService: JwtService, private readonly config: ConfigService) {}
 
-  createGqlOptions(): GqlModuleOptions {
-    return {
-      typeDefs: print(ALL_TYPE_DEFS),
-      installSubscriptionHandlers: true,
-      debug: !this.config.production,
-      playground: this.config.graphql.playground,
-      introspection: this.config.graphql.playground,
-      tracing: this.config.graphql.playground,
-      cors: this.config.production ? undefined : { credentials: true, origin: true },
-      context: async ctx &#x3D;&gt; {
-        const prisma &#x3D; this.moduleRef.get(PrismaService, { strict: false });
+  setJwtCookie(res: Response, user: RequestUser, rememberMe: boolean | string &#x3D; false) {
+    if (typeof rememberMe &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+      rememberMe &#x3D; rememberMe &#x3D;&#x3D;&#x3D; &#x27;true&#x27;;
+    }
 
-        return ctx.connection
-          ? { ...ctx, req: ctx.connection.context, prisma }
-          : { ...ctx, prisma };
-      },
-      uploads: {
-        maxFileSize: 20_000_000, // 20 MB
-        maxFiles: 5,
-      },
+    const jwtPayload &#x3D; {
+      id: user.id,
+      roles: user.roles ? user.roles.toString() : undefined,
     };
+
+    const expiresIn &#x3D; rememberMe
+      ? this.config.rememberMeExpiresIn
+      : (this.config.jwtOptions.signOptions.expiresIn as number);
+    const maxAge &#x3D; expiresIn * 1000;
+    const token &#x3D; this.jwtService.sign(jwtPayload, { expiresIn });
+
+    const cookieOptions: CookieOptions &#x3D; {
+      maxAge,
+      secure: this.config.production,
+      sameSite: this.config.production ? &#x27;strict&#x27; : &#x27;lax&#x27;,
+      domain: this.config.cookieDomain,
+    };
+
+    res.cookie(&#x27;jwt&#x27;, token, cookieOptions);
+    res.cookie(&#x27;rememberMe&#x27;, rememberMe, cookieOptions);
+
+    const response: AuthSession &#x3D; {
+      id: user.id,
+      maxAge: maxAge.toString(),
+      roles: user.roles,
+      rememberMe,
+    };
+    return response;
   }
 }
 </code></pre>
@@ -270,7 +344,7 @@ export class GqlConfigService implements GqlOptionsFactory {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'GqlConfigService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
