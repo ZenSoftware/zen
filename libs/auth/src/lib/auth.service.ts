@@ -11,7 +11,7 @@ import {
 } from '@zen/graphql';
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
-import * as Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 import { intersection, isEqual, sortBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subscription, interval, timer } from 'rxjs';
 import { debounce, map, shareReplay, tap } from 'rxjs/operators';
@@ -27,9 +27,9 @@ enum LocalStorageKey {
 })
 export class AuthService {
   private readonly EXCHANGE_INTERVAL = 30 * 60 * 1000; // 30 minutes
-  private exchangeIntervalSubscription?: Subscription;
-  private autoLogoutSubscription?: Subscription;
-  private _graphqlSubscriptionClient$ = new BehaviorSubject<AuthSession | null>(null);
+  #exchangeIntervalSubscription?: Subscription;
+  #autoLogoutSubscription?: Subscription;
+  #graphqlSubscriptionClient$ = new BehaviorSubject<AuthSession | null>(null);
 
   constructor(
     private router: Router,
@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   get graphqlSubscriptionClient$() {
-    return this._graphqlSubscriptionClient$.pipe(debounce(() => timer(100)));
+    return this.#graphqlSubscriptionClient$.pipe(debounce(() => timer(100)));
   }
 
   login(data: AuthLoginInput) {
@@ -96,7 +96,7 @@ export class AuthService {
     localStorage.setItem(LocalStorageKey.rememberMe, authSession.rememberMe.toString());
     userRolesVar(authSession.roles);
     this.loggedIn = true;
-    this._graphqlSubscriptionClient$.next(authSession);
+    this.#graphqlSubscriptionClient$.next(authSession);
   }
 
   private clearLocalStorage() {
@@ -147,35 +147,35 @@ export class AuthService {
       Cookies.remove('jwt');
       Cookies.remove('rememberMe');
       this.apollo.client.cache.reset();
-      this._graphqlSubscriptionClient$.next(null);
+      this.#graphqlSubscriptionClient$.next(null);
     }
 
     loggedInVar(value);
   }
 
   private startExchangeInterval() {
-    if (!this.rememberMe && !this.exchangeIntervalSubscription) {
-      this.exchangeIntervalSubscription = interval(this.EXCHANGE_INTERVAL).subscribe(() => {
+    if (!this.rememberMe && !this.#exchangeIntervalSubscription) {
+      this.#exchangeIntervalSubscription = interval(this.EXCHANGE_INTERVAL).subscribe(() => {
         this.exchangeToken();
       });
     }
 
-    if (!this.autoLogoutSubscription) {
-      this.autoLogoutSubscription = timer(60_000, 30_000).subscribe(() => {
+    if (!this.#autoLogoutSubscription) {
+      this.#autoLogoutSubscription = timer(60_000, 30_000).subscribe(() => {
         if (this.sessionTimeRemaining <= 0) this.logout();
       });
     }
   }
 
   private stopExchangeInterval() {
-    if (this.exchangeIntervalSubscription) {
-      this.exchangeIntervalSubscription.unsubscribe();
-      this.exchangeIntervalSubscription = undefined;
+    if (this.#exchangeIntervalSubscription) {
+      this.#exchangeIntervalSubscription.unsubscribe();
+      this.#exchangeIntervalSubscription = undefined;
     }
 
-    if (this.autoLogoutSubscription) {
-      this.autoLogoutSubscription.unsubscribe();
-      this.autoLogoutSubscription = undefined;
+    if (this.#autoLogoutSubscription) {
+      this.#autoLogoutSubscription.unsubscribe();
+      this.#autoLogoutSubscription = undefined;
     }
   }
 }

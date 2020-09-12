@@ -21,6 +21,7 @@ export class ZenLoginFormComponent {
   accountNeedsVerification = false;
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService) {
+    // Emit immediately to auto re-direct user if they are already logged in
     if (this.auth.loggedIn) this.loggedIn.emit();
 
     this.loginForm = this.formBuilder.group({
