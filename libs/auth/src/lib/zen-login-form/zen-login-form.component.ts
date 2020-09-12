@@ -8,7 +8,6 @@ import { emailValidator } from '../validators';
 @Component({
   selector: 'zen-login-form',
   templateUrl: 'zen-login-form.component.html',
-  styleUrls: ['zen-login-form.component.scss'],
 })
 export class ZenLoginFormComponent {
   @Output() loggedIn = new EventEmitter();
