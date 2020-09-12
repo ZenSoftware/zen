@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { AuthModule } from '@zen/auth';
 import { Environment } from '@zen/common';
 import { GraphQLModule } from '@zen/graphql';
 import { typePolicies } from '@zen/graphql/client';
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot([]),
+    AuthModule,
     MainModule,
     GraphQLModule.forRoot({
       typePolicies,
