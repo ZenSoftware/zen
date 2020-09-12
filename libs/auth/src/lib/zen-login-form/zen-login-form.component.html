@@ -12,9 +12,9 @@
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Password</mat-label>
     <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="password" (keydown)="incorrectPasswordReset()" required>
-    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+    <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
+    </span>
     <mat-error *ngIf="password.errors?.required">Required</mat-error>
     <mat-error *ngIf="password.errors?.incorrect">Incorrect password</mat-error>
   </mat-form-field>

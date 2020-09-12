@@ -33,9 +33,3 @@ $zen-app-theme: mat-dark-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($zen-app-theme);
-
-// Fix styling issue for <mat-icon>
-button[mat-icon-button] {
-  border-style: none;
-  background: none;
-}
