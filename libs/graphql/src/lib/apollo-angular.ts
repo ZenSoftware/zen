@@ -1,6 +1,7 @@
-import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
+import { gql } from 'apollo-angular';
 import * as Apollo from 'apollo-angular';
+
 import { GraphQLModule } from './graphql.module';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -13,9 +14,6 @@ export type Scalars = {
   Float: number;
   DateTime: any;
 };
-
-
-
 
 export type BatchPayload = {
   __typename?: 'BatchPayload';
@@ -30,22 +28,22 @@ export enum UserDistinctFieldEnum {
   LastName = 'lastName',
   Password = 'password',
   Roles = 'roles',
-  Test = 'test'
+  Test = 'test',
 }
 
 export enum RoleDistinctFieldEnum {
   Id = 'id',
-  Name = 'name'
+  Name = 'name',
 }
 
 export enum SortOrder {
   Asc = 'asc',
-  Desc = 'desc'
+  Desc = 'desc',
 }
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive'
+  Insensitive = 'insensitive',
 }
 
 export type UserWhereInput = {
@@ -341,7 +339,6 @@ export type Query = {
   userRoles: Array<Scalars['String']>;
 };
 
-
 export type QueryAggregateRoleArgs = {
   where?: Maybe<RoleWhereInput>;
   orderBy?: Maybe<Array<RoleOrderByInput>>;
@@ -349,7 +346,6 @@ export type QueryAggregateRoleArgs = {
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
-
 
 export type QueryAggregateUserArgs = {
   where?: Maybe<UserWhereInput>;
@@ -359,16 +355,13 @@ export type QueryAggregateUserArgs = {
   take?: Maybe<Scalars['Int']>;
 };
 
-
 export type QueryAuthLoginArgs = {
   data: AuthLoginInput;
 };
 
-
 export type QueryAuthPasswordResetRequestArgs = {
   data: AuthPasswordResetRequestInput;
 };
-
 
 export type QueryFindManyRoleArgs = {
   where?: Maybe<RoleWhereInput>;
@@ -378,7 +371,6 @@ export type QueryFindManyRoleArgs = {
   take?: Maybe<Scalars['Int']>;
 };
 
-
 export type QueryFindManyRoleCountArgs = {
   where?: Maybe<RoleWhereInput>;
   orderBy?: Maybe<Array<RoleOrderByInput>>;
@@ -386,7 +378,6 @@ export type QueryFindManyRoleCountArgs = {
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
-
 
 export type QueryFindManyUserArgs = {
   where?: Maybe<UserWhereInput>;
@@ -396,7 +387,6 @@ export type QueryFindManyUserArgs = {
   take?: Maybe<Scalars['Int']>;
 };
 
-
 export type QueryFindManyUserCountArgs = {
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
@@ -405,11 +395,9 @@ export type QueryFindManyUserCountArgs = {
   take?: Maybe<Scalars['Int']>;
 };
 
-
 export type QueryFindOneRoleArgs = {
   where: RoleWhereUniqueInput;
 };
-
 
 export type QueryFindOneUserArgs = {
   where: UserWhereUniqueInput;
@@ -434,22 +422,18 @@ export type Mutation = {
   authRegister: User;
 };
 
-
 export type MutationCreateOneUserArgs = {
   data: UserCreateInput;
 };
-
 
 export type MutationUpdateOneUserArgs = {
   where: UserWhereUniqueInput;
   data: UserUpdateInput;
 };
 
-
 export type MutationDeleteOneUserArgs = {
   where: UserWhereUniqueInput;
 };
-
 
 export type MutationUpsertOneUserArgs = {
   where: UserWhereUniqueInput;
@@ -457,33 +441,27 @@ export type MutationUpsertOneUserArgs = {
   update: UserUpdateInput;
 };
 
-
 export type MutationDeleteManyUserArgs = {
   where?: Maybe<UserWhereInput>;
 };
-
 
 export type MutationUpdateManyUserArgs = {
   where?: Maybe<UserWhereInput>;
   data?: Maybe<UserUpdateManyMutationInput>;
 };
 
-
 export type MutationCreateOneRoleArgs = {
   data: RoleCreateInput;
 };
-
 
 export type MutationUpdateOneRoleArgs = {
   where: RoleWhereUniqueInput;
   data: RoleUpdateInput;
 };
 
-
 export type MutationDeleteOneRoleArgs = {
   where: RoleWhereUniqueInput;
 };
-
 
 export type MutationUpsertOneRoleArgs = {
   where: RoleWhereUniqueInput;
@@ -491,27 +469,22 @@ export type MutationUpsertOneRoleArgs = {
   update: RoleUpdateInput;
 };
 
-
 export type MutationDeleteManyRoleArgs = {
   where?: Maybe<RoleWhereInput>;
 };
-
 
 export type MutationUpdateManyRoleArgs = {
   where?: Maybe<RoleWhereInput>;
   data?: Maybe<RoleUpdateManyMutationInput>;
 };
 
-
 export type MutationAuthPasswordChangeArgs = {
   data: AuthPasswordChangeInput;
 };
 
-
 export type MutationAuthPasswordResetConfirmationArgs = {
   data: AuthPasswordResetConfirmationInput;
 };
-
 
 export type MutationAuthRegisterArgs = {
   data?: Maybe<AuthRegisterInput>;
@@ -557,73 +530,47 @@ export type AuthRegisterInput = {
   password: Scalars['String'];
 };
 
-export type AuthExchangeTokenVariables = Exact<{ [key: string]: never; }>;
+export type AuthExchangeTokenVariables = Exact<{ [key: string]: never }>;
 
-
-export type AuthExchangeToken = (
-  { __typename?: 'Query' }
-  & { authExchangeToken: (
-    { __typename?: 'AuthSession' }
-    & AuthSessionFields
-  ) }
-);
+export type AuthExchangeToken = { __typename?: 'Query' } & {
+  authExchangeToken: { __typename?: 'AuthSession' } & AuthSessionFields;
+};
 
 export type AuthLoginVariables = Exact<{
   data: AuthLoginInput;
 }>;
 
+export type AuthLogin = { __typename?: 'Query' } & {
+  authLogin: { __typename?: 'AuthSession' } & AuthSessionFields;
+};
 
-export type AuthLogin = (
-  { __typename?: 'Query' }
-  & { authLogin: (
-    { __typename?: 'AuthSession' }
-    & AuthSessionFields
-  ) }
-);
+export type UserRolesVariables = Exact<{ [key: string]: never }>;
 
-export type UserRolesVariables = Exact<{ [key: string]: never; }>;
+export type UserRoles = { __typename?: 'Query' } & Pick<Query, 'userRoles'>;
 
+export type LoggedInVariables = Exact<{ [key: string]: never }>;
 
-export type UserRoles = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'userRoles'>
-);
+export type LoggedIn = { __typename?: 'Query' } & Pick<Query, 'loggedIn'>;
 
-export type LoggedInVariables = Exact<{ [key: string]: never; }>;
+export type AuthSessionFields = { __typename?: 'AuthSession' } & Pick<
+  AuthSession,
+  'id' | 'maxAge' | 'rememberMe' | 'roles'
+>;
 
+export type RoleFields = { __typename?: 'Role' } & Pick<Role, 'id'>;
 
-export type LoggedIn = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'loggedIn'>
-);
-
-export type AuthSessionFields = (
-  { __typename?: 'AuthSession' }
-  & Pick<AuthSession, 'id' | 'maxAge' | 'rememberMe' | 'roles'>
-);
-
-export type RoleFields = (
-  { __typename?: 'Role' }
-  & Pick<Role, 'id'>
-);
-
-export type UserFields = (
-  { __typename?: 'User' }
-  & Pick<User, 'id' | 'email' | 'firstName' | 'roles' | 'test'>
-);
+export type UserFields = { __typename?: 'User' } & Pick<
+  User,
+  'id' | 'email' | 'firstName' | 'roles' | 'test'
+>;
 
 export type FindOneRoleVariables = Exact<{
   where: RoleWhereUniqueInput;
 }>;
 
-
-export type FindOneRole = (
-  { __typename?: 'Query' }
-  & { findOneRole?: Maybe<(
-    { __typename?: 'Role' }
-    & RoleFields
-  )> }
-);
+export type FindOneRole = { __typename?: 'Query' } & {
+  findOneRole?: Maybe<{ __typename?: 'Role' } & RoleFields>;
+};
 
 export type FindManyRoleVariables = Exact<{
   where?: Maybe<RoleWhereInput>;
@@ -633,14 +580,9 @@ export type FindManyRoleVariables = Exact<{
   take?: Maybe<Scalars['Int']>;
 }>;
 
-
-export type FindManyRole = (
-  { __typename?: 'Query' }
-  & { findManyRole?: Maybe<Array<(
-    { __typename?: 'Role' }
-    & RoleFields
-  )>> }
-);
+export type FindManyRole = { __typename?: 'Query' } & {
+  findManyRole?: Maybe<Array<{ __typename?: 'Role' } & RoleFields>>;
+};
 
 export type FindManyRoleCountVariables = Exact<{
   where?: Maybe<RoleWhereInput>;
@@ -650,51 +592,32 @@ export type FindManyRoleCountVariables = Exact<{
   take?: Maybe<Scalars['Int']>;
 }>;
 
-
-export type FindManyRoleCount = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'findManyRoleCount'>
-);
+export type FindManyRoleCount = { __typename?: 'Query' } & Pick<Query, 'findManyRoleCount'>;
 
 export type CreateOneRoleVariables = Exact<{
   data: RoleCreateInput;
 }>;
 
-
-export type CreateOneRole = (
-  { __typename?: 'Mutation' }
-  & { createOneRole: (
-    { __typename?: 'Role' }
-    & RoleFields
-  ) }
-);
+export type CreateOneRole = { __typename?: 'Mutation' } & {
+  createOneRole: { __typename?: 'Role' } & RoleFields;
+};
 
 export type UpdateOneRoleVariables = Exact<{
   where: RoleWhereUniqueInput;
   data: RoleUpdateInput;
 }>;
 
-
-export type UpdateOneRole = (
-  { __typename?: 'Mutation' }
-  & { updateOneRole: (
-    { __typename?: 'Role' }
-    & RoleFields
-  ) }
-);
+export type UpdateOneRole = { __typename?: 'Mutation' } & {
+  updateOneRole: { __typename?: 'Role' } & RoleFields;
+};
 
 export type DeleteOneRoleVariables = Exact<{
   where: RoleWhereUniqueInput;
 }>;
 
-
-export type DeleteOneRole = (
-  { __typename?: 'Mutation' }
-  & { deleteOneRole?: Maybe<(
-    { __typename?: 'Role' }
-    & Pick<Role, 'id'>
-  )> }
-);
+export type DeleteOneRole = { __typename?: 'Mutation' } & {
+  deleteOneRole?: Maybe<{ __typename?: 'Role' } & Pick<Role, 'id'>>;
+};
 
 export type UpsertOneRoleVariables = Exact<{
   where: RoleWhereUniqueInput;
@@ -702,54 +625,34 @@ export type UpsertOneRoleVariables = Exact<{
   update: RoleUpdateInput;
 }>;
 
-
-export type UpsertOneRole = (
-  { __typename?: 'Mutation' }
-  & { upsertOneRole?: Maybe<(
-    { __typename?: 'Role' }
-    & RoleFields
-  )> }
-);
+export type UpsertOneRole = { __typename?: 'Mutation' } & {
+  upsertOneRole?: Maybe<{ __typename?: 'Role' } & RoleFields>;
+};
 
 export type DeleteManyRoleVariables = Exact<{
   where?: Maybe<RoleWhereInput>;
 }>;
 
-
-export type DeleteManyRole = (
-  { __typename?: 'Mutation' }
-  & { deleteManyRole?: Maybe<(
-    { __typename?: 'BatchPayload' }
-    & Pick<BatchPayload, 'count'>
-  )> }
-);
+export type DeleteManyRole = { __typename?: 'Mutation' } & {
+  deleteManyRole?: Maybe<{ __typename?: 'BatchPayload' } & Pick<BatchPayload, 'count'>>;
+};
 
 export type UpdateManyRoleVariables = Exact<{
   where?: Maybe<RoleWhereInput>;
   data?: Maybe<RoleUpdateManyMutationInput>;
 }>;
 
-
-export type UpdateManyRole = (
-  { __typename?: 'Mutation' }
-  & { updateManyRole?: Maybe<(
-    { __typename?: 'BatchPayload' }
-    & Pick<BatchPayload, 'count'>
-  )> }
-);
+export type UpdateManyRole = { __typename?: 'Mutation' } & {
+  updateManyRole?: Maybe<{ __typename?: 'BatchPayload' } & Pick<BatchPayload, 'count'>>;
+};
 
 export type FindOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
-
-export type FindOneUser = (
-  { __typename?: 'Query' }
-  & { findOneUser?: Maybe<(
-    { __typename?: 'User' }
-    & UserFields
-  )> }
-);
+export type FindOneUser = { __typename?: 'Query' } & {
+  findOneUser?: Maybe<{ __typename?: 'User' } & UserFields>;
+};
 
 export type FindManyUserVariables = Exact<{
   where?: Maybe<UserWhereInput>;
@@ -759,14 +662,9 @@ export type FindManyUserVariables = Exact<{
   take?: Maybe<Scalars['Int']>;
 }>;
 
-
-export type FindManyUser = (
-  { __typename?: 'Query' }
-  & { findManyUser?: Maybe<Array<(
-    { __typename?: 'User' }
-    & UserFields
-  )>> }
-);
+export type FindManyUser = { __typename?: 'Query' } & {
+  findManyUser?: Maybe<Array<{ __typename?: 'User' } & UserFields>>;
+};
 
 export type FindManyUserCountVariables = Exact<{
   where?: Maybe<UserWhereInput>;
@@ -776,51 +674,32 @@ export type FindManyUserCountVariables = Exact<{
   take?: Maybe<Scalars['Int']>;
 }>;
 
-
-export type FindManyUserCount = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'findManyUserCount'>
-);
+export type FindManyUserCount = { __typename?: 'Query' } & Pick<Query, 'findManyUserCount'>;
 
 export type CreateOneUserVariables = Exact<{
   data: UserCreateInput;
 }>;
 
-
-export type CreateOneUser = (
-  { __typename?: 'Mutation' }
-  & { createOneUser: (
-    { __typename?: 'User' }
-    & UserFields
-  ) }
-);
+export type CreateOneUser = { __typename?: 'Mutation' } & {
+  createOneUser: { __typename?: 'User' } & UserFields;
+};
 
 export type UpdateOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
   data: UserUpdateInput;
 }>;
 
-
-export type UpdateOneUser = (
-  { __typename?: 'Mutation' }
-  & { updateOneUser: (
-    { __typename?: 'User' }
-    & UserFields
-  ) }
-);
+export type UpdateOneUser = { __typename?: 'Mutation' } & {
+  updateOneUser: { __typename?: 'User' } & UserFields;
+};
 
 export type DeleteOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
-
-export type DeleteOneUser = (
-  { __typename?: 'Mutation' }
-  & { deleteOneUser?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id'>
-  )> }
-);
+export type DeleteOneUser = { __typename?: 'Mutation' } & {
+  deleteOneUser?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+};
 
 export type UpsertOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -828,449 +707,487 @@ export type UpsertOneUserVariables = Exact<{
   update: UserUpdateInput;
 }>;
 
-
-export type UpsertOneUser = (
-  { __typename?: 'Mutation' }
-  & { upsertOneUser?: Maybe<(
-    { __typename?: 'User' }
-    & UserFields
-  )> }
-);
+export type UpsertOneUser = { __typename?: 'Mutation' } & {
+  upsertOneUser?: Maybe<{ __typename?: 'User' } & UserFields>;
+};
 
 export type DeleteManyUserVariables = Exact<{
   where?: Maybe<UserWhereInput>;
 }>;
 
-
-export type DeleteManyUser = (
-  { __typename?: 'Mutation' }
-  & { deleteManyUser?: Maybe<(
-    { __typename?: 'BatchPayload' }
-    & Pick<BatchPayload, 'count'>
-  )> }
-);
+export type DeleteManyUser = { __typename?: 'Mutation' } & {
+  deleteManyUser?: Maybe<{ __typename?: 'BatchPayload' } & Pick<BatchPayload, 'count'>>;
+};
 
 export type UpdateManyUserVariables = Exact<{
   where?: Maybe<UserWhereInput>;
   data?: Maybe<UserUpdateManyMutationInput>;
 }>;
 
-
-export type UpdateManyUser = (
-  { __typename?: 'Mutation' }
-  & { updateManyUser?: Maybe<(
-    { __typename?: 'BatchPayload' }
-    & Pick<BatchPayload, 'count'>
-  )> }
-);
+export type UpdateManyUser = { __typename?: 'Mutation' } & {
+  updateManyUser?: Maybe<{ __typename?: 'BatchPayload' } & Pick<BatchPayload, 'count'>>;
+};
 
 export const AuthSessionFields = /*#__PURE__*/ gql`
-    fragment AuthSessionFields on AuthSession {
-  id
-  maxAge
-  rememberMe
-  roles
-}
-    `;
+  fragment AuthSessionFields on AuthSession {
+    id
+    maxAge
+    rememberMe
+    roles
+  }
+`;
 export const RoleFields = /*#__PURE__*/ gql`
-    fragment RoleFields on Role {
-  id
-}
-    `;
+  fragment RoleFields on Role {
+    id
+  }
+`;
 export const UserFields = /*#__PURE__*/ gql`
-    fragment UserFields on User {
-  id
-  email
-  firstName
-  roles
-  test
-}
-    `;
+  fragment UserFields on User {
+    id
+    email
+    firstName
+    roles
+    test
+  }
+`;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
-    query AuthExchangeToken {
-  authExchangeToken {
-    ...AuthSessionFields
-  }
-}
-    ${AuthSessionFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class AuthExchangeTokenGQL extends Apollo.Query<AuthExchangeToken, AuthExchangeTokenVariables> {
-    document = AuthExchangeTokenDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  query AuthExchangeToken {
+    authExchangeToken {
+      ...AuthSessionFields
     }
   }
+  ${AuthSessionFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class AuthExchangeTokenGQL extends Apollo.Query<
+  AuthExchangeToken,
+  AuthExchangeTokenVariables
+> {
+  document = AuthExchangeTokenDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const AuthLoginDocument = /*#__PURE__*/ gql`
-    query AuthLogin($data: AuthLoginInput!) {
-  authLogin(data: $data) {
-    ...AuthSessionFields
-  }
-}
-    ${AuthSessionFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
-    document = AuthLoginDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  query AuthLogin($data: AuthLoginInput!) {
+    authLogin(data: $data) {
+      ...AuthSessionFields
     }
   }
+  ${AuthSessionFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
+  document = AuthLoginDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const UserRolesDocument = /*#__PURE__*/ gql`
-    query UserRoles {
-  userRoles @client
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
-    document = UserRolesDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
+  query UserRoles {
+    userRoles @client
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
+  document = UserRolesDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const LoggedInDocument = /*#__PURE__*/ gql`
-    query LoggedIn {
-  loggedIn @client
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class LoggedInGQL extends Apollo.Query<LoggedIn, LoggedInVariables> {
-    document = LoggedInDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
+  query LoggedIn {
+    loggedIn @client
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class LoggedInGQL extends Apollo.Query<LoggedIn, LoggedInVariables> {
+  document = LoggedInDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const FindOneRoleDocument = /*#__PURE__*/ gql`
-    query FindOneRole($where: RoleWhereUniqueInput!) {
-  findOneRole(where: $where) {
-    ...RoleFields
-  }
-}
-    ${RoleFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class FindOneRoleGQL extends Apollo.Query<FindOneRole, FindOneRoleVariables> {
-    document = FindOneRoleDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  query FindOneRole($where: RoleWhereUniqueInput!) {
+    findOneRole(where: $where) {
+      ...RoleFields
     }
   }
+  ${RoleFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class FindOneRoleGQL extends Apollo.Query<FindOneRole, FindOneRoleVariables> {
+  document = FindOneRoleDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const FindManyRoleDocument = /*#__PURE__*/ gql`
-    query FindManyRole($where: RoleWhereInput, $orderBy: [RoleOrderByInput!], $cursor: RoleWhereUniqueInput, $skip: Int, $take: Int) {
-  findManyRole(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
-    ...RoleFields
-  }
-}
-    ${RoleFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class FindManyRoleGQL extends Apollo.Query<FindManyRole, FindManyRoleVariables> {
-    document = FindManyRoleDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  query FindManyRole(
+    $where: RoleWhereInput
+    $orderBy: [RoleOrderByInput!]
+    $cursor: RoleWhereUniqueInput
+    $skip: Int
+    $take: Int
+  ) {
+    findManyRole(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+      ...RoleFields
     }
   }
+  ${RoleFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class FindManyRoleGQL extends Apollo.Query<FindManyRole, FindManyRoleVariables> {
+  document = FindManyRoleDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const FindManyRoleCountDocument = /*#__PURE__*/ gql`
-    query FindManyRoleCount($where: RoleWhereInput, $orderBy: [RoleOrderByInput!], $cursor: RoleWhereUniqueInput, $skip: Int, $take: Int) {
-  findManyRoleCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class FindManyRoleCountGQL extends Apollo.Query<FindManyRoleCount, FindManyRoleCountVariables> {
-    document = FindManyRoleCountDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
+  query FindManyRoleCount(
+    $where: RoleWhereInput
+    $orderBy: [RoleOrderByInput!]
+    $cursor: RoleWhereUniqueInput
+    $skip: Int
+    $take: Int
+  ) {
+    findManyRoleCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class FindManyRoleCountGQL extends Apollo.Query<
+  FindManyRoleCount,
+  FindManyRoleCountVariables
+> {
+  document = FindManyRoleCountDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const CreateOneRoleDocument = /*#__PURE__*/ gql`
-    mutation CreateOneRole($data: RoleCreateInput!) {
-  createOneRole(data: $data) {
-    ...RoleFields
-  }
-}
-    ${RoleFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class CreateOneRoleGQL extends Apollo.Mutation<CreateOneRole, CreateOneRoleVariables> {
-    document = CreateOneRoleDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation CreateOneRole($data: RoleCreateInput!) {
+    createOneRole(data: $data) {
+      ...RoleFields
     }
   }
+  ${RoleFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class CreateOneRoleGQL extends Apollo.Mutation<CreateOneRole, CreateOneRoleVariables> {
+  document = CreateOneRoleDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const UpdateOneRoleDocument = /*#__PURE__*/ gql`
-    mutation UpdateOneRole($where: RoleWhereUniqueInput!, $data: RoleUpdateInput!) {
-  updateOneRole(where: $where, data: $data) {
-    ...RoleFields
-  }
-}
-    ${RoleFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class UpdateOneRoleGQL extends Apollo.Mutation<UpdateOneRole, UpdateOneRoleVariables> {
-    document = UpdateOneRoleDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation UpdateOneRole($where: RoleWhereUniqueInput!, $data: RoleUpdateInput!) {
+    updateOneRole(where: $where, data: $data) {
+      ...RoleFields
     }
   }
+  ${RoleFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class UpdateOneRoleGQL extends Apollo.Mutation<UpdateOneRole, UpdateOneRoleVariables> {
+  document = UpdateOneRoleDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const DeleteOneRoleDocument = /*#__PURE__*/ gql`
-    mutation DeleteOneRole($where: RoleWhereUniqueInput!) {
-  deleteOneRole(where: $where) {
-    id
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class DeleteOneRoleGQL extends Apollo.Mutation<DeleteOneRole, DeleteOneRoleVariables> {
-    document = DeleteOneRoleDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation DeleteOneRole($where: RoleWhereUniqueInput!) {
+    deleteOneRole(where: $where) {
+      id
     }
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class DeleteOneRoleGQL extends Apollo.Mutation<DeleteOneRole, DeleteOneRoleVariables> {
+  document = DeleteOneRoleDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const UpsertOneRoleDocument = /*#__PURE__*/ gql`
-    mutation UpsertOneRole($where: RoleWhereUniqueInput!, $create: RoleCreateInput!, $update: RoleUpdateInput!) {
-  upsertOneRole(where: $where, create: $create, update: $update) {
-    ...RoleFields
-  }
-}
-    ${RoleFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class UpsertOneRoleGQL extends Apollo.Mutation<UpsertOneRole, UpsertOneRoleVariables> {
-    document = UpsertOneRoleDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation UpsertOneRole(
+    $where: RoleWhereUniqueInput!
+    $create: RoleCreateInput!
+    $update: RoleUpdateInput!
+  ) {
+    upsertOneRole(where: $where, create: $create, update: $update) {
+      ...RoleFields
     }
   }
+  ${RoleFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class UpsertOneRoleGQL extends Apollo.Mutation<UpsertOneRole, UpsertOneRoleVariables> {
+  document = UpsertOneRoleDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const DeleteManyRoleDocument = /*#__PURE__*/ gql`
-    mutation DeleteManyRole($where: RoleWhereInput) {
-  deleteManyRole(where: $where) {
-    count
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class DeleteManyRoleGQL extends Apollo.Mutation<DeleteManyRole, DeleteManyRoleVariables> {
-    document = DeleteManyRoleDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation DeleteManyRole($where: RoleWhereInput) {
+    deleteManyRole(where: $where) {
+      count
     }
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class DeleteManyRoleGQL extends Apollo.Mutation<DeleteManyRole, DeleteManyRoleVariables> {
+  document = DeleteManyRoleDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const UpdateManyRoleDocument = /*#__PURE__*/ gql`
-    mutation UpdateManyRole($where: RoleWhereInput, $data: RoleUpdateManyMutationInput) {
-  updateManyRole(where: $where, data: $data) {
-    count
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class UpdateManyRoleGQL extends Apollo.Mutation<UpdateManyRole, UpdateManyRoleVariables> {
-    document = UpdateManyRoleDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation UpdateManyRole($where: RoleWhereInput, $data: RoleUpdateManyMutationInput) {
+    updateManyRole(where: $where, data: $data) {
+      count
     }
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class UpdateManyRoleGQL extends Apollo.Mutation<UpdateManyRole, UpdateManyRoleVariables> {
+  document = UpdateManyRoleDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const FindOneUserDocument = /*#__PURE__*/ gql`
-    query FindOneUser($where: UserWhereUniqueInput!) {
-  findOneUser(where: $where) {
-    ...UserFields
-  }
-}
-    ${UserFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class FindOneUserGQL extends Apollo.Query<FindOneUser, FindOneUserVariables> {
-    document = FindOneUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  query FindOneUser($where: UserWhereUniqueInput!) {
+    findOneUser(where: $where) {
+      ...UserFields
     }
   }
+  ${UserFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class FindOneUserGQL extends Apollo.Query<FindOneUser, FindOneUserVariables> {
+  document = FindOneUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const FindManyUserDocument = /*#__PURE__*/ gql`
-    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $skip: Int, $take: Int) {
-  findManyUser(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
-    ...UserFields
-  }
-}
-    ${UserFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class FindManyUserGQL extends Apollo.Query<FindManyUser, FindManyUserVariables> {
-    document = FindManyUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  query FindManyUser(
+    $where: UserWhereInput
+    $orderBy: [UserOrderByInput!]
+    $cursor: UserWhereUniqueInput
+    $skip: Int
+    $take: Int
+  ) {
+    findManyUser(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+      ...UserFields
     }
   }
+  ${UserFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class FindManyUserGQL extends Apollo.Query<FindManyUser, FindManyUserVariables> {
+  document = FindManyUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const FindManyUserCountDocument = /*#__PURE__*/ gql`
-    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $skip: Int, $take: Int) {
-  findManyUserCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCount, FindManyUserCountVariables> {
-    document = FindManyUserCountDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
+  query FindManyUserCount(
+    $where: UserWhereInput
+    $orderBy: [UserOrderByInput!]
+    $cursor: UserWhereUniqueInput
+    $skip: Int
+    $take: Int
+  ) {
+    findManyUserCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class FindManyUserCountGQL extends Apollo.Query<
+  FindManyUserCount,
+  FindManyUserCountVariables
+> {
+  document = FindManyUserCountDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const CreateOneUserDocument = /*#__PURE__*/ gql`
-    mutation CreateOneUser($data: UserCreateInput!) {
-  createOneUser(data: $data) {
-    ...UserFields
-  }
-}
-    ${UserFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUser, CreateOneUserVariables> {
-    document = CreateOneUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation CreateOneUser($data: UserCreateInput!) {
+    createOneUser(data: $data) {
+      ...UserFields
     }
   }
+  ${UserFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUser, CreateOneUserVariables> {
+  document = CreateOneUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const UpdateOneUserDocument = /*#__PURE__*/ gql`
-    mutation UpdateOneUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
-  updateOneUser(where: $where, data: $data) {
-    ...UserFields
-  }
-}
-    ${UserFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUser, UpdateOneUserVariables> {
-    document = UpdateOneUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation UpdateOneUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
+    updateOneUser(where: $where, data: $data) {
+      ...UserFields
     }
   }
+  ${UserFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUser, UpdateOneUserVariables> {
+  document = UpdateOneUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const DeleteOneUserDocument = /*#__PURE__*/ gql`
-    mutation DeleteOneUser($where: UserWhereUniqueInput!) {
-  deleteOneUser(where: $where) {
-    id
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
-    document = DeleteOneUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation DeleteOneUser($where: UserWhereUniqueInput!) {
+    deleteOneUser(where: $where) {
+      id
     }
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
+  document = DeleteOneUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const UpsertOneUserDocument = /*#__PURE__*/ gql`
-    mutation UpsertOneUser($where: UserWhereUniqueInput!, $create: UserCreateInput!, $update: UserUpdateInput!) {
-  upsertOneUser(where: $where, create: $create, update: $update) {
-    ...UserFields
-  }
-}
-    ${UserFields}`;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUser, UpsertOneUserVariables> {
-    document = UpsertOneUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation UpsertOneUser(
+    $where: UserWhereUniqueInput!
+    $create: UserCreateInput!
+    $update: UserUpdateInput!
+  ) {
+    upsertOneUser(where: $where, create: $create, update: $update) {
+      ...UserFields
     }
   }
+  ${UserFields}
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUser, UpsertOneUserVariables> {
+  document = UpsertOneUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const DeleteManyUserDocument = /*#__PURE__*/ gql`
-    mutation DeleteManyUser($where: UserWhereInput) {
-  deleteManyUser(where: $where) {
-    count
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUser, DeleteManyUserVariables> {
-    document = DeleteManyUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation DeleteManyUser($where: UserWhereInput) {
+    deleteManyUser(where: $where) {
+      count
     }
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUser, DeleteManyUserVariables> {
+  document = DeleteManyUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const UpdateManyUserDocument = /*#__PURE__*/ gql`
-    mutation UpdateManyUser($where: UserWhereInput, $data: UserUpdateManyMutationInput) {
-  updateManyUser(where: $where, data: $data) {
-    count
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
-    document = UpdateManyUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
+  mutation UpdateManyUser($where: UserWhereInput, $data: UserUpdateManyMutationInput) {
+    updateManyUser(where: $where, data: $data) {
+      count
     }
   }
+`;
+
+@Injectable({
+  providedIn: GraphQLModule,
+})
+export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
+  document = UpdateManyUserDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
