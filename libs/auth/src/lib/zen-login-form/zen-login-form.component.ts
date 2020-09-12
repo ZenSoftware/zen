@@ -12,8 +12,8 @@ import { emailValidator } from '../validators';
 export class ZenLoginFormComponent {
   @Output() loggedIn = new EventEmitter();
 
+  #loading = false;
   hidePassword = true;
-  _loading = false;
   loginForm: FormGroup;
   emailNotFound = false;
   incorrectPassword = false;
@@ -31,11 +31,11 @@ export class ZenLoginFormComponent {
   }
 
   get loading() {
-    return this._loading;
+    return this.#loading;
   }
 
   set loading(value) {
-    this._loading = value;
+    this.#loading = value;
     if (value) this.loginForm.disable();
     else this.loginForm.enable();
   }
