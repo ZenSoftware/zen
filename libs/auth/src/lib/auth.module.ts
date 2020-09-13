@@ -26,6 +26,6 @@ import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component
     AuthRoutingModule,
   ],
   declarations: [ZenLoadingComponent, ZenLoginFormComponent, ZenLoginPageComponent],
-  exports: [ZenLoginFormComponent],
+  exports: [ZenLoginFormComponent, ZenLoginPageComponent],
 })
 export class AuthModule {}
