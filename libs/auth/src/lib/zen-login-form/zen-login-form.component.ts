@@ -13,12 +13,11 @@ export class ZenLoginFormComponent {
   @Output() loggedIn = new EventEmitter();
 
   #loading = false;
+  #incorrectPassword = false;
+  #emailNotFound = false;
   hidePassword = true;
   loginForm: FormGroup;
-  emailNotFound = false;
-  incorrectPassword = false;
   generalError = false;
-  accountNeedsVerification = false;
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService) {
     // Emit immediately to auto re-direct user if they are already logged in
@@ -54,27 +53,21 @@ export class ZenLoginFormComponent {
   }
 
   emailNotFoundReset() {
-    this.emailNotFound = false;
+    this.#emailNotFound = false;
     this.email.updateValueAndValidity();
   }
 
   emailNotFoundValidator(): ValidatorFn {
-    return control => {
-      if (this.emailNotFound) return { notFound: true };
-      return null;
-    };
+    return control => (this.#emailNotFound ? { notFound: true } : null);
   }
 
   incorrectPasswordReset() {
-    this.incorrectPassword = false;
+    this.#incorrectPassword = false;
     this.password.updateValueAndValidity();
   }
 
   incorrectPasswordValidator(): ValidatorFn {
-    return control => {
-      if (this.incorrectPassword) return { incorrect: true };
-      return null;
-    };
+    return control => (this.#incorrectPassword ? { incorrect: true } : null);
   }
 
   onSubmit() {
@@ -100,15 +93,13 @@ export class ZenLoginFormComponent {
             const gqlErrors = extractGraphQLErrors(errors);
 
             if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
-              this.emailNotFound = true;
+              this.#emailNotFound = true;
               this.email.markAsTouched();
               this.email.updateValueAndValidity();
             } else if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
-              this.incorrectPassword = true;
+              this.#incorrectPassword = true;
               this.password.markAsTouched();
               this.password.updateValueAndValidity();
-            } else if (gqlErrors.find(e => e.code === 'ACCOUNT_NOT_VERIFIED')) {
-              this.accountNeedsVerification = true;
             } else {
               this.generalError = true;
             }
