@@ -59,7 +59,7 @@
     "class-validator": "^0.12.2",
     "cookie-parser": "^1.4.5",
     "date-fns": "^2.16.1",
-    "dotenv": "6.2.0",
+    "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "graphql-tools": "^6.2.2",
     "helmet": "^4.1.1",
