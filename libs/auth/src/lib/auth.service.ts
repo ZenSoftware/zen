@@ -112,7 +112,7 @@ export class AuthService {
     const expiresOn = +sessionExpiresOnString;
     const timeRemaining = expiresOn - Date.now();
 
-    if (timeRemaining < 0) return 0;
+    if (timeRemaining <= 0) return 0;
     else return timeRemaining;
   }
 
