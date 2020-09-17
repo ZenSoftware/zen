@@ -57,7 +57,9 @@ export class ZenMainComponent {
     this.updateOneUserGQL
       .mutate({
         where: selectOne('peter@zensoftware.ca', 'email'),
-        data: { test: { increment: 1 } },
+        data: {
+          test: { increment: 1 },
+        },
       })
       .subscribe();
 
