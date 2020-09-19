@@ -61,7 +61,7 @@
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
-    "graphql-tools": "^6.2.2",
+    "graphql-tools": "^6.2.3",
     "helmet": "^4.1.1",
     "lodash-es": "^4.17.15",
     "nodemailer": "^6.4.11",
