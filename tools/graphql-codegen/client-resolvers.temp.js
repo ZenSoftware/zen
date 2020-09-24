@@ -14,10 +14,18 @@ export const ${name}TypeDefs = gql\`
     $where: ${name}WhereInput
     $orderBy: [${name}OrderByInput!]
     $cursor: ${name}WhereUniqueInput
+    $distinct: ${name}DistinctFieldEnum
     $skip: Int
     $take: Int
   ) {
-    findMany${name}(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    findMany${name}(
+      where: $where
+      orderBy: $orderBy
+      cursor: $cursor
+      distinct: $distinct
+      skip: $skip
+      take: $take
+    ) {
       ...${name}Fields
     }
   }
@@ -26,10 +34,18 @@ export const ${name}TypeDefs = gql\`
     $where: ${name}WhereInput
     $orderBy: [${name}OrderByInput!]
     $cursor: ${name}WhereUniqueInput
+    $distinct: ${name}DistinctFieldEnum
     $skip: Int
     $take: Int
   ) {
-    findMany${name}Count(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+    findMany${name}Count(
+      where: $where
+      orderBy: $orderBy
+      cursor: $cursor
+      distinct: $distinct
+      skip: $skip
+      take: $take
+    )
   }
 
   mutation CreateOne${name}($data: ${name}CreateInput!) {

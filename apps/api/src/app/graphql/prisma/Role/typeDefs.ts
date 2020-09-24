@@ -12,6 +12,7 @@ export default gql`
       where: RoleWhereInput
       orderBy: [RoleOrderByInput!]
       cursor: RoleWhereUniqueInput
+      distinct: RoleDistinctFieldEnum
       skip: Int
       take: Int
     ): [Role!]
@@ -19,6 +20,7 @@ export default gql`
       where: RoleWhereInput
       orderBy: [RoleOrderByInput!]
       cursor: RoleWhereUniqueInput
+      distinct: RoleDistinctFieldEnum
       skip: Int
       take: Int
     ): Int!
@@ -26,6 +28,7 @@ export default gql`
       where: RoleWhereInput
       orderBy: [RoleOrderByInput!]
       cursor: RoleWhereUniqueInput
+      distinct: RoleDistinctFieldEnum
       skip: Int
       take: Int
     ): AggregateRole

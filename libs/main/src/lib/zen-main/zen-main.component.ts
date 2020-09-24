@@ -4,6 +4,7 @@ import {
   FindManyUserGQL,
   QueryMode,
   UpdateOneUserGQL,
+  UserDistinctFieldEnum,
   UserRolesGQL,
   selectOne,
 } from '@zen/graphql';
@@ -35,6 +36,7 @@ export class ZenMainComponent {
           equals: 'Peter@ZenSoftware.ca',
         },
       },
+      distinct: UserDistinctFieldEnum.FirstName,
     })
     .valueChanges.pipe(
       map(r => r.data?.findManyUser),

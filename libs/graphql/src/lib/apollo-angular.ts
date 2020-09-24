@@ -346,6 +346,7 @@ export type QueryAggregateRoleArgs = {
   where?: Maybe<RoleWhereInput>;
   orderBy?: Maybe<Array<RoleOrderByInput>>;
   cursor?: Maybe<RoleWhereUniqueInput>;
+  distinct?: Maybe<RoleDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -355,6 +356,7 @@ export type QueryAggregateUserArgs = {
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<UserDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -374,6 +376,7 @@ export type QueryFindManyRoleArgs = {
   where?: Maybe<RoleWhereInput>;
   orderBy?: Maybe<Array<RoleOrderByInput>>;
   cursor?: Maybe<RoleWhereUniqueInput>;
+  distinct?: Maybe<RoleDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -383,6 +386,7 @@ export type QueryFindManyRoleCountArgs = {
   where?: Maybe<RoleWhereInput>;
   orderBy?: Maybe<Array<RoleOrderByInput>>;
   cursor?: Maybe<RoleWhereUniqueInput>;
+  distinct?: Maybe<RoleDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -392,6 +396,7 @@ export type QueryFindManyUserArgs = {
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<UserDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -401,6 +406,7 @@ export type QueryFindManyUserCountArgs = {
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<UserDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -629,6 +635,7 @@ export type FindManyRoleVariables = Exact<{
   where?: Maybe<RoleWhereInput>;
   orderBy?: Maybe<Array<RoleOrderByInput>>;
   cursor?: Maybe<RoleWhereUniqueInput>;
+  distinct?: Maybe<RoleDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 }>;
@@ -646,6 +653,7 @@ export type FindManyRoleCountVariables = Exact<{
   where?: Maybe<RoleWhereInput>;
   orderBy?: Maybe<Array<RoleOrderByInput>>;
   cursor?: Maybe<RoleWhereUniqueInput>;
+  distinct?: Maybe<RoleDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 }>;
@@ -654,6 +662,24 @@ export type FindManyRoleCountVariables = Exact<{
 export type FindManyRoleCount = (
   { __typename?: 'Query' }
   & Pick<Query, 'findManyRoleCount'>
+);
+
+export type AggregateRoleVariables = Exact<{
+  where?: Maybe<RoleWhereInput>;
+  orderBy?: Maybe<Array<RoleOrderByInput>>;
+  cursor?: Maybe<RoleWhereUniqueInput>;
+  distinct?: Maybe<RoleDistinctFieldEnum>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type AggregateRole = (
+  { __typename?: 'Query' }
+  & { aggregateRole?: Maybe<(
+    { __typename?: 'AggregateRole' }
+    & Pick<AggregateRole, 'count'>
+  )> }
 );
 
 export type CreateOneRoleVariables = Exact<{
@@ -755,6 +781,7 @@ export type FindManyUserVariables = Exact<{
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<UserDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 }>;
@@ -772,6 +799,7 @@ export type FindManyUserCountVariables = Exact<{
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<UserDistinctFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 }>;
@@ -780,6 +808,24 @@ export type FindManyUserCountVariables = Exact<{
 export type FindManyUserCount = (
   { __typename?: 'Query' }
   & Pick<Query, 'findManyUserCount'>
+);
+
+export type AggregateUserVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByInput>>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<UserDistinctFieldEnum>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type AggregateUser = (
+  { __typename?: 'Query' }
+  & { aggregateUser?: Maybe<(
+    { __typename?: 'AggregateUser' }
+    & Pick<AggregateUser, 'count'>
+  )> }
 );
 
 export type CreateOneUserVariables = Exact<{
@@ -973,8 +1019,8 @@ export const FindOneRoleDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyRoleDocument = /*#__PURE__*/ gql`
-    query FindManyRole($where: RoleWhereInput, $orderBy: [RoleOrderByInput!], $cursor: RoleWhereUniqueInput, $skip: Int, $take: Int) {
-  findManyRole(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    query FindManyRole($where: RoleWhereInput, $orderBy: [RoleOrderByInput!], $cursor: RoleWhereUniqueInput, $distinct: RoleDistinctFieldEnum, $skip: Int, $take: Int) {
+  findManyRole(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take) {
     ...RoleFields
   }
 }
@@ -991,8 +1037,8 @@ export const FindManyRoleDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyRoleCountDocument = /*#__PURE__*/ gql`
-    query FindManyRoleCount($where: RoleWhereInput, $orderBy: [RoleOrderByInput!], $cursor: RoleWhereUniqueInput, $skip: Int, $take: Int) {
-  findManyRoleCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+    query FindManyRoleCount($where: RoleWhereInput, $orderBy: [RoleOrderByInput!], $cursor: RoleWhereUniqueInput, $distinct: RoleDistinctFieldEnum, $skip: Int, $take: Int) {
+  findManyRoleCount(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take)
 }
     `;
 
@@ -1001,6 +1047,24 @@ export const FindManyRoleCountDocument = /*#__PURE__*/ gql`
   })
   export class FindManyRoleCountGQL extends Apollo.Query<FindManyRoleCount, FindManyRoleCountVariables> {
     document = FindManyRoleCountDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AggregateRoleDocument = /*#__PURE__*/ gql`
+    query AggregateRole($where: RoleWhereInput, $orderBy: [RoleOrderByInput!], $cursor: RoleWhereUniqueInput, $distinct: RoleDistinctFieldEnum, $skip: Int, $take: Int) {
+  aggregateRole(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take) {
+    count
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class AggregateRoleGQL extends Apollo.Query<AggregateRole, AggregateRoleVariables> {
+    document = AggregateRoleDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1133,8 +1197,8 @@ export const FindOneUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserDocument = /*#__PURE__*/ gql`
-    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $skip: Int, $take: Int) {
-  findManyUser(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $distinct: UserDistinctFieldEnum, $skip: Int, $take: Int) {
+  findManyUser(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take) {
     ...UserFields
   }
 }
@@ -1151,8 +1215,8 @@ export const FindManyUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserCountDocument = /*#__PURE__*/ gql`
-    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $skip: Int, $take: Int) {
-  findManyUserCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $distinct: UserDistinctFieldEnum, $skip: Int, $take: Int) {
+  findManyUserCount(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take)
 }
     `;
 
@@ -1161,6 +1225,24 @@ export const FindManyUserCountDocument = /*#__PURE__*/ gql`
   })
   export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCount, FindManyUserCountVariables> {
     document = FindManyUserCountDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AggregateUserDocument = /*#__PURE__*/ gql`
+    query AggregateUser($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $distinct: UserDistinctFieldEnum, $skip: Int, $take: Int) {
+  aggregateUser(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take) {
+    count
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class AggregateUserGQL extends Apollo.Query<AggregateUser, AggregateUserVariables> {
+    document = AggregateUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

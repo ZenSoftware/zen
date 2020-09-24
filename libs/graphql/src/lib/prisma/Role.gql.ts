@@ -13,10 +13,18 @@ export const RoleTypeDefs = gql`
     $where: RoleWhereInput
     $orderBy: [RoleOrderByInput!]
     $cursor: RoleWhereUniqueInput
+    $distinct: RoleDistinctFieldEnum
     $skip: Int
     $take: Int
   ) {
-    findManyRole(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    findManyRole(
+      where: $where
+      orderBy: $orderBy
+      cursor: $cursor
+      distinct: $distinct
+      skip: $skip
+      take: $take
+    ) {
       ...RoleFields
     }
   }
@@ -25,10 +33,18 @@ export const RoleTypeDefs = gql`
     $where: RoleWhereInput
     $orderBy: [RoleOrderByInput!]
     $cursor: RoleWhereUniqueInput
+    $distinct: RoleDistinctFieldEnum
     $skip: Int
     $take: Int
   ) {
-    findManyRoleCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+    findManyRoleCount(
+      where: $where
+      orderBy: $orderBy
+      cursor: $cursor
+      distinct: $distinct
+      skip: $skip
+      take: $take
+    )
   }
 
   mutation CreateOneRole($data: RoleCreateInput!) {

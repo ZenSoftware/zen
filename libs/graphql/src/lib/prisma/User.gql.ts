@@ -13,10 +13,18 @@ export const UserTypeDefs = gql`
     $where: UserWhereInput
     $orderBy: [UserOrderByInput!]
     $cursor: UserWhereUniqueInput
+    $distinct: UserDistinctFieldEnum
     $skip: Int
     $take: Int
   ) {
-    findManyUser(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    findManyUser(
+      where: $where
+      orderBy: $orderBy
+      cursor: $cursor
+      distinct: $distinct
+      skip: $skip
+      take: $take
+    ) {
       ...UserFields
     }
   }
@@ -25,10 +33,18 @@ export const UserTypeDefs = gql`
     $where: UserWhereInput
     $orderBy: [UserOrderByInput!]
     $cursor: UserWhereUniqueInput
+    $distinct: UserDistinctFieldEnum
     $skip: Int
     $take: Int
   ) {
-    findManyUserCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+    findManyUserCount(
+      where: $where
+      orderBy: $orderBy
+      cursor: $cursor
+      distinct: $distinct
+      skip: $skip
+      take: $take
+    )
   }
 
   mutation CreateOneUser($data: UserCreateInput!) {

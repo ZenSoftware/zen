@@ -18,6 +18,7 @@ export default gql`
       where: UserWhereInput
       orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
+      distinct: UserDistinctFieldEnum
       skip: Int
       take: Int
     ): [User!]
@@ -25,6 +26,7 @@ export default gql`
       where: UserWhereInput
       orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
+      distinct: UserDistinctFieldEnum
       skip: Int
       take: Int
     ): Int!
@@ -32,6 +34,7 @@ export default gql`
       where: UserWhereInput
       orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
+      distinct: UserDistinctFieldEnum
       skip: Int
       take: Int
     ): AggregateUser

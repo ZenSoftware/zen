@@ -30,7 +30,7 @@ export const UserTypeDef = null;
 // `;
 
 @Resolver('User')
-@UseGuards(GqlGuard)
+// @UseGuards(GqlGuard)
 @Roles(Role.Admin)
 export class UserResolver {
   @ResolveField()
