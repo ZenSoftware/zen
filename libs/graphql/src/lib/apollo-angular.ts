@@ -664,24 +664,6 @@ export type FindManyRoleCount = (
   & Pick<Query, 'findManyRoleCount'>
 );
 
-export type AggregateRoleVariables = Exact<{
-  where?: Maybe<RoleWhereInput>;
-  orderBy?: Maybe<Array<RoleOrderByInput>>;
-  cursor?: Maybe<RoleWhereUniqueInput>;
-  distinct?: Maybe<RoleDistinctFieldEnum>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-}>;
-
-
-export type AggregateRole = (
-  { __typename?: 'Query' }
-  & { aggregateRole?: Maybe<(
-    { __typename?: 'AggregateRole' }
-    & Pick<AggregateRole, 'count'>
-  )> }
-);
-
 export type CreateOneRoleVariables = Exact<{
   data: RoleCreateInput;
 }>;
@@ -808,24 +790,6 @@ export type FindManyUserCountVariables = Exact<{
 export type FindManyUserCount = (
   { __typename?: 'Query' }
   & Pick<Query, 'findManyUserCount'>
-);
-
-export type AggregateUserVariables = Exact<{
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<Array<UserOrderByInput>>;
-  cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<UserDistinctFieldEnum>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-}>;
-
-
-export type AggregateUser = (
-  { __typename?: 'Query' }
-  & { aggregateUser?: Maybe<(
-    { __typename?: 'AggregateUser' }
-    & Pick<AggregateUser, 'count'>
-  )> }
 );
 
 export type CreateOneUserVariables = Exact<{
@@ -1052,24 +1016,6 @@ export const FindManyRoleCountDocument = /*#__PURE__*/ gql`
       super(apollo);
     }
   }
-export const AggregateRoleDocument = /*#__PURE__*/ gql`
-    query AggregateRole($where: RoleWhereInput, $orderBy: [RoleOrderByInput!], $cursor: RoleWhereUniqueInput, $distinct: RoleDistinctFieldEnum, $skip: Int, $take: Int) {
-  aggregateRole(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take) {
-    count
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class AggregateRoleGQL extends Apollo.Query<AggregateRole, AggregateRoleVariables> {
-    document = AggregateRoleDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
 export const CreateOneRoleDocument = /*#__PURE__*/ gql`
     mutation CreateOneRole($data: RoleCreateInput!) {
   createOneRole(data: $data) {
@@ -1225,24 +1171,6 @@ export const FindManyUserCountDocument = /*#__PURE__*/ gql`
   })
   export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCount, FindManyUserCountVariables> {
     document = FindManyUserCountDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const AggregateUserDocument = /*#__PURE__*/ gql`
-    query AggregateUser($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $distinct: UserDistinctFieldEnum, $skip: Int, $take: Int) {
-  aggregateUser(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take) {
-    count
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class AggregateUserGQL extends Apollo.Query<AggregateUser, AggregateUserVariables> {
-    document = AggregateUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
