@@ -24,7 +24,7 @@ export class ZenMainComponent {
   ) {}
 
   userRoles$ = this.userRolesGQL.watch().valueChanges.pipe(
-    map(r => r.data?.userRoles),
+    map(r => r.data.userRoles),
     shareReplay(1)
   );
 
@@ -39,7 +39,7 @@ export class ZenMainComponent {
       distinct: UserDistinctFieldEnum.FirstName,
     })
     .valueChanges.pipe(
-      map(r => r.data?.findManyUser),
+      map(r => r.data.findManyUser),
       shareReplay(1)
     );
 
