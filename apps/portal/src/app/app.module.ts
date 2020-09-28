@@ -11,6 +11,8 @@ import { typePolicies } from '@zen/graphql/client';
 import { MainModule } from '@zen/main';
 import Cookies from 'js-cookie';
 
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 
@@ -21,6 +23,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot([]),
+    MatToolbarModule,
     AuthModule,
     MainModule,
     GraphQLModule.forRoot({
