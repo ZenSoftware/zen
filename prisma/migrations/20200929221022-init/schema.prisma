@@ -19,11 +19,10 @@ model User {
   firstName String?
   lastName  String?
   password  String
-  roles     String[]
-  test      Int       @default(0)
+  roles     Role[]
 }
 
-model Role {
-  id        String    @default(cuid()) @id
-  name      String    @unique
+enum Role {
+  Registered
+  Admin
 }

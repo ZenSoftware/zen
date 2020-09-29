@@ -216,12 +216,12 @@ export type AggregateUser = {
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  email: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  email?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
-  password: Scalars['String'];
+  password?: Maybe<Scalars['String']>;
   roles: Array<Role>;
 };
 
