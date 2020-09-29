@@ -117,7 +117,7 @@ export type StringFilter = {
   startsWith?: Maybe<Scalars['String']>;
   endsWith?: Maybe<Scalars['String']>;
   mode?: Maybe<QueryMode>;
-  not?: Maybe<Scalars['String']>;
+  not?: Maybe<NestedStringFilter>;
 };
 
 export type DateTimeFilter = {
@@ -128,7 +128,7 @@ export type DateTimeFilter = {
   lte?: Maybe<Scalars['DateTime']>;
   gt?: Maybe<Scalars['DateTime']>;
   gte?: Maybe<Scalars['DateTime']>;
-  not?: Maybe<Scalars['DateTime']>;
+  not?: Maybe<NestedDateTimeFilter>;
 };
 
 export type StringNullableFilter = {
@@ -143,7 +143,7 @@ export type StringNullableFilter = {
   startsWith?: Maybe<Scalars['String']>;
   endsWith?: Maybe<Scalars['String']>;
   mode?: Maybe<QueryMode>;
-  not?: Maybe<Scalars['String']>;
+  not?: Maybe<NestedStringNullableFilter>;
 };
 
 export type EnumRoleNullableListFilter = {
@@ -151,7 +151,7 @@ export type EnumRoleNullableListFilter = {
 };
 
 export type UserCreaterolesInput = {
-  set?: Maybe<Array<Role>>;
+  set: Array<Role>;
 };
 
 export type StringFieldUpdateOperationsInput = {
@@ -167,7 +167,7 @@ export type NullableStringFieldUpdateOperationsInput = {
 };
 
 export type UserUpdaterolesInput = {
-  set?: Maybe<Array<Role>>;
+  set: Array<Role>;
 };
 
 export type NestedStringFilter = {
@@ -216,12 +216,12 @@ export type AggregateUser = {
 
 export type User = {
   __typename?: 'User';
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  email?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
+  password: Scalars['String'];
   roles: Array<Role>;
 };
 

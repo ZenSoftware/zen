@@ -2,12 +2,12 @@ import gql from 'graphql-tag'
 
 export default gql`
   type User {
-    id: String
-    createdAt: DateTime
-    email: String
+    id: String!
+    createdAt: DateTime!
+    email: String!
     firstName: String
     lastName: String
-    password: String
+    password: String!
     roles: [Role!]!
   }
 
