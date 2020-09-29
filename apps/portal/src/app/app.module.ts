@@ -1,17 +1,16 @@
 import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AuthModule } from '@zen/auth';
 import { Environment } from '@zen/common';
 import { GraphQLModule } from '@zen/graphql';
-import { typePolicies } from '@zen/graphql/client';
+import { possibleTypes, typePolicies } from '@zen/graphql/client';
 import { MainModule } from '@zen/main';
 import Cookies from 'js-cookie';
-
-import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -27,7 +26,10 @@ import { AppComponent } from './app.component';
     AuthModule,
     MainModule,
     GraphQLModule.forRoot({
-      typePolicies,
+      cacheOptions: {
+        possibleTypes,
+        typePolicies,
+      },
       batchOptions: {
         uri: environment.url.graphql,
         batchMax: 250,

@@ -1,0 +1,10 @@
+schema: 
+  - "http://localhost:7080/graphql"
+  - "libs/graphql/src/lib/client/schema.gql.ts"
+generates:
+  libs/graphql/src/lib/client/possible-types.ts:
+    plugins:
+      - fragment-matcher
+    config:
+      apolloClientVersion: 3
+      module: es2015

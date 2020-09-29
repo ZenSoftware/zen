@@ -1,10 +1,9 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import {
-  ApolloCache,
   ApolloClientOptions,
   ApolloLink,
   InMemoryCache,
-  TypePolicies,
+  InMemoryCacheConfig,
   split,
 } from '@apollo/client/core';
 import { WebSocketLink } from '@apollo/client/link/ws';
@@ -17,8 +16,7 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export abstract class GraphQLOptions {
   resolvers?: any;
-  typePolicies?: TypePolicies;
-  cache?: ApolloCache<any>;
+  cacheOptions?: InMemoryCacheConfig;
   uploadOptions?: UploadLinkOptions & { mutationNames: string[] };
   batchOptions?: BatchOptions;
   websocketOptions?: WebSocketLink.Configuration;
@@ -129,9 +127,7 @@ export function createApollo(
 
   return {
     link,
-    cache: options.cache
-      ? options.cache
-      : new InMemoryCache({ typePolicies: options.typePolicies }),
+    cache: new InMemoryCache(options.cacheOptions),
     resolvers: options.resolvers,
   };
 }
