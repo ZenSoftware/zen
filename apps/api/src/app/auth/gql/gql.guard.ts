@@ -2,8 +2,7 @@ import { ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-
-import { Role } from '../../auth';
+import { Role } from '@prisma/client';
 
 @Injectable()
 export class GqlGuard extends AuthGuard('jwt') {

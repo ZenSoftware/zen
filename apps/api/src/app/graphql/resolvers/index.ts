@@ -3,18 +3,15 @@ import { mergeTypeDefs } from '@graphql-tools/merge'
 
 import PRISMA_TYPE_DEFS from '../prisma/typeDefs';
 import { AuthResolver, AuthTypeDef } from './Auth';
-import { RoleResolver, RoleTypeDef } from './Role';
 import { UserResolver, UserTypeDef } from './User';
 
 export const NEST_RESOLVERS = [
   AuthResolver,
-  RoleResolver,
   UserResolver
 ];
 
 export const NEST_TYPE_DEFS = [
   AuthTypeDef,
-  RoleTypeDef,
   UserTypeDef
 ].filter(x => x);
 

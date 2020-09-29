@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Role } from '@zen/api-interfaces';
+import { Role } from '@zen/graphql';
 import {
   AuthExchangeTokenGQL,
   AuthLoginGQL,

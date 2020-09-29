@@ -6,6 +6,5 @@ export const UserFields = gql`
     email
     firstName
     roles
-    test
   }
 `;

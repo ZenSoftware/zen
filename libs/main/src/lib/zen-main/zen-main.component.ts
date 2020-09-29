@@ -3,7 +3,6 @@ import {
   CreateOneUserGQL,
   FindManyUserGQL,
   QueryMode,
-  UpdateOneUserGQL,
   UserDistinctFieldEnum,
   UserRolesGQL,
   selectOne,
@@ -19,8 +18,7 @@ export class ZenMainComponent {
   constructor(
     private findManyUserGQL: FindManyUserGQL,
     private userRolesGQL: UserRolesGQL,
-    private createOneUserGQL: CreateOneUserGQL,
-    private updateOneUserGQL: UpdateOneUserGQL
+    private createOneUserGQL: CreateOneUserGQL
   ) {}
 
   userRoles$ = this.userRolesGQL.watch().valueChanges.pipe(
@@ -56,15 +54,6 @@ export class ZenMainComponent {
   }
 
   example() {
-    this.updateOneUserGQL
-      .mutate({
-        where: selectOne('peter@zensoftware.ca', 'email'),
-        data: {
-          test: { increment: 1 },
-        },
-      })
-      .subscribe();
-
     userRolesVar([...userRolesVar(), 'another']);
   }
 }

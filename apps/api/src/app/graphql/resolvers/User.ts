@@ -1,14 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import {
-  Args,
-  Context,
-  Info,
-  Mutation,
-  Parent,
-  Query,
-  ResolveField,
-  Resolver,
-} from '@nestjs/graphql';
+import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 
 import { GqlGuard, GqlUser, RequestUser, Role, Roles } from '../../auth';
@@ -30,14 +21,9 @@ export const UserTypeDef = null;
 // `;
 
 @Resolver('User')
-// @UseGuards(GqlGuard)
-@Roles(Role.Admin)
+@UseGuards(GqlGuard)
+@Roles('Admin')
 export class UserResolver {
-  @ResolveField()
-  async password() {
-    return '';
-  }
-
   @Query()
   async findOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
     return resolvers.Query.findOneUser(parent, PrismaSelectArgs(info, args), ctx);
@@ -51,6 +37,11 @@ export class UserResolver {
   @Query()
   async findManyUserCount(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
     return resolvers.Query.findManyUserCount(parent, PrismaSelectArgs(info, args), ctx);
+  }
+
+  @Query()
+  async aggregateUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
+    return resolvers.Query.aggregateUser(parent, PrismaSelectArgs(info, args), ctx);
   }
 
   @Mutation()

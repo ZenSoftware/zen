@@ -8,8 +8,7 @@ export default gql`
     firstName: String
     lastName: String
     password: String!
-    roles: [String!]!
-    test: Int!
+    roles: [Role!]!
   }
 
   type Query {
