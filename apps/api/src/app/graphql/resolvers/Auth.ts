@@ -28,11 +28,11 @@ export const AuthTypeDef = gql`
   extend type Mutation {
     authPasswordChange(data: AuthPasswordChangeInput!): Boolean
     authPasswordResetConfirmation(data: AuthPasswordResetConfirmationInput!): Boolean
-    authRegister(data: AuthRegisterInput): User!
+    authRegister(data: AuthRegisterInput!): User!
   }
 
   type AuthSession {
-    id: Int!
+    id: String!
     maxAge: String!
     roles: [String!]!
     rememberMe: Boolean!

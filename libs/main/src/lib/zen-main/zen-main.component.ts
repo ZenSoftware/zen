@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  CreateOneUserGQL,
+  AuthRegisterGQL,
   FindManyUserGQL,
   QueryMode,
   UserDistinctFieldEnum,
@@ -16,9 +16,9 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class ZenMainComponent {
   constructor(
+    private authRegisterGQL: AuthRegisterGQL,
     private findManyUserGQL: FindManyUserGQL,
-    private userRolesGQL: UserRolesGQL,
-    private createOneUserGQL: CreateOneUserGQL
+    private userRolesGQL: UserRolesGQL
   ) {}
 
   userRoles$ = this.userRolesGQL.watch().valueChanges.pipe(
@@ -42,15 +42,15 @@ export class ZenMainComponent {
     );
 
   createUser() {
-    this.createOneUserGQL
+    this.authRegisterGQL
       .mutate({
         data: {
           email: 'peter@zensoftware.ca',
+          password: 'TempTemp',
           firstName: 'Peter',
-          password: '1234',
         },
       })
-      .subscribe();
+      .subscribe(({ data }) => console.log('Created', data?.authRegister));
   }
 
   example() {

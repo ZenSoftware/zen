@@ -342,12 +342,12 @@ export type MutationAuthPasswordResetConfirmationArgs = {
 
 
 export type MutationAuthRegisterArgs = {
-  data?: Maybe<AuthRegisterInput>;
+  data: AuthRegisterInput;
 };
 
 export type AuthSession = {
   __typename?: 'AuthSession';
-  id: Scalars['Int'];
+  id: Scalars['String'];
   maxAge: Scalars['String'];
   roles: Array<Scalars['String']>;
   rememberMe: Scalars['Boolean'];
@@ -400,6 +400,19 @@ export type AuthLogin = (
   & { authLogin: (
     { __typename?: 'AuthSession' }
     & AuthSessionFields
+  ) }
+);
+
+export type AuthRegisterVariables = Exact<{
+  data: AuthRegisterInput;
+}>;
+
+
+export type AuthRegister = (
+  { __typename?: 'Mutation' }
+  & { authRegister: (
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
   ) }
 );
 
@@ -604,6 +617,24 @@ export const AuthLoginDocument = /*#__PURE__*/ gql`
   })
   export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
     document = AuthLoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AuthRegisterDocument = /*#__PURE__*/ gql`
+    mutation AuthRegister($data: AuthRegisterInput!) {
+  authRegister(data: $data) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class AuthRegisterGQL extends Apollo.Mutation<AuthRegister, AuthRegisterVariables> {
+    document = AuthRegisterDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
