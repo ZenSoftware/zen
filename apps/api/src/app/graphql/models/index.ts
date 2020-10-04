@@ -4,5 +4,5 @@ export * from './auth-password-reset-confirmation-input';
 export * from './auth-password-reset-request-input';
 export * from './auth-register-input';
 export * from './auth-resend-verification-input';
-export * from './context';
+export { IContext } from './context';
 export * from './user-session';
