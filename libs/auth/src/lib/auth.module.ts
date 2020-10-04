@@ -9,8 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AuthRoutingModule } from './auth-routing.module';
+import { IsLoggedInDirective, NotRolesDirective, RolesDirective } from './directives';
 import { ZenLoadingComponent } from './zen-loading/zen-loading.component';
 import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component';
+import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 
 @NgModule({
@@ -25,7 +27,22 @@ import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component
     MatProgressSpinnerModule,
     AuthRoutingModule,
   ],
-  declarations: [ZenLoadingComponent, ZenLoginFormComponent, ZenLoginPageComponent],
-  exports: [ZenLoginFormComponent, ZenLoginPageComponent],
+  declarations: [
+    IsLoggedInDirective,
+    NotRolesDirective,
+    RolesDirective,
+    ZenLoadingComponent,
+    ZenLoginFormComponent,
+    ZenLoginPageComponent,
+    ZenLoginLinkComponent,
+  ],
+  exports: [
+    IsLoggedInDirective,
+    NotRolesDirective,
+    RolesDirective,
+    ZenLoginFormComponent,
+    ZenLoginPageComponent,
+    ZenLoginLinkComponent,
+  ],
 })
 export class AuthModule {}
