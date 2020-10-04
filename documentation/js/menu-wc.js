@@ -160,9 +160,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/EnvironmentBase.html" data-type="entity-link">EnvironmentBase</a>
                             </li>
                             <li class="link">
-                                <a href="classes/RoleResolver.html" data-type="entity-link">RoleResolver</a>
-                            </li>
-                            <li class="link">
                                 <a href="classes/UserResolver.html" data-type="entity-link">UserResolver</a>
                             </li>
                         </ul>

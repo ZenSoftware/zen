@@ -94,9 +94,6 @@
                             <a href="#Roles" title="apps/api/src/app/auth/roles.decorator.ts"><b>Roles</b>&nbsp;&nbsp;&nbsp;(apps/.../roles.decorator.ts)</a>
                         </li>
                         <li>
-                            <a href="#RoleTypeDef" title="apps/api/src/app/graphql/resolvers/Role.ts"><b>RoleTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../Role.ts)</a>
-                        </li>
-                        <li>
                             <a href="#UserTypeDef" title="apps/api/src/app/graphql/resolvers/User.ts"><b>UserTypeDef</b>&nbsp;&nbsp;&nbsp;(apps/.../User.ts)</a>
                         </li>
                     </ul>
@@ -172,7 +169,6 @@
                         <td class="col-md-4">
                             <i>Default value : </i><code>[
   AuthResolver,
-  RoleResolver,
   UserResolver
 ]</code>
                         </td>
@@ -197,7 +193,6 @@
                         <td class="col-md-4">
                             <i>Default value : </i><code>[
   AuthTypeDef,
-  RoleTypeDef,
   UserTypeDef
 ].filter(x &#x3D;&gt; x)</code>
                         </td>
@@ -254,11 +249,11 @@
   extend type Mutation {
     authPasswordChange(data: AuthPasswordChangeInput!): Boolean
     authPasswordResetConfirmation(data: AuthPasswordResetConfirmationInput!): Boolean
-    authRegister(data: AuthRegisterInput): User!
+    authRegister(data: AuthRegisterInput!): User!
   }
 
   type AuthSession {
-    id: Int!
+    id: String!
     maxAge: String!
     roles: [String!]!
     rememberMe: Boolean!
@@ -516,37 +511,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>(...roles: Array&lt;Role | string&gt;) &#x3D;&gt; SetMetadata(&#x27;roles&#x27;, roles)</code>
-                        </td>
-                    </tr>
-
-
-            </tbody>
-        </table>
-</section>
-    <h3>apps/api/src/app/graphql/resolvers/Role.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="RoleTypeDef"></a>
-                        <span class="name">
-                            <b>
-                            RoleTypeDef</b>
-                            <a href="#RoleTypeDef"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>null</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>null</code>
+                            <i>Default value : </i><code>(...roles: Array&lt;Role&gt;) &#x3D;&gt; SetMetadata(&#x27;roles&#x27;, roles)</code>
                         </td>
                     </tr>
 

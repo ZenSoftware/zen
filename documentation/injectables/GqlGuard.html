@@ -105,7 +105,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">apps/api/src/app/auth/gql/gql.guard.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">apps/api/src/app/auth/gql/gql.guard.ts:8</a></div>
                             </td>
                         </tr>
 
@@ -172,8 +172,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">apps/api/src/app/auth/gql/gql.guard.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">apps/api/src/app/auth/gql/gql.guard.ts:13</a></div>
                 </td>
             </tr>
 
@@ -242,8 +242,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">apps/api/src/app/auth/gql/gql.guard.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">apps/api/src/app/auth/gql/gql.guard.ts:31</a></div>
                 </td>
             </tr>
 
@@ -300,8 +300,7 @@
 import { Reflector } from &#x27;@nestjs/core&#x27;;
 import { GqlExecutionContext } from &#x27;@nestjs/graphql&#x27;;
 import { AuthGuard } from &#x27;@nestjs/passport&#x27;;
-
-import { Role } from &#x27;../../auth&#x27;;
+import { Role } from &#x27;@prisma/client&#x27;;
 
 @Injectable()
 export class GqlGuard extends AuthGuard(&#x27;jwt&#x27;) {
