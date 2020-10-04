@@ -4,10 +4,7 @@
     {
       "tag": "CreateEnum",
       "enum": "Role",
-      "values": [
-        "Registered",
-        "Admin"
-      ]
+      "values": ["Registered", "Admin"]
     },
     {
       "tag": "CreateSource",
