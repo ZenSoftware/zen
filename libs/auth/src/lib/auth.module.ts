@@ -13,6 +13,8 @@ import { IsLoggedInDirective, NotRolesDirective, RolesDirective } from './direct
 import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
+import { ZenRegistrationFormComponent } from './zen-registration-form/zen-registration-form.component';
+import { ZenRegistrationPageComponent } from './zen-registration-page/zen-registration-page.component';
 
 @NgModule({
   imports: [
@@ -30,6 +32,8 @@ import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component
     IsLoggedInDirective,
     NotRolesDirective,
     RolesDirective,
+    ZenRegistrationFormComponent,
+    ZenRegistrationPageComponent,
     ZenLoginFormComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,
@@ -38,6 +42,8 @@ import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component
     IsLoggedInDirective,
     NotRolesDirective,
     RolesDirective,
+    ZenRegistrationFormComponent,
+    ZenRegistrationPageComponent,
     ZenLoginFormComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,

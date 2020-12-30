@@ -372,7 +372,7 @@ export type Mutation = {
   updateManyUser?: Maybe<BatchPayload>;
   authPasswordChange?: Maybe<Scalars['Boolean']>;
   authPasswordResetConfirmation?: Maybe<Scalars['Boolean']>;
-  authRegister: User;
+  authRegister: AuthSession;
 };
 
 
@@ -491,8 +491,8 @@ export type AuthRegisterVariables = Exact<{
 export type AuthRegister = (
   { __typename?: 'Mutation' }
   & { authRegister: (
-    { __typename?: 'User' }
-    & Pick<User, 'id'>
+    { __typename?: 'AuthSession' }
+    & AuthSessionFields
   ) }
 );
 
@@ -519,7 +519,7 @@ export type AuthSessionFields = (
 
 export type UserFields = (
   { __typename?: 'User' }
-  & Pick<User, 'id'>
+  & Pick<User, 'id' | 'email' | 'firstName' | 'lastName'>
 );
 
 export type FindUniqueUserVariables = Exact<{
@@ -661,6 +661,9 @@ export const AuthSessionFields = /*#__PURE__*/ gql`
 export const UserFields = /*#__PURE__*/ gql`
     fragment UserFields on User {
   id
+  email
+  firstName
+  lastName
 }
     `;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
@@ -702,10 +705,10 @@ export const AuthLoginDocument = /*#__PURE__*/ gql`
 export const AuthRegisterDocument = /*#__PURE__*/ gql`
     mutation AuthRegister($data: AuthRegisterInput!) {
   authRegister(data: $data) {
-    id
+    ...AuthSessionFields
   }
 }
-    `;
+    ${AuthSessionFields}`;
 
   @Injectable({
     providedIn: GraphQLModule

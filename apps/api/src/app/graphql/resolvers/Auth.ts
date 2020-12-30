@@ -28,7 +28,7 @@ export const AuthTypeDef = gql`
   extend type Mutation {
     authPasswordChange(data: AuthPasswordChangeInput!): Boolean
     authPasswordResetConfirmation(data: AuthPasswordResetConfirmationInput!): Boolean
-    authRegister(data: AuthRegisterInput!): User!
+    authRegister(data: AuthRegisterInput!): AuthSession!
   }
 
   type AuthSession {
@@ -163,7 +163,7 @@ export class AuthResolver {
 
     const hashedPassword = await bcrypt.hash(data.password, 12);
 
-    return await ctx.prisma.user.create({
+    const user = await ctx.prisma.user.create({
       data: {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -172,6 +172,8 @@ export class AuthResolver {
         roles: { set: [Role.Registered] },
       },
     });
+
+    return this.auth.setJwtCookie(ctx.res, user, true);
   }
 
   @Mutation()
