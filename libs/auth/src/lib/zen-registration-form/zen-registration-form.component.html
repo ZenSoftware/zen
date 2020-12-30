@@ -1,2 +1,69 @@
-<i class="fas fa-fw fa-wrench"></i>
-Under construction
+<div @accordion *ngIf="completed" class="d-flex justify-content-center align-items-center thank-you-container">
+  <div class="text-center">
+    <i class="fas fa-envelope-open-text fa-3x mb-3"></i>
+    <p style="font-size: 30px;">
+      A confirmation email has been sent to you.
+      Click on the confirmation link in the email to activate your account.
+      Please check your junk mail.
+    </p>
+  </div>
+</div>
+
+<form @accordionLeave *ngIf="!completed" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <zen-loading *ngIf="loading"></zen-loading>
+
+  <div class="form-group" [ngClass]="{'has-danger': firstName.invalid && firstName.touched}">
+    <input name="first_name" formControlName="firstName" type="firstName" placeholder="First Name" class="form-control"
+      [ngClass]="{'is-invalid': firstName.invalid && firstName.touched}" maxlength="100" required>
+    <div class="invalid-feedback" *ngIf="firstName.errors?.required">Required</div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-danger': email.invalid && email.touched}">
+    <input name="email" formControlName="email" type="email" placeholder="Email" class="form-control" (keydown)="emailTakenReset()"
+      [ngClass]="{'is-invalid': email.invalid && email.touched}" maxlength="254" required>
+    <div class="invalid-feedback" *ngIf="email.errors?.required">Required</div>
+    <div class="invalid-feedback" *ngIf="email.errors?.email && !email.errors?.required">Not a valid email</div>
+    <div class="invalid-feedback" *ngIf="email.errors?.emailTaken">This email is already registered</div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-danger': password.invalid && password.touched}">
+    <input formControlName="password" type="password" placeholder="Password" class="form-control"
+      [ngClass]="{'is-invalid': password.invalid && password.touched}" required>
+    <div class="invalid-feedback" *ngIf="password.errors?.required">Required</div>
+    <div class="invalid-feedback" *ngIf="password.errors?.minLength && !password.errors?.required">
+      {{password.errors.minLength}}</div>
+    <div class="invalid-feedback" *ngIf="password.errors?.maxLength && !password.errors?.required">
+      {{password.errors.maxLength}}</div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-danger': passwordConfirm.invalid && passwordConfirm.touched}">
+    <input formControlName="passwordConfirm" type="password" placeholder="Confirm Password" class="form-control"
+      [ngClass]="{'is-invalid': passwordConfirm.invalid && passwordConfirm.touched}" required>
+    <div class="invalid-feedback" *ngIf="passwordConfirm.errors?.required">Required</div>
+    <div class="invalid-feedback" *ngIf="passwordConfirm.errors?.notMatching && !passwordConfirm.errors?.required">
+      Password confirmation does not match</div>
+  </div>
+
+  <div class="form-group">
+    <div class="custom-control custom-checkbox" style="line-height: 23px;">
+      <input type="checkbox" class="custom-control-input tu-pointer" id="acceptTermsCheckbox" formControlName="acceptTerms">
+      <label for="acceptTermsCheckbox" class="custom-control-label text-sm tu-pointer">
+        I accept the <a href="https://tuspeak.com/terms/" target="_blank" tabindex="-1">terms and conditions</a>
+      </label>
+    </div>
+    <div class="text-danger" style="font-size:80%;" *ngIf="acceptTerms.invalid && acceptTerms.touched">Accept the terms
+      and conditions</div>
+  </div>
+
+  <div class="text-center text-danger mb-3" *ngIf="generalError">
+    There was a problem with your registration.<br>
+    If this continues, please contact us.
+  </div>
+
+  <button type="submit" class="btn btn-info btn-lg btn-block"
+    [ngClass]="{'cursor-pointer': registrationForm.valid, 'cursor-not-allowed': !registrationForm.valid}"
+    [disabled]="!registrationForm.valid || loading">
+    <i class="fas fa-fw fa-cloud-upload-alt"></i>
+    Let's Go!
+  </button>
+</form>
