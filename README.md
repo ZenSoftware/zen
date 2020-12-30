@@ -25,9 +25,16 @@ cd Zen
 npm i
 docker-compose up -d
 npm run prisma:migrate
+```
+
+```bash
+# Start the Nest API
 npm run start:api
 
+# Watch for changes to code generate the GraphQL client
 npm run apollo:watch
+
+# Start the Angular site at localhost:4200
 npm run start
 ```
 
