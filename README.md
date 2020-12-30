@@ -20,6 +20,7 @@
 - [Docker](https://www.docker.com/)
 
 ```bash
+# Project setup steps
 git clone https://github.com/ZenSoftware/Zen.git --depth=1
 cd Zen
 npm i
