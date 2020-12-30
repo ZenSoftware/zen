@@ -6,10 +6,10 @@ export class AuthRegisterInput {
   @MaxLength(254)
   readonly email: string;
 
+  @Length(ApiConstants.PASSWORD_MIN_LENGTH, 100)
+  readonly password: string;
+
   readonly firstName?: string;
 
   readonly lastName?: string;
-
-  @Length(ApiConstants.PASSWORD_MIN_LENGTH, 100)
-  readonly password: string;
 }

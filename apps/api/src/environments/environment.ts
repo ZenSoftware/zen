@@ -5,6 +5,7 @@ import { EnvironmentBase } from './environment.base';
 dotenv.config();
 
 export const environment: EnvironmentBase = {
+  siteUrl: 'http://zensoftware.ca',
   production: false,
   expressPort: 7080,
   graphql: {

@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: nginx-ingress
+    meta.helm.sh/release-namespace: ingress-zen
+    service.beta.kubernetes.io/azure-dns-label-name: ossdns
+  creationTimestamp: "2020-10-22T10:32:06Z"
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: nginx-ingress
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/version: 0.40.2
+    helm.sh/chart: ingress-nginx-3.7.1
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:meta.helm.sh/release-name: {}
+          f:meta.helm.sh/release-namespace: {}
+          f:service.beta.kubernetes.io/azure-dns-label-name: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:app.kubernetes.io/name: {}
+          f:app.kubernetes.io/version: {}
+          f:helm.sh/chart: {}
+      f:spec:
+        f:externalTrafficPolicy: {}
+        f:loadBalancerIP: {}
+        f:ports:
+          .: {}
+          k:{"port":80,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":443,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:app.kubernetes.io/component: {}
+          f:app.kubernetes.io/instance: {}
+          f:app.kubernetes.io/name: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: Go-http-client
+    operation: Update
+    time: "2020-10-22T10:32:05Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:finalizers:
+          .: {}
+          v:"service.kubernetes.io/load-balancer-cleanup": {}
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2020-10-22T10:32:07Z"
+  name: nginx-ingress-ingress-nginx-controller
+  namespace: ingress-zen
+  resourceVersion: "368041"
+  selfLink: /api/v1/namespaces/ingress-zen/services/nginx-ingress-ingress-nginx-controller
+  uid: 52ed0871-e477-47f9-907f-0e7ce7cc5422
+spec:
+  clusterIP: 10.0.67.222
+  externalTrafficPolicy: Cluster
+  loadBalancerIP: 52.154.153.45
+  ports:
+  - name: http
+    nodePort: 30013
+    port: 80
+    protocol: TCP
+    targetPort: http
+  - name: https
+    nodePort: 32065
+    port: 443
+    protocol: TCP
+    targetPort: https
+  - name: postgres
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: nginx-ingress
+    app.kubernetes.io/name: ingress-nginx
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 52.154.153.45

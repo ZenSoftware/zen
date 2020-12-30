@@ -1,23 +1,31 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   type User {
-    id: String!
+    id: Int!
     createdAt: DateTime!
     email: String!
+    password: String!
     firstName: String
     lastName: String
-    password: String!
     roles: [Role!]!
   }
 
   type Query {
-    findOneUser(where: UserWhereUniqueInput!): User
+    findUniqueUser(where: UserWhereUniqueInput!): User
+    findFirstUser(
+      where: UserWhereInput
+      orderBy: [UserOrderByInput!]
+      cursor: UserWhereUniqueInput
+      distinct: UserScalarFieldEnum
+      skip: Int
+      take: Int
+    ): [User!]
     findManyUser(
       where: UserWhereInput
       orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
-      distinct: UserDistinctFieldEnum
+      distinct: UserScalarFieldEnum
       skip: Int
       take: Int
     ): [User!]
@@ -25,7 +33,7 @@ export default gql`
       where: UserWhereInput
       orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
-      distinct: UserDistinctFieldEnum
+      distinct: UserScalarFieldEnum
       skip: Int
       take: Int
     ): Int!
@@ -33,7 +41,7 @@ export default gql`
       where: UserWhereInput
       orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
-      distinct: UserDistinctFieldEnum
+      distinct: UserScalarFieldEnum
       skip: Int
       take: Int
     ): AggregateUser
@@ -48,9 +56,6 @@ export default gql`
       update: UserUpdateInput!
     ): User
     deleteManyUser(where: UserWhereInput): BatchPayload
-    updateManyUser(
-      where: UserWhereInput
-      data: UserUpdateManyMutationInput
-    ): BatchPayload
+    updateManyUser(where: UserWhereInput, data: UserUpdateManyMutationInput): BatchPayload
   }
-`
+`;

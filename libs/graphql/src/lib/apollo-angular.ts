@@ -4,6 +4,8 @@ import * as Apollo from 'apollo-angular';
 import { GraphQLModule } from './graphql.module';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -22,13 +24,13 @@ export type BatchPayload = {
   count: Scalars['Int'];
 };
 
-export enum UserDistinctFieldEnum {
+export enum UserScalarFieldEnum {
   Id = 'id',
   CreatedAt = 'createdAt',
   Email = 'email',
+  Password = 'password',
   FirstName = 'firstName',
   LastName = 'lastName',
-  Password = 'password',
   Roles = 'roles'
 }
 
@@ -37,26 +39,27 @@ export enum SortOrder {
   Desc = 'desc'
 }
 
-export enum Role {
-  Registered = 'Registered',
-  Admin = 'Admin'
-}
-
 export enum QueryMode {
   Default = 'default',
   Insensitive = 'insensitive'
+}
+
+export enum Role {
+  Registered = 'Registered',
+  Admin = 'Admin',
+  Super = 'Super'
 }
 
 export type UserWhereInput = {
   AND?: Maybe<Array<UserWhereInput>>;
   OR?: Maybe<Array<UserWhereInput>>;
   NOT?: Maybe<Array<UserWhereInput>>;
-  id?: Maybe<StringFilter>;
+  id?: Maybe<IntFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   email?: Maybe<StringFilter>;
+  password?: Maybe<StringFilter>;
   firstName?: Maybe<StringNullableFilter>;
   lastName?: Maybe<StringNullableFilter>;
-  password?: Maybe<StringFilter>;
   roles?: Maybe<EnumRoleNullableListFilter>;
 };
 
@@ -64,45 +67,64 @@ export type UserOrderByInput = {
   id?: Maybe<SortOrder>;
   createdAt?: Maybe<SortOrder>;
   email?: Maybe<SortOrder>;
+  password?: Maybe<SortOrder>;
   firstName?: Maybe<SortOrder>;
   lastName?: Maybe<SortOrder>;
-  password?: Maybe<SortOrder>;
   roles?: Maybe<SortOrder>;
 };
 
 export type UserWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
   email?: Maybe<Scalars['String']>;
 };
 
 export type UserCreateInput = {
-  id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
+  password: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
-  password: Scalars['String'];
   roles?: Maybe<UserCreaterolesInput>;
 };
 
 export type UserUpdateInput = {
-  id?: Maybe<StringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
+  password?: Maybe<StringFieldUpdateOperationsInput>;
   firstName?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastName?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  password?: Maybe<StringFieldUpdateOperationsInput>;
   roles?: Maybe<UserUpdaterolesInput>;
 };
 
 export type UserUpdateManyMutationInput = {
-  id?: Maybe<StringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
+  password?: Maybe<StringFieldUpdateOperationsInput>;
   firstName?: Maybe<NullableStringFieldUpdateOperationsInput>;
   lastName?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  password?: Maybe<StringFieldUpdateOperationsInput>;
   roles?: Maybe<UserUpdaterolesInput>;
+};
+
+export type IntFilter = {
+  equals?: Maybe<Scalars['Int']>;
+  in?: Maybe<Array<Scalars['Int']>>;
+  notIn?: Maybe<Array<Scalars['Int']>>;
+  lt?: Maybe<Scalars['Int']>;
+  lte?: Maybe<Scalars['Int']>;
+  gt?: Maybe<Scalars['Int']>;
+  gte?: Maybe<Scalars['Int']>;
+  not?: Maybe<NestedIntFilter>;
+};
+
+export type DateTimeFilter = {
+  equals?: Maybe<Scalars['DateTime']>;
+  in?: Maybe<Array<Scalars['DateTime']>>;
+  notIn?: Maybe<Array<Scalars['DateTime']>>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
+  not?: Maybe<NestedDateTimeFilter>;
 };
 
 export type StringFilter = {
@@ -118,17 +140,6 @@ export type StringFilter = {
   endsWith?: Maybe<Scalars['String']>;
   mode?: Maybe<QueryMode>;
   not?: Maybe<NestedStringFilter>;
-};
-
-export type DateTimeFilter = {
-  equals?: Maybe<Scalars['DateTime']>;
-  in?: Maybe<Array<Scalars['DateTime']>>;
-  notIn?: Maybe<Array<Scalars['DateTime']>>;
-  lt?: Maybe<Scalars['DateTime']>;
-  lte?: Maybe<Scalars['DateTime']>;
-  gt?: Maybe<Scalars['DateTime']>;
-  gte?: Maybe<Scalars['DateTime']>;
-  not?: Maybe<NestedDateTimeFilter>;
 };
 
 export type StringNullableFilter = {
@@ -154,12 +165,12 @@ export type UserCreaterolesInput = {
   set: Array<Role>;
 };
 
-export type StringFieldUpdateOperationsInput = {
-  set?: Maybe<Scalars['String']>;
-};
-
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['DateTime']>;
+};
+
+export type StringFieldUpdateOperationsInput = {
+  set?: Maybe<Scalars['String']>;
 };
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -168,6 +179,28 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type UserUpdaterolesInput = {
   set: Array<Role>;
+};
+
+export type NestedIntFilter = {
+  equals?: Maybe<Scalars['Int']>;
+  in?: Maybe<Array<Scalars['Int']>>;
+  notIn?: Maybe<Array<Scalars['Int']>>;
+  lt?: Maybe<Scalars['Int']>;
+  lte?: Maybe<Scalars['Int']>;
+  gt?: Maybe<Scalars['Int']>;
+  gte?: Maybe<Scalars['Int']>;
+  not?: Maybe<NestedIntFilter>;
+};
+
+export type NestedDateTimeFilter = {
+  equals?: Maybe<Scalars['DateTime']>;
+  in?: Maybe<Array<Scalars['DateTime']>>;
+  notIn?: Maybe<Array<Scalars['DateTime']>>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
+  not?: Maybe<NestedDateTimeFilter>;
 };
 
 export type NestedStringFilter = {
@@ -182,17 +215,6 @@ export type NestedStringFilter = {
   startsWith?: Maybe<Scalars['String']>;
   endsWith?: Maybe<Scalars['String']>;
   not?: Maybe<NestedStringFilter>;
-};
-
-export type NestedDateTimeFilter = {
-  equals?: Maybe<Scalars['DateTime']>;
-  in?: Maybe<Array<Scalars['DateTime']>>;
-  notIn?: Maybe<Array<Scalars['DateTime']>>;
-  lt?: Maybe<Scalars['DateTime']>;
-  lte?: Maybe<Scalars['DateTime']>;
-  gt?: Maybe<Scalars['DateTime']>;
-  gte?: Maybe<Scalars['DateTime']>;
-  not?: Maybe<NestedDateTimeFilter>;
 };
 
 export type NestedStringNullableFilter = {
@@ -211,17 +233,63 @@ export type NestedStringNullableFilter = {
 
 export type AggregateUser = {
   __typename?: 'AggregateUser';
-  count: Scalars['Int'];
+  count?: Maybe<UserCountAggregateOutputType>;
+  avg?: Maybe<UserAvgAggregateOutputType>;
+  sum?: Maybe<UserSumAggregateOutputType>;
+  min?: Maybe<UserMinAggregateOutputType>;
+  max?: Maybe<UserMaxAggregateOutputType>;
+};
+
+export type UserCountAggregateOutputType = {
+  __typename?: 'UserCountAggregateOutputType';
+  id: Scalars['Int'];
+  createdAt?: Maybe<Scalars['Int']>;
+  email?: Maybe<Scalars['Int']>;
+  password?: Maybe<Scalars['Int']>;
+  firstName?: Maybe<Scalars['Int']>;
+  lastName?: Maybe<Scalars['Int']>;
+  roles?: Maybe<Scalars['Int']>;
+  _all: Scalars['Int'];
+};
+
+export type UserAvgAggregateOutputType = {
+  __typename?: 'UserAvgAggregateOutputType';
+  id: Scalars['Float'];
+};
+
+export type UserSumAggregateOutputType = {
+  __typename?: 'UserSumAggregateOutputType';
+  id: Scalars['Int'];
+};
+
+export type UserMinAggregateOutputType = {
+  __typename?: 'UserMinAggregateOutputType';
+  id: Scalars['Int'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  email?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+};
+
+export type UserMaxAggregateOutputType = {
+  __typename?: 'UserMaxAggregateOutputType';
+  id: Scalars['Int'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  email?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['String'];
+  id: Scalars['Int'];
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
+  password: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
-  password: Scalars['String'];
   roles: Array<Role>;
 };
 
@@ -231,9 +299,10 @@ export type Query = {
   authExchangeToken: AuthSession;
   authLogin: AuthSession;
   authPasswordResetRequest?: Maybe<Scalars['Boolean']>;
+  findFirstUser?: Maybe<Array<User>>;
   findManyUser?: Maybe<Array<User>>;
   findManyUserCount: Scalars['Int'];
-  findOneUser?: Maybe<User>;
+  findUniqueUser?: Maybe<User>;
   loggedIn: Scalars['Boolean'];
   userRoles: Array<Scalars['String']>;
 };
@@ -243,7 +312,7 @@ export type QueryAggregateUserArgs = {
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<UserDistinctFieldEnum>;
+  distinct?: Maybe<UserScalarFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -259,11 +328,21 @@ export type QueryAuthPasswordResetRequestArgs = {
 };
 
 
+export type QueryFindFirstUserArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByInput>>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<UserScalarFieldEnum>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryFindManyUserArgs = {
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<UserDistinctFieldEnum>;
+  distinct?: Maybe<UserScalarFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
@@ -273,13 +352,13 @@ export type QueryFindManyUserCountArgs = {
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<UserDistinctFieldEnum>;
+  distinct?: Maybe<UserScalarFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 };
 
 
-export type QueryFindOneUserArgs = {
+export type QueryFindUniqueUserArgs = {
   where: UserWhereUniqueInput;
 };
 
@@ -347,7 +426,7 @@ export type MutationAuthRegisterArgs = {
 
 export type AuthSession = {
   __typename?: 'AuthSession';
-  id: Scalars['String'];
+  id: Scalars['Int'];
   maxAge: Scalars['String'];
   roles: Array<Scalars['String']>;
   rememberMe: Scalars['Boolean'];
@@ -375,8 +454,9 @@ export type AuthPasswordResetRequestInput = {
 
 export type AuthRegisterInput = {
   email: Scalars['String'];
-  firstName: Scalars['String'];
   password: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
 };
 
 export type AuthExchangeTokenVariables = Exact<{ [key: string]: never; }>;
@@ -439,17 +519,17 @@ export type AuthSessionFields = (
 
 export type UserFields = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'email' | 'firstName' | 'roles'>
+  & Pick<User, 'id'>
 );
 
-export type FindOneUserVariables = Exact<{
+export type FindUniqueUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type FindOneUser = (
+export type FindUniqueUser = (
   { __typename?: 'Query' }
-  & { findOneUser?: Maybe<(
+  & { findUniqueUser?: Maybe<(
     { __typename?: 'User' }
     & UserFields
   )> }
@@ -459,7 +539,7 @@ export type FindManyUserVariables = Exact<{
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<UserDistinctFieldEnum>;
+  distinct?: Maybe<UserScalarFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 }>;
@@ -477,7 +557,7 @@ export type FindManyUserCountVariables = Exact<{
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<Array<UserOrderByInput>>;
   cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<UserDistinctFieldEnum>;
+  distinct?: Maybe<UserScalarFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
 }>;
@@ -581,9 +661,6 @@ export const AuthSessionFields = /*#__PURE__*/ gql`
 export const UserFields = /*#__PURE__*/ gql`
     fragment UserFields on User {
   id
-  email
-  firstName
-  roles
 }
     `;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
@@ -672,9 +749,9 @@ export const LoggedInDocument = /*#__PURE__*/ gql`
       super(apollo);
     }
   }
-export const FindOneUserDocument = /*#__PURE__*/ gql`
-    query FindOneUser($where: UserWhereUniqueInput!) {
-  findOneUser(where: $where) {
+export const FindUniqueUserDocument = /*#__PURE__*/ gql`
+    query FindUniqueUser($where: UserWhereUniqueInput!) {
+  findUniqueUser(where: $where) {
     ...UserFields
   }
 }
@@ -683,16 +760,23 @@ export const FindOneUserDocument = /*#__PURE__*/ gql`
   @Injectable({
     providedIn: GraphQLModule
   })
-  export class FindOneUserGQL extends Apollo.Query<FindOneUser, FindOneUserVariables> {
-    document = FindOneUserDocument;
+  export class FindUniqueUserGQL extends Apollo.Query<FindUniqueUser, FindUniqueUserVariables> {
+    document = FindUniqueUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
 export const FindManyUserDocument = /*#__PURE__*/ gql`
-    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $distinct: UserDistinctFieldEnum, $skip: Int, $take: Int) {
-  findManyUser(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take) {
+    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $distinct: UserScalarFieldEnum, $skip: Int, $take: Int) {
+  findManyUser(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    distinct: $distinct
+    skip: $skip
+    take: $take
+  ) {
     ...UserFields
   }
 }
@@ -709,8 +793,15 @@ export const FindManyUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserCountDocument = /*#__PURE__*/ gql`
-    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $distinct: UserDistinctFieldEnum, $skip: Int, $take: Int) {
-  findManyUserCount(where: $where, orderBy: $orderBy, cursor: $cursor, distinct: $distinct, skip: $skip, take: $take)
+    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByInput!], $cursor: UserWhereUniqueInput, $distinct: UserScalarFieldEnum, $skip: Int, $take: Int) {
+  findManyUserCount(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    distinct: $distinct
+    skip: $skip
+    take: $take
+  )
 }
     `;
 

@@ -1,0 +1,99 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: zen-api
+  labels:
+    app: zen-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zen-api
+  template:
+    metadata:
+      labels:
+        app: zen-api
+    spec:
+      containers:
+        - name: zen-api
+          image: zenacr.azurecr.io/api:latest
+          resources:
+            requests:
+              memory: "700Mi"
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: pg-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pg-secret
+                  key: password
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: pg-secret
+                  key: url
+            - name: JWT_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zen-jwt-secret
+                  key: privateKey
+            - name: JWT_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zen-jwt-secret
+                  key: publicKey
+            - name: HOT_STORAGE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zen-hot-storage-key
+                  key: secret
+            - name: COOL_STORAGE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zen-cool-storage-key
+                  key: secret
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zen-smtp-password
+                  key: secret
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: zen-api-svc
+spec:
+  selector:
+    app: zen-api
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 7080
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: zen-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://portal.zensoftware.ca"
+spec:
+  tls:
+    - hosts:
+        - api.zensoftware.ca
+      secretName: tls-secret
+  rules:
+    - host: api.zensoftware.ca
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: zen-api-svc
+              servicePort: 80

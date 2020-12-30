@@ -4,8 +4,8 @@ module.exports = name => {
 import { ${name}Fields } from '../fields';
 
 export const ${name}TypeDefs = gql\`
-  query FindOne${name}($where: ${name}WhereUniqueInput!) {
-    findOne${name}(where: $where) {
+  query FindUnique${name}($where: ${name}WhereUniqueInput!) {
+    findUnique${name}(where: $where) {
       ...${name}Fields
     }
   }
@@ -14,7 +14,7 @@ export const ${name}TypeDefs = gql\`
     $where: ${name}WhereInput
     $orderBy: [${name}OrderByInput!]
     $cursor: ${name}WhereUniqueInput
-    $distinct: ${name}DistinctFieldEnum
+    $distinct: ${name}ScalarFieldEnum
     $skip: Int
     $take: Int
   ) {
@@ -34,7 +34,7 @@ export const ${name}TypeDefs = gql\`
     $where: ${name}WhereInput
     $orderBy: [${name}OrderByInput!]
     $cursor: ${name}WhereUniqueInput
-    $distinct: ${name}DistinctFieldEnum
+    $distinct: ${name}ScalarFieldEnum
     $skip: Int
     $take: Int
   ) {

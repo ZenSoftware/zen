@@ -5,6 +5,7 @@ import { promisify } from 'util';
 
 import * as del from 'del';
 import * as gulp from 'gulp';
+import * as flatten from 'gulp-flatten';
 import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 
 const clientResolversTemplate = require(path.join(
@@ -47,11 +48,11 @@ const CONFIG = {
     clientFieldsPath: 'libs/graphql/src/lib/fields',
   },
 
-  // handlebars: {
-  //   src: 'apps/api/src/app/mail/templates/**/*.hbs',
-  //   destApi: 'dist/apps/api/mail/templates',
-  //   destCron: 'dist/apps/api-cron/mail/templates',
-  // },
+  handlebars: {
+    src: 'apps/api/src/app/mail/templates/**/*.hbs',
+    destApi: 'dist/apps/api/mail/templates',
+    // destCron: 'dist/apps/api-cron/mail/templates',
+  },
 };
 
 //=============================================================================
@@ -59,11 +60,6 @@ const CONFIG = {
 //=============================================================================
 @Gulpclass()
 export class Gulpfile {
-  @Task('test')
-  async test(cb) {
-    cb();
-  }
-
   //---------------------------------------------------------------------------
   @Task('increment-version')
   async incrementVersion(cb) {
@@ -84,10 +80,10 @@ export class Gulpfile {
   async deployApi(cb) {
     const packageFile = await readFileAsync('package.json');
     const packageJson = JSON.parse(packageFile.toString());
-    const versionAddress = `zen.azurecr.io/api:${packageJson.version}`;
-    const latestAddress = `zen.azurecr.io/api:latest`;
-    await this.execGlobal(`docker tag tu-api ${versionAddress}`);
-    await this.execGlobal(`docker tag tu-api ${latestAddress}`);
+    const versionAddress = `zenacr.azurecr.io/api:${packageJson.version}`;
+    const latestAddress = `zenacr.azurecr.io/api:latest`;
+    await this.execGlobal(`docker tag zen-api ${versionAddress}`);
+    await this.execGlobal(`docker tag zen-api ${latestAddress}`);
     await this.execGlobal(`docker push ${versionAddress}`);
     await this.execGlobal(`docker push ${latestAddress}`);
     await this.execGlobal(`kubectl set image deployments/zen-api zen-api=${versionAddress}`);
@@ -140,8 +136,8 @@ export class Gulpfile {
     const RESOLVERS_PATH = `${CONFIG.gql.apiPath}/resolvers`;
 
     console.log(`---------------- @paljs/cli generate ----------------`);
-    await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g'); //
-    // await this.execLocal(`prettier --write "${PRISMA_PATH}/**/*.ts"`);
+    await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
+    await this.execLocal(`prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"`);
 
     console.log(`---------- Generate Nest GraphQL Resolvers ----------`);
     if (!fs.existsSync(RESOLVERS_PATH)) fs.mkdirSync(RESOLVERS_PATH);
@@ -247,19 +243,19 @@ export class Gulpfile {
   //   return { queries: [], mutations: [] };
   // }
   //---------------------------------------------------------------------------
-  // @Task('handlebars:copy')
-  // handlebarsCopy() {
-  //   return gulp
-  //     .src(CONFIG.handlebars.src)
-  //     .pipe(flatten())
-  //     .pipe(gulp.dest(CONFIG.handlebars.destApi))
-  //     .pipe(gulp.dest(CONFIG.handlebars.destCron));
-  // }
+  @Task('handlebars:copy')
+  handlebarsCopy() {
+    return gulp
+      .src(CONFIG.handlebars.src)
+      .pipe(flatten())
+      .pipe(gulp.dest(CONFIG.handlebars.destApi));
+    // .pipe(gulp.dest(CONFIG.handlebars.destCron));
+  }
 
-  // @Task('handlebars:watch')
-  // handlebarsWatch() {
-  //   gulp.watch(CONFIG.handlebars.src, gulp.parallel('handlebars:copy'));
-  // }
+  @Task('handlebars:watch')
+  handlebarsWatch() {
+    gulp.watch(CONFIG.handlebars.src, gulp.parallel('handlebars:copy'));
+  }
   //---------------------------------------------------------------------------
   private execGlobal(command: string) {
     console.log(command);

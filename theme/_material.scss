@@ -1,12 +1,13 @@
 // @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import 'variables';
+@import 'palette';
 @import '~@angular/material/theming';
 
 @include mat-core();
 
 // Available color palettes: https://material.io/design/color/
-$zen-app-primary: mat-palette($mat-cyan, A100);
-$zen-app-accent: mat-palette($mat-teal, A200, A100, A400);
+$zen-app-primary: mat-palette($zen-primary); // Custom _palette.scss
+$zen-app-accent: mat-palette($zen-accent); // Custom _palette.scss
 
 $zen-dark-theme-foreground: (
   base: $body-color,

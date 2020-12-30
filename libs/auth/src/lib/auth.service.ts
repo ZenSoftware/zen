@@ -39,6 +39,12 @@ export class AuthService {
   ) {
     this.loggedIn = this.sessionTimeRemaining > 0; // Initialize apollo client state
 
+    userRolesVar(
+      localStorage.getItem(LocalStorageKey.roles)
+        ? localStorage.getItem(LocalStorageKey.roles)?.split(',')
+        : []
+    );
+
     if (this.loggedIn) this.startExchangeInterval();
 
     // TODO: Check if this fires with a parameter with value `null` upon the app's first load
@@ -94,6 +100,7 @@ export class AuthService {
     const expiresOn = Date.now() + parseInt(authSession.maxAge, 10);
     localStorage.setItem(LocalStorageKey.sessionExpiresOn, expiresOn.toString());
     localStorage.setItem(LocalStorageKey.rememberMe, authSession.rememberMe.toString());
+    localStorage.setItem(LocalStorageKey.roles, authSession.roles.toString());
     userRolesVar(authSession.roles);
     this.loggedIn = true;
     this.#graphqlSubscriptionClient$.next(authSession);
@@ -102,6 +109,7 @@ export class AuthService {
   private clearLocalStorage() {
     localStorage.removeItem(LocalStorageKey.sessionExpiresOn);
     localStorage.removeItem(LocalStorageKey.rememberMe);
+    localStorage.removeItem(LocalStorageKey.roles);
     userRolesVar([]);
   }
 

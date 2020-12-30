@@ -4,3 +4,7 @@
 body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+mat-dialog-content {
+  max-height: 80vh !important;
+}

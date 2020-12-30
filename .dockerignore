@@ -4,7 +4,7 @@
 # Allow files and directories
 !/dist/**
 !package*.json
-!node_modules/.prisma/client
+!prisma/schema.prisma
 # Ignore unnecessary files inside allowed directories
 # This should go after the allowed directories
 # **/*~

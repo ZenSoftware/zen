@@ -1,5 +1,5 @@
 export interface JwtPayload {
-  readonly id: string;
+  readonly id: number;
   readonly roles: string;
   readonly iss?: string;
   readonly aud?: string;

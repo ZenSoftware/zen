@@ -8,7 +8,7 @@
           "style": "scss"
         }
       },
-      "root": "apps/portal",
+      "root": "",
       "sourceRoot": "apps/portal/src",
       "prefix": "portal",
       "architect": {
@@ -36,7 +36,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -54,7 +53,8 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": ["{options.outputPath}"]
         },
         "compodoc": {
           "builder": "@nrwl/workspace:run-commands",
@@ -98,7 +98,8 @@
             "tsConfig": "apps/portal/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "apps/portal/src/test-setup.ts"
-          }
+          },
+          "outputs": ["coverage/apps/portal"]
         }
       }
     },
@@ -156,7 +157,8 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": ["{options.outputPath}"]
         },
         "compodoc": {
           "builder": "@nrwl/workspace:run-commands",
@@ -187,7 +189,8 @@
             "jestConfig": "apps/api/jest.config.js",
             "tsConfig": "apps/api/tsconfig.spec.json",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/api"]
         }
       }
     },
@@ -213,7 +216,8 @@
             "jestConfig": "libs/api-interfaces/jest.config.js",
             "tsConfig": "libs/api-interfaces/tsconfig.spec.json",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/api-interfaces"]
         }
       }
     },
@@ -237,7 +241,8 @@
             "tsConfig": "libs/common/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/common/src/test-setup.ts"
-          }
+          },
+          "outputs": ["coverage/libs/common"]
         }
       },
       "schematics": {
@@ -286,7 +291,8 @@
             "tsConfig": "libs/main/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/main/src/test-setup.ts"
-          }
+          },
+          "outputs": ["coverage/libs/main"]
         }
       },
       "schematics": {
@@ -315,11 +321,40 @@
             "tsConfig": "libs/auth/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/auth/src/test-setup.ts"
-          }
+          },
+          "outputs": ["coverage/libs/auth"]
         }
       },
       "schematics": {
         "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "components": {
+      "projectType": "library",
+      "root": "libs/components",
+      "sourceRoot": "libs/components/src",
+      "prefix": "zen",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/components/tsconfig.lib.json", "libs/components/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/components/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/components/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/components"]
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
           "style": "scss"
         }
       }

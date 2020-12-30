@@ -1,2 +1,8 @@
-<span *isLoggedIn="true" (click)="auth.logout()" style="cursor: pointer;">Logout</span>
-<a *isLoggedIn="false" routerLink="/login">Login</a>
+<span *isLoggedIn="true" (click)="auth.logout()" style="cursor: pointer;">
+  <i class="fas fa-unlock-alt mr-1"></i>
+  Logout
+</span>
+<a *isLoggedIn="false" routerLink="/login">
+  <i class="fas fa-lock mr-1"></i>
+  Login
+</a>

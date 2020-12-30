@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { emailValidator } from '@zen/common';
 import { extractGraphQLErrors } from '@zen/graphql';
 
 import { AuthService } from '../auth.service';
-import { emailValidator } from '../validators';
 
 @Component({
   selector: 'zen-login-form',

@@ -1,6 +1,6 @@
 module.exports = dataTypeNames => {
-  let indexSource = `import { makeExecutableSchema } from 'graphql-tools';
-import { mergeTypeDefs } from '@graphql-tools/merge'
+  let indexSource = `import { mergeTypeDefs } from '@graphql-tools/merge';
+import { makeExecutableSchema } from 'graphql-tools';
 
 import PRISMA_TYPE_DEFS from '../prisma/typeDefs';\n`;
 

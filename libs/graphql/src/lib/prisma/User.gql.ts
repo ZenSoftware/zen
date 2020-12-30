@@ -3,8 +3,8 @@ import gql from 'graphql-tag';
 import { UserFields } from '../fields';
 
 export const UserTypeDefs = gql`
-  query FindOneUser($where: UserWhereUniqueInput!) {
-    findOneUser(where: $where) {
+  query FindUniqueUser($where: UserWhereUniqueInput!) {
+    findUniqueUser(where: $where) {
       ...UserFields
     }
   }
@@ -13,7 +13,7 @@ export const UserTypeDefs = gql`
     $where: UserWhereInput
     $orderBy: [UserOrderByInput!]
     $cursor: UserWhereUniqueInput
-    $distinct: UserDistinctFieldEnum
+    $distinct: UserScalarFieldEnum
     $skip: Int
     $take: Int
   ) {
@@ -33,7 +33,7 @@ export const UserTypeDefs = gql`
     $where: UserWhereInput
     $orderBy: [UserOrderByInput!]
     $cursor: UserWhereUniqueInput
-    $distinct: UserDistinctFieldEnum
+    $distinct: UserScalarFieldEnum
     $skip: Int
     $take: Int
   ) {

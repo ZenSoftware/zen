@@ -24,7 +24,7 @@ git clone https://github.com/ZenSoftware/Zen.git --depth=1
 cd Zen
 npm i
 docker-compose up -d
-npm run prisma:save
+npm run prisma:migrate
 npm run start:api
 
 npm run apollo:watch

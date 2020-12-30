@@ -25,7 +25,7 @@ export class MailService {
     const token = this.jwtService.sign({ email: to }, { expiresIn: '1d' });
 
     const context: PasswordResetContext = {
-      resetUrl: 'https://zensoftware.ca/#/password-reset-confirmation?token=' + encodeURI(token),
+      resetUrl: `${this.config.siteUrl}/#/password-reset-confirmation?token=${encodeURI(token)}`,
     };
 
     this.send({

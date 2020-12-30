@@ -2,6 +2,7 @@ import { JwtModuleOptions } from '@nestjs/jwt';
 import { PoolConfig as PostgreSQLConfig } from 'pg';
 
 export class EnvironmentBase {
+  siteUrl: string;
   production: boolean;
   expressPort: string | number;
   graphql: {

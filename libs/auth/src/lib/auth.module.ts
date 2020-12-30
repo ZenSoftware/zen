@@ -6,11 +6,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ZenComponentsModule } from '@zen/components';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { IsLoggedInDirective, NotRolesDirective, RolesDirective } from './directives';
-import { ZenLoadingComponent } from './zen-loading/zen-loading.component';
 import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
@@ -24,14 +23,13 @@ import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule,
     AuthRoutingModule,
+    ZenComponentsModule,
   ],
   declarations: [
     IsLoggedInDirective,
     NotRolesDirective,
     RolesDirective,
-    ZenLoadingComponent,
     ZenLoginFormComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,

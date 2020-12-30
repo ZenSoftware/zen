@@ -25,31 +25,14 @@ const fs = require('fs');
 const os = require('os');
 const cp = require('child_process');
 const isWindows = os.platform() === 'win32';
-const { output } = require('@nrwl/workspace');
-
-/**
- * Paths to files being patched
- */
-const angularCLIInitPath = 'node_modules/@angular/cli/lib/cli/index.js';
-
-/**
- * Patch index.js to warn you if you invoke the undecorated Angular CLI.
- */
-function patchAngularCLI(initPath) {
-  const angularCLIInit = fs.readFileSync(initPath, 'utf-8').toString();
-
-  if (!angularCLIInit.includes('NX_CLI_SET')) {
-    fs.writeFileSync(
-      initPath,
-      `
-if (!process.env['NX_CLI_SET']) {
-  const { output } = require('@nrwl/workspace');
-  output.warn({ title: 'The Angular CLI was invoked instead of the Nx CLI. Use "npx ng [command]" or "nx [command]" instead.' });
-}
-${angularCLIInit}
-    `
-    );
-  }
+let output;
+try {
+  output = require('@nrwl/workspace').output;
+} catch (e) {
+  console.warn(
+    'Angular CLI could not be decorated to enable computation caching. Please ensure @nrwl/workspace is installed.'
+  );
+  process.exit(0);
 }
 
 /**
@@ -83,12 +66,8 @@ function symlinkNgCLItoNxCLI() {
 
 try {
   symlinkNgCLItoNxCLI();
-  patchAngularCLI(angularCLIInitPath);
-  output.log({
-    title: 'Angular CLI has been decorated to enable computation caching.',
-  });
+  require('@nrwl/cli/lib/decorate-cli').decorateCli();
+  output.log({ title: 'Angular CLI has been decorated to enable computation caching.' });
 } catch (e) {
-  output.error({
-    title: 'Decoration of the Angular CLI did not complete successfully',
-  });
+  output.error({ title: 'Decoration of the Angular CLI did not complete successfully' });
 }

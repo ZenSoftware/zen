@@ -14,18 +14,27 @@
       "skipFiles": ["${workspaceFolder}/node_modules/**/*.js", "<node_internals>/**/*.js"]
     },
     {
+      "type": "node",
+      "request": "attach",
+      "name": "node with port",
+      "port": "${input:port}",
+      "restart": true,
+      "stopOnEntry": false,
+      "protocol": "inspector"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "portal",
       "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}/apps/portal",
-      "sourceMaps": true,
-      "sourceMapPathOverrides": {
-        "/./*": "${webRoot}/*",
-        "/src/*": "${webRoot}/*",
-        "/*": "*",
-        "/./~/*": "${webRoot}/node_modules/*"
-      }
+      "webRoot": "${workspaceFolder}"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "port",
+      "type": "promptString",
+      "description": "Websocket debug port"
     }
   ]
 }

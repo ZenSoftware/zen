@@ -3,8 +3,9 @@ import { CookieOptions, Response } from 'express';
 
 import { RequestUser } from '../auth';
 import { ConfigService } from '../config';
-import { AuthSession } from '../graphql/models/user-session';
+import { AuthSession } from '../graphql/models/auth-session';
 import { JwtService } from '../jwt';
+import { JwtPayload } from './jwt-payload';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,7 @@ export class AuthService {
       rememberMe = rememberMe === 'true';
     }
 
-    const jwtPayload = {
+    const jwtPayload: JwtPayload = {
       id: user.id,
       roles: user.roles ? user.roles.toString() : undefined,
     };

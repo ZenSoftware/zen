@@ -1,6 +1,7 @@
 import { EnvironmentBase } from './environment.base';
 
 export const environment: EnvironmentBase = {
+  siteUrl: 'https://zensoftware.ca',
   production: true,
   expressPort: process.env.PORT,
   graphql: {
@@ -9,8 +10,8 @@ export const environment: EnvironmentBase = {
   postgres: {
     host: 'postgres-svc',
     port: 5432,
-    user: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
     database: 'prisma',
   },
   jwtOptions: {
