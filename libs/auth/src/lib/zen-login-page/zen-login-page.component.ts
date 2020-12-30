@@ -17,34 +17,7 @@ export class ZenLoginPageComponent {
   //   this.authRegisterGQL
   //     .mutate({
   //       data: {
-  //         email: 'peter@zensoftware.ca',
-  //         password: 'TempTemp',
-  //       },
-  //     })
-  //     .subscribe(({ data }) => console.log('Created', data?.authRegister));
-
-  //   this.authRegisterGQL
-  //     .mutate({
-  //       data: {
-  //         email: 'travis@zensoftware.ca',
-  //         password: 'TempTemp',
-  //       },
-  //     })
-  //     .subscribe(({ data }) => console.log('Created', data?.authRegister));
-
-  //   this.authRegisterGQL
-  //     .mutate({
-  //       data: {
-  //         email: 'lironside@zensoftware.ca',
-  //         password: 'TempTemp',
-  //       },
-  //     })
-  //     .subscribe(({ data }) => console.log('Created', data?.authRegister));
-
-  //   this.authRegisterGQL
-  //     .mutate({
-  //       data: {
-  //         email: 'tyler@zensoftware.ca',
+  //         email: 'admin@temp.com',
   //         password: 'TempTemp',
   //       },
   //     })
