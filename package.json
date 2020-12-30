@@ -16,7 +16,7 @@
     "prod:api": "gulp clean && ng build api --prod && npm run dockerize:api",
     "dockerize:api": "docker build -f deploy/api/Dockerfile -t zen-api .",
     "docker:run-api": "docker run -d --name zen-api -p 7080:7080 zen-api",
-    "docs": "npx compodoc -p tsconfig.compodoc.json",
+    "docs": "ng compodoc api",
     "deploy:docs": "git subtree push --prefix documentation origin gh-pages && git subtree push --prefix documentation origin gh-pages",
     "build": "ng build",
     "test": "ng test",
