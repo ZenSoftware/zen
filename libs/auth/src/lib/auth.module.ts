@@ -13,6 +13,8 @@ import { IsLoggedInDirective, NotRolesDirective, RolesDirective } from './direct
 import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
+import { ZenPasswordResetConfirmationComponent } from './zen-password-reset-confirmation/zen-password-reset-confirmation.component';
+import { ZenPasswordResetRequestComponent } from './zen-password-reset-request/zen-password-reset-request.component';
 import { ZenRegistrationFormComponent } from './zen-registration-form/zen-registration-form.component';
 import { ZenRegistrationPageComponent } from './zen-registration-page/zen-registration-page.component';
 
@@ -32,21 +34,25 @@ import { ZenRegistrationPageComponent } from './zen-registration-page/zen-regist
     IsLoggedInDirective,
     NotRolesDirective,
     RolesDirective,
-    ZenRegistrationFormComponent,
-    ZenRegistrationPageComponent,
     ZenLoginFormComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,
+    ZenPasswordResetConfirmationComponent,
+    ZenPasswordResetRequestComponent,
+    ZenRegistrationFormComponent,
+    ZenRegistrationPageComponent,
   ],
   exports: [
     IsLoggedInDirective,
     NotRolesDirective,
     RolesDirective,
-    ZenRegistrationFormComponent,
-    ZenRegistrationPageComponent,
     ZenLoginFormComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,
+    ZenPasswordResetConfirmationComponent,
+    ZenPasswordResetRequestComponent,
+    ZenRegistrationFormComponent,
+    ZenRegistrationPageComponent,
   ],
 })
 export class AuthModule {}

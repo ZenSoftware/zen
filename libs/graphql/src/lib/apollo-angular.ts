@@ -483,6 +483,26 @@ export type AuthLogin = (
   ) }
 );
 
+export type AuthPasswordResetConfirmationVariables = Exact<{
+  data: AuthPasswordResetConfirmationInput;
+}>;
+
+
+export type AuthPasswordResetConfirmation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'authPasswordResetConfirmation'>
+);
+
+export type AuthPasswordResetRequestQueryVariables = Exact<{
+  data: AuthPasswordResetRequestInput;
+}>;
+
+
+export type AuthPasswordResetRequestQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'authPasswordResetRequest'>
+);
+
 export type AuthRegisterVariables = Exact<{
   data: AuthRegisterInput;
 }>;
@@ -697,6 +717,38 @@ export const AuthLoginDocument = /*#__PURE__*/ gql`
   })
   export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
     document = AuthLoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AuthPasswordResetConfirmationDocument = /*#__PURE__*/ gql`
+    mutation AuthPasswordResetConfirmation($data: AuthPasswordResetConfirmationInput!) {
+  authPasswordResetConfirmation(data: $data)
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class AuthPasswordResetConfirmationGQL extends Apollo.Mutation<AuthPasswordResetConfirmation, AuthPasswordResetConfirmationVariables> {
+    document = AuthPasswordResetConfirmationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AuthPasswordResetRequestQueryDocument = /*#__PURE__*/ gql`
+    query AuthPasswordResetRequestQuery($data: AuthPasswordResetRequestInput!) {
+  authPasswordResetRequest(data: $data)
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class AuthPasswordResetRequestQueryGQL extends Apollo.Query<AuthPasswordResetRequestQuery, AuthPasswordResetRequestQueryVariables> {
+    document = AuthPasswordResetRequestQueryDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
