@@ -1010,84 +1010,6 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <b>aud</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>aud:     <code>string</code>
-</bcode>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>string</code>
-
-                                        </td>
-                                    </tr>
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <b>exp</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>exp:     <code>number</code>
-</bcode>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>number</code>
-
-                                        </td>
-                                    </tr>
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <b>iat</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>iat:     <code>number</code>
-</bcode>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>number</code>
-
-                                        </td>
-                                    </tr>
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
                                         <b>id</b>
                                     </td>
                                 </tr>
@@ -1102,32 +1024,6 @@
                                     <tr>
                                         <td class="col-md-4">
                                             <i>Type : </i>    <code>number</code>
-
-                                        </td>
-                                    </tr>
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <b>iss</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>iss:     <code>string</code>
-</bcode>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>string</code>
 
                                         </td>
                                     </tr>
@@ -1162,43 +1058,12 @@
 
                         </tbody>
                     </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <b>sub</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>sub:     <code>string</code>
-</bcode>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>string</code>
-
-                                        </td>
-                                    </tr>
-
-
-
-                        </tbody>
-                    </table>
             </section>
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
         <pre><code class="hljs javascript">export interface JwtPayload {
   readonly id: number;
   readonly roles: string;
-  readonly iss?: string;
-  readonly aud?: string;
-  readonly sub?: string;
-  readonly exp?: number;
-  readonly iat?: number;
 }
 </code></pre>
     </div>

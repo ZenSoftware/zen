@@ -24,275 +24,275 @@
 <title>cluster_AuthModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-70 8,-268 2303,-268 2303,-70 8,-70"/>
 </g>
+<g id="clust2" class="cluster">
+<title>cluster_AuthModule_declarations</title>
+<polygon fill="none" stroke="black" points="1344,-78 1344,-130 2295,-130 2295,-78 1344,-78"/>
+</g>
 <g id="clust9" class="cluster">
 <title>cluster_AuthModule_imports</title>
-<polygon fill="none" stroke="black" points="975,-78 975,-130 2295,-130 2295,-78 975,-78"/>
+<polygon fill="none" stroke="black" points="16,-78 16,-130 1336,-130 1336,-78 16,-78"/>
 </g>
 <g id="clust10" class="cluster">
 <title>cluster_AuthModule_exports</title>
-<polygon fill="none" stroke="black" points="679,-208 679,-260 1653,-260 1653,-208 679,-208"/>
-</g>
-<g id="clust2" class="cluster">
-<title>cluster_AuthModule_declarations</title>
-<polygon fill="none" stroke="black" points="16,-78 16,-130 967,-130 967,-78 16,-78"/>
+<polygon fill="none" stroke="black" points="586,-208 586,-260 1560,-260 1560,-208 586,-208"/>
 </g>
 <!-- IsLoggedInDirective -->
 <g id="node1" class="node">
 <title>IsLoggedInDirective</title>
-<polygon fill="#ffffb3" stroke="black" points="959.12,-122 826.88,-122 826.88,-86 959.12,-86 959.12,-122"/>
-<text text-anchor="middle" x="893" y="-99.8" font-family="Times,serif" font-size="14.00">IsLoggedInDirective</text>
+<polygon fill="#ffffb3" stroke="black" points="2287.12,-122 2154.88,-122 2154.88,-86 2287.12,-86 2287.12,-122"/>
+<text text-anchor="middle" x="2221" y="-99.8" font-family="Times,serif" font-size="14.00">IsLoggedInDirective</text>
 </g>
 <!-- AuthModule -->
 <g id="node7" class="node">
 <title>AuthModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="1262.55,-187 1259.55,-191 1238.55,-191 1235.55,-187 1175.45,-187 1175.45,-151 1262.55,-151 1262.55,-187"/>
-<text text-anchor="middle" x="1219" y="-164.8" font-family="Times,serif" font-size="14.00">AuthModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="1169.55,-187 1166.55,-191 1145.55,-191 1142.55,-187 1082.45,-187 1082.45,-151 1169.55,-151 1169.55,-187"/>
+<text text-anchor="middle" x="1126" y="-164.8" font-family="Times,serif" font-size="14.00">AuthModule</text>
 </g>
 <!-- IsLoggedInDirective&#45;&gt;AuthModule -->
 <g id="edge1" class="edge">
 <title>IsLoggedInDirective&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M915.34,-122.01C915.34,-138.05 915.34,-159 915.34,-159 915.34,-159 1165.17,-159 1165.17,-159"/>
-<polygon fill="black" stroke="black" points="1165.17,-162.5 1175.17,-159 1165.17,-155.5 1165.17,-162.5"/>
+<path fill="none" stroke="black" d="M2221,-122.04C2221,-143.66 2221,-177 2221,-177 2221,-177 1179.6,-177 1179.6,-177"/>
+<polygon fill="black" stroke="black" points="1179.6,-173.5 1169.6,-177 1179.6,-180.5 1179.6,-173.5"/>
 </g>
 <!-- NotRolesDirective -->
 <g id="node2" class="node">
 <title>NotRolesDirective</title>
-<polygon fill="#ffffb3" stroke="black" points="808.47,-122 687.53,-122 687.53,-86 808.47,-86 808.47,-122"/>
-<text text-anchor="middle" x="748" y="-99.8" font-family="Times,serif" font-size="14.00">NotRolesDirective</text>
+<polygon fill="#ffffb3" stroke="black" points="2136.47,-122 2015.53,-122 2015.53,-86 2136.47,-86 2136.47,-122"/>
+<text text-anchor="middle" x="2076" y="-99.8" font-family="Times,serif" font-size="14.00">NotRolesDirective</text>
 </g>
 <!-- NotRolesDirective&#45;&gt;AuthModule -->
 <g id="edge2" class="edge">
 <title>NotRolesDirective&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M748,-122.03C748,-139.06 748,-162 748,-162 748,-162 1165.11,-162 1165.11,-162"/>
-<polygon fill="black" stroke="black" points="1165.11,-165.5 1175.11,-162 1165.11,-158.5 1165.11,-165.5"/>
+<path fill="none" stroke="black" d="M2076,-122.13C2076,-142.57 2076,-173 2076,-173 2076,-173 1179.6,-173 1179.6,-173"/>
+<polygon fill="black" stroke="black" points="1179.6,-169.5 1169.6,-173 1179.6,-176.5 1179.6,-169.5"/>
 </g>
 <!-- RolesDirective -->
 <g id="node3" class="node">
 <title>RolesDirective</title>
-<polygon fill="#ffffb3" stroke="black" points="669.97,-122 570.03,-122 570.03,-86 669.97,-86 669.97,-122"/>
-<text text-anchor="middle" x="620" y="-99.8" font-family="Times,serif" font-size="14.00">RolesDirective</text>
+<polygon fill="#ffffb3" stroke="black" points="1997.97,-122 1898.03,-122 1898.03,-86 1997.97,-86 1997.97,-122"/>
+<text text-anchor="middle" x="1948" y="-99.8" font-family="Times,serif" font-size="14.00">RolesDirective</text>
 </g>
 <!-- RolesDirective&#45;&gt;AuthModule -->
 <g id="edge3" class="edge">
 <title>RolesDirective&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M620,-122.27C620,-140.56 620,-166 620,-166 620,-166 1165.44,-166 1165.44,-166"/>
-<polygon fill="black" stroke="black" points="1165.44,-169.5 1175.44,-166 1165.44,-162.5 1165.44,-169.5"/>
+<path fill="none" stroke="black" d="M1948,-122.11C1948,-141.34 1948,-169 1948,-169 1948,-169 1179.61,-169 1179.61,-169"/>
+<polygon fill="black" stroke="black" points="1179.61,-165.5 1169.61,-169 1179.61,-172.5 1179.61,-165.5"/>
 </g>
 <!-- ZenLoginFormComponent -->
 <g id="node4" class="node">
 <title>ZenLoginFormComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="552.38,-122 385.62,-122 385.62,-86 552.38,-86 552.38,-122"/>
-<text text-anchor="middle" x="469" y="-99.8" font-family="Times,serif" font-size="14.00">ZenLoginFormComponent</text>
+<polygon fill="#ffffb3" stroke="black" points="1880.38,-122 1713.62,-122 1713.62,-86 1880.38,-86 1880.38,-122"/>
+<text text-anchor="middle" x="1797" y="-99.8" font-family="Times,serif" font-size="14.00">ZenLoginFormComponent</text>
 </g>
 <!-- ZenLoginFormComponent&#45;&gt;AuthModule -->
 <g id="edge4" class="edge">
 <title>ZenLoginFormComponent&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M469,-122.11C469,-141.34 469,-169 469,-169 469,-169 1165.44,-169 1165.44,-169"/>
-<polygon fill="black" stroke="black" points="1165.44,-172.5 1175.44,-169 1165.44,-165.5 1165.44,-172.5"/>
+<path fill="none" stroke="black" d="M1797,-122.27C1797,-140.56 1797,-166 1797,-166 1797,-166 1179.77,-166 1179.77,-166"/>
+<polygon fill="black" stroke="black" points="1179.77,-162.5 1169.77,-166 1179.77,-169.5 1179.77,-162.5"/>
 </g>
 <!-- ZenLoginPageComponent -->
 <g id="node5" class="node">
 <title>ZenLoginPageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="367.75,-122 204.25,-122 204.25,-86 367.75,-86 367.75,-122"/>
-<text text-anchor="middle" x="286" y="-99.8" font-family="Times,serif" font-size="14.00">ZenLoginPageComponent</text>
+<polygon fill="#ffffb3" stroke="black" points="1695.75,-122 1532.25,-122 1532.25,-86 1695.75,-86 1695.75,-122"/>
+<text text-anchor="middle" x="1614" y="-99.8" font-family="Times,serif" font-size="14.00">ZenLoginPageComponent</text>
 </g>
 <!-- ZenLoginPageComponent&#45;&gt;AuthModule -->
 <g id="edge5" class="edge">
 <title>ZenLoginPageComponent&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M286,-122.13C286,-142.57 286,-173 286,-173 286,-173 1165.25,-173 1165.25,-173"/>
-<polygon fill="black" stroke="black" points="1165.25,-176.5 1175.25,-173 1165.25,-169.5 1165.25,-176.5"/>
+<path fill="none" stroke="black" d="M1542.09,-122.03C1542.09,-139.06 1542.09,-162 1542.09,-162 1542.09,-162 1179.74,-162 1179.74,-162"/>
+<polygon fill="black" stroke="black" points="1179.74,-158.5 1169.74,-162 1179.74,-165.5 1179.74,-158.5"/>
 </g>
 <!-- ZenLoginLinkComponent -->
 <g id="node6" class="node">
 <title>ZenLoginLinkComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="186.49,-122 23.51,-122 23.51,-86 186.49,-86 186.49,-122"/>
-<text text-anchor="middle" x="105" y="-99.8" font-family="Times,serif" font-size="14.00">ZenLoginLinkComponent</text>
+<polygon fill="#ffffb3" stroke="black" points="1514.49,-122 1351.51,-122 1351.51,-86 1514.49,-86 1514.49,-122"/>
+<text text-anchor="middle" x="1433" y="-99.8" font-family="Times,serif" font-size="14.00">ZenLoginLinkComponent</text>
 </g>
 <!-- ZenLoginLinkComponent&#45;&gt;AuthModule -->
 <g id="edge6" class="edge">
 <title>ZenLoginLinkComponent&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M105,-122.04C105,-143.66 105,-177 105,-177 105,-177 1165.33,-177 1165.33,-177"/>
-<polygon fill="black" stroke="black" points="1165.33,-180.5 1175.33,-177 1165.33,-173.5 1165.33,-180.5"/>
+<path fill="none" stroke="black" d="M1374.87,-122.01C1374.87,-138.05 1374.87,-159 1374.87,-159 1374.87,-159 1179.63,-159 1179.63,-159"/>
+<polygon fill="black" stroke="black" points="1179.63,-155.5 1169.63,-159 1179.63,-162.5 1179.63,-155.5"/>
 </g>
 <!-- IsLoggedInDirective  -->
 <g id="node17" class="node">
 <title>IsLoggedInDirective </title>
-<polygon fill="#fb8072" stroke="black" points="1645.12,-252 1508.88,-252 1508.88,-216 1645.12,-216 1645.12,-252"/>
-<text text-anchor="middle" x="1577" y="-229.8" font-family="Times,serif" font-size="14.00">IsLoggedInDirective </text>
+<polygon fill="#fb8072" stroke="black" points="1552.12,-252 1415.88,-252 1415.88,-216 1552.12,-216 1552.12,-252"/>
+<text text-anchor="middle" x="1484" y="-229.8" font-family="Times,serif" font-size="14.00">IsLoggedInDirective </text>
 </g>
 <!-- AuthModule&#45;&gt;IsLoggedInDirective  -->
 <g id="edge16" class="edge">
 <title>AuthModule&#45;&gt;IsLoggedInDirective </title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1262.63,-180C1351.47,-180 1545.03,-180 1545.03,-180 1545.03,-180 1545.03,-205.72 1545.03,-205.72"/>
-<polygon fill="black" stroke="black" points="1541.53,-205.72 1545.03,-215.72 1548.53,-205.72 1541.53,-205.72"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1169.65,-180C1261.27,-180 1465.22,-180 1465.22,-180 1465.22,-180 1465.22,-205.72 1465.22,-205.72"/>
+<polygon fill="black" stroke="black" points="1461.72,-205.72 1465.22,-215.72 1468.72,-205.72 1461.72,-205.72"/>
 </g>
 <!-- NotRolesDirective  -->
 <g id="node18" class="node">
 <title>NotRolesDirective </title>
-<polygon fill="#fb8072" stroke="black" points="1491.47,-252 1366.53,-252 1366.53,-216 1491.47,-216 1491.47,-252"/>
-<text text-anchor="middle" x="1429" y="-229.8" font-family="Times,serif" font-size="14.00">NotRolesDirective </text>
+<polygon fill="#fb8072" stroke="black" points="1398.47,-252 1273.53,-252 1273.53,-216 1398.47,-216 1398.47,-252"/>
+<text text-anchor="middle" x="1336" y="-229.8" font-family="Times,serif" font-size="14.00">NotRolesDirective </text>
 </g>
 <!-- AuthModule&#45;&gt;NotRolesDirective  -->
 <g id="edge17" class="edge">
 <title>AuthModule&#45;&gt;NotRolesDirective </title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1262.98,-184C1317.87,-184 1404.6,-184 1404.6,-184 1404.6,-184 1404.6,-205.95 1404.6,-205.95"/>
-<polygon fill="black" stroke="black" points="1401.1,-205.95 1404.6,-215.95 1408.1,-205.95 1401.1,-205.95"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1169.66,-184C1221.43,-184 1300.8,-184 1300.8,-184 1300.8,-184 1300.8,-205.95 1300.8,-205.95"/>
+<polygon fill="black" stroke="black" points="1297.3,-205.95 1300.8,-215.95 1304.3,-205.95 1297.3,-205.95"/>
 </g>
 <!-- RolesDirective  -->
 <g id="node19" class="node">
 <title>RolesDirective </title>
-<polygon fill="#fb8072" stroke="black" points="1348.97,-252 1245.03,-252 1245.03,-216 1348.97,-216 1348.97,-252"/>
-<text text-anchor="middle" x="1297" y="-229.8" font-family="Times,serif" font-size="14.00">RolesDirective </text>
+<polygon fill="#fb8072" stroke="black" points="1255.97,-252 1152.03,-252 1152.03,-216 1255.97,-216 1255.97,-252"/>
+<text text-anchor="middle" x="1204" y="-229.8" font-family="Times,serif" font-size="14.00">RolesDirective </text>
 </g>
 <!-- AuthModule&#45;&gt;RolesDirective  -->
 <g id="edge18" class="edge">
 <title>AuthModule&#45;&gt;RolesDirective </title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1254.02,-187.11C1254.02,-187.11 1254.02,-205.99 1254.02,-205.99"/>
-<polygon fill="black" stroke="black" points="1250.52,-205.99 1254.02,-215.99 1257.52,-205.99 1250.52,-205.99"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1161.02,-187.11C1161.02,-187.11 1161.02,-205.99 1161.02,-205.99"/>
+<polygon fill="black" stroke="black" points="1157.52,-205.99 1161.02,-215.99 1164.52,-205.99 1157.52,-205.99"/>
 </g>
 <!-- ZenLoginFormComponent  -->
 <g id="node20" class="node">
 <title>ZenLoginFormComponent </title>
-<polygon fill="#fb8072" stroke="black" points="1227.38,-252 1056.62,-252 1056.62,-216 1227.38,-216 1227.38,-252"/>
-<text text-anchor="middle" x="1142" y="-229.8" font-family="Times,serif" font-size="14.00">ZenLoginFormComponent </text>
+<polygon fill="#fb8072" stroke="black" points="1134.38,-252 963.62,-252 963.62,-216 1134.38,-216 1134.38,-252"/>
+<text text-anchor="middle" x="1049" y="-229.8" font-family="Times,serif" font-size="14.00">ZenLoginFormComponent </text>
 </g>
 <!-- AuthModule&#45;&gt;ZenLoginFormComponent  -->
 <g id="edge19" class="edge">
 <title>AuthModule&#45;&gt;ZenLoginFormComponent </title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1201.21,-187.11C1201.21,-187.11 1201.21,-205.99 1201.21,-205.99"/>
-<polygon fill="black" stroke="black" points="1197.71,-205.99 1201.21,-215.99 1204.71,-205.99 1197.71,-205.99"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1108.21,-187.11C1108.21,-187.11 1108.21,-205.99 1108.21,-205.99"/>
+<polygon fill="black" stroke="black" points="1104.71,-205.99 1108.21,-215.99 1111.71,-205.99 1104.71,-205.99"/>
 </g>
 <!-- ZenLoginPageComponent  -->
 <g id="node21" class="node">
 <title>ZenLoginPageComponent </title>
-<polygon fill="#fb8072" stroke="black" points="1038.75,-252 871.25,-252 871.25,-216 1038.75,-216 1038.75,-252"/>
-<text text-anchor="middle" x="955" y="-229.8" font-family="Times,serif" font-size="14.00">ZenLoginPageComponent </text>
+<polygon fill="#fb8072" stroke="black" points="945.75,-252 778.25,-252 778.25,-216 945.75,-216 945.75,-252"/>
+<text text-anchor="middle" x="862" y="-229.8" font-family="Times,serif" font-size="14.00">ZenLoginPageComponent </text>
 </g>
 <!-- AuthModule&#45;&gt;ZenLoginPageComponent  -->
 <g id="edge20" class="edge">
 <title>AuthModule&#45;&gt;ZenLoginPageComponent </title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1175.35,-184C1114.3,-184 1010.79,-184 1010.79,-184 1010.79,-184 1010.79,-205.95 1010.79,-205.95"/>
-<polygon fill="black" stroke="black" points="1007.29,-205.95 1010.79,-215.95 1014.29,-205.95 1007.29,-205.95"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1082.16,-184C1025.74,-184 934.9,-184 934.9,-184 934.9,-184 934.9,-205.95 934.9,-205.95"/>
+<polygon fill="black" stroke="black" points="931.4,-205.95 934.9,-215.95 938.4,-205.95 931.4,-205.95"/>
 </g>
 <!-- ZenLoginLinkComponent  -->
 <g id="node22" class="node">
 <title>ZenLoginLinkComponent </title>
-<polygon fill="#fb8072" stroke="black" points="853.49,-252 686.51,-252 686.51,-216 853.49,-216 853.49,-252"/>
-<text text-anchor="middle" x="770" y="-229.8" font-family="Times,serif" font-size="14.00">ZenLoginLinkComponent </text>
+<polygon fill="#fb8072" stroke="black" points="760.49,-252 593.51,-252 593.51,-216 760.49,-216 760.49,-252"/>
+<text text-anchor="middle" x="677" y="-229.8" font-family="Times,serif" font-size="14.00">ZenLoginLinkComponent </text>
 </g>
 <!-- AuthModule&#45;&gt;ZenLoginLinkComponent  -->
 <g id="edge21" class="edge">
 <title>AuthModule&#45;&gt;ZenLoginLinkComponent </title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1175.15,-180C1075.38,-180 839.97,-180 839.97,-180 839.97,-180 839.97,-205.72 839.97,-205.72"/>
-<polygon fill="black" stroke="black" points="836.47,-205.72 839.97,-215.72 843.47,-205.72 836.47,-205.72"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M1082.22,-180C983.85,-180 753.87,-180 753.87,-180 753.87,-180 753.87,-205.72 753.87,-205.72"/>
+<polygon fill="black" stroke="black" points="750.37,-205.72 753.87,-215.72 757.37,-205.72 750.37,-205.72"/>
 </g>
 <!-- CommonModule -->
 <g id="node8" class="node">
 <title>CommonModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="2286.67,-122 2283.67,-126 2262.67,-126 2259.67,-122 2175.33,-122 2175.33,-86 2286.67,-86 2286.67,-122"/>
-<text text-anchor="middle" x="2231" y="-99.8" font-family="Times,serif" font-size="14.00">CommonModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="1327.67,-122 1324.67,-126 1303.67,-126 1300.67,-122 1216.33,-122 1216.33,-86 1327.67,-86 1327.67,-122"/>
+<text text-anchor="middle" x="1272" y="-99.8" font-family="Times,serif" font-size="14.00">CommonModule</text>
 </g>
 <!-- CommonModule&#45;&gt;AuthModule -->
 <g id="edge7" class="edge">
 <title>CommonModule&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M2231,-122.04C2231,-143.66 2231,-177 2231,-177 2231,-177 1272.81,-177 1272.81,-177"/>
-<polygon fill="black" stroke="black" points="1272.81,-173.5 1262.81,-177 1272.81,-180.5 1272.81,-173.5"/>
+<path fill="none" stroke="black" d="M1235.95,-122.12C1235.95,-136.78 1235.95,-155 1235.95,-155 1235.95,-155 1179.77,-155 1179.77,-155"/>
+<polygon fill="black" stroke="black" points="1179.77,-151.5 1169.77,-155 1179.77,-158.5 1179.77,-151.5"/>
 </g>
 <!-- ReactiveFormsModule -->
 <g id="node9" class="node">
 <title>ReactiveFormsModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="2157.3,-122 2154.3,-126 2133.3,-126 2130.3,-122 2012.7,-122 2012.7,-86 2157.3,-86 2157.3,-122"/>
-<text text-anchor="middle" x="2085" y="-99.8" font-family="Times,serif" font-size="14.00">ReactiveFormsModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="1198.3,-122 1195.3,-126 1174.3,-126 1171.3,-122 1053.7,-122 1053.7,-86 1198.3,-86 1198.3,-122"/>
+<text text-anchor="middle" x="1126" y="-99.8" font-family="Times,serif" font-size="14.00">ReactiveFormsModule</text>
 </g>
 <!-- ReactiveFormsModule&#45;&gt;AuthModule -->
 <g id="edge8" class="edge">
 <title>ReactiveFormsModule&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M2085,-122.13C2085,-142.57 2085,-173 2085,-173 2085,-173 1272.84,-173 1272.84,-173"/>
-<polygon fill="black" stroke="black" points="1272.84,-169.5 1262.84,-173 1272.84,-176.5 1272.84,-169.5"/>
+<path fill="none" stroke="black" d="M1126,-122.11C1126,-122.11 1126,-140.99 1126,-140.99"/>
+<polygon fill="black" stroke="black" points="1122.5,-140.99 1126,-150.99 1129.5,-140.99 1122.5,-140.99"/>
 </g>
 <!-- MatInputModule -->
 <g id="node10" class="node">
 <title>MatInputModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="1994.65,-122 1991.65,-126 1970.65,-126 1967.65,-122 1883.35,-122 1883.35,-86 1994.65,-86 1994.65,-122"/>
-<text text-anchor="middle" x="1939" y="-99.8" font-family="Times,serif" font-size="14.00">MatInputModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="1035.65,-122 1032.65,-126 1011.65,-126 1008.65,-122 924.35,-122 924.35,-86 1035.65,-86 1035.65,-122"/>
+<text text-anchor="middle" x="980" y="-99.8" font-family="Times,serif" font-size="14.00">MatInputModule</text>
 </g>
 <!-- MatInputModule&#45;&gt;AuthModule -->
 <g id="edge9" class="edge">
 <title>MatInputModule&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M1939,-122.11C1939,-141.34 1939,-169 1939,-169 1939,-169 1272.69,-169 1272.69,-169"/>
-<polygon fill="black" stroke="black" points="1272.69,-165.5 1262.69,-169 1272.69,-172.5 1272.69,-165.5"/>
+<path fill="none" stroke="black" d="M999.82,-122.12C999.82,-136.78 999.82,-155 999.82,-155 999.82,-155 1072.22,-155 1072.22,-155"/>
+<polygon fill="black" stroke="black" points="1072.22,-158.5 1082.22,-155 1072.22,-151.5 1072.22,-158.5"/>
 </g>
 <!-- MatFormFieldModule -->
 <g id="node11" class="node">
 <title>MatFormFieldModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="1865.71,-122 1862.71,-126 1841.71,-126 1838.71,-122 1724.29,-122 1724.29,-86 1865.71,-86 1865.71,-122"/>
-<text text-anchor="middle" x="1795" y="-99.8" font-family="Times,serif" font-size="14.00">MatFormFieldModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="906.71,-122 903.71,-126 882.71,-126 879.71,-122 765.29,-122 765.29,-86 906.71,-86 906.71,-122"/>
+<text text-anchor="middle" x="836" y="-99.8" font-family="Times,serif" font-size="14.00">MatFormFieldModule</text>
 </g>
 <!-- MatFormFieldModule&#45;&gt;AuthModule -->
 <g id="edge10" class="edge">
 <title>MatFormFieldModule&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M1795,-122.27C1795,-140.56 1795,-166 1795,-166 1795,-166 1272.77,-166 1272.77,-166"/>
-<polygon fill="black" stroke="black" points="1272.77,-162.5 1262.77,-166 1272.77,-169.5 1272.77,-162.5"/>
+<path fill="none" stroke="black" d="M842.49,-122.01C842.49,-138.05 842.49,-159 842.49,-159 842.49,-159 1072.32,-159 1072.32,-159"/>
+<polygon fill="black" stroke="black" points="1072.32,-162.5 1082.32,-159 1072.32,-155.5 1072.32,-162.5"/>
 </g>
 <!-- MatIconModule -->
 <g id="node12" class="node">
 <title>MatIconModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="1706.47,-122 1703.47,-126 1682.47,-126 1679.47,-122 1599.53,-122 1599.53,-86 1706.47,-86 1706.47,-122"/>
-<text text-anchor="middle" x="1653" y="-99.8" font-family="Times,serif" font-size="14.00">MatIconModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="747.47,-122 744.47,-126 723.47,-126 720.47,-122 640.53,-122 640.53,-86 747.47,-86 747.47,-122"/>
+<text text-anchor="middle" x="694" y="-99.8" font-family="Times,serif" font-size="14.00">MatIconModule</text>
 </g>
 <!-- MatIconModule&#45;&gt;AuthModule -->
 <g id="edge11" class="edge">
 <title>MatIconModule&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M1622.29,-122.03C1622.29,-139.06 1622.29,-162 1622.29,-162 1622.29,-162 1272.93,-162 1272.93,-162"/>
-<polygon fill="black" stroke="black" points="1272.93,-158.5 1262.93,-162 1272.93,-165.5 1272.93,-158.5"/>
+<path fill="none" stroke="black" d="M694,-122.03C694,-139.06 694,-162 694,-162 694,-162 1072.2,-162 1072.2,-162"/>
+<polygon fill="black" stroke="black" points="1072.2,-165.5 1082.2,-162 1072.2,-158.5 1072.2,-165.5"/>
 </g>
 <!-- MatButtonModule -->
 <g id="node13" class="node">
 <title>MatButtonModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="1581.22,-122 1578.22,-126 1557.22,-126 1554.22,-122 1460.78,-122 1460.78,-86 1581.22,-86 1581.22,-122"/>
-<text text-anchor="middle" x="1521" y="-99.8" font-family="Times,serif" font-size="14.00">MatButtonModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="622.22,-122 619.22,-126 598.22,-126 595.22,-122 501.78,-122 501.78,-86 622.22,-86 622.22,-122"/>
+<text text-anchor="middle" x="562" y="-99.8" font-family="Times,serif" font-size="14.00">MatButtonModule</text>
 </g>
 <!-- MatButtonModule&#45;&gt;AuthModule -->
 <g id="edge12" class="edge">
 <title>MatButtonModule&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M1476.06,-122.01C1476.06,-138.05 1476.06,-159 1476.06,-159 1476.06,-159 1272.61,-159 1272.61,-159"/>
-<polygon fill="black" stroke="black" points="1272.61,-155.5 1262.61,-159 1272.61,-162.5 1272.61,-155.5"/>
+<path fill="none" stroke="black" d="M607.93,-122.27C607.93,-140.56 607.93,-166 607.93,-166 607.93,-166 1072.28,-166 1072.28,-166"/>
+<polygon fill="black" stroke="black" points="1072.28,-169.5 1082.28,-166 1072.28,-162.5 1072.28,-169.5"/>
 </g>
 <!-- MatCheckboxModule -->
 <g id="node14" class="node">
 <title>MatCheckboxModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="1442.37,-122 1439.37,-126 1418.37,-126 1415.37,-122 1303.63,-122 1303.63,-86 1442.37,-86 1442.37,-122"/>
-<text text-anchor="middle" x="1373" y="-99.8" font-family="Times,serif" font-size="14.00">MatCheckboxModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="483.37,-122 480.37,-126 459.37,-126 456.37,-122 344.63,-122 344.63,-86 483.37,-86 483.37,-122"/>
+<text text-anchor="middle" x="414" y="-99.8" font-family="Times,serif" font-size="14.00">MatCheckboxModule</text>
 </g>
 <!-- MatCheckboxModule&#45;&gt;AuthModule -->
 <g id="edge13" class="edge">
 <title>MatCheckboxModule&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M1326.15,-122.12C1326.15,-136.78 1326.15,-155 1326.15,-155 1326.15,-155 1272.58,-155 1272.58,-155"/>
-<polygon fill="black" stroke="black" points="1272.58,-151.5 1262.58,-155 1272.58,-158.5 1272.58,-151.5"/>
+<path fill="none" stroke="black" d="M414,-122.11C414,-141.34 414,-169 414,-169 414,-169 1072.27,-169 1072.27,-169"/>
+<polygon fill="black" stroke="black" points="1072.27,-172.5 1082.27,-169 1072.27,-165.5 1072.27,-172.5"/>
 </g>
 <!-- AuthRoutingModule -->
 <g id="node15" class="node">
 <title>AuthRoutingModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="1285.17,-122 1282.17,-126 1261.17,-126 1258.17,-122 1152.83,-122 1152.83,-86 1285.17,-86 1285.17,-122"/>
-<text text-anchor="middle" x="1219" y="-99.8" font-family="Times,serif" font-size="14.00">AuthRoutingModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="326.17,-122 323.17,-126 302.17,-126 299.17,-122 193.83,-122 193.83,-86 326.17,-86 326.17,-122"/>
+<text text-anchor="middle" x="260" y="-99.8" font-family="Times,serif" font-size="14.00">AuthRoutingModule</text>
 </g>
 <!-- AuthRoutingModule&#45;&gt;AuthModule -->
 <g id="edge14" class="edge">
 <title>AuthRoutingModule&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M1219,-122.11C1219,-122.11 1219,-140.99 1219,-140.99"/>
-<polygon fill="black" stroke="black" points="1215.5,-140.99 1219,-150.99 1222.5,-140.99 1215.5,-140.99"/>
+<path fill="none" stroke="black" d="M260,-122.13C260,-142.57 260,-173 260,-173 260,-173 1072.16,-173 1072.16,-173"/>
+<polygon fill="black" stroke="black" points="1072.16,-176.5 1082.16,-173 1072.16,-169.5 1072.16,-176.5"/>
 </g>
 <!-- ZenComponentsModule -->
 <g id="node16" class="node">
 <title>ZenComponentsModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="1135.09,-122 1132.09,-126 1111.09,-126 1108.09,-122 982.91,-122 982.91,-86 1135.09,-86 1135.09,-122"/>
-<text text-anchor="middle" x="1059" y="-99.8" font-family="Times,serif" font-size="14.00">ZenComponentsModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="176.09,-122 173.09,-126 152.09,-126 149.09,-122 23.91,-122 23.91,-86 176.09,-86 176.09,-122"/>
+<text text-anchor="middle" x="100" y="-99.8" font-family="Times,serif" font-size="14.00">ZenComponentsModule</text>
 </g>
 <!-- ZenComponentsModule&#45;&gt;AuthModule -->
 <g id="edge15" class="edge">
 <title>ZenComponentsModule&#45;&gt;AuthModule</title>
-<path fill="none" stroke="black" d="M1095.93,-122.12C1095.93,-136.78 1095.93,-155 1095.93,-155 1095.93,-155 1165.26,-155 1165.26,-155"/>
-<polygon fill="black" stroke="black" points="1165.26,-158.5 1175.26,-155 1165.26,-151.5 1165.26,-158.5"/>
+<path fill="none" stroke="black" d="M100,-122.04C100,-143.66 100,-177 100,-177 100,-177 1072.24,-177 1072.24,-177"/>
+<polygon fill="black" stroke="black" points="1072.24,-180.5 1082.24,-177 1072.24,-173.5 1072.24,-180.5"/>
 </g>
 </g>
 </svg>
