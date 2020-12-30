@@ -8,30 +8,968 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	    <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="../" class="navbar-brand">zen documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="../">zen documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="../overview.html" 
+                                         href="../overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="../modules/AppModule.html" >AppModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/AuthModule.html" >AuthModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/GraphQLModule.html" >GraphQLModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/MainModule.html" >MainModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ZenComponentsModule.html" >ZenComponentsModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ZenSuperModule.html" >ZenSuperModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="../components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ZenConfirmComponent.html" >ZenConfirmComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ZenDashboardComponent.html" >ZenDashboardComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ZenLoadingComponent.html" >ZenLoadingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ZenLoadingComponent.html" >ZenLoadingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ZenLoginFormComponent.html" >ZenLoginFormComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ZenLoginLinkComponent.html" >ZenLoginLinkComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ZenLoginPageComponent.html" >ZenLoginPageComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ZenMainComponent.html" >ZenMainComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ZenSuperPageComponent.html" >ZenSuperPageComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-directives-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="../directives/IsLoggedInDirective.html" >IsLoggedInDirective</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../directives/NotRolesDirective.html" >NotRolesDirective</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../directives/RolesDirective.html" >RolesDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-file-code-o"></span>
+                            <span>Classes</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-classes-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-classes-links"
+                            >
+                                <li class="link">
+                                    <a href="../classes/AuthLoginInput.html" >AuthLoginInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/AuthPasswordChangeInput.html" >AuthPasswordChangeInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/AuthPasswordResetConfirmationInput.html" >AuthPasswordResetConfirmationInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/AuthPasswordResetRequestInput.html" >AuthPasswordResetRequestInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/AuthRegisterInput.html" >AuthRegisterInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/AuthResendVerificationInput.html" >AuthResendVerificationInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/EnumHelper.html" >EnumHelper</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/Environment.html" >Environment</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/EnvironmentBase.html" >EnvironmentBase</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/EnvironmentCommonDev.html" >EnvironmentCommonDev</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/EnvironmentCommonProd.html" >EnvironmentCommonProd</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/EnvironmentImpl.html" >EnvironmentImpl</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/EnvironmentImpl.html" >EnvironmentImpl</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/GraphQLOptions.html" >GraphQLOptions</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="../injectables/AdminGuard.html" >AdminGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthExchangeTokenGQL.html" >AuthExchangeTokenGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthLoginGQL.html" >AuthLoginGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthRegisterGQL.html" >AuthRegisterGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthService.html"  class="active" >AuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthService.html"  class="active" >AuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/ConfigService.html" >ConfigService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/CreateOneUserGQL.html" >CreateOneUserGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/DeleteManyUserGQL.html" >DeleteManyUserGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/DeleteOneUserGQL.html" >DeleteOneUserGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/FindManyUserCountGQL.html" >FindManyUserCountGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/FindManyUserGQL.html" >FindManyUserGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/FindUniqueUserGQL.html" >FindUniqueUserGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/GqlConfigService.html" >GqlConfigService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/GqlGuard.html" >GqlGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/HttpRequestInterceptor.html" >HttpRequestInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/JwtStrategy.html" >JwtStrategy</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/LoggedInGQL.html" >LoggedInGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/LoggedInGuard.html" >LoggedInGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/MailService.html" >MailService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/PrismaService.html" >PrismaService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/SuperGuard.html" >SuperGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/UpdateManyUserGQL.html" >UpdateManyUserGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/UpdateOneUserGQL.html" >UpdateOneUserGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/UpsertOneUserGQL.html" >UpsertOneUserGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/UserRolesGQL.html" >UserRolesGQL</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/ZenSnackbarErrorService.html" >ZenSnackbarErrorService</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/AggregateUser.html" >AggregateUser</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/AggregateUserArgs.html" >AggregateUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/AuthSession.html" >AuthSession</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/AuthSession.html" >AuthSession</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/BatchPayload.html" >BatchPayload</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/CreateOneUserArgs.html" >CreateOneUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/DateTimeFieldUpdateOperationsInput.html" >DateTimeFieldUpdateOperationsInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/DateTimeFilter.html" >DateTimeFilter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/DeleteManyUserArgs.html" >DeleteManyUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/DeleteOneUserArgs.html" >DeleteOneUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/EnumRoleNullableListFilter.html" >EnumRoleNullableListFilter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ExecuteRawArgs.html" >ExecuteRawArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/FindFirstUserArgs.html" >FindFirstUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/FindManyUserArgs.html" >FindManyUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/FindOneUserArgs.html" >FindOneUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/IContext.html" >IContext</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/IntFilter.html" >IntFilter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/JwtPayload.html" >JwtPayload</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Mutation.html" >Mutation</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/NestedDateTimeFilter.html" >NestedDateTimeFilter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/NestedIntFilter.html" >NestedIntFilter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/NestedStringFilter.html" >NestedStringFilter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/NestedStringNullableFilter.html" >NestedStringNullableFilter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/NullableStringFieldUpdateOperationsInput.html" >NullableStringFieldUpdateOperationsInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/PasswordErrors.html" >PasswordErrors</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/PasswordErrors.html" >PasswordErrors</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/PasswordResetContext.html" >PasswordResetContext</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/PossibleTypesResultData.html" >PossibleTypesResultData</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Query.html" >Query</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/QueryRawArgs.html" >QueryRawArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/RequestUser.html" >RequestUser</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Resolvers.html" >Resolvers</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/StringFieldUpdateOperationsInput.html" >StringFieldUpdateOperationsInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/StringFilter.html" >StringFilter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/StringNullableFilter.html" >StringNullableFilter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UpdateManyUserArgs.html" >UpdateManyUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UpdateOneUserArgs.html" >UpdateOneUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UpsertOneUserArgs.html" >UpsertOneUserArgs</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/User.html" >User</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserAvgAggregateOutputType.html" >UserAvgAggregateOutputType</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserCountAggregateOutputType.html" >UserCountAggregateOutputType</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserCreateInput.html" >UserCreateInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserCreaterolesInput.html" >UserCreaterolesInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserMaxAggregateOutputType.html" >UserMaxAggregateOutputType</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserMinAggregateOutputType.html" >UserMinAggregateOutputType</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserOrderByInput.html" >UserOrderByInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserSumAggregateOutputType.html" >UserSumAggregateOutputType</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserUpdateInput.html" >UserUpdateInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserUpdateManyMutationInput.html" >UserUpdateManyMutationInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserUpdaterolesInput.html" >UserUpdaterolesInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserWhereInput.html" >UserWhereInput</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/UserWhereUniqueInput.html" >UserWhereUniqueInput</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="../">zen documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="../overview.html" 
+                                                href="../overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="../modules/AppModule.html" >AppModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/AuthModule.html" >AuthModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/GraphQLModule.html" >GraphQLModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/MainModule.html" >MainModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ZenComponentsModule.html" >ZenComponentsModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ZenSuperModule.html" >ZenSuperModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="../components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ZenConfirmComponent.html" >ZenConfirmComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ZenDashboardComponent.html" >ZenDashboardComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ZenLoadingComponent.html" >ZenLoadingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ZenLoadingComponent.html" >ZenLoadingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ZenLoginFormComponent.html" >ZenLoginFormComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ZenLoginLinkComponent.html" >ZenLoginLinkComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ZenLoginPageComponent.html" >ZenLoginPageComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ZenMainComponent.html" >ZenMainComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ZenSuperPageComponent.html" >ZenSuperPageComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#directives-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="../directives/IsLoggedInDirective.html" >IsLoggedInDirective</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../directives/NotRolesDirective.html" >NotRolesDirective</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../directives/RolesDirective.html" >RolesDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-file-code-o"></span>
+                                   <span>Classes</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#classes-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="classes-links"
+                   >
+                                       <li class="link">
+                                           <a href="../classes/AuthLoginInput.html" >AuthLoginInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/AuthPasswordChangeInput.html" >AuthPasswordChangeInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/AuthPasswordResetConfirmationInput.html" >AuthPasswordResetConfirmationInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/AuthPasswordResetRequestInput.html" >AuthPasswordResetRequestInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/AuthRegisterInput.html" >AuthRegisterInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/AuthResendVerificationInput.html" >AuthResendVerificationInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/EnumHelper.html" >EnumHelper</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/Environment.html" >Environment</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/EnvironmentBase.html" >EnvironmentBase</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/EnvironmentCommonDev.html" >EnvironmentCommonDev</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/EnvironmentCommonProd.html" >EnvironmentCommonProd</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/EnvironmentImpl.html" >EnvironmentImpl</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/EnvironmentImpl.html" >EnvironmentImpl</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/GraphQLOptions.html" >GraphQLOptions</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="../injectables/AdminGuard.html" >AdminGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthExchangeTokenGQL.html" >AuthExchangeTokenGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthLoginGQL.html" >AuthLoginGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthRegisterGQL.html" >AuthRegisterGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthService.html"  class="active" >AuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthService.html"  class="active" >AuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/ConfigService.html" >ConfigService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/CreateOneUserGQL.html" >CreateOneUserGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/DeleteManyUserGQL.html" >DeleteManyUserGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/DeleteOneUserGQL.html" >DeleteOneUserGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/FindManyUserCountGQL.html" >FindManyUserCountGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/FindManyUserGQL.html" >FindManyUserGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/FindUniqueUserGQL.html" >FindUniqueUserGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/GqlConfigService.html" >GqlConfigService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/GqlGuard.html" >GqlGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/HttpRequestInterceptor.html" >HttpRequestInterceptor</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/JwtStrategy.html" >JwtStrategy</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/LoggedInGQL.html" >LoggedInGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/LoggedInGuard.html" >LoggedInGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/MailService.html" >MailService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/PrismaService.html" >PrismaService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/SuperGuard.html" >SuperGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/UpdateManyUserGQL.html" >UpdateManyUserGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/UpdateOneUserGQL.html" >UpdateOneUserGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/UpsertOneUserGQL.html" >UpsertOneUserGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/UserRolesGQL.html" >UserRolesGQL</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/ZenSnackbarErrorService.html" >ZenSnackbarErrorService</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/AggregateUser.html" >AggregateUser</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/AggregateUserArgs.html" >AggregateUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/AuthSession.html" >AuthSession</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/AuthSession.html" >AuthSession</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/BatchPayload.html" >BatchPayload</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/CreateOneUserArgs.html" >CreateOneUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/DateTimeFieldUpdateOperationsInput.html" >DateTimeFieldUpdateOperationsInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/DateTimeFilter.html" >DateTimeFilter</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/DeleteManyUserArgs.html" >DeleteManyUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/DeleteOneUserArgs.html" >DeleteOneUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/EnumRoleNullableListFilter.html" >EnumRoleNullableListFilter</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ExecuteRawArgs.html" >ExecuteRawArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/FindFirstUserArgs.html" >FindFirstUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/FindManyUserArgs.html" >FindManyUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/FindOneUserArgs.html" >FindOneUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/IContext.html" >IContext</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/IntFilter.html" >IntFilter</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/JwtPayload.html" >JwtPayload</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Mutation.html" >Mutation</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/NestedDateTimeFilter.html" >NestedDateTimeFilter</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/NestedIntFilter.html" >NestedIntFilter</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/NestedStringFilter.html" >NestedStringFilter</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/NestedStringNullableFilter.html" >NestedStringNullableFilter</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/NullableStringFieldUpdateOperationsInput.html" >NullableStringFieldUpdateOperationsInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/PasswordErrors.html" >PasswordErrors</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/PasswordErrors.html" >PasswordErrors</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/PasswordResetContext.html" >PasswordResetContext</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/PossibleTypesResultData.html" >PossibleTypesResultData</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Query.html" >Query</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/QueryRawArgs.html" >QueryRawArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/RequestUser.html" >RequestUser</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Resolvers.html" >Resolvers</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/StringFieldUpdateOperationsInput.html" >StringFieldUpdateOperationsInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/StringFilter.html" >StringFilter</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/StringNullableFilter.html" >StringNullableFilter</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UpdateManyUserArgs.html" >UpdateManyUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UpdateOneUserArgs.html" >UpdateOneUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UpsertOneUserArgs.html" >UpsertOneUserArgs</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/User.html" >User</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserAvgAggregateOutputType.html" >UserAvgAggregateOutputType</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserCountAggregateOutputType.html" >UserCountAggregateOutputType</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserCreateInput.html" >UserCreateInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserCreaterolesInput.html" >UserCreaterolesInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserMaxAggregateOutputType.html" >UserMaxAggregateOutputType</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserMinAggregateOutputType.html" >UserMinAggregateOutputType</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserOrderByInput.html" >UserOrderByInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserSumAggregateOutputType.html" >UserSumAggregateOutputType</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserUpdateInput.html" >UserUpdateInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserUpdateManyMutationInput.html" >UserUpdateManyMutationInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserUpdaterolesInput.html" >UserUpdaterolesInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserWhereInput.html" >UserWhereInput</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/UserWhereUniqueInput.html" >UserWhereUniqueInput</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
-
-
-
 
 
 
@@ -42,278 +980,583 @@
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
+    <li class="active">
+        <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
+    </li>
+    <li>
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
+    </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info">
+    <div class="tab-pane fade active in" id="infos">
         <p class="comment">
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>apps/api/src/app/auth/auth.service.ts</code>
+            <code>libs/auth/src/lib/auth.service.ts</code>
         </p>
 
 
-
+            <section>
+                <h3 id="constructor">Constructor</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>constructor(router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank" >Router</a>, apollo: Apollo, authLoginGQL: any, authExchangeTokenGQL: any)</code>
+                                </td>
+                            </tr>
+            
+                        </tbody>
+                    </table>
+            </section>
 
             <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#setJwtCookie">setJwtCookie</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
+                <h3 id="methods">Methods</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> login</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>login(data: any)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> logout</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>logout()</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> exchangeToken</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>exchangeToken()</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> setSession</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>setSession(authSession: any)</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> clearLocalStorage</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play lock">
+                                            <span class="fa fa-lock"></span>
+                                        </span>
+                                    <code>clearLocalStorage()</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> userHasRole</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>userHasRole(role: string | string[])</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> userNotInRole</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            <code>userNotInRole(role: string | string[])</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> startExchangeInterval</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play lock">
+                                            <span class="fa fa-lock"></span>
+                                        </span>
+                                    <code>startExchangeInterval()</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> stopExchangeInterval</b>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play lock">
+                                            <span class="fa fa-lock"></span>
+                                        </span>
+                                    <code>stopExchangeInterval()</code>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                        <div class="io-description">
+                                            <b>Returns: </b>    <code>void</code>
+            
+                                        </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
 
             <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(jwtService: JwtService, config: <a href="../injectables/ConfigService.html">ConfigService</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">apps/api/src/app/auth/auth.service.ts:10</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>jwtService</td>
-                                                  
-                                                        <td>
-                                                                    <code>JwtService</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>config</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
-
-            <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setJwtCookie"></a>
-                    <span class="name">
-                        <b>
-                            setJwtCookie
-                        </b>
-                        <a href="#setJwtCookie"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>setJwtCookie(res: Response, user: <a href="../interfaces/RequestUser.html">RequestUser</a>, rememberMe: boolean | string)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">apps/api/src/app/auth/auth.service.ts:13</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Default value</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>res</td>
-                                    <td>
-                                            <code>Response</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-                                    <td>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>user</td>
-                                    <td>
-                                                <code><a href="../interfaces/RequestUser.html" target="_self" >RequestUser</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-                                    <td>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>rememberMe</td>
-                                    <td>
-                                            <code>boolean | string</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-                                    <td>
-                                        <code>false</code>
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> autoLogoutSubscription</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>autoLogoutSubscription:     <code>Subscription</code>
+            </bcode>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> EXCHANGE_INTERVAL</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="modifier-icon fa fa-lock"></span><code>EXCHANGE_INTERVAL:     <code>number</code>
+            </bcode>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> exchangeIntervalSubscription</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>exchangeIntervalSubscription:     <code>Subscription</code>
+            </bcode>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> graphqlSubscriptionClient$</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>graphqlSubscriptionClient$:     <code>BehaviorSubject&lt;any&gt;</code>
+            </bcode>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> graphqlSubscriptionClient$</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>graphqlSubscriptionClient$:     <code>any</code>
+            </bcode>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> loggedIn</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>loggedIn:     <code>boolean</code>
+            </bcode>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> rememberMe</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="modifier-icon fa fa-lock"></span><code>rememberMe:     <code>boolean</code>
+            </bcode>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> sessionTimeRemaining</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="modifier-icon fa fa-lock"></span><code>sessionTimeRemaining:     <code>number</code>
+            </bcode>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
     </div>
+    <div class="tab-pane fade tab-source-code" id="source">
+        <pre><code class="hljs javascript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Role } from &#x27;@zen/graphql&#x27;;
+import {
+  AuthExchangeTokenGQL,
+  AuthLoginGQL,
+  AuthLoginInput,
+  AuthSession,
+  GraphQLModule,
+  extractGraphQLErrors,
+} from &#x27;@zen/graphql&#x27;;
+import { loggedInVar, userRolesVar } from &#x27;@zen/graphql/client&#x27;;
+import { Apollo } from &#x27;apollo-angular&#x27;;
+import Cookies from &#x27;js-cookie&#x27;;
+import { intersection, isEqual, sortBy } from &#x27;lodash-es&#x27;;
+import { BehaviorSubject, Observable, Subscription, interval, timer } from &#x27;rxjs&#x27;;
+import { debounce, map, shareReplay, tap } from &#x27;rxjs/operators&#x27;;
 
+enum LocalStorageKey {
+  sessionExpiresOn &#x3D; &#x27;sessionExpiresOn&#x27;,
+  roles &#x3D; &#x27;roles&#x27;,
+  rememberMe &#x3D; &#x27;rememberMe&#x27;,
+}
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
-import { CookieOptions, Response } from &#x27;express&#x27;;
-
-import { RequestUser } from &#x27;../auth&#x27;;
-import { ConfigService } from &#x27;../config&#x27;;
-import { AuthSession } from &#x27;../graphql/models/user-session&#x27;;
-import { JwtService } from &#x27;../jwt&#x27;;
-
-@Injectable()
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
 export class AuthService {
-  constructor(private readonly jwtService: JwtService, private readonly config: ConfigService) {}
+  private readonly EXCHANGE_INTERVAL &#x3D; 30 * 60 * 1000; // 30 minutes
+  #exchangeIntervalSubscription?: Subscription;
+  #autoLogoutSubscription?: Subscription;
+  #graphqlSubscriptionClient$ &#x3D; new BehaviorSubject&lt;AuthSession | null&gt;(null);
 
-  setJwtCookie(res: Response, user: RequestUser, rememberMe: boolean | string &#x3D; false) {
-    if (typeof rememberMe &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
-      rememberMe &#x3D; rememberMe &#x3D;&#x3D;&#x3D; &#x27;true&#x27;;
+  constructor(
+    private router: Router,
+    private apollo: Apollo,
+    private authLoginGQL: AuthLoginGQL,
+    private authExchangeTokenGQL: AuthExchangeTokenGQL
+  ) {
+    this.loggedIn &#x3D; this.sessionTimeRemaining &gt; 0; // Initialize apollo client state
+
+    userRolesVar(
+      localStorage.getItem(LocalStorageKey.roles)
+        ? localStorage.getItem(LocalStorageKey.roles)?.split(&#x27;,&#x27;)
+        : []
+    );
+
+    if (this.loggedIn) this.startExchangeInterval();
+
+    // TODO: Check if this fires with a parameter with value &#x60;null&#x60; upon the app&#x27;s first load
+    this.graphqlSubscriptionClient$.subscribe(() &#x3D;&gt; GraphQLModule.reconnectSubscriptionClient());
+  }
+
+  get graphqlSubscriptionClient$() {
+    return this.#graphqlSubscriptionClient$.pipe(debounce(() &#x3D;&gt; timer(100)));
+  }
+
+  login(data: AuthLoginInput) {
+    return this.authLoginGQL.fetch({ data }, { fetchPolicy: &#x27;network-only&#x27; }).pipe(
+      tap(({ data: { authLogin } }) &#x3D;&gt; {
+        this.setSession(authLogin);
+        this.startExchangeInterval();
+      })
+    );
+  }
+
+  logout() {
+    this.loggedIn &#x3D; false;
+    this.router.navigateByUrl(&#x27;/login&#x27;);
+  }
+
+  exchangeToken() {
+    if (this.loggedIn) {
+      this.authExchangeTokenGQL.fetch(undefined, { fetchPolicy: &#x27;network-only&#x27; }).subscribe({
+        next: ({ data: { authExchangeToken } }) &#x3D;&gt; {
+          // Re-run route guards if roles have changed
+          // TODO: See if this is necessary
+          if (!isEqual(sortBy(userRolesVar()), sortBy(authExchangeToken.roles))) {
+            console.log(&#x27;Reload&#x27;, this.router.url);
+            this.setSession(authExchangeToken);
+            this.router.navigateByUrl(this.router.url);
+          }
+
+          this.setSession(authExchangeToken);
+          console.log(&#x27;Exchanged token&#x27;);
+        },
+        error: errors &#x3D;&gt; {
+          const gqlErrors &#x3D; extractGraphQLErrors(errors);
+
+          if (gqlErrors.find(e &#x3D;&gt; e.statusCode &#x3D;&#x3D;&#x3D; 401)) {
+            this.logout();
+            console.error(&#x27;Exchange token failed&#x27;);
+          }
+        },
+      });
+    }
+  }
+
+  setSession(authSession: AuthSession) {
+    const expiresOn &#x3D; Date.now() + parseInt(authSession.maxAge, 10);
+    localStorage.setItem(LocalStorageKey.sessionExpiresOn, expiresOn.toString());
+    localStorage.setItem(LocalStorageKey.rememberMe, authSession.rememberMe.toString());
+    localStorage.setItem(LocalStorageKey.roles, authSession.roles.toString());
+    userRolesVar(authSession.roles);
+    this.loggedIn &#x3D; true;
+    this.#graphqlSubscriptionClient$.next(authSession);
+  }
+
+  private clearLocalStorage() {
+    localStorage.removeItem(LocalStorageKey.sessionExpiresOn);
+    localStorage.removeItem(LocalStorageKey.rememberMe);
+    localStorage.removeItem(LocalStorageKey.roles);
+    userRolesVar([]);
+  }
+
+  private get sessionTimeRemaining(): number {
+    const sessionExpiresOnString &#x3D; localStorage.getItem(LocalStorageKey.sessionExpiresOn);
+    if (!sessionExpiresOnString) return 0;
+
+    const expiresOn &#x3D; +sessionExpiresOnString;
+    const timeRemaining &#x3D; expiresOn - Date.now();
+
+    if (timeRemaining &lt;&#x3D; 0) return 0;
+    else return timeRemaining;
+  }
+
+  userHasRole(role: string | string[]) {
+    if (role) {
+      if (typeof role &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) return userRolesVar().some(r &#x3D;&gt; r &#x3D;&#x3D;&#x3D; role);
+      else return userRolesVar().some(r &#x3D;&gt; role.indexOf(r) &gt;&#x3D; 0);
+    }
+    return false;
+  }
+
+  userNotInRole(role: string | string[]) {
+    if (role) {
+      if (typeof role &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) return !userRolesVar().some(r &#x3D;&gt; r &#x3D;&#x3D;&#x3D; role);
+      else return intersection(userRolesVar(), role).length &#x3D;&#x3D;&#x3D; 0;
+    }
+    return true;
+  }
+
+  private get rememberMe(): boolean {
+    return &#x27;true&#x27; &#x3D;&#x3D;&#x3D; localStorage.getItem(LocalStorageKey.rememberMe);
+  }
+
+  get loggedIn(): boolean {
+    return this.sessionTimeRemaining &gt; 0;
+  }
+
+  set loggedIn(value: boolean) {
+    if (!value) {
+      this.stopExchangeInterval();
+      this.clearLocalStorage();
+      Cookies.remove(&#x27;jwt&#x27;);
+      Cookies.remove(&#x27;rememberMe&#x27;);
+      this.apollo.client.cache.reset();
+      this.#graphqlSubscriptionClient$.next(null);
     }
 
-    const jwtPayload &#x3D; {
-      id: user.id,
-      roles: user.roles ? user.roles.toString() : undefined,
-    };
+    loggedInVar(value);
+  }
 
-    const expiresIn &#x3D; rememberMe
-      ? this.config.rememberMeExpiresIn
-      : (this.config.jwtOptions.signOptions.expiresIn as number);
-    const maxAge &#x3D; expiresIn * 1000;
-    const token &#x3D; this.jwtService.sign(jwtPayload, { expiresIn });
+  private startExchangeInterval() {
+    if (!this.rememberMe &amp;&amp; !this.#exchangeIntervalSubscription) {
+      this.#exchangeIntervalSubscription &#x3D; interval(this.EXCHANGE_INTERVAL).subscribe(() &#x3D;&gt; {
+        this.exchangeToken();
+      });
+    }
 
-    const cookieOptions: CookieOptions &#x3D; {
-      maxAge,
-      secure: this.config.production,
-      sameSite: this.config.production ? &#x27;strict&#x27; : &#x27;lax&#x27;,
-      domain: this.config.cookieDomain,
-    };
+    if (!this.#autoLogoutSubscription) {
+      this.#autoLogoutSubscription &#x3D; timer(60_000, 30_000).subscribe(() &#x3D;&gt; {
+        if (this.sessionTimeRemaining &lt;&#x3D; 0) this.logout();
+      });
+    }
+  }
 
-    res.cookie(&#x27;jwt&#x27;, token, cookieOptions);
-    res.cookie(&#x27;rememberMe&#x27;, rememberMe, cookieOptions);
+  private stopExchangeInterval() {
+    if (this.#exchangeIntervalSubscription) {
+      this.#exchangeIntervalSubscription.unsubscribe();
+      this.#exchangeIntervalSubscription &#x3D; undefined;
+    }
 
-    const response: AuthSession &#x3D; {
-      id: user.id,
-      maxAge: maxAge.toString(),
-      roles: user.roles,
-      rememberMe,
-    };
-    return response;
+    if (this.#autoLogoutSubscription) {
+      this.#autoLogoutSubscription.unsubscribe();
+      this.#autoLogoutSubscription &#x3D; undefined;
+    }
   }
 }
 </code></pre>
     </div>
-
 </div>
 
 
@@ -322,14 +1565,9 @@ export class AuthService {
 
 
 
-                   
-
-
-
-
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -337,22 +1575,8 @@ export class AuthService {
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script src="../js/libs/custom-elements.min.js"></script>
-       <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
-       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
@@ -363,17 +1587,20 @@ export class AuthService {
 
        <script src="../js/compodoc.js"></script>
 
-       <script src="../js/tabs.js"></script>
-       <script src="../js/menu.js"></script>
-       <script src="../js/libs/clipboard.min.js"></script>
-       <script src="../js/libs/prism.js"></script>
-       <script src="../js/sourceCode.js"></script>
-          <script src="../js/search/search.js"></script>
-          <script src="../js/search/lunr.min.js"></script>
-          <script src="../js/search/search-lunr.js"></script>
-          <script src="../js/search/search_index.js"></script>
-       <script src="../js/lazy-load-graphs.js"></script>
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
 
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/highlight.pack.js"></script>
+       <script src="../js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="../js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>
