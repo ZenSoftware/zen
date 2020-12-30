@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AuthService } from '@zen/auth';
 import { AuthRegister, AuthRegisterGQL, AuthRegisterInput } from '@zen/graphql';
+
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'zen-registration-form',
