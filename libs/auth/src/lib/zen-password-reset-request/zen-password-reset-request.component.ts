@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AuthPasswordResetRequestQueryGQL, extractGraphQLErrors } from '@zen/graphql';
 
@@ -9,6 +9,8 @@ import { emailValidator } from '../validators';
   templateUrl: './zen-password-reset-request.component.html',
 })
 export class ZenPasswordResetRequestComponent {
+  @Output() sent = new EventEmitter();
+
   loading = false;
   completed = false;
   emailNotFound = false;
@@ -55,6 +57,7 @@ export class ZenPasswordResetRequestComponent {
           next: () => {
             this.loading = false;
             this.completed = true;
+            this.sent.emit();
           },
           error: errors => {
             this.loading = false;
