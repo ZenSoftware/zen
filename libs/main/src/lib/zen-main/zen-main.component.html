@@ -1,12 +1,17 @@
 <mat-sidenav-container style="height: calc(100% - 64px)">
-  <mat-sidenav class="menu" mode="side" opened>
-    <i class="fas fa-fw fa-desktop"></i>
-    Dashboard<br>
+  <mat-sidenav class="menu p-4" mode="side" opened>
+    
+    <a routerLink="/dashboard">
+      <i class="fas fa-fw fa-desktop mr-2"></i>
+      Dashboard
+    </a>
+    <br>
 
     <a *roles="Role.Super" routerLink="/super" class="text-info">
-      <i class="fas fa-fw fa-user-shield"></i>
+      <i class="fas fa-fw fa-user-shield mr-2"></i>
       Super
-    </a><br>
+    </a>
+    <br>
   </mat-sidenav>
 
   <mat-sidenav-content>
