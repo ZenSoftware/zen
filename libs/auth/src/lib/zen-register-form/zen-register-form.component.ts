@@ -10,11 +10,7 @@ import { emailValidator, validatePassword } from '../validators';
 @Component({
   selector: 'zen-register-form',
   templateUrl: 'zen-register-form.component.html',
-  animations: [
-    trigger('accordion', [
-      transition(':enter', useAnimation(verticalAccordionEnter, { params: { time: '200ms' } })),
-    ]),
-  ],
+  animations: [trigger('accordion', [transition(':enter', useAnimation(verticalAccordionEnter))])],
 })
 export class ZenRegisterFormComponent {
   @Output() registered = new EventEmitter();

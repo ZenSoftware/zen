@@ -10,11 +10,7 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'zen-login-form',
   templateUrl: 'zen-login-form.component.html',
-  animations: [
-    trigger('accordion', [
-      transition(':enter', useAnimation(verticalAccordionEnter, { params: { time: '200ms' } })),
-    ]),
-  ],
+  animations: [trigger('accordion', [transition(':enter', useAnimation(verticalAccordionEnter))])],
 })
 export class ZenLoginFormComponent {
   @Output() loggedIn = new EventEmitter();
