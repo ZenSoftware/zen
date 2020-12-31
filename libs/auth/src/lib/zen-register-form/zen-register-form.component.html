@@ -42,13 +42,13 @@
     <mat-error *ngIf="acceptTerms.invalid && acceptTerms.touched">Accept the terms and conditions</mat-error>
   </div>
 
-  <mat-error *ngIf="generalError" class="text-center mb-3">
-    There was a problem with your registration.<br>
-    If this continues, please contact us
-  </mat-error>
-
-  <button type="submit" mat-raised-button color="primary" class="mb-2" [disabled]="!form.valid">
+  <button type="submit" mat-raised-button color="primary" class="w-100 text-lg" style="height:3rem" [disabled]="!form.valid">
     <i class="fas fa-fw fa-cloud-upload-alt mr-1"></i>
     Submit
   </button>
+
+  <mat-error *ngIf="generalError" class="text-center mt-3">
+    There was a problem with your registration.<br>
+    If this continues, please contact us
+  </mat-error>
 </form>

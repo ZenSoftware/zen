@@ -2,11 +2,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AuthPasswordResetRequestQueryGQL, extractGraphQLErrors } from '@zen/graphql';
 
+import { verticalAccordion } from '../animations';
 import { emailValidator } from '../validators';
 
 @Component({
   selector: 'zen-password-reset-request',
   templateUrl: './zen-password-reset-request.component.html',
+  animations: [...verticalAccordion],
 })
 export class ZenPasswordResetRequestComponent {
   @Output() sent = new EventEmitter();
@@ -14,20 +16,20 @@ export class ZenPasswordResetRequestComponent {
   loading = false;
   completed = false;
   emailNotFound = false;
-  passwordForm: FormGroup;
+  form: FormGroup;
   generalError = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private authPasswordResetRequestQueryGQL: AuthPasswordResetRequestQueryGQL
   ) {
-    this.passwordForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       email: ['', [Validators.required, emailValidator(), this.emailNotFoundValidator()]],
     });
   }
 
   get email(): any {
-    return this.passwordForm.get('email');
+    return this.form.get('email');
   }
 
   emailNotFoundReset() {
