@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <zen-loading *ngIf="loading"></zen-loading>
   
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
@@ -27,7 +27,7 @@
     <mat-checkbox color="primary" [formControl]="rememberMe">Remember me</mat-checkbox>
   </div>
 
-  <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid || loading">
+  <button type="submit" mat-raised-button color="primary" [disabled]="!form.valid">
     <i class="fas fa-fw fa-sign-in-alt mr-1"></i>
     Login
   </button>

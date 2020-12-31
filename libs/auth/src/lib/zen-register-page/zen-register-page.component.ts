@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'zen-register-pagee',
   templateUrl: 'zen-register-page.component.html',
 })
 export class ZenRegisterPageComponent {
-  constructor() {}
+  constructor(private router: Router) {}
 
   onRegisterd() {
-    console.log('Registered');
+    this.router.navigateByUrl('/');
   }
 }

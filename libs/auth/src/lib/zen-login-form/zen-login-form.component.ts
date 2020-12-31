@@ -16,14 +16,11 @@ export class ZenLoginFormComponent {
   #incorrectPassword = false;
   #emailNotFound = false;
   hidePassword = true;
-  loginForm: FormGroup;
+  form: FormGroup;
   generalError = false;
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService) {
-    // Emit immediately to auto re-direct user if they are already logged in
-    if (this.auth.loggedIn) this.loggedIn.emit();
-
-    this.loginForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       email: ['', [Validators.required, emailValidator(), this.emailNotFoundValidator()]],
       password: ['', [Validators.required, this.incorrectPasswordValidator()]],
       rememberMe: [false],
@@ -36,20 +33,20 @@ export class ZenLoginFormComponent {
 
   set loading(value) {
     this.#loading = value;
-    if (value) this.loginForm.disable();
-    else this.loginForm.enable();
+    if (value) this.form.disable();
+    else this.form.enable();
   }
 
   get email(): any {
-    return this.loginForm.get('email');
+    return this.form.get('email');
   }
 
   get password(): any {
-    return this.loginForm.get('password');
+    return this.form.get('password');
   }
 
   get rememberMe(): any {
-    return this.loginForm.get('rememberMe');
+    return this.form.get('rememberMe');
   }
 
   emailNotFoundReset() {
@@ -74,6 +71,7 @@ export class ZenLoginFormComponent {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
+      this.form.disable();
 
       this.auth
         .login({
@@ -82,13 +80,14 @@ export class ZenLoginFormComponent {
           rememberMe: this.rememberMe.value,
         })
         .subscribe({
-          next: () => {
+          next: ({ data }) => {
             this.loading = false;
             this.loggedIn.emit();
           },
 
           error: errors => {
             this.loading = false;
+            this.form.enable();
 
             const gqlErrors = extractGraphQLErrors(errors);
 

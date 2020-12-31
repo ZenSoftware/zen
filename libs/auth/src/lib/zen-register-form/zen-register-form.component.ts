@@ -1,31 +1,29 @@
-import { transition, trigger, useAnimation } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AuthRegisterGQL, extractGraphQLErrors } from '@zen/graphql';
+import { AuthRegisterGQL, AuthSession, extractGraphQLErrors } from '@zen/graphql';
 
-import { verticalAccordionEnter, verticalAccordionLeave } from '../animations';
+import { AuthService } from '../auth.service';
 import { emailValidator, validatePassword } from '../validators';
 
 @Component({
   selector: 'zen-register-form',
   templateUrl: 'zen-register-form.component.html',
-  animations: [
-    trigger('accordion', [
-      transition(':enter', useAnimation(verticalAccordionEnter)),
-      transition(':leave', useAnimation(verticalAccordionLeave)),
-    ]),
-    trigger('accordionLeave', [transition(':leave', useAnimation(verticalAccordionLeave))]),
-  ],
 })
 export class ZenRegisterFormComponent {
-  registrationForm: FormGroup;
-  completed = false;
+  @Output() registered = new EventEmitter();
+
+  form: FormGroup;
   loading = false;
   emailTaken = false;
   generalError = false;
+  hidePassword = true;
 
-  constructor(private formBuilder: FormBuilder, private authRegisterGQL: AuthRegisterGQL) {
-    this.registrationForm = this.formBuilder.group({
+  constructor(
+    private formBuilder: FormBuilder,
+    private auth: AuthService,
+    private authRegisterGQL: AuthRegisterGQL
+  ) {
+    this.form = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       email: ['', [Validators.required, emailValidator(), this.emailTakenValidator()]],
       password: ['', [Validators.required, this.passwordValidator()]],
@@ -35,23 +33,23 @@ export class ZenRegisterFormComponent {
   }
 
   get firstName(): any {
-    return this.registrationForm.get('firstName');
+    return this.form.get('firstName');
   }
 
   get email(): any {
-    return this.registrationForm.get('email');
+    return this.form.get('email');
   }
 
   get password(): any {
-    return this.registrationForm.get('password');
+    return this.form.get('password');
   }
 
   get passwordConfirm(): any {
-    return this.registrationForm.get('passwordConfirm');
+    return this.form.get('passwordConfirm');
   }
 
   get acceptTerms(): any {
-    return this.registrationForm.get('acceptTerms');
+    return this.form.get('acceptTerms');
   }
 
   emailTakenReset() {
@@ -68,7 +66,7 @@ export class ZenRegisterFormComponent {
 
   passwordValidator(): ValidatorFn {
     return control => {
-      if (this.registrationForm) {
+      if (this.form) {
         this.passwordConfirm.updateValueAndValidity();
         return validatePassword(control.value);
       }
@@ -78,7 +76,7 @@ export class ZenRegisterFormComponent {
 
   passwordConfirmValidator(): ValidatorFn {
     return control => {
-      if (this.registrationForm) {
+      if (this.form) {
         if (control.value.length >= this.password.value.length && control.value.length !== 0) {
           control.markAsTouched();
         }
@@ -93,6 +91,7 @@ export class ZenRegisterFormComponent {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
+      this.form.disable();
 
       this.authRegisterGQL
         .mutate({
@@ -103,12 +102,16 @@ export class ZenRegisterFormComponent {
           },
         })
         .subscribe({
-          next: () => {
+          next: ({ data }) => {
             this.loading = false;
-            this.completed = true;
+            this.auth.setSession(data?.authRegister as AuthSession);
+            this.registered.emit();
           },
 
           error: errors => {
+            this.loading = false;
+            this.form.enable();
+
             const gqlErrors = extractGraphQLErrors(errors);
 
             if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
@@ -118,8 +121,6 @@ export class ZenRegisterFormComponent {
             } else {
               this.generalError = true;
             }
-
-            this.loading = false;
           },
         });
     }

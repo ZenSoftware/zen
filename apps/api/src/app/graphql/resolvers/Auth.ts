@@ -173,7 +173,7 @@ export class AuthResolver {
       },
     });
 
-    return this.auth.setJwtCookie(ctx.res, user, true);
+    return this.auth.setJwtCookie(ctx.res, user);
   }
 
   @Mutation()
