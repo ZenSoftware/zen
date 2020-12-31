@@ -1,4 +1,4 @@
-﻿import { animate, animation, style } from '@angular/animations';
+﻿import { animate, animation, style, transition, trigger, useAnimation } from '@angular/animations';
 
 export const verticalAccordionEnter = animation(
   [style({ height: 0, opacity: 0 }), animate('{{time}}', style({ height: '*', opacity: 1 }))],
@@ -17,3 +17,10 @@ export const verticalAccordionLeave = animation(
     },
   }
 );
+
+export const verticalAccordion = [
+  trigger('verticalAccordion', [
+    transition(':enter', useAnimation(verticalAccordionEnter)),
+    transition(':leave', useAnimation(verticalAccordionLeave)),
+  ]),
+];

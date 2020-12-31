@@ -1,16 +1,15 @@
-import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AuthRegisterGQL, AuthSession, extractGraphQLErrors } from '@zen/graphql';
 
-import { verticalAccordionEnter } from '../animations';
+import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
 import { emailValidator, validatePassword } from '../validators';
 
 @Component({
   selector: 'zen-register-form',
   templateUrl: 'zen-register-form.component.html',
-  animations: [trigger('accordion', [transition(':enter', useAnimation(verticalAccordionEnter))])],
+  animations: [...verticalAccordion],
 })
 export class ZenRegisterFormComponent {
   @Output() registered = new EventEmitter();
