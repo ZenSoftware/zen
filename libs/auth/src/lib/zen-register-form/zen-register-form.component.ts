@@ -7,8 +7,8 @@ import { verticalAccordionEnter, verticalAccordionLeave } from '../animations';
 import { emailValidator, validatePassword } from '../validators';
 
 @Component({
-  selector: 'zen-registration-form',
-  templateUrl: 'zen-registration-form.component.html',
+  selector: 'zen-register-form',
+  templateUrl: 'zen-register-form.component.html',
   animations: [
     trigger('accordion', [
       transition(':enter', useAnimation(verticalAccordionEnter)),
@@ -17,7 +17,7 @@ import { emailValidator, validatePassword } from '../validators';
     trigger('accordionLeave', [transition(':leave', useAnimation(verticalAccordionLeave))]),
   ],
 })
-export class ZenRegistrationFormComponent {
+export class ZenRegisterFormComponent {
   registrationForm: FormGroup;
   completed = false;
   loading = false;

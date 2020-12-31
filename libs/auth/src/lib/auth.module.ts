@@ -15,8 +15,8 @@ import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 import { ZenPasswordResetConfirmationComponent } from './zen-password-reset-confirmation/zen-password-reset-confirmation.component';
 import { ZenPasswordResetRequestComponent } from './zen-password-reset-request/zen-password-reset-request.component';
-import { ZenRegistrationFormComponent } from './zen-registration-form/zen-registration-form.component';
-import { ZenRegistrationPageComponent } from './zen-registration-page/zen-registration-page.component';
+import { ZenRegisterFormComponent } from './zen-register-form/zen-register-form.component';
+import { ZenRegisterPageComponent } from './zen-register-page/zen-register-page.component';
 
 @NgModule({
   imports: [
@@ -39,8 +39,8 @@ import { ZenRegistrationPageComponent } from './zen-registration-page/zen-regist
     ZenLoginLinkComponent,
     ZenPasswordResetConfirmationComponent,
     ZenPasswordResetRequestComponent,
-    ZenRegistrationFormComponent,
-    ZenRegistrationPageComponent,
+    ZenRegisterFormComponent,
+    ZenRegisterPageComponent,
   ],
   exports: [
     IsLoggedInDirective,
@@ -51,8 +51,8 @@ import { ZenRegistrationPageComponent } from './zen-registration-page/zen-regist
     ZenLoginLinkComponent,
     ZenPasswordResetConfirmationComponent,
     ZenPasswordResetRequestComponent,
-    ZenRegistrationFormComponent,
-    ZenRegistrationPageComponent,
+    ZenRegisterFormComponent,
+    ZenRegisterPageComponent,
   ],
 })
 export class AuthModule {}
