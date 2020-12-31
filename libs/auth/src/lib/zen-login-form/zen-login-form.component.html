@@ -19,10 +19,6 @@
     <mat-error *ngIf="password.errors?.incorrect">Incorrect password</mat-error>
   </mat-form-field>
 
-  <mat-error *ngIf="generalError" class="mb-3">
-    There was a problem logging you in. If this continues, please contact us.
-  </mat-error>
-
   <div class="mb-4">
     <mat-checkbox color="primary" [formControl]="rememberMe">Remember me</mat-checkbox>
   </div>
@@ -31,4 +27,8 @@
     <i class="fas fa-fw fa-sign-in-alt mr-1"></i>
     Login
   </button>
+
+  <mat-error @verticalAccordion *ngIf="generalError" class="text-center my-3">
+    There was a problem logging you in. If this continues, please contact us.
+  </mat-error>
 </form>

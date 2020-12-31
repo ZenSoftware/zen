@@ -6,11 +6,13 @@ import { AuthPasswordResetConfirmationGQL } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { verticalAccordion } from '../animations';
 import { validatePassword } from '../validators';
 
 @Component({
   selector: 'zen-password-reset-confirmation',
   templateUrl: 'zen-password-reset-confirmation.component.html',
+  animations: [...verticalAccordion],
 })
 export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy {
   private subscription?: Subscription;
