@@ -9,9 +9,6 @@
 
 ## [Docs](https://zensoftware.github.io/Zen/) - [Repo](https://github.com/ZenSoftware/Zen)
 
-
----
-
 ## 🍱 Project Setup Instructions
 
 **Requirements**
