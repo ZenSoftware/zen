@@ -4,11 +4,11 @@
 ---
 
 ## 🏯 Project Founders Notes
-> 🔬~ Peter Hoang 
+> 🔬
 
 If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Angular, and Prisma. This project is an attempt at packaging up the sum of all those lessons, and making it publicly available.  New contributors are welcome!
 
-> 🎐 ~ Give more than you take
+> 🎐 "Give more than you take" ~ Peter Hoang 
 
 ---
 
