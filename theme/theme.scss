@@ -10,6 +10,10 @@ mat-dialog-content {
   max-height: 80vh !important;
 }
 
+.mat-button-disabled {
+  cursor: not-allowed !important;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

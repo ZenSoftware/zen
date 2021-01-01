@@ -21,36 +21,38 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
   completed = false;
   generalError = false;
   token: string | null = null;
-  passwordForm?: FormGroup;
+  form: FormGroup;
+  hidePassword = true;
 
   constructor(
     private authPasswordResetConfirmationGQL: AuthPasswordResetConfirmationGQL,
     private route: ActivatedRoute,
     public router: Router,
     private formBuilder: FormBuilder
-  ) {}
-
-  ngOnInit() {
-    this.passwordForm = this.formBuilder.group({
+  ) {
+    this.form = this.formBuilder.group({
       password: ['', [Validators.required, this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
     });
+  }
 
+  ngOnInit() {
     this.subscription = this.route.queryParamMap
       .pipe(map(params => params.get('token')))
       .subscribe(token => (this.token = token));
   }
+
   get password(): any {
-    return this.passwordForm?.get('password');
+    return this.form.get('password');
   }
 
   get passwordConfirm(): any {
-    return this.passwordForm?.get('passwordConfirm');
+    return this.form.get('passwordConfirm');
   }
 
   passwordValidator(): ValidatorFn {
     return control => {
-      if (this.passwordForm) {
+      if (this.form) {
         this.passwordConfirm.updateValueAndValidity();
         return validatePassword(control.value);
       }
@@ -60,7 +62,7 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
 
   passwordConfirmValidator(): ValidatorFn {
     return control => {
-      if (this.passwordForm) {
+      if (this.form) {
         if (control.value.length >= this.password.value.length && control.value.length !== 0) {
           control.markAsTouched();
         }
@@ -75,6 +77,7 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
+      this.form.disable();
 
       this.authPasswordResetConfirmationGQL
         .mutate({
@@ -92,6 +95,7 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
           error: errors => {
             this.loading = false;
             this.generalError = true;
+            this.form.enable();
           },
         });
     }

@@ -6,6 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ZenComponentsModule } from '@zen/components';
 
 import { AuthRoutingModule } from './auth-routing.module';
@@ -29,6 +30,7 @@ import { ZenRegisterPageComponent } from './zen-register-page/zen-register-page.
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatProgressBarModule,
     AuthRoutingModule,
     ZenComponentsModule,
   ],
