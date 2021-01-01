@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'register', component: ZenRegisterPageComponent },
   { path: 'password-reset-request', component: ZenPasswordResetRequestPageComponent },
   { path: 'password-reset-confirmation', component: ZenPasswordResetConfirmationPageComponent },
-  // { path: 'verify-account/:token', component: TuVerifyAccountComponent },
 ];
 
 @NgModule({
