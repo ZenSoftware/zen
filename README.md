@@ -4,9 +4,9 @@
 
 ### [Docs](https://zensoftware.github.io/Zen/) - [Repo](https://github.com/ZenSoftware/Zen)
 
-🚧 Under development. New contributors are welcome!
+🚧 Under development.
 
-🎏 Please open a git issue if you are interested in contributing!
+🎏 New contributors are welcome!
 
 ---
 
