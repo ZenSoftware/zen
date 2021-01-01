@@ -1,14 +1,14 @@
-# ⛩ Zen ⛩
+# ⛩ Zen ⛩ 
 
-## Modern Full Stack Web Portal built with Nest and Angular
+## 🪔 A Modern Full Stack SPA Portal
+### Nest ☯ Prisma ☯ Angular
 
-### [Zen Docs](https://zensoftware.github.io/Zen/)
+### [🚧Docs🚧](https://zensoftware.github.io/Zen/)
+###  [🏮Repo🏮](https://github.com/ZenSoftware/Zen)
 
-### [GitHub repo ZenSoftware/Zen](https://github.com/ZenSoftware/Zen)
+### 🥢 Currently under development - New contributors are welcome!🌱
 
-### 🤹 Currently under development - New contributors are welcome!🌱
-
-🍧 You may open a git issue if you are interested in contributing! 🍰
+🍧 Please open a git issue if you are interested in contributing! 🍰
 
 ---
 
@@ -64,7 +64,7 @@ Reload GraphQL schema for Apollo extension via VSCode command palette after the 
 - [X] [Nest authentication](https://docs.nestjs.com/techniques/authentication), user creation, and login system designed specifically to work for an [Angular SPA (single page application)](https://angular.io/). This project will provide responsive, "mobile first" interfaces for the standard set of authentication features.
 - [X] `New account component`
 - [x] `Login component`
-- [ ] `Forgot password component` and a pre-built password reset flow via automated emails via [@nest-modules/mailer](https://www.npmjs.com/package/@nest-modules/mailer) pre-configured [Handbars e-mail templates](https://handlebarsjs.com/guide/#what-is-handlebars).  Handlebars has similar double bracket `{{contextField}}` template interpolation, akin to Angular templates.  The [apps/api/src/app/mail/templates](https://github.com/ZenSoftware/Zen/tree/main/apps/api/src/app/mail/templates) directory is a **convention** first approach. It makes working with e-mail templates akin to working with Angular templates. Also, injecting javascript contexts into the Handlebars templates from Nest is made very simple! 🍵 
+- [ ] `Forgot password component` and a pre-built password reset flow via automated emails via [@nest-modules/mailer](https://www.npmjs.com/package/@nest-modules/mailer) and pre-configured [Handbars e-mail templates](https://handlebarsjs.com/guide/#what-is-handlebars).  Handlebars has similar double bracket `{{contextField}}` template interpolation, akin to Angular templates.   It makes working with e-mail templates akin to working with Angular templates. Also, injecting JavaScript contexts from Nest, and into Handlebars is made very simple. 🍵 The [apps/api/src/app/mail/templates](https://github.com/ZenSoftware/Zen/tree/main/apps/api/src/app/mail/templates) directory is a **conventions** first approach.
 - [ ] `Password change component` for user dashboards (🍜 coming soon)
 - [X] `Angular route guards` and `Angular directives` to show/hide content depending on user permissions.
 - [X] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
@@ -87,3 +87,13 @@ Reload GraphQL schema for Apollo extension via VSCode command palette after the 
 - [x] NPM scripts for versioned releases of the **api** server as a containerized Docker image. [node:14-alpine](https://hub.docker.com/_/node?tab=description&ref=hackernoon.com) is used as the Docker container base image, and the appropriate `tsconfig.app.json` configurations are being applied for the Node v14 Nest app.
 - [x] Enforced code formatting via [Prettier](https://prettier.io/) & [import-sort](https://www.npmjs.com/package/prettier-plugin-import-sort), guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.
 - [x] [Compodoc](https://compodoc.app/) to generate Nest & Angular documentation.
+
+---
+
+### Project Founders Notes
+#### ~ Peter Hoang
+If I could be so humble as to mention a few personal things about myself. I have recentely built 2 very complex monorepo projects utilizing Nest and Angular, both using Nx as the project manager.  The first web portal I ended up integrating Prisma v1 into the data layer, and the most recent project is utilizing Prisma v2.  Through this experience, I felt the longing to give back to the community and share some of the things I have learnt.  This open source project is my attempt to give back to the community.
+
+### ⛩ Zen ⛩  - A Modern Full Stack SPA Portal
+
+[ ] TODO: Mission statement goes here
