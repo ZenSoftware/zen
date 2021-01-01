@@ -3,16 +3,15 @@
 ## 🪔 A Modern Full Stack SPA Portal
 ### Nest ☯ Prisma ☯ Angular
 
-### [🚧Docs🚧](https://zensoftware.github.io/Zen/)
-###  [🏮Repo🏮](https://github.com/ZenSoftware/Zen)
+### [🏮 Docs 🏮](https://zensoftware.github.io/Zen/) - [🏮 Repo 🏮](https://github.com/ZenSoftware/Zen)
 
-### 🥢 Currently under development - New contributors are welcome!🌱
+🚧 Under development. New contributors are welcome!
 
-🍧 Please open a git issue if you are interested in contributing! 🍰
+🎏 Please open a git issue if you are interested in contributing!
 
 ---
 
-## Project Setup Instructions
+## 🍱 Project Setup Instructions
 
 **Requirements**
 
@@ -36,17 +35,17 @@ npm run start:api
 npm run apollo:watch
 
 # Start the Angular site at localhost:4200
-npm run start
+npm start
 ```
 
 Reload GraphQL schema for Apollo extension via VSCode command palette after the api server has started: `>Apollo: Reload schema`
 
 ---
 
-## GraphQL Ambitions
+## 🥢 GraphQL Features
 
 - [x] [Nest GraphQL](https://docs.nestjs.com/graphql/resolvers) resolvers as a gateway to [Prisma Client](https://www.prisma.io/docs/understand-prisma/prisma-in-your-stack/graphql).
-- [x] [Prisma to GraphQL SDL bindings](https://paljs.com/generator/sdl) generated via [Pal.js CLI](https://paljs.com/cli/generator)!  Thank you 🍥🍙 [**@AhmedElywa**](https://github.com/paljs) 🍱🍣
+- [x] [Prisma to GraphQL SDL bindings](https://paljs.com/generator/sdl) generated via [Pal.js CLI](https://paljs.com/cli/generator)!  Thank you [**@AhmedElywa**](https://github.com/paljs) 🎎
 - [x] [Prisma Case Insensitive Filtering](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/case-sensitivity) For case-insensitive querying of text.
 - [x] [PrismaSelect](https://paljs.com/plugins/select/) to solve the N+1 problem for all queries for free.
 - [x] [PrismaDelete](https://paljs.com/plugins/delete) to add `CASCADE` and `SET_NULL` deletion capabilities to Prisma. These features have yet to be implemented by the core Prisma team. This project will convert to the approach directly supported by Prisma when the official feature becomes available.
@@ -59,20 +58,20 @@ Reload GraphQL schema for Apollo extension via VSCode command palette after the 
 
 ---
 
-## API Authentication, Performance & Scaling Ambitions
+## 🍣 API Authentication, Performance & Scaling
 
 - [X] [Nest authentication](https://docs.nestjs.com/techniques/authentication), user creation, and login system designed specifically to work for an [Angular SPA (single page application)](https://angular.io/). This project will provide responsive, "mobile first" interfaces for the standard set of authentication features.
 - [X] `New account component`
 - [x] `Login component`
-- [ ] `Forgot password component` and a pre-built password reset flow via automated emails via [@nest-modules/mailer](https://www.npmjs.com/package/@nest-modules/mailer) and pre-configured [Handbars e-mail templates](https://handlebarsjs.com/guide/#what-is-handlebars).  Handlebars has similar double bracket `{{contextField}}` template interpolation, akin to Angular templates.   It makes working with e-mail templates akin to working with Angular templates. Also, injecting JavaScript contexts from Nest, and into Handlebars is made very simple. 🍵 The [apps/api/src/app/mail/templates](https://github.com/ZenSoftware/Zen/tree/main/apps/api/src/app/mail/templates) directory is a **conventions** first approach.
-- [ ] `Password change component` for user dashboards (🍜 coming soon)
+- [ ] `Forgot password component` and a pre-built password reset flow via automated emails via [@nest-modules/mailer](https://www.npmjs.com/package/@nest-modules/mailer) and pre-configured [Handbars e-mail templates](https://handlebarsjs.com/guide/#what-is-handlebars).  Handlebars has similar double bracket `{{contextField}}` template interpolation, akin to Angular templates.   It makes working with e-mail templates akin to working with Angular templates. Also, injecting JavaScript contexts from Nest, and into Handlebars is made very simple. The [apps/api/src/app/mail/templates](https://github.com/ZenSoftware/Zen/tree/main/apps/api/src/app/mail/templates) directory is a **conventions** first approach.
+- [ ] `Password change component` for user dashboards (coming soon)
 - [X] `Angular route guards` and `Angular directives` to show/hide content depending on user permissions.
 - [X] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
 - [x] 100% stateless web server authentication via [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality). Keeping the API stateless will enable horizontal scaling of container replicas in production.
 
 ---
 
-## Modern Web Components and Styling Ambitions
+## 🍵 Modern Web Components and Styling
 
 - [x] SASS chosen as the css transpiler of choice
 - [x] [Angular Material](https://material.angular.io/) components & theme.
@@ -80,7 +79,7 @@ Reload GraphQL schema for Apollo extension via VSCode command palette after the 
 
 ---
 
-## Project & Dev Tools Ambitions
+## 🍥 Project & Dev Tools
 
 - [x] [Nx for project management](https://nx.dev/angular) to allow for the use of [Nx Console extensions for VSCode](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console). Nx Console is a GUI interface for monorepos that adds a lot of modern developer conveniences. It also helps to simplify the use of the various Angular & Nest code generation schematics available in the ecosystem.
 - [x] [Angular Language Service for VSCode](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for modern IDE tooling.
@@ -90,10 +89,9 @@ Reload GraphQL schema for Apollo extension via VSCode command palette after the 
 
 ---
 
-### Project Founders Notes
-#### ~ Peter Hoang
-If I could be so humble as to mention a few personal things about myself. I have recentely built 2 very complex monorepo projects utilizing Nest and Angular, both using Nx as the project manager.  The first web portal I ended up integrating Prisma v1 into the data layer, and the most recent project is utilizing Prisma v2.  Through this experience, I felt the longing to give back to the community and share some of the things I have learnt.  This open source project is my attempt to give back to the community.
+## 🏯 Project Founders Notes
+> 🔬Peter Hoang 
 
-### ⛩ Zen ⛩  - A Modern Full Stack SPA Portal
+If I could be so humble as to mention a few things about myself. I have recentely built 2 complex monorepos utilizing Nest and Angular. Both projects using Nx as the project manager.  For the first project, I integrated Prisma v1 into the data layer.  As for the most recent project I have integrated Prisma v2.  Through this experience, I felt the longing to give back to the community, and share some of the things that I have learnt.  This open source project ⛩ Zen ⛩ is my attempt at giving back to the community.
 
-[ ] TODO: Mission statement goes here
+> 🎐 Give more than you take
