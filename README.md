@@ -47,7 +47,7 @@ npm start
 ## 🏯 Project Founders Notes
 > 🔬~ Peter Hoang 
 
-If I could be so humble as to mention a few things about myself. I have built 2 large projects utilizing Nest, Angular, Prisma.  Through this experience, I felt the longing to share the things that I have learned building enterprise grade web portals. This project is an attempt at packaging up the sum of all those lessons, and make it publicly available to the community.
+If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Angular, and Prisma. This project is an attempt at packaging up the sum of all those lessons, and making it publicly available.
 
 > 🎐 ~ Give more than you take
 
