@@ -45,11 +45,11 @@ npm start
 ---
 
 ## 🏯 Project Founders Notes
-> 🔬Peter Hoang 
+> 🔬~ Peter Hoang 
 
-If I could be so humble as to mention a few things about myself. I have recentely built 2 complex monorepos utilizing Nest and Angular. Both projects using Nx as the project manager.  For the first project, I have integrated Prisma v1 into the data layer.  As for the most second project, I have integrated Prisma v2.  Through this experience, I felt the longing to share some of the things that I have learnt. This open source project ⛩ Zen ⛩ is an attempt at giving back to the community.
+If I could be so humble as to mention a few things about myself. I have built 2 large projects utilizing Nest, Angular, Prisma.  Through this experience, I felt the longing to share the things that I have learned building enterprise grade web portals. This project is an attempt at packaging up the sum of all those lessons, and make it publicly available to the community.
 
-> 🎐 Give more than you take
+> 🎐 ~ Give more than you take
 
 ---
 
