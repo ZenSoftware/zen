@@ -1,8 +1,9 @@
+@import 'fonts';
 @import 'bootstrap';
 @import 'material';
 
-body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+button .fas {
+  vertical-align: unset !important;
 }
 
 mat-dialog-content {

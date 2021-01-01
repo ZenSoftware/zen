@@ -5,6 +5,25 @@
 
 @include mat-core();
 
+$euro-font: mat-typography-config(
+  $font-family: 'euro-ukr',
+  $display-4: mat-typography-level(112px, 112px, 300, 'euro-ext'),
+  $display-3: mat-typography-level(56px, 56px, 400, 'euro-ext'),
+  $display-2: mat-typography-level(45px, 48px, 400, 'euro-ext'),
+  $display-1: mat-typography-level(34px, 40px, 400, 'euro-ext'),
+  $headline: mat-typography-level(24px, 32px, 400, 'euro-ext'),
+  $title: mat-typography-level(20px, 32px, 500, 'euro-ext'),
+  $subheading-2: mat-typography-level(16px, 28px, 400, 'euro-ext'),
+  $subheading-1: mat-typography-level(15px, 24px, 400, 'euro-ext'),
+  $body-2: mat-typography-level(14px, 24px, 500),
+  $body-1: mat-typography-level(14px, 20px, 400),
+  $caption: mat-typography-level(12px, 20px, 400),
+  $button: mat-typography-level(14px, 14px, 300, 'euro-ext'),
+  $input: mat-typography-level(inherit, 1.125, 400),
+);
+
+@include angular-material-typography($euro-font);
+
 // Available color palettes: https://material.io/design/color/
 $zen-app-primary: mat-palette($zen-primary); // Custom _palette.scss
 $zen-app-accent: mat-palette($zen-accent); // Custom _palette.scss

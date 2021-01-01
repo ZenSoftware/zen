@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'euro-ext';
+  src: url('/assets/font/euro-ext.eot');
+  src: url('/assets/font/euro-ext.eot?#iefix') format('embedded-opentype'),
+    url('/assets/font/euro-ext.woff2') format('woff2'), url('/assets/euro-ext.woff') format('woff'),
+    url('/assets/font/euro-ext.ttf') format('truetype'),
+    url('/assets/font/euro-ext.svg#EuropeExtWeb-Regular') format('svg');
+}
+
+@font-face {
+  font-family: 'euro-ukr';
+  src: url('/assets/font/euro-ukr.eot');
+  src: url('/assets/font/euro-ukr.eot?#iefix') format('embedded-opentype'),
+    url('/assets/font/euro-ukr.woff2') format('woff2'), url('/assets/euro-ukr.woff') format('woff'),
+    url('/assets/font/euro-ukr.ttf') format('truetype'),
+    url('/assets/font/euro-ukr.svg#EuropeExtWeb-Regular') format('svg');
+}
+
+.card-header {
+  font-family: 'euro-ext';
+}

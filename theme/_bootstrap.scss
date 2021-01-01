@@ -16,6 +16,28 @@
 @import '~bootstrap/scss/print';
 @import 'reset';
 
+// Text size helpers  ==========================================================
+
+.text-xs {
+  font-size: 0.6em !important;
+}
+
+.text-sm {
+  font-size: 0.75rem !important;
+}
+
+.text-md {
+  font-size: 1rem !important;
+}
+
+.text-lg {
+  font-size: 1.2rem !important;
+}
+
+.text-xl {
+  font-size: 1.4rem !important;
+}
+
 // Indicators ==================================================================
 
 .alert {
