@@ -3,7 +3,7 @@
   
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Email</mat-label>
-    <input type="email" matInput placeholder="enter@email.com" [formControl]="email" (keydown)="emailNotFoundReset()" maxlength="254" hideRequiredMarker="true" required>
+    <input type="email" matInput placeholder="enter@email.com" [formControl]="email" (keydown)="emailNotFoundReset()" maxlength="254" hideRequiredMarker="true">
     <mat-error *ngIf="email.errors?.required">Required</mat-error>
     <mat-error *ngIf="email.errors?.email && !email.errors?.required">Not a valid email</mat-error>
     <mat-error *ngIf="email.errors?.notFound">This account does not exist</mat-error>
@@ -11,7 +11,7 @@
 
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Password</mat-label>
-    <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="password" (keydown)="incorrectPasswordReset()" required>
+    <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="password" (keydown)="incorrectPasswordReset()">
     <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </span>
