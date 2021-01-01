@@ -38,7 +38,7 @@ npm start
 
 
 ```bash
-# Reload Apollo VSCode extension via command palette after the api has started:
+# Reload Apollo VSCode extension via command palette
 >Apollo: Reload schema
 ```
 
