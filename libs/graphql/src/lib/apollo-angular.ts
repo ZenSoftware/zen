@@ -371,7 +371,7 @@ export type Mutation = {
   deleteManyUser?: Maybe<BatchPayload>;
   updateManyUser?: Maybe<BatchPayload>;
   authPasswordChange?: Maybe<Scalars['Boolean']>;
-  authPasswordResetConfirmation?: Maybe<Scalars['Boolean']>;
+  authPasswordResetConfirmation: AuthSession;
   authRegister: AuthSession;
 };
 
@@ -490,7 +490,10 @@ export type AuthPasswordResetConfirmationVariables = Exact<{
 
 export type AuthPasswordResetConfirmation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'authPasswordResetConfirmation'>
+  & { authPasswordResetConfirmation: (
+    { __typename?: 'AuthSession' }
+    & AuthSessionFields
+  ) }
 );
 
 export type AuthPasswordResetRequestQueryVariables = Exact<{
@@ -557,7 +560,7 @@ export type FindUniqueUser = (
 
 export type FindManyUserVariables = Exact<{
   where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<Array<UserOrderByInput>>;
+  orderBy?: Maybe<Array<UserOrderByInput> | UserOrderByInput>;
   cursor?: Maybe<UserWhereUniqueInput>;
   distinct?: Maybe<UserScalarFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
@@ -575,7 +578,7 @@ export type FindManyUser = (
 
 export type FindManyUserCountVariables = Exact<{
   where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<Array<UserOrderByInput>>;
+  orderBy?: Maybe<Array<UserOrderByInput> | UserOrderByInput>;
   cursor?: Maybe<UserWhereUniqueInput>;
   distinct?: Maybe<UserScalarFieldEnum>;
   skip?: Maybe<Scalars['Int']>;
@@ -724,9 +727,11 @@ export const AuthLoginDocument = /*#__PURE__*/ gql`
   }
 export const AuthPasswordResetConfirmationDocument = /*#__PURE__*/ gql`
     mutation AuthPasswordResetConfirmation($data: AuthPasswordResetConfirmationInput!) {
-  authPasswordResetConfirmation(data: $data)
+  authPasswordResetConfirmation(data: $data) {
+    ...AuthSessionFields
+  }
 }
-    `;
+    ${AuthSessionFields}`;
 
   @Injectable({
     providedIn: GraphQLModule

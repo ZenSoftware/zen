@@ -7,11 +7,11 @@ import { AuthService } from '../auth.service';
 import { emailValidator, validatePassword } from '../validators';
 
 @Component({
-  selector: 'zen-register-form',
-  templateUrl: 'zen-register-form.component.html',
+  selector: 'zen-register',
+  templateUrl: 'zen-register.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenRegisterFormComponent {
+export class ZenRegisterComponent {
   @Output() registered = new EventEmitter();
 
   form: FormGroup;

@@ -1,12 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiConstants } from '@zen/api-interfaces';
-import { AuthPasswordResetConfirmationGQL } from '@zen/graphql';
+import { AuthPasswordResetConfirmationGQL, AuthSession } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
+import { AuthService } from '../auth.service';
 import { validatePassword } from '../validators';
 
 @Component({
@@ -15,6 +16,8 @@ import { validatePassword } from '../validators';
   animations: [...verticalAccordion],
 })
 export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy {
+  @Output() confirmed = new EventEmitter();
+
   private subscription?: Subscription;
   ApiConstants = ApiConstants;
   loading = false;
@@ -28,7 +31,8 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
     private authPasswordResetConfirmationGQL: AuthPasswordResetConfirmationGQL,
     private route: ActivatedRoute,
     public router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private auth: AuthService
   ) {
     this.form = this.formBuilder.group({
       password: ['', [Validators.required, this.passwordValidator()]],
@@ -87,10 +91,15 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
           },
         })
         .subscribe({
-          next: () => {
+          next: ({ data }) => {
             this.loading = false;
             this.completed = true;
-            setTimeout(() => this.router.navigateByUrl('/login'), 5000);
+            this.auth.setSession(data?.authPasswordResetConfirmation as AuthSession);
+
+            setTimeout(() => {
+              this.router.navigateByUrl('/');
+              this.confirmed.emit();
+            }, 5000);
           },
           error: errors => {
             this.loading = false;

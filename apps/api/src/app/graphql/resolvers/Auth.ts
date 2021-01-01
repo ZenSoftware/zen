@@ -27,7 +27,7 @@ export const AuthTypeDef = gql`
 
   extend type Mutation {
     authPasswordChange(data: AuthPasswordChangeInput!): Boolean
-    authPasswordResetConfirmation(data: AuthPasswordResetConfirmationInput!): Boolean
+    authPasswordResetConfirmation(data: AuthPasswordResetConfirmationInput!): AuthSession!
     authRegister(data: AuthRegisterInput!): AuthSession!
   }
 
@@ -144,16 +144,18 @@ export class AuthResolver {
       throw new HttpException({ code: 'UNAUTHORIZED' }, 400);
     }
 
-    const user = await this.getUser(tokenPayload.email, ctx.prisma);
+    let user = await this.getUser(tokenPayload.email, ctx.prisma);
 
     if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
 
     const hashedPassword = await bcrypt.hash(data.newPassword, 12);
 
-    await ctx.prisma.user.update({
+    user = await ctx.prisma.user.update({
       where: { id: user.id },
       data: { password: hashedPassword },
     });
+
+    return this.auth.setJwtCookie(ctx.res, user);
   }
 
   @Mutation()
