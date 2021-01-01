@@ -13,6 +13,7 @@ import { IsLoggedInDirective, NotRolesDirective, RolesDirective } from './direct
 import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
+import { ZenPasswordResetConfirmationPageComponent } from './zen-password-reset-confirmation-page/zen-password-reset-confirmation-page.component';
 import { ZenPasswordResetConfirmationComponent } from './zen-password-reset-confirmation/zen-password-reset-confirmation.component';
 import { ZenPasswordResetRequestPageComponent } from './zen-password-reset-request-page/zen-password-reset-request-page.component';
 import { ZenPasswordResetRequestComponent } from './zen-password-reset-request/zen-password-reset-request.component';
@@ -38,6 +39,7 @@ import { ZenRegisterPageComponent } from './zen-register-page/zen-register-page.
     ZenLoginFormComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,
+    ZenPasswordResetConfirmationPageComponent,
     ZenPasswordResetConfirmationComponent,
     ZenPasswordResetRequestPageComponent,
     ZenPasswordResetRequestComponent,
@@ -51,6 +53,7 @@ import { ZenRegisterPageComponent } from './zen-register-page/zen-register-page.
     ZenLoginFormComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,
+    ZenPasswordResetConfirmationPageComponent,
     ZenPasswordResetConfirmationComponent,
     ZenPasswordResetRequestPageComponent,
     ZenPasswordResetRequestComponent,

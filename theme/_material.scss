@@ -3,6 +3,10 @@
 @import 'palette';
 @import '~@angular/material/theming';
 
+.mat-button-base {
+  white-space: normal !important;
+}
+
 @include mat-core();
 
 $euro-font: mat-typography-config(
