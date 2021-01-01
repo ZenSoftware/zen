@@ -1,8 +1,5 @@
 # ⛩ Zen ⛩ 
-#### Nest + Prisma + Angular 🪔 A Modern Full Stack SPA Portal built 
-
-🚧 Under development. 
-
+#### Nest + Prisma + Angular 🪔 A Modern Full Stack SPA 
 🎏 New contributors are welcome!
 
 ## 🏯 Project Founders Notes
