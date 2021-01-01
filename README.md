@@ -62,11 +62,11 @@ Reload GraphQL schema for Apollo extension via VSCode command palette after the 
 ## API Authentication, Performance & Scaling Ambitions
 
 - [X] [Nest authentication](https://docs.nestjs.com/techniques/authentication), user creation, and login system designed specifically to work for an [Angular SPA (single page application)](https://angular.io/). This project will provide responsive, "mobile first" interfaces for the standard set of authentication features.
-- [x] Login component
-- [X] Sign up component
-- [ ] Forgot password component, and a pre-built password reset flow via automated email. (🍣 coming soon)
-- [ ] Password change component for user dashboards (🍜 coming soon)
-- [X] Angular route guards and Angular directives to show/hide content depending on user permissions.
+- [X] `New account component`
+- [x] `Login component`
+- [ ] `Forgot password component` and a pre-built password reset flow via automated emails via [@nest-modules/mailer](https://www.npmjs.com/package/@nest-modules/mailer).
+- [ ] `Password change component` for user dashboards (🍜 coming soon)
+- [X] `Angular route guards` and `Angular directives` to show/hide content depending on user permissions.
 - [X] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
 - [x] 100% stateless web server authentication via [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality). Keeping the API stateless will enable horizontal scaling of container replicas of the api in production.
 
