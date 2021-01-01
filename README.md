@@ -1,6 +1,8 @@
 # ⛩ Zen ⛩ 
 #### Nest + Prisma + Angular 🪔 A Modern Full Stack SPA 
-🎏 New contributors are welcome!
+New contributors are welcome!
+
+---
 
 ## 🏯 Project Founders Notes
 > 🔬~ Peter Hoang 
