@@ -2,7 +2,7 @@
   <zen-loading *ngIf="loading"></zen-loading>
   
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
-    <mat-label>Email</mat-label>
+    <mat-label>E-mail</mat-label>
     <input type="email" matInput placeholder="enter@email.com" [formControl]="email" (keydown)="emailNotFoundReset()" maxlength="254" hideRequiredMarker="true">
     <mat-error *ngIf="email.errors?.required">Required</mat-error>
     <mat-error *ngIf="email.errors?.email && !email.errors?.required">Not a valid email</mat-error>
