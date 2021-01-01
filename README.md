@@ -1,7 +1,7 @@
 # ⛩ Zen ⛩ 
-### 🪔 A Modern Full Stack SPA Portal
-### Nest + Prisma + Angular
-### [Docs](https://zensoftware.github.io/Zen/) - [Repo](https://github.com/ZenSoftware/Zen)
+#### 🪔 A Modern Full Stack SPA Portal
+#### Nest + Prisma + Angular
+#### [Docs](https://zensoftware.github.io/Zen/) - [Repo](https://github.com/ZenSoftware/Zen)
 🚧 Under development.
 
 🎏 New contributors are welcome!
