@@ -38,7 +38,20 @@ npm run apollo:watch
 npm start
 ```
 
-Reload GraphQL schema for Apollo extension via VSCode command palette after the api server has started: `>Apollo: Reload schema`
+
+```bash
+# Reload Apollo VSCode extension via command palette after the api has started:
+>Apollo: Reload schema
+```
+
+---
+
+## 🏯 Project Founders Notes
+> 🔬Peter Hoang 
+
+If I could be so humble as to mention a few things about myself. I have recentely built 2 complex monorepos utilizing Nest and Angular. Both projects using Nx as the project manager.  For the first project, I have integrated Prisma v1 into the data layer.  As for the most second project, I have integrated Prisma v2.  Through this experience, I felt the longing to share some of the things that I have learnt. This open source project ⛩ Zen ⛩ is an attempt at giving back to the community.
+
+> 🎐 Give more than you take
 
 ---
 
@@ -89,9 +102,3 @@ Reload GraphQL schema for Apollo extension via VSCode command palette after the 
 
 ---
 
-## 🏯 Project Founders Notes
-> 🔬Peter Hoang 
-
-If I could be so humble as to mention a few things about myself. I have recentely built 2 complex monorepos utilizing Nest and Angular. Both projects using Nx as the project manager.  For the first project, I integrated Prisma v1 into the data layer.  As for the most recent project I have integrated Prisma v2.  Through this experience, I felt the longing to give back to the community, and share some of the things that I have learnt.  This open source project ⛩ Zen ⛩ is my attempt at giving back to the community.
-
-> 🎐 Give more than you take
