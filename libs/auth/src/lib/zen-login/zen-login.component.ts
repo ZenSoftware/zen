@@ -7,11 +7,11 @@ import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'zen-login-form',
-  templateUrl: 'zen-login-form.component.html',
+  selector: 'zen-login',
+  templateUrl: 'zen-login.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenLoginFormComponent {
+export class ZenLoginComponent {
   @Output() loggedIn = new EventEmitter();
 
   #loading = false;

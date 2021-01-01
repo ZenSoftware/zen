@@ -1,0 +1,34 @@
+<form @verticalAccordion [formGroup]="form" (ngSubmit)="onSubmit()">
+  <zen-loading *ngIf="loading"></zen-loading>
+  
+  <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput placeholder="enter@email.com" [formControl]="email" (keydown)="emailNotFoundReset()" maxlength="254" hideRequiredMarker="true">
+    <mat-error *ngIf="email.errors?.required">Required</mat-error>
+    <mat-error *ngIf="email.errors?.email && !email.errors?.required">Not a valid email</mat-error>
+    <mat-error *ngIf="email.errors?.notFound">This account does not exist</mat-error>
+  </mat-form-field>
+
+  <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
+    <mat-label>Password</mat-label>
+    <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="password" (keydown)="incorrectPasswordReset()">
+    <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </span>
+    <mat-error *ngIf="password.errors?.required">Required</mat-error>
+    <mat-error *ngIf="password.errors?.incorrect">Incorrect password</mat-error>
+  </mat-form-field>
+
+  <div class="mb-4">
+    <mat-checkbox color="primary" [formControl]="rememberMe">Remember me</mat-checkbox>
+  </div>
+
+  <button type="submit" mat-raised-button color="primary" class="w-100 text-lg py-1" [disabled]="!form.valid">
+    <i class="fas fa-fw fa-sign-in-alt mr-1"></i>
+    Login
+  </button>
+
+  <mat-error @verticalAccordion *ngIf="generalError" class="text-center my-3">
+    There was a problem logging you in. If this continues, please contact us.
+  </mat-error>
+</form>
