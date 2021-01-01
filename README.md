@@ -11,7 +11,7 @@ If I could be so humble as to mention a few things about myself. I have built 2 
 
 ---
 
-## 🍱 Project Setup Instructions - [Docs](https://zensoftware.github.io/Zen/) - [Repo](https://github.com/ZenSoftware/Zen)
+## 🍣 Project Setup Instructions - [Docs](https://zensoftware.github.io/Zen/) - [Repo](https://github.com/ZenSoftware/Zen)
 
 **Requirements**
 
@@ -62,7 +62,7 @@ npm start
 
 ---
 
-## 🍣 API Authentication, Performance & Scaling
+## 🍱 API Authentication, Performance & Scaling
 
 - [X] [Nest authentication](https://docs.nestjs.com/techniques/authentication), user creation, and login system designed specifically to work for an [Angular SPA (single page application)](https://angular.io/). This project will provide responsive, "mobile first" interfaces for the standard set of authentication features.
 - [X] `New account component`
