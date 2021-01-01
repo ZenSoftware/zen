@@ -599,28 +599,29 @@
                <div class="content readme">
                    <div class="content-data">
 <h1 id="-zen-">⛩ Zen ⛩</h1>
-<h2 id="modern-full-stack-web-portal-built-with-nest-and-angular">Modern Full Stack Web Portal built with Nest and Angular</h2>
-<h3 id="zen-docs"><a href="https://zensoftware.github.io/Zen/">Zen Docs</a></h3>
-<h3 id="github-repo-zensoftware-zen"><a href="https://github.com/ZenSoftware/Zen">GitHub repo ZenSoftware/Zen</a></h3>
-<h3 id="-currently-under-development-new-contributors-are-welcome-">🤹 Currently under development - New contributors are welcome!🌱</h3>
-<p>🍧 You may open a git issue if you are interested in contributing! 🍰</p>
+<h4 id="nest-prisma-angular-modern-full-stack-spa">Nest + Prisma + Angular 🏮 Modern Full Stack SPA</h4>
 <hr>
-<h2 id="project-setup-instructions">Project Setup Instructions</h2>
+<h2 id="-project-founders-notes">🏯 Project Founders Notes</h2>
+<p>If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Angular, and Prisma. This project is an attempt at packaging up the sum of all those lessons, and making it publicly available.  New contributors are welcome!</p>
+<blockquote>
+<p>🎐 &quot;Give more than you take&quot; ~ Peter Hoang </p>
+</blockquote>
+<hr>
+<h2 id="-project-setup-instructions-docs-repo">🍣 Project Setup Instructions - <a href="https://zensoftware.github.io/Zen/">Docs</a> - <a href="https://github.com/ZenSoftware/Zen">Repo</a></h2>
 <p><strong>Requirements</strong></p>
 <ul>
 <li><a href="https://nodejs.org/">Node v14</a></li>
 <li><a href="https://www.docker.com/">Docker</a></li>
 </ul>
-<pre><code class="hljs bash"><span class="hljs-comment"># Project setup steps</span><br>git <span class="hljs-built_in">clone</span> https://github.com/ZenSoftware/Zen.git --depth=1<br><span class="hljs-built_in">cd</span> Zen<br>npm i<br>docker-compose up -d<br>npm run prisma:migrate</code></pre><pre><code class="hljs bash"><span class="hljs-comment"># Start the Nest API</span><br>npm run start:api<br><br><span class="hljs-comment"># Watch for changes to code generate the GraphQL client</span><br>npm run apollo:watch<br><br><span class="hljs-comment"># Start the Angular site at localhost:4200</span><br>npm run start</code></pre><p>Reload GraphQL schema for Apollo extension via VSCode command palette after the api server has started: <code>&gt;Apollo: Reload schema</code></p>
-<hr>
-<h2 id="graphql-ambitions">GraphQL Ambitions</h2>
+<pre><code class="hljs bash"><span class="hljs-comment"># Project setup steps</span><br>git <span class="hljs-built_in">clone</span> https://github.com/ZenSoftware/Zen.git --depth=1<br><span class="hljs-built_in">cd</span> Zen<br>npm i<br>docker-compose up -d<br>npm run prisma:migrate</code></pre><pre><code class="hljs bash"><span class="hljs-comment"># Start the Nest API</span><br>npm run start:api<br><br><span class="hljs-comment"># Watch for changes to code generate the GraphQL client</span><br>npm run apollo:watch<br><br><span class="hljs-comment"># Start the Angular site at localhost:4200</span><br>npm start</code></pre><pre><code class="hljs bash"><span class="hljs-comment"># Reload Apollo VSCode extension via command palette</span><br>&gt;Apollo: Reload schema</code></pre><hr>
+<h2 id="-graphql-features">🥢 GraphQL Features</h2>
 <ul>
 <li>[x] <a href="https://docs.nestjs.com/graphql/resolvers">Nest GraphQL</a> resolvers as a gateway to <a href="https://www.prisma.io/docs/understand-prisma/prisma-in-your-stack/graphql">Prisma Client</a>.</li>
+<li>[x] <a href="https://paljs.com/generator/sdl">Prisma to GraphQL SDL bindings</a> generated via <a href="https://paljs.com/cli/generator">Pal.js CLI</a>!  Thank you <a href="https://github.com/paljs"><strong>@AhmedElywa</strong></a> 🎎</li>
 <li>[x] <a href="https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/case-sensitivity">Prisma Case Insensitive Filtering</a> For case-insensitive querying of text.</li>
 <li>[x] <a href="https://paljs.com/plugins/select/">PrismaSelect</a> to solve the N+1 problem for all queries for free.</li>
 <li>[x] <a href="https://paljs.com/plugins/delete">PrismaDelete</a> to add <code>CASCADE</code> and <code>SET_NULL</code> deletion capabilities to Prisma. These features have yet to be implemented by the core Prisma team. This project will convert to the approach directly supported by Prisma when the official feature becomes available.</li>
-<li>[x] <a href="https://paljs.com/generator/sdl">GraphQL SDL generation with Pal.js CLI</a></li>
-<li>[x] Custom npm scripts to code generate the Nest GraphQL gateway.</li>
+<li>[x] Custom npm scripts to code generate the Nest GraphQL gateway on Prisma schema changes.</li>
 <li>[x] <a href="https://graphql-code-generator.com/docs/plugins/typescript-apollo-angular">Code generation</a> of <a href="https://www.apollographql.com/docs/angular/">apollo-angular</a> services to enable simple, type safe access to the GraphQL API within Angular. 🎀 Modern dev tooling configured for the project, allowing for <a href="https://www.apollographql.com/docs/devtools/editor-plugins/">Apollo extension for VS Code</a> to provide autocompletion for GraphQL files that have a <code>.gql.ts</code> extension. </li>
 <li>[x] An Angular <code>GraphQLModule</code> to simplify the configuration of the <code>ApolloClient</code> to enable/disable the varying <code>ApolloLink</code> features.</li>
 <li>[x] <a href="https://apollo-angular.com/docs/data/network#httpclient-1">HttpBatchLink</a> for batching several GraphQL requests that occur within a short debounce interval. This really helps to alleviate network congestion.</li>
@@ -628,26 +629,26 @@
 <li>[x] <a href="https://www.apollographql.com/docs/react/data/subscriptions/#2-initialize-a-websocketlink">WebSocketLink</a> for GraphQL subscriptions over websockets.</li>
 </ul>
 <hr>
-<h2 id="api-authentication-performance-scaling-ambitions">API Authentication, Performance &amp; Scaling Ambitions</h2>
+<h2 id="-api-authentication-performance-scaling">🍱 API Authentication, Performance &amp; Scaling</h2>
 <ul>
 <li>[X] <a href="https://docs.nestjs.com/techniques/authentication">Nest authentication</a>, user creation, and login system designed specifically to work for an <a href="https://angular.io/">Angular SPA (single page application)</a>. This project will provide responsive, &quot;mobile first&quot; interfaces for the standard set of authentication features.</li>
 <li>[X] <code>New account component</code></li>
 <li>[x] <code>Login component</code></li>
-<li>[ ] <code>Forgot password component</code> and a pre-built password reset flow via automated emails via <a href="https://www.npmjs.com/package/@nest-modules/mailer">@nest-modules/mailer</a>.</li>
-<li>[ ] <code>Password change component</code> for user dashboards (🍜 coming soon)</li>
+<li>[ ] <code>Forgot password component</code> and a pre-built password reset flow via automated emails via <a href="https://www.npmjs.com/package/@nest-modules/mailer">@nest-modules/mailer</a> and pre-configured <a href="https://handlebarsjs.com/guide/#what-is-handlebars">Handbars e-mail templates</a>.  Handlebars has similar double bracket <code>{{contextField}}</code> template interpolation, akin to Angular templates.   It makes working with e-mail templates akin to working with Angular templates. Also, injecting JavaScript contexts from Nest, and into Handlebars is made very simple. The <a href="https://github.com/ZenSoftware/Zen/tree/main/apps/api/src/app/mail/templates">apps/api/src/app/mail/templates</a> directory is a <strong>conventions</strong> first approach.</li>
+<li>[ ] <code>Password change component</code> for user dashboards (coming soon)</li>
 <li>[X] <code>Angular route guards</code> and <code>Angular directives</code> to show/hide content depending on user permissions.</li>
 <li>[X] <a href="https://docs.nestjs.com/techniques/authentication#extending-guards">Nest authorization directives</a> for server side <a href="https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true">role-based access control</a> to allow for declarative, fine grained security control over all GraphQL queries and mutations.</li>
-<li>[x] 100% stateless web server authentication via <a href="https://docs.nestjs.com/techniques/authentication#jwt-functionality">JWT (Javascript Web Tokens)</a>. Keeping the API stateless will enable horizontal scaling of container replicas of the api in production.</li>
+<li>[x] 100% stateless web server authentication via <a href="https://docs.nestjs.com/techniques/authentication#jwt-functionality">JWT (Javascript Web Tokens)</a>. Keeping the API stateless will enable horizontal scaling of container replicas in production.</li>
 </ul>
 <hr>
-<h2 id="modern-web-components-and-styling-ambitions">Modern Web Components and Styling Ambitions</h2>
+<h2 id="-modern-web-components-and-styling">🍵 Modern Web Components and Styling</h2>
 <ul>
 <li>[x] SASS chosen as the css transpiler of choice</li>
 <li>[x] <a href="https://material.angular.io/">Angular Material</a> components &amp; theme.</li>
 <li>[x] Directly import <a href="https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/">Bootstrap reset, utilities, &amp; grid</a> features through SASS imports, and exclude the Bootstrap theme and component styles. These features are missing from Angular Material, and greatly simplify the creation of responsive, mobile first applications.</li>
 </ul>
 <hr>
-<h2 id="project-dev-tools-ambitions">Project &amp; Dev Tools Ambitions</h2>
+<h2 id="-project-dev-tools">🍥 Project &amp; Dev Tools</h2>
 <ul>
 <li>[x] <a href="https://nx.dev/angular">Nx for project management</a> to allow for the use of <a href="https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console">Nx Console extensions for VSCode</a>. Nx Console is a GUI interface for monorepos that adds a lot of modern developer conveniences. It also helps to simplify the use of the various Angular &amp; Nest code generation schematics available in the ecosystem.</li>
 <li>[x] <a href="https://marketplace.visualstudio.com/items?itemName=Angular.ng-template">Angular Language Service for VSCode</a> for modern IDE tooling.</li>
@@ -655,6 +656,7 @@
 <li>[x] Enforced code formatting via <a href="https://prettier.io/">Prettier</a> &amp; <a href="https://www.npmjs.com/package/prettier-plugin-import-sort">import-sort</a>, guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.</li>
 <li>[x] <a href="https://compodoc.app/">Compodoc</a> to generate Nest &amp; Angular documentation.</li>
 </ul>
+<hr>
 
 
 
