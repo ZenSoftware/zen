@@ -4,7 +4,6 @@
 ---
 
 ## 🏯 Project Founders Notes
-> 🔬
 
 If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Angular, and Prisma. This project is an attempt at packaging up the sum of all those lessons, and making it publicly available.  New contributors are welcome!
 
@@ -12,9 +11,7 @@ If I could be so humble as to mention a few things about myself. I have built 2 
 
 ---
 
-## [Docs](https://zensoftware.github.io/Zen/) - [Repo](https://github.com/ZenSoftware/Zen)
-
-## 🍱 Project Setup Instructions
+## 🍱 Project Setup Instructions - [Docs](https://zensoftware.github.io/Zen/) - [Repo](https://github.com/ZenSoftware/Zen)
 
 **Requirements**
 
