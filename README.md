@@ -5,6 +5,13 @@
 
 🎏 New contributors are welcome!
 
+## 🏯 Project Founders Notes
+> 🔬~ Peter Hoang 
+
+If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Angular, and Prisma. This project is an attempt at packaging up the sum of all those lessons, and making it publicly available.
+
+> 🎐 ~ Give more than you take
+
 ---
 
 ## [Docs](https://zensoftware.github.io/Zen/) - [Repo](https://github.com/ZenSoftware/Zen)
@@ -41,15 +48,6 @@ npm start
 # Reload Apollo VSCode extension via command palette
 >Apollo: Reload schema
 ```
-
----
-
-## 🏯 Project Founders Notes
-> 🔬~ Peter Hoang 
-
-If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Angular, and Prisma. This project is an attempt at packaging up the sum of all those lessons, and making it publicly available.
-
-> 🎐 ~ Give more than you take
 
 ---
 
