@@ -46,7 +46,7 @@ export enum QueryMode {
 export enum Role {
   Registered = 'Registered',
   Admin = 'Admin',
-  Super = 'Super'
+  Supery = 'Supery'
 }
 
 export type UserWhereInput = {
@@ -73,6 +73,7 @@ export type UserOrderByInput = {
 export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['Int']>;
   username?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export type UserCreateInput = {

@@ -213,6 +213,7 @@ export interface UserOrderByInput {
 export interface UserWhereUniqueInput {
   id?: number;
   username?: string;
+  email?: string;
 }
 
 export interface UserCreateInput {
@@ -351,5 +352,5 @@ export enum QueryMode {
 export enum Role {
   Registered = 'Registered',
   Admin = 'Admin',
-  Super = 'Super',
+  Supery = 'Supery',
 }

@@ -139,7 +139,7 @@ export class Gulpfile {
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
     await this.execLocal(`prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"`);
 
-    console.log(`---------- Generate Nest GraphQL Resolvers ----------`);
+    console.log(`---------- Zen Nest GraphQL Resolvers generate ----------`);
     if (!fs.existsSync(RESOLVERS_PATH)) fs.mkdirSync(RESOLVERS_PATH);
     if (!fs.existsSync(CONFIG.gql.clientFieldsPath)) fs.mkdirSync(CONFIG.gql.clientFieldsPath);
     if (!fs.existsSync(CONFIG.gql.clientPrismaPath)) fs.mkdirSync(CONFIG.gql.clientPrismaPath);

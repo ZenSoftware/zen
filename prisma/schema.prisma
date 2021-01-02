@@ -13,7 +13,7 @@ model User {
   createdAt DateTime  @default(now())
   username  String    @unique
   password  String
-  email     String
+  email     String    @unique
   roles     Role[]
 }
 
