@@ -4,10 +4,9 @@ export default gql`
   type User {
     id: Int!
     createdAt: DateTime!
-    email: String!
+    username: String!
     password: String!
-    firstName: String
-    lastName: String
+    email: String!
     roles: [Role!]!
   }
 

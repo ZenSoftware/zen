@@ -16,7 +16,7 @@ export class ZenRegisterComponent {
 
   form: FormGroup;
   loading = false;
-  emailTaken = false;
+  usernameTaken = false;
   generalError = false;
   hidePassword = true;
 
@@ -26,16 +26,16 @@ export class ZenRegisterComponent {
     private authRegisterGQL: AuthRegisterGQL
   ) {
     this.form = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      email: ['', [Validators.required, emailValidator(), this.emailTakenValidator()]],
+      username: ['', [Validators.required, this.usernameTakenValidator()]],
+      email: ['', [Validators.required, emailValidator()]],
       password: ['', [Validators.required, this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
       acceptTerms: ['', Validators.requiredTrue],
     });
   }
 
-  get firstName(): any {
-    return this.form.get('firstName');
+  get username(): any {
+    return this.form.get('username');
   }
 
   get email(): any {
@@ -54,14 +54,14 @@ export class ZenRegisterComponent {
     return this.form.get('acceptTerms');
   }
 
-  emailTakenReset() {
-    this.emailTaken = false;
+  usernameTakenReset() {
+    this.usernameTaken = false;
     this.email.updateValueAndValidity();
   }
 
-  emailTakenValidator(): ValidatorFn {
+  usernameTakenValidator(): ValidatorFn {
     return control => {
-      if (this.emailTaken) return { emailTaken: true };
+      if (this.usernameTaken) return { usernameTaken: true };
       return null;
     };
   }
@@ -98,7 +98,7 @@ export class ZenRegisterComponent {
       this.authRegisterGQL
         .mutate({
           data: {
-            firstName: this.firstName.value.trim(),
+            username: this.username.value.trim(),
             email: this.email.value.trim(),
             password: this.password.value,
           },
@@ -106,7 +106,7 @@ export class ZenRegisterComponent {
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
-            this.auth.login(data?.authRegister as AuthSession);
+            this.auth.setSession(data?.authRegister as AuthSession);
             this.registered.emit();
           },
 
@@ -116,8 +116,8 @@ export class ZenRegisterComponent {
 
             const gqlErrors = extractGraphQLErrors(errors);
 
-            if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
-              this.emailTaken = true;
+            if (gqlErrors.find(e => e.code === 'USERNAME_TAKEN')) {
+              this.usernameTaken = true;
               this.email.markAsTouched();
               this.email.updateValueAndValidity();
             } else {

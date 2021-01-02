@@ -39,7 +39,7 @@ export const AuthTypeDef = gql`
   }
 
   input AuthLoginInput {
-    email: String!
+    username: String!
     password: String!
     rememberMe: Boolean!
   }
@@ -59,10 +59,9 @@ export const AuthTypeDef = gql`
   }
 
   input AuthRegisterInput {
+    username: String!
     email: String!
     password: String!
-    firstName: String
-    lastName: String
   }
 `;
 
@@ -81,12 +80,12 @@ export class AuthResolver {
     private readonly mail: MailService
   ) {}
 
-  private async getUser(email: string, prisma: PrismaClient) {
+  private async getUser(username: string, prisma: PrismaClient) {
     return prisma.user.findFirst({
       where: {
-        email: {
+        username: {
           mode: 'insensitive',
-          equals: email,
+          equals: username,
         },
       },
     });
@@ -94,7 +93,7 @@ export class AuthResolver {
 
   @Query()
   async authLogin(@Context() ctx: IContext, @Args('data') data: AuthLoginInput) {
-    const user = await this.getUser(data.email, ctx.prisma);
+    const user = await this.getUser(data.username, ctx.prisma);
 
     if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
 
@@ -125,7 +124,14 @@ export class AuthResolver {
     @Context() ctx: IContext,
     @Args('data') data: AuthPasswordResetRequestInput
   ) {
-    const user = await this.getUser(data.email, ctx.prisma);
+    const user = await ctx.prisma.user.findFirst({
+      where: {
+        email: {
+          mode: 'insensitive',
+          equals: data.email,
+        },
+      },
+    });
 
     if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
 
@@ -144,7 +150,7 @@ export class AuthResolver {
       throw new HttpException({ code: 'UNAUTHORIZED' }, 400);
     }
 
-    let user = await this.getUser(tokenPayload.email, ctx.prisma);
+    let user = await this.getUser(tokenPayload.username, ctx.prisma);
 
     if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
 
@@ -160,15 +166,14 @@ export class AuthResolver {
 
   @Mutation()
   async authRegister(@Context() ctx: IContext, @Args('data') data: AuthRegisterInput) {
-    const userFound = await this.getUser(data.email, ctx.prisma);
-    if (userFound) throw new HttpException({ code: 'EMAIL_TAKEN' }, 400);
+    const userFound = await this.getUser(data.username, ctx.prisma);
+    if (userFound) throw new HttpException({ code: 'USERNAME_TAKEN' }, 400);
 
     const hashedPassword = await bcrypt.hash(data.password, 12);
 
     const user = await ctx.prisma.user.create({
       data: {
-        firstName: data.firstName,
-        lastName: data.lastName,
+        username: data.username.trim(),
         email: data.email.trim(),
         password: hashedPassword,
         roles: { set: [Role.Registered] },

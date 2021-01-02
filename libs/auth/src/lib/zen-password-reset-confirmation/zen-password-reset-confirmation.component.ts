@@ -94,7 +94,7 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
           next: ({ data }) => {
             this.loading = false;
             this.completed = true;
-            this.auth.login(data?.authPasswordResetConfirmation as AuthSession);
+            this.auth.setSession(data?.authPasswordResetConfirmation as AuthSession);
 
             setTimeout(() => {
               this.router.navigateByUrl('/');

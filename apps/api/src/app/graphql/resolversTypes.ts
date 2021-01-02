@@ -28,10 +28,9 @@ export interface User {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.User, {}, number>;
   createdAt?: Resolver<Client.User, {}, Date>;
-  email?: Resolver<Client.User, {}, string>;
+  username?: Resolver<Client.User, {}, string>;
   password?: Resolver<Client.User, {}, string>;
-  firstName?: Resolver<Client.User, {}, string | null | undefined>;
-  lastName?: Resolver<Client.User, {}, string | null | undefined>;
+  email?: Resolver<Client.User, {}, string>;
   roles?: Resolver<Client.User, {}, Client.Role[] | null | undefined>;
 }
 
@@ -82,10 +81,9 @@ export interface UserCountAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.UserCountAggregateOutputType, {}, number>;
   createdAt?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
-  email?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
+  username?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
   password?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
-  firstName?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
-  lastName?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
+  email?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
   roles?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
   _all?: Resolver<Client.UserCountAggregateOutputType, {}, number>;
 }
@@ -104,20 +102,18 @@ export interface UserMinAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.UserMinAggregateOutputType, {}, number>;
   createdAt?: Resolver<Client.UserMinAggregateOutputType, {}, Date | null | undefined>;
-  email?: Resolver<Client.UserMinAggregateOutputType, {}, string | null | undefined>;
+  username?: Resolver<Client.UserMinAggregateOutputType, {}, string | null | undefined>;
   password?: Resolver<Client.UserMinAggregateOutputType, {}, string | null | undefined>;
-  firstName?: Resolver<Client.UserMinAggregateOutputType, {}, string | null | undefined>;
-  lastName?: Resolver<Client.UserMinAggregateOutputType, {}, string | null | undefined>;
+  email?: Resolver<Client.UserMinAggregateOutputType, {}, string | null | undefined>;
 }
 
 export interface UserMaxAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.UserMaxAggregateOutputType, {}, number>;
   createdAt?: Resolver<Client.UserMaxAggregateOutputType, {}, Date | null | undefined>;
-  email?: Resolver<Client.UserMaxAggregateOutputType, {}, string | null | undefined>;
+  username?: Resolver<Client.UserMaxAggregateOutputType, {}, string | null | undefined>;
   password?: Resolver<Client.UserMaxAggregateOutputType, {}, string | null | undefined>;
-  firstName?: Resolver<Client.UserMaxAggregateOutputType, {}, string | null | undefined>;
-  lastName?: Resolver<Client.UserMaxAggregateOutputType, {}, string | null | undefined>;
+  email?: Resolver<Client.UserMaxAggregateOutputType, {}, string | null | undefined>;
 }
 
 export interface FindFirstUserArgs {
@@ -199,52 +195,47 @@ export interface UserWhereInput {
   NOT?: UserWhereInput[];
   id?: IntFilter;
   createdAt?: DateTimeFilter;
-  email?: StringFilter;
+  username?: StringFilter;
   password?: StringFilter;
-  firstName?: StringNullableFilter | null;
-  lastName?: StringNullableFilter | null;
+  email?: StringFilter;
   roles?: EnumRoleNullableListFilter;
 }
 
 export interface UserOrderByInput {
   id?: SortOrder;
   createdAt?: SortOrder;
-  email?: SortOrder;
+  username?: SortOrder;
   password?: SortOrder;
-  firstName?: SortOrder;
-  lastName?: SortOrder;
+  email?: SortOrder;
   roles?: SortOrder;
 }
 
 export interface UserWhereUniqueInput {
   id?: number;
-  email?: string;
+  username?: string;
 }
 
 export interface UserCreateInput {
   createdAt?: Date;
-  email: string;
+  username: string;
   password: string;
-  firstName?: string | null;
-  lastName?: string | null;
+  email: string;
   roles?: UserCreaterolesInput;
 }
 
 export interface UserUpdateInput {
   createdAt?: DateTimeFieldUpdateOperationsInput;
-  email?: StringFieldUpdateOperationsInput;
+  username?: StringFieldUpdateOperationsInput;
   password?: StringFieldUpdateOperationsInput;
-  firstName?: NullableStringFieldUpdateOperationsInput | null;
-  lastName?: NullableStringFieldUpdateOperationsInput | null;
+  email?: StringFieldUpdateOperationsInput;
   roles?: UserUpdaterolesInput;
 }
 
 export interface UserUpdateManyMutationInput {
   createdAt?: DateTimeFieldUpdateOperationsInput;
-  email?: StringFieldUpdateOperationsInput;
+  username?: StringFieldUpdateOperationsInput;
   password?: StringFieldUpdateOperationsInput;
-  firstName?: NullableStringFieldUpdateOperationsInput | null;
-  lastName?: NullableStringFieldUpdateOperationsInput | null;
+  email?: StringFieldUpdateOperationsInput;
   roles?: UserUpdaterolesInput;
 }
 
@@ -285,21 +276,6 @@ export interface StringFilter {
   not?: NestedStringFilter;
 }
 
-export interface StringNullableFilter {
-  equals?: string | null;
-  in?: string[] | null;
-  notIn?: string[] | null;
-  lt?: string;
-  lte?: string;
-  gt?: string;
-  gte?: string;
-  contains?: string;
-  startsWith?: string;
-  endsWith?: string;
-  mode?: QueryMode;
-  not?: NestedStringNullableFilter | null;
-}
-
 export interface EnumRoleNullableListFilter {
   equals?: Role[] | null;
 }
@@ -314,10 +290,6 @@ export interface DateTimeFieldUpdateOperationsInput {
 
 export interface StringFieldUpdateOperationsInput {
   set?: string;
-}
-
-export interface NullableStringFieldUpdateOperationsInput {
-  set?: string | null;
 }
 
 export interface UserUpdaterolesInput {
@@ -360,27 +332,12 @@ export interface NestedStringFilter {
   not?: NestedStringFilter;
 }
 
-export interface NestedStringNullableFilter {
-  equals?: string | null;
-  in?: string[] | null;
-  notIn?: string[] | null;
-  lt?: string;
-  lte?: string;
-  gt?: string;
-  gte?: string;
-  contains?: string;
-  startsWith?: string;
-  endsWith?: string;
-  not?: NestedStringNullableFilter | null;
-}
-
 export enum UserScalarFieldEnum {
   id = 'id',
   createdAt = 'createdAt',
-  email = 'email',
+  username = 'username',
   password = 'password',
-  firstName = 'firstName',
-  lastName = 'lastName',
+  email = 'email',
   roles = 'roles',
 }
 export enum SortOrder {

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { emailValidator } from '@zen/common';
 import { extractGraphQLErrors } from '@zen/graphql';
 
 import { verticalAccordion } from '../animations';
@@ -16,14 +15,14 @@ export class ZenLoginComponent {
 
   #loading = false;
   #incorrectPassword = false;
-  #emailNotFound = false;
+  #usernameNotFound = false;
   hidePassword = true;
   form: FormGroup;
   generalError = false;
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService) {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, emailValidator(), this.emailNotFoundValidator()]],
+      username: ['', [Validators.required, this.usernameNotFoundValidator()]],
       password: ['', [Validators.required, this.incorrectPasswordValidator()]],
       rememberMe: [false],
     });
@@ -39,8 +38,8 @@ export class ZenLoginComponent {
     else this.form.enable();
   }
 
-  get email(): any {
-    return this.form.get('email');
+  get username(): any {
+    return this.form.get('username');
   }
 
   get password(): any {
@@ -51,13 +50,13 @@ export class ZenLoginComponent {
     return this.form.get('rememberMe');
   }
 
-  emailNotFoundReset() {
-    this.#emailNotFound = false;
-    this.email.updateValueAndValidity();
+  usernameNotFoundReset() {
+    this.#usernameNotFound = false;
+    this.username.updateValueAndValidity();
   }
 
-  emailNotFoundValidator(): ValidatorFn {
-    return control => (this.#emailNotFound ? { notFound: true } : null);
+  usernameNotFoundValidator(): ValidatorFn {
+    return control => (this.#usernameNotFound ? { notFound: true } : null);
   }
 
   incorrectPasswordReset() {
@@ -77,7 +76,7 @@ export class ZenLoginComponent {
 
       this.auth
         .login({
-          email: this.email.value.trim(),
+          username: this.username.value.trim(),
           password: this.password.value,
           rememberMe: this.rememberMe.value,
         })
@@ -94,9 +93,9 @@ export class ZenLoginComponent {
             const gqlErrors = extractGraphQLErrors(errors);
 
             if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
-              this.#emailNotFound = true;
-              this.email.markAsTouched();
-              this.email.updateValueAndValidity();
+              this.#usernameNotFound = true;
+              this.username.markAsTouched();
+              this.username.updateValueAndValidity();
             } else if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
               this.#incorrectPassword = true;
               this.password.markAsTouched();

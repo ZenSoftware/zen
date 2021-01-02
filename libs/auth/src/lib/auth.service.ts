@@ -53,19 +53,14 @@ export class AuthService {
     return this.#graphqlSubscriptionClient$.pipe(debounce(() => timer(100)));
   }
 
-  login(data: AuthLoginInput | AuthSession) {
-    if ((<AuthSession>data)?.__typename === 'AuthSession') {
-      this.setSession(<AuthSession>data);
-      return null;
-    } else {
-      return this.authLoginGQL
-        .fetch({ data: <AuthLoginInput>data }, { fetchPolicy: 'network-only' })
-        .pipe(
-          tap(({ data: { authLogin } }) => {
-            this.setSession(authLogin);
-          })
-        );
-    }
+  login(data: AuthLoginInput) {
+    return this.authLoginGQL
+      .fetch({ data: <AuthLoginInput>data }, { fetchPolicy: 'network-only' })
+      .pipe(
+        tap(({ data: { authLogin } }) => {
+          this.setSession(authLogin);
+        })
+      );
   }
 
   logout() {

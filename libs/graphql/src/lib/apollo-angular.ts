@@ -27,10 +27,9 @@ export type BatchPayload = {
 export enum UserScalarFieldEnum {
   Id = 'id',
   CreatedAt = 'createdAt',
-  Email = 'email',
+  Username = 'username',
   Password = 'password',
-  FirstName = 'firstName',
-  LastName = 'lastName',
+  Email = 'email',
   Roles = 'roles'
 }
 
@@ -56,52 +55,47 @@ export type UserWhereInput = {
   NOT?: Maybe<Array<UserWhereInput>>;
   id?: Maybe<IntFilter>;
   createdAt?: Maybe<DateTimeFilter>;
-  email?: Maybe<StringFilter>;
+  username?: Maybe<StringFilter>;
   password?: Maybe<StringFilter>;
-  firstName?: Maybe<StringNullableFilter>;
-  lastName?: Maybe<StringNullableFilter>;
+  email?: Maybe<StringFilter>;
   roles?: Maybe<EnumRoleNullableListFilter>;
 };
 
 export type UserOrderByInput = {
   id?: Maybe<SortOrder>;
   createdAt?: Maybe<SortOrder>;
-  email?: Maybe<SortOrder>;
+  username?: Maybe<SortOrder>;
   password?: Maybe<SortOrder>;
-  firstName?: Maybe<SortOrder>;
-  lastName?: Maybe<SortOrder>;
+  email?: Maybe<SortOrder>;
   roles?: Maybe<SortOrder>;
 };
 
 export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['Int']>;
-  email?: Maybe<Scalars['String']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 export type UserCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
-  email: Scalars['String'];
+  username: Scalars['String'];
   password: Scalars['String'];
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
   roles?: Maybe<UserCreaterolesInput>;
 };
 
 export type UserUpdateInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-  email?: Maybe<StringFieldUpdateOperationsInput>;
+  username?: Maybe<StringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
-  firstName?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  lastName?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
   roles?: Maybe<UserUpdaterolesInput>;
 };
 
 export type UserUpdateManyMutationInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-  email?: Maybe<StringFieldUpdateOperationsInput>;
+  username?: Maybe<StringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
-  firstName?: Maybe<NullableStringFieldUpdateOperationsInput>;
-  lastName?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
   roles?: Maybe<UserUpdaterolesInput>;
 };
 
@@ -142,21 +136,6 @@ export type StringFilter = {
   not?: Maybe<NestedStringFilter>;
 };
 
-export type StringNullableFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  mode?: Maybe<QueryMode>;
-  not?: Maybe<NestedStringNullableFilter>;
-};
-
 export type EnumRoleNullableListFilter = {
   equals?: Maybe<Array<Role>>;
 };
@@ -170,10 +149,6 @@ export type DateTimeFieldUpdateOperationsInput = {
 };
 
 export type StringFieldUpdateOperationsInput = {
-  set?: Maybe<Scalars['String']>;
-};
-
-export type NullableStringFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['String']>;
 };
 
@@ -217,20 +192,6 @@ export type NestedStringFilter = {
   not?: Maybe<NestedStringFilter>;
 };
 
-export type NestedStringNullableFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  not?: Maybe<NestedStringNullableFilter>;
-};
-
 export type AggregateUser = {
   __typename?: 'AggregateUser';
   count?: Maybe<UserCountAggregateOutputType>;
@@ -244,10 +205,9 @@ export type UserCountAggregateOutputType = {
   __typename?: 'UserCountAggregateOutputType';
   id: Scalars['Int'];
   createdAt?: Maybe<Scalars['Int']>;
-  email?: Maybe<Scalars['Int']>;
+  username?: Maybe<Scalars['Int']>;
   password?: Maybe<Scalars['Int']>;
-  firstName?: Maybe<Scalars['Int']>;
-  lastName?: Maybe<Scalars['Int']>;
+  email?: Maybe<Scalars['Int']>;
   roles?: Maybe<Scalars['Int']>;
   _all: Scalars['Int'];
 };
@@ -266,30 +226,27 @@ export type UserMinAggregateOutputType = {
   __typename?: 'UserMinAggregateOutputType';
   id: Scalars['Int'];
   createdAt?: Maybe<Scalars['DateTime']>;
-  email?: Maybe<Scalars['String']>;
+  username?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export type UserMaxAggregateOutputType = {
   __typename?: 'UserMaxAggregateOutputType';
   id: Scalars['Int'];
   createdAt?: Maybe<Scalars['DateTime']>;
-  email?: Maybe<Scalars['String']>;
+  username?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
   id: Scalars['Int'];
   createdAt: Scalars['DateTime'];
-  email: Scalars['String'];
+  username: Scalars['String'];
   password: Scalars['String'];
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
   roles: Array<Role>;
 };
 
@@ -433,7 +390,7 @@ export type AuthSession = {
 };
 
 export type AuthLoginInput = {
-  email: Scalars['String'];
+  username: Scalars['String'];
   password: Scalars['String'];
   rememberMe: Scalars['Boolean'];
 };
@@ -453,10 +410,9 @@ export type AuthPasswordResetRequestInput = {
 };
 
 export type AuthRegisterInput = {
+  username: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
 };
 
 export type AuthExchangeTokenVariables = Exact<{ [key: string]: never; }>;
@@ -542,7 +498,7 @@ export type AuthSessionFields = (
 
 export type UserFields = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'email' | 'firstName' | 'lastName'>
+  & Pick<User, 'id' | 'username' | 'email'>
 );
 
 export type FindUniqueUserVariables = Exact<{
@@ -684,9 +640,8 @@ export const AuthSessionFields = /*#__PURE__*/ gql`
 export const UserFields = /*#__PURE__*/ gql`
     fragment UserFields on User {
   id
+  username
   email
-  firstName
-  lastName
 }
     `;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`

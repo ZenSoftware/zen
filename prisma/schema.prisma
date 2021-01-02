@@ -11,15 +11,14 @@ generator client {
 model User {
   id        Int       @id @default(autoincrement())
   createdAt DateTime  @default(now())
-  email     String    @unique
+  username  String    @unique
   password  String
-  firstName String?
-  lastName  String?
+  email     String
   roles     Role[]
 }
 
 enum Role {
   Registered
   Admin
-  Super
+  Supery
 }
