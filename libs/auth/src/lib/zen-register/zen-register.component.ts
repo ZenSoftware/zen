@@ -17,6 +17,7 @@ export class ZenRegisterComponent {
   form: FormGroup;
   loading = false;
   usernameTaken = false;
+  emailTaken = false;
   generalError = false;
   hidePassword = true;
 
@@ -30,7 +31,7 @@ export class ZenRegisterComponent {
         '',
         [Validators.required, this.usernameValidator(), this.usernameTakenValidator()],
       ],
-      email: ['', [Validators.required, emailValidator()]],
+      email: ['', [Validators.required, emailValidator(), this.emailTakenValidator()]],
       password: ['', [Validators.required, this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
       acceptTerms: ['', Validators.requiredTrue],
@@ -72,6 +73,18 @@ export class ZenRegisterComponent {
   usernameValidator(): ValidatorFn {
     return control => {
       if (this.form) return usernameValidator(control.value);
+      return null;
+    };
+  }
+
+  emailTakenReset() {
+    this.emailTaken = false;
+    this.email.updateValueAndValidity();
+  }
+
+  emailTakenValidator(): ValidatorFn {
+    return control => {
+      if (this.emailTaken) return { emailTaken: true };
       return null;
     };
   }
@@ -130,6 +143,10 @@ export class ZenRegisterComponent {
               this.usernameTaken = true;
               this.username.markAsTouched();
               this.username.updateValueAndValidity();
+            } else if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
+              this.emailTaken = true;
+              this.email.markAsTouched();
+              this.email.updateValueAndValidity();
             } else {
               this.generalError = true;
             }

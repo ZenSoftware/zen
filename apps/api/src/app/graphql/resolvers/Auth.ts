@@ -80,7 +80,7 @@ export class AuthResolver {
     private readonly mail: MailService
   ) {}
 
-  private async getUser(username: string, prisma: PrismaClient) {
+  private async getUserByUsername(username: string, prisma: PrismaClient) {
     return prisma.user.findFirst({
       where: {
         username: {
@@ -91,9 +91,20 @@ export class AuthResolver {
     });
   }
 
+  private async getUserByEmail(email: string, prisma: PrismaClient) {
+    return prisma.user.findFirst({
+      where: {
+        email: {
+          mode: 'insensitive',
+          equals: email,
+        },
+      },
+    });
+  }
+
   @Query()
   async authLogin(@Context() ctx: IContext, @Args('data') data: AuthLoginInput) {
-    const user = await this.getUser(data.username, ctx.prisma);
+    const user = await this.getUserByUsername(data.username, ctx.prisma);
 
     if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
 
@@ -160,7 +171,7 @@ export class AuthResolver {
       throw new HttpException({ code: 'UNAUTHORIZED' }, 400);
     }
 
-    let user = await this.getUser(tokenPayload.username, ctx.prisma);
+    let user = await this.getUserByUsername(tokenPayload.username, ctx.prisma);
 
     if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
 
@@ -176,8 +187,11 @@ export class AuthResolver {
 
   @Mutation()
   async authRegister(@Context() ctx: IContext, @Args('data') data: AuthRegisterInput) {
-    const userFound = await this.getUser(data.username, ctx.prisma);
-    if (userFound) throw new HttpException({ code: 'USERNAME_TAKEN' }, 400);
+    const userFoundByUsername = await this.getUserByUsername(data.username, ctx.prisma);
+    if (userFoundByUsername) throw new HttpException({ code: 'USERNAME_TAKEN' }, 400);
+
+    const userFoundByEmail = await this.getUserByEmail(data.email, ctx.prisma);
+    if (userFoundByEmail) throw new HttpException({ code: 'EMAIL_TAKEN' }, 400);
 
     const hashedPassword = await bcrypt.hash(data.password, 12);
 
