@@ -2,15 +2,12 @@ import { AbstractControl } from '@angular/forms';
 import { ApiConstants } from '@zen/api-interfaces';
 
 interface PasswordErrors {
-  required?: boolean;
   minlength?: { actualLength: number; requiredLength: number };
   maxlength?: { actualLength: number; requiredLength: number };
 }
 
 export function passwordValidator(control: AbstractControl) {
   const errors: PasswordErrors = {};
-
-  if (!control.value) errors.required = true;
 
   if (control.value.length < ApiConstants.PASSWORD_MIN_LENGTH) {
     errors.minlength = {

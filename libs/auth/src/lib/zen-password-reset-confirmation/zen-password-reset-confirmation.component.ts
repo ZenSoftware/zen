@@ -35,7 +35,7 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
     private auth: AuthService
   ) {
     this.form = this.formBuilder.group({
-      password: ['', [this.passwordValidator()]],
+      password: ['', [Validators.required, this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
     });
   }

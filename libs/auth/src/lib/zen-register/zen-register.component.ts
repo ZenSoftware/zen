@@ -32,7 +32,7 @@ export class ZenRegisterComponent {
         [Validators.required, this.usernameValidator(), this.usernameTakenValidator()],
       ],
       email: ['', [Validators.required, emailValidator(), this.emailTakenValidator()]],
-      password: ['', [this.passwordValidator()]],
+      password: ['', [Validators.required, this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
       acceptTerms: ['', Validators.requiredTrue],
     });
