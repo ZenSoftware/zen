@@ -406,7 +406,7 @@ export type AuthPasswordResetConfirmationInput = {
 };
 
 export type AuthPasswordResetRequestInput = {
-  email: Scalars['String'];
+  emailOrUsername: Scalars['String'];
 };
 
 export type AuthRegisterInput = {

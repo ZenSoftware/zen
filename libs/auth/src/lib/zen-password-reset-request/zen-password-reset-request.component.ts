@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { AuthPasswordResetRequestQueryGQL, extractGraphQLErrors } from '@zen/graphql';
 
 import { verticalAccordion } from '../animations';
-import { emailValidator } from '../validators';
 
 @Component({
   selector: 'zen-password-reset-request',
@@ -15,7 +14,7 @@ export class ZenPasswordResetRequestComponent {
 
   loading = false;
   completed = false;
-  emailNotFound = false;
+  notFound = false;
   form: FormGroup;
   generalError = false;
 
@@ -24,22 +23,25 @@ export class ZenPasswordResetRequestComponent {
     private authPasswordResetRequestQueryGQL: AuthPasswordResetRequestQueryGQL
   ) {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, emailValidator(), this.emailNotFoundValidator()]],
+      emailOrUsername: [
+        '',
+        [Validators.required, Validators.minLength(3), this.notFoundValidator()],
+      ],
     });
   }
 
-  get email(): any {
-    return this.form.get('email');
+  get emailOrUsername(): any {
+    return this.form.get('emailOrUsername');
   }
 
-  emailNotFoundReset() {
-    this.emailNotFound = false;
-    this.email.updateValueAndValidity();
+  notFoundReset() {
+    this.notFound = false;
+    this.emailOrUsername.updateValueAndValidity();
   }
 
-  emailNotFoundValidator(): ValidatorFn {
+  notFoundValidator(): ValidatorFn {
     return () => {
-      if (this.emailNotFound) return { notFound: true };
+      if (this.notFound) return { notFound: true };
       return null;
     };
   }
@@ -53,7 +55,7 @@ export class ZenPasswordResetRequestComponent {
         .fetch(
           {
             data: {
-              email: this.email.value.trim(),
+              emailOrUsername: this.emailOrUsername.value.trim(),
             },
           },
           { fetchPolicy: 'network-only' }
@@ -69,10 +71,10 @@ export class ZenPasswordResetRequestComponent {
 
             const gqlError = extractGraphQLErrors(errors);
 
-            if (gqlError.find(e => e.code === 'ALREADY_VERIFIED')) {
-              this.emailNotFound = true;
-              this.email.markAsTouched();
-              this.email.updateValueAndValidity();
+            if (gqlError.find(e => e.code === 'USER_NOT_FOUND')) {
+              this.notFound = true;
+              this.emailOrUsername.markAsTouched();
+              this.emailOrUsername.updateValueAndValidity();
             } else {
               this.generalError = true;
             }

@@ -55,7 +55,7 @@ export const AuthTypeDef = gql`
   }
 
   input AuthPasswordResetRequestInput {
-    email: String!
+    emailOrUsername: String!
   }
 
   input AuthRegisterInput {
@@ -124,18 +124,28 @@ export class AuthResolver {
     @Context() ctx: IContext,
     @Args('data') data: AuthPasswordResetRequestInput
   ) {
-    const user = await ctx.prisma.user.findFirst({
+    const possibleUsers = await ctx.prisma.user.findMany({
       where: {
-        email: {
-          mode: 'insensitive',
-          equals: data.email,
-        },
+        OR: [
+          {
+            email: {
+              equals: data.emailOrUsername,
+              mode: 'insensitive',
+            },
+          },
+          {
+            username: {
+              equals: data.emailOrUsername,
+              mode: 'insensitive',
+            },
+          },
+        ],
       },
     });
 
-    if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
+    if (possibleUsers.length <= 0) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
 
-    this.mail.sendPasswordReset(user);
+    possibleUsers.forEach(u => this.mail.sendPasswordReset(u));
   }
 
   @Mutation()

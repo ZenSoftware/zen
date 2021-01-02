@@ -4,7 +4,6 @@ import { User } from '@prisma/client';
 
 import { ConfigService } from '../config';
 import { JwtService } from '../jwt';
-import { PrismaService } from '../prisma';
 import { PasswordResetContext } from './templates';
 
 type MailTemplate = 'verify-email' | 'password-reset';
@@ -16,8 +15,7 @@ export class MailService {
   constructor(
     private readonly mailer: MailerService,
     private readonly jwtService: JwtService,
-    private readonly config: ConfigService,
-    private readonly prisma: PrismaService
+    private readonly config: ConfigService
   ) {}
 
   send(options: MailOptions) {
