@@ -9,7 +9,7 @@ If I could be so humble as to mention a few things about myself. I have built 2 
 
 What is really nice about Nest and Angular is that their programming idioms carry over between them, allowing for front-end devs to contribute to the back-end.  Though there are complexities in creating a GraphQL endpoint to expose CRUD operations of the data model to the client.  A combination between Nest + Prisma + Angular has provided for new capabilities the industry has not really seen before.  This project code generates all the boilerplate required in bridging the 3 technologies together.
 
-There is a tremendous amount of value to be gained by treating the `prisma.schema` file as the single source of truth, and then code generate everything else from that.  It guarantees consistency between the front-end and back-end and centralizes CRUD operations over all the projects Prisma models via a single import endpoint.  This project provides solutions for all the hardest parts of creating a web portal as an example for bridging the technologies.
+There is a tremendous amount of value to be gained by treating the `prisma.schema` file as the single source of truth, and then code generate everything else from that.  It guarantees consistency between the front-end and back-end and centralizes CRUD operations over all the projects Prisma models via a single import endpoint.  This project provides solutions for all the hardest parts of creating a web portal as an example for bridging these technologies.
 
 New contributors are welcome!
 
