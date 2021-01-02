@@ -35,13 +35,13 @@ export class ZenPasswordResetRequestComponent {
     });
   }
 
-  get emailOrUsername(): any {
+  get emailOrUsername() {
     return this.form.get('emailOrUsername');
   }
 
   notFoundReset() {
     this.notFound = false;
-    this.emailOrUsername.updateValueAndValidity();
+    this.emailOrUsername?.updateValueAndValidity();
   }
 
   notFoundValidator(): ValidatorFn {
@@ -60,7 +60,7 @@ export class ZenPasswordResetRequestComponent {
         .fetch(
           {
             data: {
-              emailOrUsername: this.emailOrUsername.value.trim(),
+              emailOrUsername: this.emailOrUsername?.value.trim(),
             },
           },
           { fetchPolicy: 'network-only' }
@@ -78,8 +78,8 @@ export class ZenPasswordResetRequestComponent {
 
             if (gqlError.find(e => e.code === 'USER_NOT_FOUND')) {
               this.notFound = true;
-              this.emailOrUsername.markAsTouched();
-              this.emailOrUsername.updateValueAndValidity();
+              this.emailOrUsername?.markAsTouched();
+              this.emailOrUsername?.updateValueAndValidity();
             } else {
               this.generalError = true;
             }

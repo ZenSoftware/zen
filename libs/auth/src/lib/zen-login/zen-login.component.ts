@@ -42,21 +42,21 @@ export class ZenLoginComponent {
     else this.form.enable();
   }
 
-  get username(): any {
+  get username() {
     return this.form.get('username');
   }
 
-  get password(): any {
+  get password() {
     return this.form.get('password');
   }
 
-  get rememberMe(): any {
+  get rememberMe() {
     return this.form.get('rememberMe');
   }
 
   usernameNotFoundReset() {
     this.#usernameNotFound = false;
-    this.username.updateValueAndValidity();
+    this.username?.updateValueAndValidity();
   }
 
   usernameNotFoundValidator(): ValidatorFn {
@@ -72,7 +72,7 @@ export class ZenLoginComponent {
 
   incorrectPasswordReset() {
     this.#incorrectPassword = false;
-    this.password.updateValueAndValidity();
+    this.password?.updateValueAndValidity();
   }
 
   incorrectPasswordValidator(): ValidatorFn {
@@ -87,9 +87,9 @@ export class ZenLoginComponent {
 
       this.auth
         .login({
-          username: this.username.value.trim(),
-          password: this.password.value,
-          rememberMe: this.rememberMe.value,
+          username: this.username?.value.trim(),
+          password: this.password?.value,
+          rememberMe: this.rememberMe?.value,
         })
         .subscribe({
           next: ({ data }) => {
@@ -105,12 +105,12 @@ export class ZenLoginComponent {
 
             if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
               this.#usernameNotFound = true;
-              this.username.markAsTouched();
-              this.username.updateValueAndValidity();
+              this.username?.markAsTouched();
+              this.username?.updateValueAndValidity();
             } else if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
               this.#incorrectPassword = true;
-              this.password.markAsTouched();
-              this.password.updateValueAndValidity();
+              this.password?.markAsTouched();
+              this.password?.updateValueAndValidity();
             } else {
               this.generalError = true;
             }

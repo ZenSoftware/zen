@@ -32,35 +32,35 @@ export class ZenRegisterComponent {
         [Validators.required, this.usernameValidator(), this.usernameTakenValidator()],
       ],
       email: ['', [Validators.required, emailValidator(), this.emailTakenValidator()]],
-      password: ['', [Validators.required, this.passwordValidator()]],
+      password: ['', [this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
       acceptTerms: ['', Validators.requiredTrue],
     });
   }
 
-  get username(): any {
+  get username() {
     return this.form.get('username');
   }
 
-  get email(): any {
+  get email() {
     return this.form.get('email');
   }
 
-  get password(): any {
+  get password() {
     return this.form.get('password');
   }
 
-  get passwordConfirm(): any {
+  get passwordConfirm() {
     return this.form.get('passwordConfirm');
   }
 
-  get acceptTerms(): any {
+  get acceptTerms() {
     return this.form.get('acceptTerms');
   }
 
   usernameTakenReset() {
     this.usernameTaken = false;
-    this.email.updateValueAndValidity();
+    this.email?.updateValueAndValidity();
   }
 
   usernameTakenValidator(): ValidatorFn {
@@ -79,7 +79,7 @@ export class ZenRegisterComponent {
 
   emailTakenReset() {
     this.emailTaken = false;
-    this.email.updateValueAndValidity();
+    this.email?.updateValueAndValidity();
   }
 
   emailTakenValidator(): ValidatorFn {
@@ -92,8 +92,8 @@ export class ZenRegisterComponent {
   passwordValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        this.passwordConfirm.updateValueAndValidity();
-        return passwordValidator(control.value);
+        this.passwordConfirm?.updateValueAndValidity();
+        return passwordValidator(control);
       }
       return null;
     };
@@ -102,10 +102,10 @@ export class ZenRegisterComponent {
   passwordConfirmValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        if (control.value.length >= this.password.value.length && control.value.length !== 0) {
+        if (control.value.length >= this.password?.value.length && control.value.length !== 0) {
           control.markAsTouched();
         }
-        const notMatching = this.password.value !== control.value;
+        const notMatching = this.password?.value !== control.value;
         return notMatching ? { notMatching: true } : null;
       }
       return null;
@@ -121,9 +121,9 @@ export class ZenRegisterComponent {
       this.authRegisterGQL
         .mutate({
           data: {
-            username: this.username.value.trim(),
-            email: this.email.value.trim(),
-            password: this.password.value,
+            username: this.username?.value.trim(),
+            email: this.email?.value.trim(),
+            password: this.password?.value,
           },
         })
         .subscribe({
@@ -141,12 +141,12 @@ export class ZenRegisterComponent {
 
             if (gqlErrors.find(e => e.code === 'USERNAME_TAKEN')) {
               this.usernameTaken = true;
-              this.username.markAsTouched();
-              this.username.updateValueAndValidity();
+              this.username?.markAsTouched();
+              this.username?.updateValueAndValidity();
             } else if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
               this.emailTaken = true;
-              this.email.markAsTouched();
-              this.email.updateValueAndValidity();
+              this.email?.markAsTouched();
+              this.email?.updateValueAndValidity();
             } else {
               this.generalError = true;
             }

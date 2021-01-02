@@ -35,7 +35,7 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
     private auth: AuthService
   ) {
     this.form = this.formBuilder.group({
-      password: ['', [Validators.required, this.passwordValidator()]],
+      password: ['', [this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
     });
   }
@@ -46,19 +46,19 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
       .subscribe(token => (this.token = token));
   }
 
-  get password(): any {
+  get password() {
     return this.form.get('password');
   }
 
-  get passwordConfirm(): any {
+  get passwordConfirm() {
     return this.form.get('passwordConfirm');
   }
 
   passwordValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        this.passwordConfirm.updateValueAndValidity();
-        return passwordValidator(control.value);
+        this.passwordConfirm?.updateValueAndValidity();
+        return passwordValidator(control);
       }
       return null;
     };
@@ -67,10 +67,10 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
   passwordConfirmValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        if (control.value.length >= this.password.value.length && control.value.length !== 0) {
+        if (control.value.length >= this.password?.value.length && control.value.length !== 0) {
           control.markAsTouched();
         }
-        const notMatching = this.password.value !== control.value;
+        const notMatching = this.password?.value !== control.value;
         return notMatching ? { notMatching: true } : null;
       }
       return null;
@@ -86,7 +86,7 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
       this.authPasswordResetConfirmationGQL
         .mutate({
           data: {
-            newPassword: this.password.value,
+            newPassword: this.password?.value,
             token: this.token as string,
           },
         })
