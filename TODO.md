@@ -3,3 +3,4 @@
 - [ ] Extract out portal settings with a database seed, via Prisma migrate.
   - [ ] Sign-up via email vs username
   - [ ] Configure JWT expiresIn time
+- [ ] Make emails unique errors
