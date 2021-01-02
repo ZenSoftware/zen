@@ -11,7 +11,7 @@ What is really nice about Nest and Angular is that their programming idioms carr
 
 There is a tremendous amount of value to be gained by treating the `prisma.schema` file as the single source of truth, and then code generating everything else from that.  It guarantees consistency between the front-end and back-end.  It also centralizes the CRUD operations over all the projects Prisma models via a single import endpoint.  This project also provides solutions for the hardest parts of authentication, and managing a user base as well.
 
-I have strictly kept to the Angular and Nest best practices utilized within the ecosystem, and all the services being generated should be fairly self explanatory, but better documentation will come with time.
+I have strictly kept to the Angular and Nest best practices that are being utilized within the ecosystem. Also all the services being generated should be fairly self explanatory, but better documentation will come with time. 🍜
 
 New contributors are welcome!
 
