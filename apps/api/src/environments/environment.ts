@@ -9,7 +9,7 @@ export const environment: EnvironmentBase = {
   production: false,
   expressPort: 7080,
   graphql: {
-    playground: true,
+    playground: true, // localhost:7080/graphql
   },
   jwtOptions: {
     secret: 'dev secret',
