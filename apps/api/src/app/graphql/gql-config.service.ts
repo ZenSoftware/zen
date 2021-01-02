@@ -21,7 +21,8 @@ export class GqlConfigService implements GqlOptionsFactory {
       tracing: this.config.graphql.playground,
       cors: this.config.production ? undefined : { credentials: true, origin: true },
       context: async ctx => {
-        const prisma = this.moduleRef.get(PrismaService, { strict: false });
+        const contextId = ContextIdFactory.create();
+        const prisma = await this.moduleRef.resolve(PrismaService, contextId, { strict: false });
 
         return ctx.connection
           ? { ...ctx, req: ctx.connection.context, prisma }
