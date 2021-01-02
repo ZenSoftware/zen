@@ -46,7 +46,7 @@ export enum QueryMode {
 export enum Role {
   Registered = 'Registered',
   Admin = 'Admin',
-  Supery = 'Supery'
+  Super = 'Super'
 }
 
 export type UserWhereInput = {

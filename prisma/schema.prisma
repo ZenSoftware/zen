@@ -20,5 +20,5 @@ model User {
 enum Role {
   Registered
   Admin
-  Supery
+  Super
 }
