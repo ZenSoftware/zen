@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ApiConstants } from '@zen/api-interfaces';
 import { AuthPasswordResetRequestQueryGQL, extractGraphQLErrors } from '@zen/graphql';
 
 import { verticalAccordion } from '../animations';
@@ -27,7 +28,9 @@ export class ZenPasswordResetRequestComponent {
         '',
         [
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(
+            ApiConstants.USERNAME_MIN_LENGTH < 7 ? ApiConstants.USERNAME_MIN_LENGTH : 7
+          ),
           Validators.maxLength(254),
           this.notFoundValidator(),
         ],
