@@ -72,7 +72,7 @@ export class ZenRegisterComponent {
 
   usernameValidator(): ValidatorFn {
     return control => {
-      if (this.form) return usernameValidator(control.value);
+      if (this.form) return usernameValidator(control);
       return null;
     };
   }

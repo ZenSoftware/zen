@@ -5,8 +5,8 @@
     <mat-label>Username</mat-label>
     <input matInput placeholder="Username" [formControl]="username" hideRequiredMarker="true" maxlength="254" (keydown)="usernameTakenReset()">
     <mat-error *ngIf="username.errors?.required">Required</mat-error>
-    <mat-error *ngIf="username.errors?.minLength && !username.errors?.required">{{username.errors.minLength}}</mat-error>
-    <mat-error *ngIf="username.errors?.maxLength">{{username.errors.maxLength}}</mat-error>
+    <mat-error *ngIf="username.errors?.minlength && !username.errors?.required">Minimum length of {{username.errors?.minlength?.requiredLength}} characters</mat-error>
+    <mat-error *ngIf="username.errors?.maxlength">Maximum length of {{username.errors?.maxlength?.requiredLength}} characters</mat-error>
     <mat-error *ngIf="username.errors?.usernameTaken">Username is already taken</mat-error>
   </mat-form-field>
 
