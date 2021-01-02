@@ -106,7 +106,7 @@ export class ZenRegisterComponent {
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
-            this.auth.setSession(data?.authRegister as AuthSession);
+            this.auth.login(data?.authRegister as AuthSession);
             this.registered.emit();
           },
 
