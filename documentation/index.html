@@ -602,12 +602,12 @@
 <h4 id="nest-prisma-angular-modern-full-stack-spa">Nest + Prisma + Angular 🏮 Modern Full Stack SPA</h4>
 <hr>
 <h2 id="-project-founders-notes">🏯 Project Founders Notes</h2>
-<p>If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Angular, and Prisma. This project is an attempt at packaging up the sum of all those lessons, and making it publicly available.  New contributors are welcome!</p>
+<p>If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Prisma, and Angular. This project is an attempt at packaging up the sum of all those lessons, and making it publicly available for the community.  New contributors are welcome!</p>
 <blockquote>
 <p>🎐 &quot;Give more than you take&quot; ~ Peter Hoang </p>
 </blockquote>
 <hr>
-<h2 id="-project-setup-instructions-docs-repo">🍣 Project Setup Instructions - <a href="https://zensoftware.github.io/Zen/">Docs</a> - <a href="https://github.com/ZenSoftware/Zen">Repo</a></h2>
+<h2 id="-project-setup-instructions-repo">🍣 Project Setup Instructions - <a href="https://github.com/ZenSoftware/Zen">Repo</a></h2>
 <p><strong>Requirements</strong></p>
 <ul>
 <li><a href="https://nodejs.org/">Node v14</a></li>
@@ -634,7 +634,7 @@
 <li>[X] <a href="https://docs.nestjs.com/techniques/authentication">Nest authentication</a>, user creation, and login system designed specifically to work for an <a href="https://angular.io/">Angular SPA (single page application)</a>. This project will provide responsive, &quot;mobile first&quot; interfaces for the standard set of authentication features.</li>
 <li>[X] <code>New account component</code></li>
 <li>[x] <code>Login component</code></li>
-<li>[ ] <code>Forgot password component</code> and a pre-built password reset flow via automated emails via <a href="https://www.npmjs.com/package/@nest-modules/mailer">@nest-modules/mailer</a> and pre-configured <a href="https://handlebarsjs.com/guide/#what-is-handlebars">Handbars e-mail templates</a>.  Handlebars has similar double bracket <code>{{contextField}}</code> template interpolation, akin to Angular templates.   It makes working with e-mail templates akin to working with Angular templates. Also, injecting JavaScript contexts from Nest, and into Handlebars is made very simple. The <a href="https://github.com/ZenSoftware/Zen/tree/main/apps/api/src/app/mail/templates">apps/api/src/app/mail/templates</a> directory is a <strong>conventions</strong> first approach.</li>
+<li>[ ] <code>Forgot password component</code> and a pre-built password reset flow.</li>
 <li>[ ] <code>Password change component</code> for user dashboards (coming soon)</li>
 <li>[X] <code>Angular route guards</code> and <code>Angular directives</code> to show/hide content depending on user permissions.</li>
 <li>[X] <a href="https://docs.nestjs.com/techniques/authentication#extending-guards">Nest authorization directives</a> for server side <a href="https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true">role-based access control</a> to allow for declarative, fine grained security control over all GraphQL queries and mutations.</li>
@@ -654,9 +654,9 @@
 <li>[x] <a href="https://marketplace.visualstudio.com/items?itemName=Angular.ng-template">Angular Language Service for VSCode</a> for modern IDE tooling.</li>
 <li>[x] NPM scripts for versioned releases of the <strong>api</strong> server as a containerized Docker image. <a href="https://hub.docker.com/_/node?tab=description&amp;ref=hackernoon.com">node:14-alpine</a> is used as the Docker container base image, and the appropriate <code>tsconfig.app.json</code> configurations are being applied for the Node v14 Nest app.</li>
 <li>[x] Enforced code formatting via <a href="https://prettier.io/">Prettier</a> &amp; <a href="https://www.npmjs.com/package/prettier-plugin-import-sort">import-sort</a>, guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.</li>
+<li>[X] <a href="https://www.npmjs.com/package/@nest-modules/mailer">@nest-modules/mailer</a> for automated emails, and pre-configured <a href="https://handlebarsjs.com/guide/#what-is-handlebars">Handbars e-mail templates</a> for the various web portal&#39;s emailing needs. Handlebars has similar double bracket <code>{{contextField}}</code> template interpolation, akin to Angular templates. Custom HTML e-mail triggers within Nest are made very simple by simply passing a JSON context and the template name as paramaters to the injectable <code>MailService</code>.  The <a href="https://github.com/ZenSoftware/Zen/tree/main/apps/api/src/app/mail/templates">apps/api/src/app/mail/templates</a> directory is a <strong>conventions first approach</strong>, simplifying the management of e-mail templates.</li>
 <li>[x] <a href="https://compodoc.app/">Compodoc</a> to generate Nest &amp; Angular documentation.</li>
 </ul>
-<hr>
 
 
 

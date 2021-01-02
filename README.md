@@ -75,7 +75,7 @@ npm start
 
 ---
 
-## 🍵 Modern Web Components and Styling
+## 🍵 Modern Web Components and Responsive UIs
 
 - [x] SASS chosen as the css transpiler of choice
 - [x] [Angular Material](https://material.angular.io/) components & theme.
