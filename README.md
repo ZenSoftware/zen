@@ -73,7 +73,7 @@ npm start
 - [X] [Nest authentication](https://docs.nestjs.com/techniques/authentication), user creation, and login system designed specifically to work for an [Angular SPA (single page application)](https://angular.io/). This project will provide responsive, "mobile first" interfaces for the standard set of authentication features.
 - [X] `New account component`
 - [x] `Login component`
-- [ ] `Forgot password component` and a pre-built password reset flow.
+- [X] `Forgot password component` and a pre-built password reset flow.
 - [ ] `Password change component` for user dashboards (coming soon)
 - [X] `Angular route guards` and `Angular directives` to show/hide content depending on user permissions.
 - [X] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
