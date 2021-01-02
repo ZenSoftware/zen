@@ -174,7 +174,7 @@ export class AuthService {
       this.#graphqlSubscriptionClient$.next(null);
     }
 
-    loggedInVar(value);
+    if (value !== loggedInVar()) loggedInVar(value);
   }
 
   private startExchangeInterval() {
