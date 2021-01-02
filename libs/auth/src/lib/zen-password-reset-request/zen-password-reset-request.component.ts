@@ -25,7 +25,12 @@ export class ZenPasswordResetRequestComponent {
     this.form = this.formBuilder.group({
       emailOrUsername: [
         '',
-        [Validators.required, Validators.minLength(3), this.notFoundValidator()],
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(254),
+          this.notFoundValidator(),
+        ],
       ],
     });
   }
