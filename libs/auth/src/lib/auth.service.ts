@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Role } from '@zen/graphql';
 import {
   AuthExchangeTokenGQL,
   AuthLoginGQL,
@@ -13,8 +12,8 @@ import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import Cookies from 'js-cookie';
 import { intersection, isEqual, orderBy } from 'lodash-es';
-import { BehaviorSubject, Observable, Subscription, interval, timer } from 'rxjs';
-import { debounce, map, shareReplay, tap } from 'rxjs/operators';
+import { BehaviorSubject, Subscription, interval, timer } from 'rxjs';
+import { debounce, tap } from 'rxjs/operators';
 
 enum LocalStorageKey {
   sessionExpiresOn = 'sessionExpiresOn',
