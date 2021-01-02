@@ -2,6 +2,7 @@ import { AbstractControl } from '@angular/forms';
 import { ApiConstants } from '@zen/api-interfaces';
 
 interface UsernameErrors {
+  includesSpace?: boolean;
   minlength?: { actualLength: number; requiredLength: number };
   maxlength?: { actualLength: number; requiredLength: number };
 }
@@ -9,18 +10,20 @@ interface UsernameErrors {
 export function usernameValidator(control: AbstractControl) {
   const errors: UsernameErrors = {};
 
-  const trimmed = control.value?.trim() as string | null;
+  if (control.value && /\s/.test(control.value)) {
+    errors.includesSpace = true;
+  }
 
-  if (trimmed && trimmed.length < ApiConstants.USERNAME_MIN_LENGTH) {
+  if (control.value && control.value.length < ApiConstants.USERNAME_MIN_LENGTH) {
     errors.minlength = {
-      actualLength: trimmed.length,
+      actualLength: control.value.length,
       requiredLength: ApiConstants.USERNAME_MIN_LENGTH,
     };
   }
 
-  if (trimmed && trimmed.length > ApiConstants.USERNAME_MAX_LENGTH) {
+  if (control.value && control.value.length > ApiConstants.USERNAME_MAX_LENGTH) {
     errors.maxlength = {
-      actualLength: trimmed.length,
+      actualLength: control.value.length,
       requiredLength: ApiConstants.USERNAME_MAX_LENGTH,
     };
   }
