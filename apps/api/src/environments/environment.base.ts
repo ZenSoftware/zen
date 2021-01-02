@@ -1,5 +1,4 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
-import { PoolConfig as PostgreSQLConfig } from 'pg';
 
 export class EnvironmentBase {
   siteUrl: string;
@@ -8,7 +7,6 @@ export class EnvironmentBase {
   graphql: {
     playground: boolean;
   };
-  postgres: PostgreSQLConfig;
   jwtOptions: JwtModuleOptions;
   rememberMeExpiresIn: number;
   cookieDomain: string;

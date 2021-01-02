@@ -11,13 +11,6 @@ export const environment: EnvironmentBase = {
   graphql: {
     playground: true,
   },
-  postgres: {
-    host: 'localhost',
-    port: 5445,
-    user: 'ZenAdmin',
-    password: 'temp',
-    database: 'zen',
-  },
   jwtOptions: {
     secret: 'dev secret',
     signOptions: {
@@ -28,10 +21,10 @@ export const environment: EnvironmentBase = {
   rememberMeExpiresIn: 2592000, // 30 days (in seconds)
   cookieDomain: undefined,
   smtp: {
-    server: 'localhost/nowhere', //process.env.SMTP_SERVER,
+    server: process.env.SMTP_SERVER,
     login: process.env.SMTP_LOGIN,
     password: process.env.SMTP_PASSWORD,
+    fromName: process.env.SMTP_FROM_NAME,
     fromEmail: process.env.SMTP_FROM_EMAIL,
-    fromName: 'Zen',
   },
 };

@@ -1,0 +1,5 @@
+- [ ] Refactor authorization flows to work with the user's username instead of email
+- [ ] Make email field on users not required to be unique
+- [ ] Extract out portal settings with a database seed, via Prisma migrate.
+  - [ ] Sign-up via email vs username
+  - [ ] Configure JWT expiresIn time

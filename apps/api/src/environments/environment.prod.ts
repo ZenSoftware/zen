@@ -7,13 +7,6 @@ export const environment: EnvironmentBase = {
   graphql: {
     playground: false,
   },
-  postgres: {
-    host: 'postgres-svc',
-    port: 5432,
-    user: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-    database: 'zen',
-  },
   jwtOptions: {
     privateKey: process.env.JWT_PRIVATE_KEY,
     publicKey: process.env.JWT_PUBLIC_KEY,
@@ -28,7 +21,7 @@ export const environment: EnvironmentBase = {
     server: process.env.SMTP_SERVER,
     login: process.env.SMTP_LOGIN,
     password: process.env.SMTP_PASSWORD,
+    fromName: process.env.SMTP_FROM_NAME,
     fromEmail: process.env.SMTP_FROM_EMAIL,
-    fromName: 'Zen',
   },
 };
