@@ -46,7 +46,6 @@ export class AuthService {
     // Start the token exchange interval if the user is logged in
     if (this.loggedIn) this.startExchangeInterval();
 
-    // TODO: Check if this fires with a parameter with value `null` upon the app's first load
     this.graphqlSubscriptionClient$.subscribe(() => GraphQLModule.reconnectSubscriptionClient());
   }
 
