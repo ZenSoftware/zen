@@ -5,7 +5,7 @@
 
 ## 🏯 Project Founders Notes
 
-If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Prisma, and Angular. This project is an attempt to package the sum total of all the lessons I have learned, and making it publicly available to the community.
+If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Prisma, and Angular. This project is an attempt to package the sum total of all those lessons, and making it publicly available for the community.
 
 What is really nice about Nest and Angular is that their programming idioms carry over between them, allowing for front-end devs to contribute to the back-end.  Though, there are complexities in creating a GraphQL endpoint to expose CRUD operations over the data model to the client. If that piece of the problem could be solved it would allow anyone to be a full stack developer. A combination between Nest + Prisma + Angular has provided for new capabilities the industry has not really seen before.  This project code generates all the boilerplate required in bridging the 3 technologies together.
 
