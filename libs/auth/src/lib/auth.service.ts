@@ -39,12 +39,11 @@ export class AuthService {
   ) {
     this.loggedIn = this.sessionTimeRemaining > 0; // Initialize apollo client state
 
-    userRolesVar(
-      localStorage.getItem(LocalStorageKey.roles)
-        ? localStorage.getItem(LocalStorageKey.roles)?.split(',')
-        : []
-    );
+    // Initialize client apps user roles
+    const roles = localStorage.getItem(LocalStorageKey.roles);
+    userRolesVar(roles ? roles?.split(',') : []);
 
+    // Start the token exchange interval if the user is logged in
     if (this.loggedIn) this.startExchangeInterval();
 
     // TODO: Check if this fires with a parameter with value `null` upon the app's first load
@@ -59,7 +58,6 @@ export class AuthService {
     return this.authLoginGQL.fetch({ data }, { fetchPolicy: 'network-only' }).pipe(
       tap(({ data: { authLogin } }) => {
         this.setSession(authLogin);
-        this.startExchangeInterval();
       })
     );
   }
@@ -104,6 +102,7 @@ export class AuthService {
     userRolesVar(authSession.roles);
     this.loggedIn = true;
     this.#graphqlSubscriptionClient$.next(authSession);
+    this.startExchangeInterval();
   }
 
   private clearLocalStorage() {
