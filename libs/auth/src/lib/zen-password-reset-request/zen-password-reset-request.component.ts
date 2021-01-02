@@ -50,11 +50,14 @@ export class ZenPasswordResetRequestComponent {
       this.generalError = false;
 
       this.authPasswordResetRequestQueryGQL
-        .fetch({
-          data: {
-            email: this.email.value.trim(),
+        .fetch(
+          {
+            data: {
+              email: this.email.value.trim(),
+            },
           },
-        })
+          { fetchPolicy: 'network-only' }
+        )
         .subscribe({
           next: () => {
             this.loading = false;
