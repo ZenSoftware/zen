@@ -1,8 +1,10 @@
 import { ISendMailOptions, MailerService } from '@nest-modules/mailer';
 import { Injectable } from '@nestjs/common';
+import { User } from '@prisma/client';
 
 import { ConfigService } from '../config';
 import { JwtService } from '../jwt';
+import { PrismaService } from '../prisma';
 import { PasswordResetContext } from './templates';
 
 type MailTemplate = 'verify-email' | 'password-reset';
@@ -14,15 +16,16 @@ export class MailService {
   constructor(
     private readonly mailer: MailerService,
     private readonly jwtService: JwtService,
-    private readonly config: ConfigService
+    private readonly config: ConfigService,
+    private readonly prisma: PrismaService
   ) {}
 
   send(options: MailOptions) {
     return this.mailer.sendMail(options);
   }
 
-  sendPasswordReset(to: string) {
-    const token = this.jwtService.sign({ username: to }, { expiresIn: '1d' });
+  sendPasswordReset(user: User) {
+    const token = this.jwtService.sign({ username: user.username }, { expiresIn: '1d' });
 
     const context: PasswordResetContext = {
       siteUrl: this.config.siteUrl,
@@ -31,7 +34,7 @@ export class MailService {
 
     this.send({
       template: 'password-reset',
-      to,
+      to: user.email,
       subject: `${this.config.smtp.fromName} Password Reset`,
       context,
     }).then();

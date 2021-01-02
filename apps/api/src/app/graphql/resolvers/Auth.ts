@@ -135,7 +135,7 @@ export class AuthResolver {
 
     if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
 
-    this.mail.sendPasswordReset(user.email);
+    this.mail.sendPasswordReset(user);
   }
 
   @Mutation()
