@@ -9,16 +9,18 @@ interface PasswordErrors {
 export function passwordValidator(control: AbstractControl) {
   const errors: PasswordErrors = {};
 
-  if (control.value.length < ApiConstants.PASSWORD_MIN_LENGTH) {
+  const trimmed = control.value?.trim() as string | null;
+
+  if (trimmed && trimmed.length < ApiConstants.PASSWORD_MIN_LENGTH) {
     errors.minlength = {
-      actualLength: control.value.length,
+      actualLength: trimmed.length,
       requiredLength: ApiConstants.PASSWORD_MIN_LENGTH,
     };
   }
 
-  if (control.value.length > ApiConstants.PASSWORD_MAX_LENGTH) {
+  if (trimmed && trimmed.length > ApiConstants.PASSWORD_MAX_LENGTH) {
     errors.maxlength = {
-      actualLength: control.value.length,
+      actualLength: trimmed.length,
       requiredLength: ApiConstants.PASSWORD_MAX_LENGTH,
     };
   }

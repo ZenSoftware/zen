@@ -9,16 +9,18 @@ interface UsernameErrors {
 export function usernameValidator(control: AbstractControl) {
   const errors: UsernameErrors = {};
 
-  if (control.value.length < ApiConstants.USERNAME_MIN_LENGTH) {
+  const trimmed = control.value?.trim() as string | null;
+
+  if (trimmed && trimmed.length < ApiConstants.USERNAME_MIN_LENGTH) {
     errors.minlength = {
-      actualLength: control.value.length,
+      actualLength: trimmed.length,
       requiredLength: ApiConstants.USERNAME_MIN_LENGTH,
     };
   }
 
-  if (control.value.length > ApiConstants.USERNAME_MAX_LENGTH) {
+  if (trimmed && trimmed.length > ApiConstants.USERNAME_MAX_LENGTH) {
     errors.maxlength = {
-      actualLength: control.value.length,
+      actualLength: trimmed.length,
       requiredLength: ApiConstants.USERNAME_MAX_LENGTH,
     };
   }
