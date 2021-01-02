@@ -26,7 +26,7 @@ enum LocalStorageKey {
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly EXCHANGE_INTERVAL = 30 * 60 * 1000; // 30 minutes
+  readonly #EXCHANGE_INTERVAL = 30 * 60 * 1000; // 30 minutes
   #exchangeIntervalSubscription?: Subscription;
   #autoLogoutSubscription?: Subscription;
   #graphqlSubscriptionClient$ = new BehaviorSubject<AuthSession | null>(null);
@@ -37,7 +37,8 @@ export class AuthService {
     private authLoginGQL: AuthLoginGQL,
     private authExchangeTokenGQL: AuthExchangeTokenGQL
   ) {
-    this.loggedIn = this.sessionTimeRemaining > 0; // Initialize apollo client state
+    // Initialize apollo client state
+    this.loggedIn = this.sessionTimeRemaining > 0;
 
     // Initialize client apps user roles
     const roles = localStorage.getItem(LocalStorageKey.roles);
@@ -102,7 +103,6 @@ export class AuthService {
     userRolesVar(authSession.roles);
     this.loggedIn = true;
     this.#graphqlSubscriptionClient$.next(authSession);
-    this.startExchangeInterval();
   }
 
   private clearLocalStorage() {
@@ -162,7 +162,7 @@ export class AuthService {
 
   private startExchangeInterval() {
     if (!this.rememberMe && !this.#exchangeIntervalSubscription) {
-      this.#exchangeIntervalSubscription = interval(this.EXCHANGE_INTERVAL).subscribe(() => {
+      this.#exchangeIntervalSubscription = interval(this.#EXCHANGE_INTERVAL).subscribe(() => {
         this.exchangeToken();
       });
     }
