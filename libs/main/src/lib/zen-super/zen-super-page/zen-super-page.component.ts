@@ -13,6 +13,6 @@ export class ZenSuperPageComponent {
     console.log('Migration started...');
     this.http
       .post(`${this.env.url.api}/tools/migrate`, {})
-      .subscribe(result => console.log(result));
+      .subscribe(result => console.log('Migration done', result));
   }
 }
