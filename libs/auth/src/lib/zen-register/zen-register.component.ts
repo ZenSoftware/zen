@@ -118,8 +118,8 @@ export class ZenRegisterComponent {
 
             if (gqlErrors.find(e => e.code === 'USERNAME_TAKEN')) {
               this.usernameTaken = true;
-              this.email.markAsTouched();
-              this.email.updateValueAndValidity();
+              this.username.markAsTouched();
+              this.username.updateValueAndValidity();
             } else {
               this.generalError = true;
             }

@@ -5,7 +5,7 @@
     <mat-label>Username</mat-label>
     <input matInput placeholder="Username" [formControl]="username" hideRequiredMarker="true" maxlength="254" (keydown)="usernameTakenReset()">
     <mat-error *ngIf="username.errors?.required">Required</mat-error>
-    <mat-error *ngIf="username.errors?.usernameTaken">This username is already registered</mat-error>
+    <mat-error *ngIf="username.errors?.usernameTaken">Username is already taken</mat-error>
   </mat-form-field>
 
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
