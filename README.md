@@ -5,7 +5,13 @@
 
 ## 🏯 Project Founders Notes
 
-If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Prisma, and Angular. This project is an attempt to package up the sum total of all the lessons I have learned, and making it publicly available for the community.  I have learnt how much value code generation can do to developer productivity.  The idioms carry over between Nest and Angular, allowing for front-end devs to contribute to the back-end, to say for example, write their own GraphQL resolvers. I have noticed that there is a tremendous amount of code that could simply be code generated to bridge the 3 technologies, Nest + Prisma + Angular. This project should make it easy for anyone to make Prisma schema changes, and have all the Nest GraphQL resolvers and Angular client API generated for you. New contributors are welcome!
+If I could be so humble as to mention a few things about myself. I have built 2 enterprise grade web portals utilizing Nest, Prisma, and Angular. This project is an attempt to package the sum total of all the lessons I have learned, and making it publicly available for the community.
+
+What is really nice about Nest and Angular is that their programming idioms carry over between them, allowing for front-end devs to contribute to the back-end.  Though there are complexities in creating a GraphQL endpoint to expose CRUD operations of the data model to the client.  A combination between Nest + Prisma + Angular has provided for new capabilities the industry has not really seen before.  This project code generates all the boilerplate required in bridging the 3 technologies together.
+
+There is a tremendous amount of value to be gained by treating the `prisma.schema` file as the single source of truth, and code generating everything else from that.  It guarantees consistency between the front-end and back-end and centralizes CRUD operations over all the projects Prisma models via a single import endpoint.  This project provides solutions for all the hardest parts of creating a web portal.
+
+I believe this project can serve as a launch pad for enterprise grade projects that wish to utilize a "schema first" approach for their project.
 
 > 🎐 "Give more than you take" ~ Peter Hoang 
 
