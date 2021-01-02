@@ -91,6 +91,3 @@ npm start
 - [x] Enforced code formatting via [Prettier](https://prettier.io/) & [import-sort](https://www.npmjs.com/package/prettier-plugin-import-sort), guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.
 - [X] [@nest-modules/mailer](https://www.npmjs.com/package/@nest-modules/mailer) for automated emails, and pre-configured [Handbars e-mail templates](https://handlebarsjs.com/guide/#what-is-handlebars) for the various web portal's emailing needs. Handlebars has similar double bracket `{{contextField}}` template interpolation, akin to Angular templates. Custom HTML e-mail triggers within Nest are made very simple by simply passing a JSON context and the template name as paramaters to the injectable `MailService`.  The [apps/api/src/app/mail/templates](https://github.com/ZenSoftware/Zen/tree/main/apps/api/src/app/mail/templates) directory is a **conventions first approach**, simplifying the management of e-mail templates.
 - [x] [Compodoc](https://compodoc.app/) to generate Nest & Angular documentation.
-
----
-
