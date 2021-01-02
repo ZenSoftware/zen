@@ -12,7 +12,7 @@ import {
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import Cookies from 'js-cookie';
-import { intersection, isEqual, sortBy } from 'lodash-es';
+import { intersection, isEqual, orderBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subscription, interval, timer } from 'rxjs';
 import { debounce, map, shareReplay, tap } from 'rxjs/operators';
 
@@ -55,12 +55,19 @@ export class AuthService {
     return this.#graphqlSubscriptionClient$.pipe(debounce(() => timer(100)));
   }
 
-  login(data: AuthLoginInput) {
-    return this.authLoginGQL.fetch({ data }, { fetchPolicy: 'network-only' }).pipe(
-      tap(({ data: { authLogin } }) => {
-        this.setSession(authLogin);
-      })
-    );
+  login(data: AuthLoginInput | AuthSession) {
+    if ((<AuthSession>data)?.__typename === 'AuthSession') {
+      this.setSession(<AuthSession>data);
+      return null;
+    } else {
+      return this.authLoginGQL
+        .fetch({ data: <AuthLoginInput>data }, { fetchPolicy: 'network-only' })
+        .pipe(
+          tap(({ data: { authLogin } }) => {
+            this.setSession(authLogin);
+          })
+        );
+    }
   }
 
   logout() {
@@ -74,7 +81,7 @@ export class AuthService {
         next: ({ data: { authExchangeToken } }) => {
           // Re-run route guards if roles have changed
           // TODO: See if this is necessary
-          if (!isEqual(sortBy(userRolesVar()), sortBy(authExchangeToken.roles))) {
+          if (!this.rolesEqual(userRolesVar(), authExchangeToken.roles)) {
             console.log('Reload', this.router.url);
             this.setSession(authExchangeToken);
             this.router.navigateByUrl(this.router.url);
@@ -100,7 +107,12 @@ export class AuthService {
     localStorage.setItem(LocalStorageKey.sessionExpiresOn, expiresOn.toString());
     localStorage.setItem(LocalStorageKey.rememberMe, authSession.rememberMe.toString());
     localStorage.setItem(LocalStorageKey.roles, authSession.roles.toString());
-    userRolesVar(authSession.roles);
+
+    if (!this.rolesEqual(userRolesVar(), authSession.roles)) {
+      if (authSession.roles) userRolesVar(authSession.roles);
+      else userRolesVar([]);
+    }
+
     this.loggedIn = true;
     this.#graphqlSubscriptionClient$.next(authSession);
   }
@@ -121,6 +133,11 @@ export class AuthService {
 
     if (timeRemaining <= 0) return 0;
     else return timeRemaining;
+  }
+
+  rolesEqual(a: string[] | null | undefined, b: string[] | null | undefined) {
+    if (a && b) return isEqual(orderBy(a), orderBy(b));
+    return a === b;
   }
 
   userHasRole(role: string | string[]) {
