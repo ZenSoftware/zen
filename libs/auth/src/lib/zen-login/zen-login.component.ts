@@ -4,6 +4,7 @@ import { extractGraphQLErrors } from '@zen/graphql';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
+import { usernameValidator } from '../validators';
 
 @Component({
   selector: 'zen-login',
@@ -22,7 +23,10 @@ export class ZenLoginComponent {
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService) {
     this.form = this.formBuilder.group({
-      username: ['', [Validators.required, this.usernameNotFoundValidator()]],
+      username: [
+        '',
+        [Validators.required, this.usernameValidator(), this.usernameNotFoundValidator()],
+      ],
       password: ['', [Validators.required, this.incorrectPasswordValidator()]],
       rememberMe: [false],
     });
@@ -57,6 +61,13 @@ export class ZenLoginComponent {
 
   usernameNotFoundValidator(): ValidatorFn {
     return control => (this.#usernameNotFound ? { notFound: true } : null);
+  }
+
+  usernameValidator(): ValidatorFn {
+    return control => {
+      if (this.form) return usernameValidator(control.value);
+      return null;
+    };
   }
 
   incorrectPasswordReset() {

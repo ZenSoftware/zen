@@ -5,6 +5,8 @@
     <mat-label>Username</mat-label>
     <input matInput placeholder="Username" [formControl]="username" hideRequiredMarker="true" maxlength="254" (keydown)="usernameNotFoundReset()">
     <mat-error *ngIf="username.errors?.required">Required</mat-error>
+    <mat-error *ngIf="username.errors?.minLength && !username.errors?.required">{{username.errors.minLength}}</mat-error>
+    <mat-error *ngIf="username.errors?.maxLength">{{username.errors.maxLength}}</mat-error>
     <mat-error *ngIf="username.errors?.notFound">User not found</mat-error>
   </mat-form-field>
 

@@ -1,14 +1,14 @@
 import { ApiConstants } from '@zen/api-interfaces';
-import { IsEmail, IsNotEmpty, Length, MaxLength } from 'class-validator';
+import { IsEmail, Length } from 'class-validator';
 
 export class AuthRegisterInput {
-  @IsNotEmpty()
+  @Length(ApiConstants.USERNAME_MIN_LENGTH, ApiConstants.USERNAME_MAX_LENGTH)
   readonly username: string;
 
   @IsEmail()
-  @MaxLength(254)
+  @Length(1, 254)
   readonly email: string;
 
-  @Length(ApiConstants.PASSWORD_MIN_LENGTH, 100)
+  @Length(ApiConstants.PASSWORD_MIN_LENGTH, ApiConstants.PASSWORD_MAX_LENGTH)
   readonly password: string;
 }

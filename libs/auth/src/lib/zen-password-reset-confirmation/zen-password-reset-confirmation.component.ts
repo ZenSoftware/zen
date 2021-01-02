@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
-import { validatePassword } from '../validators';
+import { passwordValidator } from '../validators';
 
 @Component({
   selector: 'zen-password-reset-confirmation',
@@ -58,7 +58,7 @@ export class ZenPasswordResetConfirmationComponent implements OnInit, OnDestroy 
     return control => {
       if (this.form) {
         this.passwordConfirm.updateValueAndValidity();
-        return validatePassword(control.value);
+        return passwordValidator(control.value);
       }
       return null;
     };

@@ -5,7 +5,7 @@ interface PasswordErrors {
   maxLength?: string;
 }
 
-export function validatePassword(password: string) {
+export function passwordValidator(password: string) {
   const errors: PasswordErrors = {};
 
   if (password.length < ApiConstants.PASSWORD_MIN_LENGTH) {

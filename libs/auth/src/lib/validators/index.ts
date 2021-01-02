@@ -1,2 +1,3 @@
-export * from './email-validator';
-export * from './validate-password';
+export * from './email.validator';
+export * from './password.validator';
+export * from './username.validator';

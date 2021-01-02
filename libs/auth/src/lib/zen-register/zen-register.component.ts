@@ -4,7 +4,7 @@ import { AuthRegisterGQL, AuthSession, extractGraphQLErrors } from '@zen/graphql
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
-import { emailValidator, validatePassword } from '../validators';
+import { emailValidator, passwordValidator, usernameValidator } from '../validators';
 
 @Component({
   selector: 'zen-register',
@@ -26,7 +26,10 @@ export class ZenRegisterComponent {
     private authRegisterGQL: AuthRegisterGQL
   ) {
     this.form = this.formBuilder.group({
-      username: ['', [Validators.required, this.usernameTakenValidator()]],
+      username: [
+        '',
+        [Validators.required, this.usernameValidator(), this.usernameTakenValidator()],
+      ],
       email: ['', [Validators.required, emailValidator()]],
       password: ['', [Validators.required, this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
@@ -66,11 +69,18 @@ export class ZenRegisterComponent {
     };
   }
 
+  usernameValidator(): ValidatorFn {
+    return control => {
+      if (this.form) return usernameValidator(control.value);
+      return null;
+    };
+  }
+
   passwordValidator(): ValidatorFn {
     return control => {
       if (this.form) {
         this.passwordConfirm.updateValueAndValidity();
-        return validatePassword(control.value);
+        return passwordValidator(control.value);
       }
       return null;
     };

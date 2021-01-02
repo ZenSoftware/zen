@@ -1,8 +1,8 @@
 import { ApiConstants } from '@zen/api-interfaces';
-import { IsBoolean, IsNotEmpty, Length } from 'class-validator';
+import { IsBoolean, Length } from 'class-validator';
 
 export class AuthLoginInput {
-  @IsNotEmpty()
+  @Length(ApiConstants.USERNAME_MIN_LENGTH, ApiConstants.USERNAME_MAX_LENGTH)
   readonly username: string;
 
   @Length(1, ApiConstants.PASSWORD_MAX_LENGTH)
