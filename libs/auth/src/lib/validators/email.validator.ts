@@ -9,6 +9,6 @@ const isEmail = (email: string) => {
 export function emailValidator(): ValidatorFn {
   return control => {
     const notEmail = !isEmail(control.value);
-    return notEmail ? { email: { value: control.value } } : null;
+    return notEmail ? { email: control.value } : null;
   };
 }
