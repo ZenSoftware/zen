@@ -1,7 +1,9 @@
-- [ ] Refactor authorization flows to work with the user's username instead of email
-- [ ] Make email field on users not required to be unique
-- [ ] Extract out portal settings with a database seed, via Prisma migrate.
+- [X] Refactor authorization flows to work with the user's username instead of email
+- [x] Make emails unique errors
+- [x] Build welcome email trigger
+- [ ] Create a GraphQLUpload example
+- [ ] Build a password change form
+- [ ] Include a K8S secrets example
+- [ ] Consider extracting out portal settings with a database seed, via Prisma migrate.
   - [ ] Sign-up via email vs username
   - [ ] Configure JWT expiresIn time
-- [ ] Make emails unique errors
-- [x] Build welcome email trigger
