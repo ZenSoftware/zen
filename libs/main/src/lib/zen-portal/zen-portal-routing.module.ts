@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoggedInGuard, SuperGuard } from '@zen/auth';
 
 import { ZenDashboardComponent } from './zen-dashboard/zen-dashboard.component';
-import { ZenPortalComponent } from './zen-portal/zen-portal.component';
+import { ZenPortalMainComponent } from './zen-portal-main/zen-portal-main.component';
 import { ZenSuperPageComponent } from './zen-super';
 
 export const ROUTES: Routes = [
   {
     path: '',
-    component: ZenPortalComponent,
+    component: ZenPortalMainComponent,
     canActivate: [LoggedInGuard],
     children: [
       {

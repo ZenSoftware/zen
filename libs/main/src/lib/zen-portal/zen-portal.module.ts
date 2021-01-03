@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { ZenDashboardComponent } from './zen-dashboard/zen-dashboard.component';
+import { ZenPortalMainComponent } from './zen-portal-main/zen-portal-main.component';
 import { ZenPortalRoutingModule } from './zen-portal-routing.module';
-import { ZenPortalComponent } from './zen-portal/zen-portal.component';
 import { ZenSuperModule } from './zen-super';
 
 @NgModule({
   imports: [CommonModule, MatSidenavModule, ZenPortalRoutingModule, ZenSuperModule],
-  declarations: [ZenDashboardComponent, ZenPortalComponent],
+  declarations: [ZenDashboardComponent, ZenPortalMainComponent],
 })
 export class ZenPortalModule {}

@@ -3,9 +3,9 @@ import { Role } from '@zen/graphql';
 
 @Component({
   selector: 'zen-portal',
-  templateUrl: 'zen-portal.component.html',
-  styleUrls: ['zen-portal.component.scss'],
+  templateUrl: 'zen-portal-main.component.html',
+  styleUrls: ['zen-portal-main.component.scss'],
 })
-export class ZenPortalComponent {
+export class ZenPortalMainComponent {
   Role = Role;
 }
