@@ -29,7 +29,7 @@ New contributors are welcome!
 ```bash
 # Project setup steps
 git clone https://github.com/ZenSoftware/Zen.git --depth=1
-cd Zen
+cd zen
 npm i
 docker-compose up -d
 npm run prisma:migrate
@@ -45,7 +45,6 @@ npm run apollo:watch
 # Start the Angular site at localhost:4200
 npm start
 ```
-
 
 ```bash
 # Reload Apollo VSCode extension via command palette
