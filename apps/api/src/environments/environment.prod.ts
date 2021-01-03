@@ -1,7 +1,7 @@
 import { EnvironmentBase } from './environment.base';
 
 export const environment: EnvironmentBase = {
-  siteUrl: 'https://zensoftware.ca',
+  siteUrl: 'https://site.com',
   production: true,
   expressPort: process.env.PORT,
   graphql: {
@@ -16,7 +16,7 @@ export const environment: EnvironmentBase = {
     },
   },
   rememberMeExpiresIn: 2592000, // 30 days (in seconds)
-  cookieDomain: 'zensoftware.ca',
+  cookieDomain: 'site.com',
   smtp: {
     server: process.env.SMTP_SERVER,
     login: process.env.SMTP_LOGIN,

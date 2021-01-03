@@ -25,42 +25,57 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: pg-secret
-                  key: username
+                  key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: pg-secret
-                  key: password
+                  key: POSTGRES_PASSWORD
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   name: pg-secret
-                  key: url
+                  key: DATABASE_URL
             - name: JWT_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
-                  name: zen-jwt-secret
+                  name: zen-jwt
                   key: privateKey
             - name: JWT_PUBLIC_KEY
               valueFrom:
                 secretKeyRef:
-                  name: zen-jwt-secret
+                  name: zen-jwt
                   key: publicKey
-            - name: HOT_STORAGE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: zen-hot-storage-key
-                  key: secret
-            - name: COOL_STORAGE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: zen-cool-storage-key
-                  key: secret
             - name: SMTP_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: zen-smtp-password
+                  name: zen-smtp
                   key: secret
+            - name: SMTP_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: zen-smtp
+                  key: SMTP_SERVER
+            - name: SMTP_LOGIN
+              valueFrom:
+                secretKeyRef:
+                  name: zen-smtp
+                  key: SMTP_LOGIN
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zen-smtp
+                  key: SMTP_PASSWORD
+            - name: SMTP_FROM_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: zen-smtp
+                  key: SMTP_FROM_NAME
+            - name: SMTP_FROM_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: zen-smtp
+                  key: SMTP_FROM_EMAIL
 ---
 kind: Service
 apiVersion: v1
@@ -83,14 +98,14 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://portal.zensoftware.ca"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://portal.site.ca"
 spec:
   tls:
     - hosts:
-        - api.zensoftware.ca
+        - api.site.ca
       secretName: tls-secret
   rules:
-    - host: api.zensoftware.ca
+    - host: api.site.ca
       http:
         paths:
           - path: /
