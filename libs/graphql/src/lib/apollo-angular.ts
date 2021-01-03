@@ -262,7 +262,7 @@ export type Query = {
   findManyUserCount: Scalars['Int'];
   findUniqueUser?: Maybe<User>;
   loggedIn: Scalars['Boolean'];
-  userRoles: Array<Scalars['String']>;
+  userRoles: Array<Role>;
 };
 
 
