@@ -141,18 +141,18 @@ export class ZenRegisterComponent {
 
             const gqlErrors = extractGraphQLErrors(errors);
 
-            if (gqlErrors.find(e => e.code === 'USERNAME_TAKEN')) {
-              this.usernameTaken = true;
-              this.username?.markAsTouched();
-              this.username?.updateValueAndValidity();
-              this.usernameInput?.nativeElement.select();
-            }
-
             if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
               this.emailTaken = true;
               this.email?.markAsTouched();
               this.email?.updateValueAndValidity();
               this.emailInput?.nativeElement.select();
+            }
+
+            if (gqlErrors.find(e => e.code === 'USERNAME_TAKEN')) {
+              this.usernameTaken = true;
+              this.username?.markAsTouched();
+              this.username?.updateValueAndValidity();
+              this.usernameInput?.nativeElement.select();
             }
 
             if (gqlErrors.length === 0) this.generalError = true;
