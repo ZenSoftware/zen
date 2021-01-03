@@ -100,12 +100,14 @@ export class ZenLoginComponent {
           },
 
           error: errors => {
-            this.loading = false;
             this.form.enable();
+            this.loading = false;
+            this.generalError = true;
 
             const gqlErrors = extractGraphQLErrors(errors);
 
             if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
+              this.generalError = false;
               this.#incorrectPassword = true;
               this.password?.markAsTouched();
               this.password?.updateValueAndValidity();
@@ -113,13 +115,17 @@ export class ZenLoginComponent {
             }
 
             if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
+              this.generalError = false;
               this.#usernameNotFound = true;
               this.username?.markAsTouched();
               this.username?.updateValueAndValidity();
               this.usernameInput?.nativeElement.select();
             }
 
-            if (gqlErrors.length === 0) this.generalError = true;
+            if (gqlErrors.find(e => e === 'ThrottlerException: Too Many Requests')) {
+              this.generalError = true;
+              console.log('THROTTLE', gqlErrors[0]);
+            }
           },
         });
     }

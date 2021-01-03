@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { CookieOptions } from 'express';
 import gql from 'graphql-tag';
+import { Throttle, ThrottlerGuard } from 'nestjs-throttler';
 
 import { AuthService, GqlGuard, GqlUser, RequestUser, Role } from '../../auth';
 import { ConfigService } from '../../config';
@@ -103,6 +104,8 @@ export class AuthResolver {
   }
 
   @Query()
+  @UseGuards(ThrottlerGuard)
+  @Throttle(5, 60)
   async authLogin(@Context() ctx: IContext, @Args('data') data: AuthLoginInput) {
     const user = await this.getUserByUsername(data.username, ctx.prisma);
 

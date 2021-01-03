@@ -68,6 +68,7 @@
     "graphql-tools": "^7.0.2",
     "helmet": "^4.3.1",
     "lodash-es": "^4.17.20",
+    "nestjs-throttler": "^0.3.0",
     "nodemailer": "^6.4.17",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

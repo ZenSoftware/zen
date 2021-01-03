@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ThrottlerModule } from 'nestjs-throttler';
 
 import { ZenAuthModule } from './auth';
 import { ConfigModule } from './config';
@@ -8,7 +9,17 @@ import { JwtModule } from './jwt';
 import { PrismaModule } from './prisma';
 
 @Module({
-  imports: [ZenAuthModule, ConfigModule, JwtModule, ZenGraphQLModule, PrismaModule],
+  imports: [
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
+    ZenAuthModule,
+    ConfigModule,
+    JwtModule,
+    ZenGraphQLModule,
+    PrismaModule,
+  ],
   controllers: [ToolsController],
 })
 export class AppModule {}
