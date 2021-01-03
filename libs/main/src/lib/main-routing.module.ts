@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoggedInGuard, SuperGuard } from '@zen/auth';
+import { LoggedInGuard } from '@zen/auth';
 
-import { ZenDashboardComponent } from './zen-dashboard/zen-dashboard.component';
 import { ZenMainComponent } from './zen-main/zen-main.component';
-import { ZenSuperPageComponent } from './zen-super';
+import { ROUTES as PORTAL_ROUTES } from './zen-portal';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -12,17 +11,7 @@ const routes: Routes = [
     path: '',
     component: ZenMainComponent,
     canActivate: [LoggedInGuard],
-    children: [
-      {
-        path: 'dashboard',
-        component: ZenDashboardComponent,
-      },
-      {
-        path: 'super',
-        component: ZenSuperPageComponent,
-        canActivate: [SuperGuard],
-      },
-    ],
+    children: [...PORTAL_ROUTES],
   },
 ];
 
