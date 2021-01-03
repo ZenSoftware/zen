@@ -1,10 +1,10 @@
-import fs from 'fs';
+import { writeFile } from 'fs';
 import { promisify } from 'util';
 
 import { Logger } from '@nestjs/common';
 import { GraphQLSchema, printSchema } from 'graphql';
 
-const execWriteFile = promisify(fs.writeFile);
+const execWriteFile = promisify(writeFile);
 
 export async function WriteGraphQLSchema(outPath: string, schema: GraphQLSchema) {
   const schemaString = printSchema(schema);
