@@ -5,6 +5,7 @@ import { print } from 'graphql';
 
 import { ConfigService } from '../config';
 import { PrismaService } from '../prisma';
+import { IContext } from './models';
 import { ALL_TYPE_DEFS } from './resolvers';
 
 @Injectable()
@@ -20,7 +21,7 @@ export class GqlConfigService implements GqlOptionsFactory {
       introspection: this.config.graphql.playground,
       tracing: this.config.graphql.playground,
       cors: this.config.production ? undefined : { credentials: true, origin: true },
-      context: async ctx => {
+      context: async (ctx): Promise<IContext> => {
         // Resolve a scoped Prisma instance for the request
         const contextId = ContextIdFactory.create();
         const prisma = await this.moduleRef.resolve(PrismaService, contextId, { strict: false });
