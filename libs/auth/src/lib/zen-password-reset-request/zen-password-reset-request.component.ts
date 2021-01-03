@@ -12,7 +12,7 @@ import { verticalAccordion } from '../animations';
 })
 export class ZenPasswordResetRequestComponent {
   @Output() sent = new EventEmitter();
-  @ViewChild('inputTextbox') inputTextbox?: ElementRef;
+  @ViewChild('input') input?: ElementRef;
 
   loading = false;
   completed = false;
@@ -94,7 +94,7 @@ export class ZenPasswordResetRequestComponent {
               this.notFound = true;
               this.emailOrUsername?.markAsTouched();
               this.emailOrUsername?.updateValueAndValidity();
-              this.inputTextbox?.nativeElement.select();
+              this.input?.nativeElement.select();
             }
 
             if (gqlErrors.length === 0) this.generalError = true;

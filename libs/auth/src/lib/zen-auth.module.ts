@@ -14,6 +14,7 @@ import { ZenAuthRoutingModule } from './zen-auth-routing.module';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 import { ZenLoginComponent } from './zen-login/zen-login.component';
+import { ZenPasswordChangeComponent } from './zen-password-change/zen-password-change.component';
 import { ZenPasswordResetConfirmationPageComponent } from './zen-password-reset-confirmation-page/zen-password-reset-confirmation-page.component';
 import { ZenPasswordResetConfirmationComponent } from './zen-password-reset-confirmation/zen-password-reset-confirmation.component';
 import { ZenPasswordResetRequestPageComponent } from './zen-password-reset-request-page/zen-password-reset-request-page.component';
@@ -41,6 +42,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     ZenLoginComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,
+    ZenPasswordChangeComponent,
     ZenPasswordResetConfirmationPageComponent,
     ZenPasswordResetConfirmationComponent,
     ZenPasswordResetRequestPageComponent,
@@ -55,6 +57,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     ZenLoginComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,
+    ZenPasswordChangeComponent,
     ZenPasswordResetConfirmationPageComponent,
     ZenPasswordResetConfirmationComponent,
     ZenPasswordResetRequestPageComponent,

@@ -440,6 +440,16 @@ export type AuthLogin = (
   ) }
 );
 
+export type AuthPasswordChangeVariables = Exact<{
+  data: AuthPasswordChangeInput;
+}>;
+
+
+export type AuthPasswordChange = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'authPasswordChange'>
+);
+
 export type AuthPasswordResetConfirmationVariables = Exact<{
   data: AuthPasswordResetConfirmationInput;
 }>;
@@ -676,6 +686,22 @@ export const AuthLoginDocument = /*#__PURE__*/ gql`
   })
   export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
     document = AuthLoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AuthPasswordChangeDocument = /*#__PURE__*/ gql`
+    mutation AuthPasswordChange($data: AuthPasswordChangeInput!) {
+  authPasswordChange(data: $data)
+}
+    `;
+
+  @Injectable({
+    providedIn: GraphQLModule
+  })
+  export class AuthPasswordChangeGQL extends Apollo.Mutation<AuthPasswordChange, AuthPasswordChangeVariables> {
+    document = AuthPasswordChangeDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
