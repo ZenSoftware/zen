@@ -1,3 +1,5 @@
+# ⛩ Zen ⛩
+#### TODO:
 - [X] Refactor authorization flows to work with the user's username instead of email
 - [x] Make emails unique errors
 - [x] Build welcome email trigger
