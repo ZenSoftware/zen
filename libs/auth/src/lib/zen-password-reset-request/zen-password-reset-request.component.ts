@@ -94,7 +94,6 @@ export class ZenPasswordResetRequestComponent {
               this.notFound = true;
               this.emailOrUsername?.markAsTouched();
               this.emailOrUsername?.updateValueAndValidity();
-              this.inputTextbox?.nativeElement.focus();
               this.inputTextbox?.nativeElement.select();
             }
 

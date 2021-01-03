@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AuthRegisterGQL, AuthSession, extractGraphQLErrors } from '@zen/graphql';
 
@@ -13,6 +13,8 @@ import { emailValidator, passwordValidator, usernameValidator } from '../validat
 })
 export class ZenRegisterComponent {
   @Output() registered = new EventEmitter();
+  @ViewChild('usernameInput') usernameInput?: ElementRef;
+  @ViewChild('emailInput') emailInput?: ElementRef;
 
   form: FormGroup;
   loading = false;
@@ -143,12 +145,14 @@ export class ZenRegisterComponent {
               this.usernameTaken = true;
               this.username?.markAsTouched();
               this.username?.updateValueAndValidity();
+              this.usernameInput?.nativeElement.select();
             }
 
             if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
               this.emailTaken = true;
               this.email?.markAsTouched();
               this.email?.updateValueAndValidity();
+              this.emailInput?.nativeElement.select();
             }
 
             if (gqlErrors.length === 0) this.generalError = true;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { extractGraphQLErrors } from '@zen/graphql';
 
@@ -13,6 +13,8 @@ import { usernameValidator } from '../validators';
 })
 export class ZenLoginComponent {
   @Output() loggedIn = new EventEmitter();
+  @ViewChild('usernameInput') usernameInput?: ElementRef;
+  @ViewChild('passwordInput') passwordInput?: ElementRef;
 
   #loading = false;
   #incorrectPassword = false;
@@ -92,7 +94,7 @@ export class ZenLoginComponent {
           rememberMe: this.rememberMe?.value,
         })
         .subscribe({
-          next: ({ data }) => {
+          next: () => {
             this.loading = false;
             this.loggedIn.emit();
           },
@@ -103,16 +105,18 @@ export class ZenLoginComponent {
 
             const gqlErrors = extractGraphQLErrors(errors);
 
-            if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
-              this.#usernameNotFound = true;
-              this.username?.markAsTouched();
-              this.username?.updateValueAndValidity();
-            }
-
             if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
               this.#incorrectPassword = true;
               this.password?.markAsTouched();
               this.password?.updateValueAndValidity();
+              this.passwordInput?.nativeElement.select();
+            }
+
+            if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
+              this.#usernameNotFound = true;
+              this.username?.markAsTouched();
+              this.username?.updateValueAndValidity();
+              this.usernameInput?.nativeElement.select();
             }
 
             if (gqlErrors.length === 0) this.generalError = true;
