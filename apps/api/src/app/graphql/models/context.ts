@@ -6,4 +6,5 @@ export interface IContext {
   req?: Request;
   res?: Response;
   prisma?: PrismaService;
+  token?: string; // For authorizing websoket contexts
 }

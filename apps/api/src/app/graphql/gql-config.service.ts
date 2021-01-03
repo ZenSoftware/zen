@@ -21,11 +21,12 @@ export class GqlConfigService implements GqlOptionsFactory {
       tracing: this.config.graphql.playground,
       cors: this.config.production ? undefined : { credentials: true, origin: true },
       context: async ctx => {
+        // Resolve a scoped Prisma instance for the request
         const contextId = ContextIdFactory.create();
         const prisma = await this.moduleRef.resolve(PrismaService, contextId, { strict: false });
 
         return ctx.connection
-          ? { ...ctx, req: ctx.connection.context, prisma }
+          ? { ...ctx, prisma, req: ctx.connection.context as { token: string } } // Include websocket context
           : { ...ctx, prisma };
       },
       uploads: {
