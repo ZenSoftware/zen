@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ApiConstants } from '@zen/api-interfaces';
 import { AuthPasswordResetRequestQueryGQL, extractGraphQLErrors } from '@zen/graphql';
@@ -12,6 +12,7 @@ import { verticalAccordion } from '../animations';
 })
 export class ZenPasswordResetRequestComponent {
   @Output() sent = new EventEmitter();
+  @ViewChild('inputTextbox') inputTextbox?: ElementRef;
 
   loading = false;
   completed = false;
@@ -87,15 +88,17 @@ export class ZenPasswordResetRequestComponent {
             this.loading = false;
             this.form.enable();
 
-            const gqlError = extractGraphQLErrors(errors);
+            const gqlErrors = extractGraphQLErrors(errors);
 
-            if (gqlError.find(e => e.code === 'USER_NOT_FOUND')) {
+            if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
               this.notFound = true;
               this.emailOrUsername?.markAsTouched();
               this.emailOrUsername?.updateValueAndValidity();
-            } else {
-              this.generalError = true;
+              this.inputTextbox?.nativeElement.focus();
+              this.inputTextbox?.nativeElement.select();
             }
+
+            if (gqlErrors.length === 0) this.generalError = true;
           },
         });
     }

@@ -143,13 +143,15 @@ export class ZenRegisterComponent {
               this.usernameTaken = true;
               this.username?.markAsTouched();
               this.username?.updateValueAndValidity();
-            } else if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
+            }
+
+            if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
               this.emailTaken = true;
               this.email?.markAsTouched();
               this.email?.updateValueAndValidity();
-            } else {
-              this.generalError = true;
             }
+
+            if (gqlErrors.length === 0) this.generalError = true;
           },
         });
     }

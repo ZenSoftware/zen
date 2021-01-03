@@ -107,13 +107,15 @@ export class ZenLoginComponent {
               this.#usernameNotFound = true;
               this.username?.markAsTouched();
               this.username?.updateValueAndValidity();
-            } else if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
+            }
+
+            if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
               this.#incorrectPassword = true;
               this.password?.markAsTouched();
               this.password?.updateValueAndValidity();
-            } else {
-              this.generalError = true;
             }
+
+            if (gqlErrors.length === 0) this.generalError = true;
           },
         });
     }
