@@ -1,7 +1,7 @@
 - [X] Refactor authorization flows to work with the user's username instead of email
 - [x] Make emails unique errors
 - [x] Build welcome email trigger
-- [ ] Include a K8S secrets example
+- [X] Include a K8S secrets example
 - [ ] Build a password change form
 - [ ] Create a GraphQLUpload example
 - [ ] Consider extracting out portal settings with a database seed, via Prisma migrate.
