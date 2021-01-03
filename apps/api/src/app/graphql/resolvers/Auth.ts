@@ -205,18 +205,20 @@ export class AuthResolver {
       },
     });
 
-    this.mail.sendWelcome({
-      to: user.email,
-      context: {
-        siteUrl: this.config.siteUrl,
-        hiddenPreheaderText: `Sign up confirmed for ${user.username}`,
-        header: 'Welcome',
-        subject: 'Sign Up Confirmed',
-        body: `Thanks you for signing up ${user.username}!`,
-        footerHeader: '',
-        footerBody: '',
-      },
-    });
+    if (this.config.production) {
+      this.mail.sendWelcome({
+        to: user.email,
+        context: {
+          siteUrl: this.config.siteUrl,
+          hiddenPreheaderText: `Sign up confirmed for ${user.username}`,
+          header: 'Welcome',
+          subject: 'Sign Up Confirmed',
+          body: `Thanks you for signing up ${user.username}!`,
+          footerHeader: '',
+          footerBody: '',
+        },
+      });
+    }
 
     return this.auth.setJwtCookie(ctx.res, user);
   }
