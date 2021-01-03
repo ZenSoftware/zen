@@ -1,4 +1,10 @@
-import { Directive, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  Input,
+  OnDestroy,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { LoggedInGQL } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
@@ -18,7 +24,9 @@ export class IsLoggedInDirective implements OnDestroy {
     private auth: AuthService,
     private loggedInGQL: LoggedInGQL
   ) {
-    this.subsciption = this.loggedInGQL.watch().valueChanges.subscribe(() => this.showIfAllowed());
+    this.subsciption = this.loggedInGQL
+      .watch()
+      .valueChanges.subscribe(() => this.showIfAllowed());
   }
 
   @Input()

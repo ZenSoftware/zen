@@ -24,7 +24,10 @@ const nestResolversIndexTemplate = require(path.join(
   __dirname,
   'tools/graphql-codegen/nest-resolvers-index.temp.js'
 ));
-const nestQueryTemplate = require(path.join(__dirname, 'tools/graphql-codegen/nest-query.temp.js'));
+const nestQueryTemplate = require(path.join(
+  __dirname,
+  'tools/graphql-codegen/nest-query.temp.js'
+));
 const nestMutationTemplate = require(path.join(
   __dirname,
   'tools/graphql-codegen/nest-mutation.temp.js'
@@ -67,8 +70,12 @@ export class Gulpfile {
     const packageJson = JSON.parse(packageFile.toString());
     const currentVersion: string = packageJson.version;
     const minorVersionIndex = 1 + currentVersion.lastIndexOf('.');
-    const currentMinorVersion = +currentVersion.substr(minorVersionIndex, currentVersion.length);
-    const newVersion = currentVersion.substr(0, minorVersionIndex) + (currentMinorVersion + 1);
+    const currentMinorVersion = +currentVersion.substr(
+      minorVersionIndex,
+      currentVersion.length
+    );
+    const newVersion =
+      currentVersion.substr(0, minorVersionIndex) + (currentMinorVersion + 1);
     packageJson.version = newVersion;
     fs.writeFileSync('package.json', JSON.stringify(packageJson));
     await this.execLocal(`prettier --write package.json`);
@@ -86,7 +93,9 @@ export class Gulpfile {
     await this.execGlobal(`docker tag zen-api ${latestAddress}`);
     await this.execGlobal(`docker push ${versionAddress}`);
     await this.execGlobal(`docker push ${latestAddress}`);
-    await this.execGlobal(`kubectl set image deployments/zen-api zen-api=${versionAddress}`);
+    await this.execGlobal(
+      `kubectl set image deployments/zen-api zen-api=${versionAddress}`
+    );
     cb();
   }
   //---------------------------------------------------------------------------
@@ -137,12 +146,16 @@ export class Gulpfile {
 
     console.log(`---------------- @paljs/cli generate ----------------`);
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
-    await this.execLocal(`prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"`);
+    await this.execLocal(
+      `prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"`
+    );
 
     console.log(`---------- Zen Nest GraphQL Resolvers generate ----------`);
     if (!fs.existsSync(RESOLVERS_PATH)) fs.mkdirSync(RESOLVERS_PATH);
-    if (!fs.existsSync(CONFIG.gql.clientFieldsPath)) fs.mkdirSync(CONFIG.gql.clientFieldsPath);
-    if (!fs.existsSync(CONFIG.gql.clientPrismaPath)) fs.mkdirSync(CONFIG.gql.clientPrismaPath);
+    if (!fs.existsSync(CONFIG.gql.clientFieldsPath))
+      fs.mkdirSync(CONFIG.gql.clientFieldsPath);
+    if (!fs.existsSync(CONFIG.gql.clientPrismaPath))
+      fs.mkdirSync(CONFIG.gql.clientPrismaPath);
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
     const dirents = await readdirAsync(PRISMA_PATH, { withFileTypes: true });
@@ -155,15 +168,22 @@ export class Gulpfile {
 
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
-      const outPath = path.join(__dirname, CONFIG.gql.apiPath, 'resolvers', `${prismaName}.ts`);
+      const outPath = path.join(
+        __dirname,
+        CONFIG.gql.apiPath,
+        'resolvers',
+        `${prismaName}.ts`
+      );
 
       // Guard to prevent the overwriting of existing files
       if (!fs.existsSync(outPath)) {
         const pathName = path.join(__dirname, PRISMA_PATH, prismaName, 'resolvers.ts');
         const prismaScript = fs.readFileSync(pathName).toString();
 
-        const queryStartIndex = prismaScript.indexOf(QUERY_TOKEN) + QUERY_TOKEN.length + 1;
-        const queryEndIndex = prismaScript.indexOf(MUTATION_TOKEN) - MUTATION_TOKEN.length;
+        const queryStartIndex =
+          prismaScript.indexOf(QUERY_TOKEN) + QUERY_TOKEN.length + 1;
+        const queryEndIndex =
+          prismaScript.indexOf(MUTATION_TOKEN) - MUTATION_TOKEN.length;
         const querySection = prismaScript.substr(
           queryStartIndex,
           queryEndIndex - queryStartIndex + 2
@@ -182,7 +202,8 @@ export class Gulpfile {
           querySource += nestQueryTemplate(queryName);
         }
 
-        const mutationStartIndex = prismaScript.indexOf(MUTATION_TOKEN) + MUTATION_TOKEN.length + 1;
+        const mutationStartIndex =
+          prismaScript.indexOf(MUTATION_TOKEN) + MUTATION_TOKEN.length + 1;
         const mutationEndIndex = prismaScript.length - mutationStartIndex - 1;
         const mutationSection = prismaScript.substr(mutationStartIndex, mutationEndIndex);
         const mutationSectionLines = mutationSection.split('\n');

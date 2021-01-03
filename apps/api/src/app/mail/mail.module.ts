@@ -13,7 +13,9 @@ import { MailService } from './mail.service';
     MailerModule.forRootAsync({
       useFactory: () => ({
         transport: `smtps://${environment.smtp.login}:${environment.smtp.password}@${environment.smtp.server}`,
-        defaults: { from: `"${environment.smtp.fromName}" <${environment.smtp.fromEmail}>` },
+        defaults: {
+          from: `"${environment.smtp.fromName}" <${environment.smtp.fromEmail}>`,
+        },
         template: {
           dir: path.join(__dirname, 'mail/templates'),
           adapter: new HandlebarsAdapter(),

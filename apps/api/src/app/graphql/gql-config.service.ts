@@ -24,7 +24,9 @@ export class GqlConfigService implements GqlOptionsFactory {
       context: async (ctx): Promise<IContext> => {
         // Resolve a scoped Prisma instance for the request
         const contextId = ContextIdFactory.create();
-        const prisma = await this.moduleRef.resolve(PrismaService, contextId, { strict: false });
+        const prisma = await this.moduleRef.resolve(PrismaService, contextId, {
+          strict: false,
+        });
 
         return ctx.connection
           ? { ...ctx, prisma, req: ctx.connection.context as { token: string } } // Include websocket context

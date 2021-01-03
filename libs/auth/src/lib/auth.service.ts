@@ -46,7 +46,9 @@ export class AuthService {
     // Start the token exchange interval if the user is logged in
     if (this.loggedIn) this.startExchangeInterval();
 
-    this.graphqlSubscriptionClient$.subscribe(() => GraphQLModule.reconnectSubscriptionClient());
+    this.graphqlSubscriptionClient$.subscribe(() =>
+      GraphQLModule.reconnectSubscriptionClient()
+    );
   }
 
   get graphqlSubscriptionClient$() {
@@ -70,28 +72,30 @@ export class AuthService {
 
   exchangeToken() {
     if (this.loggedIn) {
-      this.authExchangeTokenGQL.fetch(undefined, { fetchPolicy: 'network-only' }).subscribe({
-        next: ({ data: { authExchangeToken } }) => {
-          // Re-run route guards if roles have changed
-          // TODO: See if this is necessary
-          if (!this.rolesEqual(userRolesVar(), authExchangeToken.roles)) {
-            console.log('Reload', this.router.url);
+      this.authExchangeTokenGQL
+        .fetch(undefined, { fetchPolicy: 'network-only' })
+        .subscribe({
+          next: ({ data: { authExchangeToken } }) => {
+            // Re-run route guards if roles have changed
+            // TODO: See if this is necessary
+            if (!this.rolesEqual(userRolesVar(), authExchangeToken.roles)) {
+              console.log('Reload', this.router.url);
+              this.setSession(authExchangeToken);
+              this.router.navigateByUrl(this.router.url);
+            }
+
             this.setSession(authExchangeToken);
-            this.router.navigateByUrl(this.router.url);
-          }
+            console.log('Exchanged token');
+          },
+          error: errors => {
+            const gqlErrors = extractGraphQLErrors(errors);
 
-          this.setSession(authExchangeToken);
-          console.log('Exchanged token');
-        },
-        error: errors => {
-          const gqlErrors = extractGraphQLErrors(errors);
-
-          if (gqlErrors.find(e => e.statusCode === 401)) {
-            this.logout();
-            console.error('Exchange token failed');
-          }
-        },
-      });
+            if (gqlErrors.find(e => e.statusCode === 401)) {
+              this.logout();
+              console.error('Exchange token failed');
+            }
+          },
+        });
     }
   }
 
@@ -172,9 +176,11 @@ export class AuthService {
 
   private startExchangeInterval() {
     if (!this.rememberMe && !this.#exchangeIntervalSubscription) {
-      this.#exchangeIntervalSubscription = interval(this.#EXCHANGE_INTERVAL).subscribe(() => {
-        this.exchangeToken();
-      });
+      this.#exchangeIntervalSubscription = interval(this.#EXCHANGE_INTERVAL).subscribe(
+        () => {
+          this.exchangeToken();
+        }
+      );
     }
 
     if (!this.#autoLogoutSubscription) {

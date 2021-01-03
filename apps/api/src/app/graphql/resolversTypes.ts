@@ -66,10 +66,26 @@ export interface AggregateUser {
     {},
     Client.UserCountAggregateOutputType | null | undefined
   >;
-  avg?: Resolver<Client.AggregateUser, {}, Client.UserAvgAggregateOutputType | null | undefined>;
-  sum?: Resolver<Client.AggregateUser, {}, Client.UserSumAggregateOutputType | null | undefined>;
-  min?: Resolver<Client.AggregateUser, {}, Client.UserMinAggregateOutputType | null | undefined>;
-  max?: Resolver<Client.AggregateUser, {}, Client.UserMaxAggregateOutputType | null | undefined>;
+  avg?: Resolver<
+    Client.AggregateUser,
+    {},
+    Client.UserAvgAggregateOutputType | null | undefined
+  >;
+  sum?: Resolver<
+    Client.AggregateUser,
+    {},
+    Client.UserSumAggregateOutputType | null | undefined
+  >;
+  min?: Resolver<
+    Client.AggregateUser,
+    {},
+    Client.UserMinAggregateOutputType | null | undefined
+  >;
+  max?: Resolver<
+    Client.AggregateUser,
+    {},
+    Client.UserMaxAggregateOutputType | null | undefined
+  >;
 }
 
 export interface BatchPayload {
@@ -80,7 +96,11 @@ export interface BatchPayload {
 export interface UserCountAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.UserCountAggregateOutputType, {}, number>;
-  createdAt?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
+  createdAt?: Resolver<
+    Client.UserCountAggregateOutputType,
+    {},
+    number | null | undefined
+  >;
   username?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
   password?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;
   email?: Resolver<Client.UserCountAggregateOutputType, {}, number | null | undefined>;

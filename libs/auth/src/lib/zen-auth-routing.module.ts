@@ -10,7 +10,10 @@ const routes: Routes = [
   { path: 'login', component: ZenLoginPageComponent },
   { path: 'register', component: ZenRegisterPageComponent },
   { path: 'password-reset-request', component: ZenPasswordResetRequestPageComponent },
-  { path: 'password-reset-confirmation', component: ZenPasswordResetConfirmationPageComponent },
+  {
+    path: 'password-reset-confirmation',
+    component: ZenPasswordResetConfirmationPageComponent,
+  },
 ];
 
 @NgModule({

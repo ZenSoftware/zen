@@ -1,4 +1,10 @@
-import { Injectable, OnModuleDestroy, OnModuleInit, Optional, Scope } from '@nestjs/common';
+import {
+  Injectable,
+  OnModuleDestroy,
+  OnModuleInit,
+  Optional,
+  Scope,
+} from '@nestjs/common';
 import { PrismaDelete, onDeleteArgs } from '@paljs/plugins';
 import { Prisma, PrismaClient } from '@prisma/client';
 

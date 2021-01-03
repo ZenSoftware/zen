@@ -9,7 +9,10 @@ import { JwtPayload } from './jwt-payload';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService: JwtService, private readonly config: ConfigService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly config: ConfigService
+  ) {}
 
   setJwtCookie(res: Response, user: RequestUser, rememberMe: boolean | string = false) {
     if (typeof rememberMe === 'string') {
