@@ -5,9 +5,15 @@ import PRISMA_TYPE_DEFS from '../prisma/typeDefs';
 import { AuthResolver, AuthTypeDef } from './Auth';
 import { UserResolver, UserTypeDef } from './User';
 
-export const NEST_RESOLVERS = [AuthResolver, UserResolver];
+export const NEST_RESOLVERS = [
+  AuthResolver,
+  UserResolver
+];
 
-export const NEST_TYPE_DEFS = [AuthTypeDef, UserTypeDef].filter(x => x);
+export const NEST_TYPE_DEFS = [
+  AuthTypeDef,
+  UserTypeDef
+].filter(x => x);
 
 export const ALL_TYPE_DEFS = mergeTypeDefs([PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS]);
 
