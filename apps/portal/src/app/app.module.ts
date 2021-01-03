@@ -5,7 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { AuthModule } from '@zen/auth';
+import { ZenAuthModule } from '@zen/auth';
 import { Environment, HttpRequestInterceptor } from '@zen/common';
 import { GraphQLModule } from '@zen/graphql';
 import { possibleTypes, typePolicies } from '@zen/graphql/client';
@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     RouterModule.forRoot([]),
     MatToolbarModule,
-    AuthModule,
+    ZenAuthModule,
     MainModule,
     GraphQLModule.forRoot({
       cacheOptions: {

@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { AuthModule } from '../auth';
+import { ZenAuthModule } from '../auth';
 import { MailModule } from '../mail';
 import { PrismaModule } from '../prisma';
 import { GqlConfigService } from './gql-config.service';
@@ -10,7 +10,7 @@ import { NEST_RESOLVERS } from './resolvers';
 @Global()
 @Module({
   imports: [
-    AuthModule,
+    ZenAuthModule,
     PrismaModule,
     MailModule,
     GraphQLModule.forRootAsync({

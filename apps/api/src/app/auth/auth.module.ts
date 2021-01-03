@@ -12,4 +12,4 @@ import { JwtStrategy } from './jwt.strategy';
   providers: [AuthService, JwtStrategy, GqlGuard],
   exports: [JwtModule, PassportModule, GqlGuard, AuthService],
 })
-export class AuthModule {}
+export class ZenAuthModule {}

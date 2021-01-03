@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ZenComponentsModule } from '@zen/components';
 
-import { AuthRoutingModule } from './auth-routing.module';
 import { IsLoggedInDirective, NotRolesDirective, RolesDirective } from './directives';
+import { ZenAuthRoutingModule } from './zen-auth-routing.module';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 import { ZenLoginComponent } from './zen-login/zen-login.component';
@@ -31,7 +31,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     MatButtonModule,
     MatCheckboxModule,
     MatProgressBarModule,
-    AuthRoutingModule,
+    ZenAuthRoutingModule,
     ZenComponentsModule,
   ],
   declarations: [
@@ -63,4 +63,4 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     ZenRegisterPageComponent,
   ],
 })
-export class AuthModule {}
+export class ZenAuthModule {}
