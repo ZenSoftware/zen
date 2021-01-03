@@ -6,6 +6,7 @@ import { ZenMainComponent } from './zen-main/zen-main.component';
 import { ROUTES as PORTAL_ROUTES } from './zen-portal';
 
 const routes: Routes = [
+  // TODO: look into making default portal path configurable
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: '',
