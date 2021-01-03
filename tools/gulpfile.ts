@@ -151,11 +151,15 @@ export class Gulpfile {
     );
 
     console.log(`---------- Zen Nest GraphQL Resolvers generate ----------`);
-    if (!fs.existsSync(RESOLVERS_PATH)) fs.mkdirSync(RESOLVERS_PATH);
-    if (!fs.existsSync(CONFIG.gql.clientFieldsPath))
+    if (!fs.existsSync(RESOLVERS_PATH)) {
+      fs.mkdirSync(RESOLVERS_PATH);
+    }
+    if (!fs.existsSync(CONFIG.gql.clientFieldsPath)) {
       fs.mkdirSync(CONFIG.gql.clientFieldsPath);
-    if (!fs.existsSync(CONFIG.gql.clientPrismaPath))
+    }
+    if (!fs.existsSync(CONFIG.gql.clientPrismaPath)) {
       fs.mkdirSync(CONFIG.gql.clientPrismaPath);
+    }
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
     const dirents = await readdirAsync(PRISMA_PATH, { withFileTypes: true });
