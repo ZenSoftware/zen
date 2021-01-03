@@ -253,36 +253,19 @@ export type User = {
 
 export type Query = {
   __typename?: 'Query';
-  aggregateUser?: Maybe<AggregateUser>;
-  authExchangeToken: AuthSession;
-  authLogin: AuthSession;
-  authPasswordResetRequest?: Maybe<Scalars['Boolean']>;
+  findUniqueUser?: Maybe<User>;
   findFirstUser?: Maybe<Array<User>>;
   findManyUser?: Maybe<Array<User>>;
   findManyUserCount: Scalars['Int'];
-  findUniqueUser?: Maybe<User>;
-  loggedIn: Scalars['Boolean'];
-  userRoles: Array<Role>;
+  aggregateUser?: Maybe<AggregateUser>;
+  authLogin: AuthSession;
+  authExchangeToken: AuthSession;
+  authPasswordResetRequest?: Maybe<Scalars['Boolean']>;
 };
 
 
-export type QueryAggregateUserArgs = {
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<Array<UserOrderByInput>>;
-  cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<UserScalarFieldEnum>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryAuthLoginArgs = {
-  data: AuthLoginInput;
-};
-
-
-export type QueryAuthPasswordResetRequestArgs = {
-  data: AuthPasswordResetRequestInput;
+export type QueryFindUniqueUserArgs = {
+  where: UserWhereUniqueInput;
 };
 
 
@@ -316,8 +299,23 @@ export type QueryFindManyUserCountArgs = {
 };
 
 
-export type QueryFindUniqueUserArgs = {
-  where: UserWhereUniqueInput;
+export type QueryAggregateUserArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByInput>>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<UserScalarFieldEnum>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryAuthLoginArgs = {
+  data: AuthLoginInput;
+};
+
+
+export type QueryAuthPasswordResetRequestArgs = {
+  data: AuthPasswordResetRequestInput;
 };
 
 export type Mutation = {
@@ -474,22 +472,6 @@ export type AuthRegister = (
     { __typename?: 'AuthSession' }
     & AuthSessionFields
   ) }
-);
-
-export type UserRolesVariables = Exact<{ [key: string]: never; }>;
-
-
-export type UserRoles = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'userRoles'>
-);
-
-export type LoggedInVariables = Exact<{ [key: string]: never; }>;
-
-
-export type LoggedIn = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'loggedIn'>
 );
 
 export type AuthSessionFields = (
@@ -728,38 +710,6 @@ export const AuthRegisterDocument = /*#__PURE__*/ gql`
   })
   export class AuthRegisterGQL extends Apollo.Mutation<AuthRegister, AuthRegisterVariables> {
     document = AuthRegisterDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const UserRolesDocument = /*#__PURE__*/ gql`
-    query UserRoles {
-  userRoles @client
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
-    document = UserRolesDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const LoggedInDocument = /*#__PURE__*/ gql`
-    query LoggedIn {
-  loggedIn @client
-}
-    `;
-
-  @Injectable({
-    providedIn: GraphQLModule
-  })
-  export class LoggedInGQL extends Apollo.Query<LoggedIn, LoggedInVariables> {
-    document = LoggedInDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
