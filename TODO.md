@@ -7,3 +7,4 @@
 - [ ] Consider extracting out portal settings with a database seed, via Prisma migrate.
   - [ ] Sign-up via email vs username
   - [ ] Configure JWT expiresIn time
+- [ ] Setup lazy loading of zen-super module
