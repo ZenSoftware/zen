@@ -128,7 +128,7 @@
     "jest": "26.2.2",
     "jest-preset-angular": "8.3.1",
     "js-cookie": "^2.2.1",
-    "prettier": "2.1.2",
+    "prettier": "^2.2.1",
     "prettier-plugin-import-sort": "0.0.6",
     "ts-jest": "26.4.0",
     "tslint": "6.1.3",
