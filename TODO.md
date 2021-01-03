@@ -4,3 +4,4 @@
   - [ ] Sign-up via email vs username
   - [ ] Configure JWT expiresIn time
 - [ ] Make emails unique errors
+- [x] Build welcome email trigger

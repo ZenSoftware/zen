@@ -4,9 +4,9 @@ import { User } from '@prisma/client';
 
 import { ConfigService } from '../config';
 import { JwtService } from '../jwt';
-import { PasswordResetContext } from './templates';
+import { PasswordResetContext, WelcomeContext } from './templates';
 
-type MailTemplate = 'verify-email' | 'password-reset';
+type MailTemplate = 'welcome' | 'password-reset';
 
 type MailOptions = ISendMailOptions & { template?: MailTemplate };
 
@@ -17,11 +17,20 @@ export class MailService {
     private readonly jwtService: JwtService,
     private readonly config: ConfigService
   ) {}
-
+  //--------------------------------------------------------------------------
   send(options: MailOptions) {
     return this.mailer.sendMail(options);
   }
-
+  //--------------------------------------------------------------------------
+  sendWelcome(options: { to: string; context: WelcomeContext }) {
+    return this.send({
+      template: 'welcome',
+      to: options.to,
+      subject: options.context.subject,
+      context: options.context,
+    }).then();
+  }
+  //--------------------------------------------------------------------------
   sendPasswordReset(user: User) {
     const token = this.jwtService.sign({ username: user.username }, { expiresIn: '1d' });
 
@@ -30,7 +39,7 @@ export class MailService {
       resetUrl: `${this.config.siteUrl}/#/password-reset-confirmation?token=${encodeURI(token)}`,
     };
 
-    this.send({
+    return this.send({
       template: 'password-reset',
       to: user.email,
       subject: `${this.config.smtp.fromName} Password Reset`,
