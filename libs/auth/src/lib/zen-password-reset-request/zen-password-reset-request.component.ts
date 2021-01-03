@@ -32,6 +32,7 @@ export class ZenPasswordResetRequestComponent {
             ApiConstants.USERNAME_MIN_LENGTH < 7 ? ApiConstants.USERNAME_MIN_LENGTH : 7
           ),
           Validators.maxLength(254),
+          this.includesSpaceValidator(),
           this.notFoundValidator(),
         ],
       ],
@@ -40,6 +41,13 @@ export class ZenPasswordResetRequestComponent {
 
   get emailOrUsername() {
     return this.form.get('emailOrUsername');
+  }
+
+  includesSpaceValidator(): ValidatorFn {
+    return control => {
+      if (control.value && /\s/.test(control.value)) return { includesSpace: true };
+      return null;
+    };
   }
 
   notFoundReset() {
@@ -58,6 +66,7 @@ export class ZenPasswordResetRequestComponent {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
+      this.form.disable();
 
       this.authPasswordResetRequestQueryGQL
         .fetch(
@@ -76,6 +85,7 @@ export class ZenPasswordResetRequestComponent {
           },
           error: errors => {
             this.loading = false;
+            this.form.enable();
 
             const gqlError = extractGraphQLErrors(errors);
 
