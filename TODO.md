@@ -7,8 +7,8 @@
 - [ ] Build a password change form
 - [ ] Create a GraphQLUpload example
 - [ ] Create a GraphQL subscription example
-- [ ] Take lazy loading structure from Tu, to load the portal seperately from the Main module.
-  - [ ] Seperate all of ZenPortal module to lazy load seperately
+- [X] Take lazy loading structure from Tu, to load the portal seperately from the Main module.
+  - [X] Seperate all of ZenPortal module to lazy load seperately
   - [ ] Setup lazy loading of zen-super module
 - [ ] Consider extracting out portal settings with a database seed, via Prisma migrate.
   - [ ] Sign-up via email vs username

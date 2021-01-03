@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoggedInGuard } from '@zen/auth';
 
 import { ZenMainComponent } from './zen-main/zen-main.component';
-import { ROUTES as PORTAL_ROUTES } from './zen-portal';
 
 const routes: Routes = [
   // TODO: look into making default portal path configurable
@@ -12,7 +11,8 @@ const routes: Routes = [
     path: '',
     component: ZenMainComponent,
     canActivate: [LoggedInGuard],
-    children: [...PORTAL_ROUTES],
+    loadChildren: () =>
+      import('./zen-portal/zen-portal.module').then(m => m.ZenPortalModule),
   },
 ];
 
