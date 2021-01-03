@@ -22,15 +22,20 @@ export class GqlConfigService implements GqlOptionsFactory {
       tracing: this.config.graphql.playground,
       cors: this.config.production ? undefined : { credentials: true, origin: true },
       context: async (ctx): Promise<IContext> => {
-        // Resolve a scoped Prisma instance for the request
-        const contextId = ContextIdFactory.create();
-        const prisma = await this.moduleRef.resolve(PrismaService, contextId, {
-          strict: false,
-        });
-
-        return ctx.connection
-          ? { ...ctx, prisma, req: ctx.connection.context as { token: string } } // Include websocket context
-          : { ...ctx, prisma };
+        // Resolve a scoped Prisma instance
+        if (ctx.connection) {
+          const contextId = ContextIdFactory.create();
+          const prisma = await this.moduleRef.resolve(PrismaService, contextId, {
+            strict: false,
+          });
+          return { ...ctx, prisma, req: ctx.connection.context as { token: string } }; // Include websocket context as req
+        } else {
+          const contextId = ContextIdFactory.getByRequest(ctx.req);
+          const prisma = await this.moduleRef.resolve(PrismaService, contextId, {
+            strict: false,
+          });
+          return { ...ctx, prisma };
+        }
       },
       uploads: {
         maxFileSize: 20_000_000, // 20 MB
