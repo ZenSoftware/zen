@@ -209,7 +209,7 @@ export class AuthResolver {
       to: user.email,
       context: {
         siteUrl: this.config.siteUrl,
-        hiddenPreheaderText: 'Sign up confirmed',
+        hiddenPreheaderText: `Sign up confirmed for ${user.username}`,
         header: 'Welcome',
         subject: 'Sign Up Confirmed',
         body: `Thanks you for signing up ${user.username}!`,
