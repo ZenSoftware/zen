@@ -13,10 +13,10 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     super({
       secretOrKey: config.production ? config.jwtOptions.publicKey : config.jwtOptions.secret,
       jwtFromRequest: (req: ExReq & { token: any }) => {
-        if (!req.token) {
-          return req.cookies['jwt']; // HTTP request
-        } else {
+        if (req.token) {
           return req.token; // Websocket connections
+        } else {
+          return req.cookies['jwt']; // HTTP request
         }
       },
     });
