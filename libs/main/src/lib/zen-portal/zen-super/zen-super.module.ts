@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ZenSuperPageComponent } from './zen-super-page/zen-super-page.component';
+import { ZenSuperRoutingModule } from './zen-super-routing.module';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, FormsModule, MatButtonModule],
+  imports: [CommonModule, HttpClientModule, MatButtonModule, ZenSuperRoutingModule],
   declarations: [ZenSuperPageComponent],
 })
 export class ZenSuperModule {}
