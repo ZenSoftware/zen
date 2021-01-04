@@ -9,8 +9,4 @@ import { verticalAccordion } from '../animations';
 })
 export class ZenRegisterComponent {
   @Output() registered = new EventEmitter();
-
-  onRegisterd() {
-    this.registered.emit();
-  }
 }

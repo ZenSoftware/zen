@@ -6,8 +6,4 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class ZenPasswordChangeComponent {
   @Output() changed = new EventEmitter();
-
-  onChanged() {
-    this.changed.emit();
-  }
 }

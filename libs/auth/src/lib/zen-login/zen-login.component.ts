@@ -6,8 +6,4 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class ZenLoginComponent {
   @Output() loggedIn = new EventEmitter();
-
-  onLoggedIn() {
-    this.loggedIn.emit();
-  }
 }
