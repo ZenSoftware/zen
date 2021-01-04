@@ -11,9 +11,9 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 @Directive({
-  selector: '[isLoggedIn]',
+  selector: '[ifLoggedIn]',
 })
-export class IsLoggedInDirective implements OnDestroy {
+export class IfLoggedInDirective implements OnDestroy {
   private subsciption: Subscription;
   private embededViewRef: any;
   private showIfLoggedIn?: boolean;
@@ -30,7 +30,7 @@ export class IsLoggedInDirective implements OnDestroy {
   }
 
   @Input()
-  set isLoggedIn(value: boolean) {
+  set ifLoggedIn(value: boolean) {
     this.showIfLoggedIn = value;
     this.showIfAllowed();
   }
