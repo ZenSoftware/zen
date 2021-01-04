@@ -67,6 +67,8 @@ export const AuthTypeDef = gql`
 `;
 
 @Resolver('Auth')
+@UseGuards(ThrottlerGuard)
+@Throttle(5, 60)
 export class AuthResolver {
   private CLEAR_COOKIE_OPTIONS: CookieOptions = {
     maxAge: 0,
@@ -104,8 +106,6 @@ export class AuthResolver {
   }
 
   @Query()
-  @UseGuards(ThrottlerGuard)
-  @Throttle(5, 60)
   async authLogin(@Context() ctx: IContext, @Args('data') data: AuthLoginInput) {
     const user = await this.getUserByUsername(data.username, ctx.prisma);
 
