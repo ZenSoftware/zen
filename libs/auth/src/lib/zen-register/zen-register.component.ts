@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AuthRegisterGQL, AuthSession, extractGraphQLErrors } from '@zen/graphql';
+import { AuthRegisterGQL, AuthSession, GqlErrors } from '@zen/graphql';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -142,9 +142,11 @@ export class ZenRegisterComponent {
             this.loading = false;
             this.form.enable();
 
-            const gqlErrors = extractGraphQLErrors(errors);
+            const gqlErrors = new GqlErrors(errors);
+            this.generalError = true;
 
             if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
+              this.generalError = false;
               this.emailTaken = true;
               this.email?.markAsTouched();
               this.email?.updateValueAndValidity();
@@ -152,13 +154,12 @@ export class ZenRegisterComponent {
             }
 
             if (gqlErrors.find(e => e.code === 'USERNAME_TAKEN')) {
+              this.generalError = false;
               this.usernameTaken = true;
               this.username?.markAsTouched();
               this.username?.updateValueAndValidity();
               this.usernameInput?.nativeElement.select();
             }
-
-            if (gqlErrors.length === 0) this.generalError = true;
           },
         });
     }

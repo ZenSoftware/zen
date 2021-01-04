@@ -5,8 +5,8 @@ import {
   AuthLoginGQL,
   AuthLoginInput,
   AuthSession,
+  GqlErrors,
   GraphQLModule,
-  extractGraphQLErrors,
 } from '@zen/graphql';
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
@@ -88,7 +88,7 @@ export class AuthService {
             console.log('Exchanged token');
           },
           error: errors => {
-            const gqlErrors = extractGraphQLErrors(errors);
+            const gqlErrors = new GqlErrors(errors);
 
             if (gqlErrors.find(e => e.statusCode === 401)) {
               this.logout();

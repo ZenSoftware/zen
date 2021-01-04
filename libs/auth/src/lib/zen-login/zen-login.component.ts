@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { extractGraphQLErrors } from '@zen/graphql';
+import { GqlErrors } from '@zen/graphql';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -104,7 +104,7 @@ export class ZenLoginComponent {
             this.loading = false;
             this.generalError = true;
 
-            const gqlErrors = extractGraphQLErrors(errors);
+            const gqlErrors = new GqlErrors(errors);
 
             if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
               this.generalError = false;
@@ -122,9 +122,8 @@ export class ZenLoginComponent {
               this.usernameInput?.nativeElement.select();
             }
 
-            if (gqlErrors.find(e => e === 'ThrottlerException: Too Many Requests')) {
+            if (gqlErrors.hasThrottleError) {
               this.generalError = true;
-              console.log('THROTTLE', gqlErrors[0]);
             }
           },
         });

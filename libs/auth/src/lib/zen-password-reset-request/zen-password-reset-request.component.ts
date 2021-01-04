@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ApiConstants } from '@zen/api-interfaces';
-import { AuthPasswordResetRequestQueryGQL, extractGraphQLErrors } from '@zen/graphql';
+import { AuthPasswordResetRequestQueryGQL, GqlErrors } from '@zen/graphql';
 
 import { verticalAccordion } from '../animations';
 
@@ -85,19 +85,19 @@ export class ZenPasswordResetRequestComponent {
             this.sent.emit();
           },
           error: errors => {
+            this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            const gqlErrors = extractGraphQLErrors(errors);
+            const gqlErrors = new GqlErrors(errors);
 
             if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
+              this.generalError = false;
               this.notFound = true;
               this.emailOrUsername?.markAsTouched();
               this.emailOrUsername?.updateValueAndValidity();
               this.input?.nativeElement.select();
             }
-
-            if (gqlErrors.length === 0) this.generalError = true;
           },
         });
     }

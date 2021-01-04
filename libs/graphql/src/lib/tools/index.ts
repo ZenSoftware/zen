@@ -1,2 +1,2 @@
 export * from './prisma-helpers';
-export * from './extract-graphql-errors';
+export * from './graphql-errors';

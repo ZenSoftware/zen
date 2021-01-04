@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiConstants } from '@zen/api-interfaces';
-import { AuthPasswordChangeGQL, extractGraphQLErrors } from '@zen/graphql';
+import { AuthPasswordChangeGQL, GqlErrors } from '@zen/graphql';
 
 import { verticalAccordion } from '../animations';
 import { passwordValidator } from '../validators';
@@ -105,19 +105,19 @@ export class ZenPasswordChangeComponent {
             this.changed.emit();
           },
           error: errors => {
+            this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            const gqlErrors = extractGraphQLErrors(errors);
+            const gqlErrors = new GqlErrors(errors);
 
             if (gqlErrors.find(e => e.code === 'WRONG_PASSWORD')) {
+              this.generalError = false;
               this.incorrectPassword = true;
               this.oldPassword?.markAsTouched();
               this.oldPassword?.updateValueAndValidity();
               this.oldPasswordInput?.nativeElement.select();
             }
-
-            if (gqlErrors.length === 0) this.generalError = true;
           },
         });
     }
