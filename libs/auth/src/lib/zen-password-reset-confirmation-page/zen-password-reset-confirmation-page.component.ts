@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
   selector: 'zen-password-reset-confirmation-page',
   templateUrl: 'zen-password-reset-confirmation-page.component.html',
 })
-export class ZenPasswordResetConfirmationPageComponent {
-  constructor() {}
-}
+export class ZenPasswordResetConfirmationPageComponent {}
