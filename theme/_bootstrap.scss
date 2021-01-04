@@ -16,6 +16,12 @@
 @import '~bootstrap/scss/print';
 @import 'reset';
 
+// Cards =======================================================================
+
+.card-header {
+  color: $white;
+}
+
 // Text size helpers  ==========================================================
 
 .text-xs {
