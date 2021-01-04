@@ -23,7 +23,7 @@ export const ${prismaName}TypeDef = null;
 
 @Resolver('${prismaName}')
 @UseGuards(GqlGuard)
-@Roles('Admin')
+@Roles('Super')
 export class ${prismaName}Resolver {
 ${querySource}${mutationSource}
 }

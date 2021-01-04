@@ -31,7 +31,7 @@ export const UserTypeDef = null;
 
 @Resolver('User')
 @UseGuards(GqlGuard)
-@Roles('Super', 'Admin')
+@Roles('Super')
 export class UserResolver {
   @ResolveField()
   async password() {

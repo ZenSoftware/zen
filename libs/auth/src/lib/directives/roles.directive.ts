@@ -40,7 +40,7 @@ export class RolesDirective implements OnDestroy {
       this.render();
       return;
     } else {
-      if (this.auth.userHasRole(Role.Admin) || this.auth.userHasRole(this.allowedRoles)) {
+      if (this.auth.userHasRole(Role.Super) || this.auth.userHasRole(this.allowedRoles)) {
         this.render();
       } else {
         this.clear();

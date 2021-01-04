@@ -370,7 +370,6 @@ export enum QueryMode {
   insensitive = 'insensitive',
 }
 export enum Role {
-  Registered = 'Registered',
-  Admin = 'Admin',
   Super = 'Super',
+  Registered = 'Registered',
 }
