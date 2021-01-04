@@ -15,6 +15,7 @@ import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 import { ZenLoginComponent } from './zen-login/zen-login.component';
+import { ZenPasswordChangeFormComponent } from './zen-password-change-form/zen-password-change-form.component';
 import { ZenPasswordChangeComponent } from './zen-password-change/zen-password-change.component';
 import { ZenPasswordResetConfirmationPageComponent } from './zen-password-reset-confirmation-page/zen-password-reset-confirmation-page.component';
 import { ZenPasswordResetConfirmationComponent } from './zen-password-reset-confirmation/zen-password-reset-confirmation.component';
@@ -44,6 +45,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     ZenLoginLinkComponent,
     ZenLoginPageComponent,
     ZenLoginComponent,
+    ZenPasswordChangeFormComponent,
     ZenPasswordChangeComponent,
     ZenPasswordResetConfirmationPageComponent,
     ZenPasswordResetConfirmationComponent,
@@ -59,6 +61,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     ZenLoginComponent,
     ZenLoginPageComponent,
     ZenLoginLinkComponent,
+    ZenPasswordChangeFormComponent,
     ZenPasswordChangeComponent,
     ZenPasswordResetConfirmationPageComponent,
     ZenPasswordResetConfirmationComponent,
