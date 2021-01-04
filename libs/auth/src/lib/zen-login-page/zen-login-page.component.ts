@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthSession } from '@zen/graphql';
 
 import { AuthService } from '../auth.service';
 

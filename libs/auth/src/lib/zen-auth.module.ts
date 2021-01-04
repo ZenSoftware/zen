@@ -11,6 +11,7 @@ import { ZenComponentsModule } from '@zen/components';
 
 import { IsLoggedInDirective, NotRolesDirective, RolesDirective } from './directives';
 import { ZenAuthRoutingModule } from './zen-auth-routing.module';
+import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 import { ZenLoginComponent } from './zen-login/zen-login.component';
@@ -39,16 +40,17 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     IsLoggedInDirective,
     NotRolesDirective,
     RolesDirective,
-    ZenLoginComponent,
-    ZenLoginPageComponent,
+    ZenLoginFormComponent,
     ZenLoginLinkComponent,
+    ZenLoginPageComponent,
+    ZenLoginComponent,
     ZenPasswordChangeComponent,
     ZenPasswordResetConfirmationPageComponent,
     ZenPasswordResetConfirmationComponent,
     ZenPasswordResetRequestPageComponent,
     ZenPasswordResetRequestComponent,
-    ZenRegisterComponent,
     ZenRegisterPageComponent,
+    ZenRegisterComponent,
   ],
   exports: [
     IsLoggedInDirective,
