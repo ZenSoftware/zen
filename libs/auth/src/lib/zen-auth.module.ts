@@ -21,6 +21,7 @@ import { ZenPasswordResetConfirmationPageComponent } from './zen-password-reset-
 import { ZenPasswordResetConfirmationComponent } from './zen-password-reset-confirmation/zen-password-reset-confirmation.component';
 import { ZenPasswordResetRequestPageComponent } from './zen-password-reset-request-page/zen-password-reset-request-page.component';
 import { ZenPasswordResetRequestComponent } from './zen-password-reset-request/zen-password-reset-request.component';
+import { ZenRegisterFormComponent } from './zen-register-form/zen-register-form.component';
 import { ZenRegisterPageComponent } from './zen-register-page/zen-register-page.component';
 import { ZenRegisterComponent } from './zen-register/zen-register.component';
 
@@ -51,6 +52,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     ZenPasswordResetConfirmationComponent,
     ZenPasswordResetRequestPageComponent,
     ZenPasswordResetRequestComponent,
+    ZenRegisterFormComponent,
     ZenRegisterPageComponent,
     ZenRegisterComponent,
   ],
@@ -58,17 +60,15 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     IsLoggedInDirective,
     NotRolesDirective,
     RolesDirective,
-    ZenLoginComponent,
-    ZenLoginPageComponent,
+    ZenLoginFormComponent,
     ZenLoginLinkComponent,
+    ZenLoginComponent,
     ZenPasswordChangeFormComponent,
     ZenPasswordChangeComponent,
-    ZenPasswordResetConfirmationPageComponent,
     ZenPasswordResetConfirmationComponent,
-    ZenPasswordResetRequestPageComponent,
     ZenPasswordResetRequestComponent,
+    ZenRegisterFormComponent,
     ZenRegisterComponent,
-    ZenRegisterPageComponent,
   ],
 })
 export class ZenAuthModule {}
