@@ -15,3 +15,4 @@
   - [ ] Configure JWT expiresIn time
 - [ ] Research NEST request throttling over specific mutations
   - [ ] Throttling decorators that take a `{ timeFrame: number; maxRequests: number; }`
+- [ ] Build <zen-errors> under @zen/components to NgModel bind to GqlErrors
