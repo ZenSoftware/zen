@@ -16,7 +16,7 @@ export class ZenLoginFormComponent {
   @ViewChild('usernameInput') usernameInput?: ElementRef;
   @ViewChild('passwordInput') passwordInput?: ElementRef;
 
-  #loading = false;
+  loading = false;
   #incorrectPassword = false;
   #usernameNotFound = false;
   hidePassword = true;
@@ -32,16 +32,6 @@ export class ZenLoginFormComponent {
       password: ['', [Validators.required, this.incorrectPasswordValidator()]],
       rememberMe: [false],
     });
-  }
-
-  get loading() {
-    return this.#loading;
-  }
-
-  set loading(value) {
-    this.#loading = value;
-    if (value) this.form.disable();
-    else this.form.enable();
   }
 
   get username() {
@@ -100,9 +90,9 @@ export class ZenLoginFormComponent {
           },
 
           error: errors => {
-            this.form.enable();
             this.loading = false;
             this.generalError = true;
+            this.form.enable();
 
             const gqlErrors = new GqlErrors(errors);
 
