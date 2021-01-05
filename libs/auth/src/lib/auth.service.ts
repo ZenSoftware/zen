@@ -6,7 +6,7 @@ import {
   AuthLoginInput,
   AuthSession,
   GqlErrors,
-  GraphQLModule,
+  ZenGraphQLModule,
 } from '@zen/graphql';
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
@@ -46,7 +46,7 @@ export class AuthService {
     if (this.loggedIn) this.startExchangeInterval();
 
     this.graphqlSubscriptionClient$.subscribe(() =>
-      GraphQLModule.reconnectSubscriptionClient()
+      ZenGraphQLModule.reconnectSubscriptionClient()
     );
   }
 

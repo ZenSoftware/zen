@@ -36,10 +36,10 @@ export abstract class GraphQLOptions {
     },
   ],
 })
-export class GraphQLModule {
+export class ZenGraphQLModule {
   static subscriptionClient: SubscriptionClient | null = null;
 
-  constructor(@Optional() @SkipSelf() parentModule?: GraphQLModule) {
+  constructor(@Optional() @SkipSelf() parentModule?: ZenGraphQLModule) {
     if (parentModule) {
       throw new Error(
         'GraphQLModule is already loaded. Import it in the AppModule only.'
@@ -47,9 +47,9 @@ export class GraphQLModule {
     }
   }
 
-  static forRoot(options: GraphQLOptions): ModuleWithProviders<GraphQLModule> {
+  static forRoot(options: GraphQLOptions): ModuleWithProviders<ZenGraphQLModule> {
     return {
-      ngModule: GraphQLModule,
+      ngModule: ZenGraphQLModule,
       providers: [
         {
           provide: GraphQLOptions,
@@ -106,7 +106,7 @@ export function createApollo(
   } else {
     const websocket_link = new WebSocketLink(options.websocketOptions);
 
-    GraphQLModule.subscriptionClient = (<any>websocket_link).subscriptionClient;
+    ZenGraphQLModule.subscriptionClient = (<any>websocket_link).subscriptionClient;
 
     const websocket_batch_link = split(
       ({ query }) => {

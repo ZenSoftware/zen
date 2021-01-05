@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ZenAuthModule } from '@zen/auth';
 import { Environment, HttpRequestInterceptor } from '@zen/common';
-import { GraphQLModule } from '@zen/graphql';
+import { ZenGraphQLModule } from '@zen/graphql';
 import { possibleTypes, typePolicies } from '@zen/graphql/client';
 import { MainModule } from '@zen/main';
 import Cookies from 'js-cookie';
@@ -25,7 +25,7 @@ import { AppComponent } from './app.component';
     MatToolbarModule,
     ZenAuthModule,
     MainModule,
-    GraphQLModule.forRoot({
+    ZenGraphQLModule.forRoot({
       cacheOptions: {
         possibleTypes,
         typePolicies,
