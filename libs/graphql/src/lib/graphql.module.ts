@@ -1,3 +1,8 @@
+/**
+ * Author: Peter Hoang
+ * Company: Zen Software
+ * License: MIT
+ */
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import {
   ApolloClientOptions,
