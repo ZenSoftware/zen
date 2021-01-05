@@ -191,11 +191,15 @@ export class AuthResolver {
 
   @Mutation()
   async authRegister(@Context() ctx: IContext, @Args('data') data: AuthRegisterInput) {
-    const userFoundByUsername = await this.getUserByUsername(data.username, ctx.prisma);
-    if (userFoundByUsername) throw new HttpException({ code: 'USERNAME_TAKEN' }, 400);
+    const foundUsernameDup = await this.getUserByUsername(data.username, ctx.prisma);
+    const foundEmailUsernameDup = await this.getUserByEmail(data.username, ctx.prisma);
+    if (foundUsernameDup || foundEmailUsernameDup)
+      throw new HttpException({ code: 'USERNAME_TAKEN' }, 400);
 
-    const userFoundByEmail = await this.getUserByEmail(data.email, ctx.prisma);
-    if (userFoundByEmail) throw new HttpException({ code: 'EMAIL_TAKEN' }, 400);
+    const foundEmailDup = await this.getUserByEmail(data.email, ctx.prisma);
+    const foundUsernameEmailDup = await this.getUserByUsername(data.email, ctx.prisma);
+    if (foundEmailDup || foundUsernameEmailDup)
+      throw new HttpException({ code: 'EMAIL_TAKEN' }, 400);
 
     const hashedPassword = await bcrypt.hash(data.password, 12);
 
