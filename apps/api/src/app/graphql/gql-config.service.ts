@@ -25,7 +25,7 @@ export class GqlConfigService implements GqlOptionsFactory {
         const prisma = await this.moduleRef.get(PrismaService, { strict: false });
 
         return ctx.connection
-          ? { ...ctx, prisma, req: ctx.connection.context as { token: string } } // Include websocket context
+          ? { ...ctx, prisma, req: ctx.connection.context as { token: string } } // Include WebSocketLink context for JwtStrategy
           : { ...ctx, prisma };
       },
       uploads: {
