@@ -1,6 +1,14 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnDestroy,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { GqlErrors } from '@zen/graphql';
+import { Subscription } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -11,15 +19,16 @@ import { usernameValidator } from '../validators';
   templateUrl: 'zen-login-form.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenLoginFormComponent {
+export class ZenLoginFormComponent implements OnDestroy {
   @Output() loggedIn = new EventEmitter();
   @ViewChild('usernameInput') usernameInput?: ElementRef;
   @ViewChild('passwordInput') passwordInput?: ElementRef;
 
-  loading = false;
-  done = false;
+  #subs: Array<Subscription | undefined> = [];
   #incorrectPassword = false;
   #usernameNotFound = false;
+  loading = false;
+  done = false;
   hidePassword = true;
   form: FormGroup;
   generalError = false;
@@ -33,6 +42,16 @@ export class ZenLoginFormComponent {
       password: ['', [Validators.required, this.incorrectPasswordValidator()]],
       rememberMe: [false],
     });
+
+    const sub1 = this.username?.valueChanges.subscribe(() => {
+      this.#usernameNotFound = false;
+    });
+    this.#subs.push(sub1);
+
+    const sub2 = this.password?.valueChanges.subscribe(() => {
+      this.#incorrectPassword = false;
+    });
+    this.#subs.push(sub2);
   }
 
   get username() {
@@ -47,11 +66,6 @@ export class ZenLoginFormComponent {
     return this.form.get('rememberMe');
   }
 
-  usernameNotFoundReset() {
-    this.#usernameNotFound = false;
-    this.username?.updateValueAndValidity();
-  }
-
   usernameNotFoundValidator(): ValidatorFn {
     return control => (this.#usernameNotFound ? { notFound: true } : null);
   }
@@ -61,11 +75,6 @@ export class ZenLoginFormComponent {
       if (this.form) return usernameValidator(control);
       return null;
     };
-  }
-
-  incorrectPasswordReset() {
-    this.#incorrectPassword = false;
-    this.password?.updateValueAndValidity();
   }
 
   incorrectPasswordValidator(): ValidatorFn {
@@ -120,5 +129,9 @@ export class ZenLoginFormComponent {
           },
         });
     }
+  }
+
+  ngOnDestroy() {
+    this.#subs.forEach(s => s?.unsubscribe);
   }
 }

@@ -1,6 +1,14 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnDestroy,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AuthRegisterGQL, AuthSession, GqlErrors } from '@zen/graphql';
+import { Subscription } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -11,15 +19,16 @@ import { emailValidator, passwordValidator, usernameValidator } from '../validat
   templateUrl: 'zen-register-form.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenRegisterFormComponent {
+export class ZenRegisterFormComponent implements OnDestroy {
   @Output() registered = new EventEmitter();
   @ViewChild('usernameInput') usernameInput?: ElementRef;
   @ViewChild('emailInput') emailInput?: ElementRef;
 
+  #subs: Array<Subscription | undefined> = [];
+  #usernameTaken = false;
+  #emailTaken = false;
   form: FormGroup;
   loading = false;
-  usernameTaken = false;
-  emailTaken = false;
   generalError = false;
   hidePassword = true;
 
@@ -38,6 +47,16 @@ export class ZenRegisterFormComponent {
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
       acceptTerms: ['', Validators.requiredTrue],
     });
+
+    const sub1 = this.username?.valueChanges.subscribe(() => {
+      this.#usernameTaken = false;
+    });
+    this.#subs.push(sub1);
+
+    const sub2 = this.email?.valueChanges.subscribe(() => {
+      this.#emailTaken = false;
+    });
+    this.#subs.push(sub2);
   }
 
   get username() {
@@ -60,14 +79,9 @@ export class ZenRegisterFormComponent {
     return this.form.get('acceptTerms');
   }
 
-  usernameTakenReset() {
-    this.usernameTaken = false;
-    this.username?.updateValueAndValidity();
-  }
-
   usernameTakenValidator(): ValidatorFn {
     return control => {
-      if (this.usernameTaken) return { usernameTaken: true };
+      if (this.#usernameTaken) return { usernameTaken: true };
       return null;
     };
   }
@@ -79,14 +93,9 @@ export class ZenRegisterFormComponent {
     };
   }
 
-  emailTakenReset() {
-    this.emailTaken = false;
-    this.email?.updateValueAndValidity();
-  }
-
   emailTakenValidator(): ValidatorFn {
     return control => {
-      if (this.emailTaken) return { emailTaken: true };
+      if (this.#emailTaken) return { emailTaken: true };
       return null;
     };
   }
@@ -147,7 +156,7 @@ export class ZenRegisterFormComponent {
 
             if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
               this.generalError = false;
-              this.emailTaken = true;
+              this.#emailTaken = true;
               this.email?.markAsTouched();
               this.email?.updateValueAndValidity();
               this.emailInput?.nativeElement.select();
@@ -155,7 +164,7 @@ export class ZenRegisterFormComponent {
 
             if (gqlErrors.find(e => e.code === 'USERNAME_TAKEN')) {
               this.generalError = false;
-              this.usernameTaken = true;
+              this.#usernameTaken = true;
               this.username?.markAsTouched();
               this.username?.updateValueAndValidity();
               this.usernameInput?.nativeElement.select();
@@ -163,5 +172,9 @@ export class ZenRegisterFormComponent {
           },
         });
     }
+  }
+
+  ngOnDestroy() {
+    this.#subs.forEach(s => s?.unsubscribe);
   }
 }

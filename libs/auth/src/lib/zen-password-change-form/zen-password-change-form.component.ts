@@ -1,8 +1,16 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnDestroy,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiConstants } from '@zen/api-interfaces';
 import { AuthPasswordChangeGQL, GqlErrors } from '@zen/graphql';
+import { Subscription } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
 import { passwordValidator } from '../validators';
@@ -12,17 +20,18 @@ import { passwordValidator } from '../validators';
   templateUrl: 'zen-password-change-form.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenPasswordChangeFormComponent {
+export class ZenPasswordChangeFormComponent implements OnDestroy {
   @Output() changed = new EventEmitter();
   @ViewChild('oldPasswordInput') oldPasswordInput?: ElementRef;
 
+  #subs: Array<Subscription | undefined> = [];
+  #incorrectPassword = false;
   ApiConstants = ApiConstants;
   loading = false;
   completed = false;
   generalError = false;
   form: FormGroup;
   hidePassword = true;
-  incorrectPassword = false;
 
   constructor(
     private authPasswordChangeGQL: AuthPasswordChangeGQL,
@@ -34,6 +43,11 @@ export class ZenPasswordChangeFormComponent {
       newPassword: ['', [Validators.required, this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
     });
+
+    const sub = this.oldPassword?.valueChanges.subscribe(() => {
+      this.#incorrectPassword = false;
+    });
+    this.#subs.push(sub);
   }
 
   get oldPassword() {
@@ -73,14 +87,9 @@ export class ZenPasswordChangeFormComponent {
     };
   }
 
-  incorrectPasswordReset() {
-    this.incorrectPassword = false;
-    this.oldPassword?.updateValueAndValidity();
-  }
-
   incorrectPasswordValidator(): ValidatorFn {
     return control => {
-      if (this.incorrectPassword) return { incorrect: true };
+      if (this.#incorrectPassword) return { incorrect: true };
       return null;
     };
   }
@@ -113,7 +122,7 @@ export class ZenPasswordChangeFormComponent {
 
             if (gqlErrors.find(e => e.code === 'WRONG_PASSWORD')) {
               this.generalError = false;
-              this.incorrectPassword = true;
+              this.#incorrectPassword = true;
               this.oldPassword?.markAsTouched();
               this.oldPassword?.updateValueAndValidity();
               this.oldPasswordInput?.nativeElement.select();
@@ -121,5 +130,9 @@ export class ZenPasswordChangeFormComponent {
           },
         });
     }
+  }
+
+  ngOnDestroy() {
+    this.#subs.forEach(s => s?.unsubscribe);
   }
 }

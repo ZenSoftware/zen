@@ -1,7 +1,15 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnDestroy,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ApiConstants } from '@zen/api-interfaces';
 import { AuthPasswordResetRequestQueryGQL, GqlErrors } from '@zen/graphql';
+import { Subscription } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
 
@@ -10,13 +18,14 @@ import { verticalAccordion } from '../animations';
   templateUrl: './zen-password-reset-request-form.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenPasswordResetRequestFormComponent {
+export class ZenPasswordResetRequestFormComponent implements OnDestroy {
   @Output() sent = new EventEmitter();
   @ViewChild('input') input?: ElementRef;
 
+  #subs: Array<Subscription | undefined> = [];
+  #notFound = false;
   loading = false;
   completed = false;
-  notFound = false;
   form: FormGroup;
   generalError = false;
 
@@ -38,6 +47,11 @@ export class ZenPasswordResetRequestFormComponent {
         ],
       ],
     });
+
+    const sub = this.emailOrUsername?.valueChanges.subscribe(() => {
+      this.#notFound = false;
+    });
+    this.#subs.push(sub);
   }
 
   get emailOrUsername() {
@@ -51,14 +65,9 @@ export class ZenPasswordResetRequestFormComponent {
     };
   }
 
-  notFoundReset() {
-    this.notFound = false;
-    this.emailOrUsername?.updateValueAndValidity();
-  }
-
   notFoundValidator(): ValidatorFn {
     return () => {
-      if (this.notFound) return { notFound: true };
+      if (this.#notFound) return { notFound: true };
       return null;
     };
   }
@@ -93,7 +102,7 @@ export class ZenPasswordResetRequestFormComponent {
 
             if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
               this.generalError = false;
-              this.notFound = true;
+              this.#notFound = true;
               this.emailOrUsername?.markAsTouched();
               this.emailOrUsername?.updateValueAndValidity();
               this.input?.nativeElement.select();
@@ -101,5 +110,9 @@ export class ZenPasswordResetRequestFormComponent {
           },
         });
     }
+  }
+
+  ngOnDestroy() {
+    this.#subs.forEach(s => s?.unsubscribe);
   }
 }
