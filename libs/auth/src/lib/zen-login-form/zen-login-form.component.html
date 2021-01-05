@@ -30,7 +30,10 @@
     Login
   </button>
 
-  <mat-progress-bar @verticalAccordion *ngIf="done" mode="indeterminate" class="my-3"></mat-progress-bar>
+  <div @verticalAccordion *ngIf="done" class="text-center mt-4">
+    <span class="text-sm">Redirecting...</span>
+    <mat-progress-bar  mode="indeterminate"></mat-progress-bar>
+  </div>
 
   <mat-error @verticalAccordion *ngIf="generalError" class="text-center my-3">
     There was a problem logging you in. If this continues, please contact us.
