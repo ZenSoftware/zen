@@ -6,7 +6,7 @@ documents:
   - "libs/**/*.gql.ts"
   - "apps/portal/src/**/*.gql.ts"
 config:
-  ngModule: ./graphql.module#GraphQLModule
+  ngModule: ./zen-graphql.module#ZenGraphQLModule
   omitOperationSuffix: true
   pureMagicComment: true
 generates:

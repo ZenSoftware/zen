@@ -1,7 +1,7 @@
 import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import { GraphQLModule } from './graphql.module';
+import { ZenGraphQLModule } from './zen-graphql.module';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -663,7 +663,7 @@ export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
     ${AuthSessionFields}`;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class AuthExchangeTokenGQL extends Apollo.Query<AuthExchangeToken, AuthExchangeTokenVariables> {
     document = AuthExchangeTokenDocument;
@@ -681,7 +681,7 @@ export const AuthLoginDocument = /*#__PURE__*/ gql`
     ${AuthSessionFields}`;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
     document = AuthLoginDocument;
@@ -697,7 +697,7 @@ export const AuthPasswordChangeDocument = /*#__PURE__*/ gql`
     `;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class AuthPasswordChangeGQL extends Apollo.Mutation<AuthPasswordChange, AuthPasswordChangeVariables> {
     document = AuthPasswordChangeDocument;
@@ -715,7 +715,7 @@ export const AuthPasswordResetConfirmationDocument = /*#__PURE__*/ gql`
     ${AuthSessionFields}`;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class AuthPasswordResetConfirmationGQL extends Apollo.Mutation<AuthPasswordResetConfirmation, AuthPasswordResetConfirmationVariables> {
     document = AuthPasswordResetConfirmationDocument;
@@ -731,7 +731,7 @@ export const AuthPasswordResetRequestQueryDocument = /*#__PURE__*/ gql`
     `;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class AuthPasswordResetRequestQueryGQL extends Apollo.Query<AuthPasswordResetRequestQuery, AuthPasswordResetRequestQueryVariables> {
     document = AuthPasswordResetRequestQueryDocument;
@@ -749,7 +749,7 @@ export const AuthRegisterDocument = /*#__PURE__*/ gql`
     ${AuthSessionFields}`;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class AuthRegisterGQL extends Apollo.Mutation<AuthRegister, AuthRegisterVariables> {
     document = AuthRegisterDocument;
@@ -765,7 +765,7 @@ export const LoggedInDocument = /*#__PURE__*/ gql`
     `;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class LoggedInGQL extends Apollo.Query<LoggedIn, LoggedInVariables> {
     document = LoggedInDocument;
@@ -781,7 +781,7 @@ export const UserRolesDocument = /*#__PURE__*/ gql`
     `;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
     document = UserRolesDocument;
@@ -799,7 +799,7 @@ export const FindUniqueUserDocument = /*#__PURE__*/ gql`
     ${UserFields}`;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class FindUniqueUserGQL extends Apollo.Query<FindUniqueUser, FindUniqueUserVariables> {
     document = FindUniqueUserDocument;
@@ -824,7 +824,7 @@ export const FindManyUserDocument = /*#__PURE__*/ gql`
     ${UserFields}`;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class FindManyUserGQL extends Apollo.Query<FindManyUser, FindManyUserVariables> {
     document = FindManyUserDocument;
@@ -847,7 +847,7 @@ export const FindManyUserCountDocument = /*#__PURE__*/ gql`
     `;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCount, FindManyUserCountVariables> {
     document = FindManyUserCountDocument;
@@ -865,7 +865,7 @@ export const CreateOneUserDocument = /*#__PURE__*/ gql`
     ${UserFields}`;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUser, CreateOneUserVariables> {
     document = CreateOneUserDocument;
@@ -883,7 +883,7 @@ export const UpdateOneUserDocument = /*#__PURE__*/ gql`
     ${UserFields}`;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUser, UpdateOneUserVariables> {
     document = UpdateOneUserDocument;
@@ -901,7 +901,7 @@ export const DeleteOneUserDocument = /*#__PURE__*/ gql`
     `;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
     document = DeleteOneUserDocument;
@@ -919,7 +919,7 @@ export const UpsertOneUserDocument = /*#__PURE__*/ gql`
     ${UserFields}`;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUser, UpsertOneUserVariables> {
     document = UpsertOneUserDocument;
@@ -937,7 +937,7 @@ export const DeleteManyUserDocument = /*#__PURE__*/ gql`
     `;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUser, DeleteManyUserVariables> {
     document = DeleteManyUserDocument;
@@ -955,7 +955,7 @@ export const UpdateManyUserDocument = /*#__PURE__*/ gql`
     `;
 
   @Injectable({
-    providedIn: GraphQLModule
+    providedIn: ZenGraphQLModule
   })
   export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
     document = UpdateManyUserDocument;
