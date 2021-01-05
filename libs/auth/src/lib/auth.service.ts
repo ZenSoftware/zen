@@ -39,9 +39,8 @@ export class AuthService {
     // Initialize apollo client state
     this.loggedIn = this.sessionTimeRemaining > 0;
 
-    // Initialize client apps user roles
     const roles = localStorage.getItem(LocalStorageKey.roles);
-    userRolesVar(roles ? roles?.split(',') : []);
+    userRolesVar(roles ? atob(roles).split(',') : []);
 
     // Start the token exchange interval if the user is logged in
     if (this.loggedIn) this.startExchangeInterval();
@@ -103,7 +102,7 @@ export class AuthService {
     const expiresOn = Date.now() + parseInt(authSession.maxAge, 10);
     localStorage.setItem(LocalStorageKey.sessionExpiresOn, expiresOn.toString());
     localStorage.setItem(LocalStorageKey.rememberMe, authSession.rememberMe.toString());
-    localStorage.setItem(LocalStorageKey.roles, authSession.roles.toString());
+    localStorage.setItem(LocalStorageKey.roles, btoa(authSession.roles.toString()));
 
     if (!this.rolesEqual(userRolesVar(), authSession.roles)) {
       if (authSession.roles) userRolesVar(authSession.roles);
