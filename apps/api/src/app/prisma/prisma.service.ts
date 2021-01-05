@@ -1,14 +1,8 @@
-import {
-  Injectable,
-  OnModuleDestroy,
-  OnModuleInit,
-  Optional,
-  Scope,
-} from '@nestjs/common';
+import { Injectable, OnModuleDestroy, OnModuleInit, Optional } from '@nestjs/common';
 import { PrismaDelete, onDeleteArgs } from '@paljs/plugins';
 import { Prisma, PrismaClient } from '@prisma/client';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   constructor(@Optional() options?: Prisma.PrismaClientOptions) {
     super(options);
