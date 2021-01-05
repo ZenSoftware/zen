@@ -17,6 +17,7 @@ export class ZenLoginFormComponent {
   @ViewChild('passwordInput') passwordInput?: ElementRef;
 
   loading = false;
+  done = false;
   #incorrectPassword = false;
   #usernameNotFound = false;
   hidePassword = true;
@@ -86,6 +87,7 @@ export class ZenLoginFormComponent {
         .subscribe({
           next: () => {
             this.loading = false;
+            this.done = true;
             this.loggedIn.emit();
           },
 

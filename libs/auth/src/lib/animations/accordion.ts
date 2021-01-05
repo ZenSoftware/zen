@@ -32,6 +32,12 @@ export const verticalAccordionLeave = animation(
 );
 
 export const verticalAccordion = [
+  trigger('verticalAccordionEnter', [
+    transition(':enter', useAnimation(verticalAccordionEnter)),
+  ]),
+  trigger('verticalAccordionLeave', [
+    transition(':leave', useAnimation(verticalAccordionLeave)),
+  ]),
   trigger('verticalAccordion', [
     transition(':enter', useAnimation(verticalAccordionEnter)),
     transition(':leave', useAnimation(verticalAccordionLeave)),
