@@ -66,15 +66,15 @@ export class ZenLoginFormComponent implements OnDestroy {
     return this.form.get('rememberMe');
   }
 
-  usernameNotFoundValidator(): ValidatorFn {
-    return control => (this.#usernameNotFound ? { notFound: true } : null);
-  }
-
   usernameValidator(): ValidatorFn {
     return control => {
       if (this.form) return usernameValidator(control);
       return null;
     };
+  }
+
+  usernameNotFoundValidator(): ValidatorFn {
+    return control => (this.#usernameNotFound ? { notFound: true } : null);
   }
 
   incorrectPasswordValidator(): ValidatorFn {
