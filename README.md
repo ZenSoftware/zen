@@ -77,7 +77,11 @@ npm start
 - [X] `Forgot password component` and full password reset flow.
 - [X] `Password change component` for user dashboards (coming soon)
 - [X] `Angular route guards` and `Angular directives` to show/hide content depending on user's roles.
-- [X] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
+- [ ] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side ~~[role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true)~~ [Attribute-based access control](https://www.wikiwand.com/en/Attribute-based_access_control) to allow for declarative, fine grained security control over all GraphQL queries and mutations. Follow the [Git Issue here](https://github.com/ZenSoftware/Zen/issues/7).
+  - [ ] [Nest + casl](https://docs.nestjs.com/security/authorization#integrating-casl]) integration
+    - [ ] Code generate default security permissions for Prisma models
+    - [ ] Directives to customize policies over GraphQL resolvers
+  - [ ] [@casl/angular](https://www.npmjs.com/package/@casl/angular) integration
 - [x] 100% stateless web server authentication via [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality). Keeping the API stateless will enable horizontal scaling of container replicas in production.
 
 ---
