@@ -11,8 +11,8 @@ import { PrismaModule } from './prisma';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
-      ttl: 60,
       limit: 10,
+      ttl: 60,
     }),
     ZenAuthModule,
     ConfigModule,

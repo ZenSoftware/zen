@@ -68,7 +68,7 @@ export const AuthTypeDef = gql`
 
 @Resolver('Auth')
 @UseGuards(ThrottlerGuard)
-@Throttle(5, 60)
+@Throttle()
 export class AuthResolver {
   private CLEAR_COOKIE_OPTIONS: CookieOptions = {
     maxAge: 0,
