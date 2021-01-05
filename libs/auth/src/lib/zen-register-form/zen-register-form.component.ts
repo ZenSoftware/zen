@@ -62,7 +62,7 @@ export class ZenRegisterFormComponent {
 
   usernameTakenReset() {
     this.usernameTaken = false;
-    this.email?.updateValueAndValidity();
+    this.username?.updateValueAndValidity();
   }
 
   usernameTakenValidator(): ValidatorFn {
