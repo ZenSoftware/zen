@@ -26,8 +26,6 @@ $euro-font: mat-typography-config(
   $input: mat-typography-level(inherit, 1.125, 400),
 );
 
-@include angular-material-typography($euro-font);
-
 // Available color palettes: https://material.io/design/color/
 $zen-app-primary: mat-palette($zen-primary); // Custom _palette.scss
 $zen-app-accent: mat-palette($zen-accent); // Custom _palette.scss
@@ -84,3 +82,4 @@ $zen-app-theme: mat-dark-theme(
 );
 
 @include angular-material-theme($zen-app-theme);
+@include angular-material-typography($euro-font);
