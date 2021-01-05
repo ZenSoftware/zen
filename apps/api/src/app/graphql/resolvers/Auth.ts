@@ -88,7 +88,7 @@ export class AuthResolver {
       where: {
         username: {
           mode: 'insensitive',
-          equals: username,
+          equals: username.trim(),
         },
       },
     });
@@ -99,7 +99,7 @@ export class AuthResolver {
       where: {
         email: {
           mode: 'insensitive',
-          equals: email,
+          equals: email.trim(),
         },
       },
     });
