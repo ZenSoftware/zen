@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { AuthService } from '../auth.service';
 
@@ -7,5 +7,7 @@ import { AuthService } from '../auth.service';
   templateUrl: 'zen-login-link.component.html',
 })
 export class ZenLoginLinkComponent {
+  @Input() displayLogout = true;
+
   constructor(public auth: AuthService) {}
 }
