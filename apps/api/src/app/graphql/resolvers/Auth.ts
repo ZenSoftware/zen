@@ -193,12 +193,8 @@ export class AuthResolver {
   async authRegister(@Context() ctx: IContext, @Args('data') data: AuthRegisterInput) {
     if (await this.getUserByUsername(data.username, ctx.prisma))
       throw new HttpException({ code: 'USERNAME_TAKEN' }, 400);
-    if (await this.getUserByEmail(data.username, ctx.prisma))
-      throw new HttpException({ code: 'USERNAME_TAKEN' }, 400);
 
     if (await this.getUserByEmail(data.email, ctx.prisma))
-      throw new HttpException({ code: 'EMAIL_TAKEN' }, 400);
-    if (await this.getUserByUsername(data.email, ctx.prisma))
       throw new HttpException({ code: 'EMAIL_TAKEN' }, 400);
 
     const hashedPassword = await bcrypt.hash(data.password, 12);
