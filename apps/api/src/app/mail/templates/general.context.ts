@@ -1,4 +1,4 @@
-export interface WelcomeContext {
+export interface GeneralContext {
   siteUrl: string;
   hiddenPreheaderText: string;
   header: string;

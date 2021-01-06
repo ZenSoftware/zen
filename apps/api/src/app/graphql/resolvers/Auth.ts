@@ -209,7 +209,7 @@ export class AuthResolver {
     });
 
     if (this.config.production) {
-      this.mail.sendWelcome({
+      this.mail.sendGeneral({
         to: user.email,
         context: {
           siteUrl: this.config.siteUrl,

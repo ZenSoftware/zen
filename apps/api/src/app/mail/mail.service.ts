@@ -4,7 +4,7 @@ import { User } from '@prisma/client';
 
 import { ConfigService } from '../config';
 import { JwtService } from '../jwt';
-import { PasswordResetContext, WelcomeContext } from './templates';
+import { GeneralContext, PasswordResetContext } from './templates';
 
 type MailTemplate = 'welcome' | 'password-reset';
 
@@ -22,7 +22,7 @@ export class MailService {
     return this.mailer.sendMail(options);
   }
   //--------------------------------------------------------------------------
-  sendWelcome(options: { to: string; context: WelcomeContext }) {
+  sendGeneral(options: { to: string; context: GeneralContext }) {
     return this.send({
       template: 'welcome',
       to: options.to,

@@ -1,2 +1,2 @@
 export * from './password-reset.context';
-export * from './welcome.context';
+export * from './general.context';
