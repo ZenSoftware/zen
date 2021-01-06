@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnDestroy,
   Output,
   ViewChild,
@@ -20,9 +21,11 @@ import { usernameValidator } from '../validators';
   animations: [...verticalAccordion],
 })
 export class ZenLoginFormComponent implements OnDestroy {
-  @Output() loggedIn = new EventEmitter();
   @ViewChild('usernameInput') usernameInput?: ElementRef;
   @ViewChild('passwordInput') passwordInput?: ElementRef;
+  @Input() doneMessage = 'Redirecting...';
+  @Input() enableDoneSection = true;
+  @Output() loggedIn = new EventEmitter();
 
   #subs: Array<Subscription | undefined> = [];
   #incorrectPassword = false;
