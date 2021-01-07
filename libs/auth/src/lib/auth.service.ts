@@ -42,7 +42,14 @@ export class AuthService {
       userRolesVar(roles ? atob(roles).split(',') : []);
       loggedInVar(true);
 
-      if (this.sessionTimeRemaining <= env.jwtExchangeInterval) this.exchangeToken();
+      if (this.sessionTimeRemaining <= env.jwtExchangeInterval) {
+        this.exchangeToken();
+      } else if (
+        this.rememberMe &&
+        this.sessionTimeRemaining <= 14 * 24 * 60 * 60 * 1000 // 14 days
+      ) {
+        this.exchangeToken();
+      }
 
       this.startExchangeInterval();
     } else {
