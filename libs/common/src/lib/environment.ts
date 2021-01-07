@@ -1,5 +1,6 @@
 export abstract class Environment {
   abstract readonly production: boolean;
+  abstract readonly jwtExchangeInterval: number;
   abstract readonly url: {
     readonly api: string;
     readonly portal: string;
@@ -10,6 +11,7 @@ export abstract class Environment {
 
 export class EnvironmentCommonDev implements Environment {
   production = false;
+  jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   url = {
     api: 'http://localhost:7080',
     portal: 'http://localhost:4200/#/',
@@ -20,7 +22,7 @@ export class EnvironmentCommonDev implements Environment {
 
 export class EnvironmentCommonProd implements Environment {
   production = true;
-  assetRoot = './assets';
+  jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   url = {
     api: 'https://api.site.com',
     portal: 'https://portal.site.com/#/',

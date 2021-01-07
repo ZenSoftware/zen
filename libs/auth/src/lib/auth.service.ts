@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Environment } from '@zen/common';
 import {
   AuthExchangeTokenGQL,
   AuthLoginGQL,
@@ -25,16 +26,15 @@ enum LocalStorageKey {
   providedIn: 'root',
 })
 export class AuthService {
-  readonly #EXCHANGE_INTERVAL = 30 * 60 * 1000; // 30 minutes
   #exchangeIntervalSubscription?: Subscription;
-  #autoLogoutSubscription?: Subscription;
   #graphqlSubscriptionClient$ = new BehaviorSubject<AuthSession | null>(null);
 
   constructor(
     private router: Router,
     private apollo: Apollo,
     private authLoginGQL: AuthLoginGQL,
-    private authExchangeTokenGQL: AuthExchangeTokenGQL
+    private authExchangeTokenGQL: AuthExchangeTokenGQL,
+    private env: Environment
   ) {
     if (this.loggedIn) {
       // Initialize apollo client state
@@ -42,7 +42,7 @@ export class AuthService {
       userRolesVar(roles ? atob(roles).split(',') : []);
       loggedInVar(true);
 
-      if (this.sessionTimeRemaining <= this.#EXCHANGE_INTERVAL) this.exchangeToken();
+      if (this.sessionTimeRemaining <= env.jwtExchangeInterval) this.exchangeToken();
 
       this.startExchangeInterval();
     } else {
@@ -167,20 +167,11 @@ export class AuthService {
 
   private startExchangeInterval() {
     if (!this.rememberMe && !this.#exchangeIntervalSubscription) {
-      this.#exchangeIntervalSubscription = interval(this.#EXCHANGE_INTERVAL).subscribe(
-        () => {
-          if (this.loggedIn) this.exchangeToken();
-          else this.logout();
-        }
-      );
-    }
-
-    if (!this.#autoLogoutSubscription) {
-      this.#autoLogoutSubscription = interval(30_000).subscribe(() => {
-        if (!this.loggedIn) {
-          this.logout();
-          console.log('Auto logout');
-        }
+      this.#exchangeIntervalSubscription = interval(
+        this.env.jwtExchangeInterval
+      ).subscribe(() => {
+        if (this.loggedIn) this.exchangeToken();
+        else this.logout();
       });
     }
   }
@@ -189,11 +180,6 @@ export class AuthService {
     if (this.#exchangeIntervalSubscription) {
       this.#exchangeIntervalSubscription.unsubscribe();
       this.#exchangeIntervalSubscription = undefined;
-    }
-
-    if (this.#autoLogoutSubscription) {
-      this.#autoLogoutSubscription.unsubscribe();
-      this.#autoLogoutSubscription = undefined;
     }
   }
 }
