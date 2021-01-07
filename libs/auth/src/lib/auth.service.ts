@@ -37,14 +37,17 @@ export class AuthService {
     private authExchangeTokenGQL: AuthExchangeTokenGQL
   ) {
     if (this.loggedIn) {
+      // Initialize apollo client state
       const roles = localStorage.getItem(LocalStorageKey.roles);
-      userRolesVar(roles ? atob(roles).split(',') : []); // Initialize apollo client state
+      userRolesVar(roles ? atob(roles).split(',') : []);
+      loggedInVar(true);
 
       if (this.sessionTimeRemaining <= this.#EXCHANGE_INTERVAL) this.exchangeToken();
 
       this.startExchangeInterval();
     } else {
       this.clearSession();
+      loggedInVar(false);
     }
 
     this.graphqlSubscriptionClient$.subscribe(() =>
@@ -174,7 +177,10 @@ export class AuthService {
 
     if (!this.#autoLogoutSubscription) {
       this.#autoLogoutSubscription = interval(30_000).subscribe(() => {
-        if (!this.loggedIn) this.logout();
+        if (!this.loggedIn) {
+          this.logout();
+          console.log('Auto logout');
+        }
       });
     }
   }
