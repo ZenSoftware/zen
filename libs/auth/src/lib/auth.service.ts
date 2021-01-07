@@ -132,8 +132,8 @@ export class AuthService {
     else return timeRemaining;
   }
 
-  rolesEqual(a: string[] | null | undefined, b: string[] | null | undefined) {
-    if (a && b) return isEqual(orderBy(a), orderBy(b));
+  rolesEqual(a: string | string[] | null | undefined, b: string | string[] | null | undefined) {
+    if (Array.isArray(a) && Array.isArray(b)) return isEqual(orderBy(a), orderBy(b));
     return a === b;
   }
 
