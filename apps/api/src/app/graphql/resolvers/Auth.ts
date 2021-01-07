@@ -211,11 +211,12 @@ export class AuthResolver {
     if (this.config.production) {
       this.mail.sendGeneral({
         to: user.email,
+        subject: 'Sign Up Confirmed',
         context: {
           siteUrl: this.config.siteUrl,
           hiddenPreheaderText: `Sign up confirmed for ${user.username}`,
           header: 'Welcome',
-          subject: 'Sign Up Confirmed',
+          subHeading: 'Sign Up Confirmed',
           body: `Thanks you for signing up ${user.username}!`,
           footerHeader: '',
           footerBody: '',

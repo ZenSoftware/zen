@@ -6,7 +6,7 @@ import { ConfigService } from '../config';
 import { JwtService } from '../jwt';
 import { GeneralContext, PasswordResetContext } from './templates';
 
-type MailTemplate = 'welcome' | 'password-reset';
+type MailTemplate = 'general' | 'password-reset';
 
 type MailOptions = ISendMailOptions & { template?: MailTemplate };
 
@@ -22,11 +22,11 @@ export class MailService {
     return this.mailer.sendMail(options);
   }
   //--------------------------------------------------------------------------
-  sendGeneral(options: { to: string; context: GeneralContext }) {
+  sendGeneral(options: { to: string; subject: string; context: GeneralContext }) {
     return this.send({
-      template: 'welcome',
+      template: 'general',
       to: options.to,
-      subject: options.context.subject,
+      subject: options.subject,
       context: options.context,
     }).then();
   }
