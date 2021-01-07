@@ -15,6 +15,7 @@ import { NEST_RESOLVERS } from './resolvers';
     MailModule,
     GraphQLModule.forRootAsync({
       useClass: GqlConfigService,
+      imports: [PrismaModule],
     }),
   ],
   providers: [...NEST_RESOLVERS],

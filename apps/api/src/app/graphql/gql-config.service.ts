@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { ContextIdFactory, ModuleRef } from '@nestjs/core';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 import { print } from 'graphql';
 
@@ -10,7 +9,10 @@ import { ALL_TYPE_DEFS } from './resolvers';
 
 @Injectable()
 export class GqlConfigService implements GqlOptionsFactory {
-  constructor(private readonly config: ConfigService, private moduleRef: ModuleRef) {}
+  constructor(
+    private readonly config: ConfigService,
+    private readonly prisma: PrismaService
+  ) {}
 
   createGqlOptions(): GqlModuleOptions {
     return {
@@ -22,11 +24,13 @@ export class GqlConfigService implements GqlOptionsFactory {
       tracing: this.config.graphql.playground,
       cors: this.config.production ? undefined : { credentials: true, origin: true },
       context: async (ctx): Promise<IContext> => {
-        const prisma = await this.moduleRef.get(PrismaService, { strict: false });
-
         return ctx.connection
-          ? { ...ctx, prisma, req: ctx.connection.context as { token: string } } // Include WebSocketLink context for JwtStrategy
-          : { ...ctx, prisma };
+          ? {
+              ...ctx,
+              prisma: this.prisma,
+              req: ctx.connection.context as { token: string }, // Include WebSocketLink context for JwtStrategy
+            }
+          : { ...ctx, prisma: this.prisma };
       },
       uploads: {
         maxFileSize: 20_000_000, // 20 MB
