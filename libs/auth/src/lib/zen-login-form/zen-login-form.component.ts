@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -8,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
 import { GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
@@ -20,7 +22,8 @@ import { usernameValidator } from '../validators';
   templateUrl: 'zen-login-form.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenLoginFormComponent implements OnDestroy {
+export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('usernameMatInput') usernameMatInput?: MatInput;
   @ViewChild('usernameInput') usernameInput?: ElementRef;
   @ViewChild('passwordInput') passwordInput?: ElementRef;
   @Input() doneMessage = 'Redirecting...';
@@ -55,6 +58,12 @@ export class ZenLoginFormComponent implements OnDestroy {
       this.#incorrectPassword = false;
     });
     this.#subs.push(sub2);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.usernameMatInput?.focus();
+    });
   }
 
   get username() {

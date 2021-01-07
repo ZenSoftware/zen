@@ -1,5 +1,14 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiConstants } from '@zen/api-interfaces';
 import { AuthPasswordResetConfirmationGQL, AuthSession } from '@zen/graphql';
@@ -15,7 +24,9 @@ import { passwordValidator } from '../validators';
   templateUrl: 'zen-password-reset-confirmation-form.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenPasswordResetConfirmationFormComponent implements OnInit, OnDestroy {
+export class ZenPasswordResetConfirmationFormComponent
+  implements AfterViewInit, OnDestroy {
+  @ViewChild('passwordMatInput') passwordMatInput?: MatInput;
   @Output() confirmed = new EventEmitter();
 
   private subscription?: Subscription;
@@ -38,12 +49,17 @@ export class ZenPasswordResetConfirmationFormComponent implements OnInit, OnDest
       password: ['', [Validators.required, this.passwordValidator()]],
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
     });
-  }
 
-  ngOnInit() {
     this.subscription = this.route.queryParamMap
       .pipe(map(params => params.get('token')))
       .subscribe(token => (this.token = token));
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.passwordMatInput?.focus();
+      console.log('mat focus', this.passwordMatInput);
+    });
   }
 
   get password() {

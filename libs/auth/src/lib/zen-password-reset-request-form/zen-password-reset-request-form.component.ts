@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -7,6 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
 import { ApiConstants } from '@zen/api-interfaces';
 import { AuthPasswordResetRequestQueryGQL, GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -18,9 +20,10 @@ import { verticalAccordion } from '../animations';
   templateUrl: './zen-password-reset-request-form.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenPasswordResetRequestFormComponent implements OnDestroy {
+export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('emailUsernameMatInput') emailUsernameMatInput?: MatInput;
+  @ViewChild('emailUsernameInput') emailUsernameInput?: ElementRef;
   @Output() sent = new EventEmitter();
-  @ViewChild('input') input?: ElementRef;
 
   #subs: Array<Subscription | undefined> = [];
   #notFound = false;
@@ -52,6 +55,12 @@ export class ZenPasswordResetRequestFormComponent implements OnDestroy {
       this.#notFound = false;
     });
     this.#subs.push(sub);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.emailUsernameMatInput?.focus();
+    });
   }
 
   get emailOrUsername() {
@@ -105,7 +114,7 @@ export class ZenPasswordResetRequestFormComponent implements OnDestroy {
               this.#notFound = true;
               this.emailOrUsername?.markAsTouched();
               this.emailOrUsername?.updateValueAndValidity();
-              this.input?.nativeElement.select();
+              this.emailUsernameInput?.nativeElement.select();
             }
           },
         });
