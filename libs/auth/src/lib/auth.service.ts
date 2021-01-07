@@ -76,13 +76,13 @@ export class AuthService {
         .fetch(undefined, { fetchPolicy: 'network-only' })
         .subscribe({
           next: ({ data: { authExchangeToken } }) => {
-            // Re-run route guards if roles have changed
             // TODO: See if this is necessary
-            if (!this.rolesEqual(userRolesVar(), authExchangeToken.roles)) {
-              console.log('Reload', this.router.url);
-              this.setSession(authExchangeToken);
-              this.router.navigateByUrl(this.router.url);
-            }
+            // Re-run route guards if roles have changed
+            // if (!this.rolesEqual(userRolesVar(), authExchangeToken.roles)) {
+            //   console.log('Reload', this.router.url);
+            //   this.setSession(authExchangeToken);
+            //   this.router.navigateByUrl(this.router.url);
+            // }
 
             this.setSession(authExchangeToken);
             console.log('Exchanged token');
