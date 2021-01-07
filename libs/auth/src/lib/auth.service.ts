@@ -70,8 +70,8 @@ export class AuthService {
   }
 
   logout() {
-    loggedInVar(false);
     this.clearSession();
+    loggedInVar(false);
     this.router.navigateByUrl('/login');
   }
 
