@@ -36,12 +36,9 @@ export class AuthService {
     private authLoginGQL: AuthLoginGQL,
     private authExchangeTokenGQL: AuthExchangeTokenGQL
   ) {
-    // Initialize apollo client state
-    this.loggedIn = this.sessionTimeRemaining > 0;
-
     if (this.loggedIn) {
       const roles = localStorage.getItem(LocalStorageKey.roles);
-      userRolesVar(roles ? atob(roles).split(',') : []);
+      userRolesVar(roles ? atob(roles).split(',') : []); // Initialize apollo client state
 
       this.startExchangeInterval();
     }
@@ -70,35 +67,6 @@ export class AuthService {
     this.router.navigateByUrl('/login');
   }
 
-  exchangeToken() {
-    if (this.loggedIn) {
-      this.authExchangeTokenGQL
-        .fetch(undefined, { fetchPolicy: 'network-only' })
-        .subscribe({
-          next: ({ data: { authExchangeToken } }) => {
-            // TODO: See if this is necessary
-            // Re-run route guards if roles have changed
-            // if (!this.rolesEqual(userRolesVar(), authExchangeToken.roles)) {
-            //   console.log('Reload', this.router.url);
-            //   this.setSession(authExchangeToken);
-            //   this.router.navigateByUrl(this.router.url);
-            // }
-
-            this.setSession(authExchangeToken);
-            console.log('Exchanged token');
-          },
-          error: errors => {
-            const gqlErrors = new GqlErrors(errors);
-
-            if (gqlErrors.find(e => e.statusCode === 401)) {
-              this.logout();
-              console.error('Exchange token failed');
-            }
-          },
-        });
-    }
-  }
-
   setSession(authSession: AuthSession) {
     const expiresOn = Date.now() + parseInt(authSession.maxAge, 10);
     localStorage.setItem(LocalStorageKey.sessionExpiresOn, expiresOn.toString());
@@ -114,25 +82,10 @@ export class AuthService {
     this.#graphqlSubscriptionClient$.next(authSession);
   }
 
-  private clearLocalStorage() {
-    localStorage.removeItem(LocalStorageKey.sessionExpiresOn);
-    localStorage.removeItem(LocalStorageKey.rememberMe);
-    localStorage.removeItem(LocalStorageKey.roles);
-    userRolesVar([]);
-  }
-
-  private get sessionTimeRemaining(): number {
-    const sessionExpiresOnString = localStorage.getItem(LocalStorageKey.sessionExpiresOn);
-    if (!sessionExpiresOnString) return 0;
-
-    const expiresOn = +sessionExpiresOnString;
-    const timeRemaining = expiresOn - Date.now();
-
-    if (timeRemaining <= 0) return 0;
-    else return timeRemaining;
-  }
-
-  rolesEqual(a: string | string[] | null | undefined, b: string | string[] | null | undefined) {
+  rolesEqual(
+    a: string | string[] | null | undefined,
+    b: string | string[] | null | undefined
+  ) {
     if (Array.isArray(a) && Array.isArray(b)) return isEqual(orderBy(a), orderBy(b));
     return a === b;
   }
@@ -157,11 +110,13 @@ export class AuthService {
     return 'true' === localStorage.getItem(LocalStorageKey.rememberMe);
   }
 
-  get loggedIn(): boolean {
-    return this.sessionTimeRemaining > 0;
+  private get loggedIn(): boolean {
+    const val = this.sessionTimeRemaining > 0;
+    this.loggedIn = val;
+    return val;
   }
 
-  set loggedIn(value: boolean) {
+  private set loggedIn(value: boolean) {
     if (!value) {
       this.stopExchangeInterval();
       this.clearLocalStorage();
@@ -172,6 +127,47 @@ export class AuthService {
     }
 
     if (value !== loggedInVar()) loggedInVar(value);
+  }
+
+  private get sessionTimeRemaining(): number {
+    const sessionExpiresOnString = localStorage.getItem(LocalStorageKey.sessionExpiresOn);
+    if (!sessionExpiresOnString) return 0;
+
+    const expiresOn = +sessionExpiresOnString;
+    const timeRemaining = expiresOn - Date.now();
+
+    if (timeRemaining <= 0) return 0;
+    else return timeRemaining;
+  }
+
+  private clearLocalStorage() {
+    localStorage.removeItem(LocalStorageKey.sessionExpiresOn);
+    localStorage.removeItem(LocalStorageKey.rememberMe);
+    localStorage.removeItem(LocalStorageKey.roles);
+    userRolesVar([]);
+  }
+
+  private exchangeToken() {
+    if (this.loggedIn) {
+      this.authExchangeTokenGQL
+        .fetch(undefined, { fetchPolicy: 'network-only' })
+        .subscribe({
+          next: ({ data: { authExchangeToken } }) => {
+            this.setSession(authExchangeToken);
+            console.log('Exchanged token');
+          },
+          error: errors => {
+            const gqlErrors = new GqlErrors(errors);
+
+            if (gqlErrors.find(e => e.statusCode === 401)) {
+              this.logout();
+              console.error('Exchange token failed');
+            }
+          },
+        });
+    } else {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   private startExchangeInterval() {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { loggedInVar } from '@zen/graphql/client';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -11,7 +12,7 @@ import { AuthService } from '../auth.service';
 })
 export class ZenLoginPageComponent {
   constructor(private router: Router, private auth: AuthService) {
-    if (auth.loggedIn) this.router.navigateByUrl('/');
+    if (loggedInVar()) this.router.navigateByUrl('/');
   }
 
   onLoggedIn() {

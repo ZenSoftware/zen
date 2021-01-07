@@ -6,6 +6,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { LoggedInGQL } from '@zen/graphql';
+import { loggedInVar } from '@zen/graphql/client';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
@@ -36,10 +37,8 @@ export class IfLoggedInDirective implements OnDestroy {
   }
 
   showIfAllowed() {
-    if (
-      (this.showIfLoggedIn && this.auth.loggedIn) ||
-      (!this.showIfLoggedIn && !this.auth.loggedIn)
-    ) {
+    const loggedIn = loggedInVar();
+    if ((this.showIfLoggedIn && loggedIn) || (!this.showIfLoggedIn && !loggedIn)) {
       this.render();
     } else {
       this.clear();
