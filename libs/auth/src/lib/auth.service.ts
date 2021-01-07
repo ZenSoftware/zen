@@ -43,6 +43,8 @@ export class AuthService {
       if (this.sessionTimeRemaining <= this.#EXCHANGE_INTERVAL) this.exchangeToken();
 
       this.startExchangeInterval();
+    } else {
+      this.clearSession();
     }
 
     this.graphqlSubscriptionClient$.subscribe(() =>
@@ -118,15 +120,6 @@ export class AuthService {
     return this.sessionTimeRemaining > 0;
   }
 
-  private clearSession() {
-    this.stopExchangeInterval();
-    this.clearLocalStorage();
-    Cookies.remove('jwt');
-    Cookies.remove('rememberMe');
-    this.apollo.client.cache.reset();
-    this.#graphqlSubscriptionClient$.next(null);
-  }
-
   private get sessionTimeRemaining(): number {
     const sessionExpiresOnString = localStorage.getItem(LocalStorageKey.sessionExpiresOn);
     if (!sessionExpiresOnString) return 0;
@@ -138,11 +131,16 @@ export class AuthService {
     else return timeRemaining;
   }
 
-  private clearLocalStorage() {
+  private clearSession() {
+    this.stopExchangeInterval();
     localStorage.removeItem(LocalStorageKey.sessionExpiresOn);
     localStorage.removeItem(LocalStorageKey.rememberMe);
     localStorage.removeItem(LocalStorageKey.roles);
     userRolesVar([]);
+    Cookies.remove('jwt');
+    Cookies.remove('rememberMe');
+    this.apollo.client.cache.reset();
+    this.#graphqlSubscriptionClient$.next(null);
   }
 
   private exchangeToken() {
