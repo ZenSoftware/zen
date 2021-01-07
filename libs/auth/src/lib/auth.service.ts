@@ -39,11 +39,12 @@ export class AuthService {
     // Initialize apollo client state
     this.loggedIn = this.sessionTimeRemaining > 0;
 
-    const roles = localStorage.getItem(LocalStorageKey.roles);
-    userRolesVar(roles ? atob(roles).split(',') : []);
+    if (this.loggedIn) {
+      const roles = localStorage.getItem(LocalStorageKey.roles);
+      userRolesVar(roles ? atob(roles).split(',') : []);
 
-    // Start the token exchange interval if the user is logged in
-    if (this.loggedIn) this.startExchangeInterval();
+      this.startExchangeInterval();
+    }
 
     this.graphqlSubscriptionClient$.subscribe(() =>
       ZenGraphQLModule.reconnectSubscriptionClient()
