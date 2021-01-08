@@ -6,6 +6,7 @@ import { ConfigModule } from './config';
 import { ToolsController } from './controllers';
 import { ZenGraphQLModule } from './graphql';
 import { JwtModule } from './jwt';
+import { MailModule } from './mail';
 import { PrismaModule } from './prisma';
 
 @Module({
@@ -16,8 +17,9 @@ import { PrismaModule } from './prisma';
     }),
     ZenAuthModule,
     ConfigModule,
-    JwtModule,
     ZenGraphQLModule,
+    JwtModule,
+    MailModule,
     PrismaModule,
   ],
   controllers: [ToolsController],
