@@ -19,7 +19,7 @@ export const environment: EnvironmentBase = {
   cookie: {
     secure: true,
     sameSite: 'strict',
-    domain: 'api.site.com',
+    domain: 'site.com',
   },
   smtp: {
     server: process.env.SMTP_SERVER,
