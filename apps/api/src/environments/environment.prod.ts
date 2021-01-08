@@ -12,7 +12,11 @@ export const environment: EnvironmentBase = {
     publicKey: process.env.JWT_PUBLIC_KEY,
     signOptions: {
       algorithm: 'RS256',
-      expiresIn: 3600, // 1 hour (in seconds). The client will exchange the token every 30 minutes during active sessions
+      /**
+       * The client will exchange the token every 30 minutes during active sessions
+       * See: `libs\common\src\lib\environment` and `EnvironmentCommonDev.jwtExchangeInterval`
+       */
+      expiresIn: 3600, // 1 hour (in seconds)
     },
   },
   rememberMeExpiresIn: 2592000, // 30 days (in seconds)

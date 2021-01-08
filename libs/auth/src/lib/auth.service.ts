@@ -46,7 +46,7 @@ export class AuthService {
         this.exchangeToken();
       } else if (
         this.rememberMe &&
-        this.sessionTimeRemaining <= 14 * 24 * 60 * 60 * 1000 // 14 days
+        this.sessionTimeRemaining <= this.env.rememberMeExchangeThreshold
       ) {
         this.exchangeToken();
       }
