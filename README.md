@@ -1,5 +1,5 @@
 # ⛩ Zen ⛩ 
-#### Nest + Prisma + Angular 🏮 Modern Full Stack SPA 
+#### Nest + Prisma + Angular 🏮 Full Stack Starter Kit 
 
 ---
 
