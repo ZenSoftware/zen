@@ -71,7 +71,7 @@ npm start
 
 ## 🍱 API Authentication, Performance & Scaling
 
-- [X] [Nest authentication](https://docs.nestjs.com/techniques/authentication), user creation, and login system designed specifically to work for an [Angular SPA (single page application)](https://angular.io/). This project will provide responsive, "mobile first" interfaces for the standard set of authentication features.
+- [X] [Nest authentication](https://docs.nestjs.com/techniques/authentication), user registration, and login system designed specifically to work for an [Angular SPA (single page application)](https://angular.io/). This project will provide responsive, "mobile first" interfaces for the standard set of authentication features.
 - [X] `New account component`
 - [x] `Login component`
 - [X] `Forgot password component` and full password reset flow.
