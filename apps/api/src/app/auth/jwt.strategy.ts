@@ -24,11 +24,10 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: JwtPayload) {
-    let roles: string[] = [];
-    if (payload.roles) {
-      roles = payload.roles.split(',');
-    }
-    const user: RequestUser = { id: payload.id, roles };
+    const user: RequestUser = {
+      id: payload.id,
+      roles: payload.roles ? payload.roles.split(',') : [],
+    };
     return user;
   }
 }
