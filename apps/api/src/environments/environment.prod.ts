@@ -19,7 +19,7 @@ export const environment: EnvironmentBase = {
       expiresIn: 3600, // 1 hour (in seconds)
     },
   },
-  rememberMeExpiresIn: 2592000, // 30 days (in seconds)
+  expiresInRememberMe: 2592000, // 30 days (in seconds)
   cookie: {
     secure: true,
     sameSite: 'strict',

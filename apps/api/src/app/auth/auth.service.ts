@@ -29,7 +29,7 @@ export class AuthService {
     };
 
     const expiresIn = rememberMe
-      ? this.config.rememberMeExpiresIn
+      ? this.config.expiresInRememberMe
       : (this.config.jwtOptions.signOptions.expiresIn as number);
     const maxAge = expiresIn * 1000;
     const token = this.jwtService.sign(jwtPayload, { expiresIn });
