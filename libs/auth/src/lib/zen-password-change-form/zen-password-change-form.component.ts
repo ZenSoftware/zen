@@ -65,6 +65,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   passwordValidator(): ValidatorFn {
     return control => {
       if (this.form) {
+        this.passwordConfirm?.updateValueAndValidity();
         return passwordValidator(control);
       }
       return null;

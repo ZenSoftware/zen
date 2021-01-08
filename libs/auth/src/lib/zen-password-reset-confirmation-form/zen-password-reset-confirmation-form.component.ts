@@ -30,6 +30,7 @@ export class ZenPasswordResetConfirmationFormComponent
   @Output() confirmed = new EventEmitter();
 
   private subscription?: Subscription;
+  #subs: Array<Subscription | undefined> = [];
   ApiConstants = ApiConstants;
   loading = false;
   completed = false;
@@ -50,9 +51,10 @@ export class ZenPasswordResetConfirmationFormComponent
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
     });
 
-    this.subscription = this.route.queryParamMap
+    const sub = this.route.queryParamMap
       .pipe(map(params => params.get('token')))
       .subscribe(token => (this.token = token));
+    this.#subs.push(sub);
   }
 
   ngAfterViewInit() {
@@ -130,6 +132,6 @@ export class ZenPasswordResetConfirmationFormComponent
   }
 
   ngOnDestroy() {
-    if (this.subscription) this.subscription.unsubscribe();
+    this.#subs.forEach(s => s?.unsubscribe);
   }
 }
