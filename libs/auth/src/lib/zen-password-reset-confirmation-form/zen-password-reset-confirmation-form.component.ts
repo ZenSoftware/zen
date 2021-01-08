@@ -29,7 +29,6 @@ export class ZenPasswordResetConfirmationFormComponent
   @ViewChild('passwordMatInput') passwordMatInput?: MatInput;
   @Output() confirmed = new EventEmitter();
 
-  private subscription?: Subscription;
   #subs: Array<Subscription | undefined> = [];
   ApiConstants = ApiConstants;
   loading = false;
@@ -85,12 +84,6 @@ export class ZenPasswordResetConfirmationFormComponent
   passwordConfirmValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        if (
-          control.value.length >= this.password?.value.length &&
-          control.value.length !== 0
-        ) {
-          control.markAsTouched();
-        }
         const notMatching = this.password?.value !== control.value;
         return notMatching ? { notMatching: true } : null;
       }

@@ -75,12 +75,6 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   passwordConfirmValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        if (
-          control.value.length >= this.newPassword?.value.length &&
-          control.value.length !== 0
-        ) {
-          control.markAsTouched();
-        }
         const notMatching = this.newPassword?.value !== control.value;
         return notMatching ? { notMatching: true } : null;
       }
