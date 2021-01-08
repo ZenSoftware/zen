@@ -1,7 +1,7 @@
 /**
  * Author: Peter Hoang
  * Company: Zen Software
- * License: MIT
+ * License: MIT - Open source
  */
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import {
