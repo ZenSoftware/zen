@@ -4,7 +4,7 @@ module.exports = name => {
 export const ${name}Fields = gql\`
   fragment ${name}Fields on ${name} {
     id
-    # TODO: Add type specific fields
+    # TODO: Add fields
   }
 \`;\n`;
 };
