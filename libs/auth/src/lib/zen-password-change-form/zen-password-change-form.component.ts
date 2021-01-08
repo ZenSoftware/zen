@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { ApiConstants } from '@zen/api-interfaces';
 import { AuthPasswordChangeGQL, GqlErrors } from '@zen/graphql';
@@ -21,8 +22,9 @@ import { passwordValidator } from '../validators';
   animations: [...verticalAccordion],
 })
 export class ZenPasswordChangeFormComponent implements OnDestroy {
-  @Output() changed = new EventEmitter();
+  @ViewChild('oldPasswordMatInput') oldPasswordMatInput?: MatInput;
   @ViewChild('oldPasswordInput') oldPasswordInput?: ElementRef;
+  @Output() changed = new EventEmitter();
 
   #subs: Array<Subscription | undefined> = [];
   #incorrectPassword = false;
@@ -66,7 +68,15 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
     return control => {
       if (this.form) {
         this.passwordConfirm?.updateValueAndValidity();
-        return passwordValidator(control);
+
+        let errors: any = passwordValidator(control);
+
+        if (this.oldPassword?.value === this.newPassword?.value) {
+          if (errors) errors.oldEqualsNew = true;
+          else errors = { oldEqualsNew: true };
+        }
+
+        return errors;
       }
       return null;
     };
@@ -87,6 +97,13 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
       if (this.#incorrectPassword) return { incorrect: true };
       return null;
     };
+  }
+
+  changeAgain() {
+    this.completed = false;
+    this.form.reset();
+    this.form.enable();
+    setTimeout(() => this.oldPasswordMatInput?.focus());
   }
 
   onSubmit() {
