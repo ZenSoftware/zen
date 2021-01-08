@@ -9,7 +9,6 @@ import {
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { ApiConstants } from '@zen/api-interfaces';
 import { AuthPasswordChangeGQL, GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
@@ -28,7 +27,6 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
 
   #subs: Array<Subscription | undefined> = [];
   #incorrectPassword = false;
-  ApiConstants = ApiConstants;
   loading = false;
   completed = false;
   generalError = false;

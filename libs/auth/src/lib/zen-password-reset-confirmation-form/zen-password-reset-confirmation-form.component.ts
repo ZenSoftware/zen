@@ -10,7 +10,6 @@ import {
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiConstants } from '@zen/api-interfaces';
 import { AuthPasswordResetConfirmationGQL, AuthSession } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -30,7 +29,6 @@ export class ZenPasswordResetConfirmationFormComponent
   @Output() confirmed = new EventEmitter();
 
   #subs: Array<Subscription | undefined> = [];
-  ApiConstants = ApiConstants;
   loading = false;
   completed = false;
   generalError = false;
