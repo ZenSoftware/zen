@@ -249,25 +249,6 @@ export class Gulpfile {
     cb();
   }
   //---------------------------------------------------------------------------
-  // async parseResolverNames(sourcePath: string) {
-  //   const QUERY_TOKEN = '@Query(';
-  //   const MUTATION_TOKEN = '@Mutation(';
-
-  //   const source = (await readFileAsync(sourcePath)).toString();
-
-  //   const lines = source.split('\n');
-
-  //   for (const line of lines) {
-  //     if (line.includes(QUERY_TOKEN)) {
-  //     }
-
-  //     if (line.includes(MUTATION_TOKEN)) {
-  //     }
-  //   }
-
-  //   return { queries: [], mutations: [] };
-  // }
-  //---------------------------------------------------------------------------
   @Task('handlebars:copy')
   handlebarsCopy() {
     return gulp
