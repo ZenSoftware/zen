@@ -57,9 +57,11 @@ export class AuthService {
       loggedInVar(false);
     }
 
-    this.graphqlSubscriptionClient$.subscribe(() =>
-      ZenGraphQLModule.reconnectSubscriptionClient()
-    );
+    if (ZenGraphQLModule.subscriptionClient) {
+      this.graphqlSubscriptionClient$.subscribe(() =>
+        ZenGraphQLModule.reconnectSubscriptionClient()
+      );
+    }
   }
 
   get graphqlSubscriptionClient$() {
