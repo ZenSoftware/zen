@@ -14,7 +14,11 @@ export class AuthService {
     private readonly config: ConfigService
   ) {}
 
-  setJwtCookie(res: Response, user: RequestUser, rememberMe: boolean | string = false) {
+  setJwtCookie(
+    res: Response,
+    user: RequestUser,
+    rememberMe: boolean | string = false
+  ): AuthSession {
     if (typeof rememberMe === 'string') {
       rememberMe = rememberMe === 'true';
     }
@@ -40,12 +44,11 @@ export class AuthService {
     res.cookie('jwt', token, cookieOptions);
     res.cookie('rememberMe', rememberMe, cookieOptions);
 
-    const response: AuthSession = {
+    return {
       id: user.id,
       maxAge: maxAge.toString(),
       roles: user.roles,
       rememberMe,
     };
-    return response;
   }
 }
