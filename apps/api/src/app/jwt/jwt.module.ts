@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
 import { JwtModule as NestJwtModule } from '@nestjs/jwt';
 
-import { environment } from '../../environments/environment';
+import { ConfigModule, ConfigService } from '../config';
 
 @Module({
-  imports: [NestJwtModule.register(environment.jwtOptions)],
+  imports: [
+    NestJwtModule.registerAsync({
+      useFactory: (config: ConfigService) => config.jwtOptions,
+      inject: [ConfigService],
+    }),
+    ConfigModule,
+  ],
   exports: [NestJwtModule],
 })
 export class JwtModule {}

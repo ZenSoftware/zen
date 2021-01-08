@@ -44,7 +44,7 @@ export class MailService {
     return this.send({
       template: 'password-reset',
       to: user.email,
-      subject: `${this.config.smtp.fromName} Password Reset`,
+      subject: `${process.env.SMTP_FROM_NAME} Password Reset`,
       context,
     }).then();
   }

@@ -1,3 +1,5 @@
+import path from 'path';
+
 import dotenv from 'dotenv';
 
 import { EnvironmentBase } from './environment.base';
@@ -27,11 +29,10 @@ export const environment: EnvironmentBase = {
     secure: false,
     sameSite: 'lax',
   },
-  smtp: {
-    server: process.env.SMTP_SERVER,
-    login: process.env.SMTP_LOGIN,
-    password: process.env.SMTP_PASSWORD,
-    fromName: process.env.SMTP_FROM_NAME,
-    fromEmail: process.env.SMTP_FROM_EMAIL,
+  mail: {
+    transport: `smtps://${process.env.SMTP_LOGIN}:${process.env.SMTP_PASSWORD}@${process.env.SMTP_SERVER}`,
+    defaults: {
+      from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_EMAIL}>`,
+    },
   },
 };
