@@ -35,4 +35,8 @@ export const environment: EnvironmentBase = {
       from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_EMAIL}>`,
     },
   },
+  throttle: {
+    limit: 10,
+    ttl: 60,
+  },
 };

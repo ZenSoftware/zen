@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ThrottlerModule } from 'nestjs-throttler';
 
 import { ZenAuthModule } from './auth';
-import { ConfigModule } from './config';
+import { ConfigModule, ConfigService } from './config';
 import { ToolsController } from './controllers';
 import { ZenGraphQLModule } from './graphql';
 import { JwtModule } from './jwt';
@@ -11,9 +11,9 @@ import { PrismaModule } from './prisma';
 
 @Module({
   imports: [
-    ThrottlerModule.forRoot({
-      limit: 10,
-      ttl: 60,
+    ThrottlerModule.forRootAsync({
+      useFactory: (config: ConfigService) => config.throttle,
+      inject: [ConfigService],
     }),
     ZenAuthModule,
     ConfigModule,

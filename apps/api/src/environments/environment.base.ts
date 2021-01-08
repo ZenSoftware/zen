@@ -1,7 +1,7 @@
 import { MailerOptions } from '@nest-modules/mailer';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { CookieOptions } from 'express';
-
+import { ThrottlerModuleOptions } from 'nestjs-throttler';
 export class EnvironmentBase {
   readonly siteUrl: string;
   readonly cookie: Omit<CookieOptions, 'maxAge'>;
@@ -13,4 +13,5 @@ export class EnvironmentBase {
   readonly jwtOptions: JwtModuleOptions;
   readonly rememberMeExpiresIn: number;
   readonly mail: Omit<MailerOptions, 'template'>;
+  readonly throttle: ThrottlerModuleOptions;
 }
