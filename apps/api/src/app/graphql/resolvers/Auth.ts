@@ -66,7 +66,7 @@ export const AuthTypeDef = gql`
   }
 `;
 
-@Resolver('Auth')
+@Resolver()
 @UseGuards(ThrottlerGuard)
 @Throttle()
 export class AuthResolver {
