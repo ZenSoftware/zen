@@ -75,7 +75,7 @@ npm start
 - [X] `New account component`
 - [x] `Login component`
 - [X] `Forgot password component` and full password reset flow.
-- [X] `Password change component` for user dashboards (coming soon)
+- [X] `Password change component` for user dashboards
 - [X] `Angular route guards` and `Angular directives` to show/hide content depending on user's roles.
 - [ ] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side ~~[role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true)~~ [Attribute-based access control](https://www.wikiwand.com/en/Attribute-based_access_control) to allow for declarative, fine grained security control over all GraphQL queries and mutations. Follow the [Git Issue here](https://github.com/ZenSoftware/Zen/issues/7).
   - [ ] [Nest + casl](https://docs.nestjs.com/security/authorization#integrating-casl]) integration
