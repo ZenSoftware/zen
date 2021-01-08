@@ -42,7 +42,7 @@ export class ZenGraphQLModule {
   constructor(@Optional() @SkipSelf() parentModule?: ZenGraphQLModule) {
     if (parentModule) {
       throw new Error(
-        'GraphQLModule is already loaded. Import it in the AppModule only.'
+        'ZenGraphQLModule is already loaded. Import it in the AppModule only.'
       );
     }
   }
