@@ -166,7 +166,6 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
             if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
               this.generalError = false;
               this.#emailTaken = true;
-              this.email?.markAsTouched();
               this.email?.updateValueAndValidity();
               this.emailInput?.nativeElement.select();
             }
@@ -174,7 +173,6 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
             if (gqlErrors.find(e => e.code === 'USERNAME_TAKEN')) {
               this.generalError = false;
               this.#usernameTaken = true;
-              this.username?.markAsTouched();
               this.username?.updateValueAndValidity();
               this.usernameInput?.nativeElement.select();
             }

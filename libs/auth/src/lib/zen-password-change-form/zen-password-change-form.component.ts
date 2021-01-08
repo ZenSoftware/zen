@@ -124,7 +124,6 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             if (gqlErrors.find(e => e.code === 'WRONG_PASSWORD')) {
               this.generalError = false;
               this.#incorrectPassword = true;
-              this.oldPassword?.markAsTouched();
               this.oldPassword?.updateValueAndValidity();
               this.oldPasswordInput?.nativeElement.select();
             }

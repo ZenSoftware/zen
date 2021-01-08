@@ -122,7 +122,6 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
             if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
               this.generalError = false;
               this.#incorrectPassword = true;
-              this.password?.markAsTouched();
               this.password?.updateValueAndValidity();
               this.passwordInput?.nativeElement.select();
             }
@@ -130,7 +129,6 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
             if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
               this.generalError = false;
               this.#usernameNotFound = true;
-              this.username?.markAsTouched();
               this.username?.updateValueAndValidity();
               this.usernameInput?.nativeElement.select();
             }

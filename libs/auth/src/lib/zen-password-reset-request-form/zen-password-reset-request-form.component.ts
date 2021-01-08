@@ -112,7 +112,6 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
             if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
               this.generalError = false;
               this.#notFound = true;
-              this.emailOrUsername?.markAsTouched();
               this.emailOrUsername?.updateValueAndValidity();
               this.emailUsernameInput?.nativeElement.select();
             }
