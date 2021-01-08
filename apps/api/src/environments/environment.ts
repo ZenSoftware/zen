@@ -17,7 +17,7 @@ export const environment: EnvironmentBase = {
       algorithm: 'HS256',
       /**
        * The client will exchange the token every 30 minutes during active sessions
-       * See: `libs\common\src\lib\environment` and `EnvironmentCommonDev.jwtExchangeInterval`
+       * See: `libs\common\src\lib\environment` for `EnvironmentCommonDev.jwtExchangeInterval`
        */
       expiresIn: 3600, // 1 hour (in seconds)
     },
