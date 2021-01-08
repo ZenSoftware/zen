@@ -7,6 +7,15 @@
   white-space: normal !important;
 }
 
+[mat-icon-button] {
+  cursor: pointer;
+
+  mat-icon:hover {
+    transition: color 0.5s ease, font-size 0.5s;
+    font-size: 170%;
+  }
+}
+
 @include mat-core();
 
 $euro-font: mat-typography-config(
