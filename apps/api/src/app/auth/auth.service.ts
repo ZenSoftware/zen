@@ -36,9 +36,7 @@ export class AuthService {
 
     const cookieOptions: CookieOptions = {
       maxAge,
-      secure: this.config.production,
-      sameSite: this.config.production ? 'strict' : 'lax',
-      domain: this.config.cookieDomain,
+      ...this.config.cookie,
     };
 
     res.cookie('jwt', token, cookieOptions);

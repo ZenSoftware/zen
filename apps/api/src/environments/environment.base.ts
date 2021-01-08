@@ -1,7 +1,9 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
+import { CookieOptions } from 'express';
 
 export class EnvironmentBase {
   siteUrl: string;
+  cookie: Omit<CookieOptions, 'maxAge'>;
   production: boolean;
   expressPort: string | number;
   graphql: {
@@ -9,7 +11,6 @@ export class EnvironmentBase {
   };
   jwtOptions: JwtModuleOptions;
   rememberMeExpiresIn: number;
-  cookieDomain: string;
   smtp: {
     server: string;
     login: string;

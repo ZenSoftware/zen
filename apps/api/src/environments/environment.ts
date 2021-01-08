@@ -19,7 +19,10 @@ export const environment: EnvironmentBase = {
     },
   },
   rememberMeExpiresIn: 2592000, // 30 days (in seconds)
-  cookieDomain: undefined,
+  cookie: {
+    secure: false,
+    sameSite: 'lax',
+  },
   smtp: {
     server: process.env.SMTP_SERVER,
     login: process.env.SMTP_LOGIN,

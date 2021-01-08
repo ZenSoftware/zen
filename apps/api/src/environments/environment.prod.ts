@@ -16,7 +16,11 @@ export const environment: EnvironmentBase = {
     },
   },
   rememberMeExpiresIn: 2592000, // 30 days (in seconds)
-  cookieDomain: 'site.com',
+  cookie: {
+    secure: true,
+    sameSite: 'strict',
+    domain: 'api.site.com',
+  },
   smtp: {
     server: process.env.SMTP_SERVER,
     login: process.env.SMTP_LOGIN,
