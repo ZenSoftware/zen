@@ -1,6 +1,6 @@
 {
   "extends": "../../tslint.json",
   "linterOptions": {
-    "exclude": ["./lib/apollo-angular.ts"]
+    "exclude": ["./src/lib/apollo-angular.ts"]
   }
 }
