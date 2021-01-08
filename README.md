@@ -29,7 +29,7 @@ New contributors are welcome!
 ```bash
 # Project setup steps
 git clone https://github.com/ZenSoftware/Zen.git --depth=1
-cd zen
+cd Zen
 # Rename .env.example to .env
 npm i
 docker-compose up -d 
