@@ -13,8 +13,15 @@ import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import Cookies from 'js-cookie';
 import { intersection, isEqual, orderBy } from 'lodash-es';
-import { BehaviorSubject, Subscription, interval, timer } from 'rxjs';
-import { debounce, tap } from 'rxjs/operators';
+import {
+  BehaviorSubject,
+  Observable,
+  Subscription,
+  interval,
+  throwError,
+  timer,
+} from 'rxjs';
+import { debounce, mergeMap, retryWhen, tap } from 'rxjs/operators';
 
 enum LocalStorageKey {
   sessionExpiresOn = 'sessionExpiresOn',
@@ -158,18 +165,23 @@ export class AuthService {
   private exchangeToken() {
     this.authExchangeTokenGQL
       .fetch(undefined, { fetchPolicy: 'network-only' })
+      .pipe(
+        retryWhen(
+          retryStrategy({
+            maxRetryAttempts: 10,
+            duration: this.sessionTimeRemaining / 10,
+            excludedStatusCodes: [401, 403],
+          })
+        )
+      )
       .subscribe({
         next: ({ data: { authExchangeToken } }) => {
           this.setSession(authExchangeToken);
           console.log('Exchanged token');
         },
         error: errors => {
-          const gqlErrors = new GqlErrors(errors);
-
-          if (gqlErrors.find(e => e.statusCode === 401)) {
-            this.logout();
-            console.error('Exchange token failed');
-          }
+          this.logout();
+          console.error('Exchange token failed', errors);
         },
       });
   }
@@ -192,3 +204,34 @@ export class AuthService {
     }
   }
 }
+
+const retryStrategy = ({
+  maxRetryAttempts: maxRetry = 3,
+  duration = 1000,
+  excludedStatusCodes = [],
+}: {
+  maxRetryAttempts?: number;
+  duration?: number;
+  excludedStatusCodes?: number[];
+} = {}) => (attempts: Observable<any>) => {
+  return attempts.pipe(
+    mergeMap((error, i) => {
+      const retryAttempt = i + 1;
+      const gqlErrors = new GqlErrors(error);
+
+      if (
+        retryAttempt > maxRetry ||
+        gqlErrors.find(e => excludedStatusCodes.find(exclude => exclude === e.statusCode))
+      ) {
+        return throwError(error);
+      }
+
+      console.log(
+        `Exchange token attempt ${retryAttempt}: retrying in ${duration}ms`,
+        error
+      );
+
+      return timer(duration);
+    })
+  );
+};
