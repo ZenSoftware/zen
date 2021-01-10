@@ -1,3 +1,6 @@
+$zen-headings-font: 'euro-ext';
+$zen-main-font: 'euro-ukr';
+
 @font-face {
   font-family: 'euro-ext';
   src: url('/assets/font/euro-ext.eot');
@@ -16,8 +19,4 @@
     url('/assets/euro-ukr.woff') format('woff'),
     url('/assets/font/euro-ukr.ttf') format('truetype'),
     url('/assets/font/euro-ukr.svg#EuropeExtWeb-Regular') format('svg');
-}
-
-.card-header {
-  font-family: 'euro-ext';
 }

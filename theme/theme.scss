@@ -1,23 +1,6 @@
+@import 'reset';
 @import 'fonts';
-@import 'bootstrap';
-@import 'material';
-
-button .fas {
-  vertical-align: unset !important;
-}
-
-mat-dialog-content {
-  max-height: 80vh !important;
-}
-
-.mat-button-disabled {
-  cursor: not-allowed !important;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.cursor-not-allowed {
-  cursor: not-allowed;
-}
+@import './bootstrap/dark-variables';
+@import './bootstrap/bootstrap';
+@import './material/dark/theme';
+@import './helpers';

@@ -1,5 +1,3 @@
-// @import '~bootswatch/dist/slate/variables';
-@import 'variables';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
@@ -14,34 +12,12 @@
 @import '~bootstrap/scss/list-group';
 @import '~bootstrap/scss/utilities';
 @import '~bootstrap/scss/print';
-@import 'reset';
 
 // Cards =======================================================================
 
 .card-header {
   color: $white;
-}
-
-// Text size helpers  ==========================================================
-
-.text-xs {
-  font-size: 0.6em !important;
-}
-
-.text-sm {
-  font-size: 0.75rem !important;
-}
-
-.text-md {
-  font-size: 1rem !important;
-}
-
-.text-lg {
-  font-size: 1.2rem !important;
-}
-
-.text-xl {
-  font-size: 1.4rem !important;
+  font-family: $zen-headings-font;
 }
 
 // Indicators ==================================================================

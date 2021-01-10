@@ -1,37 +1,48 @@
 // @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import 'variables';
 @import 'palette';
 @import '~@angular/material/theming';
 
+button .fas {
+  vertical-align: unset !important;
+}
+
+mat-dialog-content {
+  max-height: 80vh !important;
+}
+
 .mat-button-base {
   white-space: normal !important;
+}
+
+.mat-button-disabled {
+  cursor: not-allowed !important;
 }
 
 [mat-icon-button] {
   cursor: pointer;
 
   mat-icon:hover {
-    transition: color 0.5s ease, font-size 0.5s;
+    transition: font-size 0.5s;
     font-size: 170%;
   }
 }
 
 @include mat-core();
 
-$euro-font: mat-typography-config(
-  $font-family: 'euro-ukr',
-  $display-4: mat-typography-level(112px, 112px, 300, 'euro-ext'),
-  $display-3: mat-typography-level(56px, 56px, 400, 'euro-ext'),
-  $display-2: mat-typography-level(45px, 48px, 400, 'euro-ext'),
-  $display-1: mat-typography-level(34px, 40px, 400, 'euro-ext'),
-  $headline: mat-typography-level(24px, 32px, 400, 'euro-ext'),
-  $title: mat-typography-level(20px, 32px, 500, 'euro-ext'),
-  $subheading-2: mat-typography-level(16px, 28px, 400, 'euro-ext'),
-  $subheading-1: mat-typography-level(15px, 24px, 400, 'euro-ext'),
+$zen-font: mat-typography-config(
+  $font-family: $zen-main-font,
+  $display-4: mat-typography-level(112px, 112px, 300, $zen-headings-font),
+  $display-3: mat-typography-level(56px, 56px, 400, $zen-headings-font),
+  $display-2: mat-typography-level(45px, 48px, 400, $zen-headings-font),
+  $display-1: mat-typography-level(34px, 40px, 400, $zen-headings-font),
+  $headline: mat-typography-level(24px, 32px, 400, $zen-headings-font),
+  $title: mat-typography-level(20px, 32px, 500, $zen-headings-font),
+  $subheading-2: mat-typography-level(16px, 28px, 400, $zen-headings-font),
+  $subheading-1: mat-typography-level(15px, 24px, 400, $zen-headings-font),
   $body-2: mat-typography-level(14px, 24px, 500),
   $body-1: mat-typography-level(14px, 20px, 400),
   $caption: mat-typography-level(12px, 20px, 400),
-  $button: mat-typography-level(14px, 14px, 300, 'euro-ext'),
+  $button: mat-typography-level(14px, 14px, 300, $zen-headings-font),
   $input: mat-typography-level(inherit, 1.125, 400),
 );
 
@@ -91,4 +102,4 @@ $zen-app-theme: mat-dark-theme(
 );
 
 @include angular-material-theme($zen-app-theme);
-@include angular-material-typography($euro-font);
+@include angular-material-typography($zen-font);
