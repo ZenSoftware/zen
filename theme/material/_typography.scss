@@ -14,3 +14,5 @@ $zen-font: mat-typography-config(
   $button: mat-typography-level(14px, 14px, 300, $zen-headings-font),
   $input: mat-typography-level(inherit, 1.125, 400),
 );
+
+@include angular-material-typography($zen-font);

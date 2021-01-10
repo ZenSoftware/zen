@@ -1,0 +1,5 @@
+@import '~@angular/material/theming';
+@import 'fixes';
+@import 'typography';
+
+@include mat-core();

@@ -1,9 +1,4 @@
-@import '~@angular/material/theming';
 @import 'palette';
-@import '../fixes';
-@import '../typography';
-
-@include mat-core();
 
 // Available color palettes: https://material.io/design/color/
 $zen-dark-primary: mat-palette($zen-primary); // Custom _palette.scss
@@ -61,4 +56,3 @@ $zen-dark-theme: mat-dark-theme(
 );
 
 @include angular-material-theme($zen-dark-theme);
-@include angular-material-typography($zen-font);

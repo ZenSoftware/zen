@@ -1,9 +1,4 @@
-@import '~@angular/material/theming';
 @import 'palette';
-@import '../fixes';
-@import '../typography';
-
-@include mat-core();
 
 // Available color palettes: https://material.io/design/color/
 $zen-light-primary: mat-palette($zen-primary);
