@@ -19,7 +19,7 @@ New contributors are welcome!
 
 ---
 
-## 🍣 Project Setup Instructions - [Repo](https://github.com/ZenSoftware/Zen)
+## 🍣 Project Setup Instructions - [GitHub Repo](https://github.com/ZenSoftware/Zen)
 
 **Requirements**
 
