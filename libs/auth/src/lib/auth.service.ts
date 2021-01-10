@@ -8,6 +8,7 @@ import {
   AuthSession,
   GqlErrors,
   ZenGraphQLModule,
+  parseGqlErrors,
 } from '@zen/graphql';
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
@@ -21,7 +22,7 @@ import {
   throwError,
   timer,
 } from 'rxjs';
-import { debounce, mergeMap, retryWhen, tap } from 'rxjs/operators';
+import { catchError, debounce, mergeMap, retryWhen, tap } from 'rxjs/operators';
 
 enum LocalStorageKey {
   sessionExpiresOn = 'sessionExpiresOn',
@@ -166,6 +167,7 @@ export class AuthService {
     this.authExchangeTokenGQL
       .fetch(undefined, { fetchPolicy: 'network-only' })
       .pipe(
+        catchError(parseGqlErrors),
         retryWhen(
           retryStrategy({
             maxRetryAttempts: 10,
@@ -215,20 +217,19 @@ const retryStrategy = ({
   excludedStatusCodes?: number[];
 } = {}) => (attempts: Observable<any>) => {
   return attempts.pipe(
-    mergeMap((error, i) => {
+    mergeMap((errors: GqlErrors, i) => {
       const retryAttempt = i + 1;
-      const gqlErrors = new GqlErrors(error);
 
       if (
         retryAttempt > maxRetry ||
-        gqlErrors.find(e => excludedStatusCodes.find(exclude => exclude === e.statusCode))
+        errors.find(e => excludedStatusCodes.find(exclude => exclude === e.statusCode))
       ) {
-        return throwError(error);
+        return throwError(errors);
       }
 
       console.log(
         `Exchange token attempt ${retryAttempt}: retrying in ${duration}ms`,
-        error
+        errors
       );
 
       return timer(duration);
