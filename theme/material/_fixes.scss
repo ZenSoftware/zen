@@ -1,0 +1,24 @@
+button .fas {
+  vertical-align: unset !important;
+}
+
+mat-dialog-content {
+  max-height: 80vh !important;
+}
+
+.mat-button-base {
+  white-space: normal !important;
+}
+
+.mat-button-disabled {
+  cursor: not-allowed !important;
+}
+
+[mat-icon-button] {
+  cursor: pointer;
+
+  mat-icon:hover {
+    transition: font-size 0.5s;
+    font-size: 170%;
+  }
+}

@@ -1,6 +1,13 @@
 @import 'reset';
 @import 'fonts';
+@import 'helpers';
+
+/** === Dark Theme === */
 @import './bootstrap/dark-variables';
 @import './bootstrap/bootstrap';
 @import './material/dark/theme';
-@import './helpers';
+
+/** === Light Theme === */
+// @import './bootstrap/light-variables';
+// @import './bootstrap/bootstrap';
+// @import './material/light/theme';

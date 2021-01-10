@@ -1,54 +1,13 @@
-// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import 'palette';
 @import '~@angular/material/theming';
-
-button .fas {
-  vertical-align: unset !important;
-}
-
-mat-dialog-content {
-  max-height: 80vh !important;
-}
-
-.mat-button-base {
-  white-space: normal !important;
-}
-
-.mat-button-disabled {
-  cursor: not-allowed !important;
-}
-
-[mat-icon-button] {
-  cursor: pointer;
-
-  mat-icon:hover {
-    transition: font-size 0.5s;
-    font-size: 170%;
-  }
-}
+@import 'palette';
+@import '../fixes';
+@import '../typography';
 
 @include mat-core();
 
-$zen-font: mat-typography-config(
-  $font-family: $zen-main-font,
-  $display-4: mat-typography-level(112px, 112px, 300, $zen-headings-font),
-  $display-3: mat-typography-level(56px, 56px, 400, $zen-headings-font),
-  $display-2: mat-typography-level(45px, 48px, 400, $zen-headings-font),
-  $display-1: mat-typography-level(34px, 40px, 400, $zen-headings-font),
-  $headline: mat-typography-level(24px, 32px, 400, $zen-headings-font),
-  $title: mat-typography-level(20px, 32px, 500, $zen-headings-font),
-  $subheading-2: mat-typography-level(16px, 28px, 400, $zen-headings-font),
-  $subheading-1: mat-typography-level(15px, 24px, 400, $zen-headings-font),
-  $body-2: mat-typography-level(14px, 24px, 500),
-  $body-1: mat-typography-level(14px, 20px, 400),
-  $caption: mat-typography-level(12px, 20px, 400),
-  $button: mat-typography-level(14px, 14px, 300, $zen-headings-font),
-  $input: mat-typography-level(inherit, 1.125, 400),
-);
-
 // Available color palettes: https://material.io/design/color/
-$zen-app-primary: mat-palette($zen-primary); // Custom _palette.scss
-$zen-app-accent: mat-palette($zen-accent); // Custom _palette.scss
+$zen-dark-primary: mat-palette($zen-primary); // Custom _palette.scss
+$zen-dark-accent: mat-palette($zen-accent); // Custom _palette.scss
 
 $zen-dark-theme-foreground: (
   base: $body-color,
@@ -87,19 +46,19 @@ $zen-dark-theme-background: (
 );
 
 // The warn palette is optional (defaults to red).
-$zen-app-warn: mat-palette($mat-red);
+$zen-dark-warn: mat-palette($mat-red);
 
-$zen-app-theme: mat-dark-theme(
+$zen-dark-theme: mat-dark-theme(
   (
     color: (
-      primary: $zen-app-primary,
-      accent: $zen-app-accent,
-      warn: $zen-app-warn,
+      primary: $zen-dark-primary,
+      accent: $zen-dark-accent,
+      warn: $zen-dark-warn,
       foreground: $zen-dark-theme-foreground,
       background: $zen-dark-theme-background,
     ),
   )
 );
 
-@include angular-material-theme($zen-app-theme);
+@include angular-material-theme($zen-dark-theme);
 @include angular-material-typography($zen-font);
