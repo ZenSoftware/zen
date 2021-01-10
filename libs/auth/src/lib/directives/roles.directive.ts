@@ -39,7 +39,7 @@ export class RolesDirective implements OnDestroy {
     if (this.#roles === null || this.#roles === undefined) {
       this.render();
     } else {
-      if (this.auth.userHasRole(Role.Super) || this.auth.userHasRole(this.#roles)) {
+      if (this.auth.userHasRole(this.#roles)) {
         this.render();
       } else {
         this.clear();
