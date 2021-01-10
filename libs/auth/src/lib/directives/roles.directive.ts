@@ -5,7 +5,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import { Role, UserRolesGQL } from '@zen/graphql';
+import { UserRolesGQL } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
