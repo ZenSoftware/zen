@@ -98,6 +98,7 @@ npm start
 ## 🍡 Project & Dev Tools
 
 - [x] [Nx for project management](https://nx.dev/angular) to allow for the use of [Nx Console extensions for VSCode](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console). Nx Console is a GUI interface for monorepos that adds a lot of modern developer conveniences. It also helps to simplify the use of the various Angular & Nest code generation schematics available in the ecosystem.
+- [x] Strict typings with Typescript for everything.  Even the code generation scripts are written in Typescript.
 - [x] [Angular Language Service for VSCode](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for modern IDE tooling.
 - [x] NPM scripts for versioned releases of the Nest **api** server as a containerized Docker image. [node:14-alpine](https://hub.docker.com/_/node?tab=description&ref=hackernoon.com) is used as the Docker container base image, and the appropriate `tsconfig.app.json` configurations are being applied for the Node v14 Nest app.
 - [x] Example [Kubernetes](https://kubernetes.io/) deployment scripts
