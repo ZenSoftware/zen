@@ -10,8 +10,13 @@ import {
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { ApiConstants } from '@zen/api-interfaces';
-import { AuthPasswordResetRequestQueryGQL, GqlErrors } from '@zen/graphql';
+import {
+  AuthPasswordResetRequestQueryGQL,
+  GqlErrors,
+  parseGqlErrors,
+} from '@zen/graphql';
 import { Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 
@@ -97,20 +102,19 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
           },
           { fetchPolicy: 'network-only' }
         )
+        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: () => {
             this.loading = false;
             this.completed = true;
             this.sent.emit();
           },
-          error: errors => {
+          error: (errors: GqlErrors) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            const gqlErrors = new GqlErrors(errors);
-
-            if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
+            if (errors.find(e => e.code === 'USER_NOT_FOUND')) {
               this.generalError = false;
               this.#notFound = true;
               this.emailOrUsername?.updateValueAndValidity();

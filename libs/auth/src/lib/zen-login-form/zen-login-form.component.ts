@@ -10,8 +10,9 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { GqlErrors } from '@zen/graphql';
+import { GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -105,6 +106,7 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
           password: this.password?.value,
           rememberMe: this.rememberMe?.value,
         })
+        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: () => {
             this.loading = false;
@@ -112,28 +114,26 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
             this.loggedIn.emit();
           },
 
-          error: errors => {
+          error: (errors: GqlErrors) => {
             this.loading = false;
             this.generalError = true;
             this.form.enable();
 
-            const gqlErrors = new GqlErrors(errors);
-
-            if (gqlErrors.find(e => e.code === 'INCORRECT_PASSWORD')) {
+            if (errors.find(e => e.code === 'INCORRECT_PASSWORD')) {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.password?.updateValueAndValidity();
               this.passwordInput?.nativeElement.select();
             }
 
-            if (gqlErrors.find(e => e.code === 'USER_NOT_FOUND')) {
+            if (errors.find(e => e.code === 'USER_NOT_FOUND')) {
               this.generalError = false;
               this.#usernameNotFound = true;
               this.username?.updateValueAndValidity();
               this.usernameInput?.nativeElement.select();
             }
 
-            if (gqlErrors.hasThrottleError) {
+            if (errors.hasThrottleError) {
               this.generalError = true;
             }
           },

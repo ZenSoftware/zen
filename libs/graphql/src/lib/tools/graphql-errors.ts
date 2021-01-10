@@ -1,3 +1,11 @@
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+// export const parseGqlErrors = () =>
+//   catchError(errors => throwError(new GqlErrors(errors)));
+
+export const parseGqlErrors = (errors: any) => throwError(new GqlErrors(errors));
+
 export class GqlErrors {
   parsed: any[] = [];
   original: any;

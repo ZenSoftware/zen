@@ -9,8 +9,9 @@ import {
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AuthPasswordChangeGQL, GqlErrors } from '@zen/graphql';
+import { AuthPasswordChangeGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { passwordValidator } from '../validators';
@@ -118,20 +119,19 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             newPassword: this.newPassword?.value,
           },
         })
+        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: () => {
             this.loading = false;
             this.completed = true;
             this.changed.emit();
           },
-          error: errors => {
+          error: (errors: GqlErrors) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            const gqlErrors = new GqlErrors(errors);
-
-            if (gqlErrors.find(e => e.code === 'WRONG_PASSWORD')) {
+            if (errors.find(e => e.code === 'WRONG_PASSWORD')) {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.oldPassword?.updateValueAndValidity();

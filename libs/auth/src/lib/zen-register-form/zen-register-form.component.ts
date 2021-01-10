@@ -9,8 +9,9 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { AuthRegisterGQL, AuthSession, GqlErrors } from '@zen/graphql';
+import { AuthRegisterGQL, AuthSession, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -143,6 +144,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
             password: this.password?.value,
           },
         })
+        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
@@ -150,21 +152,20 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
             this.registered.emit();
           },
 
-          error: errors => {
+          error: (errors: GqlErrors) => {
             this.loading = false;
             this.form.enable();
 
-            const gqlErrors = new GqlErrors(errors);
             this.generalError = true;
 
-            if (gqlErrors.find(e => e.code === 'EMAIL_TAKEN')) {
+            if (errors.find(e => e.code === 'EMAIL_TAKEN')) {
               this.generalError = false;
               this.#emailTaken = true;
               this.email?.updateValueAndValidity();
               this.emailInput?.nativeElement.select();
             }
 
-            if (gqlErrors.find(e => e.code === 'USERNAME_TAKEN')) {
+            if (errors.find(e => e.code === 'USERNAME_TAKEN')) {
               this.generalError = false;
               this.#usernameTaken = true;
               this.username?.updateValueAndValidity();
