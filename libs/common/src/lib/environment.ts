@@ -1,8 +1,8 @@
 export abstract class Environment {
   abstract readonly production: boolean;
+  abstract readonly publicRegistration: boolean;
   abstract readonly jwtExchangeInterval: number;
   abstract readonly rememberMeExchangeThreshold: number;
-  abstract readonly publicRegistration: boolean;
   abstract readonly url: {
     readonly api: string;
     readonly portal: string;
@@ -13,9 +13,9 @@ export abstract class Environment {
 
 export class EnvironmentCommonDev implements Environment {
   production = false;
+  publicRegistration = true;
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
-  publicRegistration = true;
   url = {
     api: 'http://localhost:7080',
     portal: 'http://localhost:4200/#/',
@@ -26,9 +26,9 @@ export class EnvironmentCommonDev implements Environment {
 
 export class EnvironmentCommonProd implements Environment {
   production = true;
+  publicRegistration = true;
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
-  publicRegistration = true;
   url = {
     api: 'https://api.site.com',
     portal: 'https://portal.site.com/#/',
