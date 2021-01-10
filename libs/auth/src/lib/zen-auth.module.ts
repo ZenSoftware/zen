@@ -9,7 +9,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ZenComponentsModule } from '@zen/components';
 
-import { IfLoggedInDirective, NotRolesDirective, RolesDirective } from './directives';
+import {
+  IfLoggedInDirective,
+  IfPublicRegistration,
+  NotRolesDirective,
+  RolesDirective,
+} from './directives';
 import { ZenAuthRoutingModule } from './zen-auth-routing.module';
 import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
@@ -42,6 +47,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
   ],
   declarations: [
     IfLoggedInDirective,
+    IfPublicRegistration,
     NotRolesDirective,
     RolesDirective,
     ZenLoginFormComponent,
@@ -62,6 +68,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
   ],
   exports: [
     IfLoggedInDirective,
+    IfPublicRegistration,
     NotRolesDirective,
     RolesDirective,
     ZenLoginFormComponent,

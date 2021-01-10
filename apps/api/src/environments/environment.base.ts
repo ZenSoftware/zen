@@ -11,6 +11,7 @@ export class EnvironmentBase {
   readonly graphql: {
     readonly playground: boolean;
   };
+  readonly publicRegistration: boolean;
   readonly jwtOptions: JwtModuleOptions;
   readonly expiresInRememberMe: number;
   readonly mail: Omit<MailerOptions, 'template'>;

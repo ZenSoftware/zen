@@ -191,6 +191,9 @@ export class AuthResolver {
 
   @Mutation()
   async authRegister(@Context() ctx: IContext, @Args('data') data: AuthRegisterInput) {
+    if (!this.config.publicRegistration)
+      throw new HttpException({ code: 'NO_PUBLIC_REGISTRATIONS' }, 403);
+
     if (await this.getUserByUsername(data.username, ctx.prisma))
       throw new HttpException({ code: 'USERNAME_TAKEN' }, 400);
 

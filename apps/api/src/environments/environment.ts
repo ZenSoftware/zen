@@ -8,6 +8,7 @@ export const environment: EnvironmentBase = {
   siteUrl: 'http://site.com',
   production: false,
   expressPort: 7080,
+  publicRegistration: true,
   graphql: {
     playground: true, // localhost:7080/graphql
   },

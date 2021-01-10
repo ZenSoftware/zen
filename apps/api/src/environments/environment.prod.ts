@@ -4,6 +4,7 @@ export const environment: EnvironmentBase = {
   siteUrl: 'https://site.com',
   production: true,
   expressPort: process.env.PORT,
+  publicRegistration: true,
   graphql: {
     playground: false,
   },
