@@ -13,20 +13,20 @@ export class IfPublicRegistration {
     private viewContainer: ViewContainerRef,
     private env: Environment
   ) {
-    this.showIfAllowed();
+    this.update();
   }
 
   @Input()
   set ifPublicRegistration(value: boolean | undefined) {
     this.#ifPublicRegistration = value;
-    this.showIfAllowed();
+    this.update();
   }
 
   get ifPublicRegistration() {
     return this.#ifPublicRegistration ?? true;
   }
 
-  showIfAllowed() {
+  update() {
     if (
       (this.ifPublicRegistration && this.env.publicRegistration) ||
       (!this.ifPublicRegistration && !this.env.publicRegistration)

@@ -119,7 +119,7 @@ export class AuthService {
   userHasRole(role: string | string[]) {
     if (role) {
       if (typeof role === 'string') return userRolesVar().some(r => r === role);
-      else return userRolesVar().some(r => role.indexOf(r) >= 0);
+      else return userRolesVar().some(r => role.includes(r));
     }
     return false;
   }

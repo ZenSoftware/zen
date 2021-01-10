@@ -14,9 +14,9 @@ import { AuthService } from '../auth.service';
   selector: '[roles]',
 })
 export class RolesDirective implements OnDestroy {
-  private subsciption: Subscription;
-  private allowedRoles?: string | string[];
-  private embededViewRef: any;
+  #subsciption: Subscription;
+  #roles?: string | string[];
+  #embededViewRef: any;
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -24,23 +24,22 @@ export class RolesDirective implements OnDestroy {
     private auth: AuthService,
     private userRolesGQL: UserRolesGQL
   ) {
-    this.subsciption = this.userRolesGQL
+    this.#subsciption = this.userRolesGQL
       .watch()
-      .valueChanges.subscribe(() => this.showIfAllowed());
+      .valueChanges.subscribe(() => this.update());
   }
 
   @Input()
-  set roles(allowedRoles: string | string[]) {
-    this.allowedRoles = allowedRoles;
-    this.showIfAllowed();
+  set roles(roles: string | string[]) {
+    this.#roles = roles;
+    this.update();
   }
 
-  showIfAllowed() {
-    if (this.allowedRoles === null || this.allowedRoles === undefined) {
+  update() {
+    if (this.#roles === null || this.#roles === undefined) {
       this.render();
-      return;
     } else {
-      if (this.auth.userHasRole(Role.Super) || this.auth.userHasRole(this.allowedRoles)) {
+      if (this.auth.userHasRole(Role.Super) || this.auth.userHasRole(this.#roles)) {
         this.render();
       } else {
         this.clear();
@@ -49,16 +48,16 @@ export class RolesDirective implements OnDestroy {
   }
 
   render() {
-    if (!this.embededViewRef)
-      this.embededViewRef = this.viewContainer.createEmbeddedView(this.templateRef);
+    if (!this.#embededViewRef)
+      this.#embededViewRef = this.viewContainer.createEmbeddedView(this.templateRef);
   }
 
   clear() {
     this.viewContainer.clear();
-    this.embededViewRef = null;
+    this.#embededViewRef = null;
   }
 
   ngOnDestroy() {
-    this.subsciption.unsubscribe();
+    this.#subsciption.unsubscribe();
   }
 }

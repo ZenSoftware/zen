@@ -9,36 +9,37 @@ import { LoggedInGQL } from '@zen/graphql';
 import { loggedInVar } from '@zen/graphql/client';
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '../auth.service';
-
 @Directive({
   selector: '[ifLoggedIn]',
 })
 export class IfLoggedInDirective implements OnDestroy {
-  private subsciption: Subscription;
-  private embededViewRef: any;
-  private showIfLoggedIn?: boolean;
+  #subsciption: Subscription;
+  #embededViewRef: any;
+  #ifLoggedIn?: boolean;
 
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
-    private auth: AuthService,
     private loggedInGQL: LoggedInGQL
   ) {
-    this.subsciption = this.loggedInGQL
+    this.#subsciption = this.loggedInGQL
       .watch()
-      .valueChanges.subscribe(() => this.showIfAllowed());
+      .valueChanges.subscribe(() => this.update());
   }
 
   @Input()
   set ifLoggedIn(value: boolean) {
-    this.showIfLoggedIn = value;
-    this.showIfAllowed();
+    this.#ifLoggedIn = value;
+    this.update();
   }
 
-  showIfAllowed() {
+  get ifLoggedIn() {
+    return this.#ifLoggedIn ?? true;
+  }
+
+  update() {
     const loggedIn = loggedInVar();
-    if ((this.showIfLoggedIn && loggedIn) || (!this.showIfLoggedIn && !loggedIn)) {
+    if ((this.ifLoggedIn && loggedIn) || (!this.ifLoggedIn && !loggedIn)) {
       this.render();
     } else {
       this.clear();
@@ -46,16 +47,16 @@ export class IfLoggedInDirective implements OnDestroy {
   }
 
   render() {
-    if (!this.embededViewRef)
-      this.embededViewRef = this.viewContainer.createEmbeddedView(this.templateRef);
+    if (!this.#embededViewRef)
+      this.#embededViewRef = this.viewContainer.createEmbeddedView(this.templateRef);
   }
 
   clear() {
     this.viewContainer.clear();
-    this.embededViewRef = null;
+    this.#embededViewRef = null;
   }
 
   ngOnDestroy() {
-    this.subsciption.unsubscribe();
+    this.#subsciption.unsubscribe();
   }
 }
