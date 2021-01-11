@@ -45,21 +45,26 @@ export class AuthService {
     private env: Environment
   ) {
     if (this.loggedIn) {
-      // Initialize apollo client state
-      const roles = localStorage.getItem(LocalStorageKey.roles);
-      userRolesVar(roles ? atob(roles).split(',') : []);
-      loggedInVar(true);
+      try {
+        // Initialize apollo client state
+        const roles = localStorage.getItem(LocalStorageKey.roles);
+        userRolesVar(roles ? atob(roles).split(',') : []);
+        loggedInVar(true);
 
-      if (this.sessionTimeRemaining <= env.jwtExchangeInterval) {
-        this.exchangeToken();
-      } else if (
-        this.rememberMe &&
-        this.sessionTimeRemaining <= this.env.rememberMeExchangeThreshold
-      ) {
-        this.exchangeToken();
+        if (this.sessionTimeRemaining <= env.jwtExchangeInterval) {
+          this.exchangeToken();
+        } else if (
+          this.rememberMe &&
+          this.sessionTimeRemaining <= this.env.rememberMeExchangeThreshold
+        ) {
+          this.exchangeToken();
+        }
+
+        this.startExchangeInterval();
+      } catch (error) {
+        console.error('AuthService failed to initialize', error);
+        this.logout();
       }
-
-      this.startExchangeInterval();
     } else {
       this.clearSession();
       loggedInVar(false);
