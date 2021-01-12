@@ -90,8 +90,8 @@ spec:
       port: 80
       targetPort: 7080
 ---
-apiVersion: networking.k8s.io/v1
 kind: Ingress
+apiVersion: extensions/v1beta1
 metadata:
   name: zen-ingress
   annotations:
@@ -100,13 +100,15 @@ metadata:
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-origin: "https://portal.site.ca"
 spec:
+  tls:
+    - hosts:
+        - api.site.ca
+      secretName: tls-secret
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: zen-api-svc
-            port:
-              number: 80
+    - host: api.site.ca
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: zen-api-svc
+              servicePort: 80
