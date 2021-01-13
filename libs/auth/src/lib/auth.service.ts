@@ -162,8 +162,8 @@ export class AuthService {
     localStorage.removeItem(LocalStorageKey.rememberMe);
     localStorage.removeItem(LocalStorageKey.roles);
     userRolesVar([]);
-    Cookies.remove('jwt');
-    Cookies.remove('rememberMe');
+    Cookies.remove('jwt', this.env.cookieAttributes);
+    Cookies.remove('rememberMe', this.env.cookieAttributes);
     this.apollo.client.cache.reset();
     this.#graphqlSubscriptionClient$.next(null);
   }
