@@ -3,8 +3,8 @@ schema:
   - http://localhost:7080/graphql
   - libs/graphql/src/lib/client/schema.gql.ts
 documents: 
-  - "libs/**/*.gql.ts"
-  - "apps/portal/src/**/*.gql.ts"
+  - "libs/**/*.ts"
+  - "apps/portal/src/**/*.ts"
 config:
   ngModule: ./zen-graphql.module#ZenGraphQLModule
   omitOperationSuffix: true
