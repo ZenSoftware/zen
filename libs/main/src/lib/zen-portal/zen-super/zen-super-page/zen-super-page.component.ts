@@ -12,7 +12,7 @@ export class ZenSuperPageComponent {
   migrate() {
     console.log('Migration started...');
     this.http
-      .post(`${this.env.url.api}/tools/migrate`, {})
+      .post(`${this.env.url.api}/tools/migrate`, {}, { withCredentials: true })
       .subscribe(result => console.log('Migration done', result));
   }
 }
