@@ -256,7 +256,7 @@ export type Query = {
   authExchangeToken: AuthSession;
   authLogin: AuthSession;
   authPasswordResetRequest?: Maybe<Scalars['Boolean']>;
-  findFirstUser?: Maybe<Array<User>>;
+  findFirstUser?: Maybe<User>;
   findManyUser?: Maybe<Array<User>>;
   findManyUserCount: Scalars['Int'];
   findUniqueUser?: Maybe<User>;

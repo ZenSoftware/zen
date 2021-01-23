@@ -19,7 +19,7 @@ export default gql`
       distinct: UserScalarFieldEnum
       skip: Int
       take: Int
-    ): [User!]
+    ): User
     findManyUser(
       where: UserWhereInput
       orderBy: [UserOrderByInput!]

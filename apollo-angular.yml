@@ -4,7 +4,7 @@ schema:
   - libs/graphql/src/lib/client/schema.gql.ts
 documents: 
   - "libs/**/*.ts"
-  - "apps/portal/src/**/*.ts"
+  - "apps/portal/src/**/*.gql.ts"
 config:
   ngModule: ./zen-graphql.module#ZenGraphQLModule
   omitOperationSuffix: true
