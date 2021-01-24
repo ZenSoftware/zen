@@ -43,13 +43,12 @@
  * @return `{outputField: number | string} | undefined` - Cleaned and serialized array of select objects.
  * `outputField` will be used for `inputField` if `inputField` is not specified.
  */
-export function selectOne<T, R>(
+export function selectOne<T>(
   item: T | number | string | null | undefined,
-  outputField?: keyof R,
+  outputField: string = 'id',
   inputField?: keyof T
-): { [P in keyof R]: any } {
-  if (!outputField) (<any>outputField) = 'id';
-  if (!inputField) (<any>inputField) = outputField;
+): { [outputField: string]: any } {
+  if (!inputField) (<string>inputField) = outputField;
 
   if (item !== undefined && item !== null) {
     const typeofItem = typeof item;
@@ -61,15 +60,15 @@ export function selectOne<T, R>(
       (<any>item)[inputField] !== -1 &&
       (<any>item)[inputField] !== ''
     ) {
-      const obj: any = new Object();
+      const obj: any = {};
       obj[outputField] = (<any>item)[inputField];
       return obj;
     } else if (typeofItem === 'number' && item !== -1) {
-      const obj: any = new Object();
+      const obj: any = {};
       obj[outputField] = item;
       return obj;
     } else if (typeofItem === 'string' && item !== '') {
-      const obj: any = new Object();
+      const obj: any = {};
       obj[outputField] = item;
       return obj;
     }
@@ -147,13 +146,12 @@ export function selectOne<T, R>(
  * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @return `Array<{outputField: number | string}> | undefined` - Cleaned and serialized array of select objects.
  */
-export function selectMany<T, R>(
+export function selectMany<T>(
   input: Array<T | null | undefined> | null | undefined,
-  outputField?: keyof R,
+  outputField: string = 'id',
   inputField?: keyof T
-): Array<{ [P in keyof R]: any }> {
-  if (!outputField) (<any>outputField) = 'id';
-  if (!inputField) (<any>inputField) = outputField;
+): Array<{ [outputField: string]: any }> {
+  if (!inputField) (<string>inputField) = outputField;
 
   if (input) {
     const items = (input as any[]).filter(x => x !== null && x !== undefined);
@@ -169,15 +167,15 @@ export function selectMany<T, R>(
           item[inputField] !== -1 &&
           item[inputField] !== ''
         ) {
-          const obj: any = new Object();
+          const obj: any = {};
           obj[outputField] = item[inputField];
           accum.push(obj);
         } else if (typeofItem === 'number' && item !== -1) {
-          const obj: any = new Object();
+          const obj: any = {};
           obj[outputField] = item;
           accum.push(obj);
         } else if (typeofItem === 'string' && item !== '') {
-          const obj: any = new Object();
+          const obj: any = {};
           obj[outputField] = item;
           accum.push(obj);
         }
