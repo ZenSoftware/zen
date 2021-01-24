@@ -29,12 +29,12 @@
  * selectOne('');
  * undefined
  *
- * @example
- * selectOne(null);
+ *  * @example
+ * selectOne(undefined);
  * undefined
  *
  * @example
- * selectOne(undefined);
+ * selectOne(null);
  * undefined
  *
  * @param input - Array of items to be cleaned and serialized
@@ -51,7 +51,7 @@ export function selectOne<T, R>(
   if (!outputField) (<any>outputField) = 'id';
   if (!inputField) (<any>inputField) = outputField;
 
-  if (item !== undefined || item !== null) {
+  if (item !== undefined && item !== null) {
     const typeofItem = typeof item;
 
     if (
@@ -132,7 +132,15 @@ export function selectOne<T, R>(
  *
  * @example
  * selectMany([]);
- * undefined
+ * []
+ *
+ * @example
+ * selectMany(undefined);
+ * []
+ *
+ * @example
+ * selectMany(null);
+ * []
  *
  * @param input - Array of items to be cleaned and serialized
  * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
@@ -177,9 +185,9 @@ export function selectMany<T, R>(
         return accum;
       }, []);
 
-      if (result.length > 0) return result as Array<any>;
+      return result as Array<any>;
     }
   }
 
-  return <any>undefined;
+  return <any>[];
 }
