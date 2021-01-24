@@ -29,7 +29,7 @@
  * selectOne('');
  * undefined
  *
- *  * @example
+ * @example
  * selectOne(undefined);
  * undefined
  *
