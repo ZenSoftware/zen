@@ -83,6 +83,15 @@ export type UserCreateInput = {
   roles?: Maybe<UserCreaterolesInput>;
 };
 
+export type UserUncheckedCreateInput = {
+  id?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  username: Scalars['String'];
+  password: Scalars['String'];
+  email: Scalars['String'];
+  roles?: Maybe<UserCreaterolesInput>;
+};
+
 export type UserUpdateInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   username?: Maybe<StringFieldUpdateOperationsInput>;
@@ -91,7 +100,25 @@ export type UserUpdateInput = {
   roles?: Maybe<UserUpdaterolesInput>;
 };
 
+export type UserUncheckedUpdateInput = {
+  id?: Maybe<IntFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  username?: Maybe<StringFieldUpdateOperationsInput>;
+  password?: Maybe<StringFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
+  roles?: Maybe<UserUpdaterolesInput>;
+};
+
 export type UserUpdateManyMutationInput = {
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  username?: Maybe<StringFieldUpdateOperationsInput>;
+  password?: Maybe<StringFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
+  roles?: Maybe<UserUpdaterolesInput>;
+};
+
+export type UserUncheckedUpdateManyInput = {
+  id?: Maybe<IntFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   username?: Maybe<StringFieldUpdateOperationsInput>;
   password?: Maybe<StringFieldUpdateOperationsInput>;
@@ -138,6 +165,10 @@ export type StringFilter = {
 
 export type EnumRoleNullableListFilter = {
   equals?: Maybe<Array<Role>>;
+  has?: Maybe<Role>;
+  hasEvery?: Maybe<Array<Role>>;
+  hasSome?: Maybe<Array<Role>>;
+  isEmpty?: Maybe<Scalars['Boolean']>;
 };
 
 export type UserCreaterolesInput = {
@@ -154,6 +185,14 @@ export type StringFieldUpdateOperationsInput = {
 
 export type UserUpdaterolesInput = {
   set: Array<Role>;
+};
+
+export type IntFieldUpdateOperationsInput = {
+  set?: Maybe<Scalars['Int']>;
+  increment?: Maybe<Scalars['Int']>;
+  decrement?: Maybe<Scalars['Int']>;
+  multiply?: Maybe<Scalars['Int']>;
+  divide?: Maybe<Scalars['Int']>;
 };
 
 export type NestedIntFilter = {
@@ -203,28 +242,28 @@ export type AggregateUser = {
 
 export type UserCountAggregateOutputType = {
   __typename?: 'UserCountAggregateOutputType';
-  id: Scalars['Int'];
+  id?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['Int']>;
   username?: Maybe<Scalars['Int']>;
   password?: Maybe<Scalars['Int']>;
   email?: Maybe<Scalars['Int']>;
   roles?: Maybe<Scalars['Int']>;
-  _all: Scalars['Int'];
+  _all?: Maybe<Scalars['Int']>;
 };
 
 export type UserAvgAggregateOutputType = {
   __typename?: 'UserAvgAggregateOutputType';
-  id: Scalars['Float'];
+  id?: Maybe<Scalars['Float']>;
 };
 
 export type UserSumAggregateOutputType = {
   __typename?: 'UserSumAggregateOutputType';
-  id: Scalars['Int'];
+  id?: Maybe<Scalars['Int']>;
 };
 
 export type UserMinAggregateOutputType = {
   __typename?: 'UserMinAggregateOutputType';
-  id: Scalars['Int'];
+  id?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   username?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
@@ -233,7 +272,7 @@ export type UserMinAggregateOutputType = {
 
 export type UserMaxAggregateOutputType = {
   __typename?: 'UserMaxAggregateOutputType';
-  id: Scalars['Int'];
+  id?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   username?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
