@@ -14,7 +14,7 @@ export abstract class Environment {
   };
 }
 
-export class EnvironmentCommonDev implements Environment {
+export class EnvironmentDev implements Environment {
   production = false;
   publicRegistration = true;
   cookieAttributes = undefined;
@@ -28,7 +28,7 @@ export class EnvironmentCommonDev implements Environment {
   };
 }
 
-export class EnvironmentCommonProd implements Environment {
+export class EnvironmentProd implements Environment {
   production = true;
   publicRegistration = false;
   cookieAttributes = { path: '/', domain: '.site.com' };

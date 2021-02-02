@@ -11,8 +11,8 @@
  */
 import 'zone.js/dist/zone-error'; // Included with Angular CLI.
 
-import { EnvironmentCommonDev } from '@zen/common';
+import { EnvironmentDev } from '@zen/common';
 
-class EnvironmentImpl extends EnvironmentCommonDev {}
+class EnvironmentImpl extends EnvironmentDev {}
 
 export const environment = new EnvironmentImpl();
