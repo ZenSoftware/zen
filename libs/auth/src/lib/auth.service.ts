@@ -228,7 +228,12 @@ const retryStrategy = ({
         return throwError(errors);
       }
 
-      console.log(`Exchange token attempt ${retryAttempt}: retrying in ${duration}ms`, errors);
+      const durationMinutes = Math.round(duration / (1000 * 60));
+
+      console.log(
+        `Exchange token attempt ${retryAttempt}: retrying in ${durationMinutes}min`,
+        errors
+      );
 
       return timer(duration);
     })
