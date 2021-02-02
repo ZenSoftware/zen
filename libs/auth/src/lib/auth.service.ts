@@ -230,7 +230,7 @@ const retryStrategy = ({
 
       const durationMinutes = Math.round(duration / (1000 * 60));
 
-      console.log(
+      console.warn(
         `Exchange token attempt ${retryAttempt}: retrying in ${durationMinutes}min`,
         errors
       );
