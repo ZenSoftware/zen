@@ -96,7 +96,7 @@ export class AuthService {
     localStorage.setItem(LocalStorageKey.rememberMe, authSession.rememberMe.toString());
     localStorage.setItem(LocalStorageKey.roles, btoa(authSession.roles.toString()));
 
-    if (!this.rolesEqual(userRolesVar(), authSession.roles)) {
+    if (!this.rolesEqual(this.roles, authSession.roles)) {
       if (authSession.roles) userRolesVar(authSession.roles);
       else userRolesVar([]);
     }
@@ -113,16 +113,16 @@ export class AuthService {
 
   userHasRole(role: string | string[]) {
     if (role) {
-      if (typeof role === 'string') return userRolesVar().some(r => r === role);
-      else return userRolesVar().some(r => role.includes(r));
+      if (typeof role === 'string') return this.roles.some(r => r === role);
+      else return this.roles.some(r => role.includes(r));
     }
     return false;
   }
 
   userNotInRole(role: string | string[]) {
     if (role) {
-      if (typeof role === 'string') return !userRolesVar().some(r => r === role);
-      else return intersection(userRolesVar(), role).length === 0;
+      if (typeof role === 'string') return !this.roles.some(r => r === role);
+      else return intersection(this.roles, role).length === 0;
     }
     return true;
   }
