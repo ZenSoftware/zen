@@ -83,28 +83,6 @@ export class AuthResolver {
     private readonly mail: MailService
   ) {}
 
-  private async getUserByUsername(username: string, prisma: PrismaClient) {
-    return prisma.user.findFirst({
-      where: {
-        username: {
-          mode: 'insensitive',
-          equals: username.trim(),
-        },
-      },
-    });
-  }
-
-  private async getUserByEmail(email: string, prisma: PrismaClient) {
-    return prisma.user.findFirst({
-      where: {
-        email: {
-          mode: 'insensitive',
-          equals: email.trim(),
-        },
-      },
-    });
-  }
-
   @Query()
   async authLogin(@Context() ctx: IContext, @Args('data') data: AuthLoginInput) {
     const user = await this.getUserByUsername(data.username, ctx.prisma);
@@ -247,6 +225,28 @@ export class AuthResolver {
     await ctx.prisma.user.update({
       where: { id: user.id },
       data: { password: hashedPassword },
+    });
+  }
+
+  private async getUserByUsername(username: string, prisma: PrismaClient) {
+    return prisma.user.findFirst({
+      where: {
+        username: {
+          mode: 'insensitive',
+          equals: username.trim(),
+        },
+      },
+    });
+  }
+
+  private async getUserByEmail(email: string, prisma: PrismaClient) {
+    return prisma.user.findFirst({
+      where: {
+        email: {
+          mode: 'insensitive',
+          equals: email.trim(),
+        },
+      },
     });
   }
 }
