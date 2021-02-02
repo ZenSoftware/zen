@@ -220,7 +220,7 @@ export class AuthResolver {
           hiddenPreheaderText: `Sign up confirmed for ${user.username}`,
           header: 'Welcome',
           subHeading: 'Sign Up Confirmed',
-          body: `Thanks you for signing up ${user.username}!`,
+          body: `Thank you for signing up ${user.username}!`,
           footerHeader: '',
           footerBody: '',
         },
