@@ -1,10 +1,4 @@
-import {
-  Directive,
-  Input,
-  OnDestroy,
-  TemplateRef,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
 import { LoggedInGQL } from '@zen/graphql';
 import { loggedInVar } from '@zen/graphql/client';
 import { Subscription } from 'rxjs';
@@ -22,9 +16,7 @@ export class IfLoggedInDirective implements OnDestroy {
     private viewContainer: ViewContainerRef,
     private loggedInGQL: LoggedInGQL
   ) {
-    this.#subsciption = this.loggedInGQL
-      .watch()
-      .valueChanges.subscribe(() => this.update());
+    this.#subsciption = this.loggedInGQL.watch().valueChanges.subscribe(() => this.update());
   }
 
   @Input()

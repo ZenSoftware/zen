@@ -23,8 +23,7 @@ import { passwordValidator } from '../validators';
   templateUrl: 'zen-password-reset-confirmation-form.component.html',
   animations: [...verticalAccordion],
 })
-export class ZenPasswordResetConfirmationFormComponent
-  implements AfterViewInit, OnDestroy {
+export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit, OnDestroy {
   @ViewChild('passwordMatInput') passwordMatInput?: MatInput;
   @Output() confirmed = new EventEmitter();
 

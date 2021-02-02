@@ -96,31 +96,11 @@ export interface BatchPayload {
 export interface UserCountAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
-  createdAt?: Resolver<
-    Client.Prisma.UserCountAggregateOutputType,
-    {},
-    number | null | undefined
-  >;
-  username?: Resolver<
-    Client.Prisma.UserCountAggregateOutputType,
-    {},
-    number | null | undefined
-  >;
-  password?: Resolver<
-    Client.Prisma.UserCountAggregateOutputType,
-    {},
-    number | null | undefined
-  >;
-  email?: Resolver<
-    Client.Prisma.UserCountAggregateOutputType,
-    {},
-    number | null | undefined
-  >;
-  roles?: Resolver<
-    Client.Prisma.UserCountAggregateOutputType,
-    {},
-    number | null | undefined
-  >;
+  createdAt?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
+  username?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
+  password?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
+  email?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
+  roles?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
   _all?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
 }
 
@@ -137,51 +117,19 @@ export interface UserSumAggregateOutputType {
 export interface UserMinAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, number>;
-  createdAt?: Resolver<
-    Client.Prisma.UserMinAggregateOutputType,
-    {},
-    Date | null | undefined
-  >;
-  username?: Resolver<
-    Client.Prisma.UserMinAggregateOutputType,
-    {},
-    string | null | undefined
-  >;
-  password?: Resolver<
-    Client.Prisma.UserMinAggregateOutputType,
-    {},
-    string | null | undefined
-  >;
-  email?: Resolver<
-    Client.Prisma.UserMinAggregateOutputType,
-    {},
-    string | null | undefined
-  >;
+  createdAt?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, Date | null | undefined>;
+  username?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null | undefined>;
+  password?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null | undefined>;
+  email?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null | undefined>;
 }
 
 export interface UserMaxAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, number>;
-  createdAt?: Resolver<
-    Client.Prisma.UserMaxAggregateOutputType,
-    {},
-    Date | null | undefined
-  >;
-  username?: Resolver<
-    Client.Prisma.UserMaxAggregateOutputType,
-    {},
-    string | null | undefined
-  >;
-  password?: Resolver<
-    Client.Prisma.UserMaxAggregateOutputType,
-    {},
-    string | null | undefined
-  >;
-  email?: Resolver<
-    Client.Prisma.UserMaxAggregateOutputType,
-    {},
-    string | null | undefined
-  >;
+  createdAt?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, Date | null | undefined>;
+  username?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null | undefined>;
+  password?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null | undefined>;
+  email?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null | undefined>;
 }
 
 export interface FindFirstUserArgs {

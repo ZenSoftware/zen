@@ -27,9 +27,7 @@ export class GqlGuard extends AuthGuard('jwt') {
 
     allowedRoles.push(Role.Super); // Grants Super user full access
 
-    return (
-      user.roles && user.roles.some((userRole: Role) => allowedRoles.includes(userRole))
-    );
+    return user.roles && user.roles.some((userRole: Role) => allowedRoles.includes(userRole));
   }
 
   getRequest(context: ExecutionContext) {

@@ -9,10 +9,7 @@ import { ALL_TYPE_DEFS } from './resolvers';
 
 @Injectable()
 export class GqlConfigService implements GqlOptionsFactory {
-  constructor(
-    private readonly config: ConfigService,
-    private readonly prisma: PrismaService
-  ) {}
+  constructor(private readonly config: ConfigService, private readonly prisma: PrismaService) {}
 
   createGqlOptions(): GqlModuleOptions {
     return {

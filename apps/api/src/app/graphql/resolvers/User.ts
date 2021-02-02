@@ -40,12 +40,7 @@ export class UserResolver {
 
   @Query()
   async findUniqueUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Query.findUniqueUser(
-      parent,
-      PrismaSelectArgs(info, args),
-      ctx,
-      info
-    );
+    return resolvers.Query.findUniqueUser(parent, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Query()
@@ -60,12 +55,7 @@ export class UserResolver {
 
   @Query()
   async findManyUserCount(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Query.findManyUserCount(
-      parent,
-      PrismaSelectArgs(info, args),
-      ctx,
-      info
-    );
+    return resolvers.Query.findManyUserCount(parent, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Query()
@@ -75,61 +65,31 @@ export class UserResolver {
 
   @Mutation()
   async createOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.createOneUser(
-      parent,
-      PrismaSelectArgs(info, args),
-      ctx,
-      info
-    );
+    return resolvers.Mutation.createOneUser(parent, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
   async updateOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.updateOneUser(
-      parent,
-      PrismaSelectArgs(info, args),
-      ctx,
-      info
-    );
+    return resolvers.Mutation.updateOneUser(parent, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
   async deleteOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.deleteOneUser(
-      parent,
-      PrismaSelectArgs(info, args),
-      ctx,
-      info
-    );
+    return resolvers.Mutation.deleteOneUser(parent, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
   async upsertOneUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.upsertOneUser(
-      parent,
-      PrismaSelectArgs(info, args),
-      ctx,
-      info
-    );
+    return resolvers.Mutation.upsertOneUser(parent, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
   async deleteManyUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.deleteManyUser(
-      parent,
-      PrismaSelectArgs(info, args),
-      ctx,
-      info
-    );
+    return resolvers.Mutation.deleteManyUser(parent, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
   async updateManyUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
-    return resolvers.Mutation.updateManyUser(
-      parent,
-      PrismaSelectArgs(info, args),
-      ctx,
-      info
-    );
+    return resolvers.Mutation.updateManyUser(parent, PrismaSelectArgs(info, args), ctx, info);
   }
 }

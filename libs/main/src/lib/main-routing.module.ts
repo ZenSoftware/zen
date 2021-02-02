@@ -11,8 +11,7 @@ const routes: Routes = [
     path: '',
     component: ZenMainComponent,
     canActivate: [LoggedInGuard],
-    loadChildren: () =>
-      import('./zen-portal/zen-portal.module').then(m => m.ZenPortalModule),
+    loadChildren: () => import('./zen-portal/zen-portal.module').then(m => m.ZenPortalModule),
   },
 ];
 

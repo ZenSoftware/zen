@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  OnDestroy,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';

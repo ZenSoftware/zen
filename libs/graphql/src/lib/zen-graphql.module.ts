@@ -41,9 +41,7 @@ export class ZenGraphQLModule {
 
   constructor(@Optional() @SkipSelf() parentModule?: ZenGraphQLModule) {
     if (parentModule) {
-      throw new Error(
-        'ZenGraphQLModule is already loaded. Import it in the AppModule only.'
-      );
+      throw new Error('ZenGraphQLModule is already loaded. Import it in the AppModule only.');
     }
   }
 
@@ -74,10 +72,7 @@ export function createApollo(
 
   let batch_link: HttpBatchLinkHandler;
   if (options.batchOptions) batch_link = httpBatchLink.create(options.batchOptions);
-  else
-    throw Error(
-      'No GraphQLOptions.batchOptions provided. You must set at least the uri.'
-    );
+  else throw Error('No GraphQLOptions.batchOptions provided. You must set at least the uri.');
 
   if (!options.websocketOptions) {
     if (!options.uploadOptions) {

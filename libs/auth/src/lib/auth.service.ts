@@ -14,14 +14,7 @@ import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import Cookies from 'js-cookie';
 import { intersection, isEqual, orderBy } from 'lodash-es';
-import {
-  BehaviorSubject,
-  Observable,
-  Subscription,
-  interval,
-  throwError,
-  timer,
-} from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, interval, throwError, timer } from 'rxjs';
 import { catchError, debounce, mergeMap, retryWhen, tap } from 'rxjs/operators';
 
 enum LocalStorageKey {
@@ -113,10 +106,7 @@ export class AuthService {
     this.startExchangeInterval();
   }
 
-  rolesEqual(
-    a: string | string[] | null | undefined,
-    b: string | string[] | null | undefined
-  ) {
+  rolesEqual(a: string | string[] | null | undefined, b: string | string[] | null | undefined) {
     if (Array.isArray(a) && Array.isArray(b)) return isEqual(orderBy(a), orderBy(b));
     return a === b;
   }
@@ -195,9 +185,7 @@ export class AuthService {
 
   private startExchangeInterval() {
     if (!this.rememberMe && !this.#exchangeIntervalSubscription) {
-      this.#exchangeIntervalSubscription = interval(
-        this.env.jwtExchangeInterval
-      ).subscribe(() => {
+      this.#exchangeIntervalSubscription = interval(this.env.jwtExchangeInterval).subscribe(() => {
         if (this.loggedIn) this.exchangeToken();
         else this.logout();
       });
@@ -232,10 +220,7 @@ const retryStrategy = ({
         return throwError(errors);
       }
 
-      console.log(
-        `Exchange token attempt ${retryAttempt}: retrying in ${duration}ms`,
-        errors
-      );
+      console.log(`Exchange token attempt ${retryAttempt}: retrying in ${duration}ms`, errors);
 
       return timer(duration);
     })

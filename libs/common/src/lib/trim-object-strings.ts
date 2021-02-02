@@ -1,7 +1,6 @@
 import { isDate } from 'lodash-es';
 
-const isObject = (x: any) =>
-  typeof x === 'object' && x !== null && !Array.isArray(x) && !isDate(x);
+const isObject = (x: any) => typeof x === 'object' && x !== null && !Array.isArray(x) && !isDate(x);
 
 /**
  * Recursively finds all the string values on an object and trims off the leading and trailing whitespace.

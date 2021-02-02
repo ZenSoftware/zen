@@ -1,11 +1,7 @@
 {
   "extends": "../../tslint.json",
   "linterOptions": {
-    "exclude": [
-      "!**/*",
-      "./src/app/graphql/resolversTypes.ts",
-      "./src/app/graphql/prisma"
-    ]
+    "exclude": ["!**/*", "./src/app/graphql/resolversTypes.ts", "./src/app/graphql/prisma"]
   },
   "rules": {}
 }

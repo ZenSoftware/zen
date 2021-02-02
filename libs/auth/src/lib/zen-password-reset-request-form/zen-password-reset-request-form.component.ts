@@ -10,11 +10,7 @@ import {
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { ApiConstants } from '@zen/api-interfaces';
-import {
-  AuthPasswordResetRequestQueryGQL,
-  GqlErrors,
-  parseGqlErrors,
-} from '@zen/graphql';
+import { AuthPasswordResetRequestQueryGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 

@@ -18,8 +18,7 @@ export const ROUTES: Routes = [
       {
         path: 'super',
         canActivate: [SuperGuard],
-        loadChildren: () =>
-          import('./zen-super/zen-super.module').then(m => m.ZenSuperModule),
+        loadChildren: () => import('./zen-super/zen-super.module').then(m => m.ZenSuperModule),
       },
     ],
   },

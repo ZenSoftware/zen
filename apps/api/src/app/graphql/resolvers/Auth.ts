@@ -157,8 +157,7 @@ export class AuthResolver {
       },
     });
 
-    if (possibleUsers.length <= 0)
-      throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
+    if (possibleUsers.length <= 0) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
 
     possibleUsers.forEach(u => this.mail.sendPasswordReset(u));
   }

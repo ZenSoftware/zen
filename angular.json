@@ -87,10 +87,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/portal/tsconfig.app.json",
-              "apps/portal/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/portal/tsconfig.app.json", "apps/portal/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/portal/**/*"]
           }
         },
@@ -233,10 +230,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/common/tsconfig.lib.json",
-              "libs/common/tsconfig.spec.json"
-            ],
+            "tsConfig": ["libs/common/tsconfig.lib.json", "libs/common/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!libs/common/**/*"]
           }
         },
@@ -346,10 +340,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/components/tsconfig.lib.json",
-              "libs/components/tsconfig.spec.json"
-            ],
+            "tsConfig": ["libs/components/tsconfig.lib.json", "libs/components/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!libs/components/**/*"]
           }
         },
