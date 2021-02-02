@@ -15,4 +15,4 @@ import { EnvironmentDev } from '@zen/common';
 
 class EnvironmentImpl extends EnvironmentDev {}
 
-export const environment = new EnvironmentImpl();
+export const environment = Object.freeze(new EnvironmentImpl());
