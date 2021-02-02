@@ -6,9 +6,7 @@ import { ConfigService } from '../config';
 import { JwtService } from '../jwt';
 import { GeneralContext, PasswordResetContext } from './templates';
 
-type MailTemplate = 'general' | 'password-reset';
-
-type MailOptions = ISendMailOptions & { template?: MailTemplate };
+type MailOptions = ISendMailOptions & { template?: string };
 
 @Injectable()
 export class MailService {
