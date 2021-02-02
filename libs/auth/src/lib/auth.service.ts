@@ -37,7 +37,7 @@ export class AuthService {
     private authExchangeTokenGQL: AuthExchangeTokenGQL,
     private env: Environment
   ) {
-    if (this.loggedIn) {
+    if (this._loggedIn) {
       try {
         // Initialize apollo client state
         const roles = localStorage.getItem(LocalStorageKey.roles);
@@ -127,11 +127,19 @@ export class AuthService {
     return true;
   }
 
+  get roles() {
+    return userRolesVar();
+  }
+
+  get loggedIn() {
+    return loggedInVar();
+  }
+
   private get rememberMe(): boolean {
     return 'true' === localStorage.getItem(LocalStorageKey.rememberMe);
   }
 
-  private get loggedIn(): boolean {
+  private get _loggedIn(): boolean {
     return this.sessionTimeRemaining > 0;
   }
 
@@ -186,7 +194,7 @@ export class AuthService {
   private startExchangeInterval() {
     if (!this.rememberMe && !this.#exchangeIntervalSubscription) {
       this.#exchangeIntervalSubscription = interval(this.env.jwtExchangeInterval).subscribe(() => {
-        if (this.loggedIn) this.exchangeToken();
+        if (this._loggedIn) this.exchangeToken();
         else this.logout();
       });
     }
