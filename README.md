@@ -3,7 +3,7 @@
 
 ---
 
-## 🏯 Project Founders Notes
+## 🏯 Project Founder's Notes
 
 If I could be so humble as to mention a few things about myself.  I have built 2 enterprise-grade web portals utilizing Nest, Prisma, and Angular.  This project is an attempt to package the sum total of all those lessons learned, and making it publicly available to the community.
 
