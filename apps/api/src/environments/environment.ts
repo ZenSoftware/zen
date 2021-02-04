@@ -9,6 +9,7 @@ export const environment: EnvironmentBase = {
   production: false,
   expressPort: 7080,
   publicRegistration: true,
+  cors: { credentials: true, origin: true },
   graphql: {
     playground: true, // localhost:7080/graphql
     uploads: {

@@ -9,9 +9,10 @@ export class EnvironmentBase {
   readonly cookie: Omit<CookieOptions, 'maxAge'>;
   readonly production: boolean;
   readonly expressPort: string | number;
+  readonly cors?: any | boolean;
   readonly graphql: {
     readonly playground: boolean;
-    readonly uploads: boolean | FileUploadOptions;
+    readonly uploads?: boolean | FileUploadOptions;
   };
   readonly publicRegistration: boolean;
   readonly jwtOptions: JwtModuleOptions;

@@ -19,7 +19,7 @@ export class GqlConfigService implements GqlOptionsFactory {
       playground: this.config.graphql.playground,
       introspection: this.config.graphql.playground,
       tracing: this.config.graphql.playground,
-      cors: this.config.production ? undefined : { credentials: true, origin: true },
+      cors: this.config.cors,
       context: async (ctx): Promise<IContext> => {
         return ctx.connection
           ? {
