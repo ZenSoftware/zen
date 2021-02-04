@@ -37,7 +37,9 @@ const readFileAsync = promisify(fs.readFile);
 const appendFileAsync = promisify(fs.appendFile);
 
 //=============================================================================
-// Configuration
+/**
+ * Configuration
+ **/
 //=============================================================================
 const CONFIG = {
   cleanGlobs: ['dist/apps/'],
@@ -56,7 +58,9 @@ const CONFIG = {
 };
 
 //=============================================================================
-// Gulp
+/**
+ * Gulp
+ **/
 //=============================================================================
 @Gulpclass()
 export class Gulpfile {
@@ -96,9 +100,8 @@ export class Gulpfile {
   }
   //---------------------------------------------------------------------------
   async createApolloAngularPrismaFile(prismaNames: string[]) {
-    console.log(
-      `---------------- Generate Prisma Client Resolvers & Fields Templates ----------------`
-    );
+    console.log(`---- Generate Prisma Client Resolvers & Fields Templates ----`);
+    console.log(`------------------ @paljs/cli generate ------------------`);
 
     const fieldsIndexPath = path.join(CONFIG.gql.clientFieldsPath, `index.ts`);
     if (!fs.existsSync(fieldsIndexPath)) {
@@ -135,7 +138,7 @@ export class Gulpfile {
     const PRISMA_PATH = `${CONFIG.gql.apiPath}/prisma`;
     const RESOLVERS_PATH = `${CONFIG.gql.apiPath}/resolvers`;
 
-    console.log(`---------------- @paljs/cli generate ----------------`);
+    console.log(`------------------ @paljs/cli generate ------------------`);
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
     await this.execLocal(`prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"`);
 
