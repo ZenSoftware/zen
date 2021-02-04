@@ -16,7 +16,7 @@ export interface Resolvers {
   Query?: Query;
   Mutation?: Mutation;
   AggregateUser?: AggregateUser;
-  BatchPayload?: BatchPayload;
+  AffectedRowsOutput?: AffectedRowsOutput;
   UserCountAggregateOutputType?: UserCountAggregateOutputType;
   UserAvgAggregateOutputType?: UserAvgAggregateOutputType;
   UserSumAggregateOutputType?: UserSumAggregateOutputType;
@@ -31,12 +31,12 @@ export interface User {
   username?: Resolver<Client.User, {}, string>;
   password?: Resolver<Client.User, {}, string>;
   email?: Resolver<Client.User, {}, string>;
-  roles?: Resolver<Client.User, {}, Client.Role[] | null | undefined>;
+  roles?: Resolver<Client.User, {}, Client.Role[] | null>;
 }
 
 export interface Query {
   [key: string]: Resolver<any, any, any>;
-  findFirstUser?: Resolver<{}, FindFirstUserArgs, Client.User | null | undefined>;
+  findFirstUser?: Resolver<{}, FindFirstUserArgs, Client.User | null>;
   findManyUser?: Resolver<{}, FindManyUserArgs, Client.User[]>;
   findManyUserCount?: Resolver<{}, FindManyUserArgs, number>;
   aggregateUser?: Resolver<
@@ -44,19 +44,20 @@ export interface Query {
     AggregateUserArgs,
     Client.Prisma.GetUserAggregateType<AggregateUserArgs>
   >;
-  findOneUser?: Resolver<{}, FindOneUserArgs, Client.User | null | undefined>;
+  findOneUser?: Resolver<{}, FindOneUserArgs, Client.User | null>;
+  findUniqueUser?: Resolver<{}, FindUniqueUserArgs, Client.User | null>;
 }
 
 export interface Mutation {
   [key: string]: Resolver<any, any, any>;
   createOneUser?: Resolver<{}, CreateOneUserArgs, Client.User>;
-  deleteOneUser?: Resolver<{}, DeleteOneUserArgs, Client.User | null | undefined>;
-  updateOneUser?: Resolver<{}, UpdateOneUserArgs, Client.User | null | undefined>;
   upsertOneUser?: Resolver<{}, UpsertOneUserArgs, Client.User>;
+  deleteOneUser?: Resolver<{}, DeleteOneUserArgs, Client.User | null>;
+  updateOneUser?: Resolver<{}, UpdateOneUserArgs, Client.User | null>;
   updateManyUser?: Resolver<{}, UpdateManyUserArgs, Client.Prisma.BatchPayload>;
   deleteManyUser?: Resolver<{}, DeleteManyUserArgs, Client.Prisma.BatchPayload>;
-  executeRaw?: Resolver<{}, ExecuteRawArgs, undefined>;
-  queryRaw?: Resolver<{}, QueryRawArgs, undefined>;
+  executeRaw?: Resolver<{}, ExecuteRawArgs, any>;
+  queryRaw?: Resolver<{}, QueryRawArgs, any>;
 }
 
 export interface AggregateUser {
@@ -64,31 +65,15 @@ export interface AggregateUser {
   count?: Resolver<
     Client.Prisma.AggregateUser,
     {},
-    Client.Prisma.UserCountAggregateOutputType | null | undefined
+    Client.Prisma.UserCountAggregateOutputType | null
   >;
-  avg?: Resolver<
-    Client.Prisma.AggregateUser,
-    {},
-    Client.Prisma.UserAvgAggregateOutputType | null | undefined
-  >;
-  sum?: Resolver<
-    Client.Prisma.AggregateUser,
-    {},
-    Client.Prisma.UserSumAggregateOutputType | null | undefined
-  >;
-  min?: Resolver<
-    Client.Prisma.AggregateUser,
-    {},
-    Client.Prisma.UserMinAggregateOutputType | null | undefined
-  >;
-  max?: Resolver<
-    Client.Prisma.AggregateUser,
-    {},
-    Client.Prisma.UserMaxAggregateOutputType | null | undefined
-  >;
+  avg?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserAvgAggregateOutputType | null>;
+  sum?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserSumAggregateOutputType | null>;
+  min?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMinAggregateOutputType | null>;
+  max?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMaxAggregateOutputType | null>;
 }
 
-export interface BatchPayload {
+export interface AffectedRowsOutput {
   [key: string]: Resolver<any, any, any>;
   count?: Resolver<Client.Prisma.BatchPayload, {}, number>;
 }
@@ -96,11 +81,11 @@ export interface BatchPayload {
 export interface UserCountAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
-  createdAt?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
-  username?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
-  password?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
-  email?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
-  roles?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null | undefined>;
+  createdAt?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
+  username?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
+  password?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
+  email?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
+  roles?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
   _all?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
 }
 
@@ -117,19 +102,19 @@ export interface UserSumAggregateOutputType {
 export interface UserMinAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, number>;
-  createdAt?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, Date | null | undefined>;
-  username?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null | undefined>;
-  password?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null | undefined>;
-  email?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null | undefined>;
+  createdAt?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, Date | null>;
+  username?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
+  password?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
+  email?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
 }
 
 export interface UserMaxAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, number>;
-  createdAt?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, Date | null | undefined>;
-  username?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null | undefined>;
-  password?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null | undefined>;
-  email?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null | undefined>;
+  createdAt?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, Date | null>;
+  username?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
+  password?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
+  email?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
 }
 
 export interface FindFirstUserArgs {
@@ -167,8 +152,18 @@ export interface FindOneUserArgs {
   where: UserWhereUniqueInput | null;
 }
 
+export interface FindUniqueUserArgs {
+  where: UserWhereUniqueInput | null;
+}
+
 export interface CreateOneUserArgs {
   data: UserCreateInput;
+}
+
+export interface UpsertOneUserArgs {
+  where: UserWhereUniqueInput;
+  create: UserCreateInput;
+  update: UserUpdateInput;
 }
 
 export interface DeleteOneUserArgs {
@@ -178,12 +173,6 @@ export interface DeleteOneUserArgs {
 export interface UpdateOneUserArgs {
   data: UserUpdateInput | null;
   where: UserWhereUniqueInput | null;
-}
-
-export interface UpsertOneUserArgs {
-  where: UserWhereUniqueInput;
-  create: UserCreateInput;
-  update: UserUpdateInput;
 }
 
 export interface UpdateManyUserArgs {
@@ -197,12 +186,12 @@ export interface DeleteManyUserArgs {
 
 export interface ExecuteRawArgs {
   query: string;
-  parameters?: undefined;
+  parameters?: any;
 }
 
 export interface QueryRawArgs {
   query: string;
-  parameters?: undefined;
+  parameters?: any;
 }
 
 export interface UserWhereInput {
@@ -240,6 +229,15 @@ export interface UserCreateInput {
   roles?: UserCreaterolesInput;
 }
 
+export interface UserUncheckedCreateInput {
+  id?: number;
+  createdAt?: Date;
+  username: string;
+  password: string;
+  email: string;
+  roles?: UserCreaterolesInput;
+}
+
 export interface UserUpdateInput {
   createdAt?: DateTimeFieldUpdateOperationsInput;
   username?: StringFieldUpdateOperationsInput;
@@ -248,7 +246,25 @@ export interface UserUpdateInput {
   roles?: UserUpdaterolesInput;
 }
 
+export interface UserUncheckedUpdateInput {
+  id?: IntFieldUpdateOperationsInput;
+  createdAt?: DateTimeFieldUpdateOperationsInput;
+  username?: StringFieldUpdateOperationsInput;
+  password?: StringFieldUpdateOperationsInput;
+  email?: StringFieldUpdateOperationsInput;
+  roles?: UserUpdaterolesInput;
+}
+
 export interface UserUpdateManyMutationInput {
+  createdAt?: DateTimeFieldUpdateOperationsInput;
+  username?: StringFieldUpdateOperationsInput;
+  password?: StringFieldUpdateOperationsInput;
+  email?: StringFieldUpdateOperationsInput;
+  roles?: UserUpdaterolesInput;
+}
+
+export interface UserUncheckedUpdateManyInput {
+  id?: IntFieldUpdateOperationsInput;
   createdAt?: DateTimeFieldUpdateOperationsInput;
   username?: StringFieldUpdateOperationsInput;
   password?: StringFieldUpdateOperationsInput;
@@ -295,6 +311,10 @@ export interface StringFilter {
 
 export interface EnumRoleNullableListFilter {
   equals?: Role[] | null;
+  has?: Role | null;
+  hasEvery?: Role[];
+  hasSome?: Role[];
+  isEmpty?: boolean;
 }
 
 export interface UserCreaterolesInput {
@@ -311,6 +331,14 @@ export interface StringFieldUpdateOperationsInput {
 
 export interface UserUpdaterolesInput {
   set: Role[];
+}
+
+export interface IntFieldUpdateOperationsInput {
+  set?: number;
+  increment?: number;
+  decrement?: number;
+  multiply?: number;
+  divide?: number;
 }
 
 export interface NestedIntFilter {
