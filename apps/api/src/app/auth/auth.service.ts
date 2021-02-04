@@ -32,8 +32,8 @@ export class AuthService {
     const token = this.jwtService.sign(jwtPayload, { expiresIn });
 
     const cookieOptions: CookieOptions = {
-      maxAge,
       ...this.config.cookie,
+      maxAge,
     };
 
     res.cookie('jwt', token, cookieOptions);
