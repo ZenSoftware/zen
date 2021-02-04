@@ -41,9 +41,9 @@ export class AuthService {
 
     return {
       id: user.id,
-      maxAge: maxAge.toString(),
       roles: user.roles,
       rememberMe,
+      maxAge: maxAge.toString(),
     };
   }
 }
