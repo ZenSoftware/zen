@@ -101,8 +101,6 @@ export class Gulpfile {
   //---------------------------------------------------------------------------
   async createApolloAngularPrismaFile(prismaNames: string[]) {
     console.log(`---- Generate Prisma Client Resolvers & Fields Templates ----`);
-    console.log(`------------------ @paljs/cli generate ------------------`);
-
     const fieldsIndexPath = path.join(CONFIG.gql.clientFieldsPath, `index.ts`);
     if (!fs.existsSync(fieldsIndexPath)) {
       await writeFileAsync(fieldsIndexPath, '');
