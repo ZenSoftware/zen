@@ -100,7 +100,7 @@ export class Gulpfile {
   }
   //---------------------------------------------------------------------------
   async createApolloAngularPrismaFile(prismaNames: string[]) {
-    console.log(`---- Generate Prisma Client Resolvers & Fields Templates ----`);
+    console.log(`---- Generate Apollo Client Resolvers & Fields Templates ----`);
     const fieldsIndexPath = path.join(CONFIG.gql.clientFieldsPath, `index.ts`);
     if (!fs.existsSync(fieldsIndexPath)) {
       await writeFileAsync(fieldsIndexPath, '');
@@ -138,7 +138,6 @@ export class Gulpfile {
 
     console.log(`------------------ @paljs/cli generate ------------------`);
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
-    await this.execLocal(`prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"`);
 
     console.log(`---------- Zen Nest GraphQL Resolvers generate ----------`);
     if (!fs.existsSync(RESOLVERS_PATH)) {
@@ -225,6 +224,8 @@ export class Gulpfile {
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
     await writeFileAsync(indexPath, nestResolversIndexTemplate(dataTypeNames));
     console.log(`- Wrote: ${indexPath}\n`);
+
+    await this.execLocal(`prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"\n`);
 
     await this.createApolloAngularPrismaFile(prismaNames);
 
