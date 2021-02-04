@@ -23,8 +23,8 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     RouterModule.forRoot([]),
     MatToolbarModule,
-    ZenAuthModule,
     MainModule,
+    ZenAuthModule,
     ZenGraphQLModule.forRoot({
       cacheOptions: {
         possibleTypes,
