@@ -11,6 +11,10 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   graphql: {
     playground: true, // localhost:7080/graphql
+    uploads: {
+      maxFileSize: 20_000_000, // 20 MB
+      maxFiles: 5,
+    },
   },
   jwtOptions: {
     secret: 'dev secret',

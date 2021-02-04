@@ -29,10 +29,7 @@ export class GqlConfigService implements GqlOptionsFactory {
             }
           : { ...ctx, prisma: this.prisma };
       },
-      uploads: {
-        maxFileSize: 20_000_000, // 20 MB
-        maxFiles: 5,
-      },
+      uploads: this.config.graphql.uploads,
     };
   }
 }

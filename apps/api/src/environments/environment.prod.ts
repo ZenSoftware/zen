@@ -7,6 +7,10 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   graphql: {
     playground: false,
+    uploads: {
+      maxFileSize: 20_000_000, // 20 MB
+      maxFiles: 5,
+    },
   },
   jwtOptions: {
     privateKey: process.env.JWT_PRIVATE_KEY,
