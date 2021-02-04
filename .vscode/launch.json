@@ -34,7 +34,7 @@
     {
       "id": "port",
       "type": "promptString",
-      "description": "Websocket debug port"
+      "description": "Debug port"
     }
   ]
 }
