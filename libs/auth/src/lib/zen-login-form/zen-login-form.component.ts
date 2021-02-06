@@ -130,10 +130,6 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
               this.username?.updateValueAndValidity();
               this.usernameInput?.nativeElement.select();
             }
-
-            if (errors.hasThrottleError) {
-              this.generalError = true;
-            }
           },
         });
     }
