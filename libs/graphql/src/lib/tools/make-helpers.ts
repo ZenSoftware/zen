@@ -1,5 +1,5 @@
-import { trimObjectStrings } from '@zen/common';
 import { omit } from 'lodash-es';
+
 /**
  * Omits `__typename` and `id` properties from an object
  */
