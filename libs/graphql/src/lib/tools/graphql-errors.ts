@@ -1,8 +1,4 @@
 import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
-// export const parseGqlErrors = () =>
-//   catchError(errors => throwError(new GqlErrors(errors)));
 
 export const parseGqlErrors = (errors: any) => throwError(new GqlErrors(errors));
 
@@ -32,6 +28,6 @@ export class GqlErrors {
   }
 
   get hasThrottleError(): boolean {
-    return this.parsed.find(e => e === 'ThrottlerException: Too Many Requests');
+    return !!this.parsed.find(e => e === 'ThrottlerException: Too Many Requests');
   }
 }
