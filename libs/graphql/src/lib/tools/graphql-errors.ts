@@ -1,3 +1,4 @@
+import { ApiError } from '@zen/api-interfaces';
 import { throwError } from 'rxjs';
 export { ApiError } from '@zen/api-interfaces';
 
@@ -32,6 +33,6 @@ export class GqlErrors<T = any> {
   }
 
   get hasThrottleError(): boolean {
-    return !!this.parsed.find((e: any) => e === 'ThrottlerException: Too Many Requests');
+    return !!this.parsed.find((e: any) => e === ApiError.Nest.THROTTLE);
   }
 }

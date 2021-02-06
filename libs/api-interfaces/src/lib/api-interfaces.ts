@@ -6,6 +6,9 @@ export const ApiConstants = {
 };
 
 export namespace ApiError {
+  export enum Nest {
+    THROTTLE = 'ThrottlerException: Too Many Requests',
+  }
   export enum AuthLogin {
     USER_NOT_FOUND = 'USER_NOT_FOUND',
     INCORRECT_PASSWORD = 'INCORRECT_PASSWORD',
