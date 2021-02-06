@@ -10,9 +10,8 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { GqlErrors, parseGqlErrors } from '@zen/graphql';
+import { GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -106,7 +105,6 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
           password: this.password?.value,
           rememberMe: this.rememberMe?.value,
         })
-        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: () => {
             this.loading = false;

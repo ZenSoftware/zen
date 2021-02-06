@@ -78,6 +78,7 @@ export class AuthService {
     return this.authLoginGQL
       .fetch({ data: <AuthLoginInput>data }, { fetchPolicy: 'network-only' })
       .pipe(
+        catchError(parseGqlErrors),
         tap(({ data: { authLogin } }) => {
           this.setSession(authLogin);
         })
