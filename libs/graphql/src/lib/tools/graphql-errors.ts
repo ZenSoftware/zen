@@ -2,8 +2,8 @@ import { throwError } from 'rxjs';
 
 export const parseGqlErrors = (errors: any) => throwError(new GqlErrors(errors));
 
-export class GqlErrors {
-  parsed: any[] = [];
+export class GqlErrors<T = any> {
+  parsed: T[] = [];
   original: any;
 
   constructor(errors: any) {
@@ -23,11 +23,14 @@ export class GqlErrors {
     return [];
   }
 
-  find(predicate: (value: any, index: number, obj: any[]) => unknown) {
+  /**
+   * Returns the value of the first error where predicate is true, and undefined otherwise.
+   */
+  find(predicate: (value: T, index: number, obj: T[]) => unknown) {
     return this.parsed.find(predicate);
   }
 
   get hasThrottleError(): boolean {
-    return !!this.parsed.find(e => e === 'ThrottlerException: Too Many Requests');
+    return !!this.parsed.find((e: any) => e === 'ThrottlerException: Too Many Requests');
   }
 }
