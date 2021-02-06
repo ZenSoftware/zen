@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { AuthRegisterGQL, AuthSession, GqlErrors, parseGqlErrors } from '@zen/graphql';
+import { ApiError, AuthRegisterGQL, AuthSession, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -152,7 +152,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
             this.registered.emit();
           },
 
-          error: (errors: GqlErrors) => {
+          error: (errors: GqlErrors<ApiError.AuthRegister>) => {
             this.loading = false;
             this.form.enable();
 

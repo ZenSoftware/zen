@@ -1,6 +1,7 @@
 import { HttpException, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PrismaClient } from '@prisma/client';
+import { ApiError } from '@zen/api-interfaces';
 import bcrypt from 'bcryptjs';
 import { CookieOptions } from 'express';
 import gql from 'graphql-tag';
@@ -87,10 +88,11 @@ export class AuthResolver {
   async authLogin(@Context() ctx: IContext, @Args('data') data: AuthLoginInput) {
     const user = await this.getUserByUsername(data.username, ctx.prisma);
 
-    if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
+    if (!user) throw new HttpException(<ApiError.AuthLogin>{ code: 'USER_NOT_FOUND' }, 400);
 
     const correctPassword = await bcrypt.compare(data.password, user.password);
-    if (!correctPassword) throw new HttpException({ code: 'INCORRECT_PASSWORD' }, 400);
+    if (!correctPassword)
+      throw new HttpException(<ApiError.AuthLogin>{ code: 'INCORRECT_PASSWORD' }, 400);
 
     return this.auth.setJwtCookie(ctx.res, user, data.rememberMe);
   }
@@ -107,7 +109,7 @@ export class AuthResolver {
     } else {
       ctx.res.clearCookie('jwt', this.CLEAR_COOKIE_OPTIONS);
       ctx.res.clearCookie('rememberMe', this.CLEAR_COOKIE_OPTIONS);
-      throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
+      throw new HttpException(<ApiError.AuthExchangeToken>{ code: 'USER_NOT_FOUND' }, 400);
     }
   }
 
@@ -135,7 +137,8 @@ export class AuthResolver {
       },
     });
 
-    if (possibleUsers.length <= 0) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
+    if (possibleUsers.length <= 0)
+      throw new HttpException(<ApiError.AuthPasswordResetRequest>{ code: 'USER_NOT_FOUND' }, 400);
 
     possibleUsers.forEach(u => this.mail.sendPasswordReset(u));
   }
@@ -149,12 +152,19 @@ export class AuthResolver {
     try {
       tokenPayload = this.jwtService.verify(data.token);
     } catch {
-      throw new HttpException({ code: 'UNAUTHORIZED' }, 400);
+      throw new HttpException(
+        <ApiError.AuthPasswordResetConfirmation>{ code: 'UNAUTHORIZED' },
+        400
+      );
     }
 
     let user = await this.getUserByUsername(tokenPayload.username, ctx.prisma);
 
-    if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
+    if (!user)
+      throw new HttpException(
+        <ApiError.AuthPasswordResetConfirmation>{ code: 'USER_NOT_FOUND' },
+        400
+      );
 
     const hashedPassword = await bcrypt.hash(data.newPassword, 12);
 
@@ -169,13 +179,13 @@ export class AuthResolver {
   @Mutation()
   async authRegister(@Context() ctx: IContext, @Args('data') data: AuthRegisterInput) {
     if (!this.config.publicRegistration)
-      throw new HttpException({ code: 'NO_PUBLIC_REGISTRATIONS' }, 403);
+      throw new HttpException(<ApiError.AuthRegister>{ code: 'NO_PUBLIC_REGISTRATIONS' }, 403);
 
     if (await this.getUserByUsername(data.username, ctx.prisma))
-      throw new HttpException({ code: 'USERNAME_TAKEN' }, 400);
+      throw new HttpException(<ApiError.AuthRegister>{ code: 'USERNAME_TAKEN' }, 400);
 
     if (await this.getUserByEmail(data.email, ctx.prisma))
-      throw new HttpException({ code: 'EMAIL_TAKEN' }, 400);
+      throw new HttpException(<ApiError.AuthRegister>{ code: 'EMAIL_TAKEN' }, 400);
 
     const hashedPassword = await bcrypt.hash(data.password, 12);
 
@@ -215,10 +225,12 @@ export class AuthResolver {
     @GqlUser() reqUser: RequestUser
   ) {
     const user = await ctx.prisma.user.findUnique({ where: { id: reqUser.id } });
-    if (!user) throw new HttpException({ code: 'USER_NOT_FOUND' }, 400);
+    if (!user)
+      throw new HttpException(<ApiError.AuthPasswordChange>{ code: 'USER_NOT_FOUND' }, 400);
 
     const correctPassword = await bcrypt.compare(data.oldPassword, user.password);
-    if (!correctPassword) throw new HttpException({ code: 'WRONG_PASSWORD' }, 400);
+    if (!correctPassword)
+      throw new HttpException(<ApiError.AuthPasswordChange>{ code: 'WRONG_PASSWORD' }, 400);
 
     const hashedPassword = await bcrypt.hash(data.newPassword, 12);
 

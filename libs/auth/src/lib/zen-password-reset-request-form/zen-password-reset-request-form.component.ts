@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { ApiConstants } from '@zen/api-interfaces';
+import { ApiConstants, ApiError } from '@zen/api-interfaces';
 import { AuthPasswordResetRequestQueryGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -105,7 +105,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
             this.completed = true;
             this.sent.emit();
           },
-          error: (errors: GqlErrors) => {
+          error: (errors: GqlErrors<ApiError.AuthPasswordResetRequest>) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();

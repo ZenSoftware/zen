@@ -10,9 +10,15 @@ import {
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthPasswordResetConfirmationGQL, AuthSession } from '@zen/graphql';
+import {
+  ApiError,
+  AuthPasswordResetConfirmationGQL,
+  AuthSession,
+  GqlErrors,
+  parseGqlErrors,
+} from '@zen/graphql';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -101,6 +107,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
             token: this.token as string,
           },
         })
+        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
@@ -112,7 +119,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
               this.confirmed.emit();
             }, 5000);
           },
-          error: errors => {
+          error: (errors: GqlErrors<ApiError.AuthPasswordResetConfirmation>) => {
             this.loading = false;
             this.generalError = true;
             this.form.enable();

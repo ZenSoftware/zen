@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { GqlErrors } from '@zen/graphql';
+import { ApiError, GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
@@ -112,7 +112,7 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
             this.loggedIn.emit();
           },
 
-          error: (errors: GqlErrors) => {
+          error: (errors: GqlErrors<ApiError.AuthLogin>) => {
             this.loading = false;
             this.generalError = true;
             this.form.enable();

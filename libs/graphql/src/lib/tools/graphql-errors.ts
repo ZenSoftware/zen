@@ -1,4 +1,5 @@
 import { throwError } from 'rxjs';
+export { ApiError } from '@zen/api-interfaces';
 
 export const parseGqlErrors = (errors: any) => throwError(new GqlErrors(errors));
 

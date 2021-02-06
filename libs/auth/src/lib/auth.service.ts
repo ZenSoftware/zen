@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Environment } from '@zen/common';
 import {
+  ApiError,
   AuthExchangeTokenGQL,
   AuthLoginGQL,
   AuthLoginInput,
@@ -185,7 +186,7 @@ export class AuthService {
           this.setSession(authExchangeToken);
           console.log('Exchanged token');
         },
-        error: errors => {
+        error: (errors: GqlErrors<ApiError.AuthExchangeToken>) => {
           this.logout();
           console.error('Exchange token failed', errors);
         },

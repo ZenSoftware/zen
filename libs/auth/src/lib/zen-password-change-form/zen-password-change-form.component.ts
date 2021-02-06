@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } fro
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AuthPasswordChangeGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
+import { ApiError, AuthPasswordChangeGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -119,7 +119,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             this.completed = true;
             this.changed.emit();
           },
-          error: (errors: GqlErrors) => {
+          error: (errors: GqlErrors<ApiError.AuthPasswordChange>) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();
