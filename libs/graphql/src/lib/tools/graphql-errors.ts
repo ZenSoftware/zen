@@ -12,11 +12,11 @@ export class GqlErrors<T = any> {
   }
 
   static extractGraphQLErrors(errors: any): Array<any> {
-    if (errors && errors.graphQLErrors) {
+    if (errors?.graphQLErrors) {
       return errors.graphQLErrors.reduce((results: any[], item: any) => {
-        if (item?.extensions?.exception?.response) {
-          results.push(item?.extensions?.exception?.response);
-        }
+        const error = item?.extensions?.exception?.response;
+        if (error) results.push(error);
+
         return results;
       }, []);
     }
