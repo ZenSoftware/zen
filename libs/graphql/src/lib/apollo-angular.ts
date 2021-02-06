@@ -242,28 +242,28 @@ export type AggregateUser = {
 
 export type UserCountAggregateOutputType = {
   __typename?: 'UserCountAggregateOutputType';
-  id?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
   createdAt?: Maybe<Scalars['Int']>;
   username?: Maybe<Scalars['Int']>;
   password?: Maybe<Scalars['Int']>;
   email?: Maybe<Scalars['Int']>;
   roles?: Maybe<Scalars['Int']>;
-  _all?: Maybe<Scalars['Int']>;
+  _all: Scalars['Int'];
 };
 
 export type UserAvgAggregateOutputType = {
   __typename?: 'UserAvgAggregateOutputType';
-  id?: Maybe<Scalars['Float']>;
+  id: Scalars['Float'];
 };
 
 export type UserSumAggregateOutputType = {
   __typename?: 'UserSumAggregateOutputType';
-  id?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
 };
 
 export type UserMinAggregateOutputType = {
   __typename?: 'UserMinAggregateOutputType';
-  id?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
   createdAt?: Maybe<Scalars['DateTime']>;
   username?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
@@ -272,7 +272,7 @@ export type UserMinAggregateOutputType = {
 
 export type UserMaxAggregateOutputType = {
   __typename?: 'UserMaxAggregateOutputType';
-  id?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
   createdAt?: Maybe<Scalars['DateTime']>;
   username?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;

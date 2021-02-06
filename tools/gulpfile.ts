@@ -218,7 +218,10 @@ export class Gulpfile {
 
     // Get the data type names via the filename of the "resolvers" directory
     let dataTypeNames = (await readdirAsync(RESOLVERS_PATH))
-      .filter(f => path.basename(f) !== 'index.ts') // Filter out any "index.ts"
+      .filter(f => {
+        const basename = path.basename(f);
+        return basename !== 'index.ts' && basename !== 'debug.log';
+      })
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
