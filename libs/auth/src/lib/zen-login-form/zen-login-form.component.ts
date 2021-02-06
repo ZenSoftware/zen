@@ -117,14 +117,14 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
             this.generalError = true;
             this.form.enable();
 
-            if (errors.find(e => e.code === 'INCORRECT_PASSWORD')) {
+            if (errors.find(e => e === 'INCORRECT_PASSWORD')) {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.password?.updateValueAndValidity();
               this.passwordInput?.nativeElement.select();
             }
 
-            if (errors.find(e => e.code === 'USER_NOT_FOUND')) {
+            if (errors.find(e => e === 'USER_NOT_FOUND')) {
               this.generalError = false;
               this.#usernameNotFound = true;
               this.username?.updateValueAndValidity();

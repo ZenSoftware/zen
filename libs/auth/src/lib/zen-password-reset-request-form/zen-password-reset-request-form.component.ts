@@ -110,7 +110,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
             this.loading = false;
             this.form.enable();
 
-            if (errors.find(e => e.code === 'USER_NOT_FOUND')) {
+            if (errors.find(e => e === 'USER_NOT_FOUND')) {
               this.generalError = false;
               this.#notFound = true;
               this.emailOrUsername?.updateValueAndValidity();

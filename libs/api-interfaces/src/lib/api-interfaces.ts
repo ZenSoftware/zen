@@ -6,22 +6,27 @@ export const ApiConstants = {
 };
 
 export namespace ApiError {
-  export interface AuthLogin {
-    code: 'USER_NOT_FOUND' | 'INCORRECT_PASSWORD';
+  export enum AuthLogin {
+    USER_NOT_FOUND = 'USER_NOT_FOUND',
+    INCORRECT_PASSWORD = 'INCORRECT_PASSWORD',
   }
-  export interface AuthExchangeToken {
-    code: 'USER_NOT_FOUND';
+  export enum AuthExchangeToken {
+    USER_NOT_FOUND = 'USER_NOT_FOUND',
   }
-  export interface AuthPasswordResetRequest {
-    code: 'USER_NOT_FOUND';
+  export enum AuthPasswordResetRequest {
+    USER_NOT_FOUND = 'USER_NOT_FOUND',
   }
-  export interface AuthPasswordResetConfirmation {
-    code: 'USER_NOT_FOUND' | 'UNAUTHORIZED';
+  export enum AuthPasswordResetConfirmation {
+    USER_NOT_FOUND = 'USER_NOT_FOUND',
+    UNAUTHORIZED = 'UNAUTHORIZED',
   }
-  export interface AuthRegister {
-    code: 'NO_PUBLIC_REGISTRATIONS' | 'USERNAME_TAKEN' | 'EMAIL_TAKEN';
+  export enum AuthRegister {
+    NO_PUBLIC_REGISTRATIONS = 'NO_PUBLIC_REGISTRATIONS',
+    USERNAME_TAKEN = 'USERNAME_TAKEN',
+    EMAIL_TAKEN = 'EMAIL_TAKEN',
   }
-  export interface AuthPasswordChange {
-    code: 'USER_NOT_FOUND' | 'WRONG_PASSWORD';
+  export enum AuthPasswordChange {
+    USER_NOT_FOUND = 'USER_NOT_FOUND',
+    WRONG_PASSWORD = 'WRONG_PASSWORD',
   }
 }
