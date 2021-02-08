@@ -129,6 +129,6 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s?.unsubscribe);
+    this.#subs.forEach(s => s?.unsubscribe());
   }
 }

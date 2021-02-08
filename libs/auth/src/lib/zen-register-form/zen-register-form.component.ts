@@ -177,6 +177,6 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s?.unsubscribe);
+    this.#subs.forEach(s => s?.unsubscribe());
   }
 }

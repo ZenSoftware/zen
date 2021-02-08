@@ -122,6 +122,6 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s?.unsubscribe);
+    this.#subs.forEach(s => s?.unsubscribe());
   }
 }
