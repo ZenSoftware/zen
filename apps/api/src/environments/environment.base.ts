@@ -1,7 +1,7 @@
 import { MailerOptions } from '@nest-modules/mailer';
 import { JwtModuleOptions } from '@nestjs/jwt';
-import { FileUploadOptions } from 'apollo-server-core';
 import { CookieOptions } from 'express';
+import { UploadOptions } from 'graphql-upload';
 import { ThrottlerModuleOptions } from 'nestjs-throttler';
 
 export class EnvironmentBase {
@@ -12,7 +12,7 @@ export class EnvironmentBase {
   readonly cors?: any | boolean;
   readonly graphql: {
     readonly playground: boolean;
-    readonly uploads?: boolean | FileUploadOptions;
+    readonly uploads?: UploadOptions;
   };
   readonly publicRegistration: boolean;
   readonly jwtOptions: JwtModuleOptions;
