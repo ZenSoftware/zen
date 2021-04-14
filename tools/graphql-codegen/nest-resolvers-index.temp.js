@@ -22,7 +22,7 @@ import PRISMA_TYPE_DEFS from '../prisma/typeDefs';\n`;
     .replace(/,/g, ',\n  ');
   indexSource += `\n\nexport const NEST_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x);\n\n`;
 
-  indexSource += `export const ALL_TYPE_DEFS = mergeTypeDefs([PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS]);\n
+  indexSource += `export const ALL_TYPE_DEFS = mergeTypeDefs(['scalar Upload', PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS]);
 export const GRAPHQL_SCHEMA = makeExecutableSchema({ typeDefs: ALL_TYPE_DEFS });
 export const PRISMA_SCHEMA = makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS });\n`;
 
