@@ -14,7 +14,7 @@ export function makeUpdateObject(obj: object) {
   if (!obj) return undefined;
 
   const update = Object.entries(obj).reduce((accum: { [k: string]: unknown }, [key, val]) => {
-    accum[key] = { set: val };
+    accum[key] = Array.isArray(val) ? val : { set: val };
     return accum;
   }, {});
 
