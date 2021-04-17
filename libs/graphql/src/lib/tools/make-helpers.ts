@@ -28,8 +28,7 @@ export function makeCreateObject(obj: object) {
   if (!obj) return undefined;
 
   const create = Object.entries(obj).reduce((accum: { [k: string]: unknown }, [key, val]) => {
-    if (Array.isArray(val)) accum[key] = { set: val };
-    else accum[key] = val;
+    accum[key] = val;
     return accum;
   }, {});
 
