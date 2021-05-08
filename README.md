@@ -5,13 +5,12 @@
 
 ## 🏯 Project Founder's Notes
 
-If I could be so humble as to mention a few things about myself.  I have built 2 enterprise-grade web portals utilizing Nest, Prisma, and Angular.  This project is an attempt to package the sum total of all those lessons learned, and making it publicly available to the community.
-
 What is really nice about Nest and Angular is that their programming idioms carry over seamlessly between the two, allowing for front-end devs to contribute to the back-end.  Though, there are complexities in creating the GraphQL endpoint that exposes the various CRUD operations over the Prisma data model on the back-end.  If that piece of the problem could be code generated entirely, it would allow for virtually anyone to be a full stack developer.  A combination between Nest + Prisma + Angular has provided for new capabilities that the industry has not really seen before. This project code generates all the boilerplate required in bridging these 3 technologies together.
 
 There is a tremendous amount of value to be gained by treating the `schema.prisma` file as the single source of truth, and then code generating everything else from that.  It guarantees consistency between the front-end and back-end.  It also centralizes the CRUD operations over all the Prisma models via a single import endpoint.
 
-This project also provides solutions for the hardest parts of user authentication as well.  I have strictly kept to the Angular and Nest best practices that are being utilized within the ecosystem.  All the services being generated should be fairly self explanatory, and lots of useful NPM scripts have been provided for the various stages of development to deployment. Better documentation will come with time. 🍜
+This project also provides solutions for the hardest parts of user authentication as well.  I have strictly kept to the Angular and Nest best practices that are being utilized within the ecosystem.  This project is an attempt to package the sum total of all the lessons I have learned, and making it publicly available to the community.  All the services being generated should be fairly self explanatory, and lots of useful NPM scripts have been provided for the various stages of development to deployment.  Better documentation will come with time. 🍜
+
 
 New contributors are welcome!
 
