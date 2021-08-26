@@ -22,20 +22,19 @@
     }
   },
   "projects": {
-    "portal": {
-      "tags": []
-    },
-    "portal-e2e": {
-      "tags": [],
-      "implicitDependencies": ["portal"]
-    },
     "api": {
       "tags": []
     },
     "api-interfaces": {
       "tags": []
     },
+    "auth": {
+      "tags": []
+    },
     "common": {
+      "tags": []
+    },
+    "components": {
       "tags": []
     },
     "graphql": {
@@ -44,11 +43,20 @@
     "main": {
       "tags": []
     },
-    "auth": {
+    "portal": {
       "tags": []
     },
-    "components": {
-      "tags": []
+    "portal-e2e": {
+      "tags": [],
+      "implicitDependencies": ["portal"]
     }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   }
 }
