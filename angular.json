@@ -14,9 +14,7 @@
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": [
-              "apps/api/src/assets"
-            ]
+            "assets": ["apps/api/src/assets"]
           },
           "configurations": {
             "production": {
@@ -31,9 +29,7 @@
               ]
             }
           },
-          "outputs": [
-            "{options.outputPath}"
-          ]
+          "outputs": ["{options.outputPath}"]
         },
         "compodoc": {
           "builder": "@nrwl/workspace:run-commands",
@@ -54,14 +50,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/api/tsconfig.app.json",
-              "apps/api/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/api/**/*"
-            ]
+            "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/api/**/*"]
           }
         },
         "test": {
@@ -70,9 +60,7 @@
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/apps/api"
-          ]
+          "outputs": ["coverage/apps/api"]
         }
       }
     },
@@ -89,10 +77,7 @@
               "libs/api-interfaces/tsconfig.lib.json",
               "libs/api-interfaces/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/api-interfaces/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/api-interfaces/**/*"]
           }
         },
         "test": {
@@ -101,9 +86,7 @@
             "jestConfig": "libs/api-interfaces/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/api-interfaces"
-          ]
+          "outputs": ["coverage/libs/api-interfaces"]
         }
       }
     },
@@ -116,14 +99,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/auth/tsconfig.lib.json",
-              "libs/auth/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/auth/**/*"
-            ]
+            "tsConfig": ["libs/auth/tsconfig.lib.json", "libs/auth/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/auth/**/*"]
           }
         },
         "test": {
@@ -133,9 +110,7 @@
             "passWithNoTests": true,
             "setupFile": "libs/auth/src/test-setup.ts"
           },
-          "outputs": [
-            "coverage/libs/auth"
-          ]
+          "outputs": ["coverage/libs/auth"]
         }
       },
       "schematics": {
@@ -153,14 +128,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/common/tsconfig.lib.json",
-              "libs/common/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/common/**/*"
-            ]
+            "tsConfig": ["libs/common/tsconfig.lib.json", "libs/common/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/common/**/*"]
           }
         },
         "test": {
@@ -170,9 +139,7 @@
             "passWithNoTests": true,
             "setupFile": "libs/common/src/test-setup.ts"
           },
-          "outputs": [
-            "coverage/libs/common"
-          ]
+          "outputs": ["coverage/libs/common"]
         }
       },
       "schematics": {
@@ -190,14 +157,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/components/tsconfig.lib.json",
-              "libs/components/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/components/**/*"
-            ]
+            "tsConfig": ["libs/components/tsconfig.lib.json", "libs/components/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/components/**/*"]
           }
         },
         "test": {
@@ -206,9 +167,7 @@
             "jestConfig": "libs/components/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/components"
-          ]
+          "outputs": ["coverage/libs/components"]
         }
       },
       "schematics": {
@@ -226,13 +185,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/graphql/tsconfig.lib.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/graphql/**/*"
-            ]
+            "tsConfig": ["libs/graphql/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/graphql/**/*"]
           }
         }
       },
@@ -251,14 +205,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/main/tsconfig.lib.json",
-              "libs/main/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/main/**/*"
-            ]
+            "tsConfig": ["libs/main/tsconfig.lib.json", "libs/main/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/main/**/*"]
           }
         },
         "test": {
@@ -268,9 +216,7 @@
             "passWithNoTests": true,
             "setupFile": "libs/main/src/test-setup.ts"
           },
-          "outputs": [
-            "coverage/libs/main"
-          ]
+          "outputs": ["coverage/libs/main"]
         }
       },
       "schematics": {
@@ -298,13 +244,8 @@
             "main": "apps/portal/src/main.ts",
             "polyfills": "apps/portal/src/polyfills.ts",
             "tsConfig": "apps/portal/tsconfig.app.json",
-            "assets": [
-              "apps/portal/src/favicon.ico",
-              "apps/portal/src/assets"
-            ],
-            "styles": [
-              "apps/portal/src/styles.scss"
-            ],
+            "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
+            "styles": ["apps/portal/src/styles.scss"],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -342,9 +283,7 @@
               ]
             }
           },
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "defaultConfiguration": ""
         },
         "compodoc": {
@@ -378,14 +317,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/portal/tsconfig.app.json",
-              "apps/portal/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/portal/**/*"
-            ]
+            "tsConfig": ["apps/portal/tsconfig.app.json", "apps/portal/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/portal/**/*"]
           }
         },
         "test": {
@@ -395,9 +328,7 @@
             "passWithNoTests": true,
             "setupFile": "apps/portal/src/test-setup.ts"
           },
-          "outputs": [
-            "coverage/apps/portal"
-          ]
+          "outputs": ["coverage/apps/portal"]
         }
       }
     },
@@ -422,13 +353,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/portal-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/portal-e2e/**/*"
-            ]
+            "tsConfig": ["apps/portal-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/portal-e2e/**/*"]
           }
         }
       }
