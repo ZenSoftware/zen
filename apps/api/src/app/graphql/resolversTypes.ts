@@ -45,7 +45,7 @@ export interface Query {
     AggregateUserArgs,
     Client.Prisma.GetUserAggregateType<AggregateUserArgs>
   >;
-  groupByUser?: Resolver<{}, GroupByUserArgs, Client.Prisma.UserGroupByOutputType[]>;
+  groupByUser?: Resolver<{}, GroupByUserArgs, Client.UserGroupByOutputType[]>;
   findUniqueUser?: Resolver<{}, FindUniqueUserArgs, Client.User | null>;
 }
 
@@ -64,50 +64,34 @@ export interface Mutation {
 
 export interface AggregateUser {
   [key: string]: Resolver<any, any, any>;
-  _count?: Resolver<
+  count?: Resolver<
     Client.Prisma.AggregateUser,
     {},
     Client.Prisma.UserCountAggregateOutputType | null
   >;
-  _avg?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserAvgAggregateOutputType | null>;
-  _sum?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserSumAggregateOutputType | null>;
-  _min?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMinAggregateOutputType | null>;
-  _max?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMaxAggregateOutputType | null>;
+  avg?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserAvgAggregateOutputType | null>;
+  sum?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserSumAggregateOutputType | null>;
+  min?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMinAggregateOutputType | null>;
+  max?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMaxAggregateOutputType | null>;
 }
 
 export interface UserGroupByOutputType {
   [key: string]: Resolver<any, any, any>;
-  id?: Resolver<Client.Prisma.UserGroupByOutputType, {}, number>;
-  createdAt?: Resolver<Client.Prisma.UserGroupByOutputType, {}, Date>;
-  username?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string>;
-  password?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string>;
-  email?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string>;
-  roles?: Resolver<Client.Prisma.UserGroupByOutputType, {}, Client.Role[] | null>;
-  _count?: Resolver<
-    Client.Prisma.UserGroupByOutputType,
+  id?: Resolver<Client.UserGroupByOutputType, {}, number>;
+  createdAt?: Resolver<Client.UserGroupByOutputType, {}, Date>;
+  username?: Resolver<Client.UserGroupByOutputType, {}, string>;
+  password?: Resolver<Client.UserGroupByOutputType, {}, string>;
+  email?: Resolver<Client.UserGroupByOutputType, {}, string>;
+  roles?: Resolver<Client.UserGroupByOutputType, {}, Client.Role[] | null>;
+  count?: Resolver<
+    Client.UserGroupByOutputType,
     {},
     Client.Prisma.UserCountAggregateOutputType | null
   >;
-  _avg?: Resolver<
-    Client.Prisma.UserGroupByOutputType,
-    {},
-    Client.Prisma.UserAvgAggregateOutputType | null
-  >;
-  _sum?: Resolver<
-    Client.Prisma.UserGroupByOutputType,
-    {},
-    Client.Prisma.UserSumAggregateOutputType | null
-  >;
-  _min?: Resolver<
-    Client.Prisma.UserGroupByOutputType,
-    {},
-    Client.Prisma.UserMinAggregateOutputType | null
-  >;
-  _max?: Resolver<
-    Client.Prisma.UserGroupByOutputType,
-    {},
-    Client.Prisma.UserMaxAggregateOutputType | null
-  >;
+  avg?: Resolver<Client.UserGroupByOutputType, {}, Client.Prisma.UserAvgAggregateOutputType | null>;
+  sum?: Resolver<Client.UserGroupByOutputType, {}, Client.Prisma.UserSumAggregateOutputType | null>;
+  min?: Resolver<Client.UserGroupByOutputType, {}, Client.Prisma.UserMinAggregateOutputType | null>;
+  max?: Resolver<Client.UserGroupByOutputType, {}, Client.Prisma.UserMaxAggregateOutputType | null>;
 }
 
 export interface AffectedRowsOutput {
@@ -118,27 +102,27 @@ export interface AffectedRowsOutput {
 export interface UserCountAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
   id?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
-  createdAt?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
-  username?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
-  password?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
-  email?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
-  roles?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
+  createdAt?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
+  username?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
+  password?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
+  email?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
+  roles?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number | null>;
   _all?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
 }
 
 export interface UserAvgAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
-  id?: Resolver<Client.Prisma.UserAvgAggregateOutputType, {}, number | null>;
+  id?: Resolver<Client.Prisma.UserAvgAggregateOutputType, {}, number>;
 }
 
 export interface UserSumAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
-  id?: Resolver<Client.Prisma.UserSumAggregateOutputType, {}, number | null>;
+  id?: Resolver<Client.Prisma.UserSumAggregateOutputType, {}, number>;
 }
 
 export interface UserMinAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
-  id?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, number | null>;
+  id?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, number>;
   createdAt?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, Date | null>;
   username?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
   password?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
@@ -147,7 +131,7 @@ export interface UserMinAggregateOutputType {
 
 export interface UserMaxAggregateOutputType {
   [key: string]: Resolver<any, any, any>;
-  id?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, number | null>;
+  id?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, number>;
   createdAt?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, Date | null>;
   username?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
   password?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
@@ -156,7 +140,7 @@ export interface UserMaxAggregateOutputType {
 
 export interface FindFirstUserArgs {
   where?: UserWhereInput | null;
-  orderBy?: UserOrderByWithRelationInput[] | null;
+  orderBy?: UserOrderByInput[] | null;
   cursor?: UserWhereUniqueInput | null;
   take?: number | null;
   skip?: number | null;
@@ -165,7 +149,7 @@ export interface FindFirstUserArgs {
 
 export interface FindManyUserArgs {
   where?: UserWhereInput;
-  orderBy?: UserOrderByWithRelationInput[];
+  orderBy?: UserOrderByInput[];
   cursor?: UserWhereUniqueInput;
   take?: number;
   skip?: number;
@@ -174,20 +158,20 @@ export interface FindManyUserArgs {
 
 export interface AggregateUserArgs {
   where?: UserWhereInput;
-  orderBy?: UserOrderByWithRelationInput[];
+  orderBy?: UserOrderByInput[];
   cursor?: UserWhereUniqueInput;
   take?: number;
   skip?: number;
-  _count?: Client.Prisma.UserCountAggregateInputType;
-  _avg?: Client.Prisma.UserAvgAggregateInputType;
-  _sum?: Client.Prisma.UserSumAggregateInputType;
-  _min?: Client.Prisma.UserMinAggregateInputType;
-  _max?: Client.Prisma.UserMaxAggregateInputType;
+  count?: true;
+  avg?: Client.Prisma.UserAvgAggregateInputType;
+  sum?: Client.Prisma.UserSumAggregateInputType;
+  min?: Client.Prisma.UserMinAggregateInputType;
+  max?: Client.Prisma.UserMaxAggregateInputType;
 }
 
 export interface GroupByUserArgs {
   where?: UserWhereInput;
-  orderBy?: UserOrderByWithAggregationInput[];
+  orderBy?: UserOrderByInput[];
   by: UserScalarFieldEnum[];
   having?: UserScalarWhereWithAggregatesInput;
   take?: number;
@@ -253,7 +237,7 @@ export interface UserWhereInput {
   roles?: EnumRoleNullableListFilter;
 }
 
-export interface UserOrderByWithRelationInput {
+export interface UserOrderByInput {
   id?: SortOrder;
   createdAt?: SortOrder;
   username?: SortOrder;
@@ -266,20 +250,6 @@ export interface UserWhereUniqueInput {
   id?: number;
   username?: string;
   email?: string;
-}
-
-export interface UserOrderByWithAggregationInput {
-  id?: SortOrder;
-  createdAt?: SortOrder;
-  username?: SortOrder;
-  password?: SortOrder;
-  email?: SortOrder;
-  roles?: SortOrder;
-  _count?: UserCountOrderByAggregateInput;
-  _avg?: UserAvgOrderByAggregateInput;
-  _max?: UserMaxOrderByAggregateInput;
-  _min?: UserMinOrderByAggregateInput;
-  _sum?: UserSumOrderByAggregateInput;
 }
 
 export interface UserScalarWhereWithAggregatesInput {
@@ -399,39 +369,6 @@ export interface EnumRoleNullableListFilter {
   isEmpty?: boolean;
 }
 
-export interface UserCountOrderByAggregateInput {
-  id?: SortOrder;
-  createdAt?: SortOrder;
-  username?: SortOrder;
-  password?: SortOrder;
-  email?: SortOrder;
-  roles?: SortOrder;
-}
-
-export interface UserAvgOrderByAggregateInput {
-  id?: SortOrder;
-}
-
-export interface UserMaxOrderByAggregateInput {
-  id?: SortOrder;
-  createdAt?: SortOrder;
-  username?: SortOrder;
-  password?: SortOrder;
-  email?: SortOrder;
-}
-
-export interface UserMinOrderByAggregateInput {
-  id?: SortOrder;
-  createdAt?: SortOrder;
-  username?: SortOrder;
-  password?: SortOrder;
-  email?: SortOrder;
-}
-
-export interface UserSumOrderByAggregateInput {
-  id?: SortOrder;
-}
-
 export interface IntWithAggregatesFilter {
   equals?: number;
   in?: number[];
@@ -441,11 +378,11 @@ export interface IntWithAggregatesFilter {
   gt?: number;
   gte?: number;
   not?: NestedIntWithAggregatesFilter;
-  _count?: NestedIntFilter;
-  _avg?: NestedFloatFilter;
-  _sum?: NestedIntFilter;
-  _min?: NestedIntFilter;
-  _max?: NestedIntFilter;
+  count?: NestedIntFilter;
+  avg?: NestedFloatFilter;
+  sum?: NestedIntFilter;
+  min?: NestedIntFilter;
+  max?: NestedIntFilter;
 }
 
 export interface DateTimeWithAggregatesFilter {
@@ -457,9 +394,9 @@ export interface DateTimeWithAggregatesFilter {
   gt?: Date;
   gte?: Date;
   not?: NestedDateTimeWithAggregatesFilter;
-  _count?: NestedIntFilter;
-  _min?: NestedDateTimeFilter;
-  _max?: NestedDateTimeFilter;
+  count?: NestedIntFilter;
+  min?: NestedDateTimeFilter;
+  max?: NestedDateTimeFilter;
 }
 
 export interface StringWithAggregatesFilter {
@@ -475,9 +412,9 @@ export interface StringWithAggregatesFilter {
   endsWith?: string;
   mode?: QueryMode;
   not?: NestedStringWithAggregatesFilter;
-  _count?: NestedIntFilter;
-  _min?: NestedStringFilter;
-  _max?: NestedStringFilter;
+  count?: NestedIntFilter;
+  min?: NestedStringFilter;
+  max?: NestedStringFilter;
 }
 
 export interface UserCreaterolesInput {
@@ -554,11 +491,11 @@ export interface NestedIntWithAggregatesFilter {
   gt?: number;
   gte?: number;
   not?: NestedIntWithAggregatesFilter;
-  _count?: NestedIntFilter;
-  _avg?: NestedFloatFilter;
-  _sum?: NestedIntFilter;
-  _min?: NestedIntFilter;
-  _max?: NestedIntFilter;
+  count?: NestedIntFilter;
+  avg?: NestedFloatFilter;
+  sum?: NestedIntFilter;
+  min?: NestedIntFilter;
+  max?: NestedIntFilter;
 }
 
 export interface NestedFloatFilter {
@@ -581,9 +518,9 @@ export interface NestedDateTimeWithAggregatesFilter {
   gt?: Date;
   gte?: Date;
   not?: NestedDateTimeWithAggregatesFilter;
-  _count?: NestedIntFilter;
-  _min?: NestedDateTimeFilter;
-  _max?: NestedDateTimeFilter;
+  count?: NestedIntFilter;
+  min?: NestedDateTimeFilter;
+  max?: NestedDateTimeFilter;
 }
 
 export interface NestedStringWithAggregatesFilter {
@@ -598,9 +535,9 @@ export interface NestedStringWithAggregatesFilter {
   startsWith?: string;
   endsWith?: string;
   not?: NestedStringWithAggregatesFilter;
-  _count?: NestedIntFilter;
-  _min?: NestedStringFilter;
-  _max?: NestedStringFilter;
+  count?: NestedIntFilter;
+  min?: NestedStringFilter;
+  max?: NestedStringFilter;
 }
 
 export enum UserScalarFieldEnum {

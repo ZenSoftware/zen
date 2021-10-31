@@ -26,12 +26,14 @@ const resolvers: Resolvers = {
       return prisma.user.update(args);
     },
     deleteOneUser: async (_parent, args, { prisma }) => {
+      await prisma.onDelete({ model: 'User', where: args.where });
       return prisma.user.delete(args);
     },
     upsertOneUser: async (_parent, args, { prisma }) => {
       return prisma.user.upsert(args);
     },
     deleteManyUser: async (_parent, args, { prisma }) => {
+      await prisma.onDelete({ model: 'User', where: args.where });
       return prisma.user.deleteMany(args);
     },
     updateManyUser: (_parent, args, { prisma }) => {

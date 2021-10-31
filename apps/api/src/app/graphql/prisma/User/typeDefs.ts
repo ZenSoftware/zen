@@ -14,40 +14,40 @@ export default gql`
     findUniqueUser(where: UserWhereUniqueInput!): User
     findFirstUser(
       where: UserWhereInput
-      orderBy: [UserOrderByWithRelationInput]
+      orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
-      take: Int
+      distinct: UserScalarFieldEnum
       skip: Int
-      distinct: [UserScalarFieldEnum]
+      take: Int
     ): User
     findManyUser(
       where: UserWhereInput
-      orderBy: [UserOrderByWithRelationInput]
+      orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
-      take: Int
+      distinct: UserScalarFieldEnum
       skip: Int
-      distinct: [UserScalarFieldEnum]
+      take: Int
     ): [User!]
     findManyUserCount(
       where: UserWhereInput
-      orderBy: [UserOrderByWithRelationInput]
+      orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
-      take: Int
+      distinct: UserScalarFieldEnum
       skip: Int
-      distinct: [UserScalarFieldEnum]
+      take: Int
     ): Int!
     aggregateUser(
       where: UserWhereInput
-      orderBy: [UserOrderByWithRelationInput]
+      orderBy: [UserOrderByInput!]
       cursor: UserWhereUniqueInput
-      take: Int
+      distinct: UserScalarFieldEnum
       skip: Int
+      take: Int
     ): AggregateUser
   }
-
   type Mutation {
     createOneUser(data: UserCreateInput!): User!
-    updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+    updateOneUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): User!
     deleteOneUser(where: UserWhereUniqueInput!): User
     upsertOneUser(
       where: UserWhereUniqueInput!
@@ -55,6 +55,6 @@ export default gql`
       update: UserUpdateInput!
     ): User
     deleteManyUser(where: UserWhereInput): BatchPayload
-    updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload
+    updateManyUser(where: UserWhereInput, data: UserUpdateManyMutationInput): BatchPayload
   }
 `;
