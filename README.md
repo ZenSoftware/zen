@@ -15,7 +15,7 @@ New contributors are welcome!
 
 > 🎐 "Give more than you take" ~ Peter Hoang
 
-> 🧪💙🌸 "I love you Lily"
+> 🧪💙🌸 "I love you [Lily](https://www.twitch.tv/lilypichu)"
 
 ---
 
