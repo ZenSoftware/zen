@@ -11,10 +11,11 @@ There is a tremendous amount of value to be gained by treating the `schema.prism
 
 This project also provides solutions for the hardest parts of user authentication as well.  I have strictly kept to the Angular and Nest best practices that are being utilized within the ecosystem.  This project is an attempt to package the sum total of all the lessons I have learned, and making it publicly available to the community.  All the services being generated should be fairly self explanatory, and lots of useful NPM scripts have been provided for the various stages of development to deployment.  Better documentation will come with time. 🍜
 
-
 New contributors are welcome!
 
-> 🎐 "Give more than you take" ~ Peter Hoang 
+> 🎐 "Give more than you take" ~ Peter Hoang
+
+> 🧪💙🌸 "I love you Lily"
 
 ---
 
@@ -75,11 +76,7 @@ npm start
 - [X] `Forgot password component` and full password reset flow.
 - [X] `Password change component` for user dashboards
 - [X] `Angular route guards` and `Angular directives` to show/hide content depending on user's roles.
-- [ ] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side ~~[role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true)~~ [Attribute-based access control](https://www.wikiwand.com/en/Attribute-based_access_control) to allow for declarative, fine grained security control over all GraphQL queries and mutations. Follow the [Git Issue here](https://github.com/ZenSoftware/Zen/issues/7).
-  - [ ] [Nest + casl](https://docs.nestjs.com/security/authorization#integrating-casl]) integration
-    - [ ] Code generate default security permissions for Prisma models
-    - [ ] Directives to customize policies over GraphQL resolvers
-  - [ ] [@casl/angular](https://www.npmjs.com/package/@casl/angular) integration
+- [X] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations. Follow the [Git Issue here](https://github.com/ZenSoftware/Zen/issues/7).
 - [x] 100% stateless web server authentication via [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality). Keeping the API stateless will enable horizontal scaling of container replicas in production.
 
 ---
