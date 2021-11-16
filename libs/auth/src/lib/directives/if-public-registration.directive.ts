@@ -6,7 +6,7 @@ import { Environment } from '@zen/common';
 })
 export class IfPublicRegistration {
   #embededViewRef: any;
-  #ifPublicRegistration?: boolean;
+  #ifPublicRegistration?: boolean | '';
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -17,7 +17,7 @@ export class IfPublicRegistration {
   }
 
   @Input()
-  set ifPublicRegistration(value: boolean | undefined) {
+  set ifPublicRegistration(value: boolean | '' | undefined) {
     this.#ifPublicRegistration = value;
     this.update();
   }

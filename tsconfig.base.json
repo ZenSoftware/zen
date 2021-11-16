@@ -10,24 +10,20 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom", "esnext.asynciterable"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@zen/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@zen/auth": ["libs/auth/src/index.ts"],
       "@zen/common": ["libs/common/src/index.ts"],
+      "@zen/components": ["libs/components/src/index.ts"],
       "@zen/graphql": ["libs/graphql/src/index.ts"],
       "@zen/graphql/*": ["libs/graphql/src/lib/*"],
-      "@zen/main": ["libs/main/src/index.ts"],
-      "@zen/auth": ["libs/auth/src/index.ts"],
-      "@zen/components": ["libs/components/src/index.ts"]
+      "@zen/main": ["libs/main/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", "tmp"],
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true
-  }
+  "exclude": ["node_modules", "tmp"]
 }

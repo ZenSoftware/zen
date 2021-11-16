@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { ApiError, GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -67,15 +67,15 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
   }
 
   get username() {
-    return this.form.get('username');
+    return this.form.get('username') as FormControl;
   }
 
   get password() {
-    return this.form.get('password');
+    return this.form.get('password') as FormControl;
   }
 
   get rememberMe() {
-    return this.form.get('rememberMe');
+    return this.form.get('rememberMe') as FormControl;
   }
 
   usernameValidator(): ValidatorFn {

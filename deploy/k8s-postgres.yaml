@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:13
+          image: postgres:14
           env:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata

@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { ApiError, AuthPasswordChangeGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
@@ -46,15 +46,15 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   }
 
   get oldPassword() {
-    return this.form.get('oldPassword');
+    return this.form.get('oldPassword') as FormControl;
   }
 
   get newPassword() {
-    return this.form.get('newPassword');
+    return this.form.get('newPassword') as FormControl;
   }
 
   get passwordConfirm() {
-    return this.form.get('passwordConfirm');
+    return this.form.get('passwordConfirm') as FormControl;
   }
 
   passwordValidator(): ValidatorFn {

@@ -7,7 +7,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { ApiConstants, ApiError } from '@zen/api-interfaces';
 import { AuthPasswordResetRequestQueryGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
@@ -66,7 +66,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   }
 
   get emailOrUsername() {
-    return this.form.get('emailOrUsername');
+    return this.form.get('emailOrUsername') as FormControl;
   }
 
   includesSpaceValidator(): ValidatorFn {

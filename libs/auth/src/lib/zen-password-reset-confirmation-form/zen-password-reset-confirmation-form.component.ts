@@ -3,11 +3,10 @@ import {
   Component,
   EventEmitter,
   OnDestroy,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -67,11 +66,11 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   }
 
   get password() {
-    return this.form.get('password');
+    return this.form.get('password') as FormControl;
   }
 
   get passwordConfirm() {
-    return this.form.get('passwordConfirm');
+    return this.form.get('passwordConfirm') as FormControl;
   }
 
   passwordValidator(): ValidatorFn {

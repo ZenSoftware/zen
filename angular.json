@@ -1,144 +1,14 @@
 {
   "version": 1,
   "projects": {
-    "portal": {
-      "projectType": "application",
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "",
-      "sourceRoot": "apps/portal/src",
-      "prefix": "portal",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/portal",
-            "index": "apps/portal/src/index.html",
-            "main": "apps/portal/src/main.ts",
-            "polyfills": "apps/portal/src/polyfills.ts",
-            "tsConfig": "apps/portal/tsconfig.app.json",
-            "aot": true,
-            "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
-            "styles": ["apps/portal/src/styles.scss"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/portal/src/environments/environment.ts",
-                  "with": "apps/portal/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "compodoc": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "npx compodoc -p apps/portal/tsconfig.app.json -s"
-              }
-            ]
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "portal:build",
-            "proxyConfig": "apps/portal/proxy.conf.json"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "portal:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "portal:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/portal/tsconfig.app.json", "apps/portal/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/portal/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/portal/jest.config.js",
-            "tsConfig": "apps/portal/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/portal/src/test-setup.ts"
-          },
-          "outputs": ["coverage/apps/portal"]
-        }
-      }
-    },
-    "portal-e2e": {
-      "root": "apps/portal-e2e",
-      "sourceRoot": "apps/portal-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/portal-e2e/cypress.json",
-            "tsConfig": "apps/portal-e2e/tsconfig.e2e.json",
-            "devServerTarget": "portal:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "portal:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/portal-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/portal-e2e/**/*"]
-          }
-        }
-      }
-    },
     "api": {
       "root": "apps/api",
       "sourceRoot": "apps/api/src",
       "projectType": "application",
-      "prefix": "api",
-      "schematics": {},
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
@@ -157,17 +27,6 @@
                 }
               ]
             }
-          },
-          "outputs": ["{options.outputPath}"]
-        },
-        "compodoc": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "npx compodoc -p apps/api/tsconfig.app.json -s"
-              }
-            ]
           }
         },
         "serve": {
@@ -177,129 +36,37 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/api/**/*"]
+            "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/api"],
           "options": {
             "jestConfig": "apps/api/jest.config.js",
-            "tsConfig": "apps/api/tsconfig.spec.json",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/api"]
+          }
         }
-      }
+      },
+      "tags": []
     },
     "api-interfaces": {
       "root": "libs/api-interfaces",
       "sourceRoot": "libs/api-interfaces/src",
       "projectType": "library",
-      "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "tsConfig": [
-              "libs/api-interfaces/tsconfig.lib.json",
-              "libs/api-interfaces/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/api-interfaces/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/api-interfaces/jest.config.js",
-            "tsConfig": "libs/api-interfaces/tsconfig.spec.json",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/api-interfaces"]
-        }
-      }
-    },
-    "common": {
-      "projectType": "library",
-      "root": "libs/common",
-      "sourceRoot": "libs/common/src",
-      "prefix": "zen",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/common/tsconfig.lib.json", "libs/common/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/common/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/common/jest.config.js",
-            "tsConfig": "libs/common/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/common/src/test-setup.ts"
-          },
-          "outputs": ["coverage/libs/common"]
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "graphql": {
-      "projectType": "library",
-      "root": "libs/graphql",
-      "sourceRoot": "libs/graphql/src",
-      "prefix": "zen",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/graphql/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/graphql/**/*"]
+            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
           }
         }
       },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "main": {
-      "projectType": "library",
-      "root": "libs/main",
-      "sourceRoot": "libs/main/src",
-      "prefix": "zen",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/main/tsconfig.lib.json", "libs/main/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/main/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/main/jest.config.js",
-            "tsConfig": "libs/main/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/main/src/test-setup.ts"
-          },
-          "outputs": ["coverage/libs/main"]
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
+      "tags": []
     },
     "auth": {
       "projectType": "library",
@@ -307,29 +74,45 @@
       "sourceRoot": "libs/auth/src",
       "prefix": "zen",
       "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/auth/tsconfig.lib.json", "libs/auth/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/auth/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/auth"],
           "options": {
             "jestConfig": "libs/auth/jest.config.js",
-            "tsConfig": "libs/auth/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/auth/src/test-setup.ts"
-          },
-          "outputs": ["coverage/libs/auth"]
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/auth/src/**/*.ts", "libs/auth/src/**/*.html"]
+          }
         }
       },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
+      "tags": []
+    },
+    "common": {
+      "projectType": "library",
+      "root": "libs/common",
+      "sourceRoot": "libs/common/src",
+      "prefix": "zen",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/common"],
+          "options": {
+            "jestConfig": "libs/common/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/common/src/**/*.ts", "libs/common/src/**/*.html"]
+          }
         }
-      }
+      },
+      "tags": []
     },
     "components": {
       "projectType": "library",
@@ -337,75 +120,187 @@
       "sourceRoot": "libs/components/src",
       "prefix": "zen",
       "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/components"],
           "options": {
-            "tsConfig": ["libs/components/tsconfig.lib.json", "libs/components/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/components/**/*"]
+            "jestConfig": "libs/components/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/components/src/**/*.ts", "libs/components/src/**/*.html"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "graphql": {
+      "projectType": "library",
+      "root": "libs/graphql",
+      "sourceRoot": "libs/graphql/src",
+      "prefix": "zen",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/graphql"],
+          "options": {
+            "jestConfig": "libs/graphql/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/graphql/src/**/*.ts", "libs/graphql/src/**/*.html"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "main": {
+      "projectType": "library",
+      "root": "libs/main",
+      "sourceRoot": "libs/main/src",
+      "prefix": "zen",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/main"],
+          "options": {
+            "jestConfig": "libs/main/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/main/src/**/*.ts", "libs/main/src/**/*.html"]
+          }
+        }
+      },
+      "tags": []
+    },
+    "portal": {
+      "projectType": "application",
+      "root": "apps/portal",
+      "sourceRoot": "apps/portal/src",
+      "prefix": "zen",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/portal",
+            "index": "apps/portal/src/index.html",
+            "main": "apps/portal/src/main.ts",
+            "polyfills": "apps/portal/src/polyfills.ts",
+            "tsConfig": "apps/portal/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
+            "styles": ["apps/portal/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/portal/src/environments/environment.ts",
+                  "with": "apps/portal/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "portal:build:production"
+            },
+            "development": {
+              "browserTarget": "portal:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "apps/portal/proxy.conf.json"
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "portal:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/portal/src/**/*.ts", "apps/portal/src/**/*.html"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/portal"],
           "options": {
-            "jestConfig": "libs/components/jest.config.js",
+            "jestConfig": "apps/portal/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "portal-e2e": {
+      "root": "apps/portal-e2e",
+      "sourceRoot": "apps/portal-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/portal-e2e/cypress.json",
+            "devServerTarget": "portal:serve:development"
           },
-          "outputs": ["coverage/libs/components"]
+          "configurations": {
+            "production": {
+              "devServerTarget": "portal:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/portal-e2e/**/*.{js,ts}"]
+          }
         }
       },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
+      "tags": [],
+      "implicitDependencies": ["portal"]
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "schematics": {
-    "@nrwl/workspace": {
-      "library": {
-        "linter": "tslint"
-      }
-    },
-    "@nrwl/cypress": {
-      "cypress-project": {
-        "linter": "tslint"
-      }
-    },
-    "@nrwl/node": {
-      "application": {
-        "linter": "tslint"
-      },
-      "library": {
-        "linter": "tslint"
-      }
-    },
-    "@nrwl/nest": {
-      "application": {
-        "linter": "tslint"
-      },
-      "library": {
-        "linter": "tslint"
-      }
-    },
-    "@nrwl/express": {
-      "application": {
-        "linter": "tslint"
-      },
-      "library": {
-        "linter": "tslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "unitTestRunner": "jest",
-      "strict": true
-    }
-  },
-  "defaultProject": "portal"
+  }
 }
