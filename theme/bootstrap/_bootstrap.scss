@@ -1,72 +1,24 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
+
+@import '~bootstrap/scss/root';
 @import '~bootstrap/scss/reboot';
 @import '~bootstrap/scss/type';
-@import '~bootstrap/scss/code';
 @import '~bootstrap/scss/grid';
 @import '~bootstrap/scss/card';
 @import '~bootstrap/scss/badge';
-@import '~bootstrap/scss/jumbotron';
 @import '~bootstrap/scss/alert';
 @import '~bootstrap/scss/list-group';
-@import '~bootstrap/scss/utilities';
-@import '~bootstrap/scss/print';
+
+// Helpers
+@import '~bootstrap/scss/helpers';
+
+// Utilities
+@import '~bootstrap/scss/utilities/api';
 
 // Cards =======================================================================
-
 .card-header {
   font-family: $zen-headings-font;
-}
-
-// Indicators ==================================================================
-
-.alert {
-  border: none;
-  color: $white;
-
-  a,
-  .alert-link {
-    color: $white;
-    text-decoration: underline;
-  }
-
-  @each $color, $value in $theme-colors {
-    &-#{$color} {
-      background-color: $value;
-    }
-  }
-
-  &-light {
-    &,
-    a:not(.btn),
-    .alert-link {
-      color: $body-bg;
-    }
-  }
-
-  .close {
-    color: $close-color;
-    text-decoration: none;
-  }
-}
-
-.badge {
-  &-success,
-  &-warning,
-  &-info {
-    color: $white;
-  }
-}
-
-// Containers ==================================================================
-
-.jumbotron {
-  border: 1px solid rgba(0, 0, 0, 0.6);
-}
-
-.list-group {
-  &-item:hover {
-    background-color: darken($gray-900, 5%);
-  }
 }
