@@ -9,21 +9,41 @@ export const UserTypeDefs = gql`
     }
   }
 
-  query FindManyUser(
+  query FindFirstUser(
     $where: UserWhereInput
     $orderBy: [UserOrderByWithRelationInput!]
     $cursor: UserWhereUniqueInput
-    $distinct: UserScalarFieldEnum
-    $skip: Int
+    $distinct: [UserScalarFieldEnum]
     $take: Int
+    $skip: Int
   ) {
     findManyUser(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
       distinct: $distinct
-      skip: $skip
       take: $take
+      skip: $skip
+    ) {
+      ...UserFields
+    }
+  }
+
+  query FindManyUser(
+    $where: UserWhereInput
+    $orderBy: [UserOrderByWithRelationInput!]
+    $cursor: UserWhereUniqueInput
+    $distinct: [UserScalarFieldEnum]
+    $take: Int
+    $skip: Int
+  ) {
+    findManyUser(
+      where: $where
+      orderBy: $orderBy
+      cursor: $cursor
+      distinct: $distinct
+      take: $take
+      skip: $skip
     ) {
       ...UserFields
     }
@@ -33,17 +53,17 @@ export const UserTypeDefs = gql`
     $where: UserWhereInput
     $orderBy: [UserOrderByWithRelationInput!]
     $cursor: UserWhereUniqueInput
-    $distinct: UserScalarFieldEnum
-    $skip: Int
+    $distinct: [UserScalarFieldEnum]
     $take: Int
+    $skip: Int
   ) {
     findManyUserCount(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
       distinct: $distinct
-      skip: $skip
       take: $take
+      skip: $skip
     )
   }
 
@@ -81,7 +101,7 @@ export const UserTypeDefs = gql`
     }
   }
 
-  mutation UpdateManyUser($where: UserWhereInput, $data: UserUpdateManyMutationInput) {
+  mutation UpdateManyUser($where: UserWhereInput, $data: UserUpdateManyMutationInput!) {
     updateManyUser(where: $where, data: $data) {
       count
     }

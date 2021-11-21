@@ -671,6 +671,10 @@ export type AuthRegisterVariables = Exact<{
 
 export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> } };
 
+export type AuthSessionFields = { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> };
+
+export type UserFields = { __typename?: 'User', id: number, username: string, email: string };
+
 export type LoggedInVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -681,7 +685,94 @@ export type UserRolesVariables = Exact<{ [key: string]: never; }>;
 
 export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
 
-export type AuthSessionFields = { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> };
+export type FindUniqueUserVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username: string, email: string } | null | undefined };
+
+export type FindFirstUserVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<Array<Maybe<UserScalarFieldEnum>> | Maybe<UserScalarFieldEnum>>;
+  take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type FindFirstUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null | undefined };
+
+export type FindManyUserVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<Array<Maybe<UserScalarFieldEnum>> | Maybe<UserScalarFieldEnum>>;
+  take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null | undefined };
+
+export type FindManyUserCountVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  cursor?: Maybe<UserWhereUniqueInput>;
+  distinct?: Maybe<Array<Maybe<UserScalarFieldEnum>> | Maybe<UserScalarFieldEnum>>;
+  take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type FindManyUserCount = { __typename?: 'Query', findManyUserCount: number };
+
+export type CreateOneUserVariables = Exact<{
+  data: UserCreateInput;
+}>;
+
+
+export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: number, username: string, email: string } };
+
+export type UpdateOneUserVariables = Exact<{
+  where: UserWhereUniqueInput;
+  data: UserUpdateInput;
+}>;
+
+
+export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: number, username: string, email: string } };
+
+export type DeleteOneUserVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type DeleteOneUser = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: number } | null | undefined };
+
+export type UpsertOneUserVariables = Exact<{
+  where: UserWhereUniqueInput;
+  create: UserCreateInput;
+  update: UserUpdateInput;
+}>;
+
+
+export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username: string, email: string } | null | undefined };
+
+export type DeleteManyUserVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+}>;
+
+
+export type DeleteManyUser = { __typename?: 'Mutation', deleteManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
+
+export type UpdateManyUserVariables = Exact<{
+  where?: Maybe<UserWhereInput>;
+  data: UserUpdateManyMutationInput;
+}>;
+
+
+export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
 
 export const AuthSessionFields = /*#__PURE__*/ gql`
     fragment AuthSessionFields on AuthSession {
@@ -689,6 +780,13 @@ export const AuthSessionFields = /*#__PURE__*/ gql`
   maxAge
   rememberMe
   roles
+}
+    `;
+export const UserFields = /*#__PURE__*/ gql`
+    fragment UserFields on User {
+  id
+  username
+  email
 }
     `;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
@@ -822,6 +920,205 @@ export const UserRolesDocument = /*#__PURE__*/ gql`
   })
   export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
     document = UserRolesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const FindUniqueUserDocument = /*#__PURE__*/ gql`
+    query FindUniqueUser($where: UserWhereUniqueInput!) {
+  findUniqueUser(where: $where) {
+    ...UserFields
+  }
+}
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class FindUniqueUserGQL extends Apollo.Query<FindUniqueUser, FindUniqueUserVariables> {
+    document = FindUniqueUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const FindFirstUserDocument = /*#__PURE__*/ gql`
+    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
+  findManyUser(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    distinct: $distinct
+    take: $take
+    skip: $skip
+  ) {
+    ...UserFields
+  }
+}
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class FindFirstUserGQL extends Apollo.Query<FindFirstUser, FindFirstUserVariables> {
+    document = FindFirstUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const FindManyUserDocument = /*#__PURE__*/ gql`
+    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
+  findManyUser(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    distinct: $distinct
+    take: $take
+    skip: $skip
+  ) {
+    ...UserFields
+  }
+}
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class FindManyUserGQL extends Apollo.Query<FindManyUser, FindManyUserVariables> {
+    document = FindManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const FindManyUserCountDocument = /*#__PURE__*/ gql`
+    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
+  findManyUserCount(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    distinct: $distinct
+    take: $take
+    skip: $skip
+  )
+}
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCount, FindManyUserCountVariables> {
+    document = FindManyUserCountDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateOneUserDocument = /*#__PURE__*/ gql`
+    mutation CreateOneUser($data: UserCreateInput!) {
+  createOneUser(data: $data) {
+    ...UserFields
+  }
+}
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUser, CreateOneUserVariables> {
+    document = CreateOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateOneUserDocument = /*#__PURE__*/ gql`
+    mutation UpdateOneUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
+  updateOneUser(where: $where, data: $data) {
+    ...UserFields
+  }
+}
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUser, UpdateOneUserVariables> {
+    document = UpdateOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteOneUserDocument = /*#__PURE__*/ gql`
+    mutation DeleteOneUser($where: UserWhereUniqueInput!) {
+  deleteOneUser(where: $where) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
+    document = DeleteOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpsertOneUserDocument = /*#__PURE__*/ gql`
+    mutation UpsertOneUser($where: UserWhereUniqueInput!, $create: UserCreateInput!, $update: UserUpdateInput!) {
+  upsertOneUser(where: $where, create: $create, update: $update) {
+    ...UserFields
+  }
+}
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUser, UpsertOneUserVariables> {
+    document = UpsertOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteManyUserDocument = /*#__PURE__*/ gql`
+    mutation DeleteManyUser($where: UserWhereInput) {
+  deleteManyUser(where: $where) {
+    count
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUser, DeleteManyUserVariables> {
+    document = DeleteManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateManyUserDocument = /*#__PURE__*/ gql`
+    mutation UpdateManyUser($where: UserWhereInput, $data: UserUpdateManyMutationInput!) {
+  updateManyUser(where: $where, data: $data) {
+    count
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
+    document = UpdateManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -10,21 +10,41 @@ export const ${name}TypeDefs = gql\`
     }
   }
 
-  query FindMany${name}(
+  query FindFirst${name}(
     $where: ${name}WhereInput
     $orderBy: [${name}OrderByWithRelationInput!]
     $cursor: ${name}WhereUniqueInput
-    $distinct: ${name}ScalarFieldEnum
-    $skip: Int
+    $distinct: [${name}ScalarFieldEnum]
     $take: Int
+    $skip: Int
   ) {
     findMany${name}(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
       distinct: $distinct
-      skip: $skip
       take: $take
+      skip: $skip
+    ) {
+      ...${name}Fields
+    }
+  }
+
+  query FindMany${name}(
+    $where: ${name}WhereInput
+    $orderBy: [${name}OrderByWithRelationInput!]
+    $cursor: ${name}WhereUniqueInput
+    $distinct: [${name}ScalarFieldEnum]
+    $take: Int
+    $skip: Int
+  ) {
+    findMany${name}(
+      where: $where
+      orderBy: $orderBy
+      cursor: $cursor
+      distinct: $distinct
+      take: $take
+      skip: $skip
     ) {
       ...${name}Fields
     }
@@ -34,17 +54,17 @@ export const ${name}TypeDefs = gql\`
     $where: ${name}WhereInput
     $orderBy: [${name}OrderByWithRelationInput!]
     $cursor: ${name}WhereUniqueInput
-    $distinct: ${name}ScalarFieldEnum
-    $skip: Int
+    $distinct: [${name}ScalarFieldEnum]
     $take: Int
+    $skip: Int
   ) {
     findMany${name}Count(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
       distinct: $distinct
-      skip: $skip
       take: $take
+      skip: $skip
     )
   }
 
@@ -82,7 +102,7 @@ export const ${name}TypeDefs = gql\`
     }
   }
 
-  mutation UpdateMany${name}($where: ${name}WhereInput, $data: ${name}UpdateManyMutationInput) {
+  mutation UpdateMany${name}($where: ${name}WhereInput, $data: ${name}UpdateManyMutationInput!) {
     updateMany${name}(where: $where, data: $data) {
       count
     }
