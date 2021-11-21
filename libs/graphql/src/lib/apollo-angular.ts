@@ -693,36 +693,36 @@ export type FindUniqueUserVariables = Exact<{
 export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username: string, email: string } | null | undefined };
 
 export type FindFirstUserVariables = Exact<{
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
-  cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<Array<Maybe<UserScalarFieldEnum>> | Maybe<UserScalarFieldEnum>>;
-  take?: Maybe<Scalars['Int']>;
-  skip?: Maybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
+  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
 }>;
 
 
 export type FindFirstUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null | undefined };
 
 export type FindManyUserVariables = Exact<{
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
-  cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<Array<Maybe<UserScalarFieldEnum>> | Maybe<UserScalarFieldEnum>>;
-  take?: Maybe<Scalars['Int']>;
-  skip?: Maybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
+  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
 }>;
 
 
 export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null | undefined };
 
 export type FindManyUserCountVariables = Exact<{
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
-  cursor?: Maybe<UserWhereUniqueInput>;
-  distinct?: Maybe<Array<Maybe<UserScalarFieldEnum>> | Maybe<UserScalarFieldEnum>>;
-  take?: Maybe<Scalars['Int']>;
-  skip?: Maybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  cursor?: InputMaybe<UserWhereUniqueInput>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
+  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -760,14 +760,14 @@ export type UpsertOneUserVariables = Exact<{
 export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username: string, email: string } | null | undefined };
 
 export type DeleteManyUserVariables = Exact<{
-  where?: Maybe<UserWhereInput>;
+  where?: InputMaybe<UserWhereInput>;
 }>;
 
 
 export type DeleteManyUser = { __typename?: 'Mutation', deleteManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
 
 export type UpdateManyUserVariables = Exact<{
-  where?: Maybe<UserWhereInput>;
+  where?: InputMaybe<UserWhereInput>;
   data: UserUpdateManyMutationInput;
 }>;
 
