@@ -10,6 +10,7 @@ debug.log
 /dist
 /tmp
 /out-tsc
+.angular
 
 # dependencies
 /node_modules
