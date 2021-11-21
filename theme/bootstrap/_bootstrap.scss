@@ -18,7 +18,12 @@
 // Utilities
 @import '~bootstrap/scss/utilities/api';
 
-// Cards =======================================================================
+// Cards
 .card-header {
   font-family: $zen-headings-font;
+}
+
+// Fixes
+.row {
+  margin-right: 0;
 }
