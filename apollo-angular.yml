@@ -4,6 +4,7 @@ schema:
   - libs/graphql/src/lib/client/schema.gql.ts
 documents: 
   - "libs/**/*.ts"
+  - "!*apollo-angular.ts"
   - "apps/portal/src/**/*.gql.ts"
 config:
   ngModule: ./zen-graphql.module#ZenGraphQLModule

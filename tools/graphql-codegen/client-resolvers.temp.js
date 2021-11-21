@@ -12,7 +12,7 @@ export const ${name}TypeDefs = gql\`
 
   query FindMany${name}(
     $where: ${name}WhereInput
-    $orderBy: [${name}OrderByInput!]
+    $orderBy: [${name}OrderByWithRelationInput!]
     $cursor: ${name}WhereUniqueInput
     $distinct: ${name}ScalarFieldEnum
     $skip: Int
@@ -32,7 +32,7 @@ export const ${name}TypeDefs = gql\`
 
   query FindMany${name}Count(
     $where: ${name}WhereInput
-    $orderBy: [${name}OrderByInput!]
+    $orderBy: [${name}OrderByWithRelationInput!]
     $cursor: ${name}WhereUniqueInput
     $distinct: ${name}ScalarFieldEnum
     $skip: Int

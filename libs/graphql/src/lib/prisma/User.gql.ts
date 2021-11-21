@@ -11,7 +11,7 @@ export const UserTypeDefs = gql`
 
   query FindManyUser(
     $where: UserWhereInput
-    $orderBy: [UserOrderByInput!]
+    $orderBy: [UserOrderByWithRelationInput!]
     $cursor: UserWhereUniqueInput
     $distinct: UserScalarFieldEnum
     $skip: Int
@@ -31,7 +31,7 @@ export const UserTypeDefs = gql`
 
   query FindManyUserCount(
     $where: UserWhereInput
-    $orderBy: [UserOrderByInput!]
+    $orderBy: [UserOrderByWithRelationInput!]
     $cursor: UserWhereUniqueInput
     $distinct: UserScalarFieldEnum
     $skip: Int
