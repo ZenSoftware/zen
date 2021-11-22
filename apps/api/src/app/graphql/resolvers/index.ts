@@ -1,5 +1,5 @@
 import { mergeTypeDefs } from '@graphql-tools/merge';
-import { makeExecutableSchema } from 'graphql-tools';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 
 import PRISMA_TYPE_DEFS from '../prisma/typeDefs';
 import { AuthResolver, AuthTypeDef } from './Auth';
