@@ -14,6 +14,7 @@ import {
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import Cookies from 'js-cookie';
+import ls from 'localstorage-slim';
 import { intersection, isEqual, orderBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subscription, interval, throwError, timer } from 'rxjs';
 import { catchError, debounce, mergeMap, retryWhen, tap } from 'rxjs/operators';
@@ -41,8 +42,8 @@ export class AuthService {
     if (this._loggedIn) {
       try {
         // Initialize apollo client state
-        const roles = localStorage.getItem(LocalStorageKey.roles);
-        userRolesVar(roles ? roles.split(',') : []);
+        const roles = ls.get(LocalStorageKey.roles, { decrypt: true }) as string[];
+        userRolesVar(roles ? roles : []);
         loggedInVar(true);
 
         if (this.sessionTimeRemaining <= env.jwtExchangeInterval) {
@@ -94,9 +95,9 @@ export class AuthService {
 
   setSession(authSession: AuthSession) {
     const expiresOn = Date.now() + parseInt(authSession.maxAge, 10);
-    localStorage.setItem(LocalStorageKey.sessionExpiresOn, expiresOn.toString());
-    localStorage.setItem(LocalStorageKey.rememberMe, authSession.rememberMe.toString());
-    localStorage.setItem(LocalStorageKey.roles, authSession.roles.toString());
+    ls.set(LocalStorageKey.sessionExpiresOn, expiresOn);
+    ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
+    ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
 
     if (!this.rolesEqual(this.roles, authSession.roles)) {
       if (authSession.roles) userRolesVar(authSession.roles);
@@ -138,7 +139,7 @@ export class AuthService {
   }
 
   private get rememberMe(): boolean {
-    return 'true' === localStorage.getItem(LocalStorageKey.rememberMe);
+    return ls.get(LocalStorageKey.rememberMe) as boolean;
   }
 
   private get _loggedIn(): boolean {
@@ -146,10 +147,9 @@ export class AuthService {
   }
 
   private get sessionTimeRemaining(): number {
-    const sessionExpiresOnString = localStorage.getItem(LocalStorageKey.sessionExpiresOn);
-    if (!sessionExpiresOnString) return 0;
+    const expiresOn = ls.get(LocalStorageKey.sessionExpiresOn) as number;
+    if (!expiresOn) return 0;
 
-    const expiresOn = +sessionExpiresOnString;
     const timeRemaining = expiresOn - Date.now();
 
     if (timeRemaining <= 0) return 0;
@@ -158,9 +158,9 @@ export class AuthService {
 
   private clearSession() {
     this.stopExchangeInterval();
-    localStorage.removeItem(LocalStorageKey.sessionExpiresOn);
-    localStorage.removeItem(LocalStorageKey.rememberMe);
-    localStorage.removeItem(LocalStorageKey.roles);
+    ls.remove(LocalStorageKey.sessionExpiresOn);
+    ls.remove(LocalStorageKey.rememberMe);
+    ls.remove(LocalStorageKey.roles);
     userRolesVar([]);
     Cookies.remove('jwt', this.env.cookieAttributes);
     Cookies.remove('rememberMe', this.env.cookieAttributes);
