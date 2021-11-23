@@ -42,7 +42,7 @@ export class AuthService {
       try {
         // Initialize apollo client state
         const roles = localStorage.getItem(LocalStorageKey.roles);
-        userRolesVar(roles ? atob(roles).split(',') : []);
+        userRolesVar(roles ? roles.split(',') : []);
         loggedInVar(true);
 
         if (this.sessionTimeRemaining <= env.jwtExchangeInterval) {
@@ -96,7 +96,7 @@ export class AuthService {
     const expiresOn = Date.now() + parseInt(authSession.maxAge, 10);
     localStorage.setItem(LocalStorageKey.sessionExpiresOn, expiresOn.toString());
     localStorage.setItem(LocalStorageKey.rememberMe, authSession.rememberMe.toString());
-    localStorage.setItem(LocalStorageKey.roles, btoa(authSession.roles.toString()));
+    localStorage.setItem(LocalStorageKey.roles, authSession.roles.toString());
 
     if (!this.rolesEqual(this.roles, authSession.roles)) {
       if (authSession.roles) userRolesVar(authSession.roles);
@@ -210,34 +210,36 @@ export class AuthService {
   }
 }
 
-const retryStrategy = ({
-  maxRetryAttempts: maxRetry = 3,
-  duration = 1000,
-  excludedStatusCodes = [],
-}: {
-  maxRetryAttempts?: number;
-  duration?: number;
-  excludedStatusCodes?: number[];
-} = {}) => (attempts: Observable<any>) => {
-  return attempts.pipe(
-    mergeMap((errors: GqlErrors, i) => {
-      const retryAttempt = i + 1;
+const retryStrategy =
+  ({
+    maxRetryAttempts: maxRetry = 3,
+    duration = 1000,
+    excludedStatusCodes = [],
+  }: {
+    maxRetryAttempts?: number;
+    duration?: number;
+    excludedStatusCodes?: number[];
+  } = {}) =>
+  (attempts: Observable<any>) => {
+    return attempts.pipe(
+      mergeMap((errors: GqlErrors, i) => {
+        const retryAttempt = i + 1;
 
-      if (
-        retryAttempt > maxRetry ||
-        errors.find(e => excludedStatusCodes.find(exclude => exclude === e.statusCode))
-      ) {
-        return throwError(errors);
-      }
+        if (
+          retryAttempt > maxRetry ||
+          errors.find(e => excludedStatusCodes.find(exclude => exclude === e.statusCode))
+        ) {
+          return throwError(errors);
+        }
 
-      const durationMinutes = Math.round(duration / (1000 * 60));
+        const durationMinutes = Math.round(duration / (1000 * 60));
 
-      console.warn(
-        `Exchange token attempt ${retryAttempt}: retrying in ${durationMinutes}min`,
-        errors
-      );
+        console.warn(
+          `Exchange token attempt ${retryAttempt}: retrying in ${durationMinutes}min`,
+          errors
+        );
 
-      return timer(duration);
-    })
-  );
-};
+        return timer(duration);
+      })
+    );
+  };
