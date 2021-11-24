@@ -14,17 +14,17 @@ export const ${name}TypeDefs = gql\`
     $where: ${name}WhereInput
     $orderBy: [${name}OrderByWithRelationInput]
     $cursor: ${name}WhereUniqueInput
-    $distinct: [${name}ScalarFieldEnum]
     $take: Int
     $skip: Int
+    $distinct: [${name}ScalarFieldEnum]
   ) {
     findMany${name}(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
-      distinct: $distinct
       take: $take
       skip: $skip
+      distinct: $distinct
     ) {
       ...${name}Fields
     }
@@ -34,17 +34,17 @@ export const ${name}TypeDefs = gql\`
     $where: ${name}WhereInput
     $orderBy: [${name}OrderByWithRelationInput]
     $cursor: ${name}WhereUniqueInput
-    $distinct: [${name}ScalarFieldEnum]
     $take: Int
     $skip: Int
+    $distinct: [${name}ScalarFieldEnum]
   ) {
     findMany${name}(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
-      distinct: $distinct
       take: $take
       skip: $skip
+      distinct: $distinct
     ) {
       ...${name}Fields
     }
@@ -54,17 +54,17 @@ export const ${name}TypeDefs = gql\`
     $where: ${name}WhereInput
     $orderBy: [${name}OrderByWithRelationInput]
     $cursor: ${name}WhereUniqueInput
-    $distinct: [${name}ScalarFieldEnum]
     $take: Int
     $skip: Int
+    $distinct: [${name}ScalarFieldEnum]
   ) {
     findMany${name}Count(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
-      distinct: $distinct
       take: $take
       skip: $skip
+      distinct: $distinct
     )
   }
 
@@ -74,8 +74,8 @@ export const ${name}TypeDefs = gql\`
     }
   }
 
-  mutation UpdateOne${name}($where: ${name}WhereUniqueInput!, $data: ${name}UpdateInput!) {
-    updateOne${name}(where: $where, data: $data) {
+  mutation UpdateOne${name}($data: ${name}UpdateInput!, $where: ${name}WhereUniqueInput!) {
+    updateOne${name}(data: $data, where: $where) {
       ...${name}Fields
     }
   }
@@ -102,8 +102,8 @@ export const ${name}TypeDefs = gql\`
     }
   }
 
-  mutation UpdateMany${name}($where: ${name}WhereInput, $data: ${name}UpdateManyMutationInput!) {
-    updateMany${name}(where: $where, data: $data) {
+  mutation UpdateMany${name}($data: ${name}UpdateManyMutationInput!, $where: ${name}WhereInput) {
+    updateMany${name}(data: $data, where: $where) {
       count
     }
   }

@@ -696,9 +696,9 @@ export type FindFirstUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
   take?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
 
@@ -708,9 +708,9 @@ export type FindManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
   take?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
 
@@ -720,9 +720,9 @@ export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
   take?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
 
@@ -736,8 +736,8 @@ export type CreateOneUserVariables = Exact<{
 export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: number, username: string, email: string } };
 
 export type UpdateOneUserVariables = Exact<{
-  where: UserWhereUniqueInput;
   data: UserUpdateInput;
+  where: UserWhereUniqueInput;
 }>;
 
 
@@ -767,8 +767,8 @@ export type DeleteManyUserVariables = Exact<{
 export type DeleteManyUser = { __typename?: 'Mutation', deleteManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
 
 export type UpdateManyUserVariables = Exact<{
-  where?: InputMaybe<UserWhereInput>;
   data: UserUpdateManyMutationInput;
+  where?: InputMaybe<UserWhereInput>;
 }>;
 
 
@@ -944,14 +944,14 @@ export const FindUniqueUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindFirstUserDocument = /*#__PURE__*/ gql`
-    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
+    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
   findManyUser(
     where: $where
     orderBy: $orderBy
     cursor: $cursor
-    distinct: $distinct
     take: $take
     skip: $skip
+    distinct: $distinct
   ) {
     ...UserFields
   }
@@ -969,14 +969,14 @@ export const FindFirstUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserDocument = /*#__PURE__*/ gql`
-    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
+    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
   findManyUser(
     where: $where
     orderBy: $orderBy
     cursor: $cursor
-    distinct: $distinct
     take: $take
     skip: $skip
+    distinct: $distinct
   ) {
     ...UserFields
   }
@@ -994,14 +994,14 @@ export const FindManyUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserCountDocument = /*#__PURE__*/ gql`
-    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
+    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
   findManyUserCount(
     where: $where
     orderBy: $orderBy
     cursor: $cursor
-    distinct: $distinct
     take: $take
     skip: $skip
+    distinct: $distinct
   )
 }
     `;
@@ -1035,8 +1035,8 @@ export const CreateOneUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const UpdateOneUserDocument = /*#__PURE__*/ gql`
-    mutation UpdateOneUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
-  updateOneUser(where: $where, data: $data) {
+    mutation UpdateOneUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+  updateOneUser(data: $data, where: $where) {
     ...UserFields
   }
 }
@@ -1107,8 +1107,8 @@ export const DeleteManyUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const UpdateManyUserDocument = /*#__PURE__*/ gql`
-    mutation UpdateManyUser($where: UserWhereInput, $data: UserUpdateManyMutationInput!) {
-  updateManyUser(where: $where, data: $data) {
+    mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
+  updateManyUser(data: $data, where: $where) {
     count
   }
 }

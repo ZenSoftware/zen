@@ -13,17 +13,17 @@ export const UserTypeDefs = gql`
     $where: UserWhereInput
     $orderBy: [UserOrderByWithRelationInput]
     $cursor: UserWhereUniqueInput
-    $distinct: [UserScalarFieldEnum]
     $take: Int
     $skip: Int
+    $distinct: [UserScalarFieldEnum]
   ) {
     findManyUser(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
-      distinct: $distinct
       take: $take
       skip: $skip
+      distinct: $distinct
     ) {
       ...UserFields
     }
@@ -33,17 +33,17 @@ export const UserTypeDefs = gql`
     $where: UserWhereInput
     $orderBy: [UserOrderByWithRelationInput]
     $cursor: UserWhereUniqueInput
-    $distinct: [UserScalarFieldEnum]
     $take: Int
     $skip: Int
+    $distinct: [UserScalarFieldEnum]
   ) {
     findManyUser(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
-      distinct: $distinct
       take: $take
       skip: $skip
+      distinct: $distinct
     ) {
       ...UserFields
     }
@@ -53,17 +53,17 @@ export const UserTypeDefs = gql`
     $where: UserWhereInput
     $orderBy: [UserOrderByWithRelationInput]
     $cursor: UserWhereUniqueInput
-    $distinct: [UserScalarFieldEnum]
     $take: Int
     $skip: Int
+    $distinct: [UserScalarFieldEnum]
   ) {
     findManyUserCount(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
-      distinct: $distinct
       take: $take
       skip: $skip
+      distinct: $distinct
     )
   }
 
@@ -73,8 +73,8 @@ export const UserTypeDefs = gql`
     }
   }
 
-  mutation UpdateOneUser($where: UserWhereUniqueInput!, $data: UserUpdateInput!) {
-    updateOneUser(where: $where, data: $data) {
+  mutation UpdateOneUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+    updateOneUser(data: $data, where: $where) {
       ...UserFields
     }
   }
@@ -101,8 +101,8 @@ export const UserTypeDefs = gql`
     }
   }
 
-  mutation UpdateManyUser($where: UserWhereInput, $data: UserUpdateManyMutationInput!) {
-    updateManyUser(where: $where, data: $data) {
+  mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
+    updateManyUser(data: $data, where: $where) {
       count
     }
   }
