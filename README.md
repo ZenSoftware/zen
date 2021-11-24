@@ -23,7 +23,7 @@ New contributors are welcome!
 
 **Requirements**
 
-- [Node v14-v16](https://nodejs.org/)
+- [Node v16](https://nodejs.org/)
 - [Docker](https://www.docker.com/)
 
 ```bash
