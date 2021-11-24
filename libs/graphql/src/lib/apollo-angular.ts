@@ -671,17 +671,6 @@ export type AuthRegisterVariables = Exact<{
 
 export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> } };
 
-export type AuthSessionFields = { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> };
-
-export type UserFields = { __typename?: 'User', id: number, username: string, email: string };
-
-export type ZenTestQueryVariables = Exact<{
-  data: AuthPasswordResetRequestInput;
-}>;
-
-
-export type ZenTestQuery = { __typename?: 'Query', authPasswordResetRequest?: boolean | null | undefined };
-
 export type LoggedInVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -692,6 +681,10 @@ export type UserRolesVariables = Exact<{ [key: string]: never; }>;
 
 export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
 
+export type AuthSessionFields = { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> };
+
+export type UserFields = { __typename?: 'User', id: number, username: string, email: string };
+
 export type FindUniqueUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
@@ -701,7 +694,7 @@ export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typena
 
 export type FindFirstUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
-  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
   take?: InputMaybe<Scalars['Int']>;
@@ -713,7 +706,7 @@ export type FindFirstUser = { __typename?: 'Query', findManyUser?: Array<{ __typ
 
 export type FindManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
-  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
   take?: InputMaybe<Scalars['Int']>;
@@ -725,7 +718,7 @@ export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __type
 
 export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
-  orderBy?: InputMaybe<Array<UserOrderByWithRelationInput> | UserOrderByWithRelationInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
   take?: InputMaybe<Scalars['Int']>;
@@ -900,22 +893,6 @@ export const AuthRegisterDocument = /*#__PURE__*/ gql`
       super(apollo);
     }
   }
-export const ZenTestQueryDocument = /*#__PURE__*/ gql`
-    query ZenTestQuery($data: AuthPasswordResetRequestInput!) {
-  authPasswordResetRequest(data: $data)
-}
-    `;
-
-  @Injectable({
-    providedIn: ZenGraphQLModule
-  })
-  export class ZenTestQueryGQL extends Apollo.Query<ZenTestQuery, ZenTestQueryVariables> {
-    document = ZenTestQueryDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
 export const LoggedInDocument = /*#__PURE__*/ gql`
     query LoggedIn {
   loggedIn @client
@@ -967,7 +944,7 @@ export const FindUniqueUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindFirstUserDocument = /*#__PURE__*/ gql`
-    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
+    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
   findManyUser(
     where: $where
     orderBy: $orderBy
@@ -992,7 +969,7 @@ export const FindFirstUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserDocument = /*#__PURE__*/ gql`
-    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
+    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
   findManyUser(
     where: $where
     orderBy: $orderBy
@@ -1017,7 +994,7 @@ export const FindManyUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserCountDocument = /*#__PURE__*/ gql`
-    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput!], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
+    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum], $take: Int, $skip: Int) {
   findManyUserCount(
     where: $where
     orderBy: $orderBy
