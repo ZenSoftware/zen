@@ -44,7 +44,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
           Validators.required,
           Validators.minLength(
             // 6 is the shortest email length: a@b.cd
-            ApiConstants.USERNAME_MIN_LENGTH < 6 ? ApiConstants.USERNAME_MIN_LENGTH : 7
+            ApiConstants.USERNAME_MIN_LENGTH < 6 ? ApiConstants.USERNAME_MIN_LENGTH : 6
           ),
           Validators.maxLength(254),
           this.includesSpaceValidator(),
