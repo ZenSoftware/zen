@@ -157,7 +157,7 @@ export class Gulpfile {
 
     const QUERY_TOKEN = 'Query: {';
     const MUTATION_TOKEN = 'Mutation: {';
-    const regExpHasResolverName = new RegExp(/^[ \t]*[a-zA-Z0-9_]+\:/);
+    const regExpHasResolverName = new RegExp(/^[\s]*[a-zA-Z0-9_]+\:/);
 
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
