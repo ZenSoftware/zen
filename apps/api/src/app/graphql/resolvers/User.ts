@@ -11,7 +11,7 @@ import {
 } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 
-import { GqlGuard, GqlUser, RequestUser, Role, Roles } from '../../auth';
+import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
 import { IContext } from '../models';
 import { PrismaSelectArgs } from '../prisma-select-args';
 import resolvers from '../prisma/User/resolvers';

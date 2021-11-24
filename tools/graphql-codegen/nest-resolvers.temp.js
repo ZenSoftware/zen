@@ -1,9 +1,9 @@
 module.exports = (prismaName, querySource, mutationSource) => {
   return `import { UseGuards } from '@nestjs/common';
-import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
+import { Args, Context, Info, Mutation, Parent, Query, Resolver, ResolveField } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 
-import { GqlGuard, GqlUser, RequestUser, Role, Roles } from '../../auth';
+import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
 import { IContext } from '../models';
 import { PrismaSelectArgs } from '../prisma-select-args';
 import resolvers from '../prisma/${prismaName}/resolvers';
