@@ -1,6 +1,6 @@
 {
   "extends": ["../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": ["!**/*", "src/lib/apollo-angular.ts"],
   "overrides": [
     {
       "files": ["*.ts"],

@@ -675,6 +675,13 @@ export type AuthSessionFields = { __typename?: 'AuthSession', id: number, maxAge
 
 export type UserFields = { __typename?: 'User', id: number, username: string, email: string };
 
+export type ZenTestQueryVariables = Exact<{
+  data: AuthPasswordResetRequestInput;
+}>;
+
+
+export type ZenTestQuery = { __typename?: 'Query', authPasswordResetRequest?: boolean | null | undefined };
+
 export type LoggedInVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -888,6 +895,22 @@ export const AuthRegisterDocument = /*#__PURE__*/ gql`
   })
   export class AuthRegisterGQL extends Apollo.Mutation<AuthRegister, AuthRegisterVariables> {
     document = AuthRegisterDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const ZenTestQueryDocument = /*#__PURE__*/ gql`
+    query ZenTestQuery($data: AuthPasswordResetRequestInput!) {
+  authPasswordResetRequest(data: $data)
+}
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class ZenTestQueryGQL extends Apollo.Query<ZenTestQuery, ZenTestQueryVariables> {
+    document = ZenTestQueryDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
