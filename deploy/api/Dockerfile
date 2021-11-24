@@ -3,7 +3,8 @@ FROM node:16-alpine
 WORKDIR /usr/src/api
 
 COPY dist/apps/api ./
-COPY package*.json ./
+COPY dist/package.json ./
+COPY package-lock.json ./
 COPY prisma/schema.prisma prisma/schema.prisma
 
 RUN npm ci --production --loglevel warn

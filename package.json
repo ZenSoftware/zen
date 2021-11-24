@@ -15,7 +15,7 @@
     "prisma:studio": "prisma studio",
     "prod:apps": "ng build portal --prod",
     "prod:api": "ng build api --prod && npm run dockerize:api",
-    "dockerize:api": "docker build -f deploy/api/Dockerfile -t zen-api .",
+    "dockerize:api": "gulp create-deploy-package && docker build -f deploy/api/Dockerfile -t zen-api .",
     "docker:run-api": "docker run -d --name zen-api -p 7080:7080 zen-api",
     "docs": "ng compodoc api",
     "test": "nx test",

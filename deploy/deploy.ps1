@@ -14,6 +14,7 @@ Invoke-Call -ScriptBlock { npx gulp clean } -ErrorAction Stop
 Invoke-Call -ScriptBlock { npm run prod:apps } -ErrorAction Stop
 Invoke-Call -ScriptBlock { npx ng build api --prod } -ErrorAction Stop
 Invoke-Call -ScriptBlock { npx gulp handlebars:copy } -ErrorAction Stop
+Invoke-Call -ScriptBlock { npx gulp create-deploy-package } -ErrorAction Stop
 Invoke-Call -ScriptBlock { docker build -f deploy/api/Dockerfile -t zen-api . } -ErrorAction Stop
 Invoke-Call -ScriptBlock { azcopy cp 'dist/apps/portal/*' 'https://hot.blob.core.windows.net/$web' --recursive } -ErrorAction Stop
 Invoke-Call -ScriptBlock { npx gulp increment-version } -ErrorAction Stop

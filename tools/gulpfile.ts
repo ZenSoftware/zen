@@ -80,6 +80,15 @@ export class Gulpfile {
     cb();
   }
 
+  @Task('create-deploy-package')
+  async createDeployPackage(cb) {
+    const packageFile = await readFileAsync('package.json');
+    const packageJson = JSON.parse(packageFile.toString());
+    delete packageJson.scripts.postinstall;
+    fs.writeFileSync('dist/package.json', JSON.stringify(packageJson));
+    cb();
+  }
+
   @Task('deploy:api')
   async deployApi(cb) {
     const packageFile = await readFileAsync('package.json');
