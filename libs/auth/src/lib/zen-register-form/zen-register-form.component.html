@@ -3,7 +3,7 @@
 
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Username</mat-label>
-    <input #usernameMatInput="matInput" #usernameInput matInput placeholder="Username" [formControl]="username" hideRequiredMarker="true" maxlength="254">
+    <input #usernameMatInput="matInput" #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="username" hideRequiredMarker="true" maxlength="254">
     <mat-error *ngIf="username.errors?.required">Required</mat-error>
     <mat-error *ngIf="username.errors?.minlength && !username.errors?.required">Minimum length of {{username.errors?.minlength?.requiredLength}} characters</mat-error>
     <mat-error *ngIf="username.errors?.maxlength">Maximum length of {{username.errors?.maxlength?.requiredLength}} characters</mat-error>
@@ -13,7 +13,7 @@
 
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>E-mail</mat-label>
-    <input #emailInput type="email" matInput placeholder="enter@email.com" [formControl]="email" maxlength="254" hideRequiredMarker="true">
+    <input #emailInput type="email" matInput placeholder="enter@email.com" autocomplete="email" [formControl]="email" maxlength="254" hideRequiredMarker="true">
     <mat-error *ngIf="email.errors?.required">Required</mat-error>
     <mat-error *ngIf="email.errors?.email && !email.errors?.required">Not a valid email</mat-error>
     <mat-error *ngIf="email.errors?.emailTaken">E-mail is already taken</mat-error>
@@ -21,7 +21,7 @@
 
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Password</mat-label>
-    <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="password">
+    <input matInput autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" [formControl]="password">
     <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </span>
@@ -32,7 +32,7 @@
 
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Confirm Password</mat-label>
-    <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="passwordConfirm">
+    <input matInput autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" [formControl]="passwordConfirm">
     <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </span>
