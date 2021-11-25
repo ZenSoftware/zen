@@ -85,7 +85,7 @@ export class Gulpfile {
     const packageFile = await readFileAsync('package.json');
     const packageJson = JSON.parse(packageFile.toString());
     delete packageJson.scripts.postinstall;
-    fs.writeFileSync('dist/package.json', JSON.stringify(packageJson));
+    fs.writeFileSync('dist/package-deploy.json', JSON.stringify(packageJson));
     cb();
   }
 

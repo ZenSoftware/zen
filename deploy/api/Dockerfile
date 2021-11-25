@@ -3,7 +3,7 @@ FROM node:16-alpine
 WORKDIR /usr/src/api
 
 COPY dist/apps/api ./
-COPY dist/package.json ./
+COPY dist/package-deploy.json ./package.json
 COPY package-lock.json ./
 COPY prisma/schema.prisma prisma/schema.prisma
 
