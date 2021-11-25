@@ -1,8 +1,10 @@
 export { AuthGuard } from '@nestjs/passport';
-export * from './auth.module';
-export * from './gql';
-export { RequestUser } from './request-user';
-export * from './roles.decorator';
-export * from './auth.service';
-export * from './http-user.decorator';
 export { Role } from '@prisma/client';
+export { RequestUser } from './request-user';
+export * from './auth.module';
+export * from './auth.service';
+export * from './gql-user.decorator';
+export * from './gql.guard';
+export * from './http-user.decorator';
+export * from './http.guard';
+export * from './roles.decorator';
