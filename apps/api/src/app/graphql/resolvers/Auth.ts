@@ -1,16 +1,17 @@
 import { HttpException, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 import { PrismaClient } from '@prisma/client';
 import { ApiError } from '@zen/api-interfaces';
 import bcrypt from 'bcryptjs';
 import { CookieOptions } from 'express';
 import gql from 'graphql-tag';
-import { Throttle, ThrottlerGuard } from 'nestjs-throttler';
 
 import { AuthService, GqlGuard, GqlUser, RequestUser, Role } from '../../auth';
 import { ConfigService } from '../../config';
 import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
+import { GqlThrottlerGuard } from '../gql-throttle.guard';
 import {
   AuthLoginInput,
   AuthPasswordChangeInput,
@@ -68,7 +69,7 @@ export const AuthTypeDef = gql`
 `;
 
 @Resolver()
-@UseGuards(ThrottlerGuard)
+@UseGuards(GqlThrottlerGuard)
 @Throttle()
 export class AuthResolver {
   private CLEAR_COOKIE_OPTIONS: CookieOptions = {

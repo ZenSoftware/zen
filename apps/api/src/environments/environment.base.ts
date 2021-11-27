@@ -2,7 +2,7 @@ import { MailerOptions } from '@nest-modules/mailer';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { CookieOptions } from 'express';
 import { UploadOptions } from 'graphql-upload';
-import { ThrottlerModuleOptions } from 'nestjs-throttler';
+import { ThrottlerModuleOptions } from '@nestjs/throttler';
 
 export class EnvironmentBase {
   readonly siteUrl: string;

@@ -40,7 +40,8 @@ export const environment: EnvironmentBase = {
     },
   },
   throttle: {
-    limit: 10,
+    limit: 2,
     ttl: 60,
+    ignoreUserAgents: [/googlebot/gi, /bingbot/gi],
   },
 };
