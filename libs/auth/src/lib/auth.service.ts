@@ -13,13 +13,13 @@ import {
 } from '@zen/graphql';
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
-import Cookies from 'js-cookie';
 import ls from 'localstorage-slim';
 import { intersection, isEqual, orderBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subscription, interval, throwError, timer } from 'rxjs';
 import { catchError, debounce, mergeMap, retryWhen, tap } from 'rxjs/operators';
 
 enum LocalStorageKey {
+  token = 'token',
   sessionExpiresOn = 'sessionExpiresOn',
   roles = 'roles',
   rememberMe = 'rememberMe',
@@ -95,6 +95,7 @@ export class AuthService {
 
   setSession(authSession: AuthSession) {
     const expiresOn = Date.now() + parseInt(authSession.maxAge, 10);
+    ls.set(LocalStorageKey.token, authSession.token, { encrypt: true });
     ls.set(LocalStorageKey.sessionExpiresOn, expiresOn);
     ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
     ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
@@ -158,19 +159,21 @@ export class AuthService {
 
   private clearSession() {
     this.stopExchangeInterval();
+    ls.remove(LocalStorageKey.token);
     ls.remove(LocalStorageKey.sessionExpiresOn);
     ls.remove(LocalStorageKey.rememberMe);
     ls.remove(LocalStorageKey.roles);
     userRolesVar([]);
-    Cookies.remove('jwt', this.env.cookieAttributes);
-    Cookies.remove('rememberMe', this.env.cookieAttributes);
     this.apollo.client.cache.reset();
     this.#graphqlSubscriptionClient$.next(null);
   }
 
   private exchangeToken() {
     this.authExchangeTokenGQL
-      .fetch(undefined, { fetchPolicy: 'network-only' })
+      .fetch(
+        { data: { rememberMe: ls.get(LocalStorageKey.rememberMe) as boolean } },
+        { fetchPolicy: 'no-cache' }
+      )
       .pipe(
         catchError(parseGqlErrors),
         retryWhen(

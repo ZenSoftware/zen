@@ -27,6 +27,10 @@ export type AggregateUser = {
   _sum?: Maybe<UserSumAggregateOutputType>;
 };
 
+export type AuthExchangeTokenInput = {
+  rememberMe: Scalars['Boolean'];
+};
+
 export type AuthLoginInput = {
   password: Scalars['String'];
   rememberMe: Scalars['Boolean'];
@@ -59,6 +63,7 @@ export type AuthSession = {
   maxAge: Scalars['String'];
   rememberMe: Scalars['Boolean'];
   roles: Array<Scalars['String']>;
+  token: Scalars['String'];
 };
 
 export type BatchPayload = {
@@ -315,6 +320,11 @@ export type QueryAggregateUserArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type QueryAuthExchangeTokenArgs = {
+  data?: InputMaybe<AuthExchangeTokenInput>;
 };
 
 
@@ -631,17 +641,19 @@ export type UserWhereUniqueInput = {
   username?: InputMaybe<Scalars['String']>;
 };
 
-export type AuthExchangeTokenVariables = Exact<{ [key: string]: never; }>;
+export type AuthExchangeTokenVariables = Exact<{
+  data: AuthExchangeTokenInput;
+}>;
 
 
-export type AuthExchangeToken = { __typename?: 'Query', authExchangeToken: { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> } };
+export type AuthExchangeToken = { __typename?: 'Query', authExchangeToken: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string } };
 
 export type AuthLoginVariables = Exact<{
   data: AuthLoginInput;
 }>;
 
 
-export type AuthLogin = { __typename?: 'Query', authLogin: { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> } };
+export type AuthLogin = { __typename?: 'Query', authLogin: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string } };
 
 export type AuthPasswordChangeVariables = Exact<{
   data: AuthPasswordChangeInput;
@@ -655,7 +667,7 @@ export type AuthPasswordResetConfirmationVariables = Exact<{
 }>;
 
 
-export type AuthPasswordResetConfirmation = { __typename?: 'Mutation', authPasswordResetConfirmation: { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> } };
+export type AuthPasswordResetConfirmation = { __typename?: 'Mutation', authPasswordResetConfirmation: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string } };
 
 export type AuthPasswordResetRequestQueryVariables = Exact<{
   data: AuthPasswordResetRequestInput;
@@ -669,7 +681,7 @@ export type AuthRegisterVariables = Exact<{
 }>;
 
 
-export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> } };
+export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string } };
 
 export type LoggedInVariables = Exact<{ [key: string]: never; }>;
 
@@ -681,7 +693,7 @@ export type UserRolesVariables = Exact<{ [key: string]: never; }>;
 
 export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
 
-export type AuthSessionFields = { __typename?: 'AuthSession', id: number, maxAge: string, rememberMe: boolean, roles: Array<string> };
+export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string };
 
 export type UserFields = { __typename?: 'User', id: number, username: string, email: string };
 
@@ -777,9 +789,10 @@ export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typ
 export const AuthSessionFields = /*#__PURE__*/ gql`
     fragment AuthSessionFields on AuthSession {
   id
-  maxAge
+  token
   rememberMe
   roles
+  maxAge
 }
     `;
 export const UserFields = /*#__PURE__*/ gql`
@@ -790,8 +803,8 @@ export const UserFields = /*#__PURE__*/ gql`
 }
     `;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
-    query AuthExchangeToken {
-  authExchangeToken {
+    query AuthExchangeToken($data: AuthExchangeTokenInput!) {
+  authExchangeToken(data: $data) {
     ...AuthSessionFields
   }
 }

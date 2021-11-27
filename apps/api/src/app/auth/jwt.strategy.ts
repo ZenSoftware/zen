@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Request as ExReq } from 'express';
 import { Strategy } from 'passport-jwt';
@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         // Websocket connection
         if (req.token) return req.token;
         // HTTP request
-        else return req.cookies['jwt'];
+        else return req.header('bearer');
       },
     });
   }

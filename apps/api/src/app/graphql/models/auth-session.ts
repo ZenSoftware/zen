@@ -1,6 +1,7 @@
 export interface AuthSession {
   id: number;
-  maxAge: string;
+  token: string;
   roles: string[];
   rememberMe: boolean;
+  maxAge: string;
 }
