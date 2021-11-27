@@ -140,7 +140,7 @@ export class AuthResolver {
     if (possibleUsers.length <= 0)
       throw new HttpException(ApiError.AuthPasswordResetRequest.USER_NOT_FOUND, 400);
 
-    possibleUsers.forEach(u => this.mail.sendPasswordReset(u));
+    possibleUsers.forEach(user => this.mail.sendPasswordReset(user));
   }
 
   @Mutation()
