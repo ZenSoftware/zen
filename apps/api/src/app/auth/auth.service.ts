@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CookieOptions, Response } from 'express';
+import { Response } from 'express';
 
 import { RequestUser } from '../auth';
 import { ConfigService } from '../config';
@@ -40,40 +40,40 @@ export class AuthService {
     };
   }
 
-  setJwtCookie(
-    res: Response,
-    user: RequestUser,
-    rememberMe: boolean | string = false
-  ): AuthSession {
-    if (typeof rememberMe === 'string') {
-      rememberMe = rememberMe === 'true';
-    }
+  // setJwtCookie(
+  //   res: Response,
+  //   user: RequestUser,
+  //   rememberMe: boolean | string = false
+  // ): AuthSession {
+  //   if (typeof rememberMe === 'string') {
+  //     rememberMe = rememberMe === 'true';
+  //   }
 
-    const jwtPayload: JwtPayload = {
-      id: user.id,
-      roles: user.roles ? user.roles.toString() : undefined,
-    };
+  //   const jwtPayload: JwtPayload = {
+  //     id: user.id,
+  //     roles: user.roles ? user.roles.toString() : undefined,
+  //   };
 
-    const expiresIn = rememberMe
-      ? this.config.expiresInRememberMe
-      : (this.config.jwtOptions.signOptions.expiresIn as number);
-    const maxAge = expiresIn * 1000;
-    const token = this.jwtService.sign(jwtPayload, { expiresIn });
+  //   const expiresIn = rememberMe
+  //     ? this.config.expiresInRememberMe
+  //     : (this.config.jwtOptions.signOptions.expiresIn as number);
+  //   const maxAge = expiresIn * 1000;
+  //   const token = this.jwtService.sign(jwtPayload, { expiresIn });
 
-    const cookieOptions: CookieOptions = {
-      ...this.config.cookie,
-      maxAge,
-    };
+  //   const cookieOptions: CookieOptions = {
+  //     ...this.config.cookie,
+  //     maxAge,
+  //   };
 
-    res.cookie('jwt', token, cookieOptions);
-    res.cookie('rememberMe', rememberMe, cookieOptions);
+  //   res.cookie('jwt', token, cookieOptions);
+  //   res.cookie('rememberMe', rememberMe, cookieOptions);
 
-    return {
-      id: user.id,
-      token,
-      roles: user.roles,
-      rememberMe,
-      maxAge: maxAge.toString(),
-    };
-  }
+  //   return {
+  //     id: user.id,
+  //     token,
+  //     roles: user.roles,
+  //     rememberMe,
+  //     maxAge: maxAge.toString(),
+  //   };
+  // }
 }

@@ -25,11 +25,6 @@ export const environment: EnvironmentBase = {
     },
   },
   expiresInRememberMe: 2592000, // 30 days (in seconds)
-  cookie: {
-    secure: true,
-    sameSite: 'strict',
-    domain: 'site.com',
-  },
   mail: {
     transport: `smtps://${process.env.SMTP_LOGIN}:${process.env.SMTP_PASSWORD}@${process.env.SMTP_SERVER}`,
     defaults: {

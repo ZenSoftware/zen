@@ -1,9 +1,6 @@
-import { CookieAttributes } from 'js-cookie';
-
 export abstract class Environment {
   abstract readonly production: boolean;
   abstract readonly publicRegistration: boolean;
-  abstract readonly cookieAttributes: CookieAttributes | undefined;
   abstract readonly jwtExchangeInterval: number;
   abstract readonly rememberMeExchangeThreshold: number;
   abstract readonly url: {
@@ -17,7 +14,6 @@ export abstract class Environment {
 export class EnvironmentDev implements Environment {
   production = false;
   publicRegistration = true;
-  cookieAttributes = undefined;
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
   url = {
@@ -31,7 +27,6 @@ export class EnvironmentDev implements Environment {
 export class EnvironmentProd implements Environment {
   production = true;
   publicRegistration = false;
-  cookieAttributes = { path: '/', domain: '.site.com' };
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
   url = {

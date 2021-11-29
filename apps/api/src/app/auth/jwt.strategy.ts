@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Request as ExReq } from 'express';
 import { Strategy } from 'passport-jwt';
@@ -12,16 +12,23 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(private readonly config: ConfigService) {
     super({
       secretOrKey: config.production ? config.jwtOptions.publicKey : config.jwtOptions.secret,
+
       jwtFromRequest: (req: ExReq & { token: any }) => {
         // Websocket connection
+
         if (req.token) return req.token;
         // HTTP request
-        else return req.header('bearer');
+        else {
+          const bearer = req.header('Authorization');
+          if (bearer) return bearer.substring(bearer.indexOf('Bearer '));
+        }
       },
     });
   }
 
   async validate(payload: JwtPayload) {
+    if (Date.now() >= payload.exp * 1000) throw new UnauthorizedException(undefined, 'Expired JWT');
+
     const user: RequestUser = {
       id: payload.id,
       roles: payload.roles ? payload.roles.split(',') : [],
