@@ -27,4 +27,9 @@ export class GqlGuard extends AuthGuard('jwt') {
 
     return authLogic(user.roles, classRoles, handlerRoles);
   }
+
+  getRequest(context: ExecutionContext) {
+    const ctx = GqlExecutionContext.create(context);
+    return ctx.getContext().req;
+  }
 }
