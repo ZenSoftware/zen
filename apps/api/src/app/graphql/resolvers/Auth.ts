@@ -1,10 +1,9 @@
 import { HttpException, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
+import { Throttle } from '@nestjs/throttler';
 import { PrismaClient } from '@prisma/client';
 import { ApiError } from '@zen/api-interfaces';
 import bcrypt from 'bcryptjs';
-import { CookieOptions } from 'express';
 import gql from 'graphql-tag';
 
 import { AuthService, GqlGuard, GqlUser, RequestUser, Role } from '../../auth';
@@ -13,6 +12,7 @@ import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
 import { GqlThrottlerGuard } from '../gql-throttle.guard';
 import {
+  AuthExchangeTokenInput,
   AuthLoginInput,
   AuthPasswordChangeInput,
   AuthPasswordResetConfirmationInput,
@@ -24,7 +24,7 @@ import {
 export const AuthTypeDef = gql`
   extend type Query {
     authLogin(data: AuthLoginInput!): AuthSession!
-    authExchangeToken: AuthSession!
+    authExchangeToken(data: AuthExchangeTokenInput): AuthSession!
     authPasswordResetRequest(data: AuthPasswordResetRequestInput!): Boolean
   }
 
@@ -36,14 +36,19 @@ export const AuthTypeDef = gql`
 
   type AuthSession {
     id: Int!
-    maxAge: String!
+    token: String!
     roles: [String!]!
     rememberMe: Boolean!
+    maxAge: String!
   }
 
   input AuthLoginInput {
     username: String!
     password: String!
+    rememberMe: Boolean!
+  }
+
+  input AuthExchangeTokenInput {
     rememberMe: Boolean!
   }
 
@@ -72,12 +77,6 @@ export const AuthTypeDef = gql`
 @UseGuards(GqlThrottlerGuard)
 @Throttle()
 export class AuthResolver {
-  private CLEAR_COOKIE_OPTIONS: CookieOptions = {
-    maxAge: 0,
-    secure: this.config.production,
-    sameSite: this.config.production ? 'strict' : 'lax',
-  };
-
   constructor(
     private readonly auth: AuthService,
     private readonly config: ConfigService,
@@ -94,21 +93,23 @@ export class AuthResolver {
     const correctPassword = await bcrypt.compare(data.password, user.password);
     if (!correctPassword) throw new HttpException(ApiError.AuthLogin.INCORRECT_PASSWORD, 400);
 
-    return this.auth.setJwtCookie(ctx.res, user, data.rememberMe);
+    return this.auth.getAuthSession(ctx.res, user, data.rememberMe);
   }
 
   @Query()
   @UseGuards(GqlGuard)
-  async authExchangeToken(@Context() ctx: IContext, @GqlUser() reqUser: RequestUser) {
+  async authExchangeToken(
+    @Context() ctx: IContext,
+    @GqlUser() reqUser: RequestUser,
+    @Args('data') data: AuthExchangeTokenInput
+  ) {
     const user = await ctx.prisma.user.findUnique({
       where: { id: reqUser.id },
     });
 
     if (user) {
-      return this.auth.setJwtCookie(ctx.res, user, ctx.req.cookies['rememberMe']);
+      return this.auth.getAuthSession(ctx.res, user, data.rememberMe);
     } else {
-      ctx.res.clearCookie('jwt', this.CLEAR_COOKIE_OPTIONS);
-      ctx.res.clearCookie('rememberMe', this.CLEAR_COOKIE_OPTIONS);
       throw new HttpException(ApiError.AuthExchangeToken.USER_NOT_FOUND, 400);
     }
   }
@@ -166,7 +167,7 @@ export class AuthResolver {
       data: { password: hashedPassword },
     });
 
-    return this.auth.setJwtCookie(ctx.res, user);
+    return this.auth.getAuthSession(ctx.res, user);
   }
 
   @Mutation()
@@ -207,7 +208,7 @@ export class AuthResolver {
       });
     }
 
-    return this.auth.setJwtCookie(ctx.res, user);
+    return this.auth.getAuthSession(ctx.res, user);
   }
 
   @Mutation()

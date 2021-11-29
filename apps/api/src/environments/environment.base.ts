@@ -1,12 +1,10 @@
 import { MailerOptions } from '@nest-modules/mailer';
 import { JwtModuleOptions } from '@nestjs/jwt';
-import { CookieOptions } from 'express';
-import { UploadOptions } from 'graphql-upload';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
+import { UploadOptions } from 'graphql-upload';
 
 export class EnvironmentBase {
   readonly siteUrl: string;
-  readonly cookie: Omit<CookieOptions, 'maxAge'>;
   readonly production: boolean;
   readonly expressPort: string | number;
   readonly cors?: any | boolean;

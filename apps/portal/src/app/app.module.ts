@@ -10,7 +10,7 @@ import { Environment, HttpRequestInterceptor } from '@zen/common';
 import { ZenGraphQLModule } from '@zen/graphql';
 import { possibleTypes, typePolicies } from '@zen/graphql/client';
 import { MainModule } from '@zen/main';
-import Cookies from 'js-cookie';
+import ls from 'localstorage-slim';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -44,7 +44,7 @@ import { AppComponent } from './app.component';
         uri: environment.url.graphqlSubscriptions,
         options: {
           reconnect: true,
-          connectionParams: () => ({ token: Cookies.get('jwt') }),
+          connectionParams: () => ({ token: ls.get('token') }),
         },
       },
     }),

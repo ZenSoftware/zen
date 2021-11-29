@@ -3,8 +3,9 @@ import gql from 'graphql-tag';
 export const AuthSessionFields = gql`
   fragment AuthSessionFields on AuthSession {
     id
-    maxAge
+    token
     rememberMe
     roles
+    maxAge
   }
 `;
