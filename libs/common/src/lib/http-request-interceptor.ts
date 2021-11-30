@@ -6,9 +6,16 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const jwt = ls.get('token') as string | undefined;
-    if (jwt) req.headers.set('Authorization', 'Bearer ' + jwt);
+    const token = ls.get('token', { decrypt: true }) as string | undefined;
 
-    return next.handle(req);
+    if (token) {
+      const modifiedReq = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`),
+      });
+
+      return next.handle(modifiedReq);
+    } else {
+      return next.handle(req);
+    }
   }
 }

@@ -44,7 +44,7 @@ import { AppComponent } from './app.component';
         uri: environment.url.graphqlSubscriptions,
         options: {
           reconnect: true,
-          connectionParams: () => ({ token: ls.get('token') }),
+          connectionParams: () => ({ token: ls.get('token', { decrypt: true }) }),
         },
       },
     }),

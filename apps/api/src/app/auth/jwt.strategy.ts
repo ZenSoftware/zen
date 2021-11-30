@@ -15,12 +15,11 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
       jwtFromRequest: (req: ExReq & { token: any }) => {
         // Websocket connection
-
         if (req.token) return req.token;
         // HTTP request
         else {
           const bearer = req.header('Authorization');
-          if (bearer) return bearer.substring(bearer.indexOf('Bearer '));
+          if (bearer && bearer.startsWith('Bearer ')) return bearer.substring(7);
         }
       },
     });
