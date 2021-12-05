@@ -6,11 +6,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ZenAuthModule } from '@zen/auth';
-import { Environment, HttpRequestInterceptor } from '@zen/common';
+import { Environment, HttpRequestInterceptor, tokenVar } from '@zen/common';
 import { ZenGraphQLModule } from '@zen/graphql';
 import { possibleTypes, typePolicies } from '@zen/graphql/client';
 import { MainModule } from '@zen/main';
-import ls from 'localstorage-slim';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -44,7 +43,7 @@ import { AppComponent } from './app.component';
         uri: environment.url.graphqlSubscriptions,
         options: {
           reconnect: true,
-          connectionParams: () => ({ token: ls.get('token', { decrypt: true }) }),
+          connectionParams: () => ({ token: tokenVar() }),
         },
       },
     }),

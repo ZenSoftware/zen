@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Environment } from '@zen/common';
+import { Environment, tokenVar } from '@zen/common';
 import {
   ApiError,
   AuthExchangeTokenGQL,
@@ -100,6 +100,8 @@ export class AuthService {
     ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
     ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
 
+    tokenVar(authSession.token);
+
     if (!this.rolesEqual(this.roles, authSession.roles)) {
       if (authSession.roles) userRolesVar(authSession.roles);
       else userRolesVar([]);
@@ -164,6 +166,7 @@ export class AuthService {
     ls.remove(LocalStorageKey.rememberMe);
     ls.remove(LocalStorageKey.roles);
     userRolesVar([]);
+    tokenVar(null);
     this.apollo.client.cache.reset();
     this.#graphqlSubscriptionClient$.next(null);
   }
