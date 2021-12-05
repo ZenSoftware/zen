@@ -59,8 +59,8 @@ export type AuthRegisterInput = {
 
 export type AuthSession = {
   __typename?: 'AuthSession';
+  expiresIn: Scalars['Int'];
   id: Scalars['Int'];
-  maxAge: Scalars['String'];
   rememberMe: Scalars['Boolean'];
   roles: Array<Scalars['String']>;
   token: Scalars['String'];
@@ -646,14 +646,14 @@ export type AuthExchangeTokenVariables = Exact<{
 }>;
 
 
-export type AuthExchangeToken = { __typename?: 'Query', authExchangeToken: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string } };
+export type AuthExchangeToken = { __typename?: 'Query', authExchangeToken: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number } };
 
 export type AuthLoginVariables = Exact<{
   data: AuthLoginInput;
 }>;
 
 
-export type AuthLogin = { __typename?: 'Query', authLogin: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string } };
+export type AuthLogin = { __typename?: 'Query', authLogin: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number } };
 
 export type AuthPasswordChangeVariables = Exact<{
   data: AuthPasswordChangeInput;
@@ -667,7 +667,7 @@ export type AuthPasswordResetConfirmationVariables = Exact<{
 }>;
 
 
-export type AuthPasswordResetConfirmation = { __typename?: 'Mutation', authPasswordResetConfirmation: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string } };
+export type AuthPasswordResetConfirmation = { __typename?: 'Mutation', authPasswordResetConfirmation: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number } };
 
 export type AuthPasswordResetRequestQueryVariables = Exact<{
   data: AuthPasswordResetRequestInput;
@@ -681,7 +681,7 @@ export type AuthRegisterVariables = Exact<{
 }>;
 
 
-export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string } };
+export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number } };
 
 export type LoggedInVariables = Exact<{ [key: string]: never; }>;
 
@@ -693,7 +693,7 @@ export type UserRolesVariables = Exact<{ [key: string]: never; }>;
 
 export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
 
-export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, maxAge: string };
+export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number };
 
 export type UserFields = { __typename?: 'User', id: number, username: string, email: string };
 
@@ -792,7 +792,7 @@ export const AuthSessionFields = /*#__PURE__*/ gql`
   token
   rememberMe
   roles
-  maxAge
+  expiresIn
 }
     `;
 export const UserFields = /*#__PURE__*/ gql`

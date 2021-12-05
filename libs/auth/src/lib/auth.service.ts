@@ -94,7 +94,7 @@ export class AuthService {
   }
 
   setSession(authSession: AuthSession) {
-    const expiresOn = Date.now() + parseInt(authSession.maxAge, 10);
+    const expiresOn = Date.now() + authSession.expiresIn * 1000;
     ls.set(LocalStorageKey.token, authSession.token, { encrypt: true });
     ls.set(LocalStorageKey.sessionExpiresOn, expiresOn);
     ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);

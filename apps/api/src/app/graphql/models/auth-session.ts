@@ -3,5 +3,5 @@ export interface AuthSession {
   token: string;
   roles: string[];
   rememberMe: boolean;
-  maxAge: string;
+  expiresIn: number;
 }

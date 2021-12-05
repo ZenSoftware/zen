@@ -39,7 +39,7 @@ export const AuthTypeDef = gql`
     token: String!
     roles: [String!]!
     rememberMe: Boolean!
-    maxAge: String!
+    expiresIn: Int!
   }
 
   input AuthLoginInput {

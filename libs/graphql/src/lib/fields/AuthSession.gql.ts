@@ -6,6 +6,6 @@ export const AuthSessionFields = gql`
     token
     rememberMe
     roles
-    maxAge
+    expiresIn
   }
 `;
