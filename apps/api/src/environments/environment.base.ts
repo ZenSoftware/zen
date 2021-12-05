@@ -10,6 +10,7 @@ export class EnvironmentBase {
   readonly cors?: any | boolean;
   readonly graphql: {
     readonly playground: boolean;
+    readonly introspection: boolean;
     readonly uploads?: UploadOptions;
   };
   readonly publicRegistration: boolean;

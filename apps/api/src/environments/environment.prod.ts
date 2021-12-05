@@ -7,6 +7,8 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   graphql: {
     playground: false,
+    introspection: false,
+
     uploads: {
       maxFileSize: 20_000_000, // 20 MB
       maxFiles: 5,

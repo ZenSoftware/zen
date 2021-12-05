@@ -17,7 +17,7 @@ export class GqlConfigService implements GqlOptionsFactory {
       installSubscriptionHandlers: true,
       debug: !this.config.production,
       playground: this.config.graphql.playground,
-      introspection: this.config.graphql.playground,
+      introspection: this.config.graphql.introspection,
       cors: this.config.cors,
       context: async (ctx): Promise<IContext> => {
         return ctx.connection
