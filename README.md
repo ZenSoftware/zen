@@ -38,9 +38,6 @@ npm run prisma:migrate
 # Start the Nest API
 npm run start:api
 
-# Watch for changes to code generate the GraphQL client
-npm run apollo:watch
-
 # Start the Angular site at localhost:4200
 npm start
 ```
