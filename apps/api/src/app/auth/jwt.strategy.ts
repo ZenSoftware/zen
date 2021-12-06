@@ -29,10 +29,15 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     if (Date.now() >= payload.exp * 1000) throw new UnauthorizedException(undefined, 'Expired JWT');
 
     /* Deserialize roles as a string[] from the JWT payload */
-    let roles = [];
+    let roles: string[] = [];
+
     if (payload.roles) {
-      let rolesString = payload.roles.replaceAll('[', '');
-      rolesString = rolesString.replaceAll(']', '');
+      let rolesString = payload.roles.trim();
+
+      if (rolesString[0] !== '[' && rolesString[roles.length - 1] !== ']')
+        throw new UnauthorizedException('JWT payload with property roles is not an array');
+
+      rolesString = rolesString.substr(1, rolesString.length - 2);
       roles = rolesString.split(',').map(r => r.trim().substr(1, r.length - 2));
     }
 
