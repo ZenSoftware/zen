@@ -1,5 +1,5 @@
 export interface JwtPayload {
-  readonly id: number;
+  readonly sub: number;
   readonly roles: string;
   readonly exp?: number; // expires
 }

@@ -42,7 +42,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     }
 
     const user: RequestUser = {
-      id: payload.id,
+      id: payload.sub,
       roles,
     };
     return user;
