@@ -188,7 +188,6 @@ export class AuthResolver {
         username: data.username.trim(),
         email: data.email.trim(),
         password: hashedPassword,
-        roles: { set: [Role.Registered] },
       },
     });
 

@@ -621,5 +621,4 @@ export enum QueryMode {
 }
 export enum Role {
   Super = 'Super',
-  Registered = 'Registered',
 }

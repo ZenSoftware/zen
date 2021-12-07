@@ -19,5 +19,4 @@ model User {
 
 enum Role {
   Super
-  Registered
 }

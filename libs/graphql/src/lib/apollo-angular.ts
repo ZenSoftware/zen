@@ -378,7 +378,6 @@ export enum QueryMode {
 }
 
 export enum Role {
-  Registered = 'Registered',
   Super = 'Super'
 }
 
