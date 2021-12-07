@@ -34,14 +34,12 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     if (payload.roles) {
       let rolesString = payload.roles.trim();
 
-      if (rolesString[0] !== '[' && rolesString[roles.length - 1] !== ']')
-        throw new UnauthorizedException('JWT payload with property roles is not an array');
-
       // Remove array square brackets '[' and ']' from front and ends
       rolesString = rolesString.substr(1, rolesString.length - 2);
       roles = rolesString.split(',').map(r => {
-        // Remove quotes around the role names
-        return r.trim().substr(1, r.length - 2);
+        // Remove quotes surrounding the role name
+        const cleanedRole = r.trim();
+        return cleanedRole.substr(1, cleanedRole.length - 2);
       });
     }
 
