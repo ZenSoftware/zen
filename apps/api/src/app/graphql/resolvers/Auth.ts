@@ -93,7 +93,7 @@ export class AuthResolver {
     const correctPassword = await bcrypt.compare(data.password, user.password);
     if (!correctPassword) throw new HttpException(ApiError.AuthLogin.INCORRECT_PASSWORD, 400);
 
-    return this.auth.getAuthSession(ctx.res, user, data.rememberMe);
+    return this.auth.getAuthSession(user, data.rememberMe);
   }
 
   @Query()
@@ -108,7 +108,7 @@ export class AuthResolver {
     });
 
     if (user) {
-      return this.auth.getAuthSession(ctx.res, user, data.rememberMe);
+      return this.auth.getAuthSession(user, data.rememberMe);
     } else {
       throw new HttpException(ApiError.AuthExchangeToken.USER_NOT_FOUND, 400);
     }
@@ -167,7 +167,7 @@ export class AuthResolver {
       data: { password: hashedPassword },
     });
 
-    return this.auth.getAuthSession(ctx.res, user);
+    return this.auth.getAuthSession(user);
   }
 
   @Mutation()
@@ -207,7 +207,7 @@ export class AuthResolver {
       });
     }
 
-    return this.auth.getAuthSession(ctx.res, user);
+    return this.auth.getAuthSession(user);
   }
 
   @Mutation()
