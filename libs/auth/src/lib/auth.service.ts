@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   get graphqlSubscriptionClient$() {
-    return this.#graphqlSubscriptionClient$.pipe(debounce(() => timer(100)));
+    return this.#graphqlSubscriptionClient$.pipe(debounce(() => timer(10)));
   }
 
   login(data: AuthLoginInput) {
@@ -235,7 +235,7 @@ const retryStrategy =
           retryAttempt > maxRetry ||
           errors.find(e => excludedStatusCodes.find(exclude => exclude === e.statusCode))
         ) {
-          return throwError(errors);
+          return throwError(() => errors);
         }
 
         const durationMinutes = Math.round(duration / (1000 * 60));
