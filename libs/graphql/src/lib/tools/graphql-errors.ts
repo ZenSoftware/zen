@@ -2,7 +2,7 @@ import { ApiError } from '@zen/api-interfaces';
 import { throwError } from 'rxjs';
 export { ApiError } from '@zen/api-interfaces';
 
-export const parseGqlErrors = (errors: any) => throwError(new GqlErrors(errors));
+export const parseGqlErrors = (errors: any) => throwError(() => new GqlErrors(errors));
 
 export class GqlErrors<T = any> {
   parsed: T[] = [];
