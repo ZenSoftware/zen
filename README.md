@@ -29,7 +29,7 @@ New contributors are welcome!
 git clone https://github.com/ZenSoftware/Zen.git --depth=1
 cd Zen
 # Rename .env.example to .env
-npm i --force
+npm i
 docker-compose up -d
 npm run prisma:migrate
 ```
