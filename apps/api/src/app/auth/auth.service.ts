@@ -15,19 +15,9 @@ export class AuthService {
       rememberMe = rememberMe === 'true';
     }
 
-    /* Serialize roles as a string for the JWT payload */
-    let rolesAccum: string | undefined;
-    if (user.roles && user.roles.length > 0) {
-      rolesAccum = '[';
-      for (let i = 0; i < user.roles.length - 1; i++) {
-        rolesAccum += '"' + user.roles[i] + '", ';
-      }
-      rolesAccum += '"' + user.roles[user.roles.length - 1] + '"]';
-    }
-
     const jwtPayload: JwtPayload = {
       sub: user.id,
-      roles: rolesAccum,
+      roles: user.roles,
     };
 
     const expiresIn = rememberMe
@@ -37,8 +27,8 @@ export class AuthService {
 
     return {
       id: user.id,
-      token,
       roles: user.roles,
+      token,
       rememberMe,
       expiresIn,
     };

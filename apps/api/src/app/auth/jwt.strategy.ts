@@ -28,24 +28,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   async validate(payload: JwtPayload) {
     if (Date.now() >= payload.exp * 1000) throw new UnauthorizedException(undefined, 'Expired JWT');
 
-    /* Deserialize roles as a string[] from the JWT payload */
-    let roles: string[] = [];
-
-    if (payload.roles) {
-      let rolesString = payload.roles.trim();
-
-      // Remove array square brackets '[' and ']' from front and ends
-      rolesString = rolesString.substr(1, rolesString.length - 2);
-      roles = rolesString.split(',').map(r => {
-        // Remove quotes surrounding the role name
-        const cleanedRole = r.trim();
-        return cleanedRole.substr(1, cleanedRole.length - 2);
-      });
-    }
-
     const user: RequestUser = {
       id: payload.sub,
-      roles,
+      roles: payload.roles,
     };
     return user;
   }

@@ -36,7 +36,7 @@ import { AppComponent } from './app.component';
       },
       uploadOptions: {
         uri: environment.url.graphql,
-        mutationNames: [], // a `string[]` of mutation names to split on the batch link and send as a `multipart/form-data` request
+        mutationNames: ['UploadSample'],
         credentials: 'include',
       },
       websocketOptions: {

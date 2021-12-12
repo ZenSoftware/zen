@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
 import { gql } from 'apollo-angular';
+import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-
 import { ZenGraphQLModule } from './zen-graphql.module';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -154,42 +153,57 @@ export type Mutation = {
   deleteOneUser?: Maybe<User>;
   updateManyUser?: Maybe<BatchPayload>;
   updateOneUser: User;
+  uploadSample: Scalars['Boolean'];
   upsertOneUser?: Maybe<User>;
 };
+
 
 export type MutationAuthPasswordChangeArgs = {
   data: AuthPasswordChangeInput;
 };
 
+
 export type MutationAuthPasswordResetConfirmationArgs = {
   data: AuthPasswordResetConfirmationInput;
 };
+
 
 export type MutationAuthRegisterArgs = {
   data: AuthRegisterInput;
 };
 
+
 export type MutationCreateOneUserArgs = {
   data: UserCreateInput;
 };
+
 
 export type MutationDeleteManyUserArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+
 export type MutationDeleteOneUserArgs = {
   where: UserWhereUniqueInput;
 };
+
 
 export type MutationUpdateManyUserArgs = {
   data: UserUpdateManyMutationInput;
   where?: InputMaybe<UserWhereInput>;
 };
 
+
 export type MutationUpdateOneUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
 };
+
+
+export type MutationUploadSampleArgs = {
+  file: Scalars['Upload'];
+};
+
 
 export type MutationUpsertOneUserArgs = {
   create: UserCreateInput;
@@ -305,6 +319,7 @@ export type Query = {
   userRoles: Array<Role>;
 };
 
+
 export type QueryAggregateUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
@@ -313,17 +328,21 @@ export type QueryAggregateUserArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+
 export type QueryAuthExchangeTokenArgs = {
   data?: InputMaybe<AuthExchangeTokenInput>;
 };
+
 
 export type QueryAuthLoginArgs = {
   data: AuthLoginInput;
 };
 
+
 export type QueryAuthPasswordResetRequestArgs = {
   data: AuthPasswordResetRequestInput;
 };
+
 
 export type QueryFindFirstUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
@@ -334,6 +353,7 @@ export type QueryFindFirstUserArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+
 export type QueryFindManyUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
@@ -342,6 +362,7 @@ export type QueryFindManyUserArgs = {
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<UserWhereInput>;
 };
+
 
 export type QueryFindManyUserCountArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
@@ -352,22 +373,23 @@ export type QueryFindManyUserCountArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+
 export type QueryFindUniqueUserArgs = {
   where: UserWhereUniqueInput;
 };
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive',
+  Insensitive = 'insensitive'
 }
 
 export enum Role {
-  Super = 'Super',
+  Super = 'Super'
 }
 
 export enum SortOrder {
   Asc = 'asc',
-  Desc = 'desc',
+  Desc = 'desc'
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -534,7 +556,7 @@ export enum UserScalarFieldEnum {
   Id = 'id',
   Password = 'password',
   Roles = 'roles',
-  Username = 'username',
+  Username = 'username'
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -628,193 +650,122 @@ export type AuthExchangeTokenVariables = Exact<{
   data: AuthExchangeTokenInput;
 }>;
 
-export type AuthExchangeToken = {
-  __typename?: 'Query';
-  authExchangeToken: {
-    __typename?: 'AuthSession';
-    id: number;
-    token: string;
-    rememberMe: boolean;
-    roles: Array<string>;
-    expiresIn: number;
-  };
-};
+
+export type AuthExchangeToken = { __typename?: 'Query', authExchangeToken: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number } };
 
 export type AuthLoginVariables = Exact<{
   data: AuthLoginInput;
 }>;
 
-export type AuthLogin = {
-  __typename?: 'Query';
-  authLogin: {
-    __typename?: 'AuthSession';
-    id: number;
-    token: string;
-    rememberMe: boolean;
-    roles: Array<string>;
-    expiresIn: number;
-  };
-};
+
+export type AuthLogin = { __typename?: 'Query', authLogin: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number } };
 
 export type AuthPasswordChangeVariables = Exact<{
   data: AuthPasswordChangeInput;
 }>;
 
-export type AuthPasswordChange = {
-  __typename?: 'Mutation';
-  authPasswordChange?: boolean | null | undefined;
-};
+
+export type AuthPasswordChange = { __typename?: 'Mutation', authPasswordChange?: boolean | null | undefined };
 
 export type AuthPasswordResetConfirmationVariables = Exact<{
   data: AuthPasswordResetConfirmationInput;
 }>;
 
-export type AuthPasswordResetConfirmation = {
-  __typename?: 'Mutation';
-  authPasswordResetConfirmation: {
-    __typename?: 'AuthSession';
-    id: number;
-    token: string;
-    rememberMe: boolean;
-    roles: Array<string>;
-    expiresIn: number;
-  };
-};
+
+export type AuthPasswordResetConfirmation = { __typename?: 'Mutation', authPasswordResetConfirmation: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number } };
 
 export type AuthPasswordResetRequestQueryVariables = Exact<{
   data: AuthPasswordResetRequestInput;
 }>;
 
-export type AuthPasswordResetRequestQuery = {
-  __typename?: 'Query';
-  authPasswordResetRequest?: boolean | null | undefined;
-};
+
+export type AuthPasswordResetRequestQuery = { __typename?: 'Query', authPasswordResetRequest?: boolean | null | undefined };
 
 export type AuthRegisterVariables = Exact<{
   data: AuthRegisterInput;
 }>;
 
-export type AuthRegister = {
-  __typename?: 'Mutation';
-  authRegister: {
-    __typename?: 'AuthSession';
-    id: number;
-    token: string;
-    rememberMe: boolean;
-    roles: Array<string>;
-    expiresIn: number;
-  };
-};
 
-export type LoggedInVariables = Exact<{ [key: string]: never }>;
+export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number } };
 
-export type LoggedIn = { __typename?: 'Query'; loggedIn: boolean };
+export type LoggedInVariables = Exact<{ [key: string]: never; }>;
 
-export type UserRolesVariables = Exact<{ [key: string]: never }>;
 
-export type UserRoles = { __typename?: 'Query'; userRoles: Array<Role> };
+export type LoggedIn = { __typename?: 'Query', loggedIn: boolean };
 
-export type AuthSessionFields = {
-  __typename?: 'AuthSession';
-  id: number;
-  token: string;
-  rememberMe: boolean;
-  roles: Array<string>;
-  expiresIn: number;
-};
+export type UserRolesVariables = Exact<{ [key: string]: never; }>;
 
-export type UserFields = { __typename?: 'User'; id: number; username: string; email: string };
+
+export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
+
+export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number };
+
+export type UserFields = { __typename?: 'User', id: number, username: string, email: string };
 
 export type FindUniqueUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
-export type FindUniqueUser = {
-  __typename?: 'Query';
-  findUniqueUser?:
-    | { __typename?: 'User'; id: number; username: string; email: string }
-    | null
-    | undefined;
-};
+
+export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username: string, email: string } | null | undefined };
 
 export type FindFirstUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
-  orderBy?: InputMaybe<
-    Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>
-  >;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
   take?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
-export type FindFirstUser = {
-  __typename?: 'Query';
-  findManyUser?:
-    | Array<{ __typename?: 'User'; id: number; username: string; email: string }>
-    | null
-    | undefined;
-};
+
+export type FindFirstUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null | undefined };
 
 export type FindManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
-  orderBy?: InputMaybe<
-    Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>
-  >;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
   take?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
-export type FindManyUser = {
-  __typename?: 'Query';
-  findManyUser?:
-    | Array<{ __typename?: 'User'; id: number; username: string; email: string }>
-    | null
-    | undefined;
-};
+
+export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null | undefined };
 
 export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
-  orderBy?: InputMaybe<
-    Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>
-  >;
+  orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
   take?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
-export type FindManyUserCount = { __typename?: 'Query'; findManyUserCount: number };
+
+export type FindManyUserCount = { __typename?: 'Query', findManyUserCount: number };
 
 export type CreateOneUserVariables = Exact<{
   data: UserCreateInput;
 }>;
 
-export type CreateOneUser = {
-  __typename?: 'Mutation';
-  createOneUser: { __typename?: 'User'; id: number; username: string; email: string };
-};
+
+export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: number, username: string, email: string } };
 
 export type UpdateOneUserVariables = Exact<{
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
 }>;
 
-export type UpdateOneUser = {
-  __typename?: 'Mutation';
-  updateOneUser: { __typename?: 'User'; id: number; username: string; email: string };
-};
+
+export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: number, username: string, email: string } };
 
 export type DeleteOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
-export type DeleteOneUser = {
-  __typename?: 'Mutation';
-  deleteOneUser?: { __typename?: 'User'; id: number } | null | undefined;
-};
+
+export type DeleteOneUser = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: number } | null | undefined };
 
 export type UpsertOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -822,431 +773,395 @@ export type UpsertOneUserVariables = Exact<{
   update: UserUpdateInput;
 }>;
 
-export type UpsertOneUser = {
-  __typename?: 'Mutation';
-  upsertOneUser?:
-    | { __typename?: 'User'; id: number; username: string; email: string }
-    | null
-    | undefined;
-};
+
+export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username: string, email: string } | null | undefined };
 
 export type DeleteManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
 }>;
 
-export type DeleteManyUser = {
-  __typename?: 'Mutation';
-  deleteManyUser?: { __typename?: 'BatchPayload'; count: number } | null | undefined;
-};
+
+export type DeleteManyUser = { __typename?: 'Mutation', deleteManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
 
 export type UpdateManyUserVariables = Exact<{
   data: UserUpdateManyMutationInput;
   where?: InputMaybe<UserWhereInput>;
 }>;
 
-export type UpdateManyUser = {
-  __typename?: 'Mutation';
-  updateManyUser?: { __typename?: 'BatchPayload'; count: number } | null | undefined;
-};
+
+export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
+
+export type UploadSampleVariables = Exact<{
+  file: Scalars['Upload'];
+}>;
+
+
+export type UploadSample = { __typename?: 'Mutation', uploadSample: boolean };
 
 export const AuthSessionFields = /*#__PURE__*/ gql`
-  fragment AuthSessionFields on AuthSession {
-    id
-    token
-    rememberMe
-    roles
-    expiresIn
-  }
-`;
+    fragment AuthSessionFields on AuthSession {
+  id
+  token
+  rememberMe
+  roles
+  expiresIn
+}
+    `;
 export const UserFields = /*#__PURE__*/ gql`
-  fragment UserFields on User {
-    id
-    username
-    email
-  }
-`;
+    fragment UserFields on User {
+  id
+  username
+  email
+}
+    `;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
-  query AuthExchangeToken($data: AuthExchangeTokenInput!) {
-    authExchangeToken(data: $data) {
-      ...AuthSessionFields
-    }
-  }
-  ${AuthSessionFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class AuthExchangeTokenGQL extends Apollo.Query<
-  AuthExchangeToken,
-  AuthExchangeTokenVariables
-> {
-  document = AuthExchangeTokenDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query AuthExchangeToken($data: AuthExchangeTokenInput!) {
+  authExchangeToken(data: $data) {
+    ...AuthSessionFields
   }
 }
+    ${AuthSessionFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class AuthExchangeTokenGQL extends Apollo.Query<AuthExchangeToken, AuthExchangeTokenVariables> {
+    document = AuthExchangeTokenDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AuthLoginDocument = /*#__PURE__*/ gql`
-  query AuthLogin($data: AuthLoginInput!) {
-    authLogin(data: $data) {
-      ...AuthSessionFields
-    }
-  }
-  ${AuthSessionFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
-  document = AuthLoginDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query AuthLogin($data: AuthLoginInput!) {
+  authLogin(data: $data) {
+    ...AuthSessionFields
   }
 }
+    ${AuthSessionFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
+    document = AuthLoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AuthPasswordChangeDocument = /*#__PURE__*/ gql`
-  mutation AuthPasswordChange($data: AuthPasswordChangeInput!) {
-    authPasswordChange(data: $data)
-  }
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class AuthPasswordChangeGQL extends Apollo.Mutation<
-  AuthPasswordChange,
-  AuthPasswordChangeVariables
-> {
-  document = AuthPasswordChangeDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
+    mutation AuthPasswordChange($data: AuthPasswordChangeInput!) {
+  authPasswordChange(data: $data)
 }
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class AuthPasswordChangeGQL extends Apollo.Mutation<AuthPasswordChange, AuthPasswordChangeVariables> {
+    document = AuthPasswordChangeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AuthPasswordResetConfirmationDocument = /*#__PURE__*/ gql`
-  mutation AuthPasswordResetConfirmation($data: AuthPasswordResetConfirmationInput!) {
-    authPasswordResetConfirmation(data: $data) {
-      ...AuthSessionFields
-    }
-  }
-  ${AuthSessionFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class AuthPasswordResetConfirmationGQL extends Apollo.Mutation<
-  AuthPasswordResetConfirmation,
-  AuthPasswordResetConfirmationVariables
-> {
-  document = AuthPasswordResetConfirmationDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation AuthPasswordResetConfirmation($data: AuthPasswordResetConfirmationInput!) {
+  authPasswordResetConfirmation(data: $data) {
+    ...AuthSessionFields
   }
 }
+    ${AuthSessionFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class AuthPasswordResetConfirmationGQL extends Apollo.Mutation<AuthPasswordResetConfirmation, AuthPasswordResetConfirmationVariables> {
+    document = AuthPasswordResetConfirmationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AuthPasswordResetRequestQueryDocument = /*#__PURE__*/ gql`
-  query AuthPasswordResetRequestQuery($data: AuthPasswordResetRequestInput!) {
-    authPasswordResetRequest(data: $data)
-  }
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class AuthPasswordResetRequestQueryGQL extends Apollo.Query<
-  AuthPasswordResetRequestQuery,
-  AuthPasswordResetRequestQueryVariables
-> {
-  document = AuthPasswordResetRequestQueryDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
+    query AuthPasswordResetRequestQuery($data: AuthPasswordResetRequestInput!) {
+  authPasswordResetRequest(data: $data)
 }
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class AuthPasswordResetRequestQueryGQL extends Apollo.Query<AuthPasswordResetRequestQuery, AuthPasswordResetRequestQueryVariables> {
+    document = AuthPasswordResetRequestQueryDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AuthRegisterDocument = /*#__PURE__*/ gql`
-  mutation AuthRegister($data: AuthRegisterInput!) {
-    authRegister(data: $data) {
-      ...AuthSessionFields
-    }
-  }
-  ${AuthSessionFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class AuthRegisterGQL extends Apollo.Mutation<AuthRegister, AuthRegisterVariables> {
-  document = AuthRegisterDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation AuthRegister($data: AuthRegisterInput!) {
+  authRegister(data: $data) {
+    ...AuthSessionFields
   }
 }
+    ${AuthSessionFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class AuthRegisterGQL extends Apollo.Mutation<AuthRegister, AuthRegisterVariables> {
+    document = AuthRegisterDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LoggedInDocument = /*#__PURE__*/ gql`
-  query LoggedIn {
-    loggedIn @client
-  }
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class LoggedInGQL extends Apollo.Query<LoggedIn, LoggedInVariables> {
-  document = LoggedInDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
+    query LoggedIn {
+  loggedIn @client
 }
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class LoggedInGQL extends Apollo.Query<LoggedIn, LoggedInVariables> {
+    document = LoggedInDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UserRolesDocument = /*#__PURE__*/ gql`
-  query UserRoles {
-    userRoles @client
-  }
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
-  document = UserRolesDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
+    query UserRoles {
+  userRoles @client
 }
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
+    document = UserRolesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const FindUniqueUserDocument = /*#__PURE__*/ gql`
-  query FindUniqueUser($where: UserWhereUniqueInput!) {
-    findUniqueUser(where: $where) {
-      ...UserFields
-    }
-  }
-  ${UserFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class FindUniqueUserGQL extends Apollo.Query<FindUniqueUser, FindUniqueUserVariables> {
-  document = FindUniqueUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query FindUniqueUser($where: UserWhereUniqueInput!) {
+  findUniqueUser(where: $where) {
+    ...UserFields
   }
 }
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class FindUniqueUserGQL extends Apollo.Query<FindUniqueUser, FindUniqueUserVariables> {
+    document = FindUniqueUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const FindFirstUserDocument = /*#__PURE__*/ gql`
-  query FindFirstUser(
-    $where: UserWhereInput
-    $orderBy: [UserOrderByWithRelationInput]
-    $cursor: UserWhereUniqueInput
-    $take: Int
-    $skip: Int
-    $distinct: [UserScalarFieldEnum]
+    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
+  findManyUser(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
   ) {
-    findManyUser(
-      where: $where
-      orderBy: $orderBy
-      cursor: $cursor
-      take: $take
-      skip: $skip
-      distinct: $distinct
-    ) {
-      ...UserFields
-    }
-  }
-  ${UserFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class FindFirstUserGQL extends Apollo.Query<FindFirstUser, FindFirstUserVariables> {
-  document = FindFirstUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    ...UserFields
   }
 }
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class FindFirstUserGQL extends Apollo.Query<FindFirstUser, FindFirstUserVariables> {
+    document = FindFirstUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const FindManyUserDocument = /*#__PURE__*/ gql`
-  query FindManyUser(
-    $where: UserWhereInput
-    $orderBy: [UserOrderByWithRelationInput]
-    $cursor: UserWhereUniqueInput
-    $take: Int
-    $skip: Int
-    $distinct: [UserScalarFieldEnum]
+    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
+  findManyUser(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
   ) {
-    findManyUser(
-      where: $where
-      orderBy: $orderBy
-      cursor: $cursor
-      take: $take
-      skip: $skip
-      distinct: $distinct
-    ) {
-      ...UserFields
-    }
-  }
-  ${UserFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class FindManyUserGQL extends Apollo.Query<FindManyUser, FindManyUserVariables> {
-  document = FindManyUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    ...UserFields
   }
 }
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class FindManyUserGQL extends Apollo.Query<FindManyUser, FindManyUserVariables> {
+    document = FindManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const FindManyUserCountDocument = /*#__PURE__*/ gql`
-  query FindManyUserCount(
-    $where: UserWhereInput
-    $orderBy: [UserOrderByWithRelationInput]
-    $cursor: UserWhereUniqueInput
-    $take: Int
-    $skip: Int
-    $distinct: [UserScalarFieldEnum]
-  ) {
-    findManyUserCount(
-      where: $where
-      orderBy: $orderBy
-      cursor: $cursor
-      take: $take
-      skip: $skip
-      distinct: $distinct
-    )
-  }
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class FindManyUserCountGQL extends Apollo.Query<
-  FindManyUserCount,
-  FindManyUserCountVariables
-> {
-  document = FindManyUserCountDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
-  }
+    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
+  findManyUserCount(
+    where: $where
+    orderBy: $orderBy
+    cursor: $cursor
+    take: $take
+    skip: $skip
+    distinct: $distinct
+  )
 }
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCount, FindManyUserCountVariables> {
+    document = FindManyUserCountDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const CreateOneUserDocument = /*#__PURE__*/ gql`
-  mutation CreateOneUser($data: UserCreateInput!) {
-    createOneUser(data: $data) {
-      ...UserFields
-    }
-  }
-  ${UserFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUser, CreateOneUserVariables> {
-  document = CreateOneUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation CreateOneUser($data: UserCreateInput!) {
+  createOneUser(data: $data) {
+    ...UserFields
   }
 }
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUser, CreateOneUserVariables> {
+    document = CreateOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UpdateOneUserDocument = /*#__PURE__*/ gql`
-  mutation UpdateOneUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
-    updateOneUser(data: $data, where: $where) {
-      ...UserFields
-    }
-  }
-  ${UserFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUser, UpdateOneUserVariables> {
-  document = UpdateOneUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation UpdateOneUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+  updateOneUser(data: $data, where: $where) {
+    ...UserFields
   }
 }
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUser, UpdateOneUserVariables> {
+    document = UpdateOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const DeleteOneUserDocument = /*#__PURE__*/ gql`
-  mutation DeleteOneUser($where: UserWhereUniqueInput!) {
-    deleteOneUser(where: $where) {
-      id
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
-  document = DeleteOneUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation DeleteOneUser($where: UserWhereUniqueInput!) {
+  deleteOneUser(where: $where) {
+    id
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
+    document = DeleteOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UpsertOneUserDocument = /*#__PURE__*/ gql`
-  mutation UpsertOneUser(
-    $where: UserWhereUniqueInput!
-    $create: UserCreateInput!
-    $update: UserUpdateInput!
-  ) {
-    upsertOneUser(where: $where, create: $create, update: $update) {
-      ...UserFields
-    }
-  }
-  ${UserFields}
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUser, UpsertOneUserVariables> {
-  document = UpsertOneUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation UpsertOneUser($where: UserWhereUniqueInput!, $create: UserCreateInput!, $update: UserUpdateInput!) {
+  upsertOneUser(where: $where, create: $create, update: $update) {
+    ...UserFields
   }
 }
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUser, UpsertOneUserVariables> {
+    document = UpsertOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const DeleteManyUserDocument = /*#__PURE__*/ gql`
-  mutation DeleteManyUser($where: UserWhereInput) {
-    deleteManyUser(where: $where) {
-      count
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUser, DeleteManyUserVariables> {
-  document = DeleteManyUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation DeleteManyUser($where: UserWhereInput) {
+  deleteManyUser(where: $where) {
+    count
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUser, DeleteManyUserVariables> {
+    document = DeleteManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UpdateManyUserDocument = /*#__PURE__*/ gql`
-  mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
-    updateManyUser(data: $data, where: $where) {
-      count
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: ZenGraphQLModule,
-})
-export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
-  document = UpdateManyUserDocument;
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
+  updateManyUser(data: $data, where: $where) {
+    count
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
+    document = UpdateManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UploadSampleDocument = /*#__PURE__*/ gql`
+    mutation UploadSample($file: Upload!) {
+  uploadSample(file: $file)
+}
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class UploadSampleGQL extends Apollo.Mutation<UploadSample, UploadSampleVariables> {
+    document = UploadSampleDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
