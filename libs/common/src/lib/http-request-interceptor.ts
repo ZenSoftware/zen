@@ -1,6 +1,5 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import ls from 'localstorage-slim';
 import { Observable } from 'rxjs';
 
 import { Environment } from './environment';
