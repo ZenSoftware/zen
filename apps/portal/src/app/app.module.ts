@@ -37,7 +37,9 @@ import { AppComponent } from './app.component';
       uploadOptions: {
         uri: environment.url.graphql,
         mutationNames: ['UploadSample'],
-        credentials: 'include',
+        headers: {
+          Authorization: tokenVar(),
+        },
       },
       websocketOptions: {
         uri: environment.url.graphqlSubscriptions,

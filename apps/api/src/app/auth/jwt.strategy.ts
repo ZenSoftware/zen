@@ -18,8 +18,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         if (req.token) return req.token;
         // HTTP request
         else {
-          const bearer = req.header('Authorization');
-          if (bearer && bearer.startsWith('Bearer ')) return bearer.substring(7);
+          let bearer = req.header('Authorization');
+          if (!bearer) bearer = req.header('authorization');
+          return bearer;
         }
       },
     });
