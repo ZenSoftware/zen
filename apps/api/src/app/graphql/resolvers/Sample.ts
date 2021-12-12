@@ -21,8 +21,7 @@ export class SampleResolver {
   @Mutation()
   async uploadSample(@Args('file', { type: () => GraphQLUpload }) file: FileInfo) {
     const buffer = await this.upload.getBuffer(file);
-    const filename = file.file.filename;
-    console.log(`Server recieved file '${filename}' with buffer length: ${buffer.length}`);
+    console.log(`Recieved file '${file.file.filename}' with buffer length: ${buffer.length}`);
     return true;
   }
 }
