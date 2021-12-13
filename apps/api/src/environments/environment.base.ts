@@ -9,7 +9,7 @@ export class EnvironmentBase {
   readonly expressPort: string | number;
   readonly cors?: any | boolean;
   readonly graphql: {
-    readonly playground: boolean;
+    readonly sandbox: boolean;
     readonly introspection: boolean;
     readonly uploads?: UploadOptions;
   };

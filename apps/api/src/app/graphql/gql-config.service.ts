@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { print } from 'graphql';
 
 import { ConfigService } from '../config';
@@ -15,8 +16,12 @@ export class GqlConfigService implements GqlOptionsFactory {
     return {
       typeDefs: print(ALL_TYPE_DEFS),
       installSubscriptionHandlers: true,
+      // subscriptions: { 'graphql-ws': true },
       debug: !this.config.production,
-      playground: this.config.graphql.playground,
+      playground: false,
+      plugins: this.config.graphql.sandbox
+        ? [ApolloServerPluginLandingPageLocalDefault]
+        : undefined,
       introspection: this.config.graphql.introspection,
       cors: this.config.cors,
       context: async (ctx): Promise<IContext> => {
