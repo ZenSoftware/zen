@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 import { GraphQLUpload } from 'graphql-upload';
 
@@ -21,8 +21,7 @@ export class SampleResolver {
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: FileInfo) {
     const buffer = await this.upload.getBuffer(file);
-    const filename = file.file.filename;
-    console.log(`Server recieved file '${filename}' with buffer length: ${buffer.length}`);
+    console.log(`Recieved file '${file.file.filename}' with buffer length: ${buffer.length}`);
     return true;
   }
 }
