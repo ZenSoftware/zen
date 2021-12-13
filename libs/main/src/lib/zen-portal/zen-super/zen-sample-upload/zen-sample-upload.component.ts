@@ -1,19 +1,19 @@
 import { ElementRef, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
-import { GqlErrors, UploadSampleGQL, parseGqlErrors } from '@zen/graphql';
+import { GqlErrors, SampleUploadGQL, parseGqlErrors } from '@zen/graphql';
 import { catchError } from 'rxjs/operators';
 
 @Component({
-  selector: 'zen-upload-sample',
-  templateUrl: 'zen-upload-sample.component.html',
+  selector: 'zen-sample-upload',
+  templateUrl: 'zen-sample-upload.component.html',
 })
-export class ZenUploadSampleComponent {
+export class ZenSampleUploadComponent {
   @ViewChild('fileInput', { static: true })
   fileInput?: ElementRef<HTMLInputElement>;
   localFileName: string | null = '';
   isUploading = false;
 
-  constructor(private uploadSampleGQL: UploadSampleGQL) {}
+  constructor(private uploadSampleGQL: SampleUploadGQL) {}
 
   fileChange() {
     this.localFileName = this.file ? this.file.name : '';

@@ -791,12 +791,12 @@ export type UpdateManyUserVariables = Exact<{
 
 export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
 
-export type UploadSampleVariables = Exact<{
+export type SampleUploadVariables = Exact<{
   file: Scalars['Upload'];
 }>;
 
 
-export type UploadSample = { __typename?: 'Mutation', sampleUpload: boolean };
+export type SampleUpload = { __typename?: 'Mutation', sampleUpload: boolean };
 
 export const AuthSessionFields = /*#__PURE__*/ gql`
     fragment AuthSessionFields on AuthSession {
@@ -1149,8 +1149,8 @@ export const UpdateManyUserDocument = /*#__PURE__*/ gql`
       super(apollo);
     }
   }
-export const UploadSampleDocument = /*#__PURE__*/ gql`
-    mutation UploadSample($file: Upload!) {
+export const SampleUploadDocument = /*#__PURE__*/ gql`
+    mutation SampleUpload($file: Upload!) {
   sampleUpload(file: $file)
 }
     `;
@@ -1158,8 +1158,8 @@ export const UploadSampleDocument = /*#__PURE__*/ gql`
   @Injectable({
     providedIn: ZenGraphQLModule
   })
-  export class UploadSampleGQL extends Apollo.Mutation<UploadSample, UploadSampleVariables> {
-    document = UploadSampleDocument;
+  export class SampleUploadGQL extends Apollo.Mutation<SampleUpload, SampleUploadVariables> {
+    document = SampleUploadDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
