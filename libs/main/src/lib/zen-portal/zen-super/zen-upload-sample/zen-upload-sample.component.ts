@@ -37,7 +37,7 @@ export class ZenUploadSampleComponent {
       .pipe(catchError(parseGqlErrors))
       .subscribe({
         next: ({ data }) => {
-          console.log('Done uploading', data?.uploadSample);
+          console.log('Done uploading', data?.sampleUpload);
           this.isUploading = false;
           this.reset();
         },

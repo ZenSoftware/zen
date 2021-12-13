@@ -8,7 +8,7 @@ import { FileInfo, UploadService } from '../upload.service';
 
 export const SampleTypeDef = gql`
   extend type Mutation {
-    uploadSample(file: Upload!): Boolean!
+    sampleUpload(file: Upload!): Boolean!
   }
 `;
 
@@ -19,9 +19,10 @@ export class SampleResolver {
   constructor(private upload: UploadService) {}
 
   @Mutation()
-  async uploadSample(@Args('file', { type: () => GraphQLUpload }) file: FileInfo) {
+  async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: FileInfo) {
     const buffer = await this.upload.getBuffer(file);
-    console.log(`Recieved file '${file.file.filename}' with buffer length: ${buffer.length}`);
+    const filename = file.file.filename;
+    console.log(`Server recieved file '${filename}' with buffer length: ${buffer.length}`);
     return true;
   }
 }

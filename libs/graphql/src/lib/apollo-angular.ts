@@ -151,9 +151,9 @@ export type Mutation = {
   createOneUser: User;
   deleteManyUser?: Maybe<BatchPayload>;
   deleteOneUser?: Maybe<User>;
+  sampleUpload: Scalars['Boolean'];
   updateManyUser?: Maybe<BatchPayload>;
   updateOneUser: User;
-  uploadSample: Scalars['Boolean'];
   upsertOneUser?: Maybe<User>;
 };
 
@@ -188,6 +188,11 @@ export type MutationDeleteOneUserArgs = {
 };
 
 
+export type MutationSampleUploadArgs = {
+  file: Scalars['Upload'];
+};
+
+
 export type MutationUpdateManyUserArgs = {
   data: UserUpdateManyMutationInput;
   where?: InputMaybe<UserWhereInput>;
@@ -197,11 +202,6 @@ export type MutationUpdateManyUserArgs = {
 export type MutationUpdateOneUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
-};
-
-
-export type MutationUploadSampleArgs = {
-  file: Scalars['Upload'];
 };
 
 
@@ -796,7 +796,7 @@ export type UploadSampleVariables = Exact<{
 }>;
 
 
-export type UploadSample = { __typename?: 'Mutation', uploadSample: boolean };
+export type UploadSample = { __typename?: 'Mutation', sampleUpload: boolean };
 
 export const AuthSessionFields = /*#__PURE__*/ gql`
     fragment AuthSessionFields on AuthSession {
@@ -1151,7 +1151,7 @@ export const UpdateManyUserDocument = /*#__PURE__*/ gql`
   }
 export const UploadSampleDocument = /*#__PURE__*/ gql`
     mutation UploadSample($file: Upload!) {
-  uploadSample(file: $file)
+  sampleUpload(file: $file)
 }
     `;
 
