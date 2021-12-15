@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Environment } from '@zen/common';
 import { loggedInVar } from '@zen/graphql/client';
 
 import { verticalAccordion } from '../animations';
-import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'zen-login-page',
@@ -11,11 +11,11 @@ import { AuthService } from '../auth.service';
   animations: [...verticalAccordion],
 })
 export class ZenLoginPageComponent {
-  constructor(private router: Router, private auth: AuthService) {
-    if (loggedInVar()) this.router.navigateByUrl('/');
+  constructor(private router: Router, private env: Environment) {
+    if (loggedInVar()) this.router.navigateByUrl(env.authenticatedRedirectPath);
   }
 
   onLoggedIn() {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl(this.env.authenticatedRedirectPath);
   }
 }

@@ -1,4 +1,5 @@
 export abstract class Environment {
+  abstract readonly authenticatedRedirectPath: string;
   abstract readonly production: boolean;
   abstract readonly publicRegistration: boolean;
   abstract readonly jwtExchangeInterval: number;
@@ -12,6 +13,7 @@ export abstract class Environment {
 }
 
 export class EnvironmentDev implements Environment {
+  authenticatedRedirectPath = '/';
   production = false;
   publicRegistration = true;
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
@@ -25,6 +27,7 @@ export class EnvironmentDev implements Environment {
 }
 
 export class EnvironmentProd implements Environment {
+  authenticatedRedirectPath = '/';
   production = true;
   publicRegistration = false;
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
