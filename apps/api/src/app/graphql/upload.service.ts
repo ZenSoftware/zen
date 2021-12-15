@@ -21,6 +21,7 @@ export class UploadService {
     for await (const chunk of readStream) {
       chunks.push(chunk);
     }
+
     return Buffer.concat(chunks);
   }
 }
