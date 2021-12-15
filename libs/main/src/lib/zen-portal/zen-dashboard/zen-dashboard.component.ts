@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
   selector: 'zen-dashboard',
   templateUrl: 'zen-dashboard.component.html',
 })
-export class ZenDashboardComponent {
-  constructor() {}
-}
+export class ZenDashboardComponent {}
