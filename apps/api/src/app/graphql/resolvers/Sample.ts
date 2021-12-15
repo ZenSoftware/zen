@@ -16,11 +16,11 @@ export const SampleTypeDef = gql`
 @UseGuards(GqlGuard)
 @Roles('Super')
 export class SampleResolver {
-  constructor(private upload: UploadService) {}
+  constructor(private uploadService: UploadService) {}
 
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: FileInfo) {
-    const buffer = await this.upload.getBuffer(file);
+    const buffer = await this.uploadService.getBuffer(file);
     console.log(`Recieved file '${file.file.filename}' with buffer length: ${buffer.length}`);
     return true;
   }
