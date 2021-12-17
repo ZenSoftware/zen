@@ -36,21 +36,11 @@ spec:
                 secretKeyRef:
                   name: pg-secret
                   key: DATABASE_URL
-            - name: JWT_PRIVATE_KEY
+            - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
                   name: zen-jwt
-                  key: privateKey
-            - name: JWT_PUBLIC_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: zen-jwt
-                  key: publicKey
-            - name: SMTP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: zen-smtp
-                  key: secret
+                  key: JWT_KEY
             - name: SMTP_SERVER
               valueFrom:
                 secretKeyRef:

@@ -19,7 +19,7 @@ export const environment: EnvironmentBase = {
     },
   },
   jwtOptions: {
-    secret: 'dev secret',
+    secret: process.env.JWT_KEY,
     signOptions: {
       algorithm: 'HS256',
       /**
