@@ -21,7 +21,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
     if (token && (reqHost === this.apiHost || reqHost === this.gqlHost)) {
       const modifiedReq = req.clone({
-        headers: req.headers.set('Authorization', token),
+        headers: req.headers.set('Authorization', 'Bearer ' + token),
       });
 
       return next.handle(modifiedReq);
