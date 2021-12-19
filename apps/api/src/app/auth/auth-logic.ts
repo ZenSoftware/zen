@@ -15,17 +15,13 @@ export function authLogic(
   // Give super users unlimited access
   if (_userRoles.includes(Role.Super)) return true;
 
-  if (_classRoles.length > 0) {
-    if (!_userRoles.some(r => _classRoles.includes(r))) {
-      throw new UnauthorizedException();
-    }
+  if (_classRoles.length === 0 && _handlerRoles.length === 0) return true;
 
-    if (_handlerRoles.length > 0 && !_userRoles.some(r => _handlerRoles.includes(r))) {
-      throw new UnauthorizedException();
-    }
-  } else if (_handlerRoles.length > 0 && !_userRoles.some(r => _handlerRoles.includes(r))) {
-    throw new UnauthorizedException();
-  }
+  if (
+    _userRoles.some(r => _classRoles.includes(r)) ||
+    _userRoles.some(r => _handlerRoles.includes(r))
+  )
+    return true;
 
-  return true;
+  throw new UnauthorizedException();
 }
