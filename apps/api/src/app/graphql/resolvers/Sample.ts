@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 import { GraphQLUpload } from 'graphql-upload';
 
@@ -9,6 +9,10 @@ import { FileInfo, UploadService } from '../upload.service';
 export const SampleTypeDef = gql`
   extend type Mutation {
     sampleUpload(file: Upload!): Boolean!
+  }
+
+  type Subscription {
+    sampleSubscription: Boolean
   }
 `;
 
@@ -23,5 +27,10 @@ export class SampleResolver {
     const buffer = await this.uploadService.getBuffer(file);
     console.log(`Recieved file '${file.file.filename}' with buffer length: ${buffer.length}`);
     return true;
+  }
+
+  @Subscription()
+  async sampleSubscription() {
+    console.log('SUBSCRIPTION HIT');
   }
 }

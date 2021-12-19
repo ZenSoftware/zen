@@ -13,7 +13,7 @@ export class ZenSampleUploadComponent {
   localFileName: string | null = '';
   isUploading = false;
 
-  constructor(private uploadSampleGQL: SampleUploadGQL) {}
+  constructor(private sampleUploadGQL: SampleUploadGQL) {}
 
   fileChange() {
     this.localFileName = this.file ? this.file.name : '';
@@ -30,7 +30,7 @@ export class ZenSampleUploadComponent {
   upload() {
     this.isUploading = true;
 
-    this.uploadSampleGQL
+    this.sampleUploadGQL
       .mutate({
         file: this.file,
       })

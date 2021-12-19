@@ -429,6 +429,11 @@ export type StringWithAggregatesFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  sampleSubscription?: Maybe<Scalars['Boolean']>;
+};
+
 export type User = {
   __typename?: 'User';
   createdAt: Scalars['DateTime'];
@@ -791,6 +796,11 @@ export type UpdateManyUserVariables = Exact<{
 
 export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
 
+export type SampleSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SampleSubscription = { __typename?: 'Subscription', sampleSubscription?: boolean | null | undefined };
+
 export type SampleUploadVariables = Exact<{
   file: Scalars['Upload'];
 }>;
@@ -1144,6 +1154,22 @@ export const UpdateManyUserDocument = /*#__PURE__*/ gql`
   })
   export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
     document = UpdateManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SampleSubscriptionDocument = /*#__PURE__*/ gql`
+    subscription SampleSubscription {
+  sampleSubscription
+}
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class SampleSubscriptionGQL extends Apollo.Subscription<SampleSubscription, SampleSubscriptionVariables> {
+    document = SampleSubscriptionDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

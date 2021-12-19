@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const UPLOAD_SAMPLE = gql`
+export const SAMPLE_UPLOAD = gql`
   mutation SampleUpload($file: Upload!) {
     sampleUpload(file: $file)
   }
