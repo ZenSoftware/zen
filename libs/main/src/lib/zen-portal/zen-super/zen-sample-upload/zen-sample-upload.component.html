@@ -1,23 +1,15 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 py-5">
+<div class="card m-0">
+  <div class="card-header">
+    <h1 class="m-0">
+      <i class="fas fa-fw fa-file-upload me-1"></i>
+      Upload Sample
+    </h1>
+  </div>
+  <div class="card-body">
+    
+    <zen-loading *ngIf="isUploading"></zen-loading>
+    <input #fileInput name="file" type="file" (change)="fileChange()" [disabled]="isUploading">
+    <button mat-raised-button color="primary" (click)="upload()" [disabled]="isUploading || !file">Upload</button>
 
-      <div class="card m-0">
-        <div class="card-header">
-          <h1 class="m-0">
-            <i class="fas fa-fw fa-file-upload me-1"></i>
-            Upload Sample
-          </h1>
-        </div>
-        <div class="card-body">
-          
-          <zen-loading *ngIf="isUploading"></zen-loading>
-          <input #fileInput name="file" type="file" (change)="fileChange()" [disabled]="isUploading">
-          <button mat-raised-button color="primary" (click)="upload()" [disabled]="isUploading || !file">Upload</button>
-
-        </div>
-      </div>
-
-    </div>
   </div>
 </div>

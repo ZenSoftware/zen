@@ -1,7 +1,14 @@
 import { ElementRef, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { GqlErrors, SampleUploadGQL, parseGqlErrors } from '@zen/graphql';
+import gql from 'graphql-tag';
 import { catchError } from 'rxjs/operators';
+
+gql`
+  mutation SampleUpload($file: Upload!) {
+    sampleUpload(file: $file)
+  }
+`;
 
 @Component({
   selector: 'zen-sample-upload',

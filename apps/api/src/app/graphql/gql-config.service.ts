@@ -16,7 +16,6 @@ export class GqlConfigService implements GqlOptionsFactory {
     return {
       typeDefs: print(ALL_TYPE_DEFS),
       installSubscriptionHandlers: true,
-      // subscriptions: { 'graphql-ws': true },
       debug: !this.config.production,
       playground: false,
       plugins: this.config.graphql.sandbox
@@ -24,14 +23,18 @@ export class GqlConfigService implements GqlOptionsFactory {
         : undefined,
       introspection: this.config.graphql.introspection,
       cors: this.config.cors,
-      context: async (ctx): Promise<IContext> => {
-        return ctx.connection
-          ? {
-              ...ctx,
+      subscriptions: {
+        'subscriptions-transport-ws': {
+          onConnect: connectionParams => {
+            return {
               prisma: this.prisma,
-              req: ctx.connection.context as { token: string }, // Include WebSocketLink context for JwtStrategy
-            }
-          : { ...ctx, prisma: this.prisma };
+              req: { token: connectionParams.token }, // Include WebSocketLink context for JwtStrategy
+            };
+          },
+        },
+      },
+      context: async (ctx): Promise<IContext> => {
+        return { ...ctx, prisma: this.prisma };
       },
     };
   }

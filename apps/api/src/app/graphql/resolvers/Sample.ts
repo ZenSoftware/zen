@@ -31,6 +31,7 @@ export class SampleResolver {
 
   @Subscription()
   async sampleSubscription() {
-    console.log('SUBSCRIPTION HIT');
+    console.log('Subscription hit');
+    return true;
   }
 }

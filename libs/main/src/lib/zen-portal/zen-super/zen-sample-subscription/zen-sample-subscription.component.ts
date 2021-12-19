@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 import { SampleSubscriptionGQL } from '@zen/graphql';
+import gql from 'graphql-tag';
+
+gql`
+  subscription SampleSubscription {
+    sampleSubscription
+  }
+`;
 
 @Component({
   selector: 'zen-sample-subscription',
