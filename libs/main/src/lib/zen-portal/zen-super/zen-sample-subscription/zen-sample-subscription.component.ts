@@ -17,15 +17,15 @@ gql`
 })
 export class ZenSampleSubscriptionComponent implements OnDestroy {
   recentValue: any;
-  sub: Subscription;
+  #sub: Subscription;
 
   constructor(private sampleSubscriptionGQL: SampleSubscriptionGQL) {
-    this.sub = this.sampleSubscriptionGQL.subscribe().subscribe(result => {
+    this.#sub = this.sampleSubscriptionGQL.subscribe().subscribe(result => {
       this.recentValue = JSON.stringify(result.data);
     });
   }
 
   ngOnDestroy() {
-    if (this.sub) this.sub.unsubscribe();
+    if (this.#sub) this.#sub.unsubscribe();
   }
 }
