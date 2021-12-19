@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import { GraphQLUpload } from 'graphql-upload';
 import { interval } from 'rxjs';
 
-import { GqlGuard, Roles } from '../../auth';
+import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
 import { FileInfo, UploadService } from '../upload.service';
 
 export const SampleTypeDef = gql`
@@ -46,8 +46,8 @@ export class SampleResolver {
   }
 
   @Subscription()
-  async sampleSubscription() {
-    Logger.log('sampleSubscription hit');
+  async sampleSubscription(@GqlUser() user: RequestUser) {
+    Logger.log(`sampleSubscription subscribed to by user with id ${user.id}`);
     return pubSub.asyncIterator('sampleSubscription');
   }
 }
