@@ -21,7 +21,7 @@ export class ZenSampleSubscriptionComponent implements OnDestroy {
 
   constructor(private sampleSubscriptionGQL: SampleSubscriptionGQL) {
     this.#sub = this.sampleSubscriptionGQL.subscribe().subscribe(({ data }) => {
-      this.recentValue = JSON.stringify(data?.sampleSubscription);
+      this.recentValue = data?.sampleSubscription.message;
     });
   }
 

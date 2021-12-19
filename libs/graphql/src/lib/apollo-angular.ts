@@ -389,7 +389,7 @@ export enum Role {
 
 export type SampleSubscriptionResult = {
   __typename?: 'SampleSubscriptionResult';
-  message?: Maybe<Scalars['String']>;
+  message: Scalars['String'];
 };
 
 export enum SortOrder {
@@ -436,7 +436,7 @@ export type StringWithAggregatesFilter = {
 
 export type Subscription = {
   __typename?: 'Subscription';
-  sampleSubscription?: Maybe<SampleSubscriptionResult>;
+  sampleSubscription: SampleSubscriptionResult;
 };
 
 export type User = {
@@ -804,7 +804,7 @@ export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typ
 export type SampleSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SampleSubscription = { __typename?: 'Subscription', sampleSubscription?: { __typename?: 'SampleSubscriptionResult', message?: string | null | undefined } | null | undefined };
+export type SampleSubscription = { __typename?: 'Subscription', sampleSubscription: { __typename?: 'SampleSubscriptionResult', message: string } };
 
 export type SampleUploadVariables = Exact<{
   file: Scalars['Upload'];

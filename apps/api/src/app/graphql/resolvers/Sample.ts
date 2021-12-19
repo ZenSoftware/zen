@@ -14,11 +14,11 @@ export const SampleTypeDef = gql`
   }
 
   type SampleSubscriptionResult {
-    message: String
+    message: String!
   }
 
   type Subscription {
-    sampleSubscription: SampleSubscriptionResult
+    sampleSubscription: SampleSubscriptionResult!
   }
 `;
 
@@ -27,7 +27,7 @@ const pubSub = new PubSub();
 interval(1000).subscribe(i =>
   pubSub.publish('sampleSubscription', {
     sampleSubscription: {
-      message: `Server count: ${i}`,
+      message: `Server ticker ${i}`,
     },
   })
 );
