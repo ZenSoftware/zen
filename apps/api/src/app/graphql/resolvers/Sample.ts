@@ -24,10 +24,10 @@ export const SampleTypeDef = gql`
 
 const pubSub = new PubSub();
 
-interval(1000).subscribe(() =>
+interval(1000).subscribe(i =>
   pubSub.publish('sampleSubscription', {
     sampleSubscription: {
-      message: 'Hello world!',
+      message: `Server count: ${i}`,
     },
   })
 );

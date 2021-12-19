@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { SampleSubscriptionGQL } from '@zen/graphql';
 import gql from 'graphql-tag';
+import { Subscription } from 'rxjs';
 
 gql`
   subscription SampleSubscription {
@@ -14,12 +15,17 @@ gql`
   selector: 'zen-sample-subscription',
   templateUrl: 'zen-sample-subscription.component.html',
 })
-export class ZenSampleSubscriptionComponent {
-  constructor(private sampleSubscriptionGQL: SampleSubscriptionGQL) {}
+export class ZenSampleSubscriptionComponent implements OnDestroy {
+  recentValue: any;
+  sub: Subscription;
 
-  subscribe() {
-    this.sampleSubscriptionGQL.subscribe().subscribe(result => {
-      console.log(result.data);
+  constructor(private sampleSubscriptionGQL: SampleSubscriptionGQL) {
+    this.sub = this.sampleSubscriptionGQL.subscribe().subscribe(result => {
+      this.recentValue = JSON.stringify(result.data);
     });
+  }
+
+  ngOnDestroy() {
+    if (this.sub) this.sub.unsubscribe();
   }
 }
