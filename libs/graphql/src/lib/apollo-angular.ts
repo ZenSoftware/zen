@@ -387,6 +387,11 @@ export enum Role {
   Super = 'Super'
 }
 
+export type SampleSubscriptionResult = {
+  __typename?: 'SampleSubscriptionResult';
+  message?: Maybe<Scalars['String']>;
+};
+
 export enum SortOrder {
   Asc = 'asc',
   Desc = 'desc'
@@ -431,7 +436,7 @@ export type StringWithAggregatesFilter = {
 
 export type Subscription = {
   __typename?: 'Subscription';
-  sampleSubscription?: Maybe<Scalars['Boolean']>;
+  sampleSubscription?: Maybe<SampleSubscriptionResult>;
 };
 
 export type User = {
@@ -799,7 +804,7 @@ export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typ
 export type SampleSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SampleSubscription = { __typename?: 'Subscription', sampleSubscription?: boolean | null | undefined };
+export type SampleSubscription = { __typename?: 'Subscription', sampleSubscription?: { __typename?: 'SampleSubscriptionResult', message?: string | null | undefined } | null | undefined };
 
 export type SampleUploadVariables = Exact<{
   file: Scalars['Upload'];
@@ -1161,7 +1166,9 @@ export const UpdateManyUserDocument = /*#__PURE__*/ gql`
   }
 export const SampleSubscriptionDocument = /*#__PURE__*/ gql`
     subscription SampleSubscription {
-  sampleSubscription
+  sampleSubscription {
+    message
+  }
 }
     `;
 

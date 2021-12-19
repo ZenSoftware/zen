@@ -1,7 +1,9 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
+import { PubSub } from 'graphql-subscriptions';
 import gql from 'graphql-tag';
 import { GraphQLUpload } from 'graphql-upload';
+import { interval } from 'rxjs';
 
 import { GqlGuard, Roles } from '../../auth';
 import { FileInfo, UploadService } from '../upload.service';
@@ -11,10 +13,24 @@ export const SampleTypeDef = gql`
     sampleUpload(file: Upload!): Boolean!
   }
 
+  type SampleSubscriptionResult {
+    message: String
+  }
+
   type Subscription {
-    sampleSubscription: Boolean
+    sampleSubscription: SampleSubscriptionResult
   }
 `;
+
+const pubSub = new PubSub();
+
+interval(1000).subscribe(() =>
+  pubSub.publish('sampleSubscription', {
+    sampleSubscription: {
+      message: 'Hello world!',
+    },
+  })
+);
 
 @Resolver()
 @UseGuards(GqlGuard)
@@ -31,7 +47,7 @@ export class SampleResolver {
 
   @Subscription()
   async sampleSubscription() {
-    console.log('Subscription hit');
-    return true;
+    console.log('sampleSubscription hit');
+    return pubSub.asyncIterator('sampleSubscription');
   }
 }

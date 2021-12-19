@@ -4,7 +4,9 @@ import gql from 'graphql-tag';
 
 gql`
   subscription SampleSubscription {
-    sampleSubscription
+    sampleSubscription {
+      message
+    }
   }
 `;
 
