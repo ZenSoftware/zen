@@ -20,8 +20,8 @@ export class ZenSampleSubscriptionComponent implements OnDestroy {
   #sub: Subscription;
 
   constructor(private sampleSubscriptionGQL: SampleSubscriptionGQL) {
-    this.#sub = this.sampleSubscriptionGQL.subscribe().subscribe(result => {
-      this.recentValue = JSON.stringify(result.data);
+    this.#sub = this.sampleSubscriptionGQL.subscribe().subscribe(({ data }) => {
+      this.recentValue = JSON.stringify(data?.sampleSubscription);
     });
   }
 
