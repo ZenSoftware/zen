@@ -25,8 +25,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: JwtPayload) {
-    if (Date.now() >= payload.exp * 1000) throw new UnauthorizedException(undefined, 'Expired JWT');
-
     const user: RequestUser = {
       id: payload.sub,
       roles: payload.roles,
