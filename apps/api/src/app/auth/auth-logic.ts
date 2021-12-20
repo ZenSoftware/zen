@@ -1,13 +1,9 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { Role } from '@prisma/client';
 
-type RoleType = string[] | Role[] | undefined;
+type Roles = string[] | Role[] | undefined;
 
-export function authLogic(
-  userRoles: RoleType,
-  classRoles: RoleType,
-  handlerRoles: RoleType
-): boolean {
+export function authLogic(userRoles: Roles, classRoles: Roles, handlerRoles: Roles): boolean {
   const _userRoles = userRoles ?? [];
   const _classRoles = classRoles ?? [];
   const _handlerRoles = handlerRoles ?? [];
