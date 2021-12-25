@@ -12,4 +12,3 @@ export const NEST_TYPE_DEFS = [AuthTypeDef, SampleTypeDef, UserTypeDef].filter(x
 
 export const ALL_TYPE_DEFS = mergeTypeDefs(['scalar Upload', PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS]);
 export const GRAPHQL_SCHEMA = makeExecutableSchema({ typeDefs: ALL_TYPE_DEFS });
-export const PRISMA_SCHEMA = makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS });

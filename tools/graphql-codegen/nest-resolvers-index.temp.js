@@ -24,7 +24,7 @@ import PRISMA_TYPE_DEFS from '../prisma/typeDefs';\n`;
 
   indexSource += `export const ALL_TYPE_DEFS = mergeTypeDefs(['scalar Upload', PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS]);
 export const GRAPHQL_SCHEMA = makeExecutableSchema({ typeDefs: ALL_TYPE_DEFS });
-export const PRISMA_SCHEMA = makeExecutableSchema({ typeDefs: PRISMA_TYPE_DEFS });\n`;
+`;
 
   return indexSource;
 };
