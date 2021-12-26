@@ -4,9 +4,9 @@ import { Args, Context, Info, Mutation, Parent, Query, Resolver, ResolveField } 
 import gql from 'graphql-tag';
 
 import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
+import { PrismaSelectArgs } from '../../prisma';
 import resolvers from '../generated/${prismaName}/resolvers';
 import { IContext } from '../models';
-import { PrismaSelectArgs } from '../prisma-select-args';
 
 export const ${prismaName}TypeDef = null;
 // export const ${prismaName}TypeDef = gql\`
