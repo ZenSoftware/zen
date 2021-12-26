@@ -6,11 +6,10 @@ import { ApiError } from '@zen/api-interfaces';
 import bcrypt from 'bcryptjs';
 import gql from 'graphql-tag';
 
-import { AuthService, GqlGuard, GqlUser, RequestUser } from '../../auth';
+import { AuthService, GqlGuard, GqlThrottlerGuard, GqlUser, RequestUser } from '../../auth';
 import { ConfigService } from '../../config';
 import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
-import { GqlThrottlerGuard } from '../gql-throttle.guard';
 import {
   AuthExchangeTokenInput,
   AuthLoginInput,
