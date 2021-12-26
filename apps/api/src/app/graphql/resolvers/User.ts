@@ -12,9 +12,9 @@ import {
 import gql from 'graphql-tag';
 
 import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
+import resolvers from '../generated/User/resolvers';
 import { IContext } from '../models';
 import { PrismaSelectArgs } from '../prisma-select-args';
-import resolvers from '../prisma/User/resolvers';
 
 export const UserTypeDef = null;
 // export const UserTypeDef = gql`

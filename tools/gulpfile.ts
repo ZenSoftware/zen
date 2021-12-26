@@ -142,7 +142,7 @@ export class Gulpfile {
   //---------------------------------------------------------------------------
   @Task('gql:gen')
   async genGqlApi(cb) {
-    const PRISMA_PATH = `${CONFIG.gql.apiPath}/prisma`;
+    const PRISMA_PATH = `${CONFIG.gql.apiPath}/generated`;
     const RESOLVERS_PATH = `${CONFIG.gql.apiPath}/resolvers`;
 
     console.log(`------------------ @paljs/cli generate ------------------`);
@@ -151,6 +151,9 @@ export class Gulpfile {
     console.log(`---------- Zen Nest GraphQL Resolvers generate ----------`);
     if (!fs.existsSync(RESOLVERS_PATH)) {
       fs.mkdirSync(RESOLVERS_PATH);
+    }
+    if (!fs.existsSync(PRISMA_PATH)) {
+      fs.mkdirSync(PRISMA_PATH);
     }
     if (!fs.existsSync(CONFIG.gql.clientFieldsPath)) {
       fs.mkdirSync(CONFIG.gql.clientFieldsPath);

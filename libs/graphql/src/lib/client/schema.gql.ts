@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const CLIENT_SCHEMA = gql`
+gql`
   extend type Query {
     loggedIn: Boolean!
     userRoles: [Role!]!

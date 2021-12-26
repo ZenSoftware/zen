@@ -1,6 +1,6 @@
 module.exports = {
   backend: {
     generator: 'sdl',
-    output: 'apps/api/src/app/graphql/prisma',
+    output: 'apps/api/src/app/graphql/generated',
   },
 };

@@ -3,7 +3,7 @@ module.exports = name => {
 
 import { ${name}Fields } from '../fields';
 
-export const ${name}TypeDefs = gql\`
+gql\`
   query FindUnique${name}($where: ${name}WhereUniqueInput!) {
     findUnique${name}(where: $where) {
       ...${name}Fields

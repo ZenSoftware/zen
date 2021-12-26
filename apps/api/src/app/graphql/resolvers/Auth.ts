@@ -185,8 +185,8 @@ export class AuthResolver {
 
     const user = await ctx.prisma.user.create({
       data: {
-        username: data.username.trim(),
-        email: data.email.trim(),
+        username: data.username,
+        email: data.email,
         password: hashedPassword,
       },
     });
@@ -236,7 +236,7 @@ export class AuthResolver {
       where: {
         username: {
           mode: 'insensitive',
-          equals: username.trim(),
+          equals: username,
         },
       },
     });
@@ -247,7 +247,7 @@ export class AuthResolver {
       where: {
         email: {
           mode: 'insensitive',
-          equals: email.trim(),
+          equals: email,
         },
       },
     });

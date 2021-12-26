@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 import { UserFields } from '../fields';
 
-export const UserTypeDefs = gql`
+gql`
   query FindUniqueUser($where: UserWhereUniqueInput!) {
     findUniqueUser(where: $where) {
       ...UserFields

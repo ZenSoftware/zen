@@ -2,7 +2,7 @@ module.exports = dataTypeNames => {
   let indexSource = `import { mergeTypeDefs } from '@graphql-tools/merge';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
-import PRISMA_TYPE_DEFS from '../prisma/typeDefs';\n`;
+import PRISMA_TYPE_DEFS from '../generated/typeDefs';\n`;
 
   // Construct the "resolvers" directory's "index.ts"
   indexSource += dataTypeNames
