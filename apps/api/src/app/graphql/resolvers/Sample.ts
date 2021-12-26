@@ -6,7 +6,7 @@ import { GraphQLUpload } from 'graphql-upload';
 import { interval } from 'rxjs';
 
 import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
-import { FileInfo, UploadService } from '../upload.service';
+import { FileInfo } from '../upload.service';
 
 export const SampleTypeDef = gql`
   extend type Mutation {
@@ -36,11 +36,15 @@ interval(1000).subscribe(i =>
 @UseGuards(GqlGuard)
 @Roles('Super')
 export class SampleResolver {
-  constructor(private uploadService: UploadService) {}
-
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: FileInfo) {
-    const buffer = await this.uploadService.getBuffer(file);
+    const readStream = file.file.createReadStream();
+    const chunks = [];
+    for await (const chunk of readStream) {
+      chunks.push(chunk);
+    }
+    const buffer = Buffer.concat(chunks);
+
     Logger.log(`Recieved file '${file.file.filename}' with buffer length: ${buffer.length}`);
     return true;
   }
