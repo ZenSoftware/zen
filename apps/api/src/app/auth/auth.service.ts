@@ -10,11 +10,7 @@ import { JwtPayload } from './jwt-payload';
 export class AuthService {
   constructor(private readonly jwtService: JwtService, private readonly config: ConfigService) {}
 
-  getAuthSession(user: RequestUser, rememberMe: boolean | string = false): AuthSession {
-    if (typeof rememberMe === 'string') {
-      rememberMe = rememberMe === 'true';
-    }
-
+  getAuthSession(user: RequestUser, rememberMe = false): AuthSession {
     const jwtPayload: JwtPayload = {
       sub: user.id,
       roles: user.roles,
