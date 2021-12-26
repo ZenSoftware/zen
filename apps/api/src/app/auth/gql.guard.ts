@@ -9,7 +9,7 @@ import { ROLES_KEY } from './roles.decorator';
 
 @Injectable()
 /**
- * Replicates RBAC rules for [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-6.0).
+ * Imitates RBAC rules for [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-6.0).
  * **Super** users are granted unlimited access.
  */
 export class GqlGuard extends AuthGuard('jwt') {
