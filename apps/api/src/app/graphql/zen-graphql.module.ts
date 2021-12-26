@@ -7,7 +7,6 @@ import { MailModule } from '../mail';
 import { PrismaModule } from '../prisma';
 import { GqlConfigService } from './gql-config.service';
 import { NEST_RESOLVERS } from './resolvers';
-import { UploadService } from './upload.service';
 
 @Global()
 @Module({
@@ -20,6 +19,6 @@ import { UploadService } from './upload.service';
       imports: [PrismaModule, ConfigModule],
     }),
   ],
-  providers: [...NEST_RESOLVERS, UploadService],
+  providers: [...NEST_RESOLVERS],
 })
 export class ZenGraphQLModule {}

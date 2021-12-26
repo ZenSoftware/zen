@@ -6,7 +6,7 @@ import { GraphQLUpload } from 'graphql-upload';
 import { interval } from 'rxjs';
 
 import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
-import { FileInfo } from '../upload.service';
+import type { FileInfo } from '../models';
 
 export const SampleTypeDef = gql`
   extend type Mutation {
