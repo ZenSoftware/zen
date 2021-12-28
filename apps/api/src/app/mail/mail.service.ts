@@ -1,5 +1,5 @@
 import { ISendMailOptions, MailerService } from '@nest-modules/mailer';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { User } from '@prisma/client';
 
 import { ConfigService } from '../config';
@@ -17,7 +17,7 @@ export class MailService {
   ) {}
   //--------------------------------------------------------------------------
   send(options: MailOptions) {
-    return this.mailer.sendMail(options);
+    return this.mailer.sendMail(options).catch(e => Logger.error(e, options));
   }
   //--------------------------------------------------------------------------
   sendGeneral(options: { to: string; subject: string; context: GeneralContext }) {
