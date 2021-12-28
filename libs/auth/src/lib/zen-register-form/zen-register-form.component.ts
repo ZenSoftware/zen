@@ -50,12 +50,12 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
       acceptTerms: ['', Validators.requiredTrue],
     });
 
-    const sub1 = this.username?.valueChanges.subscribe(() => {
+    const sub1 = this.username.valueChanges.subscribe(() => {
       this.#usernameTaken = false;
     });
     this.#subs.push(sub1);
 
-    const sub2 = this.email?.valueChanges.subscribe(() => {
+    const sub2 = this.email.valueChanges.subscribe(() => {
       this.#emailTaken = false;
     });
     this.#subs.push(sub2);
@@ -111,7 +111,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   passwordValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        this.passwordConfirm?.updateValueAndValidity();
+        this.passwordConfirm.updateValueAndValidity();
         return passwordValidator(control);
       }
       return null;
@@ -121,7 +121,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   passwordConfirmValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        const notMatching = this.password?.value !== control.value;
+        const notMatching = this.password.value !== control.value;
         return notMatching ? { notMatching: true } : null;
       }
       return null;
@@ -137,9 +137,9 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
       this.authRegisterGQL
         .mutate({
           data: {
-            username: this.username?.value.trim(),
-            email: this.email?.value.trim(),
-            password: this.password?.value,
+            username: this.username.value.trim(),
+            email: this.email.value.trim(),
+            password: this.password.value,
           },
         })
         .pipe(catchError(parseGqlErrors))
@@ -159,14 +159,14 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
             if (errors.find(e => e === 'EMAIL_TAKEN')) {
               this.generalError = false;
               this.#emailTaken = true;
-              this.email?.updateValueAndValidity();
+              this.email.updateValueAndValidity();
               this.emailInput?.nativeElement.select();
             }
 
             if (errors.find(e => e === 'USERNAME_TAKEN')) {
               this.generalError = false;
               this.#usernameTaken = true;
-              this.username?.updateValueAndValidity();
+              this.username.updateValueAndValidity();
               this.usernameInput?.nativeElement.select();
             }
           },

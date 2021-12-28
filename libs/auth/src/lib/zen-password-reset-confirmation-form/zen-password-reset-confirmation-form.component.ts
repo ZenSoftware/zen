@@ -75,7 +75,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   passwordValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        this.passwordConfirm?.updateValueAndValidity();
+        this.passwordConfirm.updateValueAndValidity();
         return passwordValidator(control);
       }
       return null;
@@ -85,7 +85,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   passwordConfirmValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        const notMatching = this.password?.value !== control.value;
+        const notMatching = this.password.value !== control.value;
         return notMatching ? { notMatching: true } : null;
       }
       return null;
@@ -101,7 +101,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
       this.authPasswordResetConfirmationGQL
         .mutate({
           data: {
-            newPassword: this.password?.value,
+            newPassword: this.password.value,
             token: this.token as string,
           },
         })

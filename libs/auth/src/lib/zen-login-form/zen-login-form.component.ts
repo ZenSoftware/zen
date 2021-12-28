@@ -99,9 +99,9 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
 
       this.auth
         .login({
-          username: this.username?.value.trim(),
-          password: this.password?.value,
-          rememberMe: this.rememberMe?.value,
+          username: this.username.value.trim(),
+          password: this.password.value,
+          rememberMe: this.rememberMe.value,
         })
         .subscribe({
           next: () => {
@@ -118,14 +118,14 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
             if (errors.find(e => e === 'INCORRECT_PASSWORD')) {
               this.generalError = false;
               this.#incorrectPassword = true;
-              this.password?.updateValueAndValidity();
+              this.password.updateValueAndValidity();
               this.passwordInput?.nativeElement.select();
             }
 
             if (errors.find(e => e === 'USER_NOT_FOUND')) {
               this.generalError = false;
               this.#usernameNotFound = true;
-              this.username?.updateValueAndValidity();
+              this.username.updateValueAndValidity();
               this.usernameInput?.nativeElement.select();
             }
           },

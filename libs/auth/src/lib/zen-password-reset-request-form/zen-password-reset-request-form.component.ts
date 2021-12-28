@@ -51,7 +51,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
       ],
     });
 
-    const sub = this.emailOrUsername?.valueChanges.subscribe(() => {
+    const sub = this.emailOrUsername.valueChanges.subscribe(() => {
       this.#notFound = false;
     });
     this.#subs.push(sub);
@@ -91,7 +91,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
         .fetch(
           {
             data: {
-              emailOrUsername: this.emailOrUsername?.value.trim(),
+              emailOrUsername: this.emailOrUsername.value.trim(),
             },
           },
           { fetchPolicy: 'network-only' }
@@ -111,7 +111,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
             if (errors.find(e => e === 'USER_NOT_FOUND')) {
               this.generalError = false;
               this.#notFound = true;
-              this.emailOrUsername?.updateValueAndValidity();
+              this.emailOrUsername.updateValueAndValidity();
               this.emailUsernameInput?.nativeElement.select();
             }
           },

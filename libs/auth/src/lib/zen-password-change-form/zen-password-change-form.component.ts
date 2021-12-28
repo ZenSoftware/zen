@@ -36,9 +36,9 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
       passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
     });
 
-    const sub = this.oldPassword?.valueChanges.subscribe(() => {
+    const sub = this.oldPassword.valueChanges.subscribe(() => {
       this.#incorrectPassword = false;
-      this.newPassword?.updateValueAndValidity();
+      this.newPassword.updateValueAndValidity();
     });
     this.#subs.push(sub);
   }
@@ -58,11 +58,11 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   passwordValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        this.passwordConfirm?.updateValueAndValidity();
+        this.passwordConfirm.updateValueAndValidity();
 
         let errors: any = passwordValidator(control);
 
-        if (this.oldPassword?.value === this.newPassword?.value) {
+        if (this.oldPassword.value === this.newPassword.value) {
           if (errors) errors.oldEqualsNew = true;
           else errors = { oldEqualsNew: true };
         }
@@ -76,7 +76,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   passwordConfirmValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        const notMatching = this.newPassword?.value !== control.value;
+        const notMatching = this.newPassword.value !== control.value;
         return notMatching ? { notMatching: true } : null;
       }
       return null;
@@ -106,8 +106,8 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
       this.authPasswordChangeGQL
         .mutate({
           data: {
-            oldPassword: this.oldPassword?.value,
-            newPassword: this.newPassword?.value,
+            oldPassword: this.oldPassword.value,
+            newPassword: this.newPassword.value,
           },
         })
         .pipe(catchError(parseGqlErrors))
@@ -125,7 +125,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             if (errors.find(e => e === 'WRONG_PASSWORD')) {
               this.generalError = false;
               this.#incorrectPassword = true;
-              this.oldPassword?.updateValueAndValidity();
+              this.oldPassword.updateValueAndValidity();
               this.oldPasswordInput?.nativeElement.select();
             }
           },
