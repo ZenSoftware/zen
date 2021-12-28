@@ -3,7 +3,7 @@
 
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Username</mat-label>
-    <input #usernameMatInput="matInput" #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="username" hideRequiredMarker="true" maxlength="254">
+    <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="username" hideRequiredMarker="true" maxlength="254">
     <mat-error *ngIf="username.errors?.required">Required</mat-error>
     <mat-error *ngIf="username.errors?.minlength && !username.errors?.required">Minimum length of {{username.errors?.minlength?.requiredLength}} characters</mat-error>
     <mat-error *ngIf="username.errors?.maxlength">Maximum length of {{username.errors?.maxlength?.requiredLength}} characters</mat-error>

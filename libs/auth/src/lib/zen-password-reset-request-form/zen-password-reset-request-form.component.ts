@@ -8,7 +8,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
 import { ApiConstants, ApiError } from '@zen/api-interfaces';
 import { AuthPasswordResetRequestQueryGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -22,8 +21,7 @@ import { verticalAccordion } from '../animations';
   animations: [...verticalAccordion],
 })
 export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('emailUsernameMatInput') emailUsernameMatInput?: MatInput;
-  @ViewChild('emailUsernameInput') emailUsernameInput?: ElementRef;
+  @ViewChild('emailUsernameInput') emailUsernameInput?: ElementRef<HTMLInputElement>;
   @Output() sent = new EventEmitter();
 
   #subs: Array<Subscription | undefined> = [];
@@ -61,7 +59,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.emailUsernameMatInput?.focus();
+      this.emailUsernameInput?.nativeElement.select();
     });
   }
 

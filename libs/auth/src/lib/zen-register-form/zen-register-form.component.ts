@@ -8,7 +8,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
 import { ApiError, AuthRegisterGQL, AuthSession, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -23,9 +22,8 @@ import { emailValidator, passwordValidator, usernameValidator } from '../validat
   animations: [...verticalAccordion],
 })
 export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('usernameMatInput') usernameMatInput?: MatInput;
-  @ViewChild('usernameInput') usernameInput?: ElementRef;
-  @ViewChild('emailInput') emailInput?: ElementRef;
+  @ViewChild('usernameInput') usernameInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('emailInput') emailInput?: ElementRef<HTMLInputElement>;
   @Output() registered = new EventEmitter();
 
   #subs: Array<Subscription | undefined> = [];
@@ -65,7 +63,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.usernameMatInput?.focus();
+      this.usernameInput?.nativeElement.select();
     });
   }
 

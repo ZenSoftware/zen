@@ -1,13 +1,13 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   OnDestroy,
   Output,
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ApiError,
@@ -29,7 +29,7 @@ import { passwordValidator } from '../validators';
   animations: [...verticalAccordion],
 })
 export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('passwordMatInput') passwordMatInput?: MatInput;
+  @ViewChild('passwordInput') passwordInput?: ElementRef<HTMLInputElement>;
   @Output() confirmed = new EventEmitter();
 
   #subs: Array<Subscription | undefined> = [];
@@ -60,8 +60,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.passwordMatInput?.focus();
-      console.log('mat focus', this.passwordMatInput);
+      this.passwordInput?.nativeElement.select();
     });
   }
 

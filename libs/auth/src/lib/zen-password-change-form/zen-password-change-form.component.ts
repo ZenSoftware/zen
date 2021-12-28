@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { ApiError, AuthPasswordChangeGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -15,8 +14,7 @@ import { passwordValidator } from '../validators';
   animations: [...verticalAccordion],
 })
 export class ZenPasswordChangeFormComponent implements OnDestroy {
-  @ViewChild('oldPasswordMatInput') oldPasswordMatInput?: MatInput;
-  @ViewChild('oldPasswordInput') oldPasswordInput?: ElementRef;
+  @ViewChild('oldPasswordInput') oldPasswordInput?: ElementRef<HTMLInputElement>;
   @Output() changed = new EventEmitter();
 
   #subs: Array<Subscription | undefined> = [];
@@ -96,7 +94,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
     this.completed = false;
     this.form.reset();
     this.form.enable();
-    setTimeout(() => this.oldPasswordMatInput?.focus());
+    setTimeout(() => this.oldPasswordInput?.nativeElement.select());
   }
 
   onSubmit() {
