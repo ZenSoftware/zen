@@ -1,4 +1,5 @@
-export * from './lib/zen-auth.module';
 export * from './lib/auth.service';
 export * from './lib/guards';
-// export { Role } from '@zen/graphql';
+export * from './lib/http-request-interceptor';
+export * from './lib/token-var';
+export * from './lib/zen-auth.module';

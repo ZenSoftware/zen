@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Environment, tokenVar } from '@zen/common';
+import { Environment } from '@zen/common';
 import {
   ApiError,
   AuthExchangeTokenGQL,
@@ -17,6 +17,8 @@ import ls from 'localstorage-slim';
 import { intersection, isEqual, orderBy } from 'lodash-es';
 import { BehaviorSubject, Observable, Subscription, interval, throwError, timer } from 'rxjs';
 import { catchError, debounce, mergeMap, retryWhen, tap } from 'rxjs/operators';
+
+import { tokenVar } from './token-var';
 
 enum LocalStorageKey {
   token = 'token',
