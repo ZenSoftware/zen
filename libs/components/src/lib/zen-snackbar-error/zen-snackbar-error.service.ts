@@ -6,7 +6,7 @@ export class ZenSnackbarErrorService {
   constructor(private snackBar: MatSnackBar) {}
 
   open(error: any) {
-    console.error(JSON.stringify(error));
+    console.error(error);
 
     const snackBarRef = this.snackBar.open('ERROR', 'Copy', {
       panelClass: 'bg-danger',
