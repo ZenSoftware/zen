@@ -44,7 +44,6 @@ export class SampleResolver {
       chunks.push(chunk);
     }
     const buffer = Buffer.concat(chunks);
-
     Logger.log(`Recieved '${file.file.filename}' ${buffer.byteLength} bytes`);
     return true;
   }
