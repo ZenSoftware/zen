@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
   providedIn: 'root',
 })
 export class SuperGuard implements CanActivate {
-  constructor(public auth: AuthService, public router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   canActivate() {
     if (this.auth.userHasRole(Role.Super)) {
