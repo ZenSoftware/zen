@@ -19,7 +19,7 @@ gql`
 export class ZenSampleUploadComponent {
   @ViewChild('fileInput', { static: true })
   fileInput?: ElementRef<HTMLInputElement>;
-  localFileName: string | null = '';
+  fileName = '';
   isUploading = false;
 
   constructor(
@@ -33,11 +33,11 @@ export class ZenSampleUploadComponent {
   }
 
   fileChange() {
-    this.localFileName = this.file ? this.file.name : '';
+    this.fileName = this.file ? this.file.name : '';
   }
 
   private reset() {
-    this.localFileName = null;
+    this.fileName = '';
     (<any>this.fileInput?.nativeElement).value = null;
   }
 
@@ -52,7 +52,7 @@ export class ZenSampleUploadComponent {
       .subscribe({
         next: () => {
           this.isUploading = false;
-          this.snackbar.open('Uploaded', undefined, { duration: 2000 });
+          this.snackbar.open(`Uploaded: ${this.fileName}`, undefined, { duration: 3000 });
           this.reset();
         },
 
