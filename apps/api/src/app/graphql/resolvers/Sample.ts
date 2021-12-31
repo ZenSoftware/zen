@@ -45,7 +45,7 @@ export class SampleResolver {
     }
     const buffer = Buffer.concat(chunks);
 
-    Logger.log(`Recieved file '${file.file.filename}' with buffer length: ${buffer.length}`);
+    Logger.log(`Recieved '${file.file.filename}' ${buffer.byteLength} bytes`);
     return true;
   }
 
