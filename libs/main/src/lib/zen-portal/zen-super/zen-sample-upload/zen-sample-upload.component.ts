@@ -14,6 +14,7 @@ gql`
 
 @Component({
   selector: 'zen-sample-upload',
+  styleUrls: ['zen-sample-upload.component.scss'],
   templateUrl: 'zen-sample-upload.component.html',
 })
 export class ZenSampleUploadComponent {

@@ -1,0 +1,12 @@
+.zen-file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  position: absolute;
+}
+
+.zen-no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
