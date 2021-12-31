@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ZenConfirmComponent } from './zen-confirm/zen-confirm.component';
 import { ZenLoadingComponent } from './zen-loading/zen-loading.component';
@@ -16,8 +16,8 @@ import { ZenSnackbarErrorService } from './zen-snackbar-error/zen-snackbar-error
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
-    MatInputModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   declarations: [ZenConfirmComponent, ZenLoadingComponent],
   exports: [ZenConfirmComponent, ZenLoadingComponent],

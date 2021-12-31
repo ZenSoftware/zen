@@ -1,5 +1,7 @@
 import { ElementRef, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ZenSnackbarErrorService } from '@zen/components';
 import { GqlErrors, SampleUploadGQL, parseGqlErrors } from '@zen/graphql';
 import gql from 'graphql-tag';
 import { catchError } from 'rxjs/operators';
@@ -20,15 +22,20 @@ export class ZenSampleUploadComponent {
   localFileName: string | null = '';
   isUploading = false;
 
-  constructor(private sampleUploadGQL: SampleUploadGQL) {}
+  constructor(
+    private snackbar: MatSnackBar,
+    private sampleUploadGQL: SampleUploadGQL,
+    private snackbarError: ZenSnackbarErrorService
+  ) {}
+
+  get file() {
+    return (<any>this.fileInput?.nativeElement).files[0];
+  }
 
   fileChange() {
     this.localFileName = this.file ? this.file.name : '';
   }
 
-  get file() {
-    return (<any>this.fileInput?.nativeElement).files[0];
-  }
   private reset() {
     this.localFileName = null;
     (<any>this.fileInput?.nativeElement).value = null;
@@ -43,15 +50,15 @@ export class ZenSampleUploadComponent {
       })
       .pipe(catchError(parseGqlErrors))
       .subscribe({
-        next: ({ data }) => {
-          console.log('Done uploading', data?.sampleUpload);
+        next: () => {
           this.isUploading = false;
+          this.snackbar.open('Uploaded', undefined, { duration: 2000 });
           this.reset();
         },
 
         error: (errors: GqlErrors) => {
           this.isUploading = false;
-          alert('File upload failed' + JSON.stringify(errors));
+          this.snackbarError.open(errors);
         },
       });
   }

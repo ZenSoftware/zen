@@ -14,7 +14,7 @@ export class ZenSnackbarErrorService {
     });
 
     snackBarRef.onAction().subscribe(() => {
-      navigator.clipboard.writeText(JSON.stringify(error)).then();
+      navigator.clipboard.writeText(JSON.stringify(error, null, 2)).then();
     });
   }
 }
