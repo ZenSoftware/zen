@@ -155,7 +155,7 @@ export class AuthResolver {
       throw new HttpException(ApiError.AuthPasswordResetConfirmation.UNAUTHORIZED, 400);
     }
 
-    let user = await this.getUserByUsername(tokenPayload.username, ctx.prisma);
+    let user = await ctx.prisma.user.findUnique({ where: { id: tokenPayload.sub } });
 
     if (!user) throw new HttpException(ApiError.AuthPasswordResetConfirmation.USER_NOT_FOUND, 400);
 
