@@ -71,8 +71,8 @@ export class Gulpfile {
     const packageJson = JSON.parse(packageFile.toString());
     const currentVersion: string = packageJson.version;
     const minorVersionIndex = 1 + currentVersion.lastIndexOf('.');
-    const currentMinorVersion = +currentVersion.substr(minorVersionIndex, currentVersion.length);
-    const newVersion = currentVersion.substr(0, minorVersionIndex) + (currentMinorVersion + 1);
+    const currentMinorVersion = +currentVersion.substring(minorVersionIndex, currentVersion.length);
+    const newVersion = currentVersion.substring(0, minorVersionIndex) + (currentMinorVersion + 1);
     packageJson.version = newVersion;
     fs.writeFileSync('package.json', JSON.stringify(packageJson));
     await this.execLocal(`prettier --write package.json`);
@@ -182,7 +182,7 @@ export class Gulpfile {
 
         const queryStartIndex = prismaScript.indexOf(QUERY_TOKEN) + QUERY_TOKEN.length + 1;
         const queryEndIndex = prismaScript.indexOf(MUTATION_TOKEN) - MUTATION_TOKEN.length;
-        const querySection = prismaScript.substr(
+        const querySection = prismaScript.substring(
           queryStartIndex,
           queryEndIndex - queryStartIndex + 2
         );
@@ -191,7 +191,7 @@ export class Gulpfile {
         const queryNames = [];
         for (const line of querySectionLines) {
           if (regExpHasResolverName.test(line)) {
-            queryNames.push(line.substr(0, line.indexOf(':')).trim());
+            queryNames.push(line.substring(0, line.indexOf(':')).trim());
           }
         }
 
@@ -202,12 +202,12 @@ export class Gulpfile {
 
         const mutationStartIndex = prismaScript.indexOf(MUTATION_TOKEN) + MUTATION_TOKEN.length + 1;
         const mutationEndIndex = prismaScript.length - mutationStartIndex - 1;
-        const mutationSection = prismaScript.substr(mutationStartIndex, mutationEndIndex);
+        const mutationSection = prismaScript.substring(mutationStartIndex, mutationEndIndex);
         const mutationSectionLines = mutationSection.split('\n');
         const mutationNames = [];
         for (const line of mutationSectionLines) {
           if (regExpHasResolverName.test(line)) {
-            mutationNames.push(line.substr(0, line.indexOf(':')).trim());
+            mutationNames.push(line.substring(0, line.indexOf(':')).trim());
           }
         }
 
