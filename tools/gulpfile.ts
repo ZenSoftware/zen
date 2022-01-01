@@ -1,5 +1,6 @@
 import { exec } from 'child_process';
 import * as fs from 'fs';
+import { appendFile, readFile, readdir, writeFile } from 'fs/promises';
 import * as path from 'path';
 import { promisify } from 'util';
 
@@ -8,9 +9,9 @@ import * as gulp from 'gulp';
 import * as flatten from 'gulp-flatten';
 import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 
-const clientResolversTemplate = require(path.join(
+const clientQueriesTemplate = require(path.join(
   __dirname,
-  'tools/graphql-codegen/client-resolvers.temp.js'
+  'tools/graphql-codegen/client-queries.temp.js'
 ));
 const clientFieldsTemplate = require(path.join(
   __dirname,
@@ -31,10 +32,6 @@ const nestMutationTemplate = require(path.join(
 ));
 
 const execAsync = promisify(exec);
-const readdirAsync = promisify(fs.readdir);
-const writeFileAsync = promisify(fs.writeFile);
-const readFileAsync = promisify(fs.readFile);
-const appendFileAsync = promisify(fs.appendFile);
 
 //=============================================================================
 /**
@@ -67,7 +64,7 @@ export class Gulpfile {
   //---------------------------------------------------------------------------
   @Task('increment-version')
   async incrementVersion(cb) {
-    const packageFile = await readFileAsync('package.json');
+    const packageFile = await readFile('package.json');
     const packageJson = JSON.parse(packageFile.toString());
     const currentVersion: string = packageJson.version;
     const minorVersionIndex = 1 + currentVersion.lastIndexOf('.');
@@ -82,16 +79,16 @@ export class Gulpfile {
 
   @Task('create-deploy-package')
   async createDeployPackage(cb) {
-    const packageFile = await readFileAsync('package.json');
+    const packageFile = await readFile('package.json');
     const packageJson = JSON.parse(packageFile.toString());
     delete packageJson.scripts.postinstall;
-    fs.writeFileSync('dist/package-deploy.json', JSON.stringify(packageJson));
+    fs.writeFileSync('dist/package-deploy.json', JSON.stringify(packageJson, undefined, 2));
     cb();
   }
 
   @Task('deploy:api')
   async deployApi(cb) {
-    const packageFile = await readFileAsync('package.json');
+    const packageFile = await readFile('package.json');
     const packageJson = JSON.parse(packageFile.toString());
     const versionAddress = `zenacr.azurecr.io/api:${packageJson.version}`;
     const latestAddress = `zenacr.azurecr.io/api:latest`;
@@ -109,32 +106,33 @@ export class Gulpfile {
   }
   //---------------------------------------------------------------------------
   async createApolloAngularPrismaFile(prismaNames: string[]) {
-    console.log(`---- Generate Apollo Client Resolvers & Fields Templates ----`);
+    console.log(`------------ Apollo client queries & fields generated ------------`);
+
     const fieldsIndexPath = path.join(CONFIG.gql.clientFieldsPath, `index.ts`);
     if (!fs.existsSync(fieldsIndexPath)) {
-      await writeFileAsync(fieldsIndexPath, '');
+      await writeFile(fieldsIndexPath, '');
       console.log(`- Wrote: ${fieldsIndexPath}`);
     }
 
-    let fieldsIndexSource = (await readFileAsync(fieldsIndexPath)).toString();
+    let fieldsIndexSource = (await readFile(fieldsIndexPath)).toString();
 
     for (const prismaName of prismaNames) {
       const prismaPath = path.join(CONFIG.gql.clientPrismaPath, `${prismaName}.gql.ts`);
       const fieldsPath = path.join(CONFIG.gql.clientFieldsPath, `${prismaName}.gql.ts`);
 
       if (!fs.existsSync(fieldsPath)) {
-        await writeFileAsync(fieldsPath, clientFieldsTemplate(prismaName));
+        await writeFile(fieldsPath, clientFieldsTemplate(prismaName));
         console.log(`- Wrote: ${fieldsPath}`);
       }
 
       const exportScript = `export * from './${prismaName}.gql';`;
       if (!fieldsIndexSource.includes(exportScript)) {
-        await appendFileAsync(fieldsIndexPath, exportScript + '\n');
+        await appendFile(fieldsIndexPath, exportScript + '\n');
         fieldsIndexSource += exportScript + '\n';
       }
 
       if (!fs.existsSync(prismaPath)) {
-        await writeFileAsync(prismaPath, clientResolversTemplate(prismaName));
+        await writeFile(prismaPath, clientQueriesTemplate(prismaName));
         console.log(`- Wrote: ${prismaPath}`);
       }
     }
@@ -145,10 +143,10 @@ export class Gulpfile {
     const PRISMA_PATH = `${CONFIG.gql.apiPath}/generated`;
     const RESOLVERS_PATH = `${CONFIG.gql.apiPath}/resolvers`;
 
-    console.log(`------------------ @paljs/cli generate ------------------`);
+    console.log(`---------------------- @paljs/cli generated ----------------------`);
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
 
-    console.log(`---------- Zen Nest GraphQL Resolvers generate ----------`);
+    console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
     if (!fs.existsSync(RESOLVERS_PATH)) {
       fs.mkdirSync(RESOLVERS_PATH);
     }
@@ -163,7 +161,7 @@ export class Gulpfile {
     }
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
-    const dirents = await readdirAsync(PRISMA_PATH, { withFileTypes: true });
+    const dirents = await readdir(PRISMA_PATH, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
     prismaNames = prismaNames.sort();
 
@@ -215,12 +213,9 @@ export class Gulpfile {
         for (const mutationName of mutationNames) {
           mutationSource += nestMutationTemplate(mutationName);
         }
-        mutationSource = mutationSource.trimRight();
+        mutationSource = mutationSource.trimEnd();
 
-        await writeFileAsync(
-          outPath,
-          nestResolversTemplate(prismaName, querySource, mutationSource)
-        );
+        await writeFile(outPath, nestResolversTemplate(prismaName, querySource, mutationSource));
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }
@@ -229,15 +224,12 @@ export class Gulpfile {
     console.log(`* Total resolver files wrote: ${wroteCount}`);
 
     // Get the data type names via the filename of the "resolvers" directory
-    let dataTypeNames = (await readdirAsync(RESOLVERS_PATH))
-      .filter(f => {
-        const basename = path.basename(f);
-        return basename !== 'index.ts' && basename !== 'debug.log';
-      })
+    let dataTypeNames = (await readdir(RESOLVERS_PATH))
+      .filter(f => path.basename(f) !== 'index.ts')
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
-    await writeFileAsync(indexPath, nestResolversIndexTemplate(dataTypeNames));
+    await writeFile(indexPath, nestResolversIndexTemplate(dataTypeNames));
     console.log(`- Wrote: ${indexPath}\n`);
 
     await this.execLocal(`prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"\n`);

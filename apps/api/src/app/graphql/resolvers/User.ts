@@ -19,7 +19,7 @@ import { IContext } from '../models';
 export const UserTypeDef = null;
 // export const UserTypeDef = gql`
 //   extend type Query {
-//     sampleUserQuery: User!
+//     sampleUserQuery: User
 //   }
 //   extend type Mutation {
 //     sampleUserMutation(args: Int!): Boolean

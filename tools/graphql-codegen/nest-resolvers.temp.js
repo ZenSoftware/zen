@@ -11,7 +11,7 @@ import { IContext } from '../models';
 export const ${prismaName}TypeDef = null;
 // export const ${prismaName}TypeDef = gql\`
 //   extend type Query {
-//     sample${prismaName}Query: ${prismaName}!
+//     sample${prismaName}Query: ${prismaName}
 //   }
 //   extend type Mutation {
 //     sample${prismaName}Mutation(args: Int!): Boolean
