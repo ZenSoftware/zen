@@ -41,7 +41,7 @@ export class AuthService {
     private authExchangeTokenGQL: AuthExchangeTokenGQL,
     private env: Environment
   ) {
-    if (this._loggedIn) {
+    if (this.validSession) {
       try {
         // Initialize apollo client state
         const roles = ls.get(LocalStorageKey.roles, { decrypt: true }) as string[];
@@ -147,7 +147,7 @@ export class AuthService {
     return ls.get(LocalStorageKey.rememberMe) as boolean;
   }
 
-  private get _loggedIn(): boolean {
+  private get validSession(): boolean {
     return this.sessionTimeRemaining > 0;
   }
 
@@ -204,7 +204,7 @@ export class AuthService {
   private startExchangeInterval() {
     if (!this.rememberMe && !this.#exchangeIntervalSubscription) {
       this.#exchangeIntervalSubscription = interval(this.env.jwtExchangeInterval).subscribe(() => {
-        if (this._loggedIn) this.exchangeToken();
+        if (this.validSession) this.exchangeToken();
         else this.logout();
       });
     }
