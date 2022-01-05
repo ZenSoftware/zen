@@ -198,7 +198,6 @@ export class Gulpfile {
         const mutationStartIndex = prismaScript.indexOf(MUTATION_TOKEN) + MUTATION_TOKEN.length + 1;
         const mutationEndIndex = prismaScript.length - 1;
         const mutationSection = prismaScript.substring(mutationStartIndex, mutationEndIndex);
-        console.log(mutationSection);
         const mutationSectionLines = mutationSection.split('\n');
 
         const mutationNames = [];
