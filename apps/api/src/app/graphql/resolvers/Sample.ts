@@ -8,7 +8,7 @@ import { interval } from 'rxjs';
 import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
 import type { FileInfo } from '../models';
 
-export const SampleTypeDef = gql`
+export const typeDef = gql`
   extend type Mutation {
     sampleUpload(file: Upload!): Boolean!
   }

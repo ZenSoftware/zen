@@ -16,8 +16,8 @@ import { PrismaSelectArgs } from '../../prisma';
 import resolvers from '../generated/User/resolvers';
 import { IContext } from '../models';
 
-export const UserTypeDef = null;
-// export const UserTypeDef = gql`
+export const typeDef = null;
+// export const typeDef = gql`
 //   extend type Query {
 //     sampleUserQuery: User
 //   }

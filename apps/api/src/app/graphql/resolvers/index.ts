@@ -2,9 +2,9 @@ import { mergeTypeDefs } from '@graphql-tools/merge';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
 import PRISMA_TYPE_DEFS from '../generated/typeDefs';
-import { AuthResolver, AuthTypeDef } from './Auth';
-import { SampleResolver, SampleTypeDef } from './Sample';
-import { UserResolver, UserTypeDef } from './User';
+import { AuthResolver, typeDef as AuthTypeDef } from './Auth';
+import { SampleResolver, typeDef as SampleTypeDef } from './Sample';
+import { UserResolver, typeDef as UserTypeDef } from './User';
 
 export const NEST_RESOLVERS = [AuthResolver, SampleResolver, UserResolver];
 

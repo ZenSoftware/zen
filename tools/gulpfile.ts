@@ -179,11 +179,8 @@ export class Gulpfile {
         const prismaScript = fs.readFileSync(pathName).toString();
 
         const queryStartIndex = prismaScript.indexOf(QUERY_TOKEN) + QUERY_TOKEN.length + 1;
-        const queryEndIndex = prismaScript.indexOf(MUTATION_TOKEN) - MUTATION_TOKEN.length;
-        const querySection = prismaScript.substring(
-          queryStartIndex,
-          queryEndIndex - queryStartIndex + 2
-        );
+        const queryEndIndex = prismaScript.indexOf(MUTATION_TOKEN) - MUTATION_TOKEN.length + 3;
+        const querySection = prismaScript.substring(queryStartIndex, queryEndIndex);
         const querySectionLines = querySection.split('\n');
 
         const queryNames = [];
@@ -199,9 +196,11 @@ export class Gulpfile {
         }
 
         const mutationStartIndex = prismaScript.indexOf(MUTATION_TOKEN) + MUTATION_TOKEN.length + 1;
-        const mutationEndIndex = prismaScript.length - mutationStartIndex - 1;
+        const mutationEndIndex = prismaScript.length - 1;
         const mutationSection = prismaScript.substring(mutationStartIndex, mutationEndIndex);
+        console.log(mutationSection);
         const mutationSectionLines = mutationSection.split('\n');
+
         const mutationNames = [];
         for (const line of mutationSectionLines) {
           if (regExpHasResolverName.test(line)) {

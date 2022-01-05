@@ -6,7 +6,7 @@ import PRISMA_TYPE_DEFS from '../generated/typeDefs';\n`;
 
   // Construct the "resolvers" directory's "index.ts"
   indexSource += dataTypeNames
-    .map(n => `import { ${n}Resolver, ${n}TypeDef } from './${n}';`)
+    .map(n => `import { ${n}Resolver, typeDef as ${n}TypeDef } from './${n}';`)
     .reduce((prev, curr, i, []) => prev + '\n' + curr);
 
   // Create an ES6 export to automate the importing of all Nest resolvers in bulk
