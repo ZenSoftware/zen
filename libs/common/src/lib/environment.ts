@@ -1,10 +1,10 @@
 export abstract class Environment {
-  abstract readonly authenticatedRedirectPath: string;
   abstract readonly production: boolean;
   abstract readonly publicRegistration: boolean;
   abstract readonly jwtExchangeInterval: number;
   abstract readonly rememberMeExchangeThreshold: number;
   abstract readonly url: {
+    readonly loginRedirect: string;
     readonly api: string;
     readonly portal: string;
     readonly graphql: string;
@@ -13,12 +13,12 @@ export abstract class Environment {
 }
 
 export class EnvironmentDev implements Environment {
-  authenticatedRedirectPath = '/';
   production = false;
   publicRegistration = true;
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
   url = {
+    loginRedirect: '/',
     api: 'http://localhost:7080',
     portal: 'http://localhost:4200/#/',
     graphql: 'http://localhost:7080/graphql',
@@ -27,12 +27,12 @@ export class EnvironmentDev implements Environment {
 }
 
 export class EnvironmentProd implements Environment {
-  authenticatedRedirectPath = '/';
   production = true;
-  publicRegistration = false;
+  publicRegistration = true;
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
   url = {
+    loginRedirect: '/',
     api: 'https://api.site.com',
     portal: 'https://portal.site.com/#/',
     graphql: 'https://api.site.com/graphql',
