@@ -20,7 +20,7 @@ import {
   IContext,
 } from '../models';
 
-export const typeDef = gql`
+export const typeDefs = gql`
   extend type Query {
     authLogin(data: AuthLoginInput!): AuthSession!
     authExchangeToken(data: AuthExchangeTokenInput): AuthSession!

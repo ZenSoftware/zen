@@ -8,8 +8,8 @@ import { PrismaSelectArgs } from '../../prisma';
 import resolvers from '../generated/${prismaName}/resolvers';
 import { IContext } from '../models';
 
-export const typeDef = null;
-// export const typeDef = gql\`
+export const typeDefs = null;
+// export const typeDefs = gql\`
 //   extend type Query {
 //     sample${prismaName}Query: ${prismaName}
 //   }
