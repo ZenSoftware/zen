@@ -15,6 +15,8 @@ import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 
+const EMAIL_MIN_LENGTH = 6;
+
 @Component({
   selector: 'zen-password-reset-request-form',
   templateUrl: './zen-password-reset-request-form.component.html',
@@ -41,8 +43,9 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
         [
           Validators.required,
           Validators.minLength(
-            // 6 is the shortest email length: a@b.cd
-            ApiConstants.USERNAME_MIN_LENGTH < 6 ? ApiConstants.USERNAME_MIN_LENGTH : 6
+            ApiConstants.USERNAME_MIN_LENGTH < EMAIL_MIN_LENGTH
+              ? ApiConstants.USERNAME_MIN_LENGTH
+              : EMAIL_MIN_LENGTH
           ),
           Validators.maxLength(254),
           this.includesSpaceValidator(),
