@@ -19,18 +19,18 @@ gql`
 })
 export class ZenSampleUploadComponent {
   @ViewChild('fileInput', { static: true })
-  fileInput?: ElementRef<HTMLInputElement>;
+  fileInput!: ElementRef<HTMLInputElement>;
   fileName = '';
   isUploading = false;
 
   constructor(
     private snackbar: MatSnackBar,
-    private sampleUploadGQL: SampleUploadGQL,
-    private snackbarError: ZenSnackbarErrorService
+    private snackbarError: ZenSnackbarErrorService,
+    private sampleUploadGQL: SampleUploadGQL
   ) {}
 
   get file() {
-    return (<any>this.fileInput?.nativeElement).files[0];
+    return this.fileInput.nativeElement.files?.[0];
   }
 
   fileChange() {
@@ -39,7 +39,7 @@ export class ZenSampleUploadComponent {
 
   private reset() {
     this.fileName = '';
-    (<any>this.fileInput?.nativeElement).value = null;
+    (<any>this.fileInput.nativeElement).value = null;
   }
 
   upload() {
