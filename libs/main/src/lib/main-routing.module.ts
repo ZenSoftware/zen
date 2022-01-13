@@ -5,12 +5,11 @@ import { LoggedInGuard } from '@zen/auth';
 import { ZenMainComponent } from './zen-main/zen-main.component';
 
 const routes: Routes = [
-  // TODO: make default portal path configurable
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: '',
     component: ZenMainComponent,
-    canActivate: [LoggedInGuard],
+    canLoad: [LoggedInGuard],
     loadChildren: () => import('./zen-portal/zen-portal.module').then(m => m.ZenPortalModule),
   },
 ];
