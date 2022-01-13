@@ -10,11 +10,6 @@ export class LoginPageGuard implements CanActivate {
   constructor(private router: Router, private env: Environment) {}
 
   canActivate() {
-    if (!loggedInVar()) {
-      return true;
-    }
-
-    this.router.navigateByUrl(this.env.url.loginRedirect);
-    return false;
+    return !loggedInVar() ? true : this.router.createUrlTree([this.env.url.loginRedirect]);
   }
 }

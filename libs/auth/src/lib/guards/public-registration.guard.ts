@@ -9,11 +9,6 @@ export class PublicRegistrationGuard implements CanActivate {
   constructor(private router: Router, private env: Environment) {}
 
   canActivate() {
-    if (this.env.publicRegistration) {
-      return true;
-    }
-
-    this.router.navigateByUrl('/');
-    return false;
+    return this.env.publicRegistration ? true : this.router.createUrlTree(['']);
   }
 }

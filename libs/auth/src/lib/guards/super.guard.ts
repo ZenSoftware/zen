@@ -11,11 +11,6 @@ export class SuperGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
 
   canActivate() {
-    if (this.auth.userHasRole(Role.Super)) {
-      return true;
-    }
-
-    this.router.navigateByUrl('/login');
-    return false;
+    return this.auth.userHasRole(Role.Super) ? true : this.router.createUrlTree(['/login']);
   }
 }
