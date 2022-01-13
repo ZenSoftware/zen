@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Router } from '@angular/router';
+import { CanActivate, CanLoad, Router } from '@angular/router';
 import { loggedInVar } from '@zen/graphql/client';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoggedInGuard implements CanLoad {
+export class LoggedInGuard implements CanActivate, CanLoad {
   constructor(private router: Router) {}
 
-  canLoad() {
+  canActivate() {
     return loggedInVar() ? true : this.router.createUrlTree(['/login']);
+  }
+
+  canLoad() {
+    return this.canActivate();
   }
 }

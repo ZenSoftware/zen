@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SuperGuard } from '@zen/auth';
+import { LoggedInGuard, SuperGuard } from '@zen/auth';
 
 import { ZenDashboardComponent } from './zen-dashboard/zen-dashboard.component';
 import { ZenPortalMainComponent } from './zen-portal-main/zen-portal-main.component';
@@ -9,6 +9,7 @@ export const ROUTES: Routes = [
   {
     path: '',
     component: ZenPortalMainComponent,
+    canActivate: [LoggedInGuard],
     children: [
       {
         path: 'dashboard',
