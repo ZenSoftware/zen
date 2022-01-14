@@ -32,7 +32,7 @@
 
   <div @verticalAccordion *ngIf="done && enableDoneSection" class="text-center my-3">
     <span class="text-sm">{{doneMessage}}</span>
-    <mat-progress-bar  mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
 
   <mat-error @verticalAccordion *ngIf="generalError" class="text-center my-3">
