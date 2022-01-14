@@ -22,13 +22,13 @@ import { usernameValidator } from '../validators';
   animations: [...verticalAccordion],
 })
 export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('usernameInput') usernameInput?: ElementRef<HTMLInputElement>;
-  @ViewChild('passwordInput') passwordInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Input() doneMessage = 'Redirecting...';
   @Input() enableDoneSection = true;
   @Output() loggedIn = new EventEmitter();
 
-  #subs: Array<Subscription | undefined> = [];
+  #subs: Array<Subscription> = [];
   #incorrectPassword = false;
   #usernameNotFound = false;
   loading = false;
@@ -47,12 +47,12 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
       rememberMe: [false],
     });
 
-    const sub1 = this.username?.valueChanges.subscribe(() => {
+    const sub1 = this.username.valueChanges.subscribe(() => {
       this.#usernameNotFound = false;
     });
     this.#subs.push(sub1);
 
-    const sub2 = this.password?.valueChanges.subscribe(() => {
+    const sub2 = this.password.valueChanges.subscribe(() => {
       this.#incorrectPassword = false;
     });
     this.#subs.push(sub2);
@@ -60,7 +60,7 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.usernameInput?.nativeElement.select();
+      this.usernameInput.nativeElement.select();
     });
   }
 
@@ -84,11 +84,11 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
   }
 
   usernameNotFoundValidator(): ValidatorFn {
-    return control => (this.#usernameNotFound ? { notFound: true } : null);
+    return () => (this.#usernameNotFound ? { notFound: true } : null);
   }
 
   incorrectPasswordValidator(): ValidatorFn {
-    return control => (this.#incorrectPassword ? { incorrect: true } : null);
+    return () => (this.#incorrectPassword ? { incorrect: true } : null);
   }
 
   onSubmit() {
@@ -119,14 +119,14 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.password.updateValueAndValidity();
-              this.passwordInput?.nativeElement.select();
+              this.passwordInput.nativeElement.select();
             }
 
             if (errors.find(e => e === 'USER_NOT_FOUND')) {
               this.generalError = false;
               this.#usernameNotFound = true;
               this.username.updateValueAndValidity();
-              this.usernameInput?.nativeElement.select();
+              this.usernameInput.nativeElement.select();
             }
           },
         });
@@ -134,6 +134,6 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s?.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }
