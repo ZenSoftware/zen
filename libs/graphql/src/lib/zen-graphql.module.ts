@@ -15,14 +15,14 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition, getOperationName } from '@apollo/client/utilities';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { BatchOptions, HttpBatchLink, HttpBatchLinkHandler } from 'apollo-angular/http';
-import { UploadLinkOptions, createUploadLink } from 'apollo-upload-client';
+import { createUploadLink } from 'apollo-upload-client';
 import { OperationDefinitionNode } from 'graphql';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export abstract class GraphQLOptions {
   resolvers?: any;
   cacheOptions?: InMemoryCacheConfig;
-  uploadOptions?: UploadLinkOptions & { mutationNames: string[] };
+  uploadOptions?: createUploadLink.UploadLinkOptions & { mutationNames: string[] };
   batchOptions?: BatchOptions;
   websocketOptions?: WebSocketLink.Configuration;
 }
