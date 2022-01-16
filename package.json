@@ -18,6 +18,7 @@
     "docker:run-api": "docker run -d --name zen-api -p 7080:7080 zen-api",
     "docs": "ng compodoc api",
     "test": "nx test",
+    "lint": "nx run-many --all --target=lint",
     "build": "ng build",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main"
   },
