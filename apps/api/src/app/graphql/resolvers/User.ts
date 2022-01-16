@@ -16,18 +16,18 @@ import { PrismaSelectArgs } from '../../prisma';
 import resolvers from '../generated/User/resolvers';
 import { IContext } from '../models';
 
-export const typeDefs = null;
-// export const typeDefs = gql`
-//   extend type Query {
-//     sampleUserQuery: User
-//   }
-//   extend type Mutation {
-//     sampleUserMutation(args: Int!): Boolean
-//   }
-//   extend type User {
-//     sampleUserField: String
-//   }
-// `;
+// export const typeDefs = null;
+export const typeDefs = gql`
+  extend type Query {
+    sampleUserQuery: User
+  }
+  extend type Mutation {
+    sampleUserMutation(args: Int!): Boolean
+  }
+  extend type User {
+    sampleUserField: String
+  }
+`;
 
 @Resolver('User')
 @UseGuards(GqlGuard)

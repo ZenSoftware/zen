@@ -78,7 +78,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   }
 
   notFoundValidator(): ValidatorFn {
-    return control => {
+    return () => {
       if (this.#notFound) return { notFound: true };
       return null;
     };

@@ -13,6 +13,12 @@
     {
       "files": ["*.js", "*.jsx"],
       "rules": {}
+    },
+    {
+      "files": ["src/app/graphql/resolvers/*.ts"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": 0
+      }
     }
   ]
 }

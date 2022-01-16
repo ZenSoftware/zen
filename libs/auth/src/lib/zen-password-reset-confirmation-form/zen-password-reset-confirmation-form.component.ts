@@ -10,11 +10,8 @@ import {
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  ApiError,
   AuthPasswordResetConfirmation,
   AuthPasswordResetConfirmationGQL,
-  AuthSession,
-  GqlErrors,
   parseGqlErrors,
 } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -120,7 +117,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
               this.confirmed.emit();
             }, 5000);
           },
-          error: (errors: GqlErrors<ApiError.AuthPasswordResetConfirmation>) => {
+          error: () => {
             this.loading = false;
             this.generalError = true;
             this.form.enable();

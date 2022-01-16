@@ -88,7 +88,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   }
 
   usernameTakenValidator(): ValidatorFn {
-    return control => {
+    return () => {
       if (this.#usernameTaken) return { usernameTaken: true };
       return null;
     };
@@ -102,7 +102,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   }
 
   emailTakenValidator(): ValidatorFn {
-    return control => {
+    return () => {
       if (this.#emailTaken) return { emailTaken: true };
       return null;
     };

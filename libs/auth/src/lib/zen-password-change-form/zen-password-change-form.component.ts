@@ -84,7 +84,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   }
 
   incorrectPasswordValidator(): ValidatorFn {
-    return control => {
+    return () => {
       if (this.#incorrectPassword) return { incorrect: true };
       return null;
     };

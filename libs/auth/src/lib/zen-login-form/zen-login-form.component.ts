@@ -84,11 +84,11 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
   }
 
   usernameNotFoundValidator(): ValidatorFn {
-    return control => (this.#usernameNotFound ? { notFound: true } : null);
+    return () => (this.#usernameNotFound ? { notFound: true } : null);
   }
 
   incorrectPasswordValidator(): ValidatorFn {
-    return control => (this.#incorrectPassword ? { incorrect: true } : null);
+    return () => (this.#incorrectPassword ? { incorrect: true } : null);
   }
 
   onSubmit() {
