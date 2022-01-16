@@ -1,3 +1,6 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+/* eslint-disable  @typescript-eslint/no-empty-function */
+
 // https://itnext.io/what-do-need-know-about-enumerations-in-typescript-48b554cec43b
 
 export class EnumHelper {

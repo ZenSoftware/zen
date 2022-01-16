@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'portal-root',
+  selector: 'zen-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })

@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Query, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Prisma } from '@prisma/client';
 
@@ -11,20 +11,13 @@ import { PrismaService } from '../prisma';
 export class ToolsController {
   constructor(private readonly prisma: PrismaService) {}
 
-  // @Post('migrate')
-  // async migrate() {
-  //   return { message: `migration done` };
-  // }
-
-  // @Post('test')
-  // async test() {
+  // @Get('meta')
+  // async meta() {
   //   Prisma.dmmf.datamodel.models.forEach(model => {
   //     console.log(model.name);
   //     model.fields.forEach(field => {
-  //       console.log(`  ${field.name} - ${field.kind}`);
+  //       console.log(`  ${field.name} ${field.type}`);
   //     });
   //   });
-
-  //   return { message: 'done' };
   // }
 }

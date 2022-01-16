@@ -13,7 +13,6 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "zen",
             "style": "camelCase"
           }
         ],

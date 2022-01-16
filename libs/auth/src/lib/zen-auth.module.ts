@@ -11,7 +11,7 @@ import { ZenComponentsModule } from '@zen/components';
 
 import {
   IfLoggedInDirective,
-  IfPublicRegistration,
+  IfPublicRegistrationDirective,
   NotRolesDirective,
   RolesDirective,
 } from './directives';
@@ -47,7 +47,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
   ],
   declarations: [
     IfLoggedInDirective,
-    IfPublicRegistration,
+    IfPublicRegistrationDirective,
     NotRolesDirective,
     RolesDirective,
     ZenLoginFormComponent,
@@ -68,7 +68,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
   ],
   exports: [
     IfLoggedInDirective,
-    IfPublicRegistration,
+    IfPublicRegistrationDirective,
     NotRolesDirective,
     RolesDirective,
     ZenLoginFormComponent,

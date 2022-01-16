@@ -4,7 +4,7 @@ import { Environment } from '@zen/common';
 @Directive({
   selector: '[ifPublicRegistration]',
 })
-export class IfPublicRegistration {
+export class IfPublicRegistrationDirective {
   #embededViewRef: any;
   #ifPublicRegistration?: boolean | '';
 
