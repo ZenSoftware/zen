@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { ApiError, AuthRegisterGQL, AuthSession, GqlErrors, parseGqlErrors } from '@zen/graphql';
+import { ApiError, AuthRegister, AuthRegisterGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -22,11 +22,11 @@ import { emailValidator, passwordValidator, usernameValidator } from '../validat
   animations: [...verticalAccordion],
 })
 export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('usernameInput') usernameInput?: ElementRef<HTMLInputElement>;
-  @ViewChild('emailInput') emailInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
   @Output() registered = new EventEmitter();
 
-  #subs: Array<Subscription | undefined> = [];
+  #subs: Array<Subscription> = [];
   #usernameTaken = false;
   #emailTaken = false;
   form: FormGroup;
@@ -63,7 +63,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.usernameInput?.nativeElement.select();
+      this.usernameInput.nativeElement.select();
     });
   }
 
@@ -146,7 +146,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
-            this.auth.setSession(data?.authRegister as AuthSession);
+            this.auth.setSession((<AuthRegister>data).authRegister);
             this.registered.emit();
           },
 
@@ -160,14 +160,14 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
               this.generalError = false;
               this.#emailTaken = true;
               this.email.updateValueAndValidity();
-              this.emailInput?.nativeElement.select();
+              this.emailInput.nativeElement.select();
             }
 
             if (errors.find(e => e === 'USERNAME_TAKEN')) {
               this.generalError = false;
               this.#usernameTaken = true;
               this.username.updateValueAndValidity();
-              this.usernameInput?.nativeElement.select();
+              this.usernameInput.nativeElement.select();
             }
           },
         });
@@ -175,6 +175,6 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s?.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }

@@ -23,10 +23,10 @@ const EMAIL_MIN_LENGTH = 6;
   animations: [...verticalAccordion],
 })
 export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('emailUsernameInput') emailUsernameInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('emailUsernameInput') emailUsernameInput!: ElementRef<HTMLInputElement>;
   @Output() sent = new EventEmitter();
 
-  #subs: Array<Subscription | undefined> = [];
+  #subs: Array<Subscription> = [];
   #notFound = false;
   loading = false;
   completed = false;
@@ -62,7 +62,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.emailUsernameInput?.nativeElement.select();
+      this.emailUsernameInput.nativeElement.select();
     });
   }
 
@@ -78,7 +78,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   }
 
   notFoundValidator(): ValidatorFn {
-    return () => {
+    return control => {
       if (this.#notFound) return { notFound: true };
       return null;
     };
@@ -115,7 +115,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
               this.generalError = false;
               this.#notFound = true;
               this.emailOrUsername.updateValueAndValidity();
-              this.emailUsernameInput?.nativeElement.select();
+              this.emailUsernameInput.nativeElement.select();
             }
           },
         });
@@ -123,6 +123,6 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s?.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }

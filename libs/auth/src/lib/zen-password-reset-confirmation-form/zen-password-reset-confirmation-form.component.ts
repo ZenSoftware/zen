@@ -11,6 +11,7 @@ import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@a
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ApiError,
+  AuthPasswordResetConfirmation,
   AuthPasswordResetConfirmationGQL,
   AuthSession,
   GqlErrors,
@@ -29,10 +30,10 @@ import { passwordValidator } from '../validators';
   animations: [...verticalAccordion],
 })
 export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('passwordInput') passwordInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Output() confirmed = new EventEmitter();
 
-  #subs: Array<Subscription | undefined> = [];
+  #subs: Array<Subscription> = [];
   loading = false;
   completed = false;
   generalError = false;
@@ -60,7 +61,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.passwordInput?.nativeElement.select();
+      this.passwordInput.nativeElement.select();
     });
   }
 
@@ -110,7 +111,9 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
           next: ({ data }) => {
             this.loading = false;
             this.completed = true;
-            this.auth.setSession(data?.authPasswordResetConfirmation as AuthSession);
+            this.auth.setSession(
+              (<AuthPasswordResetConfirmation>data).authPasswordResetConfirmation
+            );
 
             setTimeout(() => {
               this.router.navigateByUrl('/');
@@ -127,6 +130,6 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s?.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }

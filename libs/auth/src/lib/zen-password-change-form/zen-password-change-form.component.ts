@@ -14,10 +14,10 @@ import { passwordValidator } from '../validators';
   animations: [...verticalAccordion],
 })
 export class ZenPasswordChangeFormComponent implements OnDestroy {
-  @ViewChild('oldPasswordInput') oldPasswordInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('oldPasswordInput') oldPasswordInput!: ElementRef<HTMLInputElement>;
   @Output() changed = new EventEmitter();
 
-  #subs: Array<Subscription | undefined> = [];
+  #subs: Array<Subscription> = [];
   #incorrectPassword = false;
   loading = false;
   completed = false;
@@ -94,7 +94,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
     this.completed = false;
     this.form.reset();
     this.form.enable();
-    setTimeout(() => this.oldPasswordInput?.nativeElement.select());
+    setTimeout(() => this.oldPasswordInput.nativeElement.select());
   }
 
   onSubmit() {
@@ -126,7 +126,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.oldPassword.updateValueAndValidity();
-              this.oldPasswordInput?.nativeElement.select();
+              this.oldPasswordInput.nativeElement.select();
             }
           },
         });
@@ -134,6 +134,6 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s?.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }
