@@ -1,4 +1,4 @@
-export { IContext } from './icontext';
+export { IContext } from './context';
 export * from './auth-exchange-token-input';
 export * from './auth-login-input';
 export * from './auth-password-change-input';
