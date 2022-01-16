@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ZenSnackbarErrorService {
   constructor(private snackBar: MatSnackBar) {}
 
-  open(error: any) {
+  open(error: unknown) {
     console.error(error);
 
     const snackBarRef = this.snackBar.open('ERROR', 'Copy', {

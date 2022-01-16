@@ -1,27 +1,36 @@
 import { ApiError } from '@zen/api-interfaces';
 import { throwError } from 'rxjs';
-export { ApiError } from '@zen/api-interfaces';
 
-export const parseGqlErrors = (errors: any) => throwError(() => new GqlErrors(errors));
+export const parseGqlErrors = (errors: ErrorResponse<unknown>) =>
+  throwError(() => new GqlErrors(errors));
+
+type UnparsedError<T> = {
+  extensions: { exception: { response: T } };
+};
+
+interface ErrorResponse<T> {
+  graphQLErrors: UnparsedError<T>[];
+}
 
 export class GqlErrors<T = any> {
   parsed: T[] = [];
-  original: any;
+  original: ErrorResponse<T>;
 
-  constructor(errors: any) {
+  constructor(errors: ErrorResponse<T>) {
     this.original = errors;
-    this.parsed = GqlErrors.extractGraphQLErrors(errors);
+    this.parsed = this.extractGraphQLErrors(errors);
   }
 
-  static extractGraphQLErrors(errors: any): Array<any> {
+  extractGraphQLErrors(errors: ErrorResponse<T>): Array<T> {
     if (errors?.graphQLErrors) {
-      return errors.graphQLErrors.reduce((results: any[], item: any) => {
+      return errors.graphQLErrors.reduce((results: T[], item) => {
         const error = item?.extensions?.exception?.response;
-        if (error) results.push(error);
+        if (error !== undefined) results.push(error);
 
         return results;
       }, []);
     }
+
     return [];
   }
 
@@ -33,6 +42,6 @@ export class GqlErrors<T = any> {
   }
 
   get hasThrottleError(): boolean {
-    return !!this.parsed.find((e: any) => e === ApiError.Nest.THROTTLE);
+    return !!this.parsed.find((e: unknown) => e === ApiError.Nest.THROTTLE);
   }
 }
