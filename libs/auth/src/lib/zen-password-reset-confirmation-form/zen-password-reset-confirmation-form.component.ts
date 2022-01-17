@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -25,6 +26,7 @@ import { passwordValidator } from '../validators';
   selector: 'zen-password-reset-confirmation-form',
   templateUrl: 'zen-password-reset-confirmation-form.component.html',
   animations: [...verticalAccordion],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit, OnDestroy {
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;

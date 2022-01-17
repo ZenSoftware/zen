@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnDestroy,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiError, AuthPasswordChangeGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
@@ -12,6 +20,7 @@ import { passwordValidator } from '../validators';
   selector: 'zen-password-change-form',
   templateUrl: 'zen-password-change-form.component.html',
   animations: [...verticalAccordion],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenPasswordChangeFormComponent implements OnDestroy {
   @ViewChild('oldPasswordInput') oldPasswordInput!: ElementRef<HTMLInputElement>;

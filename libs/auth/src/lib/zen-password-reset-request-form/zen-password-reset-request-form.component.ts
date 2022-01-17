@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -21,6 +22,7 @@ const EMAIL_MIN_LENGTH = 6;
   selector: 'zen-password-reset-request-form',
   templateUrl: './zen-password-reset-request-form.component.html',
   animations: [...verticalAccordion],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDestroy {
   @ViewChild('emailUsernameInput') emailUsernameInput!: ElementRef<HTMLInputElement>;

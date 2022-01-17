@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -20,6 +21,7 @@ import { emailValidator, passwordValidator, usernameValidator } from '../validat
   selector: 'zen-register-form',
   templateUrl: 'zen-register-form.component.html',
   animations: [...verticalAccordion],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
