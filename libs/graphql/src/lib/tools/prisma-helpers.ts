@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /**
  * ## Cleans & transforms input into a select object
  *
@@ -40,8 +42,7 @@
  * @param input - Array of items to be cleaned and serialized
  * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
- * @return `{outputField: number | string} | undefined` - Cleaned and serialized array of select objects.
- * `outputField` will be used for `inputField` if `inputField` is not specified.
+ * @return `{outputField: number | string} | undefined` - Cleaned and serialized select object.
  */
 export function selectOne<T>(
   item: T | number | string | null | undefined,
@@ -74,7 +75,7 @@ export function selectOne<T>(
     }
   }
 
-  return <any>undefined;
+  return undefined as any;
 }
 
 /**
@@ -183,9 +184,9 @@ export function selectMany<T>(
         return accum;
       }, []);
 
-      return result as Array<any>;
+      return result;
     }
   }
 
-  return <any>[];
+  return [];
 }
