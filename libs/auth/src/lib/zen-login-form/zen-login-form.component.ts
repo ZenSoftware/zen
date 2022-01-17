@@ -30,7 +30,7 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
   @Input() enableDoneSection = true;
   @Output() loggedIn = new EventEmitter();
 
-  #subs: Array<Subscription> = [];
+  #subs: Subscription[] = [];
   #incorrectPassword = false;
   #usernameNotFound = false;
   loading = false;
@@ -136,6 +136,6 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s.unsubscribe());
+    this.#subs.map(s => s.unsubscribe());
   }
 }

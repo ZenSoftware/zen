@@ -32,7 +32,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Output() confirmed = new EventEmitter();
 
-  #subs: Array<Subscription> = [];
+  #subs: Subscription[] = [];
   loading = false;
   completed = false;
   generalError = false;
@@ -129,6 +129,6 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s.unsubscribe());
+    this.#subs.map(s => s.unsubscribe());
   }
 }

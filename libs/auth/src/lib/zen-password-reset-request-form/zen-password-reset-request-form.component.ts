@@ -28,7 +28,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   @ViewChild('emailUsernameInput') emailUsernameInput!: ElementRef<HTMLInputElement>;
   @Output() sent = new EventEmitter();
 
-  #subs: Array<Subscription> = [];
+  #subs: Subscription[] = [];
   #notFound = false;
   loading = false;
   completed = false;
@@ -125,6 +125,6 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s.unsubscribe());
+    this.#subs.map(s => s.unsubscribe());
   }
 }

@@ -26,7 +26,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   @ViewChild('oldPasswordInput') oldPasswordInput!: ElementRef<HTMLInputElement>;
   @Output() changed = new EventEmitter();
 
-  #subs: Array<Subscription> = [];
+  #subs: Subscription[] = [];
   #incorrectPassword = false;
   loading = false;
   completed = false;
@@ -143,6 +143,6 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s.unsubscribe());
+    this.#subs.map(s => s.unsubscribe());
   }
 }

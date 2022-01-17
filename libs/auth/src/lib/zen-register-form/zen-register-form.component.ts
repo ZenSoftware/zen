@@ -28,7 +28,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
   @Output() registered = new EventEmitter();
 
-  #subs: Array<Subscription> = [];
+  #subs: Subscription[] = [];
   #usernameTaken = false;
   #emailTaken = false;
   form: FormGroup;
@@ -177,6 +177,6 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(s => s.unsubscribe());
+    this.#subs.map(s => s.unsubscribe());
   }
 }
