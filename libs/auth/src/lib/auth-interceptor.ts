@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { tokenVar } from './token-var';
 
 @Injectable()
-export class HttpRequestInterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
   apiHost: string;
   gqlHost: string;
 
