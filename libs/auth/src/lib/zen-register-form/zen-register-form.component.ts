@@ -137,13 +137,16 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
       this.form.disable();
 
       this.authRegisterGQL
-        .mutate({
-          data: {
-            username: this.username.value.trim(),
-            email: this.email.value.trim(),
-            password: this.password.value,
+        .mutate(
+          {
+            data: {
+              username: this.username.value.trim(),
+              email: this.email.value.trim(),
+              password: this.password.value,
+            },
           },
-        })
+          { fetchPolicy: 'no-cache' }
+        )
         .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: ({ data }) => {

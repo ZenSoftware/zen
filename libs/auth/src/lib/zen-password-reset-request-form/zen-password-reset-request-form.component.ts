@@ -99,7 +99,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
               emailOrUsername: this.emailOrUsername.value.trim(),
             },
           },
-          { fetchPolicy: 'network-only' }
+          { fetchPolicy: 'no-cache' }
         )
         .pipe(catchError(parseGqlErrors))
         .subscribe({

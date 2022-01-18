@@ -113,12 +113,15 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
       this.form.disable();
 
       this.authPasswordChangeGQL
-        .mutate({
-          data: {
-            oldPassword: this.oldPassword.value,
-            newPassword: this.newPassword.value,
+        .mutate(
+          {
+            data: {
+              oldPassword: this.oldPassword.value,
+              newPassword: this.newPassword.value,
+            },
           },
-        })
+          { fetchPolicy: 'no-cache' }
+        )
         .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: () => {

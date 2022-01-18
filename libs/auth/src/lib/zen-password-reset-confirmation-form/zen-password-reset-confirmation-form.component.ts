@@ -99,12 +99,15 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
       this.form.disable();
 
       this.authPasswordResetConfirmationGQL
-        .mutate({
-          data: {
-            newPassword: this.password.value,
-            token: this.token as string,
+        .mutate(
+          {
+            data: {
+              newPassword: this.password.value,
+              token: this.token as string,
+            },
           },
-        })
+          { fetchPolicy: 'no-cache' }
+        )
         .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: ({ data }) => {
