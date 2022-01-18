@@ -37,8 +37,8 @@ import { AppComponent } from './app.component';
       uploadOptions: {
         uri: environment.url.graphql,
         mutationNames: ['SampleUpload'],
-        fetch: (input: any, init: any) => {
-          init.headers.Authorization = 'Bearer ' + tokenVar();
+        fetch: (input, init) => {
+          (<any>init).headers.Authorization = 'Bearer ' + tokenVar();
           return fetch(input, init);
         },
       },
