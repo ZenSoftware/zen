@@ -9,12 +9,10 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import gql from 'graphql-tag';
 
-import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
+import { GqlGuard, Roles } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
 import resolvers from '../generated/User/resolvers';
-import { IContext } from '../models';
 
 export const typeDefs = null;
 // export const typeDefs = gql`
