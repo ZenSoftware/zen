@@ -1,16 +1,11 @@
 import { ApiError } from '@zen/api-interfaces';
 import { throwError } from 'rxjs';
 
+type UnparsedError<T> = { extensions: { exception: { response: T } } };
+type ErrorResponse<T> = { graphQLErrors: UnparsedError<T>[] };
+
 export const parseGqlErrors = (errors: ErrorResponse<unknown>) =>
   throwError(() => new GqlErrors(errors));
-
-type UnparsedError<T> = {
-  extensions: { exception: { response: T } };
-};
-
-interface ErrorResponse<T> {
-  graphQLErrors: UnparsedError<T>[];
-}
 
 export class GqlErrors<T = any> {
   parsed: T[] = [];
