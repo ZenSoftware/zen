@@ -6,6 +6,7 @@
   "scripts": {
     "start": "ng serve",
     "start:api": "concurrently \"ng serve api\" \"gulp handlebars:copy\" \"gulp handlebars:watch\"",
+    "start:e2e": "ng e2e portal-e2e --watch",
     "apollo:gen": "graphql-codegen -c apollo-angular.yml && graphql-codegen -c apollo-possible-types.yml",
     "gql:gen": "prisma generate && gulp gql:gen",
     "prisma:migrate": "prisma migrate dev && gulp gql:gen",
