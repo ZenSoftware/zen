@@ -32,7 +32,6 @@ import { AppComponent } from './app.component';
       batchOptions: {
         uri: environment.url.graphql,
         batchMax: 250,
-        withCredentials: true,
       },
       uploadOptions: {
         uri: environment.url.graphql,
