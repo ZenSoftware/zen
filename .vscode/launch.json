@@ -5,7 +5,7 @@
       "name": "Debug node",
       "type": "node",
       "request": "attach",
-      "port": "${input:port}",
+      "port": 9229,
       "restart": true,
       "stopOnEntry": false,
       "protocol": "inspector"
@@ -29,11 +29,6 @@
     }
   ],
   "inputs": [
-    {
-      "id": "port",
-      "type": "promptString",
-      "description": "Debug port"
-    },
     {
       "id": "project",
       "type": "promptString",
