@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
+import { ApolloServerPluginInlineTrace } from 'apollo-server-core';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { print } from 'graphql';
 
@@ -19,7 +20,7 @@ export class GqlConfigService implements GqlOptionsFactory {
       debug: !this.config.production,
       playground: false,
       plugins: this.config.graphql.sandbox
-        ? [ApolloServerPluginLandingPageLocalDefault]
+        ? [ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginInlineTrace()]
         : undefined,
       introspection: this.config.graphql.introspection,
       cors: this.config.cors,
