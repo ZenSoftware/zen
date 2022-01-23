@@ -1,12 +1,12 @@
 import { PrismaSelect } from '@paljs/plugins';
 
 export function PrismaSelectArgs(info, args) {
-  const select = new PrismaSelect(info).value;
+  const result = new PrismaSelect(info).value;
 
-  if (Object.keys(select.select).length > 0) {
+  if (!result.select || Object.keys(result.select).length > 0) {
     return {
       ...args,
-      ...select,
+      ...result,
     };
   }
 
