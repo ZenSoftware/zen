@@ -6,15 +6,6 @@
   "configurations": [
     {
       "type": "node",
-      "request": "launch",
-      "name": "api",
-      "program": "${workspaceFolder}/apps/api/src/main.ts",
-      "preLaunchTask": "tsc: watch - apps/api/tsconfig.app.json",
-      "outFiles": ["${workspaceFolder}/dist/apps/api/**/*.js"],
-      "skipFiles": ["${workspaceFolder}/node_modules/**/*.js", "<node_internals>/**/*.js"]
-    },
-    {
-      "type": "node",
       "request": "attach",
       "name": "node with port",
       "port": "${input:port}",
