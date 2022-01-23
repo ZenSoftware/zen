@@ -9,7 +9,8 @@ export class EnvironmentBase {
   readonly expressPort: string | number;
   readonly cors?: any | boolean;
   readonly graphql: {
-    readonly sandbox: boolean;
+    readonly sandbox: boolean; // http://localhost:7080/graphql
+    readonly trace?: boolean;
     readonly introspection: boolean;
     readonly uploads?: UploadOptions;
   };

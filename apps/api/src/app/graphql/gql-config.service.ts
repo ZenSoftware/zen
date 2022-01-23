@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
-import { ApolloServerPluginInlineTrace } from 'apollo-server-core';
+import { ApolloServerPluginInlineTrace, PluginDefinition } from 'apollo-server-core';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { print } from 'graphql';
 
@@ -14,14 +14,16 @@ export class GqlConfigService implements GqlOptionsFactory {
   constructor(private readonly config: ConfigService, private readonly prisma: PrismaService) {}
 
   createGqlOptions(): GqlModuleOptions {
+    const plugins: PluginDefinition[] = [];
+    if (this.config.graphql.sandbox) plugins.push(ApolloServerPluginLandingPageLocalDefault);
+    if (this.config.graphql.trace) plugins.push(ApolloServerPluginInlineTrace());
+
     return {
       typeDefs: print(ALL_TYPE_DEFS),
       installSubscriptionHandlers: true,
       debug: !this.config.production,
       playground: false,
-      plugins: this.config.graphql.sandbox
-        ? [ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginInlineTrace()]
-        : undefined,
+      plugins,
       introspection: this.config.graphql.introspection,
       cors: this.config.cors,
       subscriptions: {

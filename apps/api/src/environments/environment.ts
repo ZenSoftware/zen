@@ -11,8 +11,9 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   cors: { credentials: true, origin: true },
   graphql: {
-    sandbox: true, // localhost:7080/graphql
+    sandbox: true, // http://localhost:7080/graphql
     introspection: true,
+    trace: true,
     uploads: {
       maxFileSize: 20_000_000, // 20 MB
       maxFiles: 5,
