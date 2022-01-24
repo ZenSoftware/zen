@@ -5,7 +5,7 @@ import { LoggedInGuard } from '@zen/auth';
 import { ZenMainComponent } from './zen-main/zen-main.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: '',
     component: ZenMainComponent,
