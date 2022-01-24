@@ -1,0 +1,11 @@
+<ng-template #logo>
+  <ng-content ></ng-content>
+</ng-template>
+
+<a [routerLink]="env.url.loginRedirect" style="text-decoration:none;" *ifLoggedIn="true">
+  <ng-template *ngTemplateOutlet="logo"></ng-template>
+</a>
+
+<a routerLink="/" style="text-decoration:none;" *ifLoggedIn="false">
+  <ng-template *ngTemplateOutlet="logo"></ng-template>
+</a>

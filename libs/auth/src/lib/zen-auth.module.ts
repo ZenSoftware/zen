@@ -20,6 +20,7 @@ import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 import { ZenLoginComponent } from './zen-login/zen-login.component';
+import { ZenLogoComponent } from './zen-logo/zen-logo.component';
 import { ZenPasswordChangeFormComponent } from './zen-password-change-form/zen-password-change-form.component';
 import { ZenPasswordChangeComponent } from './zen-password-change/zen-password-change.component';
 import { ZenPasswordResetConfirmationFormComponent } from './zen-password-reset-confirmation-form/zen-password-reset-confirmation-form.component';
@@ -50,38 +51,42 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     IfPublicRegistrationDirective,
     NotRolesDirective,
     RolesDirective,
+
+    ZenLoginComponent,
     ZenLoginFormComponent,
     ZenLoginLinkComponent,
     ZenLoginPageComponent,
-    ZenLoginComponent,
-    ZenPasswordChangeFormComponent,
+    ZenLogoComponent,
     ZenPasswordChangeComponent,
+    ZenPasswordChangeFormComponent,
+    ZenPasswordResetConfirmationComponent,
     ZenPasswordResetConfirmationFormComponent,
     ZenPasswordResetConfirmationPageComponent,
-    ZenPasswordResetConfirmationComponent,
+    ZenPasswordResetRequestComponent,
     ZenPasswordResetRequestFormComponent,
     ZenPasswordResetRequestPageComponent,
-    ZenPasswordResetRequestComponent,
+    ZenRegisterComponent,
     ZenRegisterFormComponent,
     ZenRegisterPageComponent,
-    ZenRegisterComponent,
   ],
   exports: [
     IfLoggedInDirective,
     IfPublicRegistrationDirective,
     NotRolesDirective,
     RolesDirective,
+
+    ZenLoginComponent,
     ZenLoginFormComponent,
     ZenLoginLinkComponent,
-    ZenLoginComponent,
-    ZenPasswordChangeFormComponent,
+    ZenLogoComponent,
     ZenPasswordChangeComponent,
-    ZenPasswordResetConfirmationFormComponent,
+    ZenPasswordChangeFormComponent,
     ZenPasswordResetConfirmationComponent,
-    ZenPasswordResetRequestFormComponent,
+    ZenPasswordResetConfirmationFormComponent,
     ZenPasswordResetRequestComponent,
-    ZenRegisterFormComponent,
+    ZenPasswordResetRequestFormComponent,
     ZenRegisterComponent,
+    ZenRegisterFormComponent,
   ],
 })
 export class ZenAuthModule {}
