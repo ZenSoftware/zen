@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoggedInGuard } from '@zen/auth';
 
 import { ZenMainComponent } from './zen-main/zen-main.component';
 
