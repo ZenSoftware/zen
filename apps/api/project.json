@@ -26,6 +26,16 @@
         }
       }
     },
+    "compodoc": {
+      "builder": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx compodoc -p apps/api/tsconfig.app.json -s"
+          }
+        ]
+      }
+    },
     "serve": {
       "executor": "@nrwl/node:execute",
       "options": {

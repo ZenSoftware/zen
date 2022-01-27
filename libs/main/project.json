@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/main",
+  "sourceRoot": "libs/main/src",
+  "prefix": "zen",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/main"],
+      "options": {
+        "jestConfig": "libs/main/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/main/src/**/*.ts", "libs/main/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

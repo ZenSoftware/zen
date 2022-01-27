@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/components",
+  "sourceRoot": "libs/components/src",
+  "prefix": "zen",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/components"],
+      "options": {
+        "jestConfig": "libs/components/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/components/src/**/*.ts",
+          "libs/components/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
