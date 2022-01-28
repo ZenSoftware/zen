@@ -16,7 +16,7 @@ async function bootstrap() {
   const port = process.env.PORT || environment.expressPort;
 
   await app.listen(port, () => {
-    Logger.log(`Listening at http://localhost:${port}`);
+    Logger.log(`GraphQL server running at http://localhost:${port}/graphql`);
   });
 }
 
