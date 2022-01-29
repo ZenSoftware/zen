@@ -11,22 +11,30 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class ZenLayoutComponent implements OnDestroy {
   @ViewChild('drawer') drawer!: MatSidenav;
-  #sub: Subscription;
+  isMobile = false;
+  #subs: Subscription[] = [];
 
   constructor(private breakpointObserver: BreakpointObserver, router: Router) {
-    this.#sub = router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationStart) {
+    const routerSub = router.events.subscribe((event: Event) => {
+      if (this.isMobile && event instanceof NavigationStart) {
         this.drawer.close();
       }
     });
+    this.#subs.push(routerSub);
+
+    const isHandsetSub = this.isHandset$.subscribe();
+    this.#subs.push(isHandsetSub);
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(result => result.matches),
+    map(result => {
+      this.isMobile = result.matches;
+      return this.isMobile;
+    }),
     shareReplay()
   );
 
   ngOnDestroy() {
-    if (this.#sub) this.#sub.unsubscribe();
+    this.#subs.map(s => s.unsubscribe());
   }
 }
