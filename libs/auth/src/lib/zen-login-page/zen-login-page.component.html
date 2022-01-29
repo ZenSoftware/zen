@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 py-5">
 
-      <div class="card m-0">
+      <div class="card">
         <div class="card-header">
           <h1 class="m-0">
             <i class="fas fa-fw fa-key me-1"></i>
@@ -17,12 +17,12 @@
           <hr>
 
           <div class="d-flex justify-content-between">
-            <button *ifPublicRegistration mat-button color="primary" routerLink="/register">
+            <button *ifPublicRegistration mat-button color="primary" routerLink="/register" class="p-2">
               <i class="fas fa-fw fa-file-signature"></i>
               New Account
             </button>
 
-            <button mat-button color="primary" routerLink="/password-reset-request">
+            <button mat-button color="primary" routerLink="/password-reset-request" class="p-2">
               <i class="fas fa-fw fa-question-circle"></i>
               Forgot Password
             </button>
