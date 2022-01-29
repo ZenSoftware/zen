@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
 
 import { ZenLayoutComponent } from './zen-layout/zen-layout.component';
 
@@ -16,6 +17,7 @@ import { ZenLayoutComponent } from './zen-layout/zen-layout.component';
     MatIconModule,
     MatSidenavModule,
     MatToolbarModule,
+    RouterModule,
   ],
   declarations: [ZenLayoutComponent],
   exports: [ZenLayoutComponent],
