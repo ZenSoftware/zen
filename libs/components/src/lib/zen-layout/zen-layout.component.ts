@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
-  selector: 'zen-nav',
-  templateUrl: './zen-nav.component.html',
-  styleUrls: ['./zen-nav.component.scss'],
+  selector: 'zen-layout',
+  templateUrl: './zen-layout.component.html',
+  styleUrls: ['./zen-layout.component.scss'],
 })
-export class ZenNavComponent {
+export class ZenLayoutComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches),
     shareReplay()

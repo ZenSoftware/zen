@@ -1,12 +1,14 @@
-<mat-toolbar class="tbar bg-primary text-light">
-  <zen-logo>
+<zen-layout>
+  <div slot="toolbar-start" >
     <i class="fas fa-dice-d20 me-2"></i>
     Zen
-  </zen-logo>
+  </div>
 
-  <zen-login-link class="ms-auto"></zen-login-link>
-</mat-toolbar>
+  <div slot="toolbar-end">
+    <zen-login-link></zen-login-link>
+  </div>
 
-<!-- <zen-nav></zen-nav> -->
-
-<router-outlet></router-outlet>
+  <div slot="content" style="height: calc(100% - 64px)">
+    <router-outlet></router-outlet>
+  </div>
+</zen-layout>

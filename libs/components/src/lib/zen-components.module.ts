@@ -12,8 +12,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ZenConfirmComponent } from './zen-confirm/zen-confirm.component';
+import { ZenLayoutComponent } from './zen-layout/zen-layout.component';
 import { ZenLoadingComponent } from './zen-loading/zen-loading.component';
-import { ZenNavComponent } from './zen-nav/zen-nav.component';
 import { ZenSnackbarErrorService } from './zen-snackbar-error/zen-snackbar-error.service';
 
 @NgModule({
@@ -30,8 +30,8 @@ import { ZenSnackbarErrorService } from './zen-snackbar-error/zen-snackbar-error
     MatSnackBarModule,
     MatToolbarModule,
   ],
-  declarations: [ZenConfirmComponent, ZenLoadingComponent, ZenNavComponent],
-  exports: [ZenConfirmComponent, ZenLoadingComponent, ZenNavComponent],
+  declarations: [ZenConfirmComponent, ZenLoadingComponent, ZenLayoutComponent],
+  exports: [ZenConfirmComponent, ZenLoadingComponent, ZenLayoutComponent],
   providers: [ZenSnackbarErrorService],
 })
 export class ZenComponentsModule {}

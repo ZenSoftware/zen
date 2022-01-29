@@ -13,3 +13,8 @@
 // @import './bootstrap/bootstrap';
 // @import './material/material';
 // @import './material/light/theme';
+
+.mat-sidenav-content,
+.mat-sidenav {
+  background-color: $body-bg;
+}
