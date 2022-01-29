@@ -5,7 +5,7 @@
   </div>
 
   <div slot="toolbar-end">
-    <zen-login-link></zen-login-link>
+    <zen-login-link [displayLogout]="false"></zen-login-link>
   </div>
 
   <div slot="menu-toolbar">
@@ -13,32 +13,33 @@
   </div>
 
   <div slot="menu-content">
-    <ng-container *ifLoggedIn="false">
-      <mat-nav-list>
-        <a mat-list-item routerLink="/">
-          <i class="fas fa-fw fa-home me-2"></i>
-          Home
-        </a>
-        <a mat-list-item routerLink="/login">
-          <i class="fas fa-fw fa-key me-2"></i>
-          Login
-        </a>
-      </mat-nav-list>
-    </ng-container>
+    <mat-nav-list *ifLoggedIn="false">
+      <a mat-list-item routerLink="/">
+        <i class="fas fa-fw fa-home me-2"></i>
+        Home
+      </a>
+      <a mat-list-item routerLink="/login">
+        <i class="fas fa-fw fa-key me-2"></i>
+        Login
+      </a>
+    </mat-nav-list>
 
-    <ng-container *ifLoggedIn="true">
-      <mat-nav-list>
-        <a mat-list-item routerLink="/dashboard">
-          <i class="fas fa-fw fa-desktop me-2"></i>
-          Dashboard
-        </a>
+    <mat-nav-list *ifLoggedIn="true">
+      <a mat-list-item routerLink="/dashboard">
+        <i class="fas fa-fw fa-desktop me-2"></i>
+        Dashboard
+      </a>
 
-        <a mat-list-item routerLink="/super" *roles="'Super'">
-          <i class="fas fa-fw fa-user-shield me-2"></i>
-          Super
-        </a>
-      </mat-nav-list>
-    </ng-container>
+      <a mat-list-item routerLink="/super" *roles="'Super'">
+        <i class="fas fa-fw fa-user-shield me-2"></i>
+        Super
+      </a>
+
+      <a mat-list-item (click)="auth.logout()">
+        <i class="fas fa-sign-in-alt me-2"></i>
+        Logout
+      </a>
+    </mat-nav-list>
   </div>
 
   <div slot="content" style="height: calc(100% - 64px)">
