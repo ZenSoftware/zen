@@ -60,7 +60,7 @@ export class ZenGraphQLModule {
   static reconnectSubscriptionClient() {
     this.subscriptionClient?.close(true, true);
     (<any>this.subscriptionClient).connect();
-    console.log('Re-connected websocket for subscription client for GraphQL');
+    console.log('Re-connected websockets for GraphQL subscriptions');
   }
 }
 
