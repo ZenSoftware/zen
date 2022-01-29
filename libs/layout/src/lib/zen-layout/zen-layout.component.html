@@ -4,34 +4,13 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>
+      <ng-content select="[slot=menu-toolbar]"></ng-content>
+    </mat-toolbar>
 
     <hr class="m-0">
 
-    <mat-nav-list>
-      <ng-container>
-        <a mat-list-item routerLink="/">
-          <i class="fas fa-fw fa-home me-2"></i>
-          Home
-        </a>
-        <a mat-list-item routerLink="/login">
-          <i class="fas fa-fw fa-key me-2"></i>
-          Login
-        </a>
-      </ng-container>
-
-      <ng-container>
-        <a mat-list-item routerLink="/dashboard">
-          <i class="fas fa-fw fa-desktop me-2"></i>
-          Dashboard
-        </a>
-
-        <a mat-list-item routerLink="/super">
-          <i class="fas fa-fw fa-user-shield me-2"></i>
-          Super
-        </a>
-      </ng-container>
-    </mat-nav-list>
+    <ng-content select="[slot=menu-content]"></ng-content>
   </mat-sidenav>
   
   <mat-sidenav-content>
