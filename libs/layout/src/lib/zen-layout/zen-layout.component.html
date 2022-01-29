@@ -1,5 +1,6 @@
 <mat-sidenav-container class="h-100">
   <mat-sidenav #drawer fixedInViewport
+      style="min-width: 200px"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">

@@ -6,7 +6,6 @@ import { map, shareReplay } from 'rxjs/operators';
 @Component({
   selector: 'zen-layout',
   templateUrl: './zen-layout.component.html',
-  styleUrls: ['./zen-layout.component.scss'],
 })
 export class ZenLayoutComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
