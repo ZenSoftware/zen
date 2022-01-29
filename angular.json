@@ -7,6 +7,7 @@
     "common": "libs/common",
     "components": "libs/components",
     "graphql": "libs/graphql",
+    "layout": "libs/layout",
     "main": "libs/main",
     "portal": "apps/portal",
     "portal-e2e": "apps/portal-e2e"

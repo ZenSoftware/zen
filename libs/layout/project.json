@@ -1,21 +1,21 @@
 {
   "projectType": "library",
-  "root": "libs/graphql",
-  "sourceRoot": "libs/graphql/src",
+  "root": "libs/layout",
+  "sourceRoot": "libs/layout/src",
   "prefix": "zen",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/graphql"],
+      "outputs": ["coverage/libs/layout"],
       "options": {
-        "jestConfig": "libs/graphql/jest.config.js",
+        "jestConfig": "libs/layout/jest.config.js",
         "passWithNoTests": true
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/graphql/src/**/*.ts", "libs/graphql/src/**/*.html"]
+        "lintFilePatterns": ["libs/layout/src/**/*.ts", "libs/layout/src/**/*.html"]
       }
     }
   },

@@ -7,9 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AuthInterceptor, ZenAuthModule, tokenVar } from '@zen/auth';
 import { Environment } from '@zen/common';
-import { ZenComponentsModule } from '@zen/components';
 import { ZenGraphQLModule } from '@zen/graphql';
 import { possibleTypes, typePolicies } from '@zen/graphql/client';
+import { ZenLayoutModule } from '@zen/layout';
 import { MainModule } from '@zen/main';
 
 import { environment } from '../environments/environment';
@@ -25,7 +25,7 @@ import { AppComponent } from './app.component';
     MatToolbarModule,
     MainModule,
     ZenAuthModule,
-    ZenComponentsModule,
+    ZenLayoutModule,
     ZenGraphQLModule.forRoot({
       cacheOptions: {
         possibleTypes,
