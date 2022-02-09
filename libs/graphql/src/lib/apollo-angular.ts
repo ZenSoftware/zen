@@ -675,7 +675,7 @@ export type AuthPasswordChangeVariables = Exact<{
 }>;
 
 
-export type AuthPasswordChange = { __typename?: 'Mutation', authPasswordChange?: boolean | null | undefined };
+export type AuthPasswordChange = { __typename?: 'Mutation', authPasswordChange?: boolean | null };
 
 export type AuthPasswordResetConfirmationVariables = Exact<{
   data: AuthPasswordResetConfirmationInput;
@@ -689,7 +689,7 @@ export type AuthPasswordResetRequestQueryVariables = Exact<{
 }>;
 
 
-export type AuthPasswordResetRequestQuery = { __typename?: 'Query', authPasswordResetRequest?: boolean | null | undefined };
+export type AuthPasswordResetRequestQuery = { __typename?: 'Query', authPasswordResetRequest?: boolean | null };
 
 export type AuthRegisterVariables = Exact<{
   data: AuthRegisterInput;
@@ -717,7 +717,7 @@ export type FindUniqueUserVariables = Exact<{
 }>;
 
 
-export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username: string, email: string } | null | undefined };
+export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username: string, email: string } | null };
 
 export type FindFirstUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -729,7 +729,7 @@ export type FindFirstUserVariables = Exact<{
 }>;
 
 
-export type FindFirstUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null | undefined };
+export type FindFirstUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null };
 
 export type FindManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -741,7 +741,7 @@ export type FindManyUserVariables = Exact<{
 }>;
 
 
-export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null | undefined };
+export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null };
 
 export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -775,7 +775,7 @@ export type DeleteOneUserVariables = Exact<{
 }>;
 
 
-export type DeleteOneUser = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: number } | null | undefined };
+export type DeleteOneUser = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: number } | null };
 
 export type UpsertOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -784,14 +784,14 @@ export type UpsertOneUserVariables = Exact<{
 }>;
 
 
-export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username: string, email: string } | null | undefined };
+export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username: string, email: string } | null };
 
 export type DeleteManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
 }>;
 
 
-export type DeleteManyUser = { __typename?: 'Mutation', deleteManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
+export type DeleteManyUser = { __typename?: 'Mutation', deleteManyUser?: { __typename?: 'BatchPayload', count: number } | null };
 
 export type UpdateManyUserVariables = Exact<{
   data: UserUpdateManyMutationInput;
@@ -799,7 +799,7 @@ export type UpdateManyUserVariables = Exact<{
 }>;
 
 
-export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typename?: 'BatchPayload', count: number } | null | undefined };
+export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typename?: 'BatchPayload', count: number } | null };
 
 export type SampleSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
