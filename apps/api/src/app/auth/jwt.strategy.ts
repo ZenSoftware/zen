@@ -17,7 +17,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         // Websocket connection
         if (req.token) return req.token;
         // HTTP request
-
         let authHeader = req.header('Authorization');
         if (!authHeader) authHeader = req.header('authorization');
 
