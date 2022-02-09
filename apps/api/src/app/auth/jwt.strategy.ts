@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
+import { ApiError } from '@zen/api-interfaces';
 import { Request as ExReq } from 'express';
 import { Strategy } from 'passport-jwt';
 
@@ -19,6 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         // HTTP request
         let authHeader = req.header('Authorization');
         if (!authHeader) authHeader = req.header('authorization');
+        if (!authHeader) throw new HttpException(ApiError.JwtStrategy.NO_AUTH_HEADER, 400);
 
         // Strips `'Bearer '` and returns only the token
         return authHeader.substring(7);
