@@ -20,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         let authHeader = req.header('Authorization');
         if (!authHeader) authHeader = req.header('authorization');
 
-        if (authHeader?.startsWith('Bearer ') || authHeader?.startsWith('bearer ')) {
+        if (authHeader?.startsWith('Bearer ')) {
           return authHeader.substring(7);
         }
       },
