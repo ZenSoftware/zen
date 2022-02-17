@@ -14,6 +14,7 @@ import {
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition, getOperationName } from '@apollo/client/utilities';
 import { APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloModule } from 'apollo-angular';
 import { BatchOptions, HttpBatchLink, HttpBatchLinkHandler } from 'apollo-angular/http';
 import { createUploadLink } from 'apollo-upload-client';
 import { OperationDefinitionNode } from 'graphql';
@@ -28,6 +29,7 @@ export abstract class GraphQLOptions {
 }
 
 @NgModule({
+  imports: [ApolloModule],
   providers: [
     {
       provide: APOLLO_OPTIONS,
