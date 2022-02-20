@@ -4,10 +4,14 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import helmet from 'helmet';
 
 import { AppModule } from './app/app.module';
+import { PrismaService } from './app/prisma';
 import { environment } from './environments/environment';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: environment.cors });
+
+  const prismaService: PrismaService = app.get(PrismaService);
+  prismaService.enableShutdownHooks(app);
 
   app.use(graphqlUploadExpress(environment.graphql.uploads));
 
