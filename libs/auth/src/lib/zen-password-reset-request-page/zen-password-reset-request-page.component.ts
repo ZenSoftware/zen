@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class ZenPasswordResetRequestPageComponent {
   onSent() {
     /**
-     * You can further customize logic after a successful request to trigger
+     * You can further customize logic after a successful request that triggers
      * the password reset e-mail with a link to `zen-password-reset-confirmation-page`
      */
   }
