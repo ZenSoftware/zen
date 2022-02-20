@@ -26,7 +26,7 @@ New contributors are welcome!
 
 ```bash
 # Project setup steps
-git clone https://github.com/ZenSoftware/Zen.git --depth=1
+git clone https://github.com/ZenSoftware/zen.git --depth=1
 cd zen
 # Rename .env.example to .env
 npm i
