@@ -73,6 +73,7 @@ npm start
 - [X] `Angular route guards` and `Angular directives` to show/hide content depending on user's roles.
 - [X] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
 - [x] 100% stateless web server authentication via [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality). Keeping the API stateless enables horizontal scaling of container replicas in production.
+- [x] [Font Awesome](https://fontawesome.com/) integrated for an expansive set of icons.
 
 ---
 
