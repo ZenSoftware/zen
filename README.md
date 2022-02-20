@@ -82,8 +82,8 @@ npm start
 - [x] [Angular Material](https://material.angular.io/) components & theme.
 - [X] Mobile first approach to build the framework's core components (login form, etc).
 - [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SASS imports, and exclude the Bootstrap theme and conflicting component styles. These features are missing from Angular Material, and greatly simplify the creation of responsive, mobile first applications.
-- [x] [Angular Material Design Palette Generator](http://mcg.mbitson.com/) simplifies choosing any primary and accent Material Design colors for the app.
 - [x] [Bootswatch](https://bootswatch.com/) SASS variables integrated for an assortment of well-built dark and light Bootstrap themes available to choose from.
+- [x] [Angular Material Design Palette Generator](http://mcg.mbitson.com/) simplifies choosing any primary and accent Material Design colors for the app.
 
 ---
 
