@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnDestroy,
   Output,
   ViewChild,
@@ -31,6 +32,7 @@ import { passwordValidator } from '../validators';
 export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit, OnDestroy {
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Output() confirmed = new EventEmitter();
+  @Input() redirectTime = 5; //default 5 seconds
 
   #subs: Subscription[] = [];
   loading = false;
@@ -120,7 +122,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
             setTimeout(() => {
               this.router.navigateByUrl('/');
               this.confirmed.emit();
-            }, 5000);
+            }, this.redirectTime * 1000);
           },
           error: () => {
             this.loading = false;
