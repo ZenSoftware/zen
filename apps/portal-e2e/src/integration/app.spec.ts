@@ -3,7 +3,7 @@
 describe('portal', () => {
   beforeEach(() => cy.visit('/login'));
 
-  it('should display welcome message', () => {
+  it('should write zen into the username textbox', () => {
     // Custom command example, see `../support/commands.ts` file
     // cy.login('me@zen.com', 'myPassword');
 
