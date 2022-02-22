@@ -73,7 +73,6 @@ npm start
 - [X] `Angular route guards` and `Angular directives` to show/hide content depending on user's roles.
 - [X] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
 - [x] 100% stateless web server authentication via [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality). Keeping the API stateless enables horizontal scaling of container replicas in production.
-- [x] [Font Awesome](https://fontawesome.com/) integrated for an expansive set of icons.
 
 ---
 
@@ -85,6 +84,7 @@ npm start
 - [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SASS imports, and exclude the Bootstrap theme and conflicting component styles. These features are missing from Angular Material, and greatly simplify the creation of responsive, mobile first applications.
 - [x] [Bootswatch](https://bootswatch.com/) SASS variables integrated for an assortment of well-built dark and light Bootstrap themes to choose from.
 - [x] [Angular Material Design Palette Generator](http://mcg.mbitson.com/) is a GUI for choosing any `primary` and `accent` Material Design theme colors.  It generates the SASS palette code for you.  Customizing Angular Material has never been easier, reducing it down to choosing a primary and accent color and generating the SASS palette code.
+- [x] [Font Awesome](https://fontawesome.com/) integrated for an expansive set of icons.
 
 ---
 
