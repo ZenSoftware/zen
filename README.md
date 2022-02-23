@@ -81,9 +81,9 @@ npm start
 - [x] SASS chosen as the CSS transpiler of choice
 - [x] [Angular Material](https://material.angular.io/) components & theme.
 - [X] Mobile first approach to build the framework's core components (login form, etc).
-- [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SASS imports, and exclude the Bootstrap theme and conflicting component styles. These features are missing from Angular Material, and greatly simplify the creation of responsive, mobile first applications.
-- [x] [Bootswatch](https://bootswatch.com/) SASS variables integrated for an assortment of well-built dark and light Bootstrap themes to choose from.
-- [x] [Angular Material Design Palette Generator](http://mcg.mbitson.com/) is a GUI for choosing any `primary` and `accent` Material Design theme colors.  It generates the SASS palette code for you.  Customizing Angular Material has never been easier, reducing it down to choosing a primary and accent color and generating the SASS palette code.
+- [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SCSS imports, and exclude the Bootstrap theme and conflicting component styles. These features are missing from Angular Material, and greatly simplify the creation of responsive, mobile first applications.
+- [x] [Bootswatch](https://bootswatch.com/) SCSS variables integrated for an assortment of well-built dark and light Bootstrap themes to choose from.
+- [x] [Angular Material Design Palette Generator](http://mcg.mbitson.com/) is a GUI for choosing any `primary` and `accent` Material Design theme colors.  It generates the SCSS palette code for you.  Customizing Angular Material has never been easier, reducing it down to choosing a primary and accent color and generating the SCSS palette code.
 - [x] [Font Awesome](https://fontawesome.com/) integrated for an expansive set of icons.
 
 ---
