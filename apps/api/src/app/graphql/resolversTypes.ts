@@ -334,7 +334,7 @@ export interface UserCreateManyInput {
   username: string;
   password: string;
   email: string;
-  roles?: UserCreateManyrolesInput;
+  roles?: UserCreaterolesInput;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -503,10 +503,6 @@ export interface IntFieldUpdateOperationsInput {
   decrement?: number;
   multiply?: number;
   divide?: number;
-}
-
-export interface UserCreateManyrolesInput {
-  set: Role[];
 }
 
 export interface NestedIntFilter {

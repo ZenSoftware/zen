@@ -495,10 +495,6 @@ export type UserCreateManyInput = {
   username: Scalars['String'];
 };
 
-export type UserCreateManyrolesInput = {
-  set: Array<Role>;
-};
-
 export type UserCreaterolesInput = {
   set: Array<Role>;
 };
