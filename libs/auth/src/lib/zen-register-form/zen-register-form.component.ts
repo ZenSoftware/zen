@@ -9,12 +9,18 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { ApiError, AuthRegister, AuthRegisterGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
+import {
+  ApiError,
+  AuthRegister,
+  AuthRegisterGQL,
+  AuthSession,
+  GqlErrors,
+  parseGqlErrors,
+} from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
-import { AuthService } from '../auth.service';
 import { emailValidator, passwordValidator, usernameValidator } from '../validators';
 
 @Component({
@@ -26,7 +32,7 @@ import { emailValidator, passwordValidator, usernameValidator } from '../validat
 export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
-  @Output() registered = new EventEmitter();
+  @Output() registered = new EventEmitter<AuthSession>();
 
   #subs: Subscription[] = [];
   #usernameTaken = false;
@@ -36,11 +42,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   generalError = false;
   hidePassword = true;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private auth: AuthService,
-    private authRegisterGQL: AuthRegisterGQL
-  ) {
+  constructor(private formBuilder: FormBuilder, private authRegisterGQL: AuthRegisterGQL) {
     this.form = this.formBuilder.group({
       username: [
         '',
@@ -151,8 +153,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
-            this.auth.setSession((<AuthRegister>data).authRegister);
-            this.registered.emit();
+            this.registered.emit((<AuthRegister>data).authRegister);
           },
 
           error: (errors: GqlErrors<ApiError.AuthRegister>) => {
