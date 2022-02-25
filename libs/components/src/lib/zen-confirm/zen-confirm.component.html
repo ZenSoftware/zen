@@ -3,6 +3,6 @@
 </div>
 
 <mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" (click)="confirm()" cdkFocusInitial>OK</button>
-  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="dialogRef.close(true)" cdkFocusInitial>OK</button>
+  <button mat-raised-button (click)="dialogRef.close(false)">Cancel</button>
 </mat-dialog-actions>
