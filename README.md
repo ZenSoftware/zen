@@ -1,5 +1,5 @@
 # ⛩ Zen ⛩ 
-#### Nest + Prisma + Angular 🏮 Full Stack Starter Kit 
+#### Nest + Prisma + Angular 🏮 Full Stack GraphQL Starter Kit 
 
 ---
 
