@@ -1,7 +1,7 @@
 import { ApolloDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { GqlOptionsFactory } from '@nestjs/graphql';
-import { ApolloServerPluginInlineTrace, PluginDefinition } from 'apollo-server-core';
+import { ApolloServerPluginInlineTrace, Context, PluginDefinition } from 'apollo-server-core';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { print } from 'graphql';
 
@@ -28,17 +28,18 @@ export class GqlConfigService implements GqlOptionsFactory {
       introspection: this.config.graphql.introspection,
       cors: this.config.cors,
       subscriptions: {
-        'subscriptions-transport-ws': {
-          onConnect: connectionParams => {
-            return {
-              prisma: this.prisma,
-              req: { token: connectionParams.token }, // Include WebSocketLink context for JwtStrategy
-            };
+        'graphql-ws': {
+          onConnect: (context: Context<any>) => {
+            const { connectionParams, extra } = context;
+            extra.token = connectionParams.token;
           },
         },
       },
       context: async (ctx): Promise<IContext> => {
-        return { ...ctx, prisma: this.prisma };
+        // Subscriptions pass through JWT token for authentication
+        if (ctx.extra) return { req: ctx.extra, prisma: this.prisma };
+        // Queries, Mutations
+        else return { ...ctx, prisma: this.prisma };
       },
     };
   }

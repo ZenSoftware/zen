@@ -44,11 +44,9 @@ import { AppComponent } from './app.component';
         },
       },
       websocketOptions: {
-        uri: environment.url.graphqlSubscriptions,
-        options: {
-          reconnect: true,
-          connectionParams: () => ({ token: tokenVar() }),
-        },
+        url: environment.url.graphqlSubscriptions,
+        connectionParams: () => ({ token: tokenVar() }),
+        retryAttempts: Infinity,
       },
     }),
   ],

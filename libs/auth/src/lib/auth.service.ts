@@ -15,7 +15,7 @@ import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
 import { intersection, isEqual, orderBy } from 'lodash-es';
-import { BehaviorSubject, Observable, Subscription, interval, throwError, timer } from 'rxjs';
+import { Observable, Subject, Subscription, interval, throwError, timer } from 'rxjs';
 import { catchError, debounce, mergeMap, retryWhen, tap } from 'rxjs/operators';
 
 import { tokenVar } from './token-var';
@@ -32,7 +32,7 @@ enum LocalStorageKey {
 })
 export class AuthService {
   #exchangeIntervalSubscription?: Subscription;
-  #graphqlSubscriptionClient$ = new BehaviorSubject<AuthSession | null>(null);
+  #graphqlSubscriptionClient$ = new Subject<AuthSession | null>();
 
   constructor(
     private router: Router,

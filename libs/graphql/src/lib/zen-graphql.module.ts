@@ -11,21 +11,23 @@ import {
   InMemoryCacheConfig,
   split,
 } from '@apollo/client/core';
-import { WebSocketLink } from '@apollo/client/link/ws';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition, getOperationName } from '@apollo/client/utilities';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloModule } from 'apollo-angular';
 import { BatchOptions, HttpBatchLink, HttpBatchLinkHandler } from 'apollo-angular/http';
 import { createUploadLink } from 'apollo-upload-client';
 import { OperationDefinitionNode } from 'graphql';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { ClientOptions } from 'graphql-ws';
+
+import { RestartableClient, createRestartableClient } from './subscriptions';
 
 export abstract class GraphQLOptions {
   resolvers?: any;
   cacheOptions?: InMemoryCacheConfig;
   uploadOptions?: createUploadLink.UploadLinkOptions & { mutationNames: string[] };
   batchOptions?: BatchOptions;
-  websocketOptions?: WebSocketLink.Configuration;
+  websocketOptions?: ClientOptions;
 }
 
 @NgModule({
@@ -39,7 +41,7 @@ export abstract class GraphQLOptions {
   ],
 })
 export class ZenGraphQLModule {
-  static subscriptionClient: SubscriptionClient | null = null;
+  static subscriptionClient: RestartableClient | null = null;
 
   constructor(@Optional() @SkipSelf() parentModule?: ZenGraphQLModule) {
     if (parentModule) {
@@ -60,9 +62,10 @@ export class ZenGraphQLModule {
   }
 
   static reconnectSubscriptionClient() {
-    this.subscriptionClient?.close(true, true);
-    (<any>this.subscriptionClient).connect();
-    console.log('Re-connected websockets for GraphQL subscriptions');
+    if (this.subscriptionClient) {
+      this.subscriptionClient.restart();
+      console.log('Re-connected websockets for GraphQL subscriptions');
+    }
   }
 }
 
@@ -99,10 +102,10 @@ export function createApollo(
       link = upload_batch_link;
     }
   } else {
-    const websocket_link = new WebSocketLink(options.websocketOptions);
+    const wsClient = createRestartableClient(options.websocketOptions);
+    ZenGraphQLModule.subscriptionClient = wsClient;
 
-    ZenGraphQLModule.subscriptionClient = (<any>websocket_link).subscriptionClient;
-
+    const websocket_link = new GraphQLWsLink(wsClient);
     const websocket_batch_link = split(
       ({ query }) => {
         const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
