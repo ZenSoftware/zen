@@ -8,15 +8,14 @@ import {
   AuthLoginInput,
   AuthSession,
   GqlErrors,
-  ZenGraphQLModule,
   parseGqlErrors,
 } from '@zen/graphql';
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
 import { intersection, isEqual, orderBy } from 'lodash-es';
-import { Observable, Subject, Subscription, interval, throwError, timer } from 'rxjs';
-import { catchError, debounce, mergeMap, retryWhen, tap } from 'rxjs/operators';
+import { Observable, Subscription, interval, throwError, timer } from 'rxjs';
+import { catchError, mergeMap, retryWhen, tap } from 'rxjs/operators';
 
 import { tokenVar } from './token-var';
 
@@ -32,7 +31,6 @@ enum LocalStorageKey {
 })
 export class AuthService {
   #exchangeIntervalSubscription?: Subscription;
-  #graphqlSubscriptionClient$ = new Subject<AuthSession | null>();
 
   constructor(
     private router: Router,
@@ -66,16 +64,6 @@ export class AuthService {
       this.clearSession();
       loggedInVar(false);
     }
-
-    if (ZenGraphQLModule.subscriptionClient) {
-      this.graphqlSubscriptionClient$.subscribe(() =>
-        ZenGraphQLModule.reconnectSubscriptionClient()
-      );
-    }
-  }
-
-  get graphqlSubscriptionClient$() {
-    return this.#graphqlSubscriptionClient$.pipe(debounce(() => timer(10)));
   }
 
   login(data: AuthLoginInput) {
@@ -110,7 +98,6 @@ export class AuthService {
     }
 
     loggedInVar(true);
-    this.#graphqlSubscriptionClient$.next(authSession);
     this.startExchangeInterval();
   }
 
@@ -170,7 +157,6 @@ export class AuthService {
     userRolesVar([]);
     tokenVar(null);
     this.apollo.client.cache.reset();
-    this.#graphqlSubscriptionClient$.next(null);
   }
 
   private exchangeToken() {

@@ -18,9 +18,7 @@ import { ApolloModule } from 'apollo-angular';
 import { BatchOptions, HttpBatchLink, HttpBatchLinkHandler } from 'apollo-angular/http';
 import { createUploadLink } from 'apollo-upload-client';
 import { OperationDefinitionNode } from 'graphql';
-import { ClientOptions } from 'graphql-ws';
-
-import { RestartableClient, createRestartableClient } from './subscriptions';
+import { ClientOptions, createClient } from 'graphql-ws';
 
 export abstract class GraphQLOptions {
   resolvers?: any;
@@ -41,8 +39,6 @@ export abstract class GraphQLOptions {
   ],
 })
 export class ZenGraphQLModule {
-  static subscriptionClient: RestartableClient | null = null;
-
   constructor(@Optional() @SkipSelf() parentModule?: ZenGraphQLModule) {
     if (parentModule) {
       throw new Error('ZenGraphQLModule is already loaded. Import it in the AppModule only.');
@@ -59,13 +55,6 @@ export class ZenGraphQLModule {
         },
       ],
     };
-  }
-
-  static reconnectSubscriptionClient() {
-    if (this.subscriptionClient) {
-      this.subscriptionClient.restart();
-      console.log('Re-connected websockets for GraphQL subscriptions');
-    }
   }
 }
 
@@ -102,10 +91,9 @@ export function createApollo(
       link = upload_batch_link;
     }
   } else {
-    const wsClient = createRestartableClient(options.websocketOptions);
-    ZenGraphQLModule.subscriptionClient = wsClient;
-
+    const wsClient = createClient(options.websocketOptions);
     const websocket_link = new GraphQLWsLink(wsClient);
+
     const websocket_batch_link = split(
       ({ query }) => {
         const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
