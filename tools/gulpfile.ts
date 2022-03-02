@@ -31,6 +31,8 @@ const nestMutationTemplate = require(path.join(
   'tools/graphql-codegen/nest-mutation.temp.js'
 ));
 
+const paljsConfig = require(path.join(__dirname, 'pal.js'));
+
 const execAsync = promisify(exec);
 
 //=============================================================================
@@ -140,18 +142,19 @@ export class Gulpfile {
   //---------------------------------------------------------------------------
   @Task('gql:gen')
   async genGqlApi(cb) {
-    const PRISMA_PATH = `${CONFIG.gql.apiPath}/generated`;
+    const PALJS_PATH = path.join(__dirname, paljsConfig.backend.output);
     const RESOLVERS_PATH = `${CONFIG.gql.apiPath}/resolvers`;
 
     console.log(`---------------------- @paljs/cli generated ----------------------`);
+    del(PALJS_PATH);
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
 
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
     if (!fs.existsSync(RESOLVERS_PATH)) {
       fs.mkdirSync(RESOLVERS_PATH);
     }
-    if (!fs.existsSync(PRISMA_PATH)) {
-      fs.mkdirSync(PRISMA_PATH);
+    if (!fs.existsSync(PALJS_PATH)) {
+      fs.mkdirSync(PALJS_PATH);
     }
     if (!fs.existsSync(CONFIG.gql.clientFieldsPath)) {
       fs.mkdirSync(CONFIG.gql.clientFieldsPath);
@@ -161,7 +164,7 @@ export class Gulpfile {
     }
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
-    const dirents = await readdir(PRISMA_PATH, { withFileTypes: true });
+    const dirents = await readdir(PALJS_PATH, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
     prismaNames = prismaNames.sort();
 
@@ -175,7 +178,7 @@ export class Gulpfile {
 
       // Guard to prevent the overwriting of existing files
       if (!fs.existsSync(outPath)) {
-        const pathName = path.join(__dirname, PRISMA_PATH, prismaName, 'resolvers.ts');
+        const pathName = path.join(__dirname, PALJS_PATH, prismaName, 'resolvers.ts');
         const prismaScript = fs.readFileSync(pathName).toString();
 
         const queryStartIndex = prismaScript.indexOf(QUERY_TOKEN) + QUERY_TOKEN.length + 1;
