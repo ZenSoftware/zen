@@ -142,7 +142,7 @@ export class Gulpfile {
   //---------------------------------------------------------------------------
   @Task('gql:gen')
   async genGqlApi(cb) {
-    const PALJS_PATH = path.join(__dirname, paljsConfig.backend.output);
+    const PALJS_PATH = paljsConfig.backend.output;
     const RESOLVERS_PATH = `${CONFIG.gql.apiPath}/resolvers`;
 
     console.log(`---------------------- @paljs/cli generated ----------------------`);
