@@ -87,16 +87,16 @@
     "@graphql-codegen/typescript-operations": "^2.2.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
-    "@nrwl/angular": "13.8.3",
-    "@nrwl/cli": "13.8.3",
-    "@nrwl/cypress": "13.8.3",
-    "@nrwl/eslint-plugin-nx": "13.8.3",
-    "@nrwl/jest": "13.8.3",
-    "@nrwl/linter": "13.8.3",
-    "@nrwl/nest": "13.8.3",
-    "@nrwl/node": "13.8.3",
-    "@nrwl/tao": "13.8.3",
-    "@nrwl/workspace": "13.8.3",
+    "@nrwl/angular": "13.8.4",
+    "@nrwl/cli": "13.8.4",
+    "@nrwl/cypress": "13.8.4",
+    "@nrwl/eslint-plugin-nx": "13.8.4",
+    "@nrwl/jest": "13.8.4",
+    "@nrwl/linter": "13.8.4",
+    "@nrwl/nest": "13.8.4",
+    "@nrwl/node": "13.8.4",
+    "@nrwl/tao": "13.8.4",
+    "@nrwl/workspace": "13.8.4",
     "@paljs/cli": "4.0.16",
     "@types/apollo-upload-client": "^17.0.0",
     "@types/bcryptjs": "^2.4.2",
@@ -135,3 +135,4 @@
     "zone.js": "~0.11.4"
   }
 }
+
