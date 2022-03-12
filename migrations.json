@@ -2,11 +2,27 @@
   "migrations": [
     {
       "cli": "nx",
-      "version": "13.8.4",
-      "description": "Karma coverage is broken since Angular 13 upgarde and the karma config is severely out of date. Bring it up to date fixing the coverage issue.",
-      "factory": "./src/migrations/update-13-8-4/migrate-karma-conf",
-      "package": "@nrwl/angular",
-      "name": "migrate-karma-config"
+      "version": "13.8.5-beta.1",
+      "description": "Renames @nrwl/node:build to @nrwl/node:webpack",
+      "factory": "./src/migrations/update-13-8-5/rename-build-to-webpack",
+      "package": "@nrwl/node",
+      "name": "rename-build-to-webpack"
+    },
+    {
+      "cli": "nx",
+      "version": "13.8.5-beta.1",
+      "description": "Renames @nrwl/node:execute to @nrwl/node:node",
+      "factory": "./src/migrations/update-13-8-5/rename-execute-to-node",
+      "package": "@nrwl/node",
+      "name": "rename-execute-to-node"
+    },
+    {
+      "cli": "nx",
+      "version": "13.8.5-beta.1",
+      "description": "Renames @nrwl/node:package to @nrwl/js:tsc",
+      "factory": "./src/migrations/update-13-8-5/update-package-to-tsc",
+      "package": "@nrwl/node",
+      "name": "update-package-to-tsc"
     }
   ]
 }
