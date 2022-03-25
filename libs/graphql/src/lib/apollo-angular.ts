@@ -725,7 +725,7 @@ export type FindFirstUserVariables = Exact<{
 }>;
 
 
-export type FindFirstUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null };
+export type FindFirstUser = { __typename?: 'Query', findFirstUser?: { __typename?: 'User', id: number, username: string, email: string } | null };
 
 export type FindManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -981,7 +981,7 @@ export const FindUniqueUserDocument = /*#__PURE__*/ gql`
   }
 export const FindFirstUserDocument = /*#__PURE__*/ gql`
     query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
-  findManyUser(
+  findFirstUser(
     where: $where
     orderBy: $orderBy
     cursor: $cursor

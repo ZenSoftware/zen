@@ -17,7 +17,7 @@ gql`
     $skip: Int
     $distinct: [UserScalarFieldEnum]
   ) {
-    findManyUser(
+    findFirstUser(
       where: $where
       orderBy: $orderBy
       cursor: $cursor

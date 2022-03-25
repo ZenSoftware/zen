@@ -18,7 +18,7 @@ gql\`
     $skip: Int
     $distinct: [${name}ScalarFieldEnum]
   ) {
-    findMany${name}(
+    findFirst${name}(
       where: $where
       orderBy: $orderBy
       cursor: $cursor
