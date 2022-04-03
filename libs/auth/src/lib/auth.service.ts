@@ -62,7 +62,6 @@ export class AuthService {
       }
     } else {
       this.clearSession();
-      loggedInVar(false);
     }
   }
 
@@ -79,7 +78,6 @@ export class AuthService {
 
   logout() {
     this.clearSession();
-    loggedInVar(false);
     this.router.navigateByUrl('/login');
   }
 
@@ -156,6 +154,7 @@ export class AuthService {
     ls.remove(LocalStorageKey.roles);
     userRolesVar([]);
     tokenVar(null);
+    loggedInVar(false);
     this.apollo.client.cache.reset();
   }
 
@@ -169,8 +168,7 @@ export class AuthService {
         catchError(parseGqlErrors),
         retryWhen(
           retryStrategy({
-            maxRetryAttempts: 10,
-            duration: this.sessionTimeRemaining / 10,
+            delay: 3000,
             excludedStatusCodes: [401, 403],
           })
         )
@@ -206,12 +204,12 @@ export class AuthService {
 
 const retryStrategy =
   ({
-    maxRetryAttempts: maxRetry = 3,
-    duration = 1000,
+    maxRetryAttempts: maxRetry = Infinity,
+    delay = 1000,
     excludedStatusCodes = [],
   }: {
     maxRetryAttempts?: number;
-    duration?: number;
+    delay?: number;
     excludedStatusCodes?: number[];
   } = {}) =>
   (attempts: Observable<any>) => {
@@ -226,14 +224,14 @@ const retryStrategy =
           return throwError(() => errors);
         }
 
-        const durationMinutes = Math.round(duration / (1000 * 60));
+        const delaySeconds = Math.round(delay / 1000);
 
         console.warn(
-          `Exchange token attempt ${retryAttempt}: retrying in ${durationMinutes}min`,
+          `Exchange token attempt ${retryAttempt}: retrying in ${delaySeconds}s`,
           errors
         );
 
-        return timer(duration);
+        return timer(delay);
       })
     );
   };
