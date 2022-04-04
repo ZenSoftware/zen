@@ -1,11 +1,11 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, EmbeddedViewRef, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Environment } from '@zen/common';
 
 @Directive({
   selector: '[ifPublicRegistration]',
 })
 export class IfPublicRegistrationDirective {
-  #embededViewRef: any;
+  #embededViewRef: EmbeddedViewRef<any> | undefined;
   #ifPublicRegistration?: boolean | '';
 
   constructor(
@@ -44,6 +44,6 @@ export class IfPublicRegistrationDirective {
 
   clear() {
     this.viewContainer.clear();
-    this.#embededViewRef = null;
+    this.#embededViewRef = undefined;
   }
 }

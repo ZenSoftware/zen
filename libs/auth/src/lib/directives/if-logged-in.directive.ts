@@ -1,4 +1,11 @@
-import { Directive, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  EmbeddedViewRef,
+  Input,
+  OnDestroy,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { LoggedInGQL } from '@zen/graphql';
 import { loggedInVar } from '@zen/graphql/client';
 import { Subscription } from 'rxjs';
@@ -8,7 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class IfLoggedInDirective implements OnDestroy {
   #subsciption: Subscription;
-  #embededViewRef: any;
+  #embededViewRef: EmbeddedViewRef<any> | undefined;
   #ifLoggedIn?: boolean;
 
   constructor(
@@ -16,7 +23,7 @@ export class IfLoggedInDirective implements OnDestroy {
     private viewContainer: ViewContainerRef,
     private loggedInGQL: LoggedInGQL
   ) {
-    this.#subsciption = this.loggedInGQL.watch().valueChanges.subscribe(() => this.update());
+    this.#subsciption = this.loggedInGQL.watch().valueChanges.subscribe(this.update);
   }
 
   @Input()
@@ -45,7 +52,7 @@ export class IfLoggedInDirective implements OnDestroy {
 
   clear() {
     this.viewContainer.clear();
-    this.#embededViewRef = null;
+    this.#embededViewRef = undefined;
   }
 
   ngOnDestroy() {

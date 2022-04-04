@@ -1,4 +1,11 @@
-import { Directive, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  EmbeddedViewRef,
+  Input,
+  OnDestroy,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { UserRolesGQL } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +17,7 @@ import { AuthService } from '../auth.service';
 export class RolesDirective implements OnDestroy {
   #subsciption: Subscription;
   #roles?: string | string[];
-  #embededViewRef: any;
+  #embededViewRef: EmbeddedViewRef<any> | undefined;
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -18,7 +25,7 @@ export class RolesDirective implements OnDestroy {
     private auth: AuthService,
     private userRolesGQL: UserRolesGQL
   ) {
-    this.#subsciption = this.userRolesGQL.watch().valueChanges.subscribe(() => this.update());
+    this.#subsciption = this.userRolesGQL.watch().valueChanges.subscribe(this.update);
   }
 
   @Input()
@@ -46,7 +53,7 @@ export class RolesDirective implements OnDestroy {
 
   clear() {
     this.viewContainer.clear();
-    this.#embededViewRef = null;
+    this.#embededViewRef = undefined;
   }
 
   ngOnDestroy() {
