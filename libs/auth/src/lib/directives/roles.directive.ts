@@ -25,7 +25,7 @@ export class RolesDirective implements OnDestroy {
     private auth: AuthService,
     private userRolesGQL: UserRolesGQL
   ) {
-    this.#subsciption = this.userRolesGQL.watch().valueChanges.subscribe(this.update);
+    this.#subsciption = this.userRolesGQL.watch().valueChanges.subscribe(() => this.update());
   }
 
   @Input()

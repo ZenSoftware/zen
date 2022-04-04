@@ -23,7 +23,7 @@ export class IfLoggedInDirective implements OnDestroy {
     private viewContainer: ViewContainerRef,
     private loggedInGQL: LoggedInGQL
   ) {
-    this.#subsciption = this.loggedInGQL.watch().valueChanges.subscribe(this.update);
+    this.#subsciption = this.loggedInGQL.watch().valueChanges.subscribe(() => this.update());
   }
 
   @Input()
