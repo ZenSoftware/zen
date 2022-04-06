@@ -50,7 +50,7 @@ export class AuthService {
           this.exchangeToken();
         } else if (
           this.rememberMe &&
-          this.sessionTimeRemaining <= this.env.rememberMeExchangeThreshold
+          this.sessionTimeRemaining <= env.rememberMeExchangeThreshold
         ) {
           this.exchangeToken();
         }
