@@ -19,7 +19,6 @@ export function usernameValidator(control: AbstractControl) {
       actualLength: control.value.length,
       requiredLength: ApiConstants.USERNAME_MIN_LENGTH,
     };
-    console.log('ERRORS', errors);
   }
 
   if (control.value && control.value.length > ApiConstants.USERNAME_MAX_LENGTH) {
