@@ -3,10 +3,10 @@
   
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Username</mat-label>
-    <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="username" hideRequiredMarker="true" maxlength="254">
+    <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="username" hideRequiredMarker="true" maxLength="254">
     <mat-error *ngIf="username.errors?.['required']">Required</mat-error>
-    <mat-error *ngIf="username.errors?.['minlength ']&& !username.errors?.['required']">Minimum length of {{username.errors?.['minlength']?.['requiredLength']}} characters</mat-error>
-    <mat-error *ngIf="username.errors?.['maxlength']">Maximum length of {{username.errors?.['maxlength']?.['requiredLength']}} characters</mat-error>
+    <mat-error *ngIf="username.errors?.['minLength ']&& !username.errors?.['required']">Minimum length of {{username.errors?.['minLength']?.['requiredLength']}} characters</mat-error>
+    <mat-error *ngIf="username.errors?.['maxLength']">Maximum length of {{username.errors?.['maxLength']?.['requiredLength']}} characters</mat-error>
     <mat-error *ngIf="username.errors?.['includesSpace']">Cannot contain spaces</mat-error>
     <mat-error *ngIf="username.errors?.['notFound']">User not found</mat-error>
   </mat-form-field>
