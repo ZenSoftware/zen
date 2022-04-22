@@ -125,7 +125,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   passwordConfirmValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        const notMatching = this.password.value !== control.value;
+        const notMatching = control.value && this.password.value !== control.value;
         return notMatching ? { notMatching: true } : null;
       }
       return null;

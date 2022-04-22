@@ -71,7 +71,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
 
         let errors: any = passwordValidator(control);
 
-        if (this.oldPassword.value === this.newPassword.value) {
+        if (this.newPassword.value && this.oldPassword.value === this.newPassword.value) {
           if (errors) errors.oldEqualsNew = true;
           else errors = { oldEqualsNew: true };
         }
@@ -85,7 +85,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   passwordConfirmValidator(): ValidatorFn {
     return control => {
       if (this.form) {
-        const notMatching = this.newPassword.value !== control.value;
+        const notMatching = control.value && this.newPassword.value !== control.value;
         return notMatching ? { notMatching: true } : null;
       }
       return null;

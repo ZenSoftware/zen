@@ -3,12 +3,12 @@
   
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Username</mat-label>
-    <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="username" hideRequiredMarker="true" maxLength="254">
-    <mat-error *ngIf="username.errors?.['required']">Required</mat-error>
-    <mat-error *ngIf="username.errors?.['minLength ']&& !username.errors?.['required']">Minimum length of {{username.errors?.['minLength']?.['requiredLength']}} characters</mat-error>
-    <mat-error *ngIf="username.errors?.['maxLength']">Maximum length of {{username.errors?.['maxLength']?.['requiredLength']}} characters</mat-error>
-    <mat-error *ngIf="username.errors?.['includesSpace']">Cannot contain spaces</mat-error>
-    <mat-error *ngIf="username.errors?.['notFound']">User not found</mat-error>
+    <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="username" hideRequiredMarker="true" maxlength="254">
+    <mat-error *ngIf="username.hasError('required')">Required</mat-error>
+    <mat-error *ngIf="username.hasError('minlength')">Minimum length of {{username.getError('minlength')?.['requiredLength']}} characters</mat-error>
+    <mat-error *ngIf="username.hasError('maxlength')">Maximum length of {{username.getError('maxlength')?.['requiredLength']}} characters</mat-error>
+    <mat-error *ngIf="username.hasError('includesSpace')">Cannot contain spaces</mat-error>
+    <mat-error *ngIf="username.hasError('notFound')">User not found</mat-error>
   </mat-form-field>
 
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
@@ -17,8 +17,8 @@
     <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </span>
-    <mat-error *ngIf="password.errors?.['required']">Required</mat-error>
-    <mat-error *ngIf="password.errors?.['incorrect']">Incorrect password</mat-error>
+    <mat-error *ngIf="password.hasError('required')">Required</mat-error>
+    <mat-error *ngIf="password.hasError('incorrect')">Incorrect password</mat-error>
   </mat-form-field>
 
   <div class="mb-4">

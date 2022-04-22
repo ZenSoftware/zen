@@ -3,8 +3,8 @@ import { ApiConstants } from '@zen/api-interfaces';
 
 interface UsernameErrors {
   includesSpace?: boolean;
-  minLength?: { actualLength: number; requiredLength: number };
-  maxLength?: { actualLength: number; requiredLength: number };
+  minlength?: { actualLength: number; requiredLength: number };
+  maxlength?: { actualLength: number; requiredLength: number };
 }
 
 export function usernameValidator(control: AbstractControl) {
@@ -15,14 +15,15 @@ export function usernameValidator(control: AbstractControl) {
   }
 
   if (control.value && control.value.length < ApiConstants.USERNAME_MIN_LENGTH) {
-    errors.minLength = {
+    errors.minlength = {
       actualLength: control.value.length,
       requiredLength: ApiConstants.USERNAME_MIN_LENGTH,
     };
+    console.log('ERRORS', errors);
   }
 
   if (control.value && control.value.length > ApiConstants.USERNAME_MAX_LENGTH) {
-    errors.maxLength = {
+    errors.maxlength = {
       actualLength: control.value.length,
       requiredLength: ApiConstants.USERNAME_MAX_LENGTH,
     };
