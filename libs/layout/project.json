@@ -8,7 +8,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/layout"],
       "options": {
-        "jestConfig": "libs/layout/jest.config.js",
+        "jestConfig": "libs/layout/jest.config.ts",
         "passWithNoTests": true
       }
     },
