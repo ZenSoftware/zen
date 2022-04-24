@@ -65,6 +65,8 @@ describe('ZenRegisterFormComponent', () => {
     const variables = op.operation.variables as AuthRegisterVariables;
 
     expect(variables.data.username).toEqual(component.username.value);
+    expect(variables.data.password).toEqual(component.password.value);
+    expect(variables.data.email).toEqual(component.email.value);
 
     const data: AuthRegister = {
       authRegister: {
