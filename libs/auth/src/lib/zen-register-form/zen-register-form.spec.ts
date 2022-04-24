@@ -64,9 +64,9 @@ describe('ZenRegisterFormComponent', () => {
     const op = controller.expectOne(AuthRegisterDocument);
     const variables = op.operation.variables as AuthRegisterVariables;
 
-    expect(variables.data.username).toEqual(component.username.value);
-    expect(variables.data.password).toEqual(component.password.value);
-    expect(variables.data.email).toEqual(component.email.value);
+    expect(variables.data.username).toEqual('zen');
+    expect(variables.data.email).toEqual('me@zen.ca');
+    expect(variables.data.password).toEqual('samplepass');
 
     const data: AuthRegister = {
       authRegister: {
@@ -80,7 +80,7 @@ describe('ZenRegisterFormComponent', () => {
     };
 
     component.registered.subscribe(authSession => {
-      expect(authSession.token).toEqual(data.authRegister.token);
+      expect(authSession.token).toEqual('1234');
       done();
     });
 
