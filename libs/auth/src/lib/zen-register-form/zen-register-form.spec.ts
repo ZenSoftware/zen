@@ -44,7 +44,6 @@ describe('ZenRegisterFormComponent', () => {
     fixture = TestBed.createComponent(ZenRegisterFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
     controller = TestBed.inject(ApolloTestingController);
   });
 
