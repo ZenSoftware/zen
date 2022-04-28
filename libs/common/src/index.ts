@@ -1,3 +1,4 @@
+export * from './lib/assert-type';
 export * from './lib/environment';
 export * from './lib/is-number';
 export * from './lib/enum-helpers';
