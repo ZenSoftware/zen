@@ -57,20 +57,19 @@ describe('ZenRegisterFormComponent', () => {
     component.password.setValue('samplepass');
     component.passwordConfirm.setValue('samplepass');
     component.acceptTerms.setValue(true);
-
     expect(component.form.valid).toEqual(true);
 
     component.onSubmit();
     const op = controller.expectOne(AuthRegisterDocument);
 
-    const checkVariables: AuthRegisterVariables = {
+    const variables: AuthRegisterVariables = {
       data: {
         username: 'zen',
         email: 'me@zen.ca',
         password: 'samplepass',
       },
     };
-    expect(op.operation.variables).toEqual(checkVariables);
+    expect(op.operation.variables).toEqual(variables);
 
     const data: AuthRegister = {
       authRegister: {
@@ -84,7 +83,7 @@ describe('ZenRegisterFormComponent', () => {
     };
 
     component.registered.subscribe(authSession => {
-      expect(authSession.token).toEqual('1234');
+      expect(authSession).toEqual(data.authRegister);
       done();
     });
 
