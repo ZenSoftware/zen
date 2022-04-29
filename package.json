@@ -20,6 +20,7 @@
     "docs": "ng compodoc api",
     "test": "nx run-many --all --target=test --parallel",
     "lint": "nx run-many --all --target=lint --parallel",
+    "format": "nx format:write --all",
     "build": "nx build",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main"
   },

@@ -2,7 +2,11 @@
 
 /dist
 /documentation
+/.angular
+libs/graphql/src/lib/client/possible-types.ts
+libs/graphql/src/lib/apollo-angular.ts
 *.html
 *.yml
 *.yaml
 *.md
+*.hbs
