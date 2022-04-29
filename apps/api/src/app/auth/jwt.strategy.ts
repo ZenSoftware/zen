@@ -10,7 +10,7 @@ import { RequestUser } from './request-user';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor(private readonly config: ConfigService) {
+  constructor(readonly config: ConfigService) {
     super({
       secretOrKey: config.production ? config.jwtOptions.publicKey : config.jwtOptions.secret,
 
