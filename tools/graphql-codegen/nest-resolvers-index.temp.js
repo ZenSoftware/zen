@@ -2,7 +2,7 @@ module.exports = dataTypeNames => {
   let indexSource = `import { mergeTypeDefs } from '@graphql-tools/merge';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
-import PRISMA_TYPE_DEFS from '../generated/typeDefs';\n`;
+import PALJS_TYPE_DEFS from '../generated/typeDefs';\n`;
 
   // Construct the "resolvers" directory's "index.ts"
   indexSource += dataTypeNames
@@ -22,7 +22,7 @@ import PRISMA_TYPE_DEFS from '../generated/typeDefs';\n`;
     .replace(/,/g, ',\n  ');
   indexSource += `\n\nexport const NEST_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x);\n\n`;
 
-  indexSource += `export const ALL_TYPE_DEFS = mergeTypeDefs(['scalar Upload', PRISMA_TYPE_DEFS, ...NEST_TYPE_DEFS]);
+  indexSource += `export const ALL_TYPE_DEFS = mergeTypeDefs(['scalar Upload', PALJS_TYPE_DEFS, ...NEST_TYPE_DEFS]);
 export const GRAPHQL_SCHEMA = makeExecutableSchema({ typeDefs: ALL_TYPE_DEFS });
 `;
 
