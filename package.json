@@ -24,6 +24,9 @@
     "build": "nx build",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "importSort": {
     ".js, .ts": {
       "style": "module",
