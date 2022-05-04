@@ -6,6 +6,8 @@ describe('RejectNestedCreateGuard', () => {
       data: {
         text: 'sample',
         published: true,
+        stub: null,
+        stub2: undefined,
         author: {
           create: {
             username: 'mean_human',

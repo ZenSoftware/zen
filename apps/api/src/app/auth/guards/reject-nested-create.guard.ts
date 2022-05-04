@@ -2,13 +2,15 @@ import { ExecutionContext, HttpException, Injectable, Logger } from '@nestjs/com
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 export function containsNestedCreate(args: any) {
-  for (const [key, value] of Object.entries(args)) {
-    if (key === 'create') {
-      return true;
-    }
+  if (args !== null && args !== undefined) {
+    for (const [key, value] of Object.entries(args)) {
+      if (key === 'create') {
+        return true;
+      }
 
-    if (typeof value === 'object' && containsNestedCreate(value) === true) {
-      return true;
+      if (typeof value === 'object' && containsNestedCreate(value) === true) {
+        return true;
+      }
     }
   }
 
@@ -20,7 +22,7 @@ export function containsNestedCreate(args: any) {
  * Rejects mutations with nested create argument
  */
 export class RejectNestedCreateGuard {
-  static async canActivate(context: ExecutionContext) {
+  async canActivate(context: ExecutionContext) {
     const ctx = GqlExecutionContext.create(context);
 
     if (ctx.getInfo()?.operation?.operation === 'mutation') {
