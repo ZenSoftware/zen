@@ -1,4 +1,4 @@
-import { ExecutionContext, HttpException, Injectable, Logger } from '@nestjs/common';
+import { CanActivate, ExecutionContext, HttpException, Injectable, Logger } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 export function containsNestedCreate(args: any) {
@@ -21,7 +21,7 @@ export function containsNestedCreate(args: any) {
 /**
  * Rejects mutations with nested create argument
  */
-export class RejectNestedCreateGuard {
+export class RejectNestedCreateGuard implements CanActivate {
   async canActivate(context: ExecutionContext) {
     const ctx = GqlExecutionContext.create(context);
 
