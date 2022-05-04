@@ -10,7 +10,7 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 
-import { GqlGuard, Roles } from '../../auth';
+import { GqlGuard, RejectNestedCreateGuard, Roles } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
 import resolvers from '../generated/User/resolvers';
 
@@ -28,7 +28,7 @@ export const typeDefs = null;
 // `;
 
 @Resolver('User')
-@UseGuards(GqlGuard)
+@UseGuards(GqlGuard, RejectNestedCreateGuard)
 @Roles('Super')
 export class UserResolver {
   @ResolveField()
