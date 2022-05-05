@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/graphql",
   "sourceRoot": "libs/graphql/src",
   "prefix": "zen",
   "targets": {

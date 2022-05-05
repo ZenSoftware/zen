@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/portal",
   "sourceRoot": "apps/portal/src",
   "prefix": "zen",
   "targets": {

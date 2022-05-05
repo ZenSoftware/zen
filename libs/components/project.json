@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/components",
   "sourceRoot": "libs/components/src",
   "prefix": "zen",
   "targets": {

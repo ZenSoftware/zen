@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/auth",
   "sourceRoot": "libs/auth/src",
   "prefix": "zen",
   "targets": {
