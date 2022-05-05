@@ -152,6 +152,7 @@ export type Mutation = {
   deleteManyUser?: Maybe<BatchPayload>;
   deleteOneUser?: Maybe<User>;
   sampleUpload: Scalars['Boolean'];
+  sampleUploadMany: Array<Scalars['String']>;
   updateManyUser?: Maybe<BatchPayload>;
   updateOneUser: User;
   upsertOneUser?: Maybe<User>;
@@ -190,6 +191,11 @@ export type MutationDeleteOneUserArgs = {
 
 export type MutationSampleUploadArgs = {
   file: Scalars['Upload'];
+};
+
+
+export type MutationSampleUploadManyArgs = {
+  files: Array<Scalars['Upload']>;
 };
 
 

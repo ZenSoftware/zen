@@ -1,3 +1,5 @@
+import { createWriteStream, existsSync, mkdirSync } from 'fs';
+
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
@@ -6,11 +8,12 @@ import { GraphQLUpload } from 'graphql-upload';
 import { interval } from 'rxjs';
 
 import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
-import type { FileInfo } from '../models';
+import type { FileUpload } from '../models';
 
 export const typeDefs = gql`
   extend type Mutation {
     sampleUpload(file: Upload!): Boolean!
+    sampleUploadMany(files: [Upload!]!): [String!]!
   }
 
   type SampleSubscriptionResult {
@@ -37,15 +40,60 @@ interval(1000).subscribe(i =>
 @Roles('Super')
 export class SampleResolver {
   @Mutation()
-  async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: FileInfo) {
-    const readStream = file.file.createReadStream();
+  async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: FileUpload) {
+    const readStream = file.createReadStream();
     const chunks = [];
     for await (const chunk of readStream) {
       chunks.push(chunk);
     }
     const buffer = Buffer.concat(chunks);
-    Logger.log(`Recieved '${file.file.filename}' ${buffer.byteLength} bytes`);
+    Logger.log(`Recieved '${file.filename}' ${buffer.byteLength} bytes`);
     return true;
+  }
+
+  @Mutation()
+  async sampleUploadMany(
+    @Args('files', { type: () => [GraphQLUpload] }) files: Promise<FileUpload>[]
+  ) {
+    const UPLOAD_PATH = './upload/';
+    if (!existsSync(UPLOAD_PATH)) {
+      console.log('Creating directory', UPLOAD_PATH);
+      mkdirSync(UPLOAD_PATH);
+    }
+
+    return await Promise.all(
+      files.map(async file => {
+        const { filename, mimetype, encoding, createReadStream } = await file;
+        console.log('Attachment:', filename, mimetype, encoding);
+        const stream = createReadStream();
+
+        return new Promise((resolve, reject) => {
+          stream
+            .on('end', () => {
+              console.log(`${filename} ReadStream Ended`);
+            })
+            .on('close', () => {
+              console.log(`${filename} ReadStream Closed`);
+            })
+            .on('error', err => {
+              console.error(`${filename} ReadStream Error`, err);
+            })
+            .pipe(createWriteStream(`${UPLOAD_PATH}${filename}`))
+            .on('end', () => {
+              console.log(`${filename} WriteStream Ended`);
+              resolve('end');
+            })
+            .on('close', () => {
+              console.log(`${filename} WriteStream Closed`);
+              resolve('close');
+            })
+            .on('error', err => {
+              console.log(`${filename} WriteStream Error`, err);
+              reject('error');
+            });
+        });
+      })
+    );
   }
 
   @Subscription()

@@ -1,6 +1,5 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { graphqlUploadExpress } from 'graphql-upload';
 import helmet from 'helmet';
 
 import { AppModule } from './app/app.module';
@@ -12,8 +11,6 @@ async function bootstrap() {
 
   const prismaService: PrismaService = app.get(PrismaService);
   prismaService.enableShutdownHooks(app);
-
-  app.use(graphqlUploadExpress(environment.graphql.uploads));
 
   if (environment.production) app.use(helmet());
 
