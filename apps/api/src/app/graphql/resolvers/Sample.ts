@@ -69,9 +69,6 @@ export class SampleResolver {
 
         return new Promise((resolve, reject) => {
           stream
-            .on('end', () => {
-              console.log(`${filename} ReadStream Ended`);
-            })
             .on('close', () => {
               console.log(`${filename} ReadStream Closed`);
             })
@@ -79,17 +76,13 @@ export class SampleResolver {
               console.error(`${filename} ReadStream Error`, err);
             })
             .pipe(createWriteStream(`${UPLOAD_PATH}${filename}`))
-            .on('end', () => {
-              console.log(`${filename} WriteStream Ended`);
-              resolve('end');
-            })
             .on('close', () => {
               console.log(`${filename} WriteStream Closed`);
-              resolve('close');
+              resolve(`${filename} close`);
             })
             .on('error', err => {
               console.log(`${filename} WriteStream Error`, err);
-              reject('error');
+              reject(`${filename} error`);
             });
         });
       })
