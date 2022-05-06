@@ -93,7 +93,7 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
     return () => (this.#incorrectPassword ? { incorrect: true } : null);
   }
 
-  submit() {
+  onSubmit() {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;

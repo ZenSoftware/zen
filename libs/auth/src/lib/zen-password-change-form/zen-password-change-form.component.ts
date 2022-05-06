@@ -106,7 +106,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
     setTimeout(() => this.oldPasswordInput.nativeElement.select());
   }
 
-  submit() {
+  onSubmit() {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;

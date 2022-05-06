@@ -86,7 +86,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
     };
   }
 
-  submit() {
+  onSubmit() {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
