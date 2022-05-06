@@ -1,11 +1,7 @@
-* {
-  &:active,
-  :focus {
-    outline: none !important;
-  }
+body {
+  min-height: 100vh;
 }
 
-html,
-body {
-  height: 100%;
+pre {
+  margin: 0;
 }

@@ -1,19 +1,18 @@
+// Fixes the vertical alignment of FontAwesome icons within buttons
 button .fas {
   vertical-align: unset !important;
 }
 
+// Increases the max height of Material dialog
 mat-dialog-content {
   max-height: 80vh !important;
-}
-
-.mat-button-base {
-  white-space: normal !important;
 }
 
 .mat-button-disabled {
   cursor: not-allowed !important;
 }
 
+// Sets appropriate styles for the password visibility icon
 [mat-icon-button] {
   cursor: pointer;
 
@@ -21,8 +20,4 @@ mat-dialog-content {
     transition: font-size 0.5s;
     font-size: 170%;
   }
-}
-
-.mat-card-title {
-  font-family: $zen-headings-font;
 }

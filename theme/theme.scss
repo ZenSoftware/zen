@@ -1,4 +1,3 @@
-@import 'reset';
 @import 'fonts';
 @import 'helpers';
 
@@ -14,7 +13,9 @@
 // @import './material/material';
 // @import './material/light/theme';
 
-.mat-sidenav-content,
+@import 'reset';
+
+.mat-sidenav-container,
 .mat-sidenav,
 .mat-dialog-container {
   background-color: $body-bg;

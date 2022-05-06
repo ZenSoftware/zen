@@ -16,3 +16,7 @@ $zen-font: mat-typography-config(
 );
 
 @include angular-material-typography($zen-font);
+
+.mat-card-title {
+  font-family: $zen-headings-font;
+}

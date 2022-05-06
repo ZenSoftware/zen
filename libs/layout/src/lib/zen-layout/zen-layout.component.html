@@ -1,4 +1,4 @@
-<mat-sidenav-container class="h-100">
+<mat-sidenav-container style="min-height: 100vh">
   <mat-sidenav #drawer fixedInViewport
       style="min-width: 200px"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -13,7 +13,7 @@
     <ng-content select="[slot=menu-content]"></ng-content>
   </mat-sidenav>
   
-  <mat-sidenav-content>
+  <mat-sidenav-content style="min-height: 100vh">
     <mat-toolbar class="bg-primary">
       <button
         class="me-3"
