@@ -132,7 +132,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
     };
   }
 
-  onSubmit() {
+  submit() {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;

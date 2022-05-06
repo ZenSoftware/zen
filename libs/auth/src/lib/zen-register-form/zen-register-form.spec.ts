@@ -59,7 +59,7 @@ describe('ZenRegisterFormComponent', () => {
     component.acceptTerms.setValue(true);
     expect(component.form.valid).toEqual(true);
 
-    component.onSubmit();
+    component.submit();
     const op = controller.expectOne(AuthRegisterDocument);
 
     const variables: AuthRegisterVariables = {

@@ -94,7 +94,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
     };
   }
 
-  onSubmit() {
+  submit() {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
