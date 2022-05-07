@@ -11,7 +11,7 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   cors: { credentials: true, origin: true },
   graphql: {
-    sandbox: true, // http://localhost:7080/graphql
+    sandbox: true,
     introspection: true,
     trace: true,
     uploads: {
