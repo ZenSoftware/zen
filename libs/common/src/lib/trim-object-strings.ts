@@ -1,23 +1,24 @@
-import { isDate } from 'lodash-es';
-
-const isObject = (x: any) => typeof x === 'object' && x !== null && !Array.isArray(x) && !isDate(x);
+const isObject = (x: any) => typeof x === 'object' && x !== null && !Array.isArray(x);
 
 /**
- * Recursively finds all the string values on an object and trims off the leading and trailing whitespace.
+ * Recursively finds all the string values on an object and trims the leading & trailing whitespace.
  * Mutates the input object.
  */
 export function trimObjectStrings(
-  object: { [key: string]: unknown },
-  options = { convertEmptyToNull: false }
+  object: { [key: string]: any },
+  options: { convertEmptyStringTo: 'null' | 'undefined' | 'emptyString' } = {
+    convertEmptyStringTo: 'null',
+  }
 ) {
   if (object) {
     for (const [key, value] of Object.entries(object)) {
       if (isObject(value)) {
-        trimObjectStrings(value as any, options);
+        trimObjectStrings(value, options);
       } else if (typeof value === 'string') {
         object[key] = value.trim();
-        if (options.convertEmptyToNull && object[key] === '') {
-          object[key] = null;
+        if (object[key] === '') {
+          if (options?.convertEmptyStringTo === 'null') object[key] = null;
+          else if (options?.convertEmptyStringTo === 'undefined') object[key] = undefined;
         }
       }
     }
