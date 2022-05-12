@@ -8,18 +8,16 @@ import { RequestUser } from './request-user';
 
 @Injectable()
 export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
-  constructor(configService: ConfigService, private readonly prisma: PrismaService) {
+  constructor(config: ConfigService, private readonly prisma: PrismaService) {
     super({
-      clientID: configService.oauth.google.clientId,
-      clientSecret: configService.oauth.google.clientSecret,
-      callbackURL: configService.oauth.google.callbackURL,
+      clientID: config.oauth.google.clientId,
+      clientSecret: config.oauth.google.clientSecret,
+      callbackURL: config.oauth.google.callbackURL,
       scope: ['email'],
     });
   }
 
   async validate(accessToken: string, refreshToken: string, profile: Profile) {
-    console.log('Google profile', profile);
-
     let user = await this.prisma.user.findFirst({ where: { googleId: profile.id } });
 
     if (!user) {
