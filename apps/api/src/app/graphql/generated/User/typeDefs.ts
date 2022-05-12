@@ -4,10 +4,11 @@ export default gql`
   type User {
     id: Int!
     createdAt: DateTime!
-    username: String!
-    password: String!
+    username: String
+    password: String
     email: String!
     roles: [Role!]!
+    googleId: String
   }
 
   type Query {

@@ -20,7 +20,7 @@ export const environment: EnvironmentBase = {
       algorithm: 'HS256',
       /**
        * The client will exchange the token every 30 minutes during active sessions
-       * See: `libs\common\src\lib\environment` for `EnvironmentDev.jwtExchangeInterval`
+       * Refer to: `libs\common\src\lib\environment` for `EnvironmentProd.jwtExchangeInterval`
        */
       expiresIn: 3600, // 1 hour (in seconds)
     },
@@ -36,5 +36,13 @@ export const environment: EnvironmentBase = {
     limit: 10,
     ttl: 60,
     ignoreUserAgents: [/googlebot/gi, /bingbot/gi],
+  },
+  oauth: {
+    loginConfirmedURL: 'http://site.com/#/login-confirmed',
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: 'http://api.site.com/auth/google/redirect',
+    },
   },
 };

@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -23,7 +22,7 @@ import { usernameValidator } from '../validators';
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
+export class ZenLoginFormComponent implements OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Input() doneMessage = 'Redirecting...';
@@ -58,12 +57,6 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
       this.#incorrectPassword = false;
     });
     this.#subs.push(sub2);
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.usernameInput.nativeElement.select();
-    });
   }
 
   get username() {
@@ -133,6 +126,12 @@ export class ZenLoginFormComponent implements AfterViewInit, OnDestroy {
           },
         });
     }
+  }
+
+  loginWithGoogle() {
+    this.loading = true;
+    this.form.disable();
+    this.auth.loginWithGoogle();
   }
 
   ngOnDestroy() {

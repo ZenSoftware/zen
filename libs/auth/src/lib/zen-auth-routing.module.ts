@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PublicRegistrationGuard } from './guards';
 import { LoginPageGuard } from './guards/login-page.guard';
+import { ZenLoginConfirmedComponent } from './zen-login-confirmed/zen-login-confirmed.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 import { ZenPasswordResetConfirmationPageComponent } from './zen-password-reset-confirmation-page/zen-password-reset-confirmation-page.component';
 import { ZenPasswordResetRequestPageComponent } from './zen-password-reset-request-page/zen-password-reset-request-page.component';
@@ -13,6 +14,10 @@ const routes: Routes = [
     path: 'login',
     component: ZenLoginPageComponent,
     canActivate: [LoginPageGuard],
+  },
+  {
+    path: 'login-confirmed',
+    component: ZenLoginConfirmedComponent,
   },
   {
     path: 'register',

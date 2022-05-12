@@ -66,6 +66,16 @@ spec:
                 secretKeyRef:
                   name: zen-smtp
                   key: SMTP_FROM_EMAIL
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: zen-google-oauth
+                  key: GOOGLE_CLIENT_ID
+            - name: GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: zen-google-oauth
+                  key: GOOGLE_CLIENT_SECRET
 ---
 kind: Service
 apiVersion: v1

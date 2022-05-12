@@ -33,7 +33,12 @@ export const typeDefs = null;
 export class UserResolver {
   @ResolveField()
   async password() {
-    return '';
+    return null;
+  }
+
+  @ResolveField()
+  async googleId() {
+    return null;
   }
 
   @Query()

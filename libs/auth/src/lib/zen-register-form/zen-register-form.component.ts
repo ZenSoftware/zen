@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -21,6 +20,7 @@ import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
+import { AuthService } from '../auth.service';
 import { emailValidator, passwordValidator, usernameValidator } from '../validators';
 
 @Component({
@@ -29,7 +29,7 @@ import { emailValidator, passwordValidator, usernameValidator } from '../validat
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
+export class ZenRegisterFormComponent implements OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
   @Output() registered = new EventEmitter<AuthSession>();
@@ -42,7 +42,11 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
   generalError = false;
   hidePassword = true;
 
-  constructor(private formBuilder: FormBuilder, private authRegisterGQL: AuthRegisterGQL) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private auth: AuthService,
+    private authRegisterGQL: AuthRegisterGQL
+  ) {
     this.form = this.formBuilder.group({
       username: [
         '',
@@ -63,12 +67,6 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
       this.#emailTaken = false;
     });
     this.#subs.push(sub2);
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.usernameInput.nativeElement.select();
-    });
   }
 
   get username() {
@@ -178,6 +176,12 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
           },
         });
     }
+  }
+
+  loginWithGoogle() {
+    this.loading = true;
+    this.form.disable();
+    this.auth.loginWithGoogle();
   }
 
   ngOnDestroy() {

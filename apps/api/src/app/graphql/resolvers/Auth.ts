@@ -134,6 +134,7 @@ export class AuthResolver {
             },
           },
         ],
+        AND: [{ username: { not: null } }],
       },
     });
 

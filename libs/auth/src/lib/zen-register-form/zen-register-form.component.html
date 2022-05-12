@@ -1,6 +1,15 @@
 <form @verticalAccordionLeave [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
   <zen-loading *ngIf="loading"></zen-loading>
 
+  <button type="button" (click)="loginWithGoogle()" mat-raised-button color="primary" class="w-100 text-lg py-1 my-2" [disabled]="loading">
+    <i class="fa-brands fa-fw fa-google me-1"></i>
+    Sign in with Google
+  </button>
+
+  <hr>
+
+  <h1 class="text-center">Or manually sign up</h1>
+
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Username</mat-label>
     <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="username" hideRequiredMarker="true" maxlength="254">

@@ -1,7 +1,6 @@
-import { ApiConstants } from '@zen/api-interfaces';
-import { Length } from 'class-validator';
+import { MaxLength } from 'class-validator';
 
 export class AuthPasswordResetRequestInput {
-  @Length(ApiConstants.USERNAME_MIN_LENGTH, 254)
+  @MaxLength(254)
   readonly emailOrUsername: string;
 }

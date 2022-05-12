@@ -11,10 +11,11 @@ generator client {
 model User {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  username  String   @unique
-  password  String
+  username  String?  @unique
+  password  String?
   email     String   @unique
   roles     Role[]
+  googleId  String?  @unique
 }
 
 enum Role {

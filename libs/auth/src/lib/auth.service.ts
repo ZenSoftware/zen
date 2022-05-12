@@ -76,6 +76,10 @@ export class AuthService {
       );
   }
 
+  loginWithGoogle() {
+    window.location.href = this.env.url.api + '/auth/google';
+  }
+
   logout() {
     this.clearSession();
     this.router.navigateByUrl('/login');
