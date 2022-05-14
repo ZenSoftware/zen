@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header">
     <h1 class="m-0">
-      <i class="fas fa-fw fa-file-upload me-1"></i>
+      <i class="fa-solid fa-fw fa-file-upload me-1"></i>
       Sample Upload
     </h1>
   </div>
@@ -11,7 +11,7 @@
 
     <input #fileInput id="file-input" name="file" type="file" class="zen-file-input" (change)="fileChange()" [disabled]="isUploading">
     <label for="file-input" class="mat-raised-button mat-secondary zen-no-wrap" [ngClass]="{'mat-button-disabled': isUploading}">
-      <i class="fas fa-fw fa-hdd me-2"></i>
+      <i class="fa-solid fa-fw fa-hdd me-2"></i>
       <span *ngIf="!file">Select file</span>
       <span *ngIf="file" [innerHTML]="fileName"></span>
     </label>
@@ -19,7 +19,7 @@
     <br>
 
     <button mat-raised-button color="primary" (click)="upload()" [disabled]="isUploading || !file">
-      <i class="fas fa-fw fa-save me-2"></i>
+      <i class="fa-solid fa-fw fa-save me-2"></i>
       Upload
     </button>
 

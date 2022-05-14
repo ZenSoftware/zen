@@ -1,11 +1,11 @@
 
 <ng-container *ngIf="displayLogout">
   <span *ifLoggedIn="true" (click)="auth.logout()" style="cursor: pointer;">
-    <i class="fas fa-lock me-2"></i>
+    <i class="fa-solid fa-lock me-2"></i>
     Logout
   </span>
 </ng-container>
 <a *ifLoggedIn="false" routerLink="/login">
-  <i class="fas fa-sign-in-alt me-2"></i>
+  <i class="fa-solid fa-sign-in-alt me-2"></i>
   Login
 </a>

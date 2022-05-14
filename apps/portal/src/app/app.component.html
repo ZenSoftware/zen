@@ -1,6 +1,6 @@
 <zen-layout>
   <div slot="toolbar-start" >
-    <i class="fas fa-dice-d20 me-2"></i>
+    <i class="fa-solid fa-dice-d20 me-2"></i>
     Zen
   </div>
 
@@ -15,28 +15,28 @@
   <div slot="menu-content">
     <mat-nav-list *ifLoggedIn="false">
       <a mat-list-item routerLink="/">
-        <i class="fas fa-fw fa-home me-2"></i>
+        <i class="fa-solid fa-fw fa-home me-2"></i>
         Home
       </a>
       <a mat-list-item routerLink="/login">
-        <i class="fas fa-fw fa-key me-2"></i>
+        <i class="fa-solid fa-fw fa-key me-2"></i>
         Login
       </a>
     </mat-nav-list>
 
     <mat-nav-list *ifLoggedIn="true">
       <a mat-list-item routerLink="/dashboard">
-        <i class="fas fa-fw fa-desktop me-2"></i>
+        <i class="fa-solid fa-fw fa-desktop me-2"></i>
         Dashboard
       </a>
 
       <a mat-list-item routerLink="/super" *roles="'Super'">
-        <i class="fas fa-fw fa-user-shield me-2"></i>
+        <i class="fa-solid fa-fw fa-user-shield me-2"></i>
         Super
       </a>
 
       <a mat-list-item (click)="auth.logout()">
-        <i class="fas fa-fw fa-sign-in-alt me-2"></i>
+        <i class="fa-solid fa-fw fa-sign-in-alt me-2"></i>
         Logout
       </a>
     </mat-nav-list>
