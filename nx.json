@@ -1,7 +1,7 @@
 {
   "npmScope": "zen",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "cli": {
     "defaultCollection": "@nrwl/angular",
