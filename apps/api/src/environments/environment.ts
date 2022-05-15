@@ -13,7 +13,7 @@ export const environment: EnvironmentBase = {
   graphql: {
     sandbox: true,
     introspection: true,
-    trace: true,
+    trace: false,
     uploads: {
       maxFileSize: 20_000_000, // 20 MB
       maxFiles: 5,
