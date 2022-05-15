@@ -1,25 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { Environment } from '@zen/common';
 import { ZenSnackbarErrorService } from '@zen/components';
 
 import { AuthService } from '../auth.service';
 
-@Component({
-  selector: 'zen-login-confirmed',
-  template: ``,
-})
-export class ZenLoginConfirmedComponent implements OnInit {
+@Injectable({ providedIn: 'root' })
+export class LoginConfirmedGuard implements CanActivate {
   constructor(
-    private route: ActivatedRoute,
+    private auth: AuthService,
     private router: Router,
     private env: Environment,
-    private auth: AuthService,
     private zenSnackbarError: ZenSnackbarErrorService
   ) {}
 
-  ngOnInit(): void {
-    const query = this.route.snapshot.queryParams;
+  canActivate(route: ActivatedRouteSnapshot) {
+    const query = route.queryParams;
 
     try {
       this.auth.setSession({
@@ -30,10 +26,10 @@ export class ZenLoginConfirmedComponent implements OnInit {
         token: decodeURIComponent(query['token']),
       });
 
-      this.router.navigate([this.env.url.loginRedirect], { replaceUrl: true });
+      return this.router.parseUrl(this.env.url.loginRedirect);
     } catch (error) {
       this.zenSnackbarError.open({ message: 'Failed to login', error });
-      this.router.navigate(['/login'], { replaceUrl: true });
+      return this.router.parseUrl('/login');
     }
   }
 }
