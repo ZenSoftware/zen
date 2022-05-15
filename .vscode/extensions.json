@@ -1,9 +1,11 @@
 {
   "recommendations": [
-    "angular.ng-template",
+    "Angular.ng-template",
     "nrwl.angular-console",
     "esbenp.prettier-vscode",
     "firsttris.vscode-jest-runner",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "apollographql.vscode-apollo",
+    "Prisma.prisma"
   ]
 }

@@ -6,9 +6,7 @@
       "type": "node",
       "request": "attach",
       "port": 9229,
-      "restart": true,
-      "stopOnEntry": false,
-      "protocol": "inspector"
+      "restart": true
     },
     {
       "name": "Debug angular",
