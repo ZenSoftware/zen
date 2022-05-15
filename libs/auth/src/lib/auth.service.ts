@@ -20,6 +20,7 @@ import { catchError, mergeMap, retryWhen, tap } from 'rxjs/operators';
 import { tokenVar } from './token-var';
 
 enum LocalStorageKey {
+  userId = 'userId',
   token = 'token',
   sessionExpiresOn = 'sessionExpiresOn',
   roles = 'roles',
@@ -31,6 +32,10 @@ enum LocalStorageKey {
 })
 export class AuthService {
   #exchangeIntervalSubscription?: Subscription;
+  #userId: AuthSession['id'] | null = null;
+  get userId(): AuthSession['id'] | null {
+    return this.#userId;
+  }
 
   constructor(
     private router: Router,
@@ -45,6 +50,7 @@ export class AuthService {
         const roles = ls.get(LocalStorageKey.roles, { decrypt: true }) as string[];
         userRolesVar(roles ? roles : []);
         loggedInVar(true);
+        this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
 
         if (this.sessionTimeRemaining <= env.jwtExchangeInterval) {
           this.exchangeToken();
@@ -87,6 +93,7 @@ export class AuthService {
 
   setSession(authSession: AuthSession) {
     const expiresOn = Date.now() + authSession.expiresIn * 1000;
+    ls.set(LocalStorageKey.userId, authSession.id, { encrypt: true });
     ls.set(LocalStorageKey.token, authSession.token, { encrypt: true });
     ls.set(LocalStorageKey.sessionExpiresOn, expiresOn);
     ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
@@ -152,10 +159,12 @@ export class AuthService {
 
   private clearSession() {
     this.stopExchangeInterval();
+    ls.remove(LocalStorageKey.userId);
     ls.remove(LocalStorageKey.token);
     ls.remove(LocalStorageKey.sessionExpiresOn);
     ls.remove(LocalStorageKey.rememberMe);
     ls.remove(LocalStorageKey.roles);
+    this.#userId = null;
     userRolesVar([]);
     tokenVar(null);
     loggedInVar(false);
