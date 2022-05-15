@@ -11,6 +11,6 @@ export class SuperGuard implements CanLoad {
   constructor(private auth: AuthService, private router: Router) {}
 
   canLoad() {
-    return this.auth.userHasRole(Role.Super) ? true : this.router.createUrlTree(['/login']);
+    return this.auth.userHasRole(Role.Super) ? true : this.router.parseUrl('/login');
   }
 }

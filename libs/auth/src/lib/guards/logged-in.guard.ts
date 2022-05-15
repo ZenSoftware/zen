@@ -9,7 +9,7 @@ export class LoggedInGuard implements CanActivate, CanLoad {
   constructor(private router: Router) {}
 
   canActivate() {
-    return loggedInVar() ? true : this.router.createUrlTree(['/login']);
+    return loggedInVar() ? true : this.router.parseUrl('/login');
   }
 
   canLoad() {
