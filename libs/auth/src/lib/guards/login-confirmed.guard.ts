@@ -26,6 +26,13 @@ export class LoginConfirmedGuard implements CanActivate {
         token: decodeURIComponent(query['token']),
       });
 
+      /**
+       * It would be preferable to use `skipLocationChange` from `NavigationExtras` to not save the route
+       * in the browser history.  Though this is currently not supported.  Reference issue:
+       * [NavigationExtras when returning URLTree from guard](https://github.com/angular/angular/issues/27148).
+       * If a user signs out and presses the back button and resolves back to the `/login-confirmed` route,
+       * the user will be unintentionally signed back in.
+       */
       return this.router.parseUrl(this.env.url.loginRedirect);
     } catch (error) {
       this.zenSnackbarError.open({ message: 'Failed to login', error });
