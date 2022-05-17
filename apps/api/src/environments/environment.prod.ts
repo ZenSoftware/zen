@@ -45,4 +45,11 @@ export const environment: EnvironmentBase = {
       callbackURL: 'http://api.site.com/auth/google/redirect',
     },
   },
+  openTelemetry: {
+    serviceName: 'zen-api',
+    exporters: { enableOtlp: true },
+    collectorOptions: {
+      url: 'http://localhost:4318/v1/traces',
+    },
+  },
 };
