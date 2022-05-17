@@ -46,7 +46,7 @@ import { AppComponent } from './app.component';
       websocketOptions: {
         url: environment.url.graphqlSubscriptions,
         connectionParams: () => ({ token: tokenVar() }),
-        isFatalConnectionProblem: () => false,
+        shouldRetry: () => true,
         retryAttempts: Infinity,
       },
     }),
