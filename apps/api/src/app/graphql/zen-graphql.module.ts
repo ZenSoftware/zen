@@ -6,6 +6,7 @@ import { ZenAuthModule } from '../auth';
 import { ConfigModule } from '../config';
 import { MailModule } from '../mail';
 import { PrismaModule } from '../prisma';
+import { SchemaGuard } from '../validation/validate-schema';
 import { GqlConfigService } from './gql-config.service';
 import { NEST_RESOLVERS } from './resolvers';
 
@@ -21,6 +22,12 @@ import { NEST_RESOLVERS } from './resolvers';
       imports: [PrismaModule, ConfigModule],
     }),
   ],
-  providers: [...NEST_RESOLVERS],
+  providers: [
+    ...NEST_RESOLVERS,
+    {
+      provide: 'APP_GUARD',
+      useClass: SchemaGuard,
+    },
+  ],
 })
 export class ZenGraphQLModule {}

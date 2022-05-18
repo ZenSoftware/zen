@@ -8,6 +8,10 @@ generator client {
   binaryTargets = ["native", "linux-musl"]
 }
 
+generator zod {
+  provider = "prisma-zod-generator"
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
