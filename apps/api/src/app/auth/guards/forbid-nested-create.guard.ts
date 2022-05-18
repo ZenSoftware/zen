@@ -25,6 +25,7 @@ export function containsNestedCreate(args: any, options: Options = undefined) {
 
 /**
  * Rejects mutations with nested create arguments
+ * @param options - Field `allow` lists an array of field names to ignore within the Apollo args
  */
 export const ForbidNestedCreateGuard = (options: Options = undefined) => {
   class ForbidNestedCreateGuardMixin implements CanActivate {
