@@ -1,11 +1,9 @@
-import dotenv from 'dotenv';
+import 'dotenv/config';
 
 import { EnvironmentBase } from './environment.base';
 
-dotenv.config();
-
 export const environment: EnvironmentBase = {
-  siteUrl: 'http://site.com',
+  siteUrl: 'http://localhost:4200',
   production: false,
   expressPort: 7080,
   publicRegistration: true,
