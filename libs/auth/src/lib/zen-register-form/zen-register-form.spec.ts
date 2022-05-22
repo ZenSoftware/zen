@@ -15,6 +15,7 @@ import {
 } from '@zen/graphql';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 
+import { AuthService } from '../auth.service';
 import { ZenRegisterFormComponent } from './zen-register-form.component';
 
 describe('ZenRegisterFormComponent', () => {
@@ -25,7 +26,7 @@ describe('ZenRegisterFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ZenRegisterFormComponent],
-      providers: [AuthRegisterGQL],
+      providers: [AuthRegisterGQL, { provide: AuthService, useValue: {} }],
       imports: [
         NoopAnimationsModule,
         ReactiveFormsModule,

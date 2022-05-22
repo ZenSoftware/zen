@@ -12,7 +12,9 @@ import { RequestUser } from './request-user';
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(readonly config: ConfigService) {
     super({
-      secretOrKey: config.production ? config.jwtOptions.publicKey : config.jwtOptions.secret,
+      secretOrKey: config.jwtOptions.publicKey
+        ? config.jwtOptions.publicKey
+        : config.jwtOptions.secret,
 
       jwtFromRequest: (req: ExReq & { token: any }) => {
         // Websocket connection

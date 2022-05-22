@@ -15,9 +15,10 @@ export const environment: EnvironmentBase = {
     },
   },
   jwtOptions: {
-    secret: process.env.JWT_KEY,
+    secret: process.env.JWT_PRIVATE_KEY,
+    publicKey: process.env.JWT_PUBLIC_KEY,
     signOptions: {
-      algorithm: 'HS256',
+      algorithm: 'ES256',
       /**
        * The client will exchange the token every 30 minutes during active sessions
        * Refer to: `libs\common\src\lib\environment` for `EnvironmentProd.jwtExchangeInterval`

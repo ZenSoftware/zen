@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: zen-api
-          image: zenacr.azurecr.io/api:latest
+          image: zen-api:latest
+          imagePullPolicy: Never
           resources:
             requests:
               memory: "700Mi"
@@ -41,11 +42,6 @@ spec:
                 secretKeyRef:
                   name: zen-jwt
                   key: JWT_PRIVATE_KEY
-            - name: JWT_PUBLIC_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: zen-jwt
-                  key: JWT_PUBLIC_KEY
             - name: SMTP_SERVER
               valueFrom:
                 secretKeyRef:
@@ -99,21 +95,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: zen-ingress
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://portal.site.ca"
+  labels:
+    name: zen-ingress
 spec:
-  ingressClassName: nginx
   tls:
   - hosts:
-    - api.site.ca
-    secretName: tls-secret
+    - zen.rancher.localhost
   rules:
-  - host: api.site.ca
+  - host: zen.rancher.localhost
     http:
       paths:
-      - path: /
+      - path: "/"
         pathType: Prefix
         backend:
           service:
