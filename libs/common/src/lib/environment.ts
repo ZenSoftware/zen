@@ -3,6 +3,7 @@ export abstract class Environment {
   abstract readonly publicRegistration: boolean;
   abstract readonly jwtExchangeInterval: number;
   abstract readonly rememberMeExchangeThreshold: number;
+  abstract readonly enableGoogleOAuth: boolean;
   abstract readonly url: {
     readonly loginRedirect: string;
     readonly api: string;
@@ -17,6 +18,7 @@ export class EnvironmentDev implements Environment {
   publicRegistration = true;
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
+  enableGoogleOAuth = true;
   url = {
     loginRedirect: '/',
     api: 'http://localhost:7080',
@@ -31,6 +33,7 @@ export class EnvironmentProd implements Environment {
   publicRegistration = true;
   jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
   rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
+  enableGoogleOAuth = true;
   url = {
     loginRedirect: '/',
     api: 'https://api.site.com',
