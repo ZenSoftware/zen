@@ -4,9 +4,9 @@ import { ApiError } from '@zen/api-interfaces';
 import { Request as ExReq } from 'express';
 import { Strategy } from 'passport-jwt';
 
-import { ConfigService } from '../config';
-import { JwtPayload } from './jwt-payload';
-import { RequestUser } from './request-user';
+import { ConfigService } from '../../config';
+import { JwtPayload } from '../models/jwt-payload';
+import { RequestUser } from '../models/request-user';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {

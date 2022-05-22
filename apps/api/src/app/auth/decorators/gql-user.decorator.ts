@@ -1,7 +1,7 @@
 import { ExecutionContext, UnauthorizedException, createParamDecorator } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
-import { RequestUser } from './request-user';
+import { RequestUser } from '../models/request-user';
 
 /**
  * Injectable decorator for a `RequestUser`

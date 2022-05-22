@@ -4,8 +4,8 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from '@prisma/client';
 
-import { ALLOW_ANONYMOUS_KEY } from '../allow-anonymous.decorator';
-import { ROLES_KEY } from '../roles.decorator';
+import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
+import { ROLES_KEY } from '../decorators/roles.decorator';
 import { authLogic } from './auth-logic';
 
 @Injectable()

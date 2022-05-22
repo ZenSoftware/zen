@@ -4,8 +4,8 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '../jwt';
 import { PrismaModule } from '../prisma';
 import { AuthService } from './auth.service';
-import { GoogleOAuthStrategy } from './google-oauth.strategy';
-import { JwtStrategy } from './jwt.strategy';
+import { GoogleOAuthStrategy } from './strategies/google-oauth.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [JwtModule, PrismaModule, PassportModule.register({ defaultStrategy: 'jwt' })],

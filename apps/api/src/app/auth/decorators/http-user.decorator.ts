@@ -1,6 +1,6 @@
 import { ExecutionContext, UnauthorizedException, createParamDecorator } from '@nestjs/common';
 
-import { RequestUser } from './request-user';
+import { RequestUser } from '../models/request-user';
 
 export const HttpUser = createParamDecorator((data, context: ExecutionContext) => {
   const req = context.switchToHttp().getRequest();

@@ -4,7 +4,7 @@ import { RequestUser } from '../auth';
 import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models/auth-session';
 import { JwtService } from '../jwt';
-import { JwtPayload } from './jwt-payload';
+import { JwtPayload } from './models/jwt-payload';
 
 @Injectable()
 export class AuthService {
