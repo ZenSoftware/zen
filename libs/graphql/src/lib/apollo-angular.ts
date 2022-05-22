@@ -15,6 +15,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: any;
+  /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
 
@@ -264,6 +265,17 @@ export type NestedIntFilter = {
   notIn?: InputMaybe<Array<Scalars['Int']>>;
 };
 
+export type NestedIntNullableFilter = {
+  equals?: InputMaybe<Scalars['Int']>;
+  gt?: InputMaybe<Scalars['Int']>;
+  gte?: InputMaybe<Scalars['Int']>;
+  in?: InputMaybe<Array<Scalars['Int']>>;
+  lt?: InputMaybe<Scalars['Int']>;
+  lte?: InputMaybe<Scalars['Int']>;
+  not?: InputMaybe<NestedIntNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['Int']>>;
+};
+
 export type NestedIntWithAggregatesFilter = {
   _avg?: InputMaybe<NestedFloatFilter>;
   _count?: InputMaybe<NestedIntFilter>;
@@ -294,6 +306,37 @@ export type NestedStringFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type NestedStringNullableFilter = {
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  not?: InputMaybe<NestedStringNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type NestedStringNullableWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntNullableFilter>;
+  _max?: InputMaybe<NestedStringNullableFilter>;
+  _min?: InputMaybe<NestedStringNullableFilter>;
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  not?: InputMaybe<NestedStringNullableWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
+};
+
 export type NestedStringWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntFilter>;
   _max?: InputMaybe<NestedStringFilter>;
@@ -309,6 +352,10 @@ export type NestedStringWithAggregatesFilter = {
   not?: InputMaybe<NestedStringWithAggregatesFilter>;
   notIn?: InputMaybe<Array<Scalars['String']>>;
   startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -422,6 +469,39 @@ export type StringFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type StringNullableFilter = {
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  mode?: InputMaybe<QueryMode>;
+  not?: InputMaybe<NestedStringNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type StringNullableWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntNullableFilter>;
+  _max?: InputMaybe<NestedStringNullableFilter>;
+  _min?: InputMaybe<NestedStringNullableFilter>;
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  mode?: InputMaybe<QueryMode>;
+  not?: InputMaybe<NestedStringNullableWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
+};
+
 export type StringWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntFilter>;
   _max?: InputMaybe<NestedStringFilter>;
@@ -449,10 +529,11 @@ export type User = {
   __typename?: 'User';
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
+  googleId?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
-  password: Scalars['String'];
+  password?: Maybe<Scalars['String']>;
   roles: Array<Role>;
-  username: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
 };
 
 export type UserAvgAggregateOutputType = {
@@ -469,6 +550,7 @@ export type UserCountAggregateOutputType = {
   _all: Scalars['Int'];
   createdAt: Scalars['Int'];
   email: Scalars['Int'];
+  googleId: Scalars['Int'];
   id: Scalars['Int'];
   password: Scalars['Int'];
   roles: Scalars['Int'];
@@ -478,6 +560,7 @@ export type UserCountAggregateOutputType = {
 export type UserCountOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  googleId?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   roles?: InputMaybe<SortOrder>;
@@ -487,18 +570,20 @@ export type UserCountOrderByAggregateInput = {
 export type UserCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
-  password: Scalars['String'];
+  googleId?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
-  username: Scalars['String'];
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserCreateManyInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
+  googleId?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
-  password: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
-  username: Scalars['String'];
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserCreaterolesInput = {
@@ -509,6 +594,7 @@ export type UserMaxAggregateOutputType = {
   __typename?: 'UserMaxAggregateOutputType';
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
+  googleId?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   password?: Maybe<Scalars['String']>;
   username?: Maybe<Scalars['String']>;
@@ -517,6 +603,7 @@ export type UserMaxAggregateOutputType = {
 export type UserMaxOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  googleId?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   username?: InputMaybe<SortOrder>;
@@ -526,6 +613,7 @@ export type UserMinAggregateOutputType = {
   __typename?: 'UserMinAggregateOutputType';
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
+  googleId?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   password?: Maybe<Scalars['String']>;
   username?: Maybe<Scalars['String']>;
@@ -534,6 +622,7 @@ export type UserMinAggregateOutputType = {
 export type UserMinOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  googleId?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   username?: InputMaybe<SortOrder>;
@@ -547,6 +636,7 @@ export type UserOrderByWithAggregationInput = {
   _sum?: InputMaybe<UserSumOrderByAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  googleId?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   roles?: InputMaybe<SortOrder>;
@@ -556,6 +646,7 @@ export type UserOrderByWithAggregationInput = {
 export type UserOrderByWithRelationInput = {
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
+  googleId?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   roles?: InputMaybe<SortOrder>;
@@ -565,6 +656,7 @@ export type UserOrderByWithRelationInput = {
 export enum UserScalarFieldEnum {
   CreatedAt = 'createdAt',
   Email = 'email',
+  GoogleId = 'googleId',
   Id = 'id',
   Password = 'password',
   Roles = 'roles',
@@ -577,10 +669,11 @@ export type UserScalarWhereWithAggregatesInput = {
   OR?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
+  googleId?: InputMaybe<StringNullableWithAggregatesFilter>;
   id?: InputMaybe<IntWithAggregatesFilter>;
-  password?: InputMaybe<StringWithAggregatesFilter>;
+  password?: InputMaybe<StringNullableWithAggregatesFilter>;
   roles?: InputMaybe<EnumRoleNullableListFilter>;
-  username?: InputMaybe<StringWithAggregatesFilter>;
+  username?: InputMaybe<StringNullableWithAggregatesFilter>;
 };
 
 export type UserSumAggregateOutputType = {
@@ -595,44 +688,49 @@ export type UserSumOrderByAggregateInput = {
 export type UserUncheckedCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
+  googleId?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
-  password: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
-  username: Scalars['String'];
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUncheckedUpdateInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<IntFieldUpdateOperationsInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   roles?: InputMaybe<Array<Role>>;
-  username?: InputMaybe<StringFieldUpdateOperationsInput>;
+  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type UserUncheckedUpdateManyInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<IntFieldUpdateOperationsInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   roles?: InputMaybe<Array<Role>>;
-  username?: InputMaybe<StringFieldUpdateOperationsInput>;
+  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   roles?: InputMaybe<Array<Role>>;
-  username?: InputMaybe<StringFieldUpdateOperationsInput>;
+  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateManyMutationInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   roles?: InputMaybe<Array<Role>>;
-  username?: InputMaybe<StringFieldUpdateOperationsInput>;
+  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
 };
 
 export type UserUpdaterolesInput = {
@@ -646,14 +744,16 @@ export type UserWhereInput = {
   OR?: InputMaybe<Array<UserWhereInput>>;
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
+  googleId?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<IntFilter>;
-  password?: InputMaybe<StringFilter>;
+  password?: InputMaybe<StringNullableFilter>;
   roles?: InputMaybe<EnumRoleNullableListFilter>;
-  username?: InputMaybe<StringFilter>;
+  username?: InputMaybe<StringNullableFilter>;
 };
 
 export type UserWhereUniqueInput = {
   email?: InputMaybe<Scalars['String']>;
+  googleId?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   username?: InputMaybe<Scalars['String']>;
 };
@@ -712,14 +812,14 @@ export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
 
 export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number };
 
-export type UserFields = { __typename?: 'User', id: number, username: string, email: string };
+export type UserFields = { __typename?: 'User', id: number, username?: string | null, email: string };
 
 export type FindUniqueUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username: string, email: string } | null };
+export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username?: string | null, email: string } | null };
 
 export type FindFirstUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -731,7 +831,7 @@ export type FindFirstUserVariables = Exact<{
 }>;
 
 
-export type FindFirstUser = { __typename?: 'Query', findFirstUser?: { __typename?: 'User', id: number, username: string, email: string } | null };
+export type FindFirstUser = { __typename?: 'Query', findFirstUser?: { __typename?: 'User', id: number, username?: string | null, email: string } | null };
 
 export type FindManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -743,7 +843,7 @@ export type FindManyUserVariables = Exact<{
 }>;
 
 
-export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username: string, email: string }> | null };
+export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username?: string | null, email: string }> | null };
 
 export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -762,7 +862,7 @@ export type CreateOneUserVariables = Exact<{
 }>;
 
 
-export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: number, username: string, email: string } };
+export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: number, username?: string | null, email: string } };
 
 export type UpdateOneUserVariables = Exact<{
   data: UserUpdateInput;
@@ -770,7 +870,7 @@ export type UpdateOneUserVariables = Exact<{
 }>;
 
 
-export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: number, username: string, email: string } };
+export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: number, username?: string | null, email: string } };
 
 export type DeleteOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -786,7 +886,7 @@ export type UpsertOneUserVariables = Exact<{
 }>;
 
 
-export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username: string, email: string } | null };
+export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username?: string | null, email: string } | null };
 
 export type DeleteManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
