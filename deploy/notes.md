@@ -64,3 +64,20 @@ az acr login --name zenacr
 ```bash
 azcopy login --tenant-id=<tenantId>
 ```
+
+## Security 
+Reference for options for JWT: [auth0/node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+
+[Creating Elliptic Curve Keys using OpenSSL](https://www.scottbrady91.com/openssl/creating-elliptical-curve-keys-using-openssl)
+
+```bash
+# generate a private key for ES256 
+openssl ecparam -name prime256v1 -genkey -noout -out private-key.pem
+
+# generate corresponding public key
+openssl ec -in private-key.pem -pubout -out public-key.pem
+
+# base64 encode for k8s secrets JWT_PRIVATE_KEY & JWT_PUBLIC_KEY
+cat private-key.pem | base64 -w 0
+cat public-key.pem | base64 -w 0
+```

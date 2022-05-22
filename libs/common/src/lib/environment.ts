@@ -19,10 +19,10 @@ export class EnvironmentDev implements Environment {
   rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
   url = {
     loginRedirect: '/',
-    api: 'http://localhost:7080',
+    api: 'http://zen.rancher.localhost',
     portal: 'http://localhost:4200/#/',
-    graphql: 'http://localhost:7080/graphql',
-    graphqlSubscriptions: 'ws://localhost:7080/graphql',
+    graphql: 'http://zen.rancher.localhost/graphql',
+    graphqlSubscriptions: 'ws://zen.rancher.localhost/graphql',
   };
 }
 

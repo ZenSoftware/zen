@@ -36,11 +36,16 @@ spec:
                 secretKeyRef:
                   name: pg-secret
                   key: DATABASE_URL
-            - name: JWT_KEY
+            - name: JWT_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
                   name: zen-jwt
-                  key: JWT_KEY
+                  key: JWT_PRIVATE_KEY
+            - name: JWT_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zen-jwt
+                  key: JWT_PUBLIC_KEY
             - name: SMTP_SERVER
               valueFrom:
                 secretKeyRef:
@@ -90,7 +95,6 @@ spec:
       port: 80
       targetPort: 7080
 ---
-# https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip?tabs=azure-cli
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
