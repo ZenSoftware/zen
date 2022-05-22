@@ -2,6 +2,9 @@ import { ExecutionContext, UnauthorizedException, createParamDecorator } from '@
 
 import { RequestUser } from '../models/request-user';
 
+/**
+ * Injectable decorator to retrieve the `RequestUser`
+ */
 export const HttpUser = createParamDecorator((data, context: ExecutionContext) => {
   const req = context.switchToHttp().getRequest();
   if (!req.user) {

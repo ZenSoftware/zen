@@ -4,7 +4,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { RequestUser } from '../models/request-user';
 
 /**
- * Injectable decorator for a `RequestUser`
+ * Injectable decorator to retrieve the `RequestUser`
  */
 export const GqlUser = createParamDecorator((data, context: ExecutionContext) => {
   const user = GqlExecutionContext.create(context).getContext().req.user;
