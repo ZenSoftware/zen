@@ -1,5 +1,4 @@
 ## Postgres
-
 ```sql
 -- Drop
 SELECT pg_terminate_backend (pg_stat_activity.pid)
@@ -11,7 +10,7 @@ WHERE pg_stat_activity.datname = 'prisma';
 DROP DATABASE prisma;
 ```
 
-## Setup kubectl credentials
+## Setup Azure kubectl credentials
 ```bash
 az login
 
@@ -25,7 +24,7 @@ kubectl config get-contexts
 kubectl config use-context <yourClusterName>
 ```
 
-## Documentation
+## Generate docs
 ```bash
 # Build docs
 npm run docs
@@ -37,8 +36,7 @@ git subtree push --prefix documentation origin gh-pages
 git subtree push --prefix documentation docs master
 ```
 
-## GPG
-
+## Encrypt files with GPG
 ```bash
 # Decrypt
 gpg --output deploy/secrets.zip --decrypt deploy/secrets.zip.gpg
@@ -47,8 +45,7 @@ gpg --output deploy/secrets.zip --decrypt deploy/secrets.zip.gpg
 gpg --output deploy/secrets.zip.gpg -c deploy/secrets.zip
 ```
 
-## ACR
-
+## Azure ACR
 ```bash
 # Attach Kubernetes cluster to Azure Container Registry
 az aks update -n zen -g zen --attach-acr zenacr
@@ -57,16 +54,15 @@ az aks update -n zen -g zen --attach-acr zenacr
 az acr login --name zenacr
 ```
 
-## Azcopy
-
+## azcopy
 [Assign "Storage Blob Data Owner" role to account](https://docs.microsoft.com/en-us/azure/storage/common/storage-auth-aad-rbac-portal)
 
 ```bash
 azcopy login --tenant-id=<tenantId>
 ```
 
-## Security 
-Reference for options for JWT: [auth0/node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+## Generate ES256 keys 
+Options for JWT configuration: [auth0/node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
 
 [Creating Elliptic Curve Keys using OpenSSL](https://www.scottbrady91.com/openssl/creating-elliptical-curve-keys-using-openssl)
 

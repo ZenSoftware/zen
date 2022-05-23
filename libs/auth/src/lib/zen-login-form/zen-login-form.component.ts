@@ -9,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Environment } from '@zen/common';
 import { ApiError, GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
@@ -38,7 +39,11 @@ export class ZenLoginFormComponent implements OnDestroy {
   form: FormGroup;
   generalError = false;
 
-  constructor(private formBuilder: FormBuilder, private auth: AuthService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private auth: AuthService,
+    public env: Environment
+  ) {
     this.form = this.formBuilder.group({
       username: [
         '',

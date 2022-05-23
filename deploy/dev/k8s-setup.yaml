@@ -22,16 +22,6 @@ spec:
             requests:
               memory: "700Mi"
           env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: pg-secret
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: pg-secret
-                  key: POSTGRES_PASSWORD
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -42,6 +32,11 @@ spec:
                 secretKeyRef:
                   name: zen-jwt
                   key: JWT_PRIVATE_KEY
+            - name: JWT_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zen-jwt
+                  key: JWT_PUBLIC_KEY
             - name: SMTP_SERVER
               valueFrom:
                 secretKeyRef:

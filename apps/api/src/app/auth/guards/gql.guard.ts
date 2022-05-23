@@ -4,7 +4,8 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from '@prisma/client';
 
-import { ROLES_KEY } from '../roles.decorator';
+import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
+import { ROLES_KEY } from '../decorators/roles.decorator';
 import { authLogic } from './auth-logic';
 
 @Injectable()
@@ -18,9 +19,24 @@ export class GqlGuard extends AuthGuard('jwt') {
   }
 
   async canActivate(context: ExecutionContext) {
+    const ctx = GqlExecutionContext.create(context);
+
+    const allowAnonymousHandler = this.reflector.get<boolean | undefined>(
+      ALLOW_ANONYMOUS_KEY,
+      ctx.getHandler()
+    );
+
+    if (allowAnonymousHandler) return true;
+
+    const allowAnonymousClass = this.reflector.get<boolean | undefined>(
+      ALLOW_ANONYMOUS_KEY,
+      ctx.getClass()
+    );
+
+    if (allowAnonymousClass) return true;
+
     await super.canActivate(context);
 
-    const ctx = GqlExecutionContext.create(context);
     const user = ctx.getContext().req.user;
     const classRoles = this.reflector.get<Role[]>(ROLES_KEY, ctx.getClass());
     const handlerRoles = this.reflector.get<Role[]>(ROLES_KEY, ctx.getHandler());

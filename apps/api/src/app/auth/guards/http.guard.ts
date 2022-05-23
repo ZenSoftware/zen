@@ -3,7 +3,8 @@ import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from '@prisma/client';
 
-import { ROLES_KEY } from '../roles.decorator';
+import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
+import { ROLES_KEY } from '../decorators/roles.decorator';
 import { authLogic } from './auth-logic';
 
 @Injectable()
@@ -17,6 +18,20 @@ export class HttpGuard extends AuthGuard('jwt') {
   }
 
   async canActivate(ctx: ExecutionContext) {
+    const allowAnonymousHandler = this.reflector.get<boolean | undefined>(
+      ALLOW_ANONYMOUS_KEY,
+      ctx.getHandler()
+    );
+
+    if (allowAnonymousHandler) return true;
+
+    const allowAnonymousClass = this.reflector.get<boolean | undefined>(
+      ALLOW_ANONYMOUS_KEY,
+      ctx.getClass()
+    );
+
+    if (allowAnonymousClass) return true;
+
     await super.canActivate(ctx);
 
     const { user } = ctx.switchToHttp().getRequest();

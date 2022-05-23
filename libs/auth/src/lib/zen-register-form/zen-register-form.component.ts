@@ -8,6 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Environment } from '@zen/common';
 import {
   ApiError,
   AuthRegister,
@@ -45,7 +46,8 @@ export class ZenRegisterFormComponent implements OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private authRegisterGQL: AuthRegisterGQL
+    private authRegisterGQL: AuthRegisterGQL,
+    public env: Environment
   ) {
     this.form = this.formBuilder.group({
       username: [
