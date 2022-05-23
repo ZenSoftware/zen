@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: zen-pg
   labels:
-    app: postgres
+    app: zen-pg
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: zen-pg
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: postgres
+        app: zen-pg
     spec:
       containers:
-        - name: postgres
+        - name: zen-pg
           image: postgres:14
           env:
             - name: PGDATA
@@ -33,14 +33,14 @@ spec:
                   name: pg-secret
                   key: POSTGRES_PASSWORD
           ports:
-            - name: postgres-5432
+            - name: zen-pg-5432
               containerPort: 5432
           volumeMounts:
-            - name: postgres-pv-claim
+            - name: zen-pg-pv-claim
               readOnly: false
               mountPath: /var/lib/postgresql/data
       volumes:
-        - name: postgres-pv-claim
+        - name: zen-pg-pv-claim
           hostPath:
             # https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
             # Linux: /home/username/simplest-k8s/host-mount
@@ -51,11 +51,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-svc
+  name: zen-pg-svc
 spec:
+  type: NodePort
   ports:
   - port: 5432
     targetPort: 5432
     protocol: TCP
   selector:
-    app: postgres
+    app: zen-pg
