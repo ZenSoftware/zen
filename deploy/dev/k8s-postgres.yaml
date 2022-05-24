@@ -55,7 +55,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 5432
+  - name: postgresql
+    port: 5432
     targetPort: zen-pg-port
     protocol: TCP
   selector:

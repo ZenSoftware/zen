@@ -84,7 +84,8 @@ spec:
   selector:
     app: zen-api
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: zen-api-port
 ---
