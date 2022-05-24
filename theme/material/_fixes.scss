@@ -21,6 +21,7 @@ mat-dialog-content {
   max-height: 80vh !important;
 }
 
+// Have the mouse cursor display a not-allowed cursor on hover for disabled buttons
 .mat-button-disabled {
   cursor: not-allowed !important;
 }
