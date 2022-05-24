@@ -4,7 +4,7 @@ import { authLogic } from './auth-logic';
 
 describe('auth-logic', () => {
   it('validates roles correctly', () => {
-    // Allow anonymous users for classes not decorated with Roles, and handlers not decorated with Roles
+    // Allow anonymous users for classes not decorated with Roles and handlers not decorated with Roles
     expect(authLogic([], [], [])).toEqual(true);
 
     // Super gets unlimited access
