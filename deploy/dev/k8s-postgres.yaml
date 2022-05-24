@@ -33,8 +33,8 @@ spec:
                   name: pg-secret
                   key: POSTGRES_PASSWORD
           ports:
-            - name: zen-pg-5432
-              containerPort: 5432
+            - containerPort: 5432
+              name: zen-pg-port
           volumeMounts:
             - name: zen-pg-pv-claim
               readOnly: false
@@ -56,7 +56,7 @@ spec:
   type: NodePort
   ports:
   - port: 5432
-    targetPort: 5432
+    targetPort: zen-pg-port
     protocol: TCP
   selector:
     app: zen-pg
