@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@zen/auth';
 
 @Component({
   selector: 'zen-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: 'app.component.html',
 })
 export class AppComponent {
-  title = 'electron';
+  constructor(public auth: AuthService) {}
 }
