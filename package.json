@@ -7,8 +7,8 @@
   "scripts": {
     "start": "nx serve",
     "start:api": "concurrently \"nx serve api\" \"gulp handlebars:copy\" \"gulp handlebars:watch\"",
-    "start:e2e": "nx e2e portal-e2e --watch",
     "start:electron": "ng build --project electron --configuration development && electron .",
+    "start:e2e": "nx e2e portal-e2e --watch",
     "apollo:gen": "graphql-codegen -c apollo-angular.yml && graphql-codegen -c apollo-possible-types.yml",
     "gql:gen": "prisma generate && gulp gql:gen",
     "prisma:migrate": "prisma migrate dev && gulp gql:gen",
