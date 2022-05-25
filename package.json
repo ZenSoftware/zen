@@ -3,10 +3,12 @@
   "version": "6.0.0",
   "license": "MIT",
   "private": true,
+  "main": "app.js",
   "scripts": {
     "start": "nx serve",
     "start:api": "concurrently \"nx serve api\" \"gulp handlebars:copy\" \"gulp handlebars:watch\"",
     "start:e2e": "nx e2e portal-e2e --watch",
+    "start:electron": "ng build --project electron --configuration development && electron .",
     "apollo:gen": "graphql-codegen -c apollo-angular.yml && graphql-codegen -c apollo-possible-types.yml",
     "gql:gen": "prisma generate && gulp gql:gen",
     "prisma:migrate": "prisma migrate dev && gulp gql:gen",
@@ -60,6 +62,7 @@
     "rxjs": "~7.5.0"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^13.1.0",
     "@angular-devkit/build-angular": "~13.3.3",
     "@angular-eslint/eslint-plugin": "~13.2.0",
     "@angular-eslint/eslint-plugin-template": "~13.2.0",
@@ -115,6 +118,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "del": "^6.0.0",
     "dotenv": "^16.0.0",
+    "electron": "^19.0.0",
     "eslint": "~8.12.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
@@ -130,6 +134,7 @@
     "prettier-plugin-import-sort": "^0.0.7",
     "prettier-plugin-prisma": "^3.8.0",
     "ts-jest": "27.1.4",
+    "ts-node": "9.1.1",
     "tslib": "^2.3.0",
     "typescript": "~4.6.2",
     "zone.js": "~0.11.4"
@@ -146,4 +151,3 @@
     }
   }
 }
-

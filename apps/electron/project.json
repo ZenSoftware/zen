@@ -4,9 +4,17 @@
   "prefix": "zen",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-builders/custom-webpack:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "customWebpackConfig": {
+          "path": "apps/electron/extra-webpack.config.js",
+          "mergeRules": {
+            "resolve": {
+              "rules": "merge"
+            }
+          }
+        },
         "outputPath": "dist/apps/electron",
         "index": "apps/electron/src/index.html",
         "main": "apps/electron/src/main.ts",

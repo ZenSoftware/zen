@@ -4,7 +4,15 @@
   "prefix": "zen",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-builders/custom-webpack:browser",
+      "customWebpackConfig": {
+        "path": "apps/portal/extra-webpack.config.js",
+        "mergeRules": {
+          "resolve": {
+            "rules": "merge"
+          }
+        }
+      },
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/portal",
