@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { AuthService } from '../auth';
 import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models';
 import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
 
 describe('Auth Controller', () => {
   let controller: AuthController;
@@ -29,7 +29,7 @@ describe('Auth Controller', () => {
         {
           provide: ConfigService,
           useValue: <ConfigService>{
-            oauth: { loginConfirmedURL: 'http://localhost:4200/#/login-confirmed' },
+            oauth: { loginConfirmedURL: 'http://site.com/login-confirmed' },
           },
         },
       ],
@@ -42,7 +42,7 @@ describe('Auth Controller', () => {
   it('constructs a query string from an AuthSession', () => {
     const redirectUrl = controller.getLoginConfirmedURL(null);
     expect(redirectUrl).toEqual(
-      'http://localhost:4200/#/login-confirmed?id=1&roles=Super%2CRegistered&expiresIn=123&rememberMe=true&token=abc.def_%252B%252Fghi.jkl%253D%253D'
+      'http://site.com/login-confirmed?id=1&roles=Super%2CRegistered&expiresIn=123&rememberMe=true&token=abc.def_%252B%252Fghi.jkl%253D%253D'
     );
   });
 });

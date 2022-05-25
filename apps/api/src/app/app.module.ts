@@ -5,7 +5,7 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import { environment } from '../environments/environment';
 import { ZenAuthModule } from './auth';
 import { ConfigModule, ConfigService } from './config';
-import { AuthController, ToolsController } from './controllers';
+import { ToolsController } from './controllers';
 import { ZenGraphQLModule } from './graphql';
 import { JwtModule } from './jwt';
 import { MailModule } from './mail';
@@ -25,7 +25,7 @@ import { PrismaModule } from './prisma';
     MailModule,
     PrismaModule,
   ],
-  controllers: [AuthController, ToolsController],
+  controllers: [ToolsController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

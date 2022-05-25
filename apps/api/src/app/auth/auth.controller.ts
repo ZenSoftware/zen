@@ -4,8 +4,10 @@ import { Controller, Get, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 
-import { AuthService, HttpUser, RequestUser } from '../auth';
 import { ConfigService } from '../config';
+import { AuthService } from './auth.service';
+import { HttpUser } from './decorators/http-user.decorator';
+import { RequestUser } from './models/request-user';
 
 @Controller('auth')
 export class AuthController {
