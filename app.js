@@ -1,39 +1,31 @@
 const { app, BrowserWindow } = require('electron');
-const URL = require('url').URL;
 const path = require('path');
 
-let appWindow;
-
-function initWindow() {
-  appWindow = new BrowserWindow({
-    width: 1000,
-    height: 800,
-    webPreferences: {
-      nodeIntegration: true,
-    },
+function createWindow() {
+  const win = new BrowserWindow({
+    width: 1600,
+    height: 900,
+    // webPreferences: {
+    //   preload: path.join(__dirname, 'preload.js')
+    // }
   });
 
-  const url = new URL(path.join(__dirname, `/dist/apps/electron/index.html`));
-  url.protocol = 'file:';
-
-  appWindow.loadURL(url.toString()); // Electron Build Path
-  appWindow.webContents.openDevTools(); // Initialize the DevTools.
-  appWindow.on('closed', function () {
-    appWindow = null;
-  });
+  win.loadFile(path.join(__dirname, `/dist/apps/electron/index.html`));
+  win.webContents.openDevTools();
 }
 
-app.on('ready', initWindow);
+app.whenReady().then(() => {
+  createWindow();
 
-app.on('window-all-closed', function () {
-  // On macOS specific close process
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
-app.on('activate', function () {
-  if (win === null) {
-    initWindow();
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
   }
 });
