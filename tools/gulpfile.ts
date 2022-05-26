@@ -47,6 +47,7 @@ const CONFIG = {
     apiPath: 'apps/api/src/app/graphql',
     clientPrismaPath: 'libs/graphql/src/lib/prisma',
     clientFieldsPath: 'libs/graphql/src/lib/fields',
+    doNotUseFieldUpdateOperationsInput: false, // Refer to https://paljs.com/plugins/sdl-inputs/
   },
 
   handlebars: {
@@ -149,12 +150,22 @@ export class Gulpfile {
     del(PALJS_PATH);
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
 
+    /**
+     * Insert `doNotUseFieldUpdateOperationsInput: true` to PalJS generated `typeDefs.ts`
+     * Refer to: [PalJS GraphQL SDL inputs](https://paljs.com/plugins/sdl-inputs/)
+     */
+    if (CONFIG.gql.doNotUseFieldUpdateOperationsInput) {
+      const paljsTypeDefsFilePath = path.join(PALJS_PATH, 'typeDefs.ts');
+      const palTypeDefsFile = await readFile(paljsTypeDefsFilePath);
+      const palTypeDefsFileUpdated = palTypeDefsFile
+        .toString()
+        .replace('sdlInputs()', 'sdlInputs({ doNotUseFieldUpdateOperationsInput: true })');
+      await writeFile(paljsTypeDefsFilePath, palTypeDefsFileUpdated);
+    }
+
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
     if (!fs.existsSync(RESOLVERS_PATH)) {
       fs.mkdirSync(RESOLVERS_PATH);
-    }
-    if (!fs.existsSync(PALJS_PATH)) {
-      fs.mkdirSync(PALJS_PATH);
     }
     if (!fs.existsSync(CONFIG.gql.clientFieldsPath)) {
       fs.mkdirSync(CONFIG.gql.clientFieldsPath);
@@ -179,7 +190,7 @@ export class Gulpfile {
       // Guard to prevent the overwriting of existing files
       if (!fs.existsSync(outPath)) {
         const pathName = path.join(__dirname, PALJS_PATH, prismaName, 'resolvers.ts');
-        const prismaScript = fs.readFileSync(pathName).toString();
+        const prismaScript = await readFile(pathName).toString();
 
         const queryStartIndex = prismaScript.indexOf(QUERY_TOKEN) + QUERY_TOKEN.length + 1;
         const queryEndIndex = prismaScript.indexOf(MUTATION_TOKEN) - MUTATION_TOKEN.length + 3;
