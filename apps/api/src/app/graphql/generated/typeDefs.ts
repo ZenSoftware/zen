@@ -3,4 +3,4 @@ import { sdlInputs } from '@paljs/plugins';
 
 import User from './User/typeDefs';
 
-export default mergeTypeDefs([sdlInputs(), User]);
+export default mergeTypeDefs([sdlInputs({ doNotUseFieldUpdateOperationsInput: true }), User]);
