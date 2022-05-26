@@ -47,13 +47,12 @@ const CONFIG = {
     apiPath: 'apps/api/src/app/graphql',
     clientPrismaPath: 'libs/graphql/src/lib/prisma',
     clientFieldsPath: 'libs/graphql/src/lib/fields',
-    doNotUseFieldUpdateOperationsInput: false, // Refer to https://paljs.com/plugins/sdl-inputs/
+    doNotUseFieldUpdateOperationsInput: true, // Refer to https://paljs.com/plugins/sdl-inputs/
   },
 
   handlebars: {
     src: 'apps/api/src/app/mail/templates/**/*.hbs',
     destApi: 'dist/apps/api/mail/templates',
-    // destCron: 'dist/apps/api-cron/mail/templates',
   },
 };
 
@@ -257,7 +256,6 @@ export class Gulpfile {
       .src(CONFIG.handlebars.src)
       .pipe(flatten())
       .pipe(gulp.dest(CONFIG.handlebars.destApi));
-    // .pipe(gulp.dest(CONFIG.handlebars.destCron));
   }
 
   @Task('handlebars:watch')
