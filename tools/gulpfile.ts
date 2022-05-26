@@ -150,7 +150,7 @@ export class Gulpfile {
     await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
 
     /**
-     * Insert `doNotUseFieldUpdateOperationsInput: true` to PalJS generated `typeDefs.ts`
+     * Insert `doNotUseFieldUpdateOperationsInput: true` into generated PalJS `typeDefs.ts` file
      * Refer to: [PalJS GraphQL SDL inputs](https://paljs.com/plugins/sdl-inputs/)
      */
     if (CONFIG.gql.doNotUseFieldUpdateOperationsInput) {
