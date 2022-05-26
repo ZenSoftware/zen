@@ -8,12 +8,18 @@ else INDEX_PATH = path.join(__dirname, `../../../dist/apps/electron/index.html`)
 
 function createWindow() {
   const win = new BrowserWindow({
+    show: false,
     width: 1600,
     height: 900,
+    autoHideMenuBar: true,
+    webPreferences: {
+      devTools: !app.isPackaged,
+    },
   });
 
+  if (!app.isPackaged) win.webContents.openDevTools();
   win.loadFile(INDEX_PATH);
-  win.webContents.openDevTools();
+  win.once('ready-to-show', win.show);
 
   const filter = { urls: ['*://localhost/*'] };
 
