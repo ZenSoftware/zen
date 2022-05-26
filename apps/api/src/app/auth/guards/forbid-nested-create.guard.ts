@@ -10,7 +10,7 @@ export function containsNestedCreate(args: any, options: Options = undefined) {
         continue;
       }
 
-      if (key === 'create' || key === 'connectOrCreate' || key === 'upsert') {
+      if (key === 'create') {
         return true;
       }
 
