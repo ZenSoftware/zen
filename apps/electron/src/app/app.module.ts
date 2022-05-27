@@ -10,7 +10,7 @@ import { Environment } from '@zen/common';
 import { ZenGraphQLModule } from '@zen/graphql';
 import { possibleTypes, typePolicies } from '@zen/graphql/client';
 import { ZenLayoutModule } from '@zen/layout';
-import { MainModule } from '@zen/main';
+import { ZenMainModule } from '@zen/main';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -21,11 +21,11 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot([]),
     MatListModule,
-    MainModule,
+    RouterModule.forRoot([]),
     ZenAuthModule,
     ZenLayoutModule,
+    ZenMainModule,
     ZenGraphQLModule.forRoot({
       cacheOptions: {
         possibleTypes,
