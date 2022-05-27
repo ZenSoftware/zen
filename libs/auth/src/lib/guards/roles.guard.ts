@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanLoad, Router } from '@angular/router';
+import { CanActivate, CanActivateChild, CanLoad, Router } from '@angular/router';
 import { Role } from '@zen/graphql';
 
 import { AuthService } from '../auth.service';
@@ -9,11 +9,15 @@ export class RolesGuard {
     @Injectable({
       providedIn: 'root',
     })
-    class RoleCheck implements CanActivate, CanLoad {
+    class RolesCheck implements CanActivate, CanActivateChild, CanLoad {
       constructor(private auth: AuthService, private router: Router) {}
 
       canActivate() {
         return this.auth.userHasRole(roles) ? true : this.router.parseUrl('/login');
+      }
+
+      canActivateChild() {
+        return this.canActivate();
       }
 
       canLoad() {
@@ -21,6 +25,6 @@ export class RolesGuard {
       }
     }
 
-    return RoleCheck;
+    return RolesCheck;
   }
 }
