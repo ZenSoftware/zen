@@ -3,7 +3,7 @@ import { omit } from 'lodash-es';
 /**
  * Omits `__typename` and `id` properties from an object
  */
-export function makeSetObject(obj: object | undefined) {
+export function makeSetObject(obj: object | undefined | null) {
   return omit(obj, ['__typename', 'id']);
 }
 
