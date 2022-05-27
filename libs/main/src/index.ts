@@ -1,1 +1,1 @@
-export * from './lib/main.module';
+export * from './lib/zen-main.module';

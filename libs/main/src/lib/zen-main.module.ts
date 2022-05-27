@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ZenAuthModule } from '@zen/auth';
 
-import { MainRoutingModule } from './main-routing.module';
+import { ZenMainRoutingModule } from './zen-main-routing.module';
 import { ZenMainComponent } from './zen-main/zen-main.component';
 
 @NgModule({
-  imports: [CommonModule, MainRoutingModule, ZenAuthModule],
+  imports: [CommonModule, ZenMainRoutingModule, ZenAuthModule],
   declarations: [ZenMainComponent],
 })
-export class MainModule {}
+export class ZenMainModule {}
