@@ -7,9 +7,6 @@ export class EnumHelper {
 
   private static isNumeric(enumType: object) {
     const members = Object.keys(enumType);
-    if (!members.some(() => true)) {
-      throw new TypeError('Invalid enumeration type.');
-    }
     let parsedCount = 0;
     members.forEach(x => {
       const parsedValue = parseInt(x, 10);
@@ -44,7 +41,7 @@ export class EnumHelper {
     });
   }
 
-  public static toKeyValueArray(enumType: any) {
+  public static keyValues(enumType: any) {
     return EnumHelper.keys(enumType).map(key => {
       return { key, value: enumType[key] };
     });

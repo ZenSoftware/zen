@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { ZenMainComponent } from './zen-main/zen-main.component';
+import { LoggedInGuard } from '@zen/auth';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: '',
-    component: ZenMainComponent,
+    canLoad: [LoggedInGuard],
     loadChildren: () => import('./zen-portal/zen-portal.module').then(m => m.ZenPortalModule),
   },
 ];
@@ -16,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MainRoutingModule {}
+export class ZenMainRoutingModule {}

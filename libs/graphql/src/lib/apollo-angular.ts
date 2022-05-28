@@ -696,41 +696,41 @@ export type UserUncheckedCreateInput = {
 };
 
 export type UserUncheckedUpdateInput = {
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  id?: InputMaybe<IntFieldUpdateOperationsInput>;
-  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  googleId?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
-  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUncheckedUpdateManyInput = {
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  id?: InputMaybe<IntFieldUpdateOperationsInput>;
-  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  googleId?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
-  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUpdateInput = {
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  googleId?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
-  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUpdateManyMutationInput = {
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  googleId?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
-  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUpdaterolesInput = {
@@ -943,7 +943,7 @@ export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class AuthExchangeTokenGQL extends Apollo.Query<AuthExchangeToken, AuthExchangeTokenVariables> {
-    document = AuthExchangeTokenDocument;
+    override document = AuthExchangeTokenDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -961,7 +961,7 @@ export const AuthLoginDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class AuthLoginGQL extends Apollo.Query<AuthLogin, AuthLoginVariables> {
-    document = AuthLoginDocument;
+    override document = AuthLoginDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -977,7 +977,7 @@ export const AuthPasswordChangeDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class AuthPasswordChangeGQL extends Apollo.Mutation<AuthPasswordChange, AuthPasswordChangeVariables> {
-    document = AuthPasswordChangeDocument;
+    override document = AuthPasswordChangeDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -995,7 +995,7 @@ export const AuthPasswordResetConfirmationDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class AuthPasswordResetConfirmationGQL extends Apollo.Mutation<AuthPasswordResetConfirmation, AuthPasswordResetConfirmationVariables> {
-    document = AuthPasswordResetConfirmationDocument;
+    override document = AuthPasswordResetConfirmationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1011,7 +1011,7 @@ export const AuthPasswordResetRequestQueryDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class AuthPasswordResetRequestQueryGQL extends Apollo.Query<AuthPasswordResetRequestQuery, AuthPasswordResetRequestQueryVariables> {
-    document = AuthPasswordResetRequestQueryDocument;
+    override document = AuthPasswordResetRequestQueryDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1029,7 +1029,7 @@ export const AuthRegisterDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class AuthRegisterGQL extends Apollo.Mutation<AuthRegister, AuthRegisterVariables> {
-    document = AuthRegisterDocument;
+    override document = AuthRegisterDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1045,7 +1045,7 @@ export const LoggedInDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class LoggedInGQL extends Apollo.Query<LoggedIn, LoggedInVariables> {
-    document = LoggedInDocument;
+    override document = LoggedInDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1061,7 +1061,7 @@ export const UserRolesDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
-    document = UserRolesDocument;
+    override document = UserRolesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1079,7 +1079,7 @@ export const FindUniqueUserDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class FindUniqueUserGQL extends Apollo.Query<FindUniqueUser, FindUniqueUserVariables> {
-    document = FindUniqueUserDocument;
+    override document = FindUniqueUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1104,7 +1104,7 @@ export const FindFirstUserDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class FindFirstUserGQL extends Apollo.Query<FindFirstUser, FindFirstUserVariables> {
-    document = FindFirstUserDocument;
+    override document = FindFirstUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1129,7 +1129,7 @@ export const FindManyUserDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class FindManyUserGQL extends Apollo.Query<FindManyUser, FindManyUserVariables> {
-    document = FindManyUserDocument;
+    override document = FindManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1152,7 +1152,7 @@ export const FindManyUserCountDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class FindManyUserCountGQL extends Apollo.Query<FindManyUserCount, FindManyUserCountVariables> {
-    document = FindManyUserCountDocument;
+    override document = FindManyUserCountDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1170,7 +1170,7 @@ export const CreateOneUserDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUser, CreateOneUserVariables> {
-    document = CreateOneUserDocument;
+    override document = CreateOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1188,7 +1188,7 @@ export const UpdateOneUserDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class UpdateOneUserGQL extends Apollo.Mutation<UpdateOneUser, UpdateOneUserVariables> {
-    document = UpdateOneUserDocument;
+    override document = UpdateOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1206,7 +1206,7 @@ export const DeleteOneUserDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
-    document = DeleteOneUserDocument;
+    override document = DeleteOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1224,7 +1224,7 @@ export const UpsertOneUserDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class UpsertOneUserGQL extends Apollo.Mutation<UpsertOneUser, UpsertOneUserVariables> {
-    document = UpsertOneUserDocument;
+    override document = UpsertOneUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1242,7 +1242,7 @@ export const DeleteManyUserDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUser, DeleteManyUserVariables> {
-    document = DeleteManyUserDocument;
+    override document = DeleteManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1260,7 +1260,7 @@ export const UpdateManyUserDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
-    document = UpdateManyUserDocument;
+    override document = UpdateManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1278,7 +1278,7 @@ export const SampleSubscriptionDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class SampleSubscriptionGQL extends Apollo.Subscription<SampleSubscription, SampleSubscriptionVariables> {
-    document = SampleSubscriptionDocument;
+    override document = SampleSubscriptionDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1294,7 +1294,7 @@ export const SampleUploadDocument = /*#__PURE__*/ gql`
     providedIn: ZenGraphQLModule
   })
   export class SampleUploadGQL extends Apollo.Mutation<SampleUpload, SampleUploadVariables> {
-    document = SampleUploadDocument;
+    override document = SampleUploadDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

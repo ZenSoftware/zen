@@ -21,6 +21,9 @@ spec:
           resources:
             requests:
               memory: "700Mi"
+          ports:
+            - containerPort: 7080
+              name: zen-api-port
           env:
             - name: DATABASE_URL
               valueFrom:
@@ -84,7 +87,7 @@ spec:
     - name: http
       protocol: TCP
       port: 80
-      targetPort: 7080
+      targetPort: zen-api-port
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

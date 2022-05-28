@@ -10,6 +10,7 @@ config:
   ngModule: ./zen-graphql.module#ZenGraphQLModule
   omitOperationSuffix: true
   pureMagicComment: true
+  addExplicitOverride: true
 generates:
   libs/graphql/src/lib/apollo-angular.ts:
     plugins:
