@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ZenSuperPageComponent } from './zen-super-page/zen-super-page.component';
 
-export const ROUTES: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: ZenSuperPageComponent,
@@ -11,7 +11,7 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(ROUTES)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class ZenSuperRoutingModule {}
