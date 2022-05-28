@@ -1,6 +1,6 @@
 {
   "name": "zen",
-  "version": "6.1.0",
+  "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "main": "apps/electron/src/app.js",

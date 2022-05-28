@@ -6,7 +6,7 @@ import { ZenDashboardComponent } from './zen-dashboard/zen-dashboard.component';
 import { ZenPortalMainComponent } from './zen-portal-main/zen-portal-main.component';
 import { ZenSettingsComponent } from './zen-settings/zen-settings.component';
 
-export const ROUTES: Routes = [
+const routes: Routes = [
   {
     path: '',
     component: ZenPortalMainComponent,
@@ -29,7 +29,7 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(ROUTES)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class ZenPortalRoutingModule {}
