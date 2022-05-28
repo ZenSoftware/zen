@@ -1,7 +1,5 @@
 ## 6.0.0 (2022-05-28)
 
-## 7.0.0 (2022-05-28)
-
 ### Refactor
 
 - **enum-helper**: renamed toKeyValueArray to keyValues
