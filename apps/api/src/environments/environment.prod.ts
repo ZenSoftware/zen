@@ -39,11 +39,11 @@ export const environment: EnvironmentBase = {
     ignoreUserAgents: [/googlebot/gi, /bingbot/gi],
   },
   oauth: {
-    loginConfirmedURL: 'http://site.com/#/login-confirmed',
+    loginConfirmedURL: 'https://site.com/#/login-confirmed',
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://api.site.com/auth/google/redirect',
+      callbackURL: 'https://api.site.com/auth/google/redirect',
     },
   },
 };
