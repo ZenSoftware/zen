@@ -9,7 +9,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AuthPasswordResetConfirmation,
@@ -39,14 +45,14 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   completed = false;
   generalError = false;
   token: string | null = null;
-  form: FormGroup;
+  form: UntypedFormGroup;
   hidePassword = true;
 
   constructor(
     private authPasswordResetConfirmationGQL: AuthPasswordResetConfirmationGQL,
     private route: ActivatedRoute,
     public router: Router,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private auth: AuthService
   ) {
     this.form = this.formBuilder.group({
@@ -67,11 +73,11 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   }
 
   get password() {
-    return this.form.get('password') as FormControl;
+    return this.form.get('password') as UntypedFormControl;
   }
 
   get passwordConfirm() {
-    return this.form.get('passwordConfirm') as FormControl;
+    return this.form.get('passwordConfirm') as UntypedFormControl;
   }
 
   passwordValidator(): ValidatorFn {

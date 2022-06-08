@@ -8,7 +8,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { ApiConstants, ApiError } from '@zen/api-interfaces';
 import { AuthPasswordResetRequestQueryGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -32,11 +38,11 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   #notFound = false;
   loading = false;
   completed = false;
-  form: FormGroup;
+  form: UntypedFormGroup;
   generalError = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private authPasswordResetRequestQueryGQL: AuthPasswordResetRequestQueryGQL
   ) {
     this.form = this.formBuilder.group({
@@ -69,7 +75,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   }
 
   get emailOrUsername() {
-    return this.form.get('emailOrUsername') as FormControl;
+    return this.form.get('emailOrUsername') as UntypedFormControl;
   }
 
   includesSpaceValidator(): ValidatorFn {

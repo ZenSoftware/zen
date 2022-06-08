@@ -7,7 +7,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiError, AuthPasswordChangeGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -31,13 +37,13 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   loading = false;
   completed = false;
   generalError = false;
-  form: FormGroup;
+  form: UntypedFormGroup;
   hidePassword = true;
 
   constructor(
     private authPasswordChangeGQL: AuthPasswordChangeGQL,
     public router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.form = this.formBuilder.group({
       oldPassword: ['', [Validators.required, this.incorrectPasswordValidator()]],
@@ -53,15 +59,15 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   }
 
   get oldPassword() {
-    return this.form.get('oldPassword') as FormControl;
+    return this.form.get('oldPassword') as UntypedFormControl;
   }
 
   get newPassword() {
-    return this.form.get('newPassword') as FormControl;
+    return this.form.get('newPassword') as UntypedFormControl;
   }
 
   get passwordConfirm() {
-    return this.form.get('passwordConfirm') as FormControl;
+    return this.form.get('passwordConfirm') as UntypedFormControl;
   }
 
   passwordValidator(): ValidatorFn {

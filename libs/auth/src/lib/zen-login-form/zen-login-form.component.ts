@@ -8,7 +8,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Environment } from '@zen/common';
 import { ApiError, GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -36,11 +42,11 @@ export class ZenLoginFormComponent implements OnDestroy {
   loading = false;
   done = false;
   hidePassword = true;
-  form: FormGroup;
+  form: UntypedFormGroup;
   generalError = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private auth: AuthService,
     public env: Environment
   ) {
@@ -65,15 +71,15 @@ export class ZenLoginFormComponent implements OnDestroy {
   }
 
   get username() {
-    return this.form.get('username') as FormControl;
+    return this.form.get('username') as UntypedFormControl;
   }
 
   get password() {
-    return this.form.get('password') as FormControl;
+    return this.form.get('password') as UntypedFormControl;
   }
 
   get rememberMe() {
-    return this.form.get('rememberMe') as FormControl;
+    return this.form.get('rememberMe') as UntypedFormControl;
   }
 
   usernameValidator(): ValidatorFn {

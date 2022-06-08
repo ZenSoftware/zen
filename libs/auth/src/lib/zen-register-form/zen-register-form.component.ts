@@ -7,7 +7,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Environment } from '@zen/common';
 import {
   ApiError,
@@ -38,13 +44,13 @@ export class ZenRegisterFormComponent implements OnDestroy {
   #subs: Subscription[] = [];
   #usernameTaken = false;
   #emailTaken = false;
-  form: FormGroup;
+  form: UntypedFormGroup;
   loading = false;
   generalError = false;
   hidePassword = true;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private auth: AuthService,
     private authRegisterGQL: AuthRegisterGQL,
     public env: Environment
@@ -72,23 +78,23 @@ export class ZenRegisterFormComponent implements OnDestroy {
   }
 
   get username() {
-    return this.form.get('username') as FormControl;
+    return this.form.get('username') as UntypedFormControl;
   }
 
   get email() {
-    return this.form.get('email') as FormControl;
+    return this.form.get('email') as UntypedFormControl;
   }
 
   get password() {
-    return this.form.get('password') as FormControl;
+    return this.form.get('password') as UntypedFormControl;
   }
 
   get passwordConfirm() {
-    return this.form.get('passwordConfirm') as FormControl;
+    return this.form.get('passwordConfirm') as UntypedFormControl;
   }
 
   get acceptTerms() {
-    return this.form.get('acceptTerms') as FormControl;
+    return this.form.get('acceptTerms') as UntypedFormControl;
   }
 
   usernameTakenValidator(): ValidatorFn {
