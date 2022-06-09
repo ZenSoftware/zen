@@ -52,7 +52,7 @@ export class ZenRegisterFormComponent implements OnDestroy {
   hidePassword = true;
   form = new FormGroup<FormType>({
     username: new FormControl('', {
-      validators: [Validators.required, this.usernameValidator(), this.usernameTakenValidator()],
+      validators: [Validators.required, usernameValidator(), this.usernameTakenValidator()],
       nonNullable: true,
     }),
     email: new FormControl('', {
@@ -112,13 +112,6 @@ export class ZenRegisterFormComponent implements OnDestroy {
   usernameTakenValidator(): ValidatorFn {
     return () => {
       if (this.#usernameTaken) return { usernameTaken: true };
-      return null;
-    };
-  }
-
-  usernameValidator(): ValidatorFn {
-    return control => {
-      if (this.form) return usernameValidator(control);
       return null;
     };
   }

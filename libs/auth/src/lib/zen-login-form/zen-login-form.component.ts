@@ -45,7 +45,7 @@ export class ZenLoginFormComponent implements OnDestroy {
   generalError = false;
   form = new FormGroup<FormType>({
     username: new FormControl('', {
-      validators: [Validators.required, this.usernameValidator(), this.usernameNotFoundValidator()],
+      validators: [Validators.required, usernameValidator(), this.usernameNotFoundValidator()],
       nonNullable: true,
     }),
     password: new FormControl('', {
@@ -77,13 +77,6 @@ export class ZenLoginFormComponent implements OnDestroy {
 
   get rememberMe() {
     return this.form.get('rememberMe') as FormType['rememberMe'];
-  }
-
-  usernameValidator(): ValidatorFn {
-    return control => {
-      if (this.form) return usernameValidator(control);
-      return null;
-    };
   }
 
   usernameNotFoundValidator(): ValidatorFn {
