@@ -1,4 +1,4 @@
-export interface RequestUser {
+export class RequestUser {
   id: number;
   roles: string[];
 }
