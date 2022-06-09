@@ -7,12 +7,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Environment } from '@zen/common';
 import {
   ApiError,
   AuthRegister,
   AuthRegisterGQL,
+  AuthRegisterInput,
   AuthSession,
   GqlErrors,
   parseGqlErrors,
@@ -22,7 +23,15 @@ import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
-import { emailValidator, passwordValidator, usernameValidator } from '../validators';
+import { emailValidator, passwordValidatorFn, usernameValidator } from '../validators';
+
+interface FormType {
+  username: FormControl<AuthRegisterInput['username']>;
+  email: FormControl<AuthRegisterInput['email']>;
+  password: FormControl<AuthRegisterInput['password']>;
+  passwordConfirm: FormControl<AuthRegisterInput['password']>;
+  acceptTerms: FormControl<boolean>;
+}
 
 @Component({
   selector: 'zen-register-form',
@@ -38,28 +47,37 @@ export class ZenRegisterFormComponent implements OnDestroy {
   #subs: Subscription[] = [];
   #usernameTaken = false;
   #emailTaken = false;
-  form: FormGroup;
   loading = false;
   generalError = false;
   hidePassword = true;
+  form = new FormGroup<FormType>({
+    username: new FormControl('', {
+      validators: [Validators.required, usernameValidator(), this.usernameTakenValidator()],
+      nonNullable: true,
+    }),
+    email: new FormControl('', {
+      validators: [Validators.required, emailValidator(), this.emailTakenValidator()],
+      nonNullable: true,
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required, this.passwordValidator()],
+      nonNullable: true,
+    }),
+    passwordConfirm: new FormControl('', {
+      validators: [Validators.required, this.passwordConfirmValidator()],
+      nonNullable: true,
+    }),
+    acceptTerms: new FormControl(false, {
+      validators: [Validators.requiredTrue],
+      nonNullable: true,
+    }),
+  });
 
   constructor(
-    private formBuilder: FormBuilder,
     private auth: AuthService,
     private authRegisterGQL: AuthRegisterGQL,
     public env: Environment
   ) {
-    this.form = this.formBuilder.group({
-      username: [
-        '',
-        [Validators.required, this.usernameValidator(), this.usernameTakenValidator()],
-      ],
-      email: ['', [Validators.required, emailValidator(), this.emailTakenValidator()]],
-      password: ['', [Validators.required, this.passwordValidator()]],
-      passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
-      acceptTerms: ['', Validators.requiredTrue],
-    });
-
     const sub1 = this.username.valueChanges.subscribe(() => {
       this.#usernameTaken = false;
     });
@@ -72,35 +90,28 @@ export class ZenRegisterFormComponent implements OnDestroy {
   }
 
   get username() {
-    return this.form.get('username') as FormControl;
+    return this.form.get('username') as FormType['username'];
   }
 
   get email() {
-    return this.form.get('email') as FormControl;
+    return this.form.get('email') as FormType['email'];
   }
 
   get password() {
-    return this.form.get('password') as FormControl;
+    return this.form.get('password') as FormType['password'];
   }
 
   get passwordConfirm() {
-    return this.form.get('passwordConfirm') as FormControl;
+    return this.form.get('passwordConfirm') as FormType['passwordConfirm'];
   }
 
   get acceptTerms() {
-    return this.form.get('acceptTerms') as FormControl;
+    return this.form.get('acceptTerms') as FormType['acceptTerms'];
   }
 
   usernameTakenValidator(): ValidatorFn {
     return () => {
       if (this.#usernameTaken) return { usernameTaken: true };
-      return null;
-    };
-  }
-
-  usernameValidator(): ValidatorFn {
-    return control => {
-      if (this.form) return usernameValidator(control);
       return null;
     };
   }
@@ -116,7 +127,7 @@ export class ZenRegisterFormComponent implements OnDestroy {
     return control => {
       if (this.form) {
         this.passwordConfirm.updateValueAndValidity();
-        return passwordValidator(control);
+        return passwordValidatorFn(control);
       }
       return null;
     };
@@ -136,7 +147,6 @@ export class ZenRegisterFormComponent implements OnDestroy {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
-      this.form.disable();
 
       this.authRegisterGQL
         .mutate(
@@ -177,6 +187,8 @@ export class ZenRegisterFormComponent implements OnDestroy {
             }
           },
         });
+
+      this.form.disable();
     }
   }
 
@@ -187,6 +199,6 @@ export class ZenRegisterFormComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.map(s => s.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }

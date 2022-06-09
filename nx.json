@@ -4,7 +4,6 @@
     "defaultBase": "main"
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular",
     "packageManager": "npm"
   },
   "implicitDependencies": {
@@ -45,5 +44,6 @@
       "style": "scss"
     }
   },
-  "defaultProject": "portal"
+  "defaultProject": "portal",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }

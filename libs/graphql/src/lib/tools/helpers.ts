@@ -1,8 +1,12 @@
-import { omit } from 'lodash-es';
-
 /**
  * Omits `id` and `__typename` properties from an object
  */
-export function omitIdAndTypename(obj: object | undefined | null) {
-  return omit(obj, ['__typename', 'id']);
+
+export function omitIdAndTypename<T>(obj: T): T extends object ? Omit<T, '__typename' | 'id'> : T {
+  if (typeof obj === 'object' && obj !== null) {
+    delete (<any>obj).__typename;
+    delete (<any>obj).id;
+  }
+
+  return obj as any;
 }

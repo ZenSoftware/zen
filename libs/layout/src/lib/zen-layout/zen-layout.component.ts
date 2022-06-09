@@ -35,6 +35,6 @@ export class ZenLayoutComponent implements OnDestroy {
   );
 
   ngOnDestroy() {
-    this.#subs.map(s => s.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }
