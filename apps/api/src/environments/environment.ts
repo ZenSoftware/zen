@@ -48,4 +48,8 @@ export const environment: EnvironmentBase = {
       callbackURL: 'http://localhost:7080/auth/google/redirect',
     },
   },
+  openTelemetry: {
+    serviceName: 'zen-api',
+    exporters: { enableConsole: true, enableJaeger: true },
+  },
 };
