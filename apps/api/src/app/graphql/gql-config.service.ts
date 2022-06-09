@@ -29,6 +29,7 @@ export class GqlConfigService implements GqlOptionsFactory {
       plugins,
       introspection: this.config.graphql.introspection,
       cors: this.config.cors,
+      csrfPrevention: true,
       subscriptions: {
         'graphql-ws': {
           onConnect: (context: Context<any>) => {

@@ -6,6 +6,8 @@
     "firsttris.vscode-jest-runner",
     "dbaeumer.vscode-eslint",
     "apollographql.vscode-apollo",
-    "Prisma.prisma"
+    "Prisma.prisma",
+    "KnisterPeter.vscode-commitizen",
+    "eamodio.gitlens"
   ]
 }

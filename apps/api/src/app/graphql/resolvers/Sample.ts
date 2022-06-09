@@ -57,31 +57,31 @@ export class SampleResolver {
   ) {
     const UPLOAD_PATH = './upload/';
     if (!existsSync(UPLOAD_PATH)) {
-      console.log('Creating directory', UPLOAD_PATH);
+      Logger.log('Creating directory', UPLOAD_PATH);
       mkdirSync(UPLOAD_PATH);
     }
 
     return await Promise.all(
       files.map(async file => {
         const { filename, mimetype, encoding, createReadStream } = await file;
-        console.log('Attachment:', filename, mimetype, encoding);
+        Logger.log('Attachment:', filename, mimetype, encoding);
         const stream = createReadStream();
 
         return new Promise((resolve, reject) => {
           stream
             .on('close', () => {
-              console.log(`${filename} ReadStream Closed`);
+              Logger.log(`${filename} ReadStream Closed`);
             })
             .on('error', err => {
               console.error(`${filename} ReadStream Error`, err);
             })
             .pipe(createWriteStream(`${UPLOAD_PATH}${filename}`))
             .on('close', () => {
-              console.log(`${filename} WriteStream Closed`);
+              Logger.log(`${filename} WriteStream Closed`);
               resolve(`${filename} close`);
             })
             .on('error', err => {
-              console.log(`${filename} WriteStream Error`, err);
+              Logger.log(`${filename} WriteStream Error`, err);
               reject(`${filename} error`);
             });
         });

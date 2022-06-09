@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Environment, EnvironmentDev } from '@zen/common';
 import { ZenComponentsModule } from '@zen/components';
 import {
   AuthRegister,
@@ -26,7 +27,11 @@ describe('ZenRegisterFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ZenRegisterFormComponent],
-      providers: [AuthRegisterGQL, { provide: AuthService, useValue: {} }],
+      providers: [
+        AuthRegisterGQL,
+        { provide: AuthService, useValue: {} },
+        { provide: Environment, useClass: EnvironmentDev },
+      ],
       imports: [
         NoopAnimationsModule,
         ReactiveFormsModule,
