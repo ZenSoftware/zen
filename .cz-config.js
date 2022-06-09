@@ -28,6 +28,7 @@ module.exports = {
     { name: 'auth' },
     { name: 'common' },
     { name: 'components' },
+    { name: 'deps' },
     { name: 'graphql' },
     { name: 'layout' },
     { name: 'portal' },
