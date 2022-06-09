@@ -1,5 +1,3 @@
-import './tracing';
-
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import helmet from 'helmet';

@@ -2,7 +2,6 @@ import { MailerOptions } from '@nest-modules/mailer';
 import { NestApplicationOptions } from '@nestjs/common';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
-import { OTLPExporterNodeConfigBase } from '@opentelemetry/otlp-exporter-base';
 import { UploadOptions } from 'graphql-upload';
 
 export class EnvironmentBase {
@@ -29,15 +28,4 @@ export class EnvironmentBase {
       callbackURL: string;
     };
   };
-  readonly openTelemetry?:
-    | false
-    | {
-        serviceName: string;
-        exporters: {
-          enableConsole?: boolean;
-          enableJaeger?: boolean;
-          enableOtlp?: boolean;
-        };
-        collectorOptions?: OTLPExporterNodeConfigBase;
-      };
 }
