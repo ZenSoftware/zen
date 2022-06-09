@@ -13,6 +13,7 @@ import {
   ApiError,
   AuthRegister,
   AuthRegisterGQL,
+  AuthRegisterInput,
   AuthSession,
   GqlErrors,
   parseGqlErrors,
@@ -25,10 +26,10 @@ import { AuthService } from '../auth.service';
 import { emailValidator, passwordValidator, usernameValidator } from '../validators';
 
 interface FormType {
-  username: FormControl<string>;
-  email: FormControl<string>;
-  password: FormControl<string>;
-  passwordConfirm: FormControl<string>;
+  username: FormControl<AuthRegisterInput['username']>;
+  email: FormControl<AuthRegisterInput['email']>;
+  password: FormControl<AuthRegisterInput['password']>;
+  passwordConfirm: FormControl<AuthRegisterInput['password']>;
   acceptTerms: FormControl<boolean>;
 }
 

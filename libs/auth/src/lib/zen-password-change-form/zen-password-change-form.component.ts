@@ -9,7 +9,13 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiError, AuthPasswordChangeGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
+import {
+  ApiError,
+  AuthPasswordChangeGQL,
+  AuthPasswordChangeInput,
+  GqlErrors,
+  parseGqlErrors,
+} from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -17,9 +23,9 @@ import { verticalAccordion } from '../animations';
 import { passwordValidator } from '../validators';
 
 interface FormType {
-  oldPassword: FormControl<string>;
-  newPassword: FormControl<string>;
-  passwordConfirm: FormControl<string>;
+  oldPassword: FormControl<AuthPasswordChangeInput['oldPassword']>;
+  newPassword: FormControl<AuthPasswordChangeInput['newPassword']>;
+  passwordConfirm: FormControl<AuthPasswordChangeInput['newPassword']>;
 }
 
 @Component({

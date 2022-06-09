@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   AuthPasswordResetConfirmation,
   AuthPasswordResetConfirmationGQL,
+  AuthPasswordResetConfirmationInput,
   parseGqlErrors,
 } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -24,8 +25,8 @@ import { AuthService } from '../auth.service';
 import { passwordValidator } from '../validators';
 
 interface FormType {
-  password: FormControl<string>;
-  passwordConfirm: FormControl<string>;
+  password: FormControl<AuthPasswordResetConfirmationInput['newPassword']>;
+  passwordConfirm: FormControl<AuthPasswordResetConfirmationInput['newPassword']>;
 }
 
 @Component({

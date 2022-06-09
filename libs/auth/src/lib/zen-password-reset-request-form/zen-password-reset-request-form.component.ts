@@ -10,7 +10,12 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ApiConstants, ApiError } from '@zen/api-interfaces';
-import { AuthPasswordResetRequestQueryGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
+import {
+  AuthPasswordResetRequestInput,
+  AuthPasswordResetRequestQueryGQL,
+  GqlErrors,
+  parseGqlErrors,
+} from '@zen/graphql';
 import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -19,7 +24,7 @@ import { verticalAccordion } from '../animations';
 const EMAIL_MIN_LENGTH = 6;
 
 interface FormType {
-  emailOrUsername: FormControl<string>;
+  emailOrUsername: FormControl<AuthPasswordResetRequestInput['emailOrUsername']>;
 }
 
 @Component({

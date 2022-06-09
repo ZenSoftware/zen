@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Environment } from '@zen/common';
-import { ApiError, GqlErrors } from '@zen/graphql';
+import { ApiError, AuthLoginInput, GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
@@ -18,9 +18,9 @@ import { AuthService } from '../auth.service';
 import { usernameValidator } from '../validators';
 
 interface FormType {
-  username: FormControl<string>;
-  password: FormControl<string>;
-  rememberMe: FormControl<boolean>;
+  username: FormControl<AuthLoginInput['username']>;
+  password: FormControl<AuthLoginInput['password']>;
+  rememberMe: FormControl<AuthLoginInput['rememberMe']>;
 }
 
 @Component({
