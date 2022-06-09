@@ -22,7 +22,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
-import { passwordValidator } from '../validators';
+import { passwordValidatorFn } from '../validators';
 
 interface FormType {
   password: FormControl<AuthPasswordResetConfirmationInput['newPassword']>;
@@ -87,7 +87,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
     return control => {
       if (this.form) {
         this.passwordConfirm.updateValueAndValidity();
-        return passwordValidator(control);
+        return passwordValidatorFn(control);
       }
       return null;
     };

@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
-import { passwordValidator } from '../validators';
+import { passwordValidatorFn } from '../validators';
 
 interface FormType {
   oldPassword: FormControl<AuthPasswordChangeInput['oldPassword']>;
@@ -84,7 +84,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
       if (this.form) {
         this.passwordConfirm.updateValueAndValidity();
 
-        let errors: any = passwordValidator(control);
+        let errors: any = passwordValidatorFn(control);
 
         if (this.newPassword.value && this.oldPassword.value === this.newPassword.value) {
           if (errors) errors.oldEqualsNew = true;

@@ -23,7 +23,7 @@ import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
-import { emailValidator, passwordValidator, usernameValidator } from '../validators';
+import { emailValidator, passwordValidatorFn, usernameValidator } from '../validators';
 
 interface FormType {
   username: FormControl<AuthRegisterInput['username']>;
@@ -127,7 +127,7 @@ export class ZenRegisterFormComponent implements OnDestroy {
     return control => {
       if (this.form) {
         this.passwordConfirm.updateValueAndValidity();
-        return passwordValidator(control);
+        return passwordValidatorFn(control);
       }
       return null;
     };

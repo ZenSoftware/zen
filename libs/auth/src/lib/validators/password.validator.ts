@@ -6,7 +6,7 @@ interface PasswordErrors {
   maxlength?: { actualLength: number; requiredLength: number };
 }
 
-export function passwordValidator(control: AbstractControl) {
+export function passwordValidatorFn(control: AbstractControl) {
   const errors: PasswordErrors = {};
 
   if (control.value && control.value.length < ApiConstants.PASSWORD_MIN_LENGTH) {
