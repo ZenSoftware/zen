@@ -8,13 +8,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Environment } from '@zen/common';
 import { ApiError, GqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -22,6 +16,12 @@ import { Subscription } from 'rxjs';
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
 import { usernameValidator } from '../validators';
+
+interface FormType {
+  username: FormControl<string>;
+  password: FormControl<string>;
+  rememberMe: FormControl<boolean>;
+}
 
 @Component({
   selector: 'zen-login-form',
@@ -42,23 +42,20 @@ export class ZenLoginFormComponent implements OnDestroy {
   loading = false;
   done = false;
   hidePassword = true;
-  form: UntypedFormGroup;
   generalError = false;
+  form = new FormGroup<FormType>({
+    username: new FormControl('', {
+      validators: [Validators.required, this.usernameValidator(), this.usernameNotFoundValidator()],
+      nonNullable: true,
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required, this.incorrectPasswordValidator()],
+      nonNullable: true,
+    }),
+    rememberMe: new FormControl(false, { nonNullable: true }),
+  });
 
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private auth: AuthService,
-    public env: Environment
-  ) {
-    this.form = this.formBuilder.group({
-      username: [
-        '',
-        [Validators.required, this.usernameValidator(), this.usernameNotFoundValidator()],
-      ],
-      password: ['', [Validators.required, this.incorrectPasswordValidator()]],
-      rememberMe: [false],
-    });
-
+  constructor(private auth: AuthService, public env: Environment) {
     const sub1 = this.username.valueChanges.subscribe(() => {
       this.#usernameNotFound = false;
     });
@@ -71,15 +68,15 @@ export class ZenLoginFormComponent implements OnDestroy {
   }
 
   get username() {
-    return this.form.get('username') as UntypedFormControl;
+    return this.form.get('username') as FormType['username'];
   }
 
   get password() {
-    return this.form.get('password') as UntypedFormControl;
+    return this.form.get('password') as FormType['password'];
   }
 
   get rememberMe() {
-    return this.form.get('rememberMe') as UntypedFormControl;
+    return this.form.get('rememberMe') as FormType['rememberMe'];
   }
 
   usernameValidator(): ValidatorFn {
@@ -101,11 +98,10 @@ export class ZenLoginFormComponent implements OnDestroy {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
-      this.form.disable();
 
       this.auth
         .login({
-          username: this.username.value.trim(),
+          username: this.username.value,
           password: this.password.value,
           rememberMe: this.rememberMe.value,
         })
@@ -136,6 +132,8 @@ export class ZenLoginFormComponent implements OnDestroy {
             }
           },
         });
+
+      this.form.disable();
     }
   }
 
@@ -146,6 +144,6 @@ export class ZenLoginFormComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.map(s => s.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }

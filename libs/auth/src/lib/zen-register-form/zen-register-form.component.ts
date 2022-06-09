@@ -7,13 +7,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Environment } from '@zen/common';
 import {
   ApiError,
@@ -30,6 +24,14 @@ import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
 import { emailValidator, passwordValidator, usernameValidator } from '../validators';
 
+interface FormType {
+  username: FormControl<string>;
+  email: FormControl<string>;
+  password: FormControl<string>;
+  passwordConfirm: FormControl<string>;
+  acceptTerms: FormControl<boolean>;
+}
+
 @Component({
   selector: 'zen-register-form',
   templateUrl: 'zen-register-form.component.html',
@@ -44,28 +46,37 @@ export class ZenRegisterFormComponent implements OnDestroy {
   #subs: Subscription[] = [];
   #usernameTaken = false;
   #emailTaken = false;
-  form: UntypedFormGroup;
   loading = false;
   generalError = false;
   hidePassword = true;
+  form = new FormGroup<FormType>({
+    username: new FormControl('', {
+      validators: [Validators.required, this.usernameValidator(), this.usernameTakenValidator()],
+      nonNullable: true,
+    }),
+    email: new FormControl('', {
+      validators: [Validators.required, emailValidator(), this.emailTakenValidator()],
+      nonNullable: true,
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required, this.passwordValidator()],
+      nonNullable: true,
+    }),
+    passwordConfirm: new FormControl('', {
+      validators: [Validators.required, this.passwordConfirmValidator()],
+      nonNullable: true,
+    }),
+    acceptTerms: new FormControl(false, {
+      validators: [Validators.requiredTrue],
+      nonNullable: true,
+    }),
+  });
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
     private auth: AuthService,
     private authRegisterGQL: AuthRegisterGQL,
     public env: Environment
   ) {
-    this.form = this.formBuilder.group({
-      username: [
-        '',
-        [Validators.required, this.usernameValidator(), this.usernameTakenValidator()],
-      ],
-      email: ['', [Validators.required, emailValidator(), this.emailTakenValidator()]],
-      password: ['', [Validators.required, this.passwordValidator()]],
-      passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
-      acceptTerms: ['', Validators.requiredTrue],
-    });
-
     const sub1 = this.username.valueChanges.subscribe(() => {
       this.#usernameTaken = false;
     });
@@ -78,23 +89,23 @@ export class ZenRegisterFormComponent implements OnDestroy {
   }
 
   get username() {
-    return this.form.get('username') as UntypedFormControl;
+    return this.form.get('username') as FormType['username'];
   }
 
   get email() {
-    return this.form.get('email') as UntypedFormControl;
+    return this.form.get('email') as FormType['email'];
   }
 
   get password() {
-    return this.form.get('password') as UntypedFormControl;
+    return this.form.get('password') as FormType['password'];
   }
 
   get passwordConfirm() {
-    return this.form.get('passwordConfirm') as UntypedFormControl;
+    return this.form.get('passwordConfirm') as FormType['passwordConfirm'];
   }
 
   get acceptTerms() {
-    return this.form.get('acceptTerms') as UntypedFormControl;
+    return this.form.get('acceptTerms') as FormType['acceptTerms'];
   }
 
   usernameTakenValidator(): ValidatorFn {
@@ -142,7 +153,6 @@ export class ZenRegisterFormComponent implements OnDestroy {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
-      this.form.disable();
 
       this.authRegisterGQL
         .mutate(
@@ -183,6 +193,8 @@ export class ZenRegisterFormComponent implements OnDestroy {
             }
           },
         });
+
+      this.form.disable();
     }
   }
 
@@ -193,6 +205,6 @@ export class ZenRegisterFormComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.map(s => s.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }

@@ -9,13 +9,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AuthPasswordResetConfirmation,
@@ -28,6 +22,11 @@ import { catchError, map } from 'rxjs/operators';
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
 import { passwordValidator } from '../validators';
+
+interface FormType {
+  password: FormControl<string>;
+  passwordConfirm: FormControl<string>;
+}
 
 @Component({
   selector: 'zen-password-reset-confirmation-form',
@@ -45,21 +44,24 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   completed = false;
   generalError = false;
   token: string | null = null;
-  form: UntypedFormGroup;
   hidePassword = true;
+  form = new FormGroup<FormType>({
+    password: new FormControl('', {
+      validators: [Validators.required, this.passwordValidator()],
+      nonNullable: true,
+    }),
+    passwordConfirm: new FormControl('', {
+      validators: [Validators.required, this.passwordConfirmValidator()],
+      nonNullable: true,
+    }),
+  });
 
   constructor(
     private authPasswordResetConfirmationGQL: AuthPasswordResetConfirmationGQL,
     private route: ActivatedRoute,
     public router: Router,
-    private formBuilder: UntypedFormBuilder,
     private auth: AuthService
   ) {
-    this.form = this.formBuilder.group({
-      password: ['', [Validators.required, this.passwordValidator()]],
-      passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
-    });
-
     const sub = this.route.queryParamMap
       .pipe(map(params => params.get('token')))
       .subscribe(token => (this.token = token));
@@ -73,11 +75,11 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
   }
 
   get password() {
-    return this.form.get('password') as UntypedFormControl;
+    return this.form.get('password') as FormType['password'];
   }
 
   get passwordConfirm() {
-    return this.form.get('passwordConfirm') as UntypedFormControl;
+    return this.form.get('passwordConfirm') as FormType['passwordConfirm'];
   }
 
   passwordValidator(): ValidatorFn {
@@ -104,7 +106,6 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
-      this.form.disable();
 
       this.authPasswordResetConfirmationGQL
         .mutate(
@@ -136,10 +137,12 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
             this.form.enable();
           },
         });
+
+      this.form.disable();
     }
   }
 
   ngOnDestroy() {
-    this.#subs.map(s => s.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }

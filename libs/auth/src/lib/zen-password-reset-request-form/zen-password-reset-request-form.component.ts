@@ -8,13 +8,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ApiConstants, ApiError } from '@zen/api-interfaces';
 import { AuthPasswordResetRequestQueryGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -23,6 +17,10 @@ import { catchError } from 'rxjs/operators';
 import { verticalAccordion } from '../animations';
 
 const EMAIL_MIN_LENGTH = 6;
+
+interface FormType {
+  emailOrUsername: FormControl<string>;
+}
 
 @Component({
   selector: 'zen-password-reset-request-form',
@@ -38,30 +36,25 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   #notFound = false;
   loading = false;
   completed = false;
-  form: UntypedFormGroup;
   generalError = false;
-
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private authPasswordResetRequestQueryGQL: AuthPasswordResetRequestQueryGQL
-  ) {
-    this.form = this.formBuilder.group({
-      emailOrUsername: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(
-            ApiConstants.USERNAME_MIN_LENGTH < EMAIL_MIN_LENGTH
-              ? ApiConstants.USERNAME_MIN_LENGTH
-              : EMAIL_MIN_LENGTH
-          ),
-          Validators.maxLength(254),
-          this.includesSpaceValidator(),
-          this.notFoundValidator(),
-        ],
+  form = new FormGroup<FormType>({
+    emailOrUsername: new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(
+          ApiConstants.USERNAME_MIN_LENGTH < EMAIL_MIN_LENGTH
+            ? ApiConstants.USERNAME_MIN_LENGTH
+            : EMAIL_MIN_LENGTH
+        ),
+        Validators.maxLength(254),
+        this.includesSpaceValidator(),
+        this.notFoundValidator(),
       ],
-    });
+      nonNullable: true,
+    }),
+  });
 
+  constructor(private authPasswordResetRequestQueryGQL: AuthPasswordResetRequestQueryGQL) {
     const sub = this.emailOrUsername.valueChanges.subscribe(() => {
       this.#notFound = false;
     });
@@ -75,7 +68,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
   }
 
   get emailOrUsername() {
-    return this.form.get('emailOrUsername') as UntypedFormControl;
+    return this.form.get('emailOrUsername') as FormType['emailOrUsername'];
   }
 
   includesSpaceValidator(): ValidatorFn {
@@ -96,7 +89,6 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
-      this.form.disable();
 
       this.authPasswordResetRequestQueryGQL
         .fetch(
@@ -127,10 +119,12 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
             }
           },
         });
+
+      this.form.disable();
     }
   }
 
   ngOnDestroy() {
-    this.#subs.map(s => s.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }

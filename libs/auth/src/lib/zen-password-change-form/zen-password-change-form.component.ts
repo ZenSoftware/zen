@@ -7,13 +7,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiError, AuthPasswordChangeGQL, GqlErrors, parseGqlErrors } from '@zen/graphql';
 import { Subscription } from 'rxjs';
@@ -21,6 +15,12 @@ import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { passwordValidator } from '../validators';
+
+interface FormType {
+  oldPassword: FormControl<string>;
+  newPassword: FormControl<string>;
+  passwordConfirm: FormControl<string>;
+}
 
 @Component({
   selector: 'zen-password-change-form',
@@ -37,20 +37,23 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   loading = false;
   completed = false;
   generalError = false;
-  form: UntypedFormGroup;
   hidePassword = true;
+  form = new FormGroup<FormType>({
+    oldPassword: new FormControl('', {
+      validators: [Validators.required, this.incorrectPasswordValidator()],
+      nonNullable: true,
+    }),
+    newPassword: new FormControl('', {
+      validators: [Validators.required, this.passwordValidator()],
+      nonNullable: true,
+    }),
+    passwordConfirm: new FormControl('', {
+      validators: [Validators.required, this.passwordConfirmValidator()],
+      nonNullable: true,
+    }),
+  });
 
-  constructor(
-    private authPasswordChangeGQL: AuthPasswordChangeGQL,
-    public router: Router,
-    private formBuilder: UntypedFormBuilder
-  ) {
-    this.form = this.formBuilder.group({
-      oldPassword: ['', [Validators.required, this.incorrectPasswordValidator()]],
-      newPassword: ['', [Validators.required, this.passwordValidator()]],
-      passwordConfirm: ['', [Validators.required, this.passwordConfirmValidator()]],
-    });
-
+  constructor(private authPasswordChangeGQL: AuthPasswordChangeGQL, public router: Router) {
     const sub = this.oldPassword.valueChanges.subscribe(() => {
       this.#incorrectPassword = false;
       this.newPassword.updateValueAndValidity();
@@ -59,15 +62,15 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   }
 
   get oldPassword() {
-    return this.form.get('oldPassword') as UntypedFormControl;
+    return this.form.get('oldPassword') as FormType['oldPassword'];
   }
 
   get newPassword() {
-    return this.form.get('newPassword') as UntypedFormControl;
+    return this.form.get('newPassword') as FormType['newPassword'];
   }
 
   get passwordConfirm() {
-    return this.form.get('passwordConfirm') as UntypedFormControl;
+    return this.form.get('passwordConfirm') as FormType['passwordConfirm'];
   }
 
   passwordValidator(): ValidatorFn {
@@ -116,7 +119,6 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
     if (!this.loading) {
       this.loading = true;
       this.generalError = false;
-      this.form.disable();
 
       this.authPasswordChangeGQL
         .mutate(
@@ -148,10 +150,12 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             }
           },
         });
+
+      this.form.disable();
     }
   }
 
   ngOnDestroy() {
-    this.#subs.map(s => s.unsubscribe());
+    this.#subs.forEach(s => s.unsubscribe());
   }
 }
