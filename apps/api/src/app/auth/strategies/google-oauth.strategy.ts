@@ -9,12 +9,7 @@ import { RequestUser } from '../models/request-user';
 @Injectable()
 export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(config: ConfigService, private readonly prisma: PrismaService) {
-    super({
-      clientID: config.oauth.google.clientId,
-      clientSecret: config.oauth.google.clientSecret,
-      callbackURL: config.oauth.google.callbackURL,
-      scope: ['email'],
-    });
+    super(config.oauth.google);
   }
 
   async validate(accessToken: string, refreshToken: string, profile: Profile) {

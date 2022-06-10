@@ -43,9 +43,10 @@ export const environment: EnvironmentBase = {
   oauth: {
     loginConfirmedURL: 'http://localhost:4200/#/login-confirmed',
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: 'http://localhost:7080/auth/google/redirect',
+      scope: ['email'],
     },
   },
 };
