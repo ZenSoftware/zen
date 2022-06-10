@@ -5,13 +5,15 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Environment } from '@zen/common';
 import { ApiError, AuthLoginInput, GqlErrors } from '@zen/graphql';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -29,7 +31,7 @@ interface FormType {
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenLoginFormComponent implements OnDestroy {
+export class ZenLoginFormComponent implements OnInit, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Input() doneMessage = 'Redirecting...';
@@ -43,6 +45,7 @@ export class ZenLoginFormComponent implements OnDestroy {
   done = false;
   hidePassword = true;
   generalError = false;
+  emailTakenError = false;
   form = new FormGroup<FormType>({
     username: new FormControl('', {
       validators: [Validators.required, usernameValidator(), this.usernameNotFoundValidator()],
@@ -55,7 +58,7 @@ export class ZenLoginFormComponent implements OnDestroy {
     rememberMe: new FormControl(false, { nonNullable: true }),
   });
 
-  constructor(private auth: AuthService, public env: Environment) {
+  constructor(private route: ActivatedRoute, private auth: AuthService, public env: Environment) {
     const sub1 = this.username.valueChanges.subscribe(() => {
       this.#usernameNotFound = false;
     });
@@ -65,6 +68,15 @@ export class ZenLoginFormComponent implements OnDestroy {
       this.#incorrectPassword = false;
     });
     this.#subs.push(sub2);
+  }
+
+  ngOnInit(): void {
+    const sub = this.route.queryParamMap
+      .pipe(map(p => p.get('email_taken') === 'true'))
+      .subscribe(emailTaken => {
+        this.emailTakenError = emailTaken;
+      });
+    this.#subs.push(sub);
   }
 
   get username() {

@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { EnvironmentBase } from './environment.base';
 
 export const environment: EnvironmentBase = {
-  siteUrl: 'http://localhost:4200',
+  siteUrl: 'http://localhost:4200/#',
   production: false,
   expressPort: 7080,
   publicRegistration: true,

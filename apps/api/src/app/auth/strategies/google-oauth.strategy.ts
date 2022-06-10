@@ -5,6 +5,7 @@ import { Profile, Strategy } from 'passport-google-oauth20';
 import { ConfigService } from '../../config';
 import { PrismaService } from '../../prisma';
 import { RequestUser } from '../models/request-user';
+import { EmailTakenException } from './email-taken-exception.filter';
 
 @Injectable()
 export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
@@ -13,12 +14,31 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
   }
 
   async validate(accessToken: string, refreshToken: string, profile: Profile) {
+    const googleEmail = profile.emails[0].value;
+
+    const existingUserWithGoogleEmail = await this.prisma.user.findFirst({
+      where: {
+        AND: [
+          {
+            googleId: null,
+          },
+          {
+            email: { equals: googleEmail, mode: 'insensitive' },
+          },
+        ],
+      },
+    });
+
+    if (existingUserWithGoogleEmail) {
+      throw new EmailTakenException();
+    }
+
     let user = await this.prisma.user.findFirst({ where: { googleId: profile.id } });
 
     if (!user) {
       user = await this.prisma.user.create({
         data: {
-          email: profile.emails[0].value,
+          email: googleEmail,
           googleId: profile.id,
         },
       });
