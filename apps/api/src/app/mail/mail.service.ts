@@ -34,7 +34,7 @@ export class MailService {
 
     const context: PasswordResetContext = {
       siteUrl: this.config.siteUrl,
-      resetUrl: `${this.config.siteUrl}/#/password-reset-confirmation?token=${encodeURI(token)}`,
+      resetUrl: `${this.config.siteUrl}/password-reset-confirmation?token=${encodeURI(token)}`,
     };
 
     return this.send({

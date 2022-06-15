@@ -3,6 +3,7 @@ import { NestApplicationOptions } from '@nestjs/common';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
 import { UploadOptions } from 'graphql-upload';
+import { StrategyOptions as GoogleStrategyOptions } from 'passport-google-oauth20';
 
 export class EnvironmentBase {
   readonly siteUrl: string;
@@ -22,10 +23,6 @@ export class EnvironmentBase {
   readonly throttle: ThrottlerModuleOptions;
   readonly oauth?: {
     loginConfirmedURL: string;
-    google?: {
-      clientId: string;
-      clientSecret: string;
-      callbackURL: string;
-    };
+    google?: GoogleStrategyOptions;
   };
 }

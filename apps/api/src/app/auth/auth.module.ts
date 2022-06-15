@@ -10,7 +10,7 @@ import { GoogleOAuthStrategy } from './strategies/google-oauth.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 const oauthProviders = [];
-if (environment.oauth?.google?.clientId) oauthProviders.push(GoogleOAuthStrategy);
+if (environment.oauth?.google?.clientID) oauthProviders.push(GoogleOAuthStrategy);
 
 @Module({
   imports: [JwtModule, PrismaModule, PassportModule.register({ defaultStrategy: 'jwt' })],
