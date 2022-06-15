@@ -16,7 +16,8 @@ export class ZenLoginLinkComponent {
     this.displayLogin$ = this.router.events.pipe(
       filter((event: any) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => {
-        if (event.url === '/login') return false;
+        const url = event.url.split('?')[0];
+        if (url === '/login') return false;
         return true;
       })
     );

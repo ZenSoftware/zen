@@ -4,6 +4,7 @@ import { JwtModuleOptions } from '@nestjs/jwt';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
 import { OTLPExporterNodeConfigBase } from '@opentelemetry/otlp-exporter-base';
 import { UploadOptions } from 'graphql-upload';
+import { StrategyOptions as GoogleStrategyOptions } from 'passport-google-oauth20';
 
 export class EnvironmentBase {
   readonly siteUrl: string;
@@ -23,11 +24,7 @@ export class EnvironmentBase {
   readonly throttle: ThrottlerModuleOptions;
   readonly oauth?: {
     loginConfirmedURL: string;
-    google?: {
-      clientId: string;
-      clientSecret: string;
-      callbackURL: string;
-    };
+    google?: GoogleStrategyOptions;
   };
   readonly openTelemetry?:
     | false
