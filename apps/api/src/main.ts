@@ -11,8 +11,8 @@ import { environment } from './environments/environment';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: environment.cors });
 
-  const prismaService: PrismaService = app.get(PrismaService);
-  prismaService.enableShutdownHooks(app);
+  const prisma: PrismaService = app.get(PrismaService);
+  prisma.enableShutdownHooks(app);
 
   if (environment.production) app.use(helmet());
 
