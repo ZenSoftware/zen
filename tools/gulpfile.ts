@@ -189,7 +189,7 @@ export class Gulpfile {
       // Guard to prevent the overwriting of existing files
       if (!fs.existsSync(outPath)) {
         const pathName = path.join(__dirname, PALJS_PATH, prismaName, 'resolvers.ts');
-        const prismaScript = await readFile(pathName).toString();
+        const prismaScript = (await readFile(pathName)).toString();
 
         const queryStartIndex = prismaScript.indexOf(QUERY_TOKEN) + QUERY_TOKEN.length + 1;
         const queryEndIndex = prismaScript.indexOf(MUTATION_TOKEN) - MUTATION_TOKEN.length + 3;
@@ -219,6 +219,7 @@ export class Gulpfile {
             mutationNames.push(line.substring(0, line.indexOf(':')).trim());
           }
         }
+        console.log('MUTATION NAMES', mutationNames);
 
         let mutationSource = '';
         for (const mutationName of mutationNames) {
