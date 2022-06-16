@@ -69,7 +69,7 @@ npm start
 - [x] [Nest authentication](https://docs.nestjs.com/techniques/authentication), user registration, and login system designed specifically to work for an [Angular SPA (single page application)](https://angular.io/). This project provides responsive, "mobile first" interfaces for the standard set of authentication features.
 - [x] `New account component`
 - [x] `Login component` with remember me option.
-- [x] `Sign in with Google` via OpenID connect.
+- [x] `Sign in with Google` via OpenID Connect.
 - [x] `Forgot password component` and full password reset flow.
 - [x] `Password change component` for user dashboards.
 - [x] `Angular route guards` and `Angular directives` to show/hide content depending on user's roles.
