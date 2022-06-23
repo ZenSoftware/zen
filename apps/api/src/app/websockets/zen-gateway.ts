@@ -25,7 +25,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
   @SubscribeMessage('msgToServer')
   handleMessage(client: Socket, payload: string): void {
-    this.logger.log('Recieved emit');
+    this.logger.log('Recieved emit', payload);
     this.server.emit('msgToClient', payload);
   }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Role, RolesGuard } from '@zen/auth';
 
+import { ZenChatComponent } from './zen-chat';
 import { ZenDashboardComponent } from './zen-dashboard/zen-dashboard.component';
 import { ZenPortalMainComponent } from './zen-portal-main/zen-portal-main.component';
 import { ZenSettingsComponent } from './zen-settings/zen-settings.component';
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: ZenDashboardComponent,
+      },
+      {
+        path: 'chat',
+        component: ZenChatComponent,
       },
       {
         path: 'settings',

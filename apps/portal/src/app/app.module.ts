@@ -11,9 +11,19 @@ import { ZenGraphQLModule } from '@zen/graphql';
 import { possibleTypes, typePolicies } from '@zen/graphql/client';
 import { ZenLayoutModule } from '@zen/layout';
 import { ZenMainModule } from '@zen/main';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+
+const config: SocketIoConfig = {
+  url: environment.url.socketio,
+  options: {
+    extraHeaders: {
+      Authorization: 'Bearer ' + tokenVar(),
+    },
+  },
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +33,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     MatListModule,
     RouterModule.forRoot([]),
+    SocketIoModule.forRoot(config),
     ZenAuthModule,
     ZenLayoutModule,
     ZenMainModule,
