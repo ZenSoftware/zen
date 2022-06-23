@@ -12,6 +12,9 @@ RUN npm ci --production --loglevel warn
 # ENV DATABASE_URL=postgresql://user:pass@localhost:5432/database
 
 ENV PORT=7080
-EXPOSE ${PORT}
+ENV SOCKETIO_PORT =7081
+
+EXPOSE 7080/tcp
+EXPOSE 7081/tcp
 
 CMD [ "node", "main.js" ]

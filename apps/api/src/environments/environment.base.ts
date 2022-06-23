@@ -10,6 +10,7 @@ export class EnvironmentBase {
   readonly production: boolean;
   readonly expressPort: string | number;
   readonly cors?: NestApplicationOptions['cors'];
+  readonly socketioPort: number;
   readonly graphql: {
     readonly sandbox: boolean; // http://localhost:7080/graphql
     readonly trace?: boolean;

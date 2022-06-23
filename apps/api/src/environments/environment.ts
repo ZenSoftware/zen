@@ -8,6 +8,7 @@ export const environment: EnvironmentBase = {
   expressPort: 7080,
   publicRegistration: true,
   cors: { credentials: true, origin: true },
+  socketioPort: +process.env.SOCKETIO_PORT,
   graphql: {
     sandbox: true,
     introspection: true,

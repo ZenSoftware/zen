@@ -14,9 +14,10 @@ import { Server, Socket } from 'socket.io';
 
 import { environment } from '../../environments/environment';
 
-@WebSocketGateway({
+@WebSocketGateway(environment.socketioPort, {
   /** @todo verify cors */
   cors: environment.cors,
+  // transports: ['websocket'],
 })
 export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server;
@@ -24,6 +25,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
   @SubscribeMessage('msgToServer')
   handleMessage(client: Socket, payload: string): void {
+    this.logger.log('Recieved emit');
     this.server.emit('msgToClient', payload);
   }
 
@@ -38,5 +40,6 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
   handleConnection(client: Socket, ...args: any[]) {
     /** @todo Needs guard auth flow here */
     this.logger.log(`Client connected: ${client.id}`);
+    this.logger.log(`Client query:`, client.handshake.query);
   }
 }
