@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+
+import { ZenSocketService } from '../zen-socket.service';
 
 @Component({
   selector: 'zen-chat',
   templateUrl: 'zen-chat.component.html',
 })
 export class ZenChatComponent implements OnInit {
-  constructor(private socket: Socket) {}
+  constructor(private socket: ZenSocketService) {}
 
   ngOnInit(): void {
     this.socket.on('msgToClient', (args: any) => {

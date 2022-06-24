@@ -39,6 +39,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
   handleConnection(client: Socket, ...args: any[]) {
     /** @todo Needs guard auth flow here */
+    console.log('HEADERS:', client.handshake.headers.authorization);
     this.logger.log(`Client connected: ${client.id}`);
     this.logger.log(`Client query:`, client.handshake.query);
   }
