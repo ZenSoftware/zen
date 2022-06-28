@@ -24,7 +24,17 @@ import { PrismaService } from '../prisma';
   // transports: ['websocket'],
 })
 export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-  userMap = new Map<string, Pick<User, 'id' | 'roles' | 'username'>>();
+  /**
+   * key: client.id
+   * value: User
+   */
+  clientIdToUserMap = new Map<string, Partial<User>>();
+
+  /**
+   * key: user.id
+   * value: array of clients user is currently connected with
+   */
+  userIdToClientsMap = new Map<User['id'], Socket[] | undefined>();
 
   constructor(private readonly prisma: PrismaService, private readonly auth: AuthService) {}
 
@@ -33,12 +43,19 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
   @SubscribeMessage('msgToServer')
   handleMessage(client: Socket, payload: string): void {
-    const user = this.userMap.get(client.id);
+    const user = this.clientIdToUserMap.get(client.id);
     this.logger.log(`Recieved emit from ${user.username}:`, payload);
+    this.emitToUser(user.id, 'msgToClient', payload); // Echo to all devices user is connected with
+  }
 
-    /** @todo send message to all devices user is connected with */
-
-    this.server.emit('msgToClient', payload);
+  /**
+   * @description Emit to all devices user is connected to.
+   */
+  emitToUser(userId: User['id'], eventName: string, ...args: any[]) {
+    const userClients = this.userIdToClientsMap.get(userId);
+    for (const userClient of userClients) {
+      userClient.emit(eventName, args);
+    }
   }
 
   afterInit(server: Server) {
@@ -47,7 +64,18 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
   handleDisconnect(client: Socket) {
     this.logger.log(`Client disconnected: ${client.id}`);
-    this.userMap.delete(client.id);
+
+    const user = this.clientIdToUserMap.get(client.id);
+    const clients = this.userIdToClientsMap.get(user.id);
+    const withoutClient = clients.filter(c => c !== client);
+
+    console.log('Client disconnecting.  User client count:', clients.length);
+    console.log('New client count:', withoutClient.length);
+
+    if (withoutClient.length === 0) this.userIdToClientsMap.delete(user.id);
+    else this.userIdToClientsMap.set(user.id, withoutClient);
+
+    this.clientIdToUserMap.delete(client.id);
   }
 
   async handleConnection(client: Socket, ...args: any[]) {
@@ -70,7 +98,14 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
       },
     });
 
-    this.userMap.set(client.id, user);
+    this.clientIdToUserMap.set(client.id, user);
+
+    const userClients = this.userIdToClientsMap.get(user.id);
+    if (!userClients || userClients.length === 0) {
+      this.userIdToClientsMap.set(user.id, [client]); // Initialize map
+    } else {
+      userClients.push(client);
+    }
 
     this.logger.log(`User connected ${user.username}`);
     this.logger.log(`Client ID: ${client.id}`);
