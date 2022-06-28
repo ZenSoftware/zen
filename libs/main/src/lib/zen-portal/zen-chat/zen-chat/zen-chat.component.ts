@@ -11,7 +11,7 @@ export class ZenChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.socket.on('msgToClient', (args: any) => {
-      console.log('Recieved:', args);
+      console.log('msgToClient:', args);
     });
   }
 
