@@ -23,7 +23,7 @@ export class EnvironmentDev implements Environment {
   url = {
     loginRedirect: '/',
     api: 'http://localhost:7080',
-    portal: 'http://localhost:4200/#/',
+    portal: 'http://localhost:4200/#',
     graphql: 'http://localhost:7080/graphql',
     graphqlSubscriptions: 'ws://localhost:7080/graphql',
     socketio: 'http://localhost:7081',
@@ -39,7 +39,7 @@ export class EnvironmentProd implements Environment {
   url = {
     loginRedirect: '/',
     api: 'https://api.site.com',
-    portal: 'https://portal.site.com/#/',
+    portal: 'https://portal.site.com/#',
     graphql: 'https://api.site.com/graphql',
     graphqlSubscriptions: 'wss://api.site.com/graphql',
     socketio: 'https://api.site.com:7081',
