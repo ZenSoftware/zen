@@ -45,7 +45,7 @@ spec:
             # https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
             # Linux: /home/username/simplest-k8s/host-mount
             # macOS: /Users/yourusername/path/to/repo/simplest-k8s/host-mount
-            # Windows: /Users/username/code/simplest-k8s/host-mount 
+            # Windows: /Users/username/code/simplest-k8s/host-mount
             path: /home/z/host-mount
 ---
 apiVersion: v1
@@ -55,9 +55,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: postgresql
-    port: 5432
-    targetPort: zen-pg-port
-    protocol: TCP
+    - name: postgresql
+      port: 5432
+      targetPort: zen-pg-port
+      protocol: TCP
   selector:
     app: zen-pg

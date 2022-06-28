@@ -64,10 +64,10 @@ metadata:
   name: zen-pg-svc
 spec:
   ports:
-  - name: postgresql
-    port: 5432
-    targetPort: zen-pg-port
-    protocol: TCP
+    - name: postgresql
+      port: 5432
+      targetPort: zen-pg-port
+      protocol: TCP
   selector:
     app: zen-pg
 ---
