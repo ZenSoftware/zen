@@ -113,3 +113,10 @@ spec:
                 name: zen-api-svc
                 port:
                   number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: zen-api-svc
+                port:
+                  number: 81 # Socket.IO
