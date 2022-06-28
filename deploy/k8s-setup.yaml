@@ -23,6 +23,8 @@ spec:
           ports:
             - containerPort: 7080
               name: zen-api-port
+            - containerPort: 7081
+              name: zen-api-socketio-port
           env:
             - name: DATABASE_URL
               valueFrom:
@@ -87,6 +89,10 @@ spec:
       protocol: TCP
       port: 80
       targetPort: zen-api-port
+    - name: socketio
+      protocol: TCP
+      port: 81
+      targetPort: zen-api-socketio-port
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

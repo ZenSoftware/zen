@@ -90,7 +90,7 @@ spec:
       protocol: TCP
       port: 80
       targetPort: zen-api-port
-    - name: http
+    - name: socketio
       protocol: TCP
       port: 81
       targetPort: zen-api-socketio-port
