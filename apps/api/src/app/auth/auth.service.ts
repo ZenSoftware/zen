@@ -30,4 +30,12 @@ export class AuthService {
       expiresIn,
     };
   }
+
+  authorizeJwt(token: string): RequestUser {
+    const jwtPayload = this.jwtService.decode(token) as JwtPayload;
+    return {
+      id: jwtPayload.sub,
+      roles: jwtPayload.roles,
+    };
+  }
 }
