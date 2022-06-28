@@ -1,7 +1,7 @@
 /**
  * https://gabrieltanner.org/blog/nestjs-realtime-chat/
  */
-import { Logger } from '@nestjs/common';
+import { HttpException, Logger } from '@nestjs/common';
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -9,6 +9,7 @@ import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
+  WsException,
 } from '@nestjs/websockets';
 import { User } from '@prisma/client';
 import { Server, Socket } from 'socket.io';
@@ -51,7 +52,14 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
   async handleConnection(client: Socket, ...args: any[]) {
     const token = client.handshake.headers.authorization?.substring(7);
-    const requestUser = this.auth.authorizeJwt(token);
+
+    let requestUser: RequestUser;
+    try {
+      requestUser = this.auth.authorizeJwt(token);
+    } catch (error) {
+      Logger.error('ZenGateway authorization failed', error);
+      throw new HttpException(error, 404);
+    }
 
     const user = await this.prisma.user.findFirst({
       where: { id: requestUser.id },
