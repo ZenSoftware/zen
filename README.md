@@ -23,7 +23,7 @@ New contributors are welcome!
 **Requirements**
 
 - [Node v16](https://nodejs.org/)
-- [Docker](https://www.docker.com/) or [Rancher Desktop](https://rancherdesktop.io/))
+- [Docker](https://www.docker.com/) or [Rancher Desktop](https://rancherdesktop.io/)
 
 ```bash
 # Project setup steps

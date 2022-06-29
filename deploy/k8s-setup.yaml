@@ -99,17 +99,17 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - api.site.ca
-    secretName: tls-secret
+    - hosts:
+        - api.site.ca
+      secretName: tls-secret
   rules:
-  - host: api.site.ca
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: zen-api-svc
-            port:
-              number: 80
+    - host: api.site.ca
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: zen-api-svc
+                port:
+                  number: 80

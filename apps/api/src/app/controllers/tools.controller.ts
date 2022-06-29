@@ -4,11 +4,17 @@ import { Prisma } from '@prisma/client';
 import { HttpGuard, Roles } from '../auth';
 import { PrismaService } from '../prisma';
 
-@Controller('tools')
+@Controller()
 @UseGuards(HttpGuard)
 @Roles('Super')
 export class ToolsController {
   constructor(private readonly prisma: PrismaService) {}
+
+  // @Get('metrics')
+  // @Header('Content-Type', 'text/plain')
+  // async meta() {
+  //   return this.prisma.$metrics.prometheus();
+  // }
 
   // @Get('meta')
   // @Header('Content-Type', 'text/plain')
