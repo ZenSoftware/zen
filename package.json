@@ -62,10 +62,10 @@
     "rxjs": "~7.5.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "14.0.2",
-    "@angular-eslint/eslint-plugin": "~13.2.1",
-    "@angular-eslint/eslint-plugin-template": "~13.2.1",
-    "@angular-eslint/template-parser": "~13.2.1",
+    "@angular-devkit/build-angular": "~14.0.3",
+    "@angular-eslint/eslint-plugin": "~14.0.0",
+    "@angular-eslint/eslint-plugin-template": "~14.0.0",
+    "@angular-eslint/template-parser": "~14.0.0",
     "@angular/animations": "~14.0.2",
     "@angular/cdk": "~14.0.2",
     "@angular/cli": "~14.0.2",
@@ -131,7 +131,7 @@
     "localstorage-slim": "^2.2.0",
     "ngx-socket-io": "^4.2.0",
     "nx": "14.3.6",
-    "prettier": "2.6.2",
+    "prettier": "2.7.1",
     "prettier-plugin-import-sort": "^0.0.7",
     "prettier-plugin-prisma": "^3.8.0",
     "ts-jest": "27.1.4",
