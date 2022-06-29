@@ -49,7 +49,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
   }
 
   /**
-   * @description Emit to all devices user is connected to.
+   * @description Emit to all devices user is connected with.
    */
   emitToUser(userId: User['id'], eventName: string, ...args: any[]) {
     const userClients = this.userIdToClientsMap.get(userId);

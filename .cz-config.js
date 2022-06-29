@@ -36,6 +36,7 @@ module.exports = {
     { name: 'k8s' },
     { name: 'electron' },
     { name: 'capacitor' },
+    { name: 'socketio' },
   ],
   allowCustomScopes: true,
   skipQuestions: ['body', 'footer'],
