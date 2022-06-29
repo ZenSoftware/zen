@@ -42,6 +42,6 @@ export class EnvironmentProd implements Environment {
     portal: 'https://portal.site.com/#',
     graphql: 'https://api.site.com/graphql',
     graphqlSubscriptions: 'wss://api.site.com/graphql',
-    socketio: 'https://api.site.com:7081',
+    socketio: 'https://api.site.com:81',
   };
 }
