@@ -97,16 +97,16 @@ metadata:
     name: zen-ingress
 spec:
   tls:
-  - hosts:
-    - zen.rancher.localhost
+    - hosts:
+        - zen.rancher.localhost
   rules:
-  - host: zen.rancher.localhost
-    http:
-      paths:
-      - path: "/"
-        pathType: Prefix
-        backend:
-          service:
-            name: zen-api-svc
-            port:
-              number: 80
+    - host: zen.rancher.localhost
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: zen-api-svc
+                port:
+                  number: 80
