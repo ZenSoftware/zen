@@ -16,6 +16,7 @@ export class EnvironmentBase {
     readonly trace?: boolean;
     readonly introspection: boolean;
     readonly uploads?: UploadOptions;
+    readonly csrfPrevention?: boolean;
   };
   readonly publicRegistration: boolean;
   readonly jwtOptions: JwtModuleOptions;

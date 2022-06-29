@@ -9,6 +9,7 @@ export const environment: EnvironmentBase = {
     sandbox: false,
     introspection: false,
     trace: false,
+    csrfPrevention: true,
     uploads: {
       maxFileSize: 20_000_000, // 20 MB
       maxFiles: 5,
