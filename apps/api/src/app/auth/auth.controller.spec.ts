@@ -39,7 +39,7 @@ describe('Auth Controller', () => {
     controller = module.get(AuthController);
   });
 
-  it('constructs a query string from an AuthSession', () => {
+  it('constructs a valid query string from an AuthSession', () => {
     const redirectUrl = controller.getLoginConfirmedURL(null);
     expect(redirectUrl).toEqual(
       'http://site.com/login-confirmed?id=1&roles=Super%2CRegistered&expiresIn=123&rememberMe=true&token=abc.def_%252B%252Fghi.jkl%253D%253D'
