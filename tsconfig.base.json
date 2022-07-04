@@ -22,6 +22,7 @@
       "@zen/graphql": ["libs/graphql/src/index.ts"],
       "@zen/graphql/client": ["libs/graphql/src/lib/client/index.ts"],
       "@zen/graphql/fields": ["libs/graphql/src/lib/fields/index.ts"],
+      "@zen/grid": ["libs/grid/src/index.ts"],
       "@zen/layout": ["libs/layout/src/index.ts"],
       "@zen/main": ["libs/main/src/index.ts"]
     },

@@ -812,14 +812,14 @@ export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
 
 export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number };
 
-export type UserFields = { __typename?: 'User', id: number, username?: string | null, email: string };
+export type UserFields = { __typename?: 'User', id: number, username?: string | null, email: string, createdAt: any, roles: Array<Role> };
 
 export type FindUniqueUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username?: string | null, email: string } | null };
+export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username?: string | null, email: string, createdAt: any, roles: Array<Role> } | null };
 
 export type FindFirstUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -831,7 +831,7 @@ export type FindFirstUserVariables = Exact<{
 }>;
 
 
-export type FindFirstUser = { __typename?: 'Query', findFirstUser?: { __typename?: 'User', id: number, username?: string | null, email: string } | null };
+export type FindFirstUser = { __typename?: 'Query', findFirstUser?: { __typename?: 'User', id: number, username?: string | null, email: string, createdAt: any, roles: Array<Role> } | null };
 
 export type FindManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -843,7 +843,7 @@ export type FindManyUserVariables = Exact<{
 }>;
 
 
-export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username?: string | null, email: string }> | null };
+export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username?: string | null, email: string, createdAt: any, roles: Array<Role> }> | null };
 
 export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -862,7 +862,7 @@ export type CreateOneUserVariables = Exact<{
 }>;
 
 
-export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: number, username?: string | null, email: string } };
+export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: number, username?: string | null, email: string, createdAt: any, roles: Array<Role> } };
 
 export type UpdateOneUserVariables = Exact<{
   data: UserUpdateInput;
@@ -870,7 +870,7 @@ export type UpdateOneUserVariables = Exact<{
 }>;
 
 
-export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: number, username?: string | null, email: string } };
+export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: number, username?: string | null, email: string, createdAt: any, roles: Array<Role> } };
 
 export type DeleteOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -886,7 +886,7 @@ export type UpsertOneUserVariables = Exact<{
 }>;
 
 
-export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username?: string | null, email: string } | null };
+export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username?: string | null, email: string, createdAt: any, roles: Array<Role> } | null };
 
 export type DeleteManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -929,6 +929,8 @@ export const UserFields = /*#__PURE__*/ gql`
   id
   username
   email
+  createdAt
+  roles
 }
     `;
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`

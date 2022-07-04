@@ -1,4 +1,5 @@
 export * from './lib/assert-type';
+export * from './lib/currency-helpers';
 export * from './lib/enum-helper';
 export * from './lib/environment';
 export * from './lib/is-string-number';

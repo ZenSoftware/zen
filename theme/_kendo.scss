@@ -1,0 +1,90 @@
+$primary-palette-name: $zen-primary;
+$secondary-palette-name: $zen-accent;
+$theme-type: dark;
+
+@import '~@progress/kendo-theme-material/dist/all.scss';
+
+.k-pager-nav {
+  background-color: #333333;
+}
+
+.k-form,
+.k-grid {
+  input,
+  button,
+  .k-button {
+    color: #00ffff;
+  }
+}
+
+// Fixes vertical alignment of <k-grid> select mode checkboxes
+.k-grid td > .k-checkbox {
+  vertical-align: inherit;
+}
+
+// Fixes items per page drop down text being cut off within the <zen-grid> pager
+.k-pager-sizes .k-input-inner {
+  min-width: 100px;
+}
+
+// Narrow Kendo headers
+.k-grid-header .k-header > .k-link {
+  padding: 16px 10px;
+}
+
+// Begin narrowing Kendo filter
+.k-grid .k-filter-row td {
+  padding: 0 0 0 5px;
+}
+
+// .k-dropdown-operator .k-dropdown-wrap .k-select {
+//   width: inherit;
+// }
+
+.k-grid .k-icon-button,
+.k-grid .k-button.k-button-icon {
+  width: inherit;
+  padding: 8px 0;
+}
+// End narrowing Kendo filter
+
+// Fix html editor
+.zen-html,
+.k-editor .k-editor-content {
+  line-height: 1.5em;
+
+  p {
+    margin: 0;
+  }
+}
+
+.k-editor-content > .ProseMirror {
+  padding: 0 16px;
+}
+// End
+
+.k-form .k-form-field {
+  margin-top: 0;
+}
+
+// .k-label {
+//   color: darkblue;
+// }
+
+button.k-button i.fas {
+  margin-top: 3px;
+}
+
+// Fix Kendo grid left cell, transparent is overriding the custom row background color
+// td[role='presentation'] {
+//   background-color: transparent;
+// }
+
+/** Fixes the background change when hovering in Kendo Grid's details row */
+html .k-grid tr.k-detail-row:hover {
+  background-color: transparent;
+
+  .k-alt {
+    background-color: transparent;
+  }
+}

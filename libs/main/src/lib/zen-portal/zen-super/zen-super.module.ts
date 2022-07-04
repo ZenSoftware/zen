@@ -8,6 +8,7 @@ import { ZenSampleSubscriptionComponent } from './zen-sample-subscription/zen-sa
 import { ZenSampleUploadComponent } from './zen-sample-upload/zen-sample-upload.component';
 import { ZenSuperPageComponent } from './zen-super-page/zen-super-page.component';
 import { ZenSuperRoutingModule } from './zen-super-routing.module';
+import { ZenUserModule } from './zen-user-manager';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ZenSuperRoutingModule } from './zen-super-routing.module';
     MatSnackBarModule,
     ZenComponentsModule,
     ZenSuperRoutingModule,
+    ZenUserModule,
   ],
   declarations: [ZenSuperPageComponent, ZenSampleSubscriptionComponent, ZenSampleUploadComponent],
 })

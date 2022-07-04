@@ -7,6 +7,7 @@
     "common": "libs/common",
     "components": "libs/components",
     "graphql": "libs/graphql",
+    "grid": "libs/grid",
     "layout": "libs/layout",
     "main": "libs/main",
     "portal": "apps/portal",
