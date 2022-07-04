@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { emailValidator, usernameValidator } from '@zen/auth';
 import { trimObjectStrings } from '@zen/common';
 import { ZenSnackbarErrorService } from '@zen/components';
-import { CreateOneUserGQL, UpdateOneUserGQL, UserFields, UserUpdateInput } from '@zen/graphql';
+import { UpdateOneUserGQL, UserFields, UserUpdateInput } from '@zen/graphql';
 import { Apollo } from 'apollo-angular';
 
 export interface DialogData {
