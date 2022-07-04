@@ -1,7 +1,7 @@
 /**
  * https://gabrieltanner.org/blog/nestjs-realtime-chat/
  */
-import { HttpException, Logger } from '@nestjs/common';
+import { HttpException, Logger, UnauthorizedException } from '@nestjs/common';
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -44,7 +44,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
   @SubscribeMessage('msgToServer')
   handleMessage(client: Socket, payload: string): void {
     const user = this.clientIdToUserMap.get(client.id);
-    this.logger.log(`Recieved emit from ${user.username}:`, payload);
+    this.logger.log(`Recieved emit from ${user?.username}:`, payload);
     this.emitToUser(user.id, 'msgToClient', payload); // Echo to all devices user is connected with
   }
 
@@ -84,9 +84,10 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     let requestUser: RequestUser;
     try {
       requestUser = this.auth.authorizeJwt(token);
+      if (!requestUser) return; // new UnauthorizedException();
     } catch (error) {
       Logger.error('ZenGateway authorization failed', error);
-      throw new HttpException(error, 404);
+      return; // new UnauthorizedException('Unauthorized connection to Socket.IO');
     }
 
     const user = await this.prisma.user.findFirst({
@@ -98,6 +99,11 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
       },
     });
 
+    // if (!user.roles.includes('Super')) {
+    //   Logger.error('User is not super');
+    //   return;
+    // }
+
     this.clientIdToUserMap.set(client.id, user);
 
     const userClients = this.userIdToClientsMap.get(user.id);
@@ -107,7 +113,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
       userClients.push(client);
     }
 
-    this.logger.log(`User connected ${user.username}`);
+    this.logger.log(`User connected ${user?.username}`);
     this.logger.log(`Client ID: ${client.id}`);
   }
 }
