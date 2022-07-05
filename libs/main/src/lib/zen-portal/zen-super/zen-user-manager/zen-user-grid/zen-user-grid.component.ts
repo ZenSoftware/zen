@@ -49,7 +49,7 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
 })
 export class ZenUserGridComponent {
   @Input() mode = GridMode.Default;
-  @Input() selection: number[] = [];
+  @Input() selection: Array<UserFields['id']> = [];
   @Input() showAdd = true;
   @Input() showEdit = true;
   @Input() showDelete = true;
