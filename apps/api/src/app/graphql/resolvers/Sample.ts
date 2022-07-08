@@ -73,7 +73,7 @@ export class SampleResolver {
               Logger.log(`${filename} ReadStream Closed`);
             })
             .on('error', err => {
-              console.error(`${filename} ReadStream Error`, err);
+              Logger.error(`${filename} ReadStream Error`, err);
             })
             .pipe(createWriteStream(`${UPLOAD_PATH}${filename}`))
             .on('close', () => {
@@ -81,7 +81,7 @@ export class SampleResolver {
               resolve(`${filename} close`);
             })
             .on('error', err => {
-              Logger.log(`${filename} WriteStream Error`, err);
+              Logger.error(`${filename} WriteStream Error`, err);
               reject(`${filename} error`);
             });
         });
