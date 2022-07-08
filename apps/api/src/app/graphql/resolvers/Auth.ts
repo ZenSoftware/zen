@@ -98,19 +98,10 @@ export class AuthResolver {
   @Query()
   @UseGuards(GqlGuard)
   async authExchangeToken(
-    @Context() ctx: IContext,
     @GqlUser() reqUser: RequestUser,
     @Args('data') data: AuthExchangeTokenInput
   ) {
-    const user = await ctx.prisma.user.findUnique({
-      where: { id: reqUser.id },
-    });
-
-    if (user) {
-      return this.auth.getAuthSession(user, data.rememberMe);
-    } else {
-      throw new HttpException(ApiError.AuthExchangeToken.USER_NOT_FOUND, 400);
-    }
+    return this.auth.getAuthSession(reqUser, data.rememberMe);
   }
 
   @Query()
