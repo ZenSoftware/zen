@@ -137,7 +137,7 @@ export class KendoToPrismaService {
   }
 
   /**
-   * @description Data query adapter to convert Kendo grid's state into a valid Prisma query
+   * @description Data query adapter that converts a Kendo grid `State` object into a valid Prisma query
    */
   getVariables(state: State) {
     return {
