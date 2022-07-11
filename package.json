@@ -37,7 +37,7 @@
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
-    "@nestjs/throttler": "^2.0.0",
+    "@nestjs/throttler": "^3.0.0",
     "@paljs/plugins": "4.1.0",
     "@prisma/client": "~3.15.0",
     "apollo-server-core": "~3.9.0",
