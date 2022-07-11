@@ -6,7 +6,7 @@
 
 ## 🏯 Project Founder's Notes
 
-What is really nice about Nest and Angular is that their programming idioms carry over seamlessly between the two, allowing for front-end devs to contribute to the back-end. Though, there are complexities in creating the GraphQL endpoint that exposes the various CRUD operations over the Prisma data model on the back-end. If that piece of the problem could be code generated entirely, it would allow for virtually anyone to be a full stack developer. A combination between Nest + Prisma + Angular has provided for new capabilities that the industry has not really seen before. This project code generates all the boilerplate required in bridging these 3 technologies together.
+What is really nice about Nest and Angular is that their programming idioms carry over seamlessly between the two, allowing for front-end devs to contribute to the back-end. Though, there are complexities in creating the GraphQL endpoint that exposes the various CRUD operations over the Prisma data model on the back-end.  A combination between Nest + Prisma + Angular has provided for new capabilities that the industry has not really seen before. This project code generates all the boilerplate required in bridging these 3 technologies together.
 
 There is a tremendous amount of value to be gained by treating the `schema.prisma` file as the single source of truth, and then code generating everything else from that. It guarantees consistency between the front-end and back-end. It also centralizes the CRUD operations over all the Prisma models via a single import endpoint.
 
@@ -86,6 +86,13 @@ npm start
 - [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SCSS imports, and exclude the Bootstrap theme and conflicting component styles. These features are missing from Angular Material, and greatly simplify the creation of responsive, mobile first applications.
 - [x] [Bootswatch](https://bootswatch.com/) SCSS variables integrated for a large assortment of high quality color themes to choose from.
 
+---
+### Optional Tech Integrations
+
+- [x] [Electron](https://www.electronjs.org/) branch with new npm script `npm run start:electron` to launch the app within Electron.
+- [ ] Capacitor branch - planned
+- [x] [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/grid/) branch - which includes [@zen/grid](https://github.com/ZenSoftware/zen/tree/kendo/libs/grid).  `<zen-grid>` renders robust and reliable data grids, over all of the Prisma models within the project, with minimal configuration needed.
+- [x] [OpenTelemetry](https://opentelemetry.io/) branch demonstrates how to integrate and expose telemetry data for the API server.
 ---
 
 ## 🍡 Developer Operations
