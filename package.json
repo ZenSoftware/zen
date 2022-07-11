@@ -37,7 +37,7 @@
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
-    "@nestjs/throttler": "^2.0.0",
+    "@nestjs/throttler": "^3.0.0",
     "@opentelemetry/exporter-jaeger": "^1.2.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.30.0",
     "@opentelemetry/instrumentation-express": "^0.30.0",
