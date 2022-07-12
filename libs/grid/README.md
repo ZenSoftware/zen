@@ -4,7 +4,7 @@
 
 Configuration is made simple by providing GQL documents generated via `@zen/graphql` and listing them within the grid `settings`.
 
-constructor of `zen-user-grid.component.ts`
+*zen-user-grid.component.ts*
 ```ts
 this.settings = {
   typename: 'User',
@@ -15,18 +15,18 @@ this.settings = {
 };
 ```
 
-`zen-user-grid.component.html`
+*zen-user-grid.component.html*
 ```html
 <zen-grid
-      [mode]="mode"
-      [settings]="settings"
-      [selection]="selection"
-      [showAdd]="showAdd"
-      [showEdit]="showEdit"
-      [showDelete]="showDelete"
-      (add)="addHandler()" 
-      (edit)="editHandler($event)">
-    </zen-grid>
+  [mode]="mode"
+  [settings]="settings"
+  [selection]="selection"
+  [showAdd]="showAdd"
+  [showEdit]="showEdit"
+  [showDelete]="showDelete"
+  (add)="addHandler()" 
+  (edit)="editHandler($event)">
+</zen-grid>
 ```
 
 One of the best features is that the grid provides end-to-end type safety for its configuration, from the Prisma data type to the client-side type that is generated from the grid's GraphQL query.  Define the columns of the grid utilizing the property `columnsConfig` under `KendoGridSettings<T>`, where `T` is the type containing the fields on the Prisma object being selected for within the grid's GraphQL request.  Sensibly, a column can only be added if its field exists within the GraphQL query made for the grid.  For usage of `<zen-grid>`, view the `<zen-user-grid>` component as a template for a complete solution.
