@@ -9,6 +9,7 @@ export default gql`
     email: String!
     roles: [Role!]!
     googleId: String
+    googleProfile: Json
   }
 
   type Query {

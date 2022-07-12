@@ -36,11 +36,6 @@ export class UserResolver {
     return null;
   }
 
-  @ResolveField()
-  async googleId() {
-    return null;
-  }
-
   @Query()
   async findUniqueUser(@Parent() parent, @Info() info, @Args() args, @Context() ctx) {
     return resolvers.Query.findUniqueUser(parent, PrismaSelectArgs(info, args), ctx, info);
