@@ -40,6 +40,7 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
         data: {
           email: googleEmail,
           googleId: profile.id,
+          googleProfile: profile._json,
         },
       });
     }

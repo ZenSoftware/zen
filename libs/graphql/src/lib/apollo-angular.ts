@@ -15,6 +15,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: any;
+  Json: any;
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
@@ -142,6 +143,25 @@ export type IntWithAggregatesFilter = {
   lte?: InputMaybe<Scalars['Int']>;
   not?: InputMaybe<NestedIntWithAggregatesFilter>;
   notIn?: InputMaybe<Array<Scalars['Int']>>;
+};
+
+export enum JsonNullValueFilter {
+  AnyNull = 'AnyNull',
+  DbNull = 'DbNull',
+  JsonNull = 'JsonNull'
+}
+
+export type JsonNullableFilter = {
+  equals?: InputMaybe<Scalars['Json']>;
+  not?: InputMaybe<Scalars['Json']>;
+};
+
+export type JsonNullableWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntNullableFilter>;
+  _max?: InputMaybe<NestedJsonNullableFilter>;
+  _min?: InputMaybe<NestedJsonNullableFilter>;
+  equals?: InputMaybe<Scalars['Json']>;
+  not?: InputMaybe<Scalars['Json']>;
 };
 
 export type Mutation = {
@@ -292,6 +312,11 @@ export type NestedIntWithAggregatesFilter = {
   notIn?: InputMaybe<Array<Scalars['Int']>>;
 };
 
+export type NestedJsonNullableFilter = {
+  equals?: InputMaybe<Scalars['Json']>;
+  not?: InputMaybe<Scalars['Json']>;
+};
+
 export type NestedStringFilter = {
   contains?: InputMaybe<Scalars['String']>;
   endsWith?: InputMaybe<Scalars['String']>;
@@ -353,6 +378,11 @@ export type NestedStringWithAggregatesFilter = {
   notIn?: InputMaybe<Array<Scalars['String']>>;
   startsWith?: InputMaybe<Scalars['String']>;
 };
+
+export enum NullableJsonNullValueInput {
+  DbNull = 'DbNull',
+  JsonNull = 'JsonNull'
+}
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: InputMaybe<Scalars['String']>;
@@ -530,6 +560,7 @@ export type User = {
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   googleId?: Maybe<Scalars['String']>;
+  googleProfile?: Maybe<Scalars['Json']>;
   id: Scalars['Int'];
   password?: Maybe<Scalars['String']>;
   roles: Array<Role>;
@@ -551,6 +582,7 @@ export type UserCountAggregateOutputType = {
   createdAt: Scalars['Int'];
   email: Scalars['Int'];
   googleId: Scalars['Int'];
+  googleProfile: Scalars['Int'];
   id: Scalars['Int'];
   password: Scalars['Int'];
   roles: Scalars['Int'];
@@ -561,6 +593,7 @@ export type UserCountOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   googleId?: InputMaybe<SortOrder>;
+  googleProfile?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   roles?: InputMaybe<SortOrder>;
@@ -571,6 +604,7 @@ export type UserCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   googleId?: InputMaybe<Scalars['String']>;
+  googleProfile?: InputMaybe<Scalars['Json']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
   username?: InputMaybe<Scalars['String']>;
@@ -580,6 +614,7 @@ export type UserCreateManyInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   googleId?: InputMaybe<Scalars['String']>;
+  googleProfile?: InputMaybe<Scalars['Json']>;
   id?: InputMaybe<Scalars['Int']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
@@ -637,6 +672,7 @@ export type UserOrderByWithAggregationInput = {
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   googleId?: InputMaybe<SortOrder>;
+  googleProfile?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   roles?: InputMaybe<SortOrder>;
@@ -647,6 +683,7 @@ export type UserOrderByWithRelationInput = {
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   googleId?: InputMaybe<SortOrder>;
+  googleProfile?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   roles?: InputMaybe<SortOrder>;
@@ -657,6 +694,7 @@ export enum UserScalarFieldEnum {
   CreatedAt = 'createdAt',
   Email = 'email',
   GoogleId = 'googleId',
+  GoogleProfile = 'googleProfile',
   Id = 'id',
   Password = 'password',
   Roles = 'roles',
@@ -670,6 +708,7 @@ export type UserScalarWhereWithAggregatesInput = {
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
   googleId?: InputMaybe<StringNullableWithAggregatesFilter>;
+  googleProfile?: InputMaybe<JsonNullableWithAggregatesFilter>;
   id?: InputMaybe<IntWithAggregatesFilter>;
   password?: InputMaybe<StringNullableWithAggregatesFilter>;
   roles?: InputMaybe<EnumRoleNullableListFilter>;
@@ -689,6 +728,7 @@ export type UserUncheckedCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   googleId?: InputMaybe<Scalars['String']>;
+  googleProfile?: InputMaybe<Scalars['Json']>;
   id?: InputMaybe<Scalars['Int']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
@@ -699,6 +739,7 @@ export type UserUncheckedUpdateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
   googleId?: InputMaybe<Scalars['String']>;
+  googleProfile?: InputMaybe<Scalars['Json']>;
   id?: InputMaybe<Scalars['Int']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
@@ -709,6 +750,7 @@ export type UserUncheckedUpdateManyInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
   googleId?: InputMaybe<Scalars['String']>;
+  googleProfile?: InputMaybe<Scalars['Json']>;
   id?: InputMaybe<Scalars['Int']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
@@ -719,6 +761,7 @@ export type UserUpdateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
   googleId?: InputMaybe<Scalars['String']>;
+  googleProfile?: InputMaybe<Scalars['Json']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
   username?: InputMaybe<Scalars['String']>;
@@ -728,6 +771,7 @@ export type UserUpdateManyMutationInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
   googleId?: InputMaybe<Scalars['String']>;
+  googleProfile?: InputMaybe<Scalars['Json']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Role>>;
   username?: InputMaybe<Scalars['String']>;
@@ -745,6 +789,7 @@ export type UserWhereInput = {
   createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   googleId?: InputMaybe<StringNullableFilter>;
+  googleProfile?: InputMaybe<JsonNullableFilter>;
   id?: InputMaybe<IntFilter>;
   password?: InputMaybe<StringNullableFilter>;
   roles?: InputMaybe<EnumRoleNullableListFilter>;
