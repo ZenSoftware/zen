@@ -43,6 +43,8 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
           googleProfile: profile._json,
         },
       });
+    } else {
+      this.prisma.user.update({ where: { id: user.id }, data: { googleProfile: profile._json } });
     }
 
     const reqUser: RequestUser = {
