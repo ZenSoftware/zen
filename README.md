@@ -87,7 +87,7 @@ npm start
 - [x] [Bootswatch](https://bootswatch.com/) SCSS variables integrated for a large assortment of high quality color themes to choose from.
 
 ---
-### Optional Tech Integrations
+### 🎏 Optional Tech Integrations
 
 - [x] [Electron](https://www.electronjs.org/) branch with new npm script `npm run start:electron` to launch the app within Electron.
 - [ ] Capacitor branch - planned
