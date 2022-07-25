@@ -1,6 +1,6 @@
 # Zen Grid
 
-`<zen-grid>` is a component that wraps [Kendo Grid](https://www.telerik.com/kendo-angular-ui/components/grid/) and implements a data source adapter to interface with the code generated GraphQL module `@zen/graphql`.  With minimal configuration, `<zen-grid>` will render a fully featured data grid over any Prisma model within the project.  Intelligent default implementations for the varying Kendo grid features have all been implemented.  By converting the Kendo Grid state object into valid Prisma queries that will be made via the code generated GraphQL API gateway, sophisticated queries over Prisma models can be simply designed utilizing Kendo Grid's robust filter UIs.  There is heavy utilization of Apollo's InMemoryCache to only incur network requests when necessary.  Also, the grid implements an efficient, scalable, server-side pagination strategy, giving you pagination for free.  
+`<zen-grid>` is a component that wraps [Kendo Grid](https://www.telerik.com/kendo-angular-ui/components/grid/) and implements a data source adapter to interface with the code generated GraphQL module `@zen/graphql`.  With minimal configuration, `<zen-grid>` will render a fully featured data grid over any Prisma model within the project.  Intelligent default implementations for the varying Kendo grid features have all been implemented.  By converting the Kendo Grid state object into valid Prisma queries that will be made via the code generated GraphQL API gateway, sophisticated queries over Prisma models can be simply designed utilizing Kendo Grid's robust filter UIs.  The grid leverages off of heavy utilization of Apollo's InMemoryCache, and only incurs network requests when necessary.  Also, the grid implements an efficient, scalable, server-side pagination strategy, giving you pagination for free.  
 
 Configuration is made simple by providing GQL documents generated via `@zen/graphql` and listing them within the grid `settings`.
 
@@ -127,4 +127,16 @@ export class ZenUserGridComponent {
     });
   }
 }
+```
+
+### Detail Row Template
+
+To gain access to the row item for use within the master details template, utilize the `zenGridDetailTemplate` decorator that mimics [kendoGridDetailTemplate](https://www.telerik.com/kendo-angular-ui/components/grid/master-detail/detail-template/).  For usage, please view the following code. 
+
+```html
+<zen-grid [settings]="settings">
+  <ng-template zenGridDetailTemplate let-dataItem [zenGridDetailTemplateShowIf]="showDetails">
+    id: {{dataItem.id}}
+  </ng-template>
+</zen-grid>
 ```
