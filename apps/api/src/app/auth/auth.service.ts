@@ -12,6 +12,7 @@ export class AuthService {
 
   getAuthSession(user: RequestUser, rememberMe = false): AuthSession {
     const jwtPayload: JwtPayload = {
+      aud: this.config.siteUrl,
       sub: user.id,
       roles: user.roles,
     };
