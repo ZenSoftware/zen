@@ -30,7 +30,7 @@ export class MailService {
   }
   //--------------------------------------------------------------------------
   sendPasswordReset(user: User) {
-    const token = this.jwtService.sign({ sub: user.id }, { expiresIn: '1d' });
+    const token = this.jwtService.sign({ sub: user.id, aud: user.email }, { expiresIn: '1d' });
 
     const context: PasswordResetContext = {
       siteUrl: this.config.siteUrl,
