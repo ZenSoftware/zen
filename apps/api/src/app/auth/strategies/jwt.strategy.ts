@@ -10,7 +10,7 @@ import { RequestUser } from '../models/request-user';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor(readonly config: ConfigService) {
+  constructor(private readonly config: ConfigService) {
     super({
       secretOrKey: config.jwtOptions.publicKey
         ? config.jwtOptions.publicKey
@@ -31,6 +31,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: JwtPayload) {
+    if (payload.aud !== this.config.siteUrl) return null;
+
     const user: RequestUser = {
       id: payload.sub,
       roles: payload.roles,
