@@ -60,10 +60,8 @@ export class StyleService {
 
   private getStyleRule(selectorText: string) {
     if (!this.cssStyleSheet) return;
-    const rules: CSSRuleList =
-      this.cssStyleSheet.cssRules.length > 0 || this.cssStyleSheet.rules.length === 0
-        ? this.cssStyleSheet.cssRules
-        : this.cssStyleSheet.rules;
+    const rules: CSSRuleList = this.cssStyleSheet.cssRules;
+
     let rule: CSSStyleRule = Array.from(rules).find(
       r => r instanceof CSSStyleRule && r.selectorText.toLowerCase() === selectorText.toLowerCase()
     ) as CSSStyleRule;
