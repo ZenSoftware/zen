@@ -33,10 +33,10 @@ export class AuthService {
     return {
       id: user.id,
       roles: user.roles,
+      ability: ability.rules,
       token,
       rememberMe,
       expiresIn,
-      ability: ability.rules,
     };
   }
 }
