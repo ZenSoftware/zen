@@ -2,6 +2,7 @@
 
 /.env
 debug.log
+/android
 
 # documentation
 /documentation
