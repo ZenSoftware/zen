@@ -49,11 +49,6 @@ const CONFIG = {
     clientFieldsPath: 'libs/graphql/src/lib/fields',
     doNotUseFieldUpdateOperationsInput: true, // Refer to https://paljs.com/plugins/sdl-inputs/
   },
-
-  handlebars: {
-    src: 'apps/api/src/app/mail/templates/**/*.hbs',
-    destApi: 'dist/apps/api/mail/templates',
-  },
 };
 
 //=============================================================================
@@ -250,19 +245,6 @@ export class Gulpfile {
     await this.createApolloAngularPrismaFile(prismaNames);
 
     cb();
-  }
-  //---------------------------------------------------------------------------
-  @Task('handlebars:copy')
-  handlebarsCopy() {
-    return gulp
-      .src(CONFIG.handlebars.src)
-      .pipe(flatten())
-      .pipe(gulp.dest(CONFIG.handlebars.destApi));
-  }
-
-  @Task('handlebars:watch')
-  handlebarsWatch() {
-    gulp.watch(CONFIG.handlebars.src, gulp.parallel('handlebars:copy'));
   }
   //---------------------------------------------------------------------------
   private execGlobal(command: string) {
