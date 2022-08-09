@@ -91,7 +91,7 @@ npm start
 
 - [x] [Electron](https://www.electronjs.org/) branch with new npm script `npm run start:electron` to launch the app within Electron.
 - [ ] [Capacitor](https://capacitorjs.com/) branch - planned
-- [x] [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/grid/) branch - which includes [@zen/grid](https://github.com/ZenSoftware/zen/tree/kendo/libs/grid).  `<zen-grid>` renders robust and reliable data grids, over all of the Prisma models within the project, with minimal configuration needed.
+- [x] [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/grid/) branch - which includes [@zen/grid](https://github.com/ZenSoftware/zen/tree/kendo/libs/grid).  `<zen-grid>` renders robust and reliable data grids over all of the Prisma models within the project, with minimal configuration needed.
 - [x] [OpenTelemetry](https://opentelemetry.io/) branch demonstrates how to integrate and expose telemetry data for the API server.
 ---
 
@@ -104,5 +104,5 @@ npm start
 - [x] Example [Kubernetes](https://kubernetes.io/) deployment scripts.
 - [x] Enforced code formatting via [Prettier](https://prettier.io/) & [import-sort](https://www.npmjs.com/package/prettier-plugin-import-sort), guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.
 - [x] [Commitizen](https://github.com/commitizen/cz-cli) for standardizing git commits.
-- [x] [@nestjs-modules/mailer](hhttps://github.com/nest-modules/mailer) for automated emailing, and pre-configured [Handlebars e-mail templates](https://handlebarsjs.com/guide/#what-is-handlebars) for the various web portal's emailing needs. Handlebars has similar double bracket `{{contextField}}` template interpolation, akin to Angular templates. Custom HTML e-mail triggers within Nest are made very simple by simply passing a `JSON context` and the template's `file name` as parameters to the class injectable `MailService`.
+- [x] [@nestjs-modules/mailer](https://github.com/nest-modules/mailer) for automated emailing, and pre-configured [Handlebars e-mail templates](https://handlebarsjs.com/guide/#what-is-handlebars) for the various web portal's emailing needs. Handlebars has similar double bracket `{{contextField}}` template interpolation, akin to Angular templates. Custom HTML e-mail triggers within Nest are made very simple by simply passing a `JSON context` and the template's `file name` as parameters to the class injectable `MailService`.
 - [x] [Compodoc](https://compodoc.app/) to generate Nest & Angular documentation.
