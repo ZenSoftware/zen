@@ -1,3 +1,4 @@
+import { subject } from '@casl/ability';
 import { ExecutionContext, Injectable, Logger, mixin } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
@@ -23,13 +24,15 @@ export function GqlCaslGuard(...actions: Array<keyof typeof Action>) {
 
       const classSubject = this.reflector.get<string>(SUBJECT_KEY, ctx.getClass());
       const handlerSubject = this.reflector.get<string>(SUBJECT_KEY, ctx.getHandler());
-      const subject = handlerSubject ? handlerSubject : classSubject;
+      const subjectName = handlerSubject ? handlerSubject : classSubject;
 
       const ability = this.caslAbilityFactory.createAbility(user);
 
+      const args = ctx.getArgs();
+
       for (const action of actions) {
-        const allowed = ability.can(action, subject as any);
-        Logger.log(`user: ${user.id} - ${action} ${subject} ${allowed}`);
+        const allowed = ability.can(action, subject(subjectName, args?.where));
+        // Logger.log(`user: ${user.id} - ${action} ${subjectName} ${allowed}`);
         if (!allowed) return false;
       }
 

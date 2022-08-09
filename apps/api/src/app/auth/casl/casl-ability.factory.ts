@@ -32,10 +32,8 @@ export class CaslAbilityFactory {
     if (user.roles.includes('Super')) {
       can(Action.manage, 'all'); // read-write access to everything
     } else {
-      // can(Action.read, 'Sample');
+      can(Action.read, 'User', { id: user.id });
     }
-
-    can(Action.delete, 'User', { roles: { has: 'Super' } });
 
     return build();
   }
