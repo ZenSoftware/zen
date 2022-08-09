@@ -5,8 +5,6 @@ import * as path from 'path';
 import { promisify } from 'util';
 
 import * as del from 'del';
-import * as gulp from 'gulp';
-import * as flatten from 'gulp-flatten';
 import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 
 const clientQueriesTemplate = require(path.join(

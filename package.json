@@ -122,7 +122,6 @@
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
     "gulp": "^4.0.2",
-    "gulp-flatten": "^0.4.0",
     "gulpclass": "^0.2.0",
     "import-sort-style-module": "^6.0.0",
     "jest": "27.5.1",
