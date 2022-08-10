@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from '@zen/auth';
+import { Ability } from '@casl/ability';
 import {
   DeleteOneUserGQL,
   FindManyUserCountGQL,
@@ -57,18 +57,19 @@ export class ZenUserGridComponent {
 
   constructor(
     private dialog: MatDialog,
-    auth: AuthService,
     findManyUserGQL: FindManyUserGQL,
     findManyUserCountGQL: FindManyUserCountGQL,
-    deleteOneUserGQL: DeleteOneUserGQL
+    deleteOneUserGQL: DeleteOneUserGQL,
+    ability: Ability
   ) {
-    const isSuper = auth.userHasRole(Role.Super);
-    this.showAdd = isSuper;
-    this.showEdit = isSuper;
-    this.showDelete = isSuper;
+    const typename = 'User';
+
+    this.showAdd = ability.can('create', typename);
+    this.showEdit = ability.can('update', typename);
+    this.showDelete = ability.can('delete', typename);
 
     this.settings = {
-      typename: 'User',
+      typename,
       findManyGQL: findManyUserGQL,
       findManyCountGQL: findManyUserCountGQL,
       deleteOneGQL: deleteOneUserGQL,
