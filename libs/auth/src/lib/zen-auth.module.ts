@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AbilityModule } from '@casl/angular';
 import { ZenComponentsModule } from '@zen/components';
 
 import {
@@ -16,6 +17,7 @@ import {
   RolesDirective,
 } from './directives';
 import { ZenAuthRoutingModule } from './zen-auth-routing.module';
+import { ZenLoginConfirmedComponent } from './zen-login-confirmed/zen-login-confirmed.component';
 import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
@@ -53,6 +55,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     RolesDirective,
 
     ZenLoginComponent,
+    ZenLoginConfirmedComponent,
     ZenLoginFormComponent,
     ZenLoginLinkComponent,
     ZenLoginPageComponent,
@@ -70,12 +73,14 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     ZenRegisterPageComponent,
   ],
   exports: [
+    AbilityModule,
     IfLoggedInDirective,
     IfPublicRegistrationDirective,
     NotRolesDirective,
     RolesDirective,
 
     ZenLoginComponent,
+    ZenLoginConfirmedComponent,
     ZenLoginFormComponent,
     ZenLoginLinkComponent,
     ZenLogoComponent,

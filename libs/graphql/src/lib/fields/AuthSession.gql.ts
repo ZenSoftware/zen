@@ -7,5 +7,6 @@ export const AuthSessionFields = gql`
     rememberMe
     roles
     expiresIn
+    ability
   }
 `;

@@ -28,6 +28,8 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
+    "@casl/ability": "^6.0.0",
+    "@casl/prisma": "^1.0.4",
     "@graphql-tools/schema": "^8.3.1",
     "@nestjs-modules/mailer": "^1.8.1",
     "@nestjs/apollo": "^10.0.4",
@@ -82,6 +84,7 @@
     "@angular/platform-browser-dynamic": "14.1.1",
     "@angular/router": "14.1.1",
     "@apollo/client": "^3.2.0",
+    "@casl/angular": "^7.0.1",
     "@graphql-codegen/cli": "^2.3.0",
     "@graphql-codegen/fragment-matcher": "^3.2.0",
     "@graphql-codegen/typescript": "^2.4.0",
@@ -124,7 +127,6 @@
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
     "gulp": "^4.0.2",
-    "gulp-flatten": "^0.4.0",
     "gulpclass": "^0.2.0",
     "import-sort-style-module": "^6.0.0",
     "jest": "27.5.1",
@@ -143,6 +145,9 @@
   },
   "overrides": {
     "apollo-angular": {
+      "@angular/core": "$@angular/core"
+    },
+    "@casl/angular": {
       "@angular/core": "$@angular/core"
     }
   },

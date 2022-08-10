@@ -6,7 +6,7 @@ type RoleType = string[] | Role[] | undefined;
 /**
  * Imitates RBAC rules for [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-6.0).
  */
-export function authLogic(
+export function rbacLogic(
   userRoles: RoleType,
   classRoles: RoleType,
   handlerRoles: RoleType
