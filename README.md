@@ -73,8 +73,7 @@ npm start
 - [x] `Forgot password component` and full password reset flow.
 - [x] `Password change component` for user dashboards.
 - [x] `Angular route guards` and `Angular directives` to show/hide content depending on user's roles.
-- [x] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
-- [x] 100% stateless web server authentication via [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality). Keeping the API stateless enables horizontal scaling of container replicas in production.
+- [x] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for both RBAC & ABAC authorization schemes.  ABAC is the default authorization scheme and is implemented with [@casl/prisma](https://casl.js.org/v6/en/package/casl-prisma) & [@casl/angular](https://casl.js.org/v6/en/package/casl-angular).  All `@casl/prisma` subjects are code generated for you.  The user's Casl rules are sent from the server to the client and updates the `@casl/angular` ability.  This unifies the permissions across both the server and the client, fully exploiting Casl's isomorphic capabilities.
 
 ---
 
