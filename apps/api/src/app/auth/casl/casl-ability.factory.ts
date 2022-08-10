@@ -1,9 +1,9 @@
 import { AbilityBuilder, AbilityClass } from '@casl/ability';
-import { PrismaAbility, Subjects } from '@casl/prisma';
+import { PrismaAbility } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { User } from '@prisma/client';
 
 import { RequestUser } from '../models/request-user';
+import { ZenAbility } from './generated';
 
 export enum Action {
   manage = 'manage',
@@ -13,16 +13,7 @@ export enum Action {
   delete = 'delete',
 }
 
-type AppAbility = PrismaAbility<
-  [
-    string,
-    Subjects<{
-      User: User;
-    }>
-  ]
->;
-
-const APP_ABILITY = PrismaAbility as AbilityClass<AppAbility>;
+const APP_ABILITY = PrismaAbility as AbilityClass<ZenAbility>;
 
 @Injectable()
 export class CaslAbilityFactory {

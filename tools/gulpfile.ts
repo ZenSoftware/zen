@@ -32,6 +32,7 @@ const nestMutationTemplate = require(path.join(
   __dirname,
   'tools/graphql-codegen/nest-mutation.temp.js'
 ));
+const nestCaslTemplate = require(path.join(__dirname, 'tools/graphql-codegen/nest-casl.temp.js'));
 
 const paljsConfig = require(path.join(__dirname, 'pal.js'));
 
@@ -53,6 +54,8 @@ const CONFIG = {
     clientFieldsPath: 'libs/graphql/src/lib/fields',
     doNotUseFieldUpdateOperationsInput: true, // Refer to https://paljs.com/plugins/sdl-inputs/
   },
+
+  caslPath: 'apps/api/src/app/auth/casl/generated.ts',
 };
 
 @Gulpclass()
@@ -175,6 +178,10 @@ export class Gulpfile {
 
     let wroteCount = 0;
     if (CONFIG.gql.authScheme === 'ABAC') {
+      // Generate Casl Subject types
+      await writeFile(CONFIG.caslPath, nestCaslTemplate(prismaNames));
+      console.log(`- Wrote: ${CONFIG.caslPath}`);
+
       wroteCount = await this.nestAbacResolvers(prismaNames);
     } else if (CONFIG.gql.authScheme === 'RBAC') {
       wroteCount = await this.nestRbacResolvers(prismaNames, PALJS_PATH);
