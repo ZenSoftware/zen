@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { PublicRegistrationGuard } from './guards';
-import { LoginConfirmedGuard } from './guards/login-confirmed.guard';
 import { LoginPageGuard } from './guards/login-page.guard';
+import { ZenLoginConfirmedComponent } from './zen-login-confirmed/zen-login-confirmed.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 import { ZenPasswordResetConfirmationPageComponent } from './zen-password-reset-confirmation-page/zen-password-reset-confirmation-page.component';
 import { ZenPasswordResetRequestPageComponent } from './zen-password-reset-request-page/zen-password-reset-request-page.component';
@@ -17,8 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'login-confirmed',
-    children: [],
-    canActivate: [LoginConfirmedGuard],
+    component: ZenLoginConfirmedComponent,
   },
   {
     path: 'register',

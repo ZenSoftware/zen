@@ -6,6 +6,7 @@ import { JwtModule } from '../jwt';
 import { PrismaModule } from '../prisma';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { CaslAbilityFactory } from './casl/casl-ability.factory';
 import { GoogleOAuthStrategy } from './strategies/google-oauth.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
@@ -14,8 +15,8 @@ if (environment.oauth?.google?.clientID) oauthProviders.push(GoogleOAuthStrategy
 
 @Module({
   imports: [JwtModule, PrismaModule, PassportModule.register({ defaultStrategy: 'jwt' })],
-  providers: [JwtStrategy, AuthService, ...oauthProviders],
-  exports: [JwtModule, PassportModule, AuthService],
+  providers: [JwtStrategy, AuthService, CaslAbilityFactory, ...oauthProviders],
+  exports: [JwtModule, PassportModule, CaslAbilityFactory, AuthService],
   controllers: [AuthController],
 })
 export class ZenAuthModule {}

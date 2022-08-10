@@ -73,8 +73,7 @@ npm start
 - [x] `Forgot password component` and full password reset flow.
 - [x] `Password change component` for user dashboards.
 - [x] `Angular route guards` and `Angular directives` to show/hide content depending on user's roles.
-- [x] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for server side [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control?oldformat=true) to allow for declarative, fine grained security control over all GraphQL queries and mutations.
-- [x] 100% stateless web server authentication via [JWT (Javascript Web Tokens)](https://docs.nestjs.com/techniques/authentication#jwt-functionality). Keeping the API stateless enables horizontal scaling of container replicas in production.
+- [x] [Nest authorization directives](https://docs.nestjs.com/techniques/authentication#extending-guards) for both RBAC & ABAC authorization schemes.  ABAC is the default authorization scheme and is implemented with [@casl/prisma](https://casl.js.org/v6/en/package/casl-prisma) & [@casl/angular](https://casl.js.org/v6/en/package/casl-angular).  All `@casl/prisma` subjects are code generated for you.  The user's Casl rules are sent from the server to the client and updates the `@casl/angular` ability.  This unifies the permissions across both the server and the client, fully exploiting Casl's isomorphic capabilities.
 
 ---
 
@@ -91,7 +90,7 @@ npm start
 
 - [x] [Electron](https://www.electronjs.org/) branch with new npm script `npm run start:electron` to launch the app within Electron.
 - [ ] [Capacitor](https://capacitorjs.com/) branch - planned
-- [x] [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/grid/) branch - which includes [@zen/grid](https://github.com/ZenSoftware/zen/tree/kendo/libs/grid).  `<zen-grid>` renders robust and reliable data grids, over all of the Prisma models within the project, with minimal configuration needed.
+- [x] [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/grid/) branch - which includes [@zen/grid](https://github.com/ZenSoftware/zen/tree/kendo/libs/grid).  `<zen-grid>` renders robust and reliable data grids over all of the Prisma models within the project, with minimal configuration needed.
 - [x] [OpenTelemetry](https://opentelemetry.io/) branch demonstrates how to integrate and expose telemetry data for the API server.
 ---
 
@@ -104,5 +103,5 @@ npm start
 - [x] Example [Kubernetes](https://kubernetes.io/) deployment scripts.
 - [x] Enforced code formatting via [Prettier](https://prettier.io/) & [import-sort](https://www.npmjs.com/package/prettier-plugin-import-sort), guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.
 - [x] [Commitizen](https://github.com/commitizen/cz-cli) for standardizing git commits.
-- [x] [@nestjs-modules/mailer](hhttps://github.com/nest-modules/mailer) for automated emailing, and pre-configured [Handlebars e-mail templates](https://handlebarsjs.com/guide/#what-is-handlebars) for the various web portal's emailing needs. Handlebars has similar double bracket `{{contextField}}` template interpolation, akin to Angular templates. Custom HTML e-mail triggers within Nest are made very simple by simply passing a `JSON context` and the template's `file name` as parameters to the class injectable `MailService`.
+- [x] [@nestjs-modules/mailer](https://github.com/nest-modules/mailer) for automated emailing, and pre-configured [Handlebars e-mail templates](https://handlebarsjs.com/guide/#what-is-handlebars) for the various web portal's emailing needs. Handlebars has similar double bracket `{{contextField}}` template interpolation, akin to Angular templates. Custom HTML e-mail triggers within Nest are made very simple by simply passing a `JSON context` and the template's `file name` as parameters to the class injectable `MailService`.
 - [x] [Compodoc](https://compodoc.app/) to generate Nest & Angular documentation.

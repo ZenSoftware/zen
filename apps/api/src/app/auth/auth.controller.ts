@@ -29,8 +29,8 @@ export class AuthController {
 
   getLoginConfirmedURL(user: RequestUser) {
     const authSession = this.auth.getAuthSession(user, true);
-    authSession.token = encodeURIComponent(authSession.token);
-    const queryParams = new URLSearchParams(Object.entries(authSession));
+    const token = encodeURIComponent(authSession.token);
+    const queryParams = new URLSearchParams({ token });
     return this.config.oauth.loginConfirmedURL + '?' + queryParams;
   }
 }
