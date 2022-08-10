@@ -16,6 +16,7 @@ import {
   RolesDirective,
 } from './directives';
 import { ZenAuthRoutingModule } from './zen-auth-routing.module';
+import { ZenLoginConfirmedComponent } from './zen-login-confirmed/zen-login-confirmed.component';
 import { ZenLoginFormComponent } from './zen-login-form/zen-login-form.component';
 import { ZenLoginLinkComponent } from './zen-login-link/zen-login-link.component';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
@@ -53,6 +54,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     RolesDirective,
 
     ZenLoginComponent,
+    ZenLoginConfirmedComponent,
     ZenLoginFormComponent,
     ZenLoginLinkComponent,
     ZenLoginPageComponent,
@@ -76,6 +78,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     RolesDirective,
 
     ZenLoginComponent,
+    ZenLoginConfirmedComponent,
     ZenLoginFormComponent,
     ZenLoginLinkComponent,
     ZenLogoComponent,
