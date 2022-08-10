@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable, Logger, mixin } from '@nestjs/common';
+import { ExecutionContext, Injectable, mixin } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -39,8 +39,7 @@ export function HttpCaslGuard(...actions: Array<keyof typeof Action>) {
       const ability = this.caslAbilityFactory.createAbility(user);
 
       for (const action of actions) {
-        const allowed = ability.can(action, subjectName);
-        Logger.log(`HttpCaslGuard user: ${user.id} - ${action} ${subjectName} ${allowed}`);
+        const allowed = ability.can(action, subjectName as any);
         if (!allowed) return false;
       }
 
