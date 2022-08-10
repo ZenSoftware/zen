@@ -12,9 +12,13 @@ describe('auth-logic', () => {
 
     // Class check
     expect(() => authLogic([], ['Admin'], [])).toThrow(UnauthorizedException);
+    expect(() => authLogic(null, ['Admin'], [])).toThrow(UnauthorizedException);
+    expect(() => authLogic(undefined, ['Admin'], [])).toThrow(UnauthorizedException);
 
     // Handler check
     expect(() => authLogic([], [], ['Admin'])).toThrow(UnauthorizedException);
+    expect(() => authLogic(null, [], ['Admin'])).toThrow(UnauthorizedException);
+    expect(() => authLogic(undefined, [], ['Admin'])).toThrow(UnauthorizedException);
 
     // Class "or" check
     expect(authLogic(['Editor'], ['Admin', 'Editor'], [])).toEqual(true);
