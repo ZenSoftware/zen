@@ -18,7 +18,6 @@ type AppAbility = PrismaAbility<
     string,
     Subjects<{
       User: User;
-      Tools: any;
     }>
   ]
 >;
@@ -33,6 +32,7 @@ export class CaslAbilityFactory {
     if (user.roles.includes('Super')) {
       can(Action.manage, 'all'); // read-write access to everything
     } else {
+      // Customize user permissions here
       can(Action.read, 'User', { id: user.id });
     }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Ability } from '@casl/ability';
 import { Environment } from '@zen/common';
 import {
   ApiError,
@@ -41,6 +42,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private apollo: Apollo,
+    private ability: Ability,
     private authLoginGQL: AuthLoginGQL,
     private authExchangeTokenGQL: AuthExchangeTokenGQL,
     private env: Environment
@@ -53,8 +55,8 @@ export class AuthService {
         loggedInVar(true);
         this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
 
-        const rawAbility = ls.get(LocalStorageKey.ability, { decrypt: true });
-        /** @todo update ability */
+        const rules: any = ls.get(LocalStorageKey.ability, { decrypt: true });
+        if (rules) this.ability.update(rules);
 
         if (this.sessionTimeRemaining <= env.jwtExchangeInterval) {
           this.exchangeToken();
@@ -103,6 +105,8 @@ export class AuthService {
     ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
     ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
     ls.set(LocalStorageKey.ability, authSession.ability, { encrypt: true });
+
+    this.ability.update(authSession.ability);
 
     tokenVar(authSession.token);
 

@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AbilityModule } from '@casl/angular';
 import { ZenComponentsModule } from '@zen/components';
 
 import {
@@ -72,6 +73,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
     ZenRegisterPageComponent,
   ],
   exports: [
+    AbilityModule,
     IfLoggedInDirective,
     IfPublicRegistrationDirective,
     NotRolesDirective,
