@@ -6,7 +6,7 @@ import { Role } from '@prisma/client';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { ROLES_KEY } from '../decorators/roles.decorator';
-import { authLogic } from './auth-logic';
+import { rbacLogic } from './rbac-logic';
 
 @Injectable()
 /**
@@ -41,7 +41,7 @@ export class GqlGuard extends AuthGuard('jwt') {
     const classRoles = this.reflector.get<Role[]>(ROLES_KEY, ctx.getClass());
     const handlerRoles = this.reflector.get<Role[]>(ROLES_KEY, ctx.getHandler());
 
-    return authLogic(user.roles, classRoles, handlerRoles);
+    return rbacLogic(user.roles, classRoles, handlerRoles);
   }
 
   getRequest(context: ExecutionContext) {
