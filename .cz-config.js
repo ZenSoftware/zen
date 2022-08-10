@@ -36,7 +36,7 @@ module.exports = {
     { name: 'k8s' },
     { name: 'electron' },
     { name: 'capacitor' },
-    { name: 'grid' },
+    { name: 'casl' },
   ],
   allowCustomScopes: true,
   skipQuestions: ['body', 'footer'],

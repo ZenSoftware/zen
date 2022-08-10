@@ -5,6 +5,8 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { Ability, PureAbility } from '@casl/ability';
+import { AbilityModule } from '@casl/angular';
 import { AuthInterceptor, ZenAuthModule, tokenVar } from '@zen/auth';
 import { Environment } from '@zen/common';
 import { ZenGraphQLModule } from '@zen/graphql';
@@ -18,6 +20,7 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    AbilityModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -57,6 +60,8 @@ import { AppComponent } from './app.component';
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: Environment, useValue: environment },
+    { provide: Ability, useValue: new Ability() },
+    { provide: PureAbility, useExisting: Ability },
   ],
   bootstrap: [AppComponent],
 })

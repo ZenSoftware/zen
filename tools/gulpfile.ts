@@ -5,8 +5,6 @@ import * as path from 'path';
 import { promisify } from 'util';
 
 import * as del from 'del';
-import * as gulp from 'gulp';
-import * as flatten from 'gulp-flatten';
 import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 
 const clientQueriesTemplate = require(path.join(
@@ -17,9 +15,13 @@ const clientFieldsTemplate = require(path.join(
   __dirname,
   'tools/graphql-codegen/client-fields.temp.js'
 ));
-const nestResolversTemplate = require(path.join(
+const nestResolversRBAC = require(path.join(
   __dirname,
-  'tools/graphql-codegen/nest-resolvers.temp.js'
+  'tools/graphql-codegen/nest-resolvers-rbac.temp.js'
+));
+const nestResolversABAC = require(path.join(
+  __dirname,
+  'tools/graphql-codegen/nest-resolvers-abac.temp.js'
 ));
 const nestResolversIndexTemplate = require(path.join(
   __dirname,
@@ -30,32 +32,32 @@ const nestMutationTemplate = require(path.join(
   __dirname,
   'tools/graphql-codegen/nest-mutation.temp.js'
 ));
+const nestCaslTemplate = require(path.join(__dirname, 'tools/graphql-codegen/nest-casl.temp.js'));
 
 const paljsConfig = require(path.join(__dirname, 'pal.js'));
 
 const execAsync = promisify(exec);
 
+type AuthScheme = 'ABAC' | 'RBAC';
+
 //=============================================================================
 /**
  * Configuration
  **/
-//=============================================================================
 const CONFIG = {
   cleanGlobs: ['dist/apps/'],
 
   gql: {
+    authScheme: <AuthScheme>'ABAC',
     apiPath: 'apps/api/src/app/graphql',
     clientPrismaPath: 'libs/graphql/src/lib/prisma',
     clientFieldsPath: 'libs/graphql/src/lib/fields',
     doNotUseFieldUpdateOperationsInput: true, // Refer to https://paljs.com/plugins/sdl-inputs/
   },
+
+  caslPath: 'apps/api/src/app/auth/casl/generated.ts',
 };
 
-//=============================================================================
-/**
- * Gulp
- **/
-//=============================================================================
 @Gulpclass()
 export class Gulpfile {
   //---------------------------------------------------------------------------
@@ -174,6 +176,52 @@ export class Gulpfile {
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
     prismaNames = prismaNames.sort();
 
+    let wroteCount = 0;
+    if (CONFIG.gql.authScheme === 'ABAC') {
+      // Generate Casl Subject types
+      await writeFile(CONFIG.caslPath, nestCaslTemplate(prismaNames));
+      console.log(`- Wrote: ${CONFIG.caslPath}`);
+
+      wroteCount = await this.nestAbacResolvers(prismaNames);
+    } else if (CONFIG.gql.authScheme === 'RBAC') {
+      wroteCount = await this.nestRbacResolvers(prismaNames, PALJS_PATH);
+    }
+
+    console.log(`* Total resolver files wrote: ${wroteCount}`);
+
+    // Get the data type names via the filename of the "resolvers" directory
+    let dataTypeNames = (await readdir(RESOLVERS_PATH))
+      .filter(f => path.basename(f) !== 'index.ts')
+      .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
+
+    const indexPath = `${RESOLVERS_PATH}/index.ts`;
+    await writeFile(indexPath, nestResolversIndexTemplate(dataTypeNames));
+    console.log(`- Wrote: ${indexPath}\n`);
+
+    await this.execLocal(`prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"\n`);
+
+    await this.createApolloAngularPrismaFile(prismaNames);
+
+    cb();
+  }
+  //---------------------------------------------------------------------------
+  async nestAbacResolvers(prismaNames: string[]) {
+    let wroteCount = 0;
+    for (const prismaName of prismaNames) {
+      const outPath = path.join(__dirname, CONFIG.gql.apiPath, 'resolvers', `${prismaName}.ts`);
+
+      // Guard to prevent the overwriting of existing files
+      if (!fs.existsSync(outPath)) {
+        await writeFile(outPath, nestResolversABAC(prismaName));
+        console.log(`- Wrote: ${outPath}`);
+        wroteCount++;
+      }
+    }
+
+    return wroteCount;
+  }
+  //---------------------------------------------------------------------------
+  async nestRbacResolvers(prismaNames: string[], PALJS_PATH: string) {
     const QUERY_TOKEN = 'Query: {';
     const MUTATION_TOKEN = 'Mutation: {';
     const regExpHasResolverName = new RegExp(/^[\s]*[a-zA-Z0-9_]+\:/);
@@ -215,7 +263,6 @@ export class Gulpfile {
             mutationNames.push(line.substring(0, line.indexOf(':')).trim());
           }
         }
-        console.log('MUTATION NAMES', mutationNames);
 
         let mutationSource = '';
         for (const mutationName of mutationNames) {
@@ -223,28 +270,13 @@ export class Gulpfile {
         }
         mutationSource = mutationSource.trimEnd();
 
-        await writeFile(outPath, nestResolversTemplate(prismaName, querySource, mutationSource));
+        await writeFile(outPath, nestResolversRBAC(prismaName, querySource, mutationSource));
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }
+
+      return wroteCount;
     }
-
-    console.log(`* Total resolver files wrote: ${wroteCount}`);
-
-    // Get the data type names via the filename of the "resolvers" directory
-    let dataTypeNames = (await readdir(RESOLVERS_PATH))
-      .filter(f => path.basename(f) !== 'index.ts')
-      .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
-
-    const indexPath = `${RESOLVERS_PATH}/index.ts`;
-    await writeFile(indexPath, nestResolversIndexTemplate(dataTypeNames));
-    console.log(`- Wrote: ${indexPath}\n`);
-
-    await this.execLocal(`prettier --loglevel warn --write "${CONFIG.gql.apiPath}/**/*.ts"\n`);
-
-    await this.createApolloAngularPrismaFile(prismaNames);
-
-    cb();
   }
   //---------------------------------------------------------------------------
   private execGlobal(command: string) {
