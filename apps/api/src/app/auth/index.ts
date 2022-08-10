@@ -9,6 +9,7 @@ export * from './auth.service';
 export * from './casl/casl-ability.factory';
 export * from './casl/casl-subject.decorator';
 export * from './casl/gql-casl.guard';
+export * from './casl/http-casl.guard';
 export * from './decorators/gql-user.decorator';
 export * from './decorators/http-user.decorator';
 export * from './guards/gql-throttle.guard';

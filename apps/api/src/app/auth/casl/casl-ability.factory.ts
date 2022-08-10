@@ -18,6 +18,7 @@ type AppAbility = PrismaAbility<
     string,
     Subjects<{
       User: User;
+      Tools: any;
     }>
   ]
 >;
