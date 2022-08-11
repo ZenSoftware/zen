@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Role, RolesGuard } from '@zen/auth';
+import { CaslGuard, Role, RolesGuard } from '@zen/auth';
 
 import { ZenChatComponent } from './zen-chat';
 import { ZenDashboardComponent } from './zen-dashboard/zen-dashboard.component';
@@ -26,7 +26,8 @@ const routes: Routes = [
       },
       {
         path: 'super',
-        canLoad: [RolesGuard.for(Role.Super)],
+        canLoad: [CaslGuard.can('manage', 'all')],
+        // canLoad: [RolesGuard.has(Role.Super)],
         loadChildren: () => import('./zen-super/zen-super.module').then(m => m.ZenSuperModule),
       },
     ],
