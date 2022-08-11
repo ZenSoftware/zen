@@ -919,12 +919,13 @@ export type UpdateOneUserVariables = Exact<{
 
 export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: number, username?: string | null, email: string, createdAt: any, roles: Array<Role> } };
 
-export type DeleteOneUserVariables = Exact<{
-  where: UserWhereUniqueInput;
+export type UpdateManyUserVariables = Exact<{
+  data: UserUpdateManyMutationInput;
+  where?: InputMaybe<UserWhereInput>;
 }>;
 
 
-export type DeleteOneUser = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: number } | null };
+export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typename?: 'BatchPayload', count: number } | null };
 
 export type UpsertOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -935,20 +936,19 @@ export type UpsertOneUserVariables = Exact<{
 
 export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username?: string | null, email: string, createdAt: any, roles: Array<Role> } | null };
 
+export type DeleteOneUserVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type DeleteOneUser = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: number } | null };
+
 export type DeleteManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
 }>;
 
 
 export type DeleteManyUser = { __typename?: 'Mutation', deleteManyUser?: { __typename?: 'BatchPayload', count: number } | null };
-
-export type UpdateManyUserVariables = Exact<{
-  data: UserUpdateManyMutationInput;
-  where?: InputMaybe<UserWhereInput>;
-}>;
-
-
-export type UpdateManyUser = { __typename?: 'Mutation', updateManyUser?: { __typename?: 'BatchPayload', count: number } | null };
 
 export type SampleSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -1244,10 +1244,10 @@ export const UpdateOneUserDocument = /*#__PURE__*/ gql`
       super(apollo);
     }
   }
-export const DeleteOneUserDocument = /*#__PURE__*/ gql`
-    mutation DeleteOneUser($where: UserWhereUniqueInput!) {
-  deleteOneUser(where: $where) {
-    id
+export const UpdateManyUserDocument = /*#__PURE__*/ gql`
+    mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
+  updateManyUser(data: $data, where: $where) {
+    count
   }
 }
     `;
@@ -1255,8 +1255,8 @@ export const DeleteOneUserDocument = /*#__PURE__*/ gql`
   @Injectable({
     providedIn: ZenGraphQLModule
   })
-  export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
-    override document = DeleteOneUserDocument;
+  export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
+    override document = UpdateManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -1280,6 +1280,24 @@ export const UpsertOneUserDocument = /*#__PURE__*/ gql`
       super(apollo);
     }
   }
+export const DeleteOneUserDocument = /*#__PURE__*/ gql`
+    mutation DeleteOneUser($where: UserWhereUniqueInput!) {
+  deleteOneUser(where: $where) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class DeleteOneUserGQL extends Apollo.Mutation<DeleteOneUser, DeleteOneUserVariables> {
+    override document = DeleteOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const DeleteManyUserDocument = /*#__PURE__*/ gql`
     mutation DeleteManyUser($where: UserWhereInput) {
   deleteManyUser(where: $where) {
@@ -1293,24 +1311,6 @@ export const DeleteManyUserDocument = /*#__PURE__*/ gql`
   })
   export class DeleteManyUserGQL extends Apollo.Mutation<DeleteManyUser, DeleteManyUserVariables> {
     override document = DeleteManyUserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const UpdateManyUserDocument = /*#__PURE__*/ gql`
-    mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
-  updateManyUser(data: $data, where: $where) {
-    count
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: ZenGraphQLModule
-  })
-  export class UpdateManyUserGQL extends Apollo.Mutation<UpdateManyUser, UpdateManyUserVariables> {
-    override document = UpdateManyUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
