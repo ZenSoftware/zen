@@ -50,9 +50,9 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
 export class ZenUserGridComponent {
   @Input() mode = GridMode.Default;
   @Input() selection: Array<UserFields['id']> = [];
-  @Input() showAdd = true;
-  @Input() showEdit = true;
-  @Input() showDelete = true;
+  @Input() showAdd: boolean;
+  @Input() showEdit: boolean | ((i: UserFields) => boolean);
+  @Input() showDelete: boolean | ((i: UserFields) => boolean);
   settings: ZenGridSettings<UserFields>;
 
   constructor(
