@@ -5,11 +5,11 @@ import { Role } from '@zen/graphql';
 import { AuthService } from '../auth.service';
 
 export class RolesGuard {
-  static for(...roles: Role[]) {
+  static has(...roles: Role[]) {
     @Injectable({
       providedIn: 'root',
     })
-    class RolesCheck implements CanActivate, CanActivateChild, CanLoad {
+    class HasRoles implements CanActivate, CanActivateChild, CanLoad {
       constructor(private auth: AuthService, private router: Router) {}
 
       canActivate() {
@@ -25,6 +25,29 @@ export class RolesGuard {
       }
     }
 
-    return RolesCheck;
+    return HasRoles;
+  }
+
+  static not(...roles: Role[]) {
+    @Injectable({
+      providedIn: 'root',
+    })
+    class NotRoles implements CanActivate, CanActivateChild, CanLoad {
+      constructor(private auth: AuthService, private router: Router) {}
+
+      canActivate() {
+        return this.auth.userNotInRole(roles) ? true : this.router.parseUrl('/login');
+      }
+
+      canActivateChild() {
+        return this.canActivate();
+      }
+
+      canLoad() {
+        return this.canActivate();
+      }
+    }
+
+    return NotRoles;
   }
 }
