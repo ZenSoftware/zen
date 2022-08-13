@@ -27,7 +27,7 @@ export const environment: EnvironmentBase = {
       expiresIn: 3600, // 1 hour (in seconds)
     },
   },
-  expiresInRememberMe: 2592000, // 30 days (in seconds)
+  expiresInRememberMe: 7_776_000, // 90 days (in seconds)
   mail: {
     // Docs: https://nodemailer.com/smtp/
     transport: {
