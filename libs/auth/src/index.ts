@@ -5,3 +5,4 @@ export * from './lib/token-var';
 export * from './lib/validators';
 export * from './lib/zen-auth.module';
 export { Role } from '@zen/graphql';
+export { Action } from '@zen/api-interfaces';
