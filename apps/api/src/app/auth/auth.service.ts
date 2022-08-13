@@ -1,3 +1,5 @@
+import { randomUUID } from 'crypto';
+
 import { Injectable } from '@nestjs/common';
 
 import { ConfigService } from '../config';
@@ -17,6 +19,7 @@ export class AuthService {
 
   getAuthSession(user: RequestUser, rememberMe = false): AuthSession {
     const jwtPayload: JwtPayload = {
+      jti: randomUUID(),
       aud: this.config.siteUrl,
       sub: user.id,
       roles: user.roles,
