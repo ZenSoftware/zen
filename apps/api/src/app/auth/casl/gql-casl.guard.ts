@@ -3,9 +3,10 @@ import { ExecutionContext, Injectable, mixin } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
+import { Action } from '@zen/api-interfaces';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
-import { Action, CaslAbilityFactory } from './casl-ability.factory';
+import { CaslAbilityFactory } from './casl-ability.factory';
 import { SUBJECT_KEY } from './casl-subject.decorator';
 
 export function GqlCaslGuard(...actions: Array<keyof typeof Action>) {

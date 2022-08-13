@@ -1,17 +1,10 @@
 import { AbilityBuilder, AbilityClass } from '@casl/ability';
 import { PrismaAbility } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { Action } from '@zen/api-interfaces';
 
 import { RequestUser } from '../models/request-user';
 import { ZenAbility } from './generated';
-
-export enum Action {
-  manage = 'manage',
-  create = 'create',
-  read = 'read',
-  update = 'update',
-  delete = 'delete',
-}
 
 const APP_ABILITY = PrismaAbility as AbilityClass<ZenAbility>;
 
