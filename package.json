@@ -123,7 +123,7 @@
     "@types/express": "^4.17.11",
     "@types/jest": "27.4.1",
     "@types/lodash-es": "^4.17.4",
-    "@types/node": "18.7.1",
+    "@types/node": "^16.0.0",
     "@types/passport": "^1.0.6",
     "@types/passport-google-oauth20": "^2.0.11",
     "@types/passport-jwt": "^3.0.4",
@@ -178,4 +178,3 @@
     }
   }
 }
-
