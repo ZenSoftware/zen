@@ -42,7 +42,7 @@ describe('Auth Controller', () => {
   it('constructs a valid query string from an AuthSession', () => {
     const redirectUrl = controller.getLoginConfirmedURL(null);
     expect(redirectUrl).toEqual(
-      'http://site.com/login-confirmed?id=1&roles=Super%2CRegistered&expiresIn=123&rememberMe=true&token=abc.def_%252B%252Fghi.jkl%253D%253D'
+      'http://site.com/login-confirmed?token=abc.def_%252B%252Fghi.jkl%253D%253D'
     );
   });
 });

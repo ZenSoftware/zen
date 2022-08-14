@@ -19,7 +19,11 @@ spec:
           image: zenacr.azurecr.io/api:latest
           resources:
             requests:
-              memory: "700Mi"
+              cpu: "100m"
+              memory: "400Mi"
+            limits:
+              cpu: "1000m"
+              memory: "2Gi"
           ports:
             - containerPort: 7080
               name: zen-api-port
