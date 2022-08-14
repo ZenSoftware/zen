@@ -16,7 +16,7 @@ export type ZenAbility = PrismaAbility<
 `;
 
   for (const name of prismaNames) {
-    accum += `      ${name}: ${name},\n`;
+    accum += `      ${name}: ${name};\n`;
   }
 
   accum += `    }>
