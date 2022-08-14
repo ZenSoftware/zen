@@ -19,6 +19,13 @@ spec:
       containers:
         - name: zen-pg
           image: postgres:14
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "2Gi"
+            limits:
+              cpu: "0"
+              memory: "4Gi"
           env:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
