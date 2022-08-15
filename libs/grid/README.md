@@ -132,7 +132,7 @@ export class ZenUserGridComponent {
 
 ### Detail Row Template
 
-The master details template row item can be accessed via `zenGridDetailTemplate` which mimics [kendoGridDetailTemplate](https://www.telerik.com/kendo-angular-ui/components/grid/master-detail/detail-template/).  For usage, please view the following code.
+The master details template row item can be accessed via `zenGridDetailTemplate` which imitates  [kendoGridDetailTemplate](https://www.telerik.com/kendo-angular-ui/components/grid/master-detail/detail-template/).  For usage, please view the following code.
 
 ```html
 <zen-grid [settings]="settings">
