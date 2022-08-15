@@ -4,5 +4,5 @@ export interface AuthSession {
   roles: string[];
   rememberMe: boolean;
   expiresIn: number;
-  ability: object[];
+  rules: object[];
 }

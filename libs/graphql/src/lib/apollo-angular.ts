@@ -61,11 +61,11 @@ export type AuthRegisterInput = {
 
 export type AuthSession = {
   __typename?: 'AuthSession';
-  ability: Array<Scalars['Json']>;
   expiresIn: Scalars['Int'];
   id: Scalars['Int'];
   rememberMe: Scalars['Boolean'];
   roles: Array<Scalars['String']>;
+  rules: Array<Scalars['Json']>;
   token: Scalars['String'];
 };
 
@@ -558,7 +558,6 @@ export type Subscription = {
 
 export type User = {
   __typename?: 'User';
-  ability: Array<Scalars['Json']>;
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   googleId?: Maybe<Scalars['String']>;
@@ -566,6 +565,7 @@ export type User = {
   id: Scalars['Int'];
   password?: Maybe<Scalars['String']>;
   roles: Array<Role>;
+  rules: Array<Scalars['Json']>;
   username?: Maybe<Scalars['String']>;
 };
 
@@ -810,14 +810,14 @@ export type AuthExchangeTokenVariables = Exact<{
 }>;
 
 
-export type AuthExchangeToken = { __typename?: 'Query', authExchangeToken: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, ability: Array<any> } };
+export type AuthExchangeToken = { __typename?: 'Query', authExchangeToken: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
 
 export type AuthLoginVariables = Exact<{
   data: AuthLoginInput;
 }>;
 
 
-export type AuthLogin = { __typename?: 'Query', authLogin: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, ability: Array<any> } };
+export type AuthLogin = { __typename?: 'Query', authLogin: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
 
 export type AuthPasswordChangeVariables = Exact<{
   data: AuthPasswordChangeInput;
@@ -831,7 +831,7 @@ export type AuthPasswordResetConfirmationVariables = Exact<{
 }>;
 
 
-export type AuthPasswordResetConfirmation = { __typename?: 'Mutation', authPasswordResetConfirmation: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, ability: Array<any> } };
+export type AuthPasswordResetConfirmation = { __typename?: 'Mutation', authPasswordResetConfirmation: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
 
 export type AuthPasswordResetRequestQueryVariables = Exact<{
   data: AuthPasswordResetRequestInput;
@@ -845,7 +845,7 @@ export type AuthRegisterVariables = Exact<{
 }>;
 
 
-export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, ability: Array<any> } };
+export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
 
 export type LoggedInVariables = Exact<{ [key: string]: never; }>;
 
@@ -857,7 +857,7 @@ export type UserRolesVariables = Exact<{ [key: string]: never; }>;
 
 export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
 
-export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, ability: Array<any> };
+export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> };
 
 export type UserFields = { __typename?: 'User', id: number, username?: string | null, email: string };
 
@@ -969,7 +969,7 @@ export const AuthSessionFields = /*#__PURE__*/ gql`
   rememberMe
   roles
   expiresIn
-  ability
+  rules
 }
     `;
 export const UserFields = /*#__PURE__*/ gql`
