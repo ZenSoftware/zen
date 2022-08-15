@@ -1,8 +1,8 @@
 # Zen Grid
 
-`<zen-grid>` is a component that wraps [Kendo Grid](https://www.telerik.com/kendo-angular-ui/components/grid/) and implements a data source adapter to interface with the code generated GraphQL module `@zen/graphql`.  With minimal configuration, `<zen-grid>` will render a fully featured data grid over any Prisma model within the project.  Intelligent default implementations for the varying Kendo grid features have all been implemented.  By converting the Kendo Grid state object into valid Prisma queries that will be made via the code generated GraphQL API gateway, sophisticated queries over Prisma models can be simply designed utilizing Kendo Grid's robust filter UIs.  The grid leverages off of heavy utilization of Apollo's InMemoryCache, and only incurs network requests when necessary.  Also, the grid implements an efficient, scalable, server-side pagination strategy, giving you pagination for free.  
+`<zen-grid>` is a component that wraps [Kendo Angular Grid](https://www.telerik.com/kendo-angular-ui/components/grid/) and implements a data source adapter to interface with the code generated GraphQL module `@zen/graphql`.  With minimal configuration, `<zen-grid>` will render a fully featured data grid over any Prisma model within the project.  Intelligent default implementations for the varying Kendo grid features have all been implemented.  By converting the Kendo Grid state object into valid Prisma queries that will be made via the code generated GraphQL API gateway, sophisticated queries over Prisma models can be simply designed utilizing Kendo Grid's robust filter UIs.  The grid leverages Apollo InMemoryCache to only incurs network requests when necessary.  Also, the grid implements an efficient, scalable, server-side pagination strategy, giving you pagination for free.
 
-Configuration is made simple by providing GQL documents generated via `@zen/graphql` and listing them within the grid `settings`.
+Configuration is made simple by providing the GQL documents generated via `@zen/graphql` and listing them within the grid `settings`.
 
 *zen-user-grid.component.ts*
 ```ts
@@ -29,13 +29,13 @@ this.settings = {
 </zen-grid>
 ```
 
-One of the best features is that the grid provides end-to-end type safety for its configuration, from the Prisma data type to the client-side type that is generated from the grid's GraphQL query.  Define the columns of the grid utilizing the property `columnsConfig` under `KendoGridSettings<T>`, where `T` is the type containing the fields on the Prisma object being selected for within the grid's GraphQL request.  Sensibly, a column can only be added if its field exists within the GraphQL query made for the grid.  For usage of `<zen-grid>`, view the `<zen-user-grid>` component as a template for a complete solution.
+The grid provides end-to-end type safety for its configuration, from the Prisma data type to the client-side type that is generated from the grid's GraphQL query.  Define the columns of the grid utilizing the property `columnsConfig` under `KendoGridSettings<T>`, where `T` is the type containing the fields on the Prisma object being selected for within the grid's GraphQL request.  Sensibly, a column can only be added if its field exists within the GraphQL query made for the grid.  For usage of `<zen-grid>`, view the `<zen-user-grid>` component as a template for a complete solution.
 
 `zen-user-grid.component.ts`
 ```ts
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from '@zen/auth';
+import { Ability } from '@casl/ability';
 import {
   DeleteOneUserGQL,
   FindManyUserCountGQL,
@@ -85,25 +85,26 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
 export class ZenUserGridComponent {
   @Input() mode = GridMode.Default;
   @Input() selection: Array<UserFields['id']> = [];
-  @Input() showAdd = true;
-  @Input() showEdit = true;
-  @Input() showDelete = true;
+  @Input() showAdd: boolean;
+  @Input() showEdit: boolean | ((i: UserFields) => boolean);
+  @Input() showDelete: boolean | ((i: UserFields) => boolean);
   settings: ZenGridSettings<UserFields>;
 
   constructor(
-    private dialog: MatDialog,
-    auth: AuthService,
+    ability: Ability,
     findManyUserGQL: FindManyUserGQL,
     findManyUserCountGQL: FindManyUserCountGQL,
-    deleteOneUserGQL: DeleteOneUserGQL
+    deleteOneUserGQL: DeleteOneUserGQL,
+    private dialog: MatDialog
   ) {
-    const isSuper = auth.userHasRole(Role.Super);
-    this.showAdd = isSuper;
-    this.showEdit = isSuper;
-    this.showDelete = isSuper;
+    const typename = 'User';
+
+    this.showAdd = ability.can('create', typename);
+    this.showEdit = ability.can('update', typename);
+    this.showDelete = ability.can('delete', typename);
 
     this.settings = {
-      typename: 'User',
+      typename,
       findManyGQL: findManyUserGQL,
       findManyCountGQL: findManyUserCountGQL,
       deleteOneGQL: deleteOneUserGQL,
@@ -131,7 +132,7 @@ export class ZenUserGridComponent {
 
 ### Detail Row Template
 
-To gain access to the row item for use within the master details template, utilize the `zenGridDetailTemplate` decorator that mimics [kendoGridDetailTemplate](https://www.telerik.com/kendo-angular-ui/components/grid/master-detail/detail-template/).  For usage, please view the following code. 
+The master details template row item can be accessed via `zenGridDetailTemplate` which mimics [kendoGridDetailTemplate](https://www.telerik.com/kendo-angular-ui/components/grid/master-detail/detail-template/).  For usage, please view the following code.
 
 ```html
 <zen-grid [settings]="settings">
