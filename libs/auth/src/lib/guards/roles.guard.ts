@@ -5,7 +5,7 @@ import { Role } from '@zen/graphql';
 import { AuthService } from '../auth.service';
 
 export class RolesGuard {
-  static has(...roles: Role[]) {
+  static has(...roles: Array<keyof typeof Role>) {
     @Injectable({
       providedIn: 'root',
     })
@@ -13,7 +13,7 @@ export class RolesGuard {
       constructor(private auth: AuthService, private router: Router) {}
 
       canActivate() {
-        return this.auth.userHasRole(roles) ? true : this.router.parseUrl('/login');
+        return this.auth.userHasRole(roles as string[]) ? true : this.router.parseUrl('/login');
       }
 
       canActivateChild() {
@@ -28,7 +28,7 @@ export class RolesGuard {
     return HasRoles;
   }
 
-  static not(...roles: Role[]) {
+  static not(...roles: Array<keyof typeof Role>) {
     @Injectable({
       providedIn: 'root',
     })
@@ -36,7 +36,7 @@ export class RolesGuard {
       constructor(private auth: AuthService, private router: Router) {}
 
       canActivate() {
-        return this.auth.userNotInRole(roles) ? true : this.router.parseUrl('/login');
+        return this.auth.userNotInRole(roles as string[]) ? true : this.router.parseUrl('/login');
       }
 
       canActivateChild() {
