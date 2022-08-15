@@ -18,7 +18,7 @@ import resolvers from '../generated/User/resolvers';
 
 export const typeDefs = gql`
   extend type User {
-    ability: [Json!]!
+    rules: [Json!]!
   }
 `;
 
@@ -33,7 +33,7 @@ export class UserResolver {
   }
 
   @ResolveField()
-  async ability(@Parent() user: User) {
+  async rules(@Parent() user: User) {
     const ability = this.caslAbilityFactory.createAbility(user);
     return ability.rules;
   }
