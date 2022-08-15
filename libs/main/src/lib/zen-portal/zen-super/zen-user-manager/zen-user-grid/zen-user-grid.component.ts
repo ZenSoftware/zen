@@ -56,11 +56,11 @@ export class ZenUserGridComponent {
   settings: ZenGridSettings<UserFields>;
 
   constructor(
-    private dialog: MatDialog,
+    ability: Ability,
     findManyUserGQL: FindManyUserGQL,
     findManyUserCountGQL: FindManyUserCountGQL,
     deleteOneUserGQL: DeleteOneUserGQL,
-    ability: Ability
+    private dialog: MatDialog
   ) {
     const typename = 'User';
 
