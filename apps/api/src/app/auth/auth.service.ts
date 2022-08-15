@@ -36,7 +36,7 @@ export class AuthService {
     return {
       id: user.id,
       roles: user.roles,
-      ability: ability.rules,
+      rules: ability.rules,
       token,
       rememberMe,
       expiresIn,
