@@ -17,6 +17,7 @@ export class MailService {
   ) {}
   //--------------------------------------------------------------------------
   send(options: MailOptions) {
+    Logger.log(`Sent ${options.template} ${options.to}`);
     return this.mailer.sendMail(options).catch(e => Logger.error(e, options));
   }
   //--------------------------------------------------------------------------
