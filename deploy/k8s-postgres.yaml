@@ -10,7 +10,7 @@ spec:
   storageClassName: managed-premium
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
