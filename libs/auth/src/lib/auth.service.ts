@@ -26,7 +26,7 @@ enum LocalStorageKey {
   sessionExpiresOn = 'sessionExpiresOn',
   roles = 'roles',
   rememberMe = 'rememberMe',
-  ability = 'ability',
+  rules = 'rules',
 }
 
 @Injectable({
@@ -55,7 +55,7 @@ export class AuthService {
         loggedInVar(true);
         this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
 
-        const rules: any = ls.get(LocalStorageKey.ability, { decrypt: true });
+        const rules: any = ls.get(LocalStorageKey.rules, { decrypt: true });
         if (rules) this.ability.update(rules);
 
         if (this.sessionTimeRemaining <= env.jwtExchangeInterval) {
@@ -104,9 +104,9 @@ export class AuthService {
     ls.set(LocalStorageKey.sessionExpiresOn, expiresOn);
     ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
     ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
-    ls.set(LocalStorageKey.ability, authSession.ability, { encrypt: true });
+    ls.set(LocalStorageKey.rules, authSession.rules, { encrypt: true });
 
-    this.ability.update(authSession.ability);
+    this.ability.update(authSession.rules);
 
     tokenVar(authSession.token);
 
@@ -173,7 +173,7 @@ export class AuthService {
     ls.remove(LocalStorageKey.sessionExpiresOn);
     ls.remove(LocalStorageKey.rememberMe);
     ls.remove(LocalStorageKey.roles);
-    ls.remove(LocalStorageKey.ability);
+    ls.remove(LocalStorageKey.rules);
 
     this.#userId = null;
     userRolesVar([]);
