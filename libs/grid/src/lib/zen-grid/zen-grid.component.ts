@@ -10,7 +10,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDiag } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Ability } from '@casl/ability';
 import {
@@ -33,7 +33,6 @@ import { Action } from '@zen/auth';
 import { ZenConfirmComponent, ZenSnackbarErrorService } from '@zen/components';
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
-import { omit } from 'lodash-es';
 import { Subscription, map } from 'rxjs';
 
 import {
@@ -433,18 +432,25 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     return this.showDelete;
   }
 
+  omitPageVars(obj: object) {
+    const clone = structuredClone(obj);
+    delete clone['take'];
+    delete clone['skip'];
+    return clone;
+  }
+
   allData = () => {
     if (this.settings.process === 'local') {
       return {
         data: process(<T[]>this.#data, {
-          ...omit(this.gridSettings.state, ['take', 'skip']),
+          ...this.omitPageVars(this.gridSettings.state),
           group: this.groups,
         }).data,
         group: this.groups,
       };
     } else {
-      let variables: any = this.kendoToPrisma.getVariables(this.gridSettings.state);
-      variables = omit(variables, ['take', 'skip']);
+      let variables = this.kendoToPrisma.getVariables(this.gridSettings.state);
+      variables = this.omitPageVars(variables);
 
       const $allData = this.settings.findManyGQL.fetch(variables).pipe(
         map(({ data }) => {
