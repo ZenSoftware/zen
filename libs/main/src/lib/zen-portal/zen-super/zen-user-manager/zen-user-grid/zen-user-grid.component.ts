@@ -16,7 +16,7 @@ import { DialogData, ZenUserInputComponent } from '../zen-user-input/zen-user-in
 const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
   rowColorStyles: [
     {
-      condition: item => item.roles.includes(Role.Super),
+      condition: row => row.roles.includes(Role.Super),
       hexColor: '#003333',
     },
   ],
