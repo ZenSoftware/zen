@@ -36,6 +36,7 @@ The grid provides end-to-end type safety for its configuration, from the Prisma 
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Ability } from '@casl/ability';
+import { Action } from '@zen/auth';
 import {
   DeleteOneUserGQL,
   FindManyUserCountGQL,
@@ -100,9 +101,9 @@ export class ZenUserGridComponent {
 
     // Casl subject detection is set to `object => object['__typename']`
     // consequently GraphQL results are accepted as Casl subjects
-    this.showAdd = ability.can('create', typename);
-    this.showEdit = row => ability.can('update', row);
-    this.showDelete = row => ability.can('delete', row);
+    this.showAdd = ability.can(Action.create, typename);
+    this.showEdit = row => ability.can(Action.update, row);
+    this.showDelete = row => ability.can(Action.delete, row);
 
     this.settings = {
       typename,
