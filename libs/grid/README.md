@@ -12,6 +12,7 @@ this.settings = {
   findManyCountGQL: findManyUserCountGQL,
   deleteOneGQL: deleteOneUserGQL,
   defaultSettings: DEFAULT_SETTINGS,
+  ability: ability
 };
 ```
 
@@ -21,9 +22,6 @@ this.settings = {
   [mode]="mode"
   [settings]="settings"
   [selection]="selection"
-  [showAdd]="showAdd"
-  [showEdit]="showEdit"
-  [showDelete]="showDelete"
   (add)="addHandler()" 
   (edit)="editHandler($event)">
 </zen-grid>
@@ -85,32 +83,22 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
 export class ZenUserGridComponent {
   @Input() mode = GridMode.Default;
   @Input() selection: Array<UserFields['id']> = [];
-  @Input() showAdd: boolean;
-  @Input() showEdit: boolean | ((row: UserFields) => boolean);
-  @Input() showDelete: boolean | ((row: UserFields) => boolean);
   settings: ZenGridSettings<UserFields>;
 
   constructor(
-    ability: Ability,
     findManyUserGQL: FindManyUserGQL,
     findManyUserCountGQL: FindManyUserCountGQL,
     deleteOneUserGQL: DeleteOneUserGQL,
+    ability: Ability,
     private dialog: MatDialog
   ) {
-    const typename = 'User';
-
-    // Casl subject detection is set to `object => object['__typename']`
-    // consequently GraphQL results are accepted as Casl subjects
-    this.showAdd = ability.can(Action.create, typename);
-    this.showEdit = row => ability.can(Action.update, row);
-    this.showDelete = row => ability.can(Action.delete, row);
-
     this.settings = {
-      typename,
+      typename: 'User',
       findManyGQL: findManyUserGQL,
       findManyCountGQL: findManyUserCountGQL,
       deleteOneGQL: deleteOneUserGQL,
       defaultSettings: DEFAULT_SETTINGS,
+      ability: ability,
     };
   }
 

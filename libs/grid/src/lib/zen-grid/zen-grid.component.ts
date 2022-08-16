@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Ability } from '@casl/ability';
 import {
   AddEvent,
   ColumnMenuSettings,
@@ -28,6 +29,7 @@ import {
   State,
   process,
 } from '@progress/kendo-data-query';
+import { Action } from '@zen/auth';
 import { ZenConfirmComponent, ZenSnackbarErrorService } from '@zen/components';
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
@@ -55,7 +57,21 @@ export interface ZenGridSettings<T extends object> {
   findManyCountGQL: Apollo.Query<any, any>;
   deleteOneGQL?: Apollo.Mutation;
   defaultSettings: KendoGridSettings<T>;
+
+  /**
+   * @default 'remote'
+   */
   process?: 'remote' | 'local';
+
+  /**
+   * @describe Optional Casl ability that will set `showAdd`, `showEdit`, `showDelete` according to `@zen/auth` ABAC rules
+   * ```ts
+   * const showAdd = ability.can(Action.create, this.settings.typename);
+   * const showEdit = row => ability.can(Action.update, row);
+   * const showDelete = row => ability.can(Action.delete, row);
+   * ```
+   */
+  ability?: Ability;
 }
 
 const DEFAULT_TAKE = 10;
@@ -119,6 +135,13 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     (<State>this.#defaultSettings.state).sort = (<State>this.#defaultSettings.state).sort ?? [];
 
     Object.freeze(this.#defaultSettings);
+
+    const ability = this.#settings.ability;
+    if (ability) {
+      this.showAdd = ability.can(Action.create, this.#settings.typename);
+      this.showEdit = row => ability.can(Action.update, row);
+      this.showDelete = row => ability.can(Action.delete, row);
+    }
 
     this.gridSettings = cloneDeep(this.#defaultSettings) as any;
   }
