@@ -9,7 +9,6 @@ import {
   UserFields,
 } from '@zen/graphql';
 import { GridMode, KendoGridSettings, ZenGridSettings } from '@zen/grid';
-import { cloneDeep } from 'lodash-es';
 
 import { DialogData, ZenUserInputComponent } from '../zen-user-input/zen-user-input.component';
 
@@ -84,7 +83,7 @@ export class ZenUserGridComponent {
   }
 
   editHandler({ dataItem }: { dataItem: UserFields }) {
-    this.inputDialog({ action: 'edit', item: cloneDeep(dataItem) });
+    this.inputDialog({ action: 'edit', item: structuredClone(dataItem) });
   }
 
   inputDialog(data: DialogData) {
