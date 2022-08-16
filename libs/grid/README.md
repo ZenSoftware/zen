@@ -99,7 +99,8 @@ export class ZenUserGridComponent {
   ) {
     const typename = 'User';
 
-    // Casl subject detection is set to `object => object['__typename']` consequently GraphQL results are accepted as Casl subjects
+    // Casl subject detection is set to `object => object['__typename']`
+    // consequently GraphQL results are accepted as Casl subjects
     this.showAdd = ability.can('create', typename);
     this.showEdit = row => ability.can('update', row);
     this.showDelete = row => ability.can('delete', row);
