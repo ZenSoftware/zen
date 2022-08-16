@@ -1,8 +1,17 @@
 export abstract class Environment {
   abstract readonly production: boolean;
   abstract readonly publicRegistration: boolean;
-  abstract readonly jwtExchangeInterval: number;
-  abstract readonly rememberMeExchangeThreshold: number;
+  abstract readonly auth: {
+    /**
+     * @value 'AppLoad' | 'OnPush'
+     * 'app-load' will exchange the auth token every time the app loads
+     * 'on-push' will exchange the auth token only when intervals are exceeded
+     */
+    readonly exchangeStrategy: 'app-load' | 'on-push' | string;
+    readonly jwtExchangeInterval: number;
+    readonly rememberMeExchangeThreshold: number;
+  };
+
   abstract readonly enableGoogleOAuth: boolean;
   abstract readonly url: {
     readonly loginRedirect: string;
@@ -17,8 +26,11 @@ export abstract class Environment {
 export class EnvironmentDev implements Environment {
   production = false;
   publicRegistration = true;
-  jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
-  rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
+  auth = {
+    exchangeStrategy: 'app-load',
+    jwtExchangeInterval: 30 * 60 * 1000, // 30 minutes
+    rememberMeExchangeThreshold: 45 * 24 * 60 * 60 * 1000, // 45 days
+  };
   enableGoogleOAuth = true;
   url = {
     loginRedirect: '/',
@@ -33,8 +45,11 @@ export class EnvironmentDev implements Environment {
 export class EnvironmentProd implements Environment {
   production = true;
   publicRegistration = true;
-  jwtExchangeInterval = 30 * 60 * 1000; // 30 minutes;
-  rememberMeExchangeThreshold = 14 * 24 * 60 * 60 * 1000; // 14 days
+  auth = {
+    exchangeStrategy: 'app-load',
+    jwtExchangeInterval: 30 * 60 * 1000, // 30 minutes
+    rememberMeExchangeThreshold: 45 * 24 * 60 * 60 * 1000, // 45 days
+  };
   enableGoogleOAuth = true;
   url = {
     loginRedirect: '/',
