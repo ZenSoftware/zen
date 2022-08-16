@@ -7,5 +7,6 @@ export const UserFields = gql`
     email
     createdAt
     roles
+    rules
   }
 `;
