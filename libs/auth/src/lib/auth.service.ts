@@ -58,13 +58,20 @@ export class AuthService {
         const rules: any = ls.get(LocalStorageKey.rules, { decrypt: true });
         if (rules) this.ability.update(rules);
 
-        if (this.sessionTimeRemaining <= env.jwtExchangeInterval) {
-          this.exchangeToken();
-        } else if (
-          this.rememberMe &&
-          this.sessionTimeRemaining <= env.rememberMeExchangeThreshold
-        ) {
-          this.exchangeToken();
+        switch (env.auth.exchangeStrategy) {
+          case 'app-load':
+            this.exchangeToken();
+            break;
+          case 'on-push':
+            if (this.sessionTimeRemaining <= env.auth.jwtExchangeInterval) {
+              this.exchangeToken();
+            } else if (
+              this.rememberMe &&
+              this.sessionTimeRemaining <= env.auth.rememberMeExchangeThreshold
+            ) {
+              this.exchangeToken();
+            }
+            break;
         }
 
         this.startExchangeInterval();
@@ -211,10 +218,12 @@ export class AuthService {
 
   private startExchangeInterval() {
     if (!this.rememberMe && !this.#exchangeIntervalSubscription) {
-      this.#exchangeIntervalSubscription = interval(this.env.jwtExchangeInterval).subscribe(() => {
-        if (this.validSession) this.exchangeToken();
-        else this.logout();
-      });
+      this.#exchangeIntervalSubscription = interval(this.env.auth.jwtExchangeInterval).subscribe(
+        () => {
+          if (this.validSession) this.exchangeToken();
+          else this.logout();
+        }
+      );
     }
   }
 
