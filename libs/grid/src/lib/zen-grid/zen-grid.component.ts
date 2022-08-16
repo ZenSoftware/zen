@@ -33,6 +33,7 @@ import { Action } from '@zen/auth';
 import { ZenConfirmComponent, ZenSnackbarErrorService } from '@zen/components';
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
+import { cloneDeep, omit } from 'lodash-es';
 import { Subscription, map } from 'rxjs';
 
 import {
@@ -126,7 +127,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     this.#settings = value;
     this.#settings.process = this.#settings.process ?? 'remote';
 
-    this.#defaultSettings = structuredClone(value.defaultSettings);
+    this.#defaultSettings = cloneDeep(value.defaultSettings);
     this.#defaultSettings.state = this.#defaultSettings.state ?? ({} as any);
     (<State>this.#defaultSettings.state).skip = (<State>this.#defaultSettings.state).skip ?? 0;
     (<State>this.#defaultSettings.state).take =
@@ -142,7 +143,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       this.showDelete = row => ability.can(Action.delete, row);
     }
 
-    this.gridSettings = structuredClone(this.#defaultSettings) as any;
+    this.gridSettings = cloneDeep(this.#defaultSettings) as any;
   }
   get settings() {
     return this.#settings as ZenGridSettings<T>;
@@ -286,7 +287,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   }
 
   resetGrid() {
-    this.gridSettings = structuredClone(this.#defaultSettings) as any;
+    this.gridSettings = cloneDeep(this.#defaultSettings) as any;
     this.collapseAllDetails();
     if (this.settings.process === 'local') this.dataStateChangeHandler();
   }
@@ -432,25 +433,18 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     return this.showDelete;
   }
 
-  omitPageVars(obj: object) {
-    const clone = structuredClone(obj);
-    delete clone['take'];
-    delete clone['skip'];
-    return clone;
-  }
-
   allData = () => {
     if (this.settings.process === 'local') {
       return {
         data: process(<T[]>this.#data, {
-          ...this.omitPageVars(this.gridSettings.state),
+          ...omit(this.gridSettings.state, ['take', 'skip']),
           group: this.groups,
         }).data,
         group: this.groups,
       };
     } else {
-      let variables = this.kendoToPrisma.getVariables(this.gridSettings.state);
-      variables = this.omitPageVars(variables);
+      let variables: any = this.kendoToPrisma.getVariables(this.gridSettings.state);
+      variables = omit(variables, ['take', 'skip']);
 
       const $allData = this.settings.findManyGQL.fetch(variables).pipe(
         map(({ data }) => {
