@@ -51,8 +51,8 @@ export class ZenUserGridComponent {
   @Input() mode = GridMode.Default;
   @Input() selection: Array<UserFields['id']> = [];
   @Input() showAdd: boolean;
-  @Input() showEdit: boolean | ((i: UserFields) => boolean);
-  @Input() showDelete: boolean | ((i: UserFields) => boolean);
+  @Input() showEdit: boolean | ((row: UserFields) => boolean);
+  @Input() showDelete: boolean | ((row: UserFields) => boolean);
   settings: ZenGridSettings<UserFields>;
 
   constructor(
@@ -64,9 +64,10 @@ export class ZenUserGridComponent {
   ) {
     const typename = 'User';
 
+    // Casl subject detection is set to `object => object['__typename']` consequently GraphQL results are accepted as Casl subjects
     this.showAdd = ability.can('create', typename);
-    this.showEdit = ability.can('update', typename);
-    this.showDelete = ability.can('delete', typename);
+    this.showEdit = row => ability.can('update', row);
+    this.showDelete = row => ability.can('delete', row);
 
     this.settings = {
       typename,

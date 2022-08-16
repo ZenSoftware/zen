@@ -93,8 +93,8 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() selection: any[] = [];
   @Input() showAdd = true;
   @Input() showAutoFitColsButton = true;
-  @Input() showDelete: boolean | ((x: T) => boolean) = true;
-  @Input() showEdit: boolean | ((x: T) => boolean) = true;
+  @Input() showDelete: boolean | ((row: T) => boolean) = true;
+  @Input() showEdit: boolean | ((row: T) => boolean) = true;
   @Input() showExcel = true;
   @Input() showFilters = true;
   @Input() showGroupButton = false;
