@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '@zen/auth';
+
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'zen-manage-account',
