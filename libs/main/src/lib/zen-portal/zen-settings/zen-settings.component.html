@@ -5,10 +5,26 @@
 
 <hr>
 
-<div class="row">
-  <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-    <div class="mb-5">
-      <zen-password-change *ngIf="(auth.accountInfo$ | async)?.hasPassword" ></zen-password-change>
+<div class="row" *ngIf="auth.accountInfo$ | async as accountInfo">
+  <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 text-lg">
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <div *ngIf="accountInfo.username">
+          <i class="fa-solid fa-fw fa-user me-2"></i>
+          <strong class="me-2">User:</strong>
+          <span class="text-muted">{{accountInfo.username}}</span>
+        </div>
+    
+        <div *ngIf="accountInfo.googleProfile">
+          <img *ngIf="accountInfo.googleProfile.picture" src="{{accountInfo.googleProfile.picture}}" referrerpolicy="no-referrer" class="me-2">
+          {{accountInfo.googleProfile.email}}
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <zen-password-change *ngIf="accountInfo.hasPassword" ></zen-password-change>
     </div>
   </div>
 </div>
