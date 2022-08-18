@@ -826,7 +826,7 @@ export type UserWhereUniqueInput = {
 export type GetAccountInfoVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAccountInfo = { __typename?: 'Query', accountInfo: { __typename?: 'AccountInfo', username?: string | null, hasPassword: boolean, googleProfile?: { __typename?: 'GoogleProfile', name?: string | null, picture?: string | null } | null } };
+export type GetAccountInfo = { __typename?: 'Query', accountInfo: { __typename?: 'AccountInfo', username?: string | null, hasPassword: boolean, googleProfile?: { __typename?: 'GoogleProfile', email?: string | null, picture?: string | null } | null } };
 
 export type AuthExchangeTokenVariables = Exact<{
   data: AuthExchangeTokenInput;
@@ -880,11 +880,11 @@ export type UserRolesVariables = Exact<{ [key: string]: never; }>;
 
 export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
 
-export type AccountInfoFields = { __typename?: 'AccountInfo', username?: string | null, hasPassword: boolean, googleProfile?: { __typename?: 'GoogleProfile', name?: string | null, picture?: string | null } | null };
+export type AccountInfoFields = { __typename?: 'AccountInfo', username?: string | null, hasPassword: boolean, googleProfile?: { __typename?: 'GoogleProfile', email?: string | null, picture?: string | null } | null };
 
 export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> };
 
-export type GoogleProfileFields = { __typename?: 'GoogleProfile', name?: string | null, picture?: string | null };
+export type GoogleProfileFields = { __typename?: 'GoogleProfile', email?: string | null, picture?: string | null };
 
 export type UserFields = { __typename?: 'User', id: number, username?: string | null, email: string };
 
@@ -991,7 +991,7 @@ export type SampleUpload = { __typename?: 'Mutation', sampleUpload: boolean };
 
 export const GoogleProfileFields = /*#__PURE__*/ gql`
     fragment GoogleProfileFields on GoogleProfile {
-  name
+  email
   picture
 }
     `;
