@@ -20,6 +20,13 @@ export type Scalars = {
   Upload: any;
 };
 
+export type AccountInfo = {
+  __typename?: 'AccountInfo';
+  googleProfile?: Maybe<GoogleProfile>;
+  hasPassword: Scalars['Boolean'];
+  username?: Maybe<Scalars['String']>;
+};
+
 export type AggregateUser = {
   __typename?: 'AggregateUser';
   _avg?: Maybe<UserAvgAggregateOutputType>;
@@ -109,6 +116,16 @@ export type EnumRoleNullableListFilter = {
   hasEvery?: InputMaybe<Array<Role>>;
   hasSome?: InputMaybe<Array<Role>>;
   isEmpty?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type GoogleProfile = {
+  __typename?: 'GoogleProfile';
+  email?: Maybe<Scalars['String']>;
+  family_name?: Maybe<Scalars['String']>;
+  given_name?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
 };
 
 export type IntFieldUpdateOperationsInput = {
@@ -391,6 +408,7 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type Query = {
   __typename?: 'Query';
+  accountInfo: AccountInfo;
   aggregateUser?: Maybe<AggregateUser>;
   authExchangeToken: AuthSession;
   authLogin: AuthSession;
@@ -805,6 +823,11 @@ export type UserWhereUniqueInput = {
   username?: InputMaybe<Scalars['String']>;
 };
 
+export type GetAccountInfoVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAccountInfo = { __typename?: 'Query', accountInfo: { __typename?: 'AccountInfo', username?: string | null, hasPassword: boolean, googleProfile?: { __typename?: 'GoogleProfile', name?: string | null, picture?: string | null } | null } };
+
 export type AuthExchangeTokenVariables = Exact<{
   data: AuthExchangeTokenInput;
 }>;
@@ -857,7 +880,11 @@ export type UserRolesVariables = Exact<{ [key: string]: never; }>;
 
 export type UserRoles = { __typename?: 'Query', userRoles: Array<Role> };
 
+export type AccountInfoFields = { __typename?: 'AccountInfo', username?: string | null, hasPassword: boolean, googleProfile?: { __typename?: 'GoogleProfile', name?: string | null, picture?: string | null } | null };
+
 export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> };
+
+export type GoogleProfileFields = { __typename?: 'GoogleProfile', name?: string | null, picture?: string | null };
 
 export type UserFields = { __typename?: 'User', id: number, username?: string | null, email: string };
 
@@ -962,6 +989,21 @@ export type SampleUploadVariables = Exact<{
 
 export type SampleUpload = { __typename?: 'Mutation', sampleUpload: boolean };
 
+export const GoogleProfileFields = /*#__PURE__*/ gql`
+    fragment GoogleProfileFields on GoogleProfile {
+  name
+  picture
+}
+    `;
+export const AccountInfoFields = /*#__PURE__*/ gql`
+    fragment AccountInfoFields on AccountInfo {
+  username
+  hasPassword
+  googleProfile {
+    ...GoogleProfileFields
+  }
+}
+    ${GoogleProfileFields}`;
 export const AuthSessionFields = /*#__PURE__*/ gql`
     fragment AuthSessionFields on AuthSession {
   id
@@ -979,6 +1021,24 @@ export const UserFields = /*#__PURE__*/ gql`
   email
 }
     `;
+export const GetAccountInfoDocument = /*#__PURE__*/ gql`
+    query GetAccountInfo {
+  accountInfo {
+    ...AccountInfoFields
+  }
+}
+    ${AccountInfoFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class GetAccountInfoGQL extends Apollo.Query<GetAccountInfo, GetAccountInfoVariables> {
+    override document = GetAccountInfoDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AuthExchangeTokenDocument = /*#__PURE__*/ gql`
     query AuthExchangeToken($data: AuthExchangeTokenInput!) {
   authExchangeToken(data: $data) {

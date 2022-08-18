@@ -1,4 +1,5 @@
 export { IContext } from './context';
+export * from './account-info';
 export * from './auth-exchange-token-input';
 export * from './auth-login-input';
 export * from './auth-password-change-input';
