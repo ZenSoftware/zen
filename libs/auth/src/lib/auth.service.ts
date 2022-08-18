@@ -8,6 +8,7 @@ import {
   AuthLoginGQL,
   AuthLoginInput,
   AuthSession,
+  GetAccountInfoGQL,
   GqlErrors,
   parseGqlErrors,
 } from '@zen/graphql';
@@ -15,7 +16,7 @@ import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
 import { intersection, isEqual, orderBy } from 'lodash-es';
-import { Observable, Subscription, interval, throwError, timer } from 'rxjs';
+import { Observable, Subscription, interval, map, share, throwError, timer } from 'rxjs';
 import { catchError, mergeMap, retryWhen, tap } from 'rxjs/operators';
 
 import { tokenVar } from './token-var';
@@ -34,9 +35,15 @@ enum LocalStorageKey {
 })
 export class AuthService {
   #exchangeIntervalSubscription?: Subscription;
+
   #userId: AuthSession['id'] | null = null;
   get userId(): AuthSession['id'] | null {
     return this.#userId;
+  }
+
+  #accountInfo$;
+  get accountInfo$() {
+    return this.#accountInfo$;
   }
 
   constructor(
@@ -45,8 +52,14 @@ export class AuthService {
     private ability: Ability,
     private authLoginGQL: AuthLoginGQL,
     private authExchangeTokenGQL: AuthExchangeTokenGQL,
-    private env: Environment
+    private env: Environment,
+    getAccountInfoGQL: GetAccountInfoGQL
   ) {
+    this.#accountInfo$ = getAccountInfoGQL.watch().valueChanges.pipe(
+      map(({ data }) => data.accountInfo),
+      share()
+    );
+
     if (this.validSession) {
       try {
         // Initialize apollo client state
