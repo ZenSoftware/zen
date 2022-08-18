@@ -11,6 +11,7 @@ import { ConfigService } from '../../config';
 import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
 import {
+  AccountInfo,
   AuthExchangeTokenInput,
   AuthLoginInput,
   AuthPasswordChangeInput,
@@ -25,6 +26,7 @@ export const typeDefs = gql`
     authLogin(data: AuthLoginInput!): AuthSession!
     authExchangeToken(data: AuthExchangeTokenInput): AuthSession!
     authPasswordResetRequest(data: AuthPasswordResetRequestInput!): Boolean
+    accountInfo: AccountInfo!
   }
 
   extend type Mutation {
@@ -40,6 +42,21 @@ export const typeDefs = gql`
     rememberMe: Boolean!
     expiresIn: Int!
     rules: [Json!]!
+  }
+
+  type GoogleProfile {
+    name: String
+    given_name: String
+    family_name: String
+    locale: String
+    email: String
+    picture: String
+  }
+
+  type AccountInfo {
+    username: String
+    hasPassword: Boolean!
+    googleProfile: GoogleProfile
   }
 
   input AuthLoginInput {
@@ -94,6 +111,22 @@ export class AuthResolver {
     if (!correctPassword) throw new HttpException(ApiError.AuthLogin.INCORRECT_PASSWORD, 400);
 
     return this.auth.getAuthSession(user, data.rememberMe);
+  }
+
+  @Query()
+  @UseGuards(GqlGuard)
+  async accountInfo(@Context() ctx: IContext, @GqlUser() reqUser: RequestUser) {
+    const user = await ctx.prisma.user.findUnique({
+      where: { id: reqUser.id },
+    });
+
+    const result: AccountInfo = {
+      username: user.username,
+      hasPassword: !!user.password,
+      googleProfile: user.googleProfile as any,
+    };
+
+    return result;
   }
 
   @Query()
