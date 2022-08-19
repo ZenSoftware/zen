@@ -29,9 +29,4 @@ mat-dialog-content {
 // Styles for the password visibility icon
 [mat-icon-button] {
   cursor: pointer;
-
-  mat-icon:hover {
-    transition: font-size 0.5s;
-    font-size: 170%;
-  }
 }
