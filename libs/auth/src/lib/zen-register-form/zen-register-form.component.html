@@ -33,7 +33,7 @@
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Password</mat-label>
     <input matInput autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" [formControl]="password">
-    <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+    <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="Toggle Show Password" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </span>
     <mat-error *ngIf="password.hasError('required')">Required</mat-error>
@@ -44,7 +44,7 @@
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>Confirm Password</mat-label>
     <input matInput autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" [formControl]="passwordConfirm">
-    <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+    <span mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="Toggle Show Password" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </span>
     <mat-error *ngIf="passwordConfirm.hasError('required')">Required</mat-error>
