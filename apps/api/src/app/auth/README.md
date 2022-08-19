@@ -1,12 +1,23 @@
 # Zen Authentication & Authorization
 Exported from *auth*, the following table lists the guards and directives for their respective ABAC & RBAC schemes.
 
-|                       | ABAC            | RBAC        | Common     |
-|-----------------------|-----------------|-------------|------------|
-| **GraphQL Resolvers** | `GqlCaslGuard`  | `GqlGuard`  | `GqlUser`  |
-| **Http Controllers**  | `HttpCaslGuard` | `HttpGuard` | `HttpUser` |
-| **Common**            | `CaslSubject`   | `Roles`     |            |
+|                       | ABAC            | RBAC        | Common           |
+|-----------------------|-----------------|-------------|------------------|
+| **GraphQL Resolvers** | `GqlCaslGuard`  | `GqlGuard`  | `GqlUser`        |
+| **Http Controllers**  | `HttpCaslGuard` | `HttpGuard` | `HttpUser`       |
+| **Common**            | `CaslSubject`   | `Roles`     | `AllowAnonymous` |
 
+These are a complete set of Nest guards & directives that can be applied to either classes or functions to declaritively apply permissions.
+`GqlCaslGuard` and `GqlGuard` extract the user from the JWT token and makes the `RequestUser` accessible via an injectable paramater `GqlUser`.  This is symmetric to how the Nest Http Controllers guards `HttpCaslGuard` & `HttpGuard` work to extract the `RequestUser` via `HttpUser`.  The definition for `RequestUser` is quite simple:
+
+```ts
+export class RequestUser {
+  id: number;
+  roles: string[];
+}
+```
+
+This is simply extracted from a valid JWT payload without hitting the database to maintain performance.  The full user can then be retrieved via Prisma utilizing their `id` if needed.  For usage of the guards, you may reference the following code:
 
 ### GraphQL ABAC (Attribute-based access control)
 Simplest usage of GraphQL ABAC guards and directives
