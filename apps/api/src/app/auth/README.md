@@ -17,7 +17,7 @@ export class RequestUser {
 }
 ```
 
-This is simply extracted from a valid JWT payload without hitting the database to maintain performance.  The full user can then be retrieved via Prisma utilizing their `id` if needed.  For usage of the guards, you may reference the following code:
+This is simply extracted from a valid JWT payload without hitting the database in an effort to maintain performance.  The full user can then be retrieved via Prisma utilizing their `id` if needed.  For usage of the guards, you may reference the following code:
 
 ### GraphQL ABAC (Attribute-based access control)
 Simplest usage of GraphQL ABAC guards and directives
