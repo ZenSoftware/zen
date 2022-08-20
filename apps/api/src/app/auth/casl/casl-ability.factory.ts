@@ -17,7 +17,7 @@ export class CaslAbilityFactory {
       can(Action.manage, 'all'); // read-write access to everything
     } else {
       // Customize user permissions here
-      can(Action.read, 'User', { id: user.id });
+      // can(Action.read, 'User', { id: user.id });
     }
 
     return build();
