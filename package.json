@@ -51,7 +51,7 @@
     "graphql": "~16.6.0",
     "graphql-subscriptions": "^2.0.0",
     "graphql-upload": "^15.0.2",
-    "helmet": "^5.0.0",
+    "helmet": "^6.0.0",
     "lodash-es": "^4.17.20",
     "nodemailer": "^6.7.7",
     "passport": "^0.6.0",
@@ -59,7 +59,7 @@
     "passport-jwt": "^4.0.0",
     "prisma": "~3.15.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "7.5.6",
+    "rxjs": "~7.5.0",
     "ts-morph": "^15.1.0"
   },
   "devDependencies": {
@@ -152,4 +152,3 @@
     }
   }
 }
-
