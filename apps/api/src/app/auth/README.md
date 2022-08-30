@@ -23,7 +23,7 @@ This is extracted from a valid JWT payload without hitting the database.  The fu
 
 Simplest usage of GraphQL RBAC guards and directives
 
-*app/graphql/resolvers/Sample.ts*
+*graphql/resolvers/Sample.ts*
 ```ts
 import { Logger, UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';

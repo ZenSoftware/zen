@@ -51,6 +51,7 @@ export const environment: EnvironmentBase = {
     ttl: 60,
     ignoreUserAgents: [/googlebot/gi, /bingbot/gi],
   },
+  bcryptSalt: 12,
   oauth: {
     loginConfirmedURL: 'http://localhost:4200/#/login-confirmed',
     google: {

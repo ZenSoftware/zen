@@ -1,4 +1,6 @@
+import { User } from '@prisma/client';
+
 export class RequestUser {
-  id: number;
+  id: User['id'];
   roles: string[];
 }

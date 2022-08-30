@@ -43,7 +43,7 @@ import { AppComponent } from './app.component';
         mutationNames: ['SampleUpload', 'SampleUploadMany'],
         headers: { 'Apollo-Require-Preflight': 'true' },
         fetch: (input, init) => {
-          (<any>init).headers.Authorization = 'Bearer ' + tokenVar();
+          (<any>init).headers['Authorization'] = 'Bearer ' + tokenVar();
           return fetch(input, init);
         },
       },
