@@ -1,5 +1,7 @@
+import { User } from '@prisma/client';
+
 export interface AuthSession {
-  id: number;
+  id: User['id'];
   token: string;
   roles: string[];
   rememberMe: boolean;
