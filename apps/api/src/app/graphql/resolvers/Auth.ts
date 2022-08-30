@@ -194,7 +194,7 @@ export class AuthResolver {
 
     if (!user) throw new HttpException(ApiError.AuthPasswordResetConfirmation.USER_NOT_FOUND, 400);
 
-    const hashedPassword = await bcrypt.hash(data.newPassword, 12);
+    const hashedPassword = await bcrypt.hash(data.newPassword, this.config.bcryptSalt);
 
     user = await ctx.prisma.user.update({
       where: { id: user.id },
@@ -215,7 +215,7 @@ export class AuthResolver {
     if (await this.getUserByEmail(data.email, ctx.prisma))
       throw new HttpException(ApiError.AuthRegister.EMAIL_TAKEN, 400);
 
-    const hashedPassword = await bcrypt.hash(data.password, 12);
+    const hashedPassword = await bcrypt.hash(data.password, this.config.bcryptSalt);
 
     const user = await ctx.prisma.user.create({
       data: {
@@ -257,7 +257,7 @@ export class AuthResolver {
     const correctPassword = await bcrypt.compare(data.oldPassword, user.password);
     if (!correctPassword) throw new HttpException(ApiError.AuthPasswordChange.WRONG_PASSWORD, 400);
 
-    const hashedPassword = await bcrypt.hash(data.newPassword, 12);
+    const hashedPassword = await bcrypt.hash(data.newPassword, this.config.bcryptSalt);
 
     await ctx.prisma.user.update({
       where: { id: user.id },
