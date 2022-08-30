@@ -2,6 +2,7 @@ import { MailerOptions } from '@nestjs-modules/mailer';
 import { NestApplicationOptions } from '@nestjs/common';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
+import { UploadOptions } from 'graphql-upload';
 import { StrategyOptions as GoogleStrategyOptions } from 'passport-google-oauth20';
 
 export class EnvironmentBase {
@@ -13,7 +14,7 @@ export class EnvironmentBase {
     readonly sandbox: boolean; // http://localhost:7080/graphql
     readonly trace?: boolean;
     readonly introspection: boolean;
-    readonly uploads?: { maxFileSize?: number; maxFiles?: number };
+    readonly uploads?: UploadOptions;
     readonly csrfPrevention?: boolean;
   };
   readonly publicRegistration: boolean;
