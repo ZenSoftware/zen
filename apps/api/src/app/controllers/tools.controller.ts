@@ -12,7 +12,7 @@ export class ToolsController {
 
   // @Get('metrics')
   // @Header('Content-Type', 'text/plain')
-  // async meta() {
+  // async metrics() {
   //   return this.prisma.$metrics.prometheus();
   // }
 
