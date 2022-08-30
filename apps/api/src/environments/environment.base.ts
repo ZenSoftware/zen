@@ -3,6 +3,7 @@ import { NestApplicationOptions } from '@nestjs/common';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
 import { OTLPExporterNodeConfigBase } from '@opentelemetry/otlp-exporter-base';
+import { UploadOptions } from 'graphql-upload';
 import { StrategyOptions as GoogleStrategyOptions } from 'passport-google-oauth20';
 
 export class EnvironmentBase {
@@ -14,7 +15,7 @@ export class EnvironmentBase {
     readonly sandbox: boolean; // http://localhost:7080/graphql
     readonly trace?: boolean;
     readonly introspection: boolean;
-    readonly uploads?: { maxFileSize?: number; maxFiles?: number };
+    readonly uploads?: UploadOptions;
     readonly csrfPrevention?: boolean;
   };
   readonly publicRegistration: boolean;
@@ -22,6 +23,7 @@ export class EnvironmentBase {
   readonly expiresInRememberMe: number;
   readonly mail: Omit<MailerOptions, 'template'>;
   readonly throttle: ThrottlerModuleOptions;
+  readonly bcryptSalt: string | number;
   readonly oauth?: {
     loginConfirmedURL: string;
     google?: GoogleStrategyOptions;
