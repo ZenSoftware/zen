@@ -3,7 +3,7 @@ export abstract class Environment {
   abstract readonly publicRegistration: boolean;
   abstract readonly auth: {
     /**
-     * @value 'AppLoad' | 'OnPush'
+     * @value 'app-load' | 'on-push'
      * 'app-load' will exchange the auth token every time the app loads
      * 'on-push' will exchange the auth token only when intervals are exceeded
      */

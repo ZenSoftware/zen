@@ -85,7 +85,7 @@ describe('ZenRegisterFormComponent', () => {
         rememberMe: true,
         roles: ['Super'],
         token: '1234',
-        ability: [{ action: 'manage', subject: 'all' }],
+        rules: [{ action: 'manage', subject: 'all' }],
       },
     };
 
