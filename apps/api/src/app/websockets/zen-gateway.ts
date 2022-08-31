@@ -14,7 +14,7 @@ import { AuthService, RequestUser } from '../auth';
 import { PrismaService } from '../prisma';
 import { AllExceptionsFilter } from './all-exceptions.filter';
 
-@WebSocketGateway(environment.socketioPort, {
+@WebSocketGateway(environment.socketio.port, {
   cors: environment.cors,
 })
 export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {

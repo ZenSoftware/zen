@@ -5,7 +5,9 @@ export const environment: EnvironmentBase = {
   production: true,
   expressPort: process.env.PORT,
   publicRegistration: true,
-  socketioPort: +process.env.SOCKETIO_PORT,
+  socketio: {
+    port: +process.env.SOCKETIO_PORT,
+  },
   graphql: {
     sandbox: false,
     introspection: false,
