@@ -17,7 +17,7 @@ export class ZenChatComponent implements OnInit, OnDestroy {
     console.log('msgToClient:', args);
   };
 
-  sendMessage() {
+  msgToServer() {
     this.socket.emit('msgToServer', { test: 'hello world' });
   }
 
