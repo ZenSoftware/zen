@@ -29,7 +29,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
   handleMessage(client: Socket, payload: string): void {
     const user = this.clientIdToUserMap.get(client.id);
     this.logger.log(`msgToServer by ${user?.username}:`, payload);
-    this.emitToUser(user.id, 'msgToClient', payload); // Echo to all connected user devices
+    this.emitToUser(user.id, 'msgToClient', payload); // Echo to all connected devices of user
   }
 
   /**
