@@ -20,7 +20,7 @@ import { AllExceptionsFilter } from './all-exceptions.filter';
 export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   private logger: Logger = new Logger('ZenGateway');
   clientIdToUserMap = new Map<string, Partial<User>>();
-  userIdToClientsMap = new Map<User['id'], Socket[] | undefined>();
+  userIdToClientsMap = new Map<User['id'], Socket[]>();
 
   constructor(private readonly prisma: PrismaService, private readonly auth: AuthService) {}
 
@@ -33,13 +33,11 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
   }
 
   /**
-   * @description Emit to all user connected devices
+   * @description Emit to all connected devices for a given user
    */
   emitToUser(userId: User['id'], eventName: string, ...args: any[]) {
     const userClients = this.userIdToClientsMap.get(userId);
-    for (const userClient of userClients) {
-      userClient.emit(eventName, args);
-    }
+    userClients.map(client => client.emit(eventName, args));
   }
 
   afterInit(server: Server) {
