@@ -26,7 +26,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
   @SubscribeMessage('msgToServer')
   @UseFilters(new AllExceptionsFilter())
-  handleMessage(client: Socket, payload: string): void {
+  handleMessage(client: Socket, payload: unknown): void {
     const user = this.clientIdToUserMap.get(client.id);
     this.logger.log(`msgToServer by ${user?.username}`, payload);
     this.emitToUser(user.id, 'msgToClient', payload); // Echo to all connected devices of user
@@ -57,7 +57,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     this.clientIdToUserMap.delete(client.id);
 
     this.logger.log(
-      `Disconnected: ${user.username} with ${remainingClients.length} connected devices remaining`
+      `Disconnected ${user.username} with ${remainingClients.length} connected devices remaining`
     );
   }
 
@@ -95,6 +95,6 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
       userClients.push(client);
     }
 
-    this.logger.log(`Connected: ${user?.username} with client id: ${client.id}`);
+    this.logger.log(`Connected ${user?.username} with client id ${client.id}`);
   }
 }
