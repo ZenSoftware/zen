@@ -28,7 +28,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
   @UseFilters(new AllExceptionsFilter())
   handleMessage(client: Socket, payload: string): void {
     const user = this.clientIdToUserMap.get(client.id);
-    this.logger.log(`msgToServer by ${user?.username}:`, payload);
+    this.logger.log(`msgToServer by ${user?.username}`, payload);
     this.emitToUser(user.id, 'msgToClient', payload); // Echo to all connected devices of user
   }
 
@@ -67,9 +67,13 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     try {
       const token = client.handshake.headers.authorization?.substring(7);
       requestUser = this.auth.authorizeJwt(token);
-      if (!requestUser) return;
+      if (!requestUser) {
+        client.disconnect();
+        return;
+      }
     } catch (error) {
       this.logger.error('Authorization failed', error);
+      client.disconnect();
       return;
     }
 
