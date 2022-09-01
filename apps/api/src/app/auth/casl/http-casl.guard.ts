@@ -7,7 +7,7 @@ import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { CaslAbilityFactory } from './casl-ability.factory';
 import { SUBJECT_KEY } from './casl-subject.decorator';
 
-export function HttpCaslGuard(...actions: Array<keyof typeof Action>) {
+export function HttpCaslGuard(...actions: Array<Action>) {
   @Injectable()
   class CaslGuard extends AuthGuard('jwt') {
     constructor(
