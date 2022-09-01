@@ -9,7 +9,7 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   cors: { credentials: true, origin: true },
   graphql: {
-    subscriptions: false,
+    subscriptions: true,
     sandbox: true,
     introspection: true,
     trace: false,
