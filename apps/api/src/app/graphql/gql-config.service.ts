@@ -31,14 +31,16 @@ export class GqlConfigService implements GqlOptionsFactory {
       cors: this.config.cors,
       csrfPrevention: this.config.graphql.csrfPrevention,
       cache: 'bounded',
-      subscriptions: {
-        'graphql-ws': {
-          onConnect: (context: Context<any>) => {
-            const { connectionParams, extra } = context;
-            extra.token = connectionParams.token;
-          },
-        },
-      },
+      subscriptions: this.config.graphql.subscriptions
+        ? {
+            'graphql-ws': {
+              onConnect: (context: Context<any>) => {
+                const { connectionParams, extra } = context;
+                extra.token = connectionParams.token;
+              },
+            },
+          }
+        : undefined,
       context: async (ctx): Promise<IContext> => {
         // Subscriptions pass through JWT token for authentication
         if (ctx.extra) return { req: ctx.extra, prisma: this.prisma };

@@ -11,11 +11,12 @@ export class EnvironmentBase {
   readonly expressPort: string | number;
   readonly cors?: NestApplicationOptions['cors'];
   readonly graphql: {
+    readonly subscriptions: boolean;
     readonly sandbox: boolean; // http://localhost:7080/graphql
-    readonly trace?: boolean;
     readonly introspection: boolean;
-    readonly uploads?: UploadOptions;
+    readonly trace?: boolean;
     readonly csrfPrevention?: boolean;
+    readonly uploads?: UploadOptions;
   };
   readonly publicRegistration: boolean;
   readonly jwtOptions: JwtModuleOptions;
