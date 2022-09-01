@@ -4,7 +4,7 @@ import { Ability, Subject } from '@casl/ability';
 import { Action } from '@zen/api-interfaces';
 
 export class CaslGuard {
-  static can(action: keyof typeof Action, subject: Subject, field?: string | undefined) {
+  static can(action: Action, subject: Subject, field?: string | undefined) {
     @Injectable({
       providedIn: 'root',
     })
@@ -27,7 +27,7 @@ export class CaslGuard {
     return CaslCan;
   }
 
-  static cannot(action: keyof typeof Action, subject: Subject, field?: string | undefined) {
+  static cannot(action: Action, subject: Subject, field?: string | undefined) {
     @Injectable({
       providedIn: 'root',
     })
