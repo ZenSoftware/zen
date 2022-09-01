@@ -7,7 +7,7 @@ import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { CaslAbilityFactory } from './casl-ability.factory';
 import { SUBJECT_KEY } from './casl-subject.decorator';
 
-export function HttpCaslGuard(...actions: Array<keyof typeof Action>) {
+export function HttpCaslGuard(...actions: Array<Action>) {
   @Injectable()
   class CaslGuard extends AuthGuard('jwt') {
     constructor(
@@ -37,7 +37,7 @@ export function HttpCaslGuard(...actions: Array<keyof typeof Action>) {
       const handlerSubject = this.reflector.get<string>(SUBJECT_KEY, context.getHandler());
       const subjectName = handlerSubject ? handlerSubject : classSubject;
 
-      const ability = this.caslAbilityFactory.createAbility(user);
+      const ability = await this.caslAbilityFactory.createAbility(user);
 
       for (const action of actions) {
         const allowed = ability.can(action, subjectName as any);

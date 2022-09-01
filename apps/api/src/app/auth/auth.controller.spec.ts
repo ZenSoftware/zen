@@ -16,13 +16,15 @@ describe('Auth Controller', () => {
           provide: AuthService,
           useValue: {
             getAuthSession: () => {
-              return <AuthSession>{
+              const authSession = {
                 id: 1,
                 roles: ['Super', 'Registered'],
                 expiresIn: 123,
                 rememberMe: true,
                 token: 'abc.def_+/ghi.jkl==',
               };
+
+              return Promise.resolve(authSession);
             },
           },
         },

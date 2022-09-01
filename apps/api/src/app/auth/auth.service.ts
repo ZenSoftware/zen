@@ -8,16 +8,18 @@ import { JwtService } from '../jwt';
 import { CaslAbilityFactory } from './casl/casl-ability.factory';
 import { JwtPayload } from './models/jwt-payload';
 import { RequestUser } from './models/request-user';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
+    private readonly jwtStrategy: JwtStrategy,
     private readonly config: ConfigService,
     private readonly caslAbilityFactory: CaslAbilityFactory
   ) {}
 
-  getAuthSession(user: RequestUser, rememberMe = false): AuthSession {
+  async getAuthSession(user: RequestUser, rememberMe = false) {
     const jwtPayload: JwtPayload = {
       jti: randomUUID(),
       aud: this.config.siteUrl,
@@ -31,9 +33,9 @@ export class AuthService {
 
     const token = this.jwtService.sign(jwtPayload, { expiresIn });
 
-    const ability = this.caslAbilityFactory.createAbility(user);
+    const ability = await this.caslAbilityFactory.createAbility(user);
 
-    return {
+    const authSession: AuthSession = {
       id: user.id,
       roles: user.roles,
       rules: ability.rules,
@@ -41,5 +43,19 @@ export class AuthService {
       rememberMe,
       expiresIn,
     };
+
+    return authSession;
+  }
+
+  async createAbility(user: RequestUser) {
+    return this.caslAbilityFactory.createAbility(user);
+  }
+
+  /**
+   * @returns `RequestUser` if valid and `null` otherwise
+   */
+  async authorizeJwt(token: string) {
+    const jwtPayload = this.jwtService.decode(token) as JwtPayload;
+    return this.jwtStrategy.validate(jwtPayload);
   }
 }
