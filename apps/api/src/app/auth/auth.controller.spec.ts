@@ -42,9 +42,10 @@ describe('Auth Controller', () => {
   });
 
   it('constructs a valid query string from an AuthSession', () => {
-    const redirectUrl = controller.getLoginConfirmedURL(null);
-    expect(redirectUrl).toEqual(
-      'http://site.com/login-confirmed?token=abc.def_%252B%252Fghi.jkl%253D%253D'
-    );
+    controller.getLoginConfirmedURL(null).then(url => {
+      expect(url).toEqual(
+        'http://site.com/login-confirmed?token=abc.def_%252B%252Fghi.jkl%253D%253D'
+      );
+    });
   });
 });
