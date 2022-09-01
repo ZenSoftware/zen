@@ -10,7 +10,7 @@ const APP_ABILITY = PrismaAbility as AbilityClass<ZenAbility>;
 
 @Injectable()
 export class CaslAbilityFactory {
-  createAbility(user: RequestUser) {
+  async createAbility(user: RequestUser) {
     const { can, cannot, build } = new AbilityBuilder(APP_ABILITY);
 
     if (user.roles.includes('Super')) {
