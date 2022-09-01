@@ -16,7 +16,7 @@ describe('Auth Controller', () => {
           provide: AuthService,
           useValue: {
             getAuthSession: () => {
-              const authSession = {
+              const authSession: Partial<AuthSession> = {
                 id: 1,
                 roles: ['Super', 'Registered'],
                 expiresIn: 123,
@@ -42,9 +42,10 @@ describe('Auth Controller', () => {
   });
 
   it('constructs a valid query string from an AuthSession', () => {
-    const redirectUrl = controller.getLoginConfirmedURL(null);
-    expect(redirectUrl).toEqual(
-      'http://site.com/login-confirmed?token=abc.def_%252B%252Fghi.jkl%253D%253D'
-    );
+    controller.getLoginConfirmedURL(null).then(url => {
+      expect(url).toEqual(
+        'http://site.com/login-confirmed?token=abc.def_%252B%252Fghi.jkl%253D%253D'
+      );
+    });
   });
 });
