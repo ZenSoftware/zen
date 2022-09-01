@@ -29,13 +29,13 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
   handleMessage(client: Socket, payload: unknown): void {
     const user = this.clientIdToUserMap.get(client.id);
     this.logger.log(`msgToServer by ${user?.username}`, payload);
-    this.emitToUser(user.id, 'msgToClient', payload); // Echo to all connected devices of user
+    this.broadcastToUser(user.id, 'msgToClient', payload); // Echo to all connected devices of user
   }
 
   /**
    * @description Emit to all connected devices for a given user
    */
-  emitToUser(userId: User['id'], eventName: string, ...args: any[]) {
+  broadcastToUser(userId: User['id'], eventName: string, ...args: any[]) {
     const userClients = this.userIdToClientsMap.get(userId);
     userClients.map(client => client.emit(eventName, args));
   }
@@ -64,7 +64,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
     try {
       const token = client.handshake.headers.authorization?.substring(7);
-      requestUser = this.auth.authorizeJwt(token);
+      requestUser = await this.auth.authorizeJwt(token);
       if (!requestUser) {
         client.disconnect();
         return;
