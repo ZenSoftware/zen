@@ -34,7 +34,7 @@ export class UserResolver {
 
   @ResolveField()
   async rules(@Parent() user: User) {
-    const ability = this.caslAbilityFactory.createAbility(user);
+    const ability = await this.caslAbilityFactory.createAbility(user);
     return ability.rules;
   }
 

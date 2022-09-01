@@ -41,7 +41,7 @@ export function GqlCaslGuard(...actions: Array<keyof typeof Action>) {
       const handlerSubject = this.reflector.get<string>(SUBJECT_KEY, ctx.getHandler());
       const subjectName = handlerSubject ? handlerSubject : classSubject;
 
-      const ability = this.caslAbilityFactory.createAbility(user);
+      const ability = await this.caslAbilityFactory.createAbility(user);
 
       const args = ctx.getArgs();
 
