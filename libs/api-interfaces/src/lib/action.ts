@@ -1,7 +1,2 @@
-export enum Action {
-  manage = 'manage',
-  create = 'create',
-  read = 'read',
-  update = 'update',
-  delete = 'delete',
-}
+/** @description Union of all Casl actions */
+export type Action = 'manage' | 'create' | 'read' | 'update' | 'delete';

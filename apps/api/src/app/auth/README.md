@@ -84,10 +84,10 @@ createAbility(user: RequestUser) {
   const { can, cannot, build } = new AbilityBuilder(APP_ABILITY);
 
   if (user.roles.includes('Super')) {
-    can(Action.manage, 'all'); // read-write access to everything
+    can('manage', 'all'); // read-write access to everything
   } else {
     // Customize user permissions here
-    can(Action.read, 'Sample' as any);
+    can('read', 'Sample' as any);
   }
 
   return build();
