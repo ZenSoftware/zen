@@ -8,11 +8,13 @@ import { JwtService } from '../jwt';
 import { CaslAbilityFactory } from './casl/casl-ability.factory';
 import { JwtPayload } from './models/jwt-payload';
 import { RequestUser } from './models/request-user';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
+    private readonly jwtStrategy: JwtStrategy,
     private readonly config: ConfigService,
     private readonly caslAbilityFactory: CaslAbilityFactory
   ) {}
@@ -43,11 +45,11 @@ export class AuthService {
     };
   }
 
-  authorizeJwt(token: string): RequestUser {
+  /**
+   * @returns `RequestUser` if valid and `null` otherwise
+   */
+  async authorizeJwt(token: string) {
     const jwtPayload = this.jwtService.decode(token) as JwtPayload;
-    return {
-      id: jwtPayload.sub,
-      roles: jwtPayload.roles,
-    };
+    return this.jwtStrategy.validate(jwtPayload);
   }
 }
