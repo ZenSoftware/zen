@@ -47,12 +47,6 @@ import { AppComponent } from './app.component';
           return fetch(input, init);
         },
       },
-      websocketOptions: {
-        url: environment.url.graphqlSubscriptions,
-        connectionParams: () => ({ token: tokenVar() }),
-        shouldRetry: () => true,
-        retryAttempts: Infinity,
-      },
     }),
   ],
   providers: [

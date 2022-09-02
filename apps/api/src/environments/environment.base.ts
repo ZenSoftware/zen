@@ -12,9 +12,9 @@ export class EnvironmentBase {
   readonly cors?: NestApplicationOptions['cors'];
   readonly graphql: {
     readonly subscriptions: boolean;
+    readonly trace?: boolean;
     readonly sandbox: boolean; // http://localhost:7080/graphql
     readonly introspection: boolean;
-    readonly trace?: boolean;
     readonly csrfPrevention?: boolean;
     readonly uploads?: UploadOptions;
   };
