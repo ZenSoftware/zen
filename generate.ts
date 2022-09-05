@@ -48,50 +48,6 @@ const CONFIG: GeneratorConfig = {
  **/
 export class Generator {
   constructor(public config: GeneratorConfig) {}
-
-  //---------------------------------------------------------------------------
-  async generateFrontend(prismaNames: string[]) {
-    console.log(`----------------------- Front end generated ----------------------`);
-
-    if (this.config.frontend) {
-      if (!fs.existsSync(this.config.frontend.fieldsOutPath)) {
-        await mkdir(this.config.frontend.fieldsOutPath);
-      }
-      if (!fs.existsSync(this.config.frontend.prismaOutPath)) {
-        await mkdir(this.config.frontend.prismaOutPath);
-      }
-
-      const fieldsIndexPath = path.join(this.config.frontend.fieldsOutPath, `index.ts`);
-
-      if (!fs.existsSync(fieldsIndexPath)) {
-        await writeFile(fieldsIndexPath, '');
-        console.log(`- Wrote: ${fieldsIndexPath}`);
-      }
-
-      let fieldsIndexSource = (await readFile(fieldsIndexPath)).toString();
-
-      for (const prismaName of prismaNames) {
-        const fieldsPath = path.join(this.config.frontend.fieldsOutPath, `${prismaName}.gql.ts`);
-        const prismaPath = path.join(this.config.frontend.prismaOutPath, `${prismaName}.gql.ts`);
-
-        if (!fs.existsSync(fieldsPath)) {
-          await writeFile(fieldsPath, ClientFieldsTemplate(prismaName));
-          console.log(`- Wrote: ${fieldsPath}`);
-        }
-
-        const exportScript = `export * from './${prismaName}.gql';`;
-        if (!fieldsIndexSource.includes(exportScript)) {
-          await appendFile(fieldsIndexPath, exportScript + '\n');
-          fieldsIndexSource += exportScript + '\n';
-        }
-
-        if (!fs.existsSync(prismaPath)) {
-          await writeFile(prismaPath, ClientQueriesTemplate(prismaName));
-          console.log(`- Wrote: ${prismaPath}`);
-        }
-      }
-    }
-  }
   //---------------------------------------------------------------------------
   async generate() {
     const paljsConfig = this.config.palConfig as any;
@@ -161,6 +117,49 @@ export class Generator {
     await this.execLocal(`prettier --loglevel warn --write "${this.config.apiOutPath}/**/*.ts"\n`);
 
     await this.generateFrontend(prismaNames);
+  }
+  //---------------------------------------------------------------------------
+  async generateFrontend(prismaNames: string[]) {
+    console.log(`----------------------- Front end generated ----------------------`);
+
+    if (this.config.frontend) {
+      if (!fs.existsSync(this.config.frontend.fieldsOutPath)) {
+        await mkdir(this.config.frontend.fieldsOutPath);
+      }
+      if (!fs.existsSync(this.config.frontend.prismaOutPath)) {
+        await mkdir(this.config.frontend.prismaOutPath);
+      }
+
+      const fieldsIndexPath = path.join(this.config.frontend.fieldsOutPath, `index.ts`);
+
+      if (!fs.existsSync(fieldsIndexPath)) {
+        await writeFile(fieldsIndexPath, '');
+        console.log(`- Wrote: ${fieldsIndexPath}`);
+      }
+
+      let fieldsIndexSource = (await readFile(fieldsIndexPath)).toString();
+
+      for (const prismaName of prismaNames) {
+        const fieldsPath = path.join(this.config.frontend.fieldsOutPath, `${prismaName}.gql.ts`);
+        const prismaPath = path.join(this.config.frontend.prismaOutPath, `${prismaName}.gql.ts`);
+
+        if (!fs.existsSync(fieldsPath)) {
+          await writeFile(fieldsPath, ClientFieldsTemplate(prismaName));
+          console.log(`- Wrote: ${fieldsPath}`);
+        }
+
+        const exportScript = `export * from './${prismaName}.gql';`;
+        if (!fieldsIndexSource.includes(exportScript)) {
+          await appendFile(fieldsIndexPath, exportScript + '\n');
+          fieldsIndexSource += exportScript + '\n';
+        }
+
+        if (!fs.existsSync(prismaPath)) {
+          await writeFile(prismaPath, ClientQueriesTemplate(prismaName));
+          console.log(`- Wrote: ${prismaPath}`);
+        }
+      }
+    }
   }
   //---------------------------------------------------------------------------
   async nestAbacResolvers(prismaNames: string[]) {
