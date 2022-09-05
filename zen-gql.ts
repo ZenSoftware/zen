@@ -25,7 +25,7 @@ type AuthScheme = 'ABAC' | 'RBAC';
  **/
 export type GeneratorConfig = {
   palConfigPath: string;
-  caslPath: string;
+  caslOutPath: string;
   gql: {
     authScheme?: AuthScheme;
     apiPath: string;
@@ -36,7 +36,7 @@ export type GeneratorConfig = {
 
 const CONFIG: GeneratorConfig = {
   palConfigPath: './pal.js',
-  caslPath: 'apps/api/src/app/auth/casl/generated.ts',
+  caslOutPath: 'apps/api/src/app/auth/casl/generated.ts',
   gql: {
     apiPath: 'apps/api/src/app/graphql',
     clientPrismaPath: 'libs/graphql/src/lib/prisma',
@@ -134,8 +134,8 @@ export class Generator {
     let wroteCount = 0;
     if (!this.config.gql.authScheme || this.config.gql.authScheme === 'ABAC') {
       // Generate Casl Subject types
-      await writeFile(this.config.caslPath, NestCaslTemplate(prismaNames));
-      console.log(`- Wrote: ${this.config.caslPath}`);
+      await writeFile(this.config.caslOutPath, NestCaslTemplate(prismaNames));
+      console.log(`- Wrote: ${this.config.caslOutPath}`);
 
       wroteCount = await this.nestAbacResolvers(prismaNames);
     } else if (this.config.gql.authScheme === 'RBAC') {
