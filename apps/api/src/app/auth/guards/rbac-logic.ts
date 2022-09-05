@@ -11,22 +11,22 @@ export function rbacLogic(
   classRoles: RoleType,
   handlerRoles: RoleType
 ): boolean {
-  const _userRoles = userRoles ?? [];
-  const _classRoles = classRoles ?? [];
-  const _handlerRoles = handlerRoles ?? [];
+  userRoles = userRoles ?? [];
+  classRoles = classRoles ?? [];
+  handlerRoles = handlerRoles ?? [];
 
   // Give super users unlimited access
-  if (_userRoles.includes(Role.Super)) return true;
+  if (userRoles.includes(Role.Super)) return true;
 
-  if (_classRoles.length > 0) {
-    if (!_userRoles.some(r => _classRoles.includes(r))) {
+  if (classRoles.length > 0) {
+    if (!userRoles.some(r => classRoles.includes(r))) {
       throw new UnauthorizedException();
     }
 
-    if (_handlerRoles.length > 0 && !_userRoles.some(r => _handlerRoles.includes(r))) {
+    if (handlerRoles.length > 0 && !userRoles.some(r => handlerRoles.includes(r))) {
       throw new UnauthorizedException();
     }
-  } else if (_handlerRoles.length > 0 && !_userRoles.some(r => _handlerRoles.includes(r))) {
+  } else if (handlerRoles.length > 0 && !userRoles.some(r => handlerRoles.includes(r))) {
     throw new UnauthorizedException();
   }
 

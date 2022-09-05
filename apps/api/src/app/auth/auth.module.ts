@@ -16,7 +16,7 @@ if (environment.oauth?.google?.clientID) oauthProviders.push(GoogleOAuthStrategy
 @Module({
   imports: [JwtModule, PrismaModule, PassportModule.register({ defaultStrategy: 'jwt' })],
   providers: [JwtStrategy, AuthService, CaslAbilityFactory, ...oauthProviders],
-  exports: [JwtModule, PassportModule, CaslAbilityFactory, AuthService],
+  exports: [JwtModule, PassportModule, AuthService, CaslAbilityFactory],
   controllers: [AuthController],
 })
 export class ZenAuthModule {}

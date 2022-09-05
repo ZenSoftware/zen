@@ -1,8 +1,11 @@
-module.exports = (prismaName, querySource, mutationSource) => {
+export function NestResolversRBACTemplate(
+  /** @todo finish implementation */
+  prismaName: string
+) {
   return `import { UseGuards } from '@nestjs/common';
 import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
 
-import { GqlGuard, ForbidNestedCreateGuard, Roles } from '../../auth';
+import { GqlGuard, Roles } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
 import resolvers from '../generated/${prismaName}/resolvers';
 
@@ -20,10 +23,12 @@ export const typeDefs = null;
 // \`;
 
 @Resolver('${prismaName}')
-@UseGuards(GqlGuard, ForbidNestedCreateGuard())
+@UseGuards(GqlGuard)
 @Roles('Super')
 export class ${prismaName}Resolver {
-${querySource}${mutationSource}
+
+// ... finish codegen
+
 }
 `;
-};
+}

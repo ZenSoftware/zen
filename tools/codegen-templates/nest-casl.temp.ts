@@ -1,4 +1,4 @@
-module.exports = prismaNames => {
+export function NestCaslTemplate(prismaNames: string[]) {
   let accum = `import { PrismaAbility, Subjects } from '@casl/prisma';
 import { 
 `;
@@ -25,4 +25,4 @@ export type ZenAbility = PrismaAbility<
 `;
 
   return accum;
-};
+}

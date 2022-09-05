@@ -333,23 +333,23 @@ export interface UserUncheckedCreateInput {
 }
 
 export interface UserUpdateInput {
-  createdAt?: DateTimeFieldUpdateOperationsInput;
-  username?: NullableStringFieldUpdateOperationsInput | null;
-  password?: NullableStringFieldUpdateOperationsInput | null;
-  email?: StringFieldUpdateOperationsInput;
+  createdAt?: Date;
+  username?: string | null;
+  password?: string | null;
+  email?: string;
   roles?: UserUpdaterolesInput;
-  googleId?: NullableStringFieldUpdateOperationsInput | null;
+  googleId?: string | null;
   googleProfile?: NullableJsonNullValueInput;
 }
 
 export interface UserUncheckedUpdateInput {
-  id?: IntFieldUpdateOperationsInput;
-  createdAt?: DateTimeFieldUpdateOperationsInput;
-  username?: NullableStringFieldUpdateOperationsInput | null;
-  password?: NullableStringFieldUpdateOperationsInput | null;
-  email?: StringFieldUpdateOperationsInput;
+  id?: number;
+  createdAt?: Date;
+  username?: string | null;
+  password?: string | null;
+  email?: string;
   roles?: UserUpdaterolesInput;
-  googleId?: NullableStringFieldUpdateOperationsInput | null;
+  googleId?: string | null;
   googleProfile?: NullableJsonNullValueInput;
 }
 
@@ -365,23 +365,23 @@ export interface UserCreateManyInput {
 }
 
 export interface UserUpdateManyMutationInput {
-  createdAt?: DateTimeFieldUpdateOperationsInput;
-  username?: NullableStringFieldUpdateOperationsInput | null;
-  password?: NullableStringFieldUpdateOperationsInput | null;
-  email?: StringFieldUpdateOperationsInput;
+  createdAt?: Date;
+  username?: string | null;
+  password?: string | null;
+  email?: string;
   roles?: UserUpdaterolesInput;
-  googleId?: NullableStringFieldUpdateOperationsInput | null;
+  googleId?: string | null;
   googleProfile?: NullableJsonNullValueInput;
 }
 
 export interface UserUncheckedUpdateManyInput {
-  id?: IntFieldUpdateOperationsInput;
-  createdAt?: DateTimeFieldUpdateOperationsInput;
-  username?: NullableStringFieldUpdateOperationsInput | null;
-  password?: NullableStringFieldUpdateOperationsInput | null;
-  email?: StringFieldUpdateOperationsInput;
+  id?: number;
+  createdAt?: Date;
+  username?: string | null;
+  password?: string | null;
+  email?: string;
   roles?: UserUpdaterolesInput;
-  googleId?: NullableStringFieldUpdateOperationsInput | null;
+  googleId?: string | null;
   googleProfile?: NullableJsonNullValueInput;
 }
 

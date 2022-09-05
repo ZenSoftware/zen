@@ -1,4 +1,4 @@
-module.exports = name => {
+export function ClientFieldsTemplate(name: string) {
   return `import gql from 'graphql-tag';
 
 export const ${name}Fields = gql\`
@@ -7,4 +7,4 @@ export const ${name}Fields = gql\`
     # TODO: Add fields
   }
 \`;\n`;
-};
+}
