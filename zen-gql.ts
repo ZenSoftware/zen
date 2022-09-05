@@ -78,7 +78,7 @@ export class Generator {
     const PALJS_PATH = paljsConfig.backend.output;
     const RESOLVERS_PATH = `${this.config.gql.apiPath}/resolvers`;
 
-    console.log(`---------------------- @paljs/cli generated ----------------------`);
+    console.log(`---------------------- @paljs/generator ----------------------`);
     if (fs.existsSync(PALJS_PATH)) {
       await rm(PALJS_PATH, { recursive: true });
       await mkdir(PALJS_PATH);
