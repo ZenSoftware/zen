@@ -7,9 +7,9 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   graphql: {
     subscriptions: true,
+    trace: false,
     sandbox: false,
     introspection: false,
-    trace: false,
     csrfPrevention: true,
     uploads: {
       maxFileSize: 20_000_000, // 20 MB
