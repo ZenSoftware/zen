@@ -1,4 +1,4 @@
-module.exports = prismaName => {
+export function NestResolversABACTemplate(prismaName: string) {
   return `import { UseGuards } from '@nestjs/common';
 import { Args, Context, Info, Mutation, Parent, Query, Resolver } from '@nestjs/graphql';
 
@@ -89,4 +89,4 @@ export class ${prismaName}Resolver {
   }
 }
 `;
-};
+}

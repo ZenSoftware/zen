@@ -1,4 +1,4 @@
-module.exports = name => {
+export function ClientQueriesTemplate(name: string) {
   return `import gql from 'graphql-tag';
 
 import { ${name}Fields } from '../fields';
@@ -110,4 +110,4 @@ gql\`
 
   \${${name}Fields}
 \`;\n`;
-};
+}

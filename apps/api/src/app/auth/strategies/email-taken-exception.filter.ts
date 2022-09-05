@@ -10,7 +10,7 @@ export class EmailTakenException extends HttpException {
 }
 
 @Catch(EmailTakenException)
-export class UserAlreadyExistsExceptionFilter implements ExceptionFilter {
+export class EmailTakenExceptionFilter implements ExceptionFilter {
   constructor(private readonly config: ConfigService) {}
 
   catch(exception: HttpException, host: ArgumentsHost) {

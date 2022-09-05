@@ -12,9 +12,10 @@ export const environment: EnvironmentBase = {
     port: +process.env.SOCKETIO_PORT,
   },
   graphql: {
+    subscriptions: true,
+    trace: false,
     sandbox: true,
     introspection: true,
-    trace: false,
     csrfPrevention: true,
     uploads: {
       maxFileSize: 20_000_000, // 20 MB

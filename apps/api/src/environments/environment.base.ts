@@ -14,11 +14,12 @@ export class EnvironmentBase {
     port: number;
   };
   readonly graphql: {
-    readonly sandbox: boolean; // http://localhost:7080/graphql
+    readonly subscriptions: boolean;
     readonly trace?: boolean;
+    readonly sandbox: boolean; // http://localhost:7080/graphql
     readonly introspection: boolean;
-    readonly uploads?: UploadOptions;
     readonly csrfPrevention?: boolean;
+    readonly uploads?: UploadOptions;
   };
   readonly publicRegistration: boolean;
   readonly jwtOptions: JwtModuleOptions;
