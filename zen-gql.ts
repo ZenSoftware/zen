@@ -26,8 +26,6 @@ type AuthScheme = 'ABAC' | 'RBAC';
  * Configuration
  **/
 const CONFIG = {
-  prismaSchemaPath: 'prisma/schema.prisma',
-
   gql: {
     authScheme: <AuthScheme>'ABAC',
     apiPath: 'apps/api/src/app/graphql',
@@ -87,7 +85,7 @@ export class Generator {
     }
 
     const pal = new PalGenerator(
-      { name: 'sdl', schemaPath: this.config.prismaSchemaPath },
+      { name: paljsConfig.backend.generator, schemaPath: paljsConfig.schema },
       paljsConfig.backend
     );
     await pal.run();

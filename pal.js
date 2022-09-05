@@ -5,6 +5,7 @@
  */
 
 module.exports = {
+  schema: 'prisma/schema.prisma',
   backend: {
     generator: 'sdl',
     output: 'apps/api/src/app/graphql/generated',
