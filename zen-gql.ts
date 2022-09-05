@@ -51,7 +51,7 @@ export class Generator {
 
   //---------------------------------------------------------------------------
   async generateFrontend(prismaNames: string[]) {
-    console.log(`------------ Apollo client queries & fields generated ------------`);
+    console.log(`----------------------- Front end generated ----------------------`);
 
     if (this.config.frontend) {
       if (!fs.existsSync(this.config.frontend.fieldsOutPath)) {
@@ -98,7 +98,7 @@ export class Generator {
     const PALJS_PATH = paljsConfig.backend.output;
     const RESOLVERS_PATH = `${this.config.apiOutPath}/resolvers`;
 
-    console.log(`---------------------- @paljs/generator ----------------------`);
+    console.log(`------------------------ @paljs/generator ------------------------`);
     if (fs.existsSync(PALJS_PATH)) {
       await rm(PALJS_PATH, { recursive: true });
       await mkdir(PALJS_PATH);
