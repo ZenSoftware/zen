@@ -5,6 +5,7 @@ import * as path from 'path';
 import { promisify } from 'util';
 
 import { Generator as PalGenerator } from '@paljs/generator';
+import { Config as PalConfig } from '@paljs/types';
 
 import {
   ClientFieldsTemplate,
@@ -17,31 +18,25 @@ import {
 
 const execAsync = promisify(exec);
 
-type AuthScheme = 'ABAC' | 'RBAC';
-
 //=============================================================================
 /**
  * Configuration
  **/
 export type GeneratorConfig = {
-  palConfigPath: string;
+  palConfig: PalConfig;
   caslOutPath: string;
-  gql: {
-    authScheme?: AuthScheme;
-    apiPath: string;
-    clientPrismaPath: string;
-    clientFieldsPath: string;
-  };
+  apiOutPath: string;
+  clientPrismaPath: string;
+  clientFieldsPath: string;
+  authScheme?: 'ABAC' | 'RBAC';
 };
 
 const CONFIG: GeneratorConfig = {
-  palConfigPath: './pal.js',
+  palConfig: require('./pal.js'),
   caslOutPath: 'apps/api/src/app/auth/casl/generated.ts',
-  gql: {
-    apiPath: 'apps/api/src/app/graphql',
-    clientPrismaPath: 'libs/graphql/src/lib/prisma',
-    clientFieldsPath: 'libs/graphql/src/lib/fields',
-  },
+  apiOutPath: 'apps/api/src/app/graphql',
+  clientPrismaPath: 'libs/graphql/src/lib/prisma',
+  clientFieldsPath: 'libs/graphql/src/lib/fields',
 };
 //=============================================================================
 /**
@@ -54,7 +49,7 @@ export class Generator {
   async createApolloAngularPrismaFile(prismaNames: string[]) {
     console.log(`------------ Apollo client queries & fields generated ------------`);
 
-    const fieldsIndexPath = path.join(this.config.gql.clientFieldsPath, `index.ts`);
+    const fieldsIndexPath = path.join(this.config.clientFieldsPath, `index.ts`);
 
     if (!fs.existsSync(fieldsIndexPath)) {
       await writeFile(fieldsIndexPath, '');
@@ -64,8 +59,8 @@ export class Generator {
     let fieldsIndexSource = (await readFile(fieldsIndexPath)).toString();
 
     for (const prismaName of prismaNames) {
-      const prismaPath = path.join(this.config.gql.clientPrismaPath, `${prismaName}.gql.ts`);
-      const fieldsPath = path.join(this.config.gql.clientFieldsPath, `${prismaName}.gql.ts`);
+      const prismaPath = path.join(this.config.clientPrismaPath, `${prismaName}.gql.ts`);
+      const fieldsPath = path.join(this.config.clientFieldsPath, `${prismaName}.gql.ts`);
 
       if (!fs.existsSync(fieldsPath)) {
         await writeFile(fieldsPath, ClientFieldsTemplate(prismaName));
@@ -86,9 +81,9 @@ export class Generator {
   }
   //---------------------------------------------------------------------------
   async generate() {
-    const paljsConfig = require(this.config.palConfigPath);
+    const paljsConfig = this.config.palConfig as any;
     const PALJS_PATH = paljsConfig.backend.output;
-    const RESOLVERS_PATH = `${this.config.gql.apiPath}/resolvers`;
+    const RESOLVERS_PATH = `${this.config.apiOutPath}/resolvers`;
 
     console.log(`---------------------- @paljs/generator ----------------------`);
     if (fs.existsSync(PALJS_PATH)) {
@@ -101,6 +96,7 @@ export class Generator {
       paljsConfig.backend
     );
     await pal.run();
+    console.log(`@paljs/generator ran for ${this.config.palConfig.backend?.output}`);
 
     /**
      * Insert `doNotUseFieldUpdateOperationsInput: true` into generated PalJS `typeDefs.ts` file
@@ -119,11 +115,11 @@ export class Generator {
     if (!fs.existsSync(RESOLVERS_PATH)) {
       await mkdir(RESOLVERS_PATH);
     }
-    if (!fs.existsSync(this.config.gql.clientFieldsPath)) {
-      await mkdir(this.config.gql.clientFieldsPath);
+    if (!fs.existsSync(this.config.clientFieldsPath)) {
+      await mkdir(this.config.clientFieldsPath);
     }
-    if (!fs.existsSync(this.config.gql.clientPrismaPath)) {
-      await mkdir(this.config.gql.clientPrismaPath);
+    if (!fs.existsSync(this.config.clientPrismaPath)) {
+      await mkdir(this.config.clientPrismaPath);
     }
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
@@ -132,13 +128,13 @@ export class Generator {
     prismaNames = prismaNames.sort();
 
     let wroteCount = 0;
-    if (!this.config.gql.authScheme || this.config.gql.authScheme === 'ABAC') {
+    if (!this.config.authScheme || this.config.authScheme === 'ABAC') {
       // Generate Casl Subject types
       await writeFile(this.config.caslOutPath, NestCaslTemplate(prismaNames));
       console.log(`- Wrote: ${this.config.caslOutPath}`);
 
       wroteCount = await this.nestAbacResolvers(prismaNames);
-    } else if (this.config.gql.authScheme === 'RBAC') {
+    } else if (this.config.authScheme === 'RBAC') {
       wroteCount = await this.nestRbacResolvers(prismaNames);
     }
 
@@ -153,7 +149,7 @@ export class Generator {
     await writeFile(indexPath, NestResolversIndexTemplate(dataTypeNames));
     console.log(`- Wrote: ${indexPath}\n`);
 
-    await this.execLocal(`prettier --loglevel warn --write "${this.config.gql.apiPath}/**/*.ts"\n`);
+    await this.execLocal(`prettier --loglevel warn --write "${this.config.apiOutPath}/**/*.ts"\n`);
 
     await this.createApolloAngularPrismaFile(prismaNames);
   }
@@ -161,12 +157,7 @@ export class Generator {
   async nestAbacResolvers(prismaNames: string[]) {
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
-      const outPath = path.join(
-        __dirname,
-        this.config.gql.apiPath,
-        'resolvers',
-        `${prismaName}.ts`
-      );
+      const outPath = path.join(__dirname, this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
 
       // Guard to prevent the overwriting of existing files
       if (!fs.existsSync(outPath)) {
@@ -182,12 +173,7 @@ export class Generator {
   async nestRbacResolvers(prismaNames: string[]) {
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
-      const outPath = path.join(
-        __dirname,
-        this.config.gql.apiPath,
-        'resolvers',
-        `${prismaName}.ts`
-      );
+      const outPath = path.join(__dirname, this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
 
       // Guard to prevent the overwriting of existing files
       if (!fs.existsSync(outPath)) {
