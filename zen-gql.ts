@@ -4,6 +4,8 @@ import { appendFile, mkdir, readFile, readdir, rm, writeFile } from 'fs/promises
 import * as path from 'path';
 import { promisify } from 'util';
 
+import { Generator as PalGenerator } from '@paljs/generator';
+
 import {
   ClientFieldsTemplate,
   ClientQueriesTemplate,
@@ -24,6 +26,8 @@ type AuthScheme = 'ABAC' | 'RBAC';
  * Configuration
  **/
 const CONFIG = {
+  prismaSchemaPath: 'prisma/schema.prisma',
+
   gql: {
     authScheme: <AuthScheme>'ABAC',
     apiPath: 'apps/api/src/app/graphql',
@@ -77,8 +81,16 @@ export class Generator {
     const RESOLVERS_PATH = `${this.config.gql.apiPath}/resolvers`;
 
     console.log(`---------------------- @paljs/cli generated ----------------------`);
-    await rm(PALJS_PATH, { recursive: true });
-    await this.execGlobal(path.join(__dirname, 'node_modules/.bin/pal') + ' g');
+    if (fs.existsSync(PALJS_PATH)) {
+      await rm(PALJS_PATH, { recursive: true });
+      await mkdir(PALJS_PATH);
+    }
+
+    const pal = new PalGenerator(
+      { name: 'sdl', schemaPath: this.config.prismaSchemaPath },
+      paljsConfig.backend
+    );
+    await pal.run();
 
     /**
      * Insert `doNotUseFieldUpdateOperationsInput: true` into generated PalJS `typeDefs.ts` file
@@ -178,14 +190,6 @@ export class Generator {
     return wroteCount;
   }
   //---------------------------------------------------------------------------
-  private execGlobal(command: string) {
-    console.log(command);
-    return execAsync(command).then(({ stdout, stderr }) => {
-      if (stdout) console.log(stdout);
-      if (stderr) console.log(stderr);
-    });
-  }
-
   private execLocal(command: string) {
     console.log(command);
     return execAsync('npx --no-install ' + command).then(({ stdout, stderr }) => {
