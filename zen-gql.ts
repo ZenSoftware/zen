@@ -24,19 +24,23 @@ const execAsync = promisify(exec);
  **/
 export type GeneratorConfig = {
   palConfig: PalConfig;
-  caslOutPath: string;
   apiOutPath: string;
-  clientPrismaPath: string;
-  clientFieldsPath: string;
+  caslOutFile?: string;
   authScheme?: 'ABAC' | 'RBAC';
+  frontend?: {
+    prismaOutPath: string;
+    fieldsOutPath: string;
+  };
 };
 
 const CONFIG: GeneratorConfig = {
   palConfig: require('./pal.js'),
-  caslOutPath: 'apps/api/src/app/auth/casl/generated.ts',
   apiOutPath: 'apps/api/src/app/graphql',
-  clientPrismaPath: 'libs/graphql/src/lib/prisma',
-  clientFieldsPath: 'libs/graphql/src/lib/fields',
+  caslOutFile: 'apps/api/src/app/auth/casl/generated.ts',
+  frontend: {
+    prismaOutPath: 'libs/graphql/src/lib/prisma',
+    fieldsOutPath: 'libs/graphql/src/lib/fields',
+  },
 };
 //=============================================================================
 /**
@@ -46,36 +50,45 @@ export class Generator {
   constructor(public config: GeneratorConfig) {}
 
   //---------------------------------------------------------------------------
-  async createApolloAngularPrismaFile(prismaNames: string[]) {
+  async generateFrontend(prismaNames: string[]) {
     console.log(`------------ Apollo client queries & fields generated ------------`);
 
-    const fieldsIndexPath = path.join(this.config.clientFieldsPath, `index.ts`);
-
-    if (!fs.existsSync(fieldsIndexPath)) {
-      await writeFile(fieldsIndexPath, '');
-      console.log(`- Wrote: ${fieldsIndexPath}`);
-    }
-
-    let fieldsIndexSource = (await readFile(fieldsIndexPath)).toString();
-
-    for (const prismaName of prismaNames) {
-      const prismaPath = path.join(this.config.clientPrismaPath, `${prismaName}.gql.ts`);
-      const fieldsPath = path.join(this.config.clientFieldsPath, `${prismaName}.gql.ts`);
-
-      if (!fs.existsSync(fieldsPath)) {
-        await writeFile(fieldsPath, ClientFieldsTemplate(prismaName));
-        console.log(`- Wrote: ${fieldsPath}`);
+    if (this.config.frontend) {
+      if (!fs.existsSync(this.config.frontend.fieldsOutPath)) {
+        await mkdir(this.config.frontend.fieldsOutPath);
+      }
+      if (!fs.existsSync(this.config.frontend.prismaOutPath)) {
+        await mkdir(this.config.frontend.prismaOutPath);
       }
 
-      const exportScript = `export * from './${prismaName}.gql';`;
-      if (!fieldsIndexSource.includes(exportScript)) {
-        await appendFile(fieldsIndexPath, exportScript + '\n');
-        fieldsIndexSource += exportScript + '\n';
+      const fieldsIndexPath = path.join(this.config.frontend.fieldsOutPath, `index.ts`);
+
+      if (!fs.existsSync(fieldsIndexPath)) {
+        await writeFile(fieldsIndexPath, '');
+        console.log(`- Wrote: ${fieldsIndexPath}`);
       }
 
-      if (!fs.existsSync(prismaPath)) {
-        await writeFile(prismaPath, ClientQueriesTemplate(prismaName));
-        console.log(`- Wrote: ${prismaPath}`);
+      let fieldsIndexSource = (await readFile(fieldsIndexPath)).toString();
+
+      for (const prismaName of prismaNames) {
+        const fieldsPath = path.join(this.config.frontend.fieldsOutPath, `${prismaName}.gql.ts`);
+        const prismaPath = path.join(this.config.frontend.prismaOutPath, `${prismaName}.gql.ts`);
+
+        if (!fs.existsSync(fieldsPath)) {
+          await writeFile(fieldsPath, ClientFieldsTemplate(prismaName));
+          console.log(`- Wrote: ${fieldsPath}`);
+        }
+
+        const exportScript = `export * from './${prismaName}.gql';`;
+        if (!fieldsIndexSource.includes(exportScript)) {
+          await appendFile(fieldsIndexPath, exportScript + '\n');
+          fieldsIndexSource += exportScript + '\n';
+        }
+
+        if (!fs.existsSync(prismaPath)) {
+          await writeFile(prismaPath, ClientQueriesTemplate(prismaName));
+          console.log(`- Wrote: ${prismaPath}`);
+        }
       }
     }
   }
@@ -116,12 +129,6 @@ export class Generator {
     if (!fs.existsSync(RESOLVERS_PATH)) {
       await mkdir(RESOLVERS_PATH);
     }
-    if (!fs.existsSync(this.config.clientFieldsPath)) {
-      await mkdir(this.config.clientFieldsPath);
-    }
-    if (!fs.existsSync(this.config.clientPrismaPath)) {
-      await mkdir(this.config.clientPrismaPath);
-    }
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
     const dirents = await readdir(PALJS_PATH, { withFileTypes: true });
@@ -130,9 +137,10 @@ export class Generator {
 
     let wroteCount = 0;
     if (!this.config.authScheme || this.config.authScheme === 'ABAC') {
-      // Generate Casl Subject types
-      await writeFile(this.config.caslOutPath, NestCaslTemplate(prismaNames));
-      console.log(`- Wrote: ${this.config.caslOutPath}`);
+      if (this.config.caslOutFile) {
+        await writeFile(this.config.caslOutFile, NestCaslTemplate(prismaNames));
+        console.log(`- Wrote: ${this.config.caslOutFile}`);
+      }
 
       wroteCount = await this.nestAbacResolvers(prismaNames);
     } else if (this.config.authScheme === 'RBAC') {
@@ -148,11 +156,11 @@ export class Generator {
 
     const indexPath = `${RESOLVERS_PATH}/index.ts`;
     await writeFile(indexPath, NestResolversIndexTemplate(dataTypeNames));
-    console.log(`- Wrote: ${indexPath}\n`);
+    console.log(`- Wrote: ${indexPath}`);
 
     await this.execLocal(`prettier --loglevel warn --write "${this.config.apiOutPath}/**/*.ts"\n`);
 
-    await this.createApolloAngularPrismaFile(prismaNames);
+    await this.generateFrontend(prismaNames);
   }
   //---------------------------------------------------------------------------
   async nestAbacResolvers(prismaNames: string[]) {
@@ -202,7 +210,7 @@ export class Generator {
  **/
 async function main() {
   const generator = new Generator(CONFIG);
-  generator.generate();
+  await generator.generate();
 }
 
 main().catch(e => {
