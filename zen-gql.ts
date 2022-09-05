@@ -96,7 +96,6 @@ export class Generator {
       paljsConfig.backend
     );
     await pal.run();
-    console.log(`@paljs/generator ran for ${this.config.palConfig.backend?.output}`);
 
     /**
      * Insert `doNotUseFieldUpdateOperationsInput: true` into generated PalJS `typeDefs.ts` file
@@ -110,6 +109,8 @@ export class Generator {
         .replace('sdlInputs()', 'sdlInputs({ doNotUseFieldUpdateOperationsInput: true })');
       await writeFile(paljsTypeDefsFilePath, palTypeDefsFileUpdated);
     }
+
+    console.log(`PalJS wrote: ${this.config.palConfig.backend?.output}`);
 
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
     if (!fs.existsSync(RESOLVERS_PATH)) {
