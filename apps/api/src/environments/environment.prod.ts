@@ -6,9 +6,10 @@ export const environment: EnvironmentBase = {
   expressPort: process.env.PORT,
   publicRegistration: true,
   graphql: {
+    subscriptions: true,
+    trace: false,
     sandbox: false,
     introspection: false,
-    trace: false,
     csrfPrevention: true,
     uploads: {
       maxFileSize: 20_000_000, // 20 MB

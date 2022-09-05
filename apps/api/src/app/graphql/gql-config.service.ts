@@ -1,7 +1,11 @@
 import { ApolloDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { GqlOptionsFactory } from '@nestjs/graphql';
-import { ApolloServerPluginInlineTrace, Context, PluginDefinition } from 'apollo-server-core';
+import {
+  ApolloServerPluginInlineTraceDisabled,
+  Context,
+  PluginDefinition,
+} from 'apollo-server-core';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { print } from 'graphql';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
@@ -18,12 +22,11 @@ export class GqlConfigService implements GqlOptionsFactory {
   createGqlOptions(): ApolloDriverConfig {
     const plugins: PluginDefinition[] = [];
     if (this.config.graphql.sandbox) plugins.push(ApolloServerPluginLandingPageLocalDefault);
-    if (this.config.graphql.trace) plugins.push(ApolloServerPluginInlineTrace());
+    if (!this.config.graphql.trace) plugins.push(ApolloServerPluginInlineTraceDisabled());
 
     return {
       typeDefs: print(ALL_TYPE_DEFS),
       resolvers: { Upload: GraphQLUpload },
-      installSubscriptionHandlers: true,
       debug: !this.config.production,
       playground: false,
       plugins,
@@ -31,14 +34,17 @@ export class GqlConfigService implements GqlOptionsFactory {
       cors: this.config.cors,
       csrfPrevention: this.config.graphql.csrfPrevention,
       cache: 'bounded',
-      subscriptions: {
-        'graphql-ws': {
-          onConnect: (context: Context<any>) => {
-            const { connectionParams, extra } = context;
-            extra.token = connectionParams.token;
-          },
-        },
-      },
+      installSubscriptionHandlers: this.config.graphql.subscriptions,
+      subscriptions: this.config.graphql.subscriptions
+        ? {
+            'graphql-ws': {
+              onConnect: (context: Context<any>) => {
+                const { connectionParams, extra } = context;
+                extra.token = connectionParams.token;
+              },
+            },
+          }
+        : undefined,
       context: async (ctx): Promise<IContext> => {
         // Subscriptions pass through JWT token for authentication
         if (ctx.extra) return { req: ctx.extra, prisma: this.prisma };
