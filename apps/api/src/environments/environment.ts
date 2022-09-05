@@ -9,9 +9,10 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   cors: { credentials: true, origin: true },
   graphql: {
+    subscriptions: true,
+    trace: false,
     sandbox: true,
     introspection: true,
-    trace: false,
     csrfPrevention: true,
     uploads: {
       maxFileSize: 20_000_000, // 20 MB

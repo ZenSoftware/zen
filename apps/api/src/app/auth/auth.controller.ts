@@ -8,10 +8,10 @@ import { ConfigService } from '../config';
 import { AuthService } from './auth.service';
 import { HttpUser } from './decorators/http-user.decorator';
 import { RequestUser } from './models/request-user';
-import { UserAlreadyExistsExceptionFilter } from './strategies/email-taken-exception.filter';
+import { EmailTakenExceptionFilter } from './strategies/email-taken-exception.filter';
 
 @Controller('auth')
-@UseFilters(UserAlreadyExistsExceptionFilter)
+@UseFilters(EmailTakenExceptionFilter)
 export class AuthController {
   constructor(private readonly auth: AuthService, private readonly config: ConfigService) {}
 
