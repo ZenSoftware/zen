@@ -15,8 +15,6 @@ import {
   NestResolversRBACTemplate,
 } from './tools/codegen-templates';
 
-const paljsConfig = require('./pal.js');
-
 const execAsync = promisify(exec);
 
 type AuthScheme = 'ABAC' | 'RBAC';
@@ -25,19 +23,32 @@ type AuthScheme = 'ABAC' | 'RBAC';
 /**
  * Configuration
  **/
-const CONFIG = {
+export type GeneratorConfig = {
+  palConfigPath: string;
+  caslPath: string;
   gql: {
-    authScheme: <AuthScheme>'ABAC',
+    authScheme?: AuthScheme;
+    apiPath: string;
+    clientPrismaPath: string;
+    clientFieldsPath: string;
+  };
+};
+
+const CONFIG: GeneratorConfig = {
+  palConfigPath: './pal.js',
+  caslPath: 'apps/api/src/app/auth/casl/generated.ts',
+  gql: {
     apiPath: 'apps/api/src/app/graphql',
     clientPrismaPath: 'libs/graphql/src/lib/prisma',
     clientFieldsPath: 'libs/graphql/src/lib/fields',
   },
-
-  caslPath: 'apps/api/src/app/auth/casl/generated.ts',
 };
-
+//=============================================================================
+/**
+ * Generator
+ **/
 export class Generator {
-  constructor(public config: any) {}
+  constructor(public config: GeneratorConfig) {}
 
   //---------------------------------------------------------------------------
   async createApolloAngularPrismaFile(prismaNames: string[]) {
@@ -75,6 +86,7 @@ export class Generator {
   }
   //---------------------------------------------------------------------------
   async generate() {
+    const paljsConfig = require(this.config.palConfigPath);
     const PALJS_PATH = paljsConfig.backend.output;
     const RESOLVERS_PATH = `${this.config.gql.apiPath}/resolvers`;
 
@@ -120,7 +132,7 @@ export class Generator {
     prismaNames = prismaNames.sort();
 
     let wroteCount = 0;
-    if (this.config.gql.authScheme === 'ABAC') {
+    if (!this.config.gql.authScheme || this.config.gql.authScheme === 'ABAC') {
       // Generate Casl Subject types
       await writeFile(this.config.caslPath, NestCaslTemplate(prismaNames));
       console.log(`- Wrote: ${this.config.caslPath}`);
