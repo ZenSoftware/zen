@@ -18,7 +18,6 @@ import {
 
 const execAsync = promisify(exec);
 
-//=============================================================================
 /**
  * Configuration
  **/
@@ -42,13 +41,12 @@ const CONFIG: GeneratorConfig = {
     fieldsOutPath: 'libs/graphql/src/lib/fields',
   },
 };
-//=============================================================================
 /**
  * Generator
  **/
 export class Generator {
   constructor(public config: GeneratorConfig) {}
-  //---------------------------------------------------------------------------
+
   async generate() {
     const paljsConfig = this.config.palConfig as any;
     const PALJS_PATH = paljsConfig.backend.output;
@@ -118,7 +116,7 @@ export class Generator {
 
     await this.generateFrontend(prismaNames);
   }
-  //---------------------------------------------------------------------------
+
   async generateFrontend(prismaNames: string[]) {
     console.log(`----------------------- Front end generated ----------------------`);
 
@@ -161,7 +159,7 @@ export class Generator {
       }
     }
   }
-  //---------------------------------------------------------------------------
+
   async nestAbacResolvers(prismaNames: string[]) {
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
@@ -177,7 +175,7 @@ export class Generator {
 
     return wroteCount;
   }
-  //---------------------------------------------------------------------------
+
   async nestRbacResolvers(prismaNames: string[]) {
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
@@ -193,7 +191,7 @@ export class Generator {
 
     return wroteCount;
   }
-  //---------------------------------------------------------------------------
+
   private execLocal(command: string) {
     console.log(command);
     return execAsync('npx --no-install ' + command).then(({ stdout, stderr }) => {
@@ -203,7 +201,6 @@ export class Generator {
   }
 }
 
-//=============================================================================
 /**
  * Main
  **/
