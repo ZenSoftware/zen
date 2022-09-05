@@ -110,7 +110,7 @@ export class Generator {
       await writeFile(paljsTypeDefsFilePath, palTypeDefsFileUpdated);
     }
 
-    console.log(`PalJS wrote: ${this.config.palConfig.backend?.output}`);
+    console.log(`- Wrote: ${this.config.palConfig.backend?.output}`);
 
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
     if (!fs.existsSync(RESOLVERS_PATH)) {
