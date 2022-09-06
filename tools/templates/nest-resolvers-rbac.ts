@@ -1,139 +1,139 @@
-export function NestResolversRBACTemplate(prismaName: string) {
+export function NestResolversRBACTemplate(name: string) {
   return `import { UseGuards } from '@nestjs/common';
 import { Args, Context, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
 
 import { GqlGuard, Roles } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
-import resolvers from '../generated/${prismaName}/resolvers';
+import resolvers from '../generated/${name}/resolvers';
 import { IContext } from '../models';
 import type {
-  Aggregate${prismaName}Args,
-  CreateOne${prismaName}Args,
-  DeleteMany${prismaName}Args,
-  DeleteOne${prismaName}Args,
-  FindFirst${prismaName}Args,
-  FindMany${prismaName}Args,
-  FindUnique${prismaName}Args,
-  UpdateMany${prismaName}Args,
-  UpdateOne${prismaName}Args,
-  UpsertOne${prismaName}Args,
+  Aggregate${name}Args,
+  CreateOne${name}Args,
+  DeleteMany${name}Args,
+  DeleteOne${name}Args,
+  FindFirst${name}Args,
+  FindMany${name}Args,
+  FindUnique${name}Args,
+  UpdateMany${name}Args,
+  UpdateOne${name}Args,
+  UpsertOne${name}Args,
 } from '../resolversTypes';
 
 export const typeDefs = null;
 // export const typeDefs = gql\`
 //   extend type Query {
-//     sample${prismaName}Query: ${prismaName}
+//     sample${name}Query: ${name}
 //   }
 //   extend type Mutation {
-//     sample${prismaName}Mutation(args: Int!): Boolean
+//     sample${name}Mutation(args: Int!): Boolean
 //   }
-//   extend type ${prismaName} {
-//     sample${prismaName}Field: String
+//   extend type ${name} {
+//     sample${name}Field: String
 //   }
 // \`;
 
-@Resolver('${prismaName}')
+@Resolver('${name}')
 @Roles('Super')
 @UseGuards(GqlGuard)
-export class ${prismaName}Resolver {
+export class ${name}Resolver {
   @Query()
-  async findUnique${prismaName}(
-    @Args() args: FindUnique${prismaName}Args,
+  async findUnique${name}(
+    @Args() args: FindUnique${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findUnique${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
-  }
-
-  @Query()
-  async findFirst${prismaName}(
-    @Args() args: FindFirst${prismaName}Args,
-    @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
-  ) {
-    return resolvers.Query.findFirst${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Query.findUnique${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Query()
-  async findMany${prismaName}(
-    @Args() args: FindMany${prismaName}Args,
+  async findFirst${name}(
+    @Args() args: FindFirst${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findMany${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Query.findFirst${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Query()
-  async findMany${prismaName}Count(
-    @Args() args: FindMany${prismaName}Args,
+  async findMany${name}(
+    @Args() args: FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findMany${prismaName}Count(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Query.findMany${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Query()
-  async aggregate${prismaName}(
-    @Args() args: Aggregate${prismaName}Args,
+  async findMany${name}Count(
+    @Args() args: FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.aggregate${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Query.findMany${name}Count(undefined, PrismaSelectArgs(info, args), ctx, info);
+  }
+
+  @Query()
+  async aggregate${name}(
+    @Args() args: Aggregate${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @Context() ctx: IContext
+  ) {
+    return resolvers.Query.aggregate${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async createOne${prismaName}(
-    @Args() args: CreateOne${prismaName}Args,
+  async createOne${name}(
+    @Args() args: CreateOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.createOne${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.createOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async updateOne${prismaName}(
-    @Args() args: UpdateOne${prismaName}Args,
+  async updateOne${name}(
+    @Args() args: UpdateOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.updateOne${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.updateOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async updateMany${prismaName}(
-    @Args() args: UpdateMany${prismaName}Args,
+  async updateMany${name}(
+    @Args() args: UpdateMany${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.updateMany${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.updateMany${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async upsertOne${prismaName}(
-    @Args() args: UpsertOne${prismaName}Args,
+  async upsertOne${name}(
+    @Args() args: UpsertOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.upsertOne${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.upsertOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async deleteOne${prismaName}(
-    @Args() args: DeleteOne${prismaName}Args,
+  async deleteOne${name}(
+    @Args() args: DeleteOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.deleteOne${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.deleteOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async deleteMany${prismaName}(
-    @Args() args: DeleteMany${prismaName}Args,
+  async deleteMany${name}(
+    @Args() args: DeleteMany${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.deleteMany${prismaName}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.deleteMany${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 }
 `;
