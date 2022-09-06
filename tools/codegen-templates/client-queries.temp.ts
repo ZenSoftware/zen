@@ -80,7 +80,7 @@ gql\`
     }
   }
 
-  mutation UpdateMany${name}($data: ${name}UpdateManyMutationInput!, $where: ${name}WhereInput) {
+  mutation UpdateMany${name}($data: ${name}UpdateManyMutationInput!, $where: ${name}WhereInput!) {
     updateMany${name}(data: $data, where: $where) {
       count
     }
@@ -102,7 +102,7 @@ gql\`
     }
   }
 
-  mutation DeleteMany${name}($where: ${name}WhereInput) {
+  mutation DeleteMany${name}($where: ${name}WhereInput!) {
     deleteMany${name}(where: $where) {
       count
     }
