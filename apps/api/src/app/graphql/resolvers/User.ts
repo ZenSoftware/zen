@@ -17,7 +17,7 @@ import { CaslAbilityFactory, CaslSubject, GqlCaslGuard } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
 import resolvers from '../generated/User/resolvers';
 import { IContext } from '../models';
-import {
+import type {
   AggregateUserArgs,
   CreateOneUserArgs,
   DeleteManyUserArgs,
