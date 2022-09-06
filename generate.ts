@@ -48,19 +48,19 @@ export class Generator {
   constructor(public config: GeneratorConfig) {}
 
   async generate() {
-    const paljsConfig = this.config.palConfig as any;
-    const PALJS_PATH = paljsConfig.backend.output;
+    const palConfig = this.config.palConfig as any;
+    const PAL_OUT_PATH = palConfig.backend.output;
     const RESOLVERS_PATH = `${this.config.apiOutPath}/resolvers`;
 
     console.log(`------------------------ @paljs/generator ------------------------`);
-    if (fs.existsSync(PALJS_PATH)) {
-      await rm(PALJS_PATH, { recursive: true });
-      await mkdir(PALJS_PATH);
+    if (fs.existsSync(PAL_OUT_PATH)) {
+      await rm(PAL_OUT_PATH, { recursive: true });
+      await mkdir(PAL_OUT_PATH);
     }
 
     const pal = new PalGenerator(
-      { name: paljsConfig.backend.generator, schemaPath: paljsConfig.schema },
-      paljsConfig.backend
+      { name: palConfig.backend.generator, schemaPath: palConfig.schema },
+      palConfig.backend
     );
     await pal.run();
 
@@ -68,13 +68,13 @@ export class Generator {
      * Insert `doNotUseFieldUpdateOperationsInput: true` into generated PalJS `typeDefs.ts` file
      * Refer to: [PalJS GraphQL SDL inputs](https://paljs.com/plugins/sdl-inputs/)
      */
-    if (paljsConfig.backend.doNotUseFieldUpdateOperationsInput) {
-      const paljsTypeDefsFilePath = path.join(PALJS_PATH, 'typeDefs.ts');
-      const palTypeDefsFile = await readFile(paljsTypeDefsFilePath);
+    if (palConfig.backend.doNotUseFieldUpdateOperationsInput) {
+      const palTypeDefsFilePath = path.join(PAL_OUT_PATH, 'typeDefs.ts');
+      const palTypeDefsFile = await readFile(palTypeDefsFilePath);
       const palTypeDefsFileUpdated = palTypeDefsFile
         .toString()
         .replace('sdlInputs()', 'sdlInputs({ doNotUseFieldUpdateOperationsInput: true })');
-      await writeFile(paljsTypeDefsFilePath, palTypeDefsFileUpdated);
+      await writeFile(palTypeDefsFilePath, palTypeDefsFileUpdated);
     }
 
     console.log(`- Wrote: ${this.config.palConfig.backend?.output}`);
@@ -85,7 +85,7 @@ export class Generator {
     }
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
-    const dirents = await readdir(PALJS_PATH, { withFileTypes: true });
+    const dirents = await readdir(PAL_OUT_PATH, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
     prismaNames = prismaNames.sort();
 
