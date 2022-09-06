@@ -79,7 +79,7 @@ gql`
     }
   }
 
-  mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
+  mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput!) {
     updateManyUser(data: $data, where: $where) {
       count
     }
@@ -101,7 +101,7 @@ gql`
     }
   }
 
-  mutation DeleteManyUser($where: UserWhereInput) {
+  mutation DeleteManyUser($where: UserWhereInput!) {
     deleteManyUser(where: $where) {
       count
     }
