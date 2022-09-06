@@ -14,7 +14,7 @@ import {
   NestResolversABACTemplate,
   NestResolversIndexTemplate,
   NestResolversRBACTemplate,
-} from './codegen-templates';
+} from './templates';
 
 const execAsync = promisify(exec);
 
