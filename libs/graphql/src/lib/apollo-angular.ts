@@ -948,7 +948,7 @@ export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typena
 
 export type UpdateManyUserVariables = Exact<{
   data: UserUpdateManyMutationInput;
-  where?: InputMaybe<UserWhereInput>;
+  where: UserWhereInput;
 }>;
 
 
@@ -971,7 +971,7 @@ export type DeleteOneUserVariables = Exact<{
 export type DeleteOneUser = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: number } | null };
 
 export type DeleteManyUserVariables = Exact<{
-  where?: InputMaybe<UserWhereInput>;
+  where: UserWhereInput;
 }>;
 
 
@@ -1306,7 +1306,7 @@ export const UpdateOneUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const UpdateManyUserDocument = /*#__PURE__*/ gql`
-    mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
+    mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput!) {
   updateManyUser(data: $data, where: $where) {
     count
   }
@@ -1360,7 +1360,7 @@ export const DeleteOneUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const DeleteManyUserDocument = /*#__PURE__*/ gql`
-    mutation DeleteManyUser($where: UserWhereInput) {
+    mutation DeleteManyUser($where: UserWhereInput!) {
   deleteManyUser(where: $where) {
     count
   }
