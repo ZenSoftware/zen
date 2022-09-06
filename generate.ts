@@ -152,10 +152,8 @@ export class Generator {
           fieldsIndexSource += exportScript + '\n';
         }
 
-        if (!fs.existsSync(prismaPath)) {
-          await writeFile(prismaPath, ClientQueriesTemplate(prismaName));
-          console.log(`- Wrote: ${prismaPath}`);
-        }
+        await writeFile(prismaPath, ClientQueriesTemplate(prismaName));
+        console.log(`- Wrote: ${prismaPath}`);
       }
     }
   }
