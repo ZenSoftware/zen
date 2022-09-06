@@ -118,9 +118,9 @@ export class Generator {
   }
 
   async generateFrontend(prismaNames: string[]) {
-    console.log(`----------------------- Front end generated ----------------------`);
-
     if (this.config.frontend) {
+      console.log(`----------------------- Front end generated ----------------------`);
+
       if (!fs.existsSync(this.config.frontend.fieldsOutPath)) {
         await mkdir(this.config.frontend.fieldsOutPath);
       }
