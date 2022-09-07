@@ -67,7 +67,7 @@ export class ZenGenerator {
       await writeFile(palTypeDefsFilePath, palTypeDefsFileUpdated);
     }
 
-    console.log(`- Wrote: ${this.config.palConfig.backend?.output}`);
+    console.log(`- Wrote: ${palOutPath}`);
 
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
     const nestResolversPath = path.join(this.config.apiOutPath, 'resolvers');
