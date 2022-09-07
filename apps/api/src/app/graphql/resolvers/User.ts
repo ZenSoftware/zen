@@ -15,8 +15,8 @@ import { gql } from 'graphql-tag';
 
 import { CaslAbilityFactory, CaslSubject, GqlCaslGuard } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
-import resolvers from '../generated/User/resolvers';
 import { IContext } from '../models';
+import resolvers from '../paljs/User/resolvers';
 import type {
   AggregateUserArgs,
   CreateOneUserArgs,
