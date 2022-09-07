@@ -8,12 +8,11 @@ async function main() {
     apiOutPath: path.join(__dirname, 'apps/api/src/app/graphql'),
     caslOutFile: path.join(__dirname, 'apps/api/src/app/auth/casl/generated.ts'),
     frontend: {
-      prismaOutPath: path.join(__dirname, 'libs/graphql/src/lib/prisma'),
-      fieldsOutPath: path.join(__dirname, 'libs/graphql/src/lib/fields'),
+      outPath: path.join(__dirname, 'libs/graphql/src/lib'),
     },
   });
 
-  await generator.generate();
+  await generator.run();
 }
 
 main().catch(e => {

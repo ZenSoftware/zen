@@ -1,7 +1,7 @@
-export function ClientQueriesTemplate(name: string) {
+export function ClientQueriesTemplate(name: string, fieldsFolderName: string) {
   return `import gql from 'graphql-tag';
 
-import { ${name}Fields } from '../fields';
+import { ${name}Fields } from '../${fieldsFolderName}';
 
 gql\`
   query FindUnique${name}($where: ${name}WhereUniqueInput!) {
