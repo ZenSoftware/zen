@@ -8,7 +8,7 @@ module.exports = {
   schema: 'prisma/schema.prisma',
   backend: {
     generator: 'sdl',
-    output: 'apps/api/src/app/graphql/generated',
+    output: 'apps/api/src/app/graphql/paljs',
     doNotUseFieldUpdateOperationsInput: true,
   },
 };

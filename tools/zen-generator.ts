@@ -36,14 +36,16 @@ export class ZenGenerator {
   constructor(public config: ZenGeneratorConfig) {}
 
   async run() {
-    const palConfig = this.config.palConfig as any;
-    const PAL_OUT_PATH = palConfig.backend.output;
-    const RESOLVERS_PATH = `${this.config.apiOutPath}/resolvers`;
-
     console.log(`------------------------ @paljs/generator ------------------------`);
-    if (fs.existsSync(PAL_OUT_PATH)) {
-      await rm(PAL_OUT_PATH, { recursive: true });
-      await mkdir(PAL_OUT_PATH);
+    const palConfig = this.config.palConfig as any;
+    const palOutPath = palConfig.backend.output
+      ? palConfig.backend.output
+      : path.join(this.config.apiOutPath, 'paljs');
+    palConfig.backend.output = palOutPath;
+
+    if (fs.existsSync(palOutPath)) {
+      await rm(palOutPath, { recursive: true });
+      await mkdir(palOutPath);
     }
 
     const pal = new PalGenerator(
@@ -57,7 +59,7 @@ export class ZenGenerator {
      * Refer to: [PalJS GraphQL SDL inputs](https://paljs.com/plugins/sdl-inputs/)
      */
     if (palConfig.backend.doNotUseFieldUpdateOperationsInput) {
-      const palTypeDefsFilePath = path.join(PAL_OUT_PATH, 'typeDefs.ts');
+      const palTypeDefsFilePath = path.join(palOutPath, 'typeDefs.ts');
       const palTypeDefsFile = await readFile(palTypeDefsFilePath);
       const palTypeDefsFileUpdated = palTypeDefsFile
         .toString()
@@ -68,12 +70,14 @@ export class ZenGenerator {
     console.log(`- Wrote: ${this.config.palConfig.backend?.output}`);
 
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
-    if (!fs.existsSync(RESOLVERS_PATH)) {
-      await mkdir(RESOLVERS_PATH);
+    const nestResolversPath = path.join(this.config.apiOutPath, 'resolvers');
+
+    if (!fs.existsSync(nestResolversPath)) {
+      await mkdir(nestResolversPath);
     }
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
-    const dirents = await readdir(PAL_OUT_PATH, { withFileTypes: true });
+    const dirents = await readdir(palOutPath, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
     prismaNames = prismaNames.sort();
 
@@ -92,11 +96,11 @@ export class ZenGenerator {
     console.log(`* Total resolver files wrote: ${wroteCount}`);
 
     // Get the data type names via the filename of the "resolvers" directory
-    let dataTypeNames = (await readdir(RESOLVERS_PATH))
+    let dataTypeNames = (await readdir(nestResolversPath))
       .filter(f => path.basename(f) !== 'index.ts')
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
-    const indexPath = `${RESOLVERS_PATH}/index.ts`;
+    const indexPath = `${nestResolversPath}/index.ts`;
     await writeFile(indexPath, NestResolversIndexTemplate(dataTypeNames));
     console.log(`- Wrote: ${indexPath}`);
 

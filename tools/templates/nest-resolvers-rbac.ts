@@ -5,8 +5,8 @@ import { GraphQLResolveInfo } from 'graphql';
 
 import { GqlGuard, Roles } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
-import resolvers from '../generated/${name}/resolvers';
 import { IContext } from '../models';
+import resolvers from '../paljs/${name}/resolvers';
 import type {
   Aggregate${name}Args,
   CreateOne${name}Args,
