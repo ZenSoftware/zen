@@ -24,23 +24,28 @@ export type ZenGeneratorConfig = {
   caslOutFile?: string;
   authScheme?: 'ABAC' | 'RBAC';
   frontend?: {
-    prismaOutPath: string;
-    fieldsOutPath: string;
+    outPath: string;
+    /** Defaults to 'fields' */
+    fieldsFolderName?: string;
+    /** Defaults to 'prisma' */
+    queriesFolderName?: string;
   };
 };
 
 export class ZenGenerator {
   constructor(public config: ZenGeneratorConfig) {}
 
-  async generate() {
-    const palConfig = this.config.palConfig as any;
-    const PAL_OUT_PATH = palConfig.backend.output;
-    const RESOLVERS_PATH = `${this.config.apiOutPath}/resolvers`;
-
+  async run() {
     console.log(`------------------------ @paljs/generator ------------------------`);
-    if (fs.existsSync(PAL_OUT_PATH)) {
-      await rm(PAL_OUT_PATH, { recursive: true });
-      await mkdir(PAL_OUT_PATH);
+    const palConfig = this.config.palConfig as any;
+    const palOutPath = palConfig.backend.output
+      ? palConfig.backend.output
+      : path.join(this.config.apiOutPath, 'paljs');
+    palConfig.backend.output = palOutPath;
+
+    if (fs.existsSync(palOutPath)) {
+      await rm(palOutPath, { recursive: true });
+      await mkdir(palOutPath);
     }
 
     const pal = new PalGenerator(
@@ -54,7 +59,7 @@ export class ZenGenerator {
      * Refer to: [PalJS GraphQL SDL inputs](https://paljs.com/plugins/sdl-inputs/)
      */
     if (palConfig.backend.doNotUseFieldUpdateOperationsInput) {
-      const palTypeDefsFilePath = path.join(PAL_OUT_PATH, 'typeDefs.ts');
+      const palTypeDefsFilePath = path.join(palOutPath, 'typeDefs.ts');
       const palTypeDefsFile = await readFile(palTypeDefsFilePath);
       const palTypeDefsFileUpdated = palTypeDefsFile
         .toString()
@@ -65,12 +70,14 @@ export class ZenGenerator {
     console.log(`- Wrote: ${this.config.palConfig.backend?.output}`);
 
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
-    if (!fs.existsSync(RESOLVERS_PATH)) {
-      await mkdir(RESOLVERS_PATH);
+    const nestResolversPath = path.join(this.config.apiOutPath, 'resolvers');
+
+    if (!fs.existsSync(nestResolversPath)) {
+      await mkdir(nestResolversPath);
     }
 
     // Get Prisma type names via the directory names under the 'prisma' folder;
-    const dirents = await readdir(PAL_OUT_PATH, { withFileTypes: true });
+    const dirents = await readdir(palOutPath, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
     prismaNames = prismaNames.sort();
 
@@ -89,11 +96,11 @@ export class ZenGenerator {
     console.log(`* Total resolver files wrote: ${wroteCount}`);
 
     // Get the data type names via the filename of the "resolvers" directory
-    let dataTypeNames = (await readdir(RESOLVERS_PATH))
+    let dataTypeNames = (await readdir(nestResolversPath))
       .filter(f => path.basename(f) !== 'index.ts')
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
-    const indexPath = `${RESOLVERS_PATH}/index.ts`;
+    const indexPath = `${nestResolversPath}/index.ts`;
     await writeFile(indexPath, NestResolversIndexTemplate(dataTypeNames));
     console.log(`- Wrote: ${indexPath}`);
 
@@ -105,15 +112,18 @@ export class ZenGenerator {
   async generateFrontend(prismaNames: string[]) {
     if (this.config.frontend) {
       console.log(`----------------------- Front end generated ----------------------`);
+      const fieldsPath = this.config.frontend.fieldsFolderName
+        ? path.join(this.config.frontend.outPath, this.config.frontend.fieldsFolderName)
+        : path.join(this.config.frontend.outPath, 'fields');
 
-      if (!fs.existsSync(this.config.frontend.fieldsOutPath)) {
-        await mkdir(this.config.frontend.fieldsOutPath);
-      }
-      if (!fs.existsSync(this.config.frontend.prismaOutPath)) {
-        await mkdir(this.config.frontend.prismaOutPath);
-      }
+      const queriesPath = this.config.frontend.queriesFolderName
+        ? path.join(this.config.frontend.outPath, this.config.frontend.queriesFolderName)
+        : path.join(this.config.frontend.outPath, 'prisma');
 
-      const fieldsIndexPath = path.join(this.config.frontend.fieldsOutPath, `index.ts`);
+      if (!fs.existsSync(fieldsPath)) await mkdir(fieldsPath);
+      if (!fs.existsSync(queriesPath)) await mkdir(queriesPath);
+
+      const fieldsIndexPath = path.join(fieldsPath, `index.ts`);
 
       if (!fs.existsSync(fieldsIndexPath)) {
         await writeFile(fieldsIndexPath, '');
@@ -123,12 +133,12 @@ export class ZenGenerator {
       let fieldsIndexSource = (await readFile(fieldsIndexPath)).toString();
 
       for (const prismaName of prismaNames) {
-        const fieldsPath = path.join(this.config.frontend.fieldsOutPath, `${prismaName}.gql.ts`);
-        const prismaPath = path.join(this.config.frontend.prismaOutPath, `${prismaName}.gql.ts`);
+        const fieldsOutPath = path.join(fieldsPath, `${prismaName}.gql.ts`);
+        const queriesOutPath = path.join(queriesPath, `${prismaName}.gql.ts`);
 
-        if (!fs.existsSync(fieldsPath)) {
-          await writeFile(fieldsPath, ClientFieldsTemplate(prismaName));
-          console.log(`- Wrote: ${fieldsPath}`);
+        if (!fs.existsSync(fieldsOutPath)) {
+          await writeFile(fieldsOutPath, ClientFieldsTemplate(prismaName));
+          console.log(`- Wrote: ${fieldsOutPath}`);
         }
 
         const exportScript = `export * from './${prismaName}.gql';`;
@@ -137,8 +147,11 @@ export class ZenGenerator {
           fieldsIndexSource += exportScript + '\n';
         }
 
-        await writeFile(prismaPath, ClientQueriesTemplate(prismaName));
-        console.log(`- Wrote: ${prismaPath}`);
+        const fieldsFolderName = this.config.frontend.fieldsFolderName
+          ? this.config.frontend.fieldsFolderName
+          : 'fields';
+        await writeFile(queriesOutPath, ClientQueriesTemplate(prismaName, fieldsFolderName));
+        console.log(`- Wrote: ${queriesOutPath}`);
       }
     }
   }
