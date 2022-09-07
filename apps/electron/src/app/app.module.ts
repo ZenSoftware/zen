@@ -43,7 +43,7 @@ import { AppComponent } from './app.component';
         mutationNames: ['SampleUpload', 'SampleUploadMany'],
         headers: { 'Apollo-Require-Preflight': 'true' },
         fetch: (input, init) => {
-          (<any>init).headers.Authorization = 'Bearer ' + tokenVar();
+          (<any>init).headers['Authorization'] = 'Bearer ' + tokenVar();
           return fetch(input, init);
         },
       },
@@ -60,7 +60,10 @@ import { AppComponent } from './app.component';
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: Environment, useValue: environment },
-    { provide: Ability, useValue: new Ability() },
+    {
+      provide: Ability,
+      useValue: new Ability(undefined, { detectSubjectType: object => object['__typename'] }),
+    },
     { provide: PureAbility, useExisting: Ability },
   ],
   bootstrap: [AppComponent],
