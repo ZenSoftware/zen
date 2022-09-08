@@ -122,7 +122,7 @@
     "cypress": "^10.2.0",
     "cz-customizable": "^7.0.0",
     "dotenv": "^16.0.0",
-    "electron": "^19.0.0",
+    "electron": "^20.1.2",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
