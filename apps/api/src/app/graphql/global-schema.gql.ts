@@ -1,8 +1,32 @@
+/** Place global GraphQL type definitions here */
 import gql from 'graphql-tag';
 
-/** Place global GraphQL type definitions here */
+/**
+ * For subgraph schema additions refer to https://www.apollographql.com/docs/federation/federation-spec/
+ */
 
 export const typeDefs = gql`
   scalar Upload # for graphql-upload
   scalar Json # for Prisma Json type
+  scalar link__Import
+  enum link__Purpose {
+    """
+    SECURITY features provide metadata necessary to securely resolve fields.
+    """
+    SECURITY
+
+    """
+    EXECUTION features provide metadata necessary for operation execution.
+    """
+    EXECUTION
+  }
+
+  directive @link(
+    url: String!
+    as: String
+    for: link__Purpose
+    import: [link__Import]
+  ) repeatable on SCHEMA
+
+  directive @key(fields: String!, resolvable: Boolean = true) repeatable on OBJECT | INTERFACE
 `;
