@@ -1,4 +1,4 @@
-import { ApolloDriverConfig } from '@nestjs/apollo';
+import { ApolloFederationDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { GqlOptionsFactory } from '@nestjs/graphql';
 import {
@@ -19,7 +19,7 @@ import { ALL_TYPE_DEFS } from './resolvers';
 export class GqlConfigService implements GqlOptionsFactory {
   constructor(private readonly config: ConfigService, private readonly prisma: PrismaService) {}
 
-  createGqlOptions(): ApolloDriverConfig {
+  createGqlOptions(): ApolloFederationDriverConfig {
     const plugins: PluginDefinition[] = [];
     if (this.config.graphql.sandbox) plugins.push(ApolloServerPluginLandingPageLocalDefault);
     if (!this.config.graphql.trace) plugins.push(ApolloServerPluginInlineTraceDisabled());

@@ -1,4 +1,3 @@
-// import { ApolloDriver } from '@nestjs/apollo';
 import { ApolloFederationDriver } from '@nestjs/apollo';
 import { Global, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';

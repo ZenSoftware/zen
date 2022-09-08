@@ -18,6 +18,8 @@ export type Scalars = {
   Json: any;
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
+  _Any: any;
+  _FieldSet: any;
 };
 
 export type AccountInfo = {
@@ -408,6 +410,7 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type Query = {
   __typename?: 'Query';
+  _service: _Service;
   accountInfo: AccountInfo;
   aggregateUser?: Maybe<AggregateUser>;
   authExchangeToken: AuthSession;
@@ -821,6 +824,11 @@ export type UserWhereUniqueInput = {
   googleId?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   username?: InputMaybe<Scalars['String']>;
+};
+
+export type _Service = {
+  __typename?: '_Service';
+  sdl?: Maybe<Scalars['String']>;
 };
 
 export type AuthExchangeTokenVariables = Exact<{
