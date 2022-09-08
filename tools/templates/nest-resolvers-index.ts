@@ -2,7 +2,7 @@ export function NestResolversIndexTemplate(names: string[]) {
   let indexSource = `import { mergeTypeDefs } from '@graphql-tools/merge';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
-import PALJS_TYPE_DEFS from '../generated/typeDefs';
+import PALJS_TYPE_DEFS from '../paljs/typeDefs';
 import { typeDefs as GlobalTypeDefs } from '../global-schema.gql';\n`;
 
   // Construct the "resolvers" directory's "index.ts"
