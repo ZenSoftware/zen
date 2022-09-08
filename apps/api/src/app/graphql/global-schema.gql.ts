@@ -1,9 +1,8 @@
-/** Place global GraphQL type definitions here */
-import gql from 'graphql-tag';
-
 /**
+ * @description Global GraphQL SDL
  * For subgraph schema additions refer to https://www.apollographql.com/docs/federation/federation-spec/
  */
+import gql from 'graphql-tag';
 
 export const typeDefs = gql`
   scalar Upload # for graphql-upload
