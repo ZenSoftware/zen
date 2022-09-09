@@ -102,15 +102,15 @@ export class AuthResolver {
   ) {}
 
   @Query()
-  async authLogin(@Context() ctx: IContext, @Args('data') data: AuthLoginInput) {
-    const user = await this.getUserByUsername(data.username, ctx.prisma);
+  async authLogin(@Context() ctx: IContext, @Args('data') args: AuthLoginInput) {
+    const user = await this.getUserByUsername(args.username, ctx.prisma);
 
     if (!user) throw new HttpException(ApiError.AuthLogin.USER_NOT_FOUND, 400);
 
-    const correctPassword = await bcrypt.compare(data.password, user.password);
+    const correctPassword = await bcrypt.compare(args.password, user.password);
     if (!correctPassword) throw new HttpException(ApiError.AuthLogin.INCORRECT_PASSWORD, 400);
 
-    return this.auth.getAuthSession(user, data.rememberMe);
+    return this.auth.getAuthSession(user, args.rememberMe);
   }
 
   @Query()
@@ -134,14 +134,14 @@ export class AuthResolver {
   async authExchangeToken(
     @Context() ctx: IContext,
     @GqlUser() reqUser: RequestUser,
-    @Args('data') data: AuthExchangeTokenInput
+    @Args('data') args: AuthExchangeTokenInput
   ) {
     const user = await ctx.prisma.user.findUnique({
       where: { id: reqUser.id },
     });
 
     if (user) {
-      return this.auth.getAuthSession(user, data.rememberMe);
+      return this.auth.getAuthSession(user, args.rememberMe);
     } else {
       throw new HttpException(ApiError.AuthExchangeToken.USER_NOT_FOUND, 400);
     }
@@ -150,20 +150,20 @@ export class AuthResolver {
   @Query()
   async authPasswordResetRequest(
     @Context() ctx: IContext,
-    @Args('data') data: AuthPasswordResetRequestInput
+    @Args('data') args: AuthPasswordResetRequestInput
   ) {
     const possibleUsers = await ctx.prisma.user.findMany({
       where: {
         OR: [
           {
             email: {
-              equals: data.emailOrUsername,
+              equals: args.emailOrUsername,
               mode: 'insensitive',
             },
           },
           {
             username: {
-              equals: data.emailOrUsername,
+              equals: args.emailOrUsername,
               mode: 'insensitive',
             },
           },
@@ -181,11 +181,11 @@ export class AuthResolver {
   @Mutation()
   async authPasswordResetConfirmation(
     @Context() ctx: IContext,
-    @Args('data') data: AuthPasswordResetConfirmationInput
+    @Args('data') args: AuthPasswordResetConfirmationInput
   ) {
     let tokenPayload;
     try {
-      tokenPayload = this.jwtService.verify(data.token);
+      tokenPayload = this.jwtService.verify(args.token);
     } catch {
       throw new HttpException(ApiError.AuthPasswordResetConfirmation.UNAUTHORIZED, 400);
     }
@@ -194,7 +194,7 @@ export class AuthResolver {
 
     if (!user) throw new HttpException(ApiError.AuthPasswordResetConfirmation.USER_NOT_FOUND, 400);
 
-    const hashedPassword = await bcrypt.hash(data.newPassword, this.config.bcryptSalt);
+    const hashedPassword = await bcrypt.hash(args.newPassword, this.config.bcryptSalt);
 
     user = await ctx.prisma.user.update({
       where: { id: user.id },
@@ -205,22 +205,22 @@ export class AuthResolver {
   }
 
   @Mutation()
-  async authRegister(@Context() ctx: IContext, @Args('data') data: AuthRegisterInput) {
+  async authRegister(@Context() ctx: IContext, @Args('data') args: AuthRegisterInput) {
     if (!this.config.publicRegistration)
       throw new HttpException(ApiError.AuthRegister.NO_PUBLIC_REGISTRATIONS, 403);
 
-    if (await this.getUserByUsername(data.username, ctx.prisma))
+    if (await this.getUserByUsername(args.username, ctx.prisma))
       throw new HttpException(ApiError.AuthRegister.USERNAME_TAKEN, 400);
 
-    if (await this.getUserByEmail(data.email, ctx.prisma))
+    if (await this.getUserByEmail(args.email, ctx.prisma))
       throw new HttpException(ApiError.AuthRegister.EMAIL_TAKEN, 400);
 
-    const hashedPassword = await bcrypt.hash(data.password, this.config.bcryptSalt);
+    const hashedPassword = await bcrypt.hash(args.password, this.config.bcryptSalt);
 
     const user = await ctx.prisma.user.create({
       data: {
-        username: data.username,
-        email: data.email,
+        username: args.username,
+        email: args.email,
         password: hashedPassword,
       },
     });
@@ -248,16 +248,16 @@ export class AuthResolver {
   @UseGuards(GqlGuard)
   async authPasswordChange(
     @Context() ctx: IContext,
-    @Args('data') data: AuthPasswordChangeInput,
+    @Args('data') args: AuthPasswordChangeInput,
     @GqlUser() reqUser: RequestUser
   ) {
     const user = await ctx.prisma.user.findUnique({ where: { id: reqUser.id } });
     if (!user) throw new HttpException(ApiError.AuthPasswordChange.USER_NOT_FOUND, 400);
 
-    const correctPassword = await bcrypt.compare(data.oldPassword, user.password);
+    const correctPassword = await bcrypt.compare(args.oldPassword, user.password);
     if (!correctPassword) throw new HttpException(ApiError.AuthPasswordChange.WRONG_PASSWORD, 400);
 
-    const hashedPassword = await bcrypt.hash(data.newPassword, this.config.bcryptSalt);
+    const hashedPassword = await bcrypt.hash(args.newPassword, this.config.bcryptSalt);
 
     await ctx.prisma.user.update({
       where: { id: user.id },
