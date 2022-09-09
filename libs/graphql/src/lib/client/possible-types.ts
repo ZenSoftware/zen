@@ -5,7 +5,11 @@
         }
       }
       const result: PossibleTypesResultData = {
-  "possibleTypes": {}
+  "possibleTypes": {
+    "_Entity": [
+      "User"
+    ]
+  }
 };
       export default result;
     

@@ -28,4 +28,7 @@ export const typeDefs = gql`
   ) repeatable on SCHEMA
 
   directive @key(fields: String!, resolvable: Boolean = true) repeatable on OBJECT | INTERFACE
+
+  extend schema
+    @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key", "@shareable"])
 `;

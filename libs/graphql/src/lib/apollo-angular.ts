@@ -19,7 +19,8 @@ export type Scalars = {
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
   _Any: any;
-  _FieldSet: any;
+  federation__FieldSet: any;
+  link__Import: any;
 };
 
 export type AccountInfo = {
@@ -410,6 +411,7 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type Query = {
   __typename?: 'Query';
+  _entities: Array<Maybe<_Entity>>;
   _service: _Service;
   accountInfo: AccountInfo;
   aggregateUser?: Maybe<AggregateUser>;
@@ -422,6 +424,11 @@ export type Query = {
   findUniqueUser?: Maybe<User>;
   loggedIn: Scalars['Boolean'];
   userRoles: Array<Role>;
+};
+
+
+export type Query_EntitiesArgs = {
+  representations: Array<Scalars['_Any']>;
 };
 
 
@@ -826,10 +833,19 @@ export type UserWhereUniqueInput = {
   username?: InputMaybe<Scalars['String']>;
 };
 
+export type _Entity = User;
+
 export type _Service = {
   __typename?: '_Service';
   sdl?: Maybe<Scalars['String']>;
 };
+
+export enum Link__Purpose {
+  /** EXECUTION features provide metadata necessary for operation execution. */
+  Execution = 'EXECUTION',
+  /** SECURITY features provide metadata necessary to securely resolve fields. */
+  Security = 'SECURITY'
+}
 
 export type AuthExchangeTokenVariables = Exact<{
   data: AuthExchangeTokenInput;

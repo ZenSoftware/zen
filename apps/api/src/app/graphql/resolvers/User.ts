@@ -7,6 +7,7 @@ import {
   Parent,
   Query,
   ResolveField,
+  ResolveReference,
   Resolver,
 } from '@nestjs/graphql';
 import { User } from '@prisma/client';
@@ -50,6 +51,11 @@ export class UserResolver {
   async rules(@Parent() parent: User) {
     const ability = await this.caslAbilityFactory.createAbility(parent);
     return ability.rules;
+  }
+
+  @ResolveReference()
+  resolveReference(@Parent() reference, @Context() ctx: IContext) {
+    return resolvers.User.__resolveReference(reference, ctx);
   }
 
   @Query()

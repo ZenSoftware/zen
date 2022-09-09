@@ -10,5 +10,6 @@ module.exports = {
     generator: 'sdl',
     output: 'apps/api/src/app/graphql/paljs',
     doNotUseFieldUpdateOperationsInput: true,
+    federation: true,
   },
 };

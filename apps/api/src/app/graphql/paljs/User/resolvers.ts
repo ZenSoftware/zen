@@ -38,5 +38,11 @@ const resolvers: Resolvers = {
       return prisma.user.updateMany(args);
     },
   },
+  User: {
+    __resolveReference(reference, { prisma }) {
+      const [field, value] = Object.entries(reference).find(e => e[0] !== '__typename');
+      return prisma.user.findUnique({ where: { [field]: value } });
+    },
+  },
 };
 export default resolvers;

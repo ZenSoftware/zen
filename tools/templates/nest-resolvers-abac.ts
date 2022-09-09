@@ -1,6 +1,15 @@
 export function NestResolversABACTemplate(name: string) {
   return `import { UseGuards } from '@nestjs/common';
-import { Args, Context, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Context,
+  Info,
+  Mutation,
+  Parent,
+  Query,
+  ResolveReference,
+  Resolver,
+} from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
 
 import { CaslSubject, GqlCaslGuard } from '../../auth';
@@ -36,6 +45,11 @@ export const typeDefs = null;
 @Resolver('${name}')
 @CaslSubject('${name}')
 export class ${name}Resolver {
+  @ResolveReference()
+  resolveReference(@Parent() reference, @Context() ctx: IContext) {
+    return resolvers.User.__resolveReference(reference, ctx);
+  }
+
   @Query()
   @UseGuards(GqlCaslGuard('read'))
   async findUnique${name}(
