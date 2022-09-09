@@ -47,7 +47,7 @@ export const typeDefs = null;
 export class ${name}Resolver {
   @ResolveReference()
   resolveReference(@Parent() reference, @Context() ctx: IContext) {
-    return resolvers.User.__resolveReference(reference, ctx);
+    return resolvers.${name}.__resolveReference(reference, ctx);
   }
 
   @Query()
