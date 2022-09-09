@@ -11,8 +11,10 @@ These are a complete set of Nest guards & directives that can be applied to eith
 `GqlCaslGuard` and `GqlGuard` extract the user from the JWT token and makes the `RequestUser` accessible via an injectable paramater `GqlUser`.  This is symmetric to how the Nest Http Controllers guards `HttpCaslGuard` & `HttpGuard` work to extract the `RequestUser` via `HttpUser`.  The definition for `RequestUser` is quite simple:
 
 ```ts
+import { User } from '@prisma/client';
+
 export class RequestUser {
-  id: number;
+  id: User['id'];
   roles: string[];
 }
 ```
