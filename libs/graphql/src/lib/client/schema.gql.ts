@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-gql`
+export default gql`
   extend type Query {
     loggedIn: Boolean!
     userRoles: [String!]!
