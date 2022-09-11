@@ -3,7 +3,7 @@ export function ClientQueriesTemplate(name: string, fieldsFolderName: string) {
 
 import { ${name}Fields } from '../${fieldsFolderName}';
 
-gql\`
+export default gql\`
   query FindUnique${name}($where: ${name}WhereUniqueInput!) {
     findUnique${name}(where: $where) {
       ...${name}Fields
