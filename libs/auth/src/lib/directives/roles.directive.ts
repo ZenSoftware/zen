@@ -6,6 +6,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+import { Role } from '@zen/api-interfaces';
 import { UserRolesGQL } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
@@ -29,7 +30,7 @@ export class RolesDirective implements OnDestroy {
   }
 
   @Input()
-  set roles(roles: string | string[]) {
+  set roles(roles: keyof typeof Role | Array<keyof typeof Role>) {
     this.#roles = roles;
     this.update();
   }
