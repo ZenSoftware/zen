@@ -3,14 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { emailValidator, usernameValidator } from '@zen/auth';
-import { Action } from '@zen/auth';
 import { trimObjectStrings } from '@zen/common';
 import { ZenSnackbarErrorService } from '@zen/components';
 import { UpdateOneUserGQL, UserFields, UserUpdateInput } from '@zen/graphql';
 import { Apollo } from 'apollo-angular';
 
 export interface DialogData {
-  action: Action.create | Action.update;
+  action: 'create' | 'update';
   item?: UserFields;
 }
 
@@ -24,7 +23,6 @@ interface FormType {
   templateUrl: 'zen-user-input.component.html',
 })
 export class ZenUserInputComponent {
-  Action = Action;
   loading = false;
   form = new FormGroup<FormType>({
     username: new FormControl('', {
@@ -50,7 +48,7 @@ export class ZenUserInputComponent {
     private snackBarError: ZenSnackbarErrorService,
     private updateOneUserGQL: UpdateOneUserGQL
   ) {
-    if (data.action === Action.update) {
+    if (data.action === 'update') {
       this.username.setValue(data.item?.username);
       this.email.setValue(data.item?.email as string);
     }
@@ -60,7 +58,7 @@ export class ZenUserInputComponent {
     if (!this.loading) {
       this.loading = true;
 
-      if (this.data.action === Action.update) {
+      if (this.data.action === 'update') {
         const updateInput: UserUpdateInput = {
           username: this.username.value,
           email: this.email.value,

@@ -29,7 +29,6 @@ import {
   State,
   process,
 } from '@progress/kendo-data-query';
-import { Action } from '@zen/auth';
 import { ZenConfirmComponent, ZenSnackbarErrorService } from '@zen/components';
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
@@ -138,9 +137,9 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
     const ability = this.#settings.ability;
     if (ability) {
-      this.showAdd = ability.can(Action.create, this.#settings.typename);
-      this.showEdit = row => ability.can(Action.update, row);
-      this.showDelete = row => ability.can(Action.delete, row);
+      this.showAdd = ability.can('create', this.#settings.typename);
+      this.showEdit = row => ability.can('update', row);
+      this.showDelete = row => ability.can('delete', row);
     }
 
     this.gridSettings = cloneDeep(this.#defaultSettings) as any;
