@@ -35,8 +35,6 @@ export interface User {
   roles?: Resolver<Client.User, {}, Client.Role[] | null>;
   googleId?: Resolver<Client.User, {}, string | null>;
   googleProfile?: Resolver<Client.User, {}, any | null>;
-
-  __resolveReference?: any;
 }
 
 export interface Query {
@@ -448,19 +446,8 @@ export interface EnumRoleNullableListFilter {
 }
 
 export interface JsonNullableFilter {
-  equals?: any;
-  path?: string[];
-  string_contains?: string;
-  string_starts_with?: string;
-  string_ends_with?: string;
-  array_contains?: any | null;
-  array_starts_with?: any | null;
-  array_ends_with?: any | null;
-  lt?: any;
-  lte?: any;
-  gt?: any;
-  gte?: any;
-  not?: any;
+  equals?: JsonNullValueFilter;
+  not?: JsonNullValueFilter;
 }
 
 export interface UserCountOrderByAggregateInput {
@@ -567,19 +554,8 @@ export interface StringWithAggregatesFilter {
 }
 
 export interface JsonNullableWithAggregatesFilter {
-  equals?: any;
-  path?: string[];
-  string_contains?: string;
-  string_starts_with?: string;
-  string_ends_with?: string;
-  array_contains?: any | null;
-  array_starts_with?: any | null;
-  array_ends_with?: any | null;
-  lt?: any;
-  lte?: any;
-  gt?: any;
-  gte?: any;
-  not?: any;
+  equals?: JsonNullValueFilter;
+  not?: JsonNullValueFilter;
   _count?: NestedIntNullableFilter;
   _min?: NestedJsonNullableFilter;
   _max?: NestedJsonNullableFilter;
@@ -751,44 +727,10 @@ export interface NestedStringWithAggregatesFilter {
 }
 
 export interface NestedJsonNullableFilter {
-  equals?: any;
-  path?: string[];
-  string_contains?: string;
-  string_starts_with?: string;
-  string_ends_with?: string;
-  array_contains?: any | null;
-  array_starts_with?: any | null;
-  array_ends_with?: any | null;
-  lt?: any;
-  lte?: any;
-  gt?: any;
-  gte?: any;
-  not?: any;
+  equals?: JsonNullValueFilter;
+  not?: JsonNullValueFilter;
 }
 
-export enum JsonNullValueFilter {
-  DbNull = 'DbNull',
-  JsonNull = 'JsonNull',
-  AnyNull = 'AnyNull',
-}
-export enum NullableJsonNullValueInput {
-  DbNull = 'DbNull',
-  JsonNull = 'JsonNull',
-}
-export enum QueryMode {
-  default = 'default',
-  insensitive = 'insensitive',
-}
-export enum SortOrder {
-  asc = 'asc',
-  desc = 'desc',
-}
-export enum TransactionIsolationLevel {
-  ReadUncommitted = 'ReadUncommitted',
-  ReadCommitted = 'ReadCommitted',
-  RepeatableRead = 'RepeatableRead',
-  Serializable = 'Serializable',
-}
 export enum UserScalarFieldEnum {
   id = 'id',
   createdAt = 'createdAt',
@@ -798,6 +740,23 @@ export enum UserScalarFieldEnum {
   roles = 'roles',
   googleId = 'googleId',
   googleProfile = 'googleProfile',
+}
+export enum SortOrder {
+  asc = 'asc',
+  desc = 'desc',
+}
+export enum NullableJsonNullValueInput {
+  DbNull = 'DbNull',
+  JsonNull = 'JsonNull',
+}
+export enum QueryMode {
+  default = 'default',
+  insensitive = 'insensitive',
+}
+export enum JsonNullValueFilter {
+  DbNull = 'DbNull',
+  JsonNull = 'JsonNull',
+  AnyNull = 'AnyNull',
 }
 export enum Role {
   Super = 'Super',

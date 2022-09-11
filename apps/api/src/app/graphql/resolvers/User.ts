@@ -53,10 +53,10 @@ export class UserResolver {
     return ability.rules;
   }
 
-  @ResolveReference()
-  resolveReference(@Parent() reference, @Context() ctx: IContext) {
-    return resolvers.User.__resolveReference(reference, ctx);
-  }
+  // @ResolveReference()
+  // resolveReference(@Parent() reference, @Context() ctx: IContext) {
+  //   return resolvers.User.__resolveReference(reference, ctx);
+  // }
 
   @Query()
   @UseGuards(GqlCaslGuard('read'))

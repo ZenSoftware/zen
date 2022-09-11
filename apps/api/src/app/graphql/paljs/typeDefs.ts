@@ -1,6 +1,6 @@
 import { mergeTypeDefs } from '@graphql-tools/merge';
-import { sdlInputs } from '@paljs/plugins';
 
+import SDLInputs from './sdl-inputs';
 import User from './User/typeDefs';
 
-export default mergeTypeDefs([sdlInputs({ doNotUseFieldUpdateOperationsInput: true }), User]);
+export default mergeTypeDefs([SDLInputs, User]);

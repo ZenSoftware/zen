@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  type User @key(fields: "id") {
+  type User {
     id: Int!
     createdAt: DateTime!
     username: String
