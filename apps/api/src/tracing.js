@@ -1,18 +1,19 @@
-const { JaegerExporter } = require('@opentelemetry/exporter-jaeger');
-const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
-const { registerInstrumentations } = require('@opentelemetry/instrumentation');
-const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express');
-const { GraphQLInstrumentation } = require('@opentelemetry/instrumentation-graphql');
-const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
-const { Resource } = require('@opentelemetry/resources');
-const {
+import { JaegerExporter } from '@opentelemetry/exporter-jaeger';
+import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
+import { registerInstrumentations } from '@opentelemetry/instrumentation';
+import { ExpressInstrumentation } from '@opentelemetry/instrumentation-express';
+import { GraphQLInstrumentation } from '@opentelemetry/instrumentation-graphql';
+import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
+import { Resource } from '@opentelemetry/resources';
+import {
   BatchSpanProcessor,
   ConsoleSpanExporter,
   SimpleSpanProcessor,
-} = require('@opentelemetry/sdk-trace-base');
-const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
-const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
-const { environment } = require('./environments/environment');
+} from '@opentelemetry/sdk-trace-base';
+import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
+import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
+
+import { environment } from './environments/environment';
 
 if (environment.openTelemetry) {
   const provider = new NodeTracerProvider({
