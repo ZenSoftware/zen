@@ -26,7 +26,6 @@ export class ZenUserInputComponent {
   loading = false;
   form = new FormGroup<FormType>({
     username: new FormControl('', {
-      validators: [Validators.required, usernameValidator()],
       nonNullable: true,
     }),
     email: new FormControl('', {
