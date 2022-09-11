@@ -2,7 +2,6 @@ import { ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-import { Role } from '@prisma/client';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { ROLES_KEY } from '../decorators/roles.decorator';
@@ -38,8 +37,8 @@ export class GqlGuard extends AuthGuard('jwt') {
     await super.canActivate(context);
 
     const user = ctx.getContext().req.user;
-    const classRoles = this.reflector.get<Role[]>(ROLES_KEY, ctx.getClass());
-    const handlerRoles = this.reflector.get<Role[]>(ROLES_KEY, ctx.getHandler());
+    const classRoles = this.reflector.get<string[]>(ROLES_KEY, ctx.getClass());
+    const handlerRoles = this.reflector.get<string[]>(ROLES_KEY, ctx.getHandler());
 
     return rbacLogic(user.roles, classRoles, handlerRoles);
   }
