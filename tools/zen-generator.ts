@@ -7,6 +7,7 @@ import { promisify } from 'util';
 import { Generator as PalGenerator } from '@paljs/generator';
 import { Config as PalConfig } from '@paljs/types';
 
+import { sdlInputsString } from './sdl-inputs';
 import {
   ClientFieldsTemplate,
   ClientQueriesTemplate,
@@ -14,6 +15,8 @@ import {
   NestResolversABACTemplate,
   NestResolversIndexTemplate,
   NestResolversRBACTemplate,
+  SDLInputsTemplate,
+  TypeDefsTemplate,
 } from './templates';
 
 const execAsync = promisify(exec);
@@ -48,26 +51,30 @@ export class ZenGenerator {
       await mkdir(palOutPath);
     }
 
+    const inputsString = await sdlInputsString({
+      dmmfOptions: { datamodelPath: this.config.palConfig.schema },
+      doNotUseFieldUpdateOperationsInput:
+        this.config.palConfig.backend?.doNotUseFieldUpdateOperationsInput,
+    });
+    const inputOutPath = path.join(palOutPath, 'sdl-inputs.ts');
+    await writeFile(inputOutPath, SDLInputsTemplate(inputsString));
+    console.log(`- Wrote: ${inputOutPath}`);
+
     const pal = new PalGenerator(
       { name: palConfig.backend.generator, schemaPath: palConfig.schema },
       palConfig.backend
     );
     await pal.run();
-
-    /**
-     * Insert `doNotUseFieldUpdateOperationsInput: true` into generated PalJS `typeDefs.ts` file
-     * Refer to: [PalJS GraphQL SDL inputs](https://paljs.com/plugins/sdl-inputs/)
-     */
-    if (palConfig.backend.doNotUseFieldUpdateOperationsInput) {
-      const palTypeDefsFilePath = path.join(palOutPath, 'typeDefs.ts');
-      const palTypeDefsFile = await readFile(palTypeDefsFilePath);
-      const palTypeDefsFileUpdated = palTypeDefsFile
-        .toString()
-        .replace('sdlInputs()', 'sdlInputs({ doNotUseFieldUpdateOperationsInput: true })');
-      await writeFile(palTypeDefsFilePath, palTypeDefsFileUpdated);
-    }
-
     console.log(`- Wrote: ${palOutPath}`);
+
+    // Get Prisma type names via the directory names under the 'prisma' folder;
+    const dirents = await readdir(palOutPath, { withFileTypes: true });
+    let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
+    prismaNames = prismaNames.sort();
+
+    const palTypeDefsFilePath = path.join(palOutPath, 'typeDefs.ts');
+    await writeFile(palTypeDefsFilePath, TypeDefsTemplate(prismaNames));
+    console.log(`- Wrote: ${palTypeDefsFilePath}`);
 
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
     const nestResolversPath = path.join(this.config.apiOutPath, 'resolvers');
@@ -75,11 +82,6 @@ export class ZenGenerator {
     if (!fs.existsSync(nestResolversPath)) {
       await mkdir(nestResolversPath);
     }
-
-    // Get Prisma type names via the directory names under the 'prisma' folder;
-    const dirents = await readdir(palOutPath, { withFileTypes: true });
-    let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
-    prismaNames = prismaNames.sort();
 
     let wroteCount = 0;
     if (!this.config.authScheme || this.config.authScheme === 'ABAC') {
@@ -100,11 +102,11 @@ export class ZenGenerator {
       .filter(f => path.basename(f) !== 'index.ts')
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
-    const indexPath = `${nestResolversPath}/index.ts`;
+    const indexPath = path.join(nestResolversPath, 'index.ts');
     await writeFile(indexPath, NestResolversIndexTemplate(dataTypeNames));
     console.log(`- Wrote: ${indexPath}`);
 
-    await this.execLocal(`prettier --loglevel warn --write "${this.config.apiOutPath}/**/*.ts"\n`);
+    await this.execLocal(`prettier --loglevel warn --write "${this.config.apiOutPath}/**/*.ts"`);
 
     await this.generateFrontend(prismaNames);
   }

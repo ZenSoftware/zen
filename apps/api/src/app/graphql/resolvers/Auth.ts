@@ -115,18 +115,19 @@ export class AuthResolver {
 
   @Query()
   @UseGuards(GqlGuard)
-  async accountInfo(@Context() ctx: IContext, @GqlUser() reqUser: RequestUser) {
+  async accountInfo(
+    @Context() ctx: IContext,
+    @GqlUser() reqUser: RequestUser
+  ): Promise<AccountInfo> {
     const user = await ctx.prisma.user.findUnique({
       where: { id: reqUser.id },
     });
 
-    const result: AccountInfo = {
+    return {
       username: user.username,
       hasPassword: !!user.password,
       googleProfile: user.googleProfile as any,
     };
-
-    return result;
   }
 
   @Query()
