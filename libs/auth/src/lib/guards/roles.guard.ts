@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, CanLoad, Router } from '@angular/router';
-import { Role } from '@zen/graphql';
 
 import { AuthService } from '../auth.service';
 
 export class RolesGuard {
-  static has(...roles: Array<keyof typeof Role>) {
+  static has(...roles: string[]) {
     @Injectable({
       providedIn: 'root',
     })
@@ -28,7 +27,7 @@ export class RolesGuard {
     return HasRoles;
   }
 
-  static not(...roles: Array<keyof typeof Role>) {
+  static not(...roles: string[]) {
     @Injectable({
       providedIn: 'root',
     })

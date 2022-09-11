@@ -2,7 +2,6 @@ export { AllowAnonymous } from './decorators/allow-anonymous.decorator';
 export { AuthGuard } from '@nestjs/passport';
 export { ForbidNestedCreateGuard } from './guards/forbid-nested-create.guard';
 export { RequestUser } from './models/request-user';
-export { Role } from '@prisma/client';
 export { Roles } from './decorators/roles.decorator';
 export * from './auth.module';
 export * from './auth.service';
