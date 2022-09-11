@@ -14,11 +14,7 @@ model User {
   username      String?  @unique
   password      String?
   email         String   @unique
-  roles         Role[]
+  roles         String[]
   googleId      String?  @unique
   googleProfile Json?
-}
-
-enum Role {
-  Super
 }

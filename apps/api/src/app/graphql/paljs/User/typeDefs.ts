@@ -7,7 +7,7 @@ export default gql`
     username: String
     password: String
     email: String!
-    roles: [Role!]!
+    roles: [String!]!
     googleId: String
     googleProfile: Json
   }
