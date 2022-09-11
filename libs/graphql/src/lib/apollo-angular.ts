@@ -170,16 +170,38 @@ export enum JsonNullValueFilter {
 }
 
 export type JsonNullableFilter = {
+  array_contains?: InputMaybe<Scalars['Json']>;
+  array_ends_with?: InputMaybe<Scalars['Json']>;
+  array_starts_with?: InputMaybe<Scalars['Json']>;
   equals?: InputMaybe<Scalars['Json']>;
+  gt?: InputMaybe<Scalars['Json']>;
+  gte?: InputMaybe<Scalars['Json']>;
+  lt?: InputMaybe<Scalars['Json']>;
+  lte?: InputMaybe<Scalars['Json']>;
   not?: InputMaybe<Scalars['Json']>;
+  path?: InputMaybe<Array<Scalars['String']>>;
+  string_contains?: InputMaybe<Scalars['String']>;
+  string_ends_with?: InputMaybe<Scalars['String']>;
+  string_starts_with?: InputMaybe<Scalars['String']>;
 };
 
 export type JsonNullableWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntNullableFilter>;
   _max?: InputMaybe<NestedJsonNullableFilter>;
   _min?: InputMaybe<NestedJsonNullableFilter>;
+  array_contains?: InputMaybe<Scalars['Json']>;
+  array_ends_with?: InputMaybe<Scalars['Json']>;
+  array_starts_with?: InputMaybe<Scalars['Json']>;
   equals?: InputMaybe<Scalars['Json']>;
+  gt?: InputMaybe<Scalars['Json']>;
+  gte?: InputMaybe<Scalars['Json']>;
+  lt?: InputMaybe<Scalars['Json']>;
+  lte?: InputMaybe<Scalars['Json']>;
   not?: InputMaybe<Scalars['Json']>;
+  path?: InputMaybe<Array<Scalars['String']>>;
+  string_contains?: InputMaybe<Scalars['String']>;
+  string_ends_with?: InputMaybe<Scalars['String']>;
+  string_starts_with?: InputMaybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -331,8 +353,19 @@ export type NestedIntWithAggregatesFilter = {
 };
 
 export type NestedJsonNullableFilter = {
+  array_contains?: InputMaybe<Scalars['Json']>;
+  array_ends_with?: InputMaybe<Scalars['Json']>;
+  array_starts_with?: InputMaybe<Scalars['Json']>;
   equals?: InputMaybe<Scalars['Json']>;
+  gt?: InputMaybe<Scalars['Json']>;
+  gte?: InputMaybe<Scalars['Json']>;
+  lt?: InputMaybe<Scalars['Json']>;
+  lte?: InputMaybe<Scalars['Json']>;
   not?: InputMaybe<Scalars['Json']>;
+  path?: InputMaybe<Array<Scalars['String']>>;
+  string_contains?: InputMaybe<Scalars['String']>;
+  string_ends_with?: InputMaybe<Scalars['String']>;
+  string_starts_with?: InputMaybe<Scalars['String']>;
 };
 
 export type NestedStringFilter = {
@@ -573,6 +606,13 @@ export type Subscription = {
   __typename?: 'Subscription';
   sampleSubscription: SampleSubscriptionResult;
 };
+
+export enum TransactionIsolationLevel {
+  ReadCommitted = 'ReadCommitted',
+  ReadUncommitted = 'ReadUncommitted',
+  RepeatableRead = 'RepeatableRead',
+  Serializable = 'Serializable'
+}
 
 export type User = {
   __typename?: 'User';

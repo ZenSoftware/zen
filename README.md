@@ -102,7 +102,7 @@ npm start
 - [x] [Nx for project management](https://nx.dev/angular) to allow for the use of [Nx Console extensions for VSCode](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console). Nx Console is a GUI interface for monorepos that adds a lot of modern developer conveniences. It also helps to simplify the use of the various Angular & Nest code generation schematics available in the ecosystem.
 - [x] Strict typings with Typescript for everything. Even the code generation tools are written in Typescript.
 - [x] [Angular Language Service for VSCode](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for modern IDE tooling.
-- [x] NPM scripts for versioned releases of the Nest **api** server as a containerized Docker image. [node:16-alpine](https://hub.docker.com/_/node?tab=description&ref=hackernoon.com) is used as the Docker container base image, and the appropriate `tsconfig.app.json` configurations are being applied for the Nest app.
+- [x] NPM scripts for versioned releases of the Nest **api** server as a containerized Docker image. [node:18-alpine](https://hub.docker.com/_/node?tab=description&ref=hackernoon.com) is used as the Docker container base image, and the appropriate `tsconfig.app.json` configurations are being applied for the Nest app.
 - [x] Example [Kubernetes](https://kubernetes.io/) deployment scripts.
 - [x] Enforced code formatting via [Prettier](https://prettier.io/) & [import-sort](https://www.npmjs.com/package/prettier-plugin-import-sort), guaranteeing all contributions to the project are standardized with predictable structure, and clear legibility.
 - [x] [Commitizen](https://github.com/commitizen/cz-cli) for standardizing git commits.
