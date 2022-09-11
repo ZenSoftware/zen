@@ -45,10 +45,6 @@ export default gql`
     googleProfile
   }
 
-  enum Role {
-    Super
-  }
-
   input UserWhereInput {
     AND: [UserWhereInput!]
     OR: [UserWhereInput!]
@@ -58,7 +54,7 @@ export default gql`
     username: StringNullableFilter
     password: StringNullableFilter
     email: StringFilter
-    roles: EnumRoleNullableListFilter
+    roles: StringNullableListFilter
     googleId: StringNullableFilter
     googleProfile: JsonNullableFilter
   }
@@ -106,7 +102,7 @@ export default gql`
     username: StringNullableWithAggregatesFilter
     password: StringNullableWithAggregatesFilter
     email: StringWithAggregatesFilter
-    roles: EnumRoleNullableListFilter
+    roles: StringNullableListFilter
     googleId: StringNullableWithAggregatesFilter
     googleProfile: JsonNullableWithAggregatesFilter
   }
@@ -116,7 +112,7 @@ export default gql`
     username: String
     password: String
     email: String!
-    roles: [Role!]
+    roles: [String!]
     googleId: String
     googleProfile: Json
   }
@@ -127,7 +123,7 @@ export default gql`
     username: String
     password: String
     email: String!
-    roles: [Role!]
+    roles: [String!]
     googleId: String
     googleProfile: Json
   }
@@ -137,7 +133,7 @@ export default gql`
     username: String
     password: String
     email: String
-    roles: [Role!]
+    roles: [String!]
     googleId: String
     googleProfile: Json
   }
@@ -148,7 +144,7 @@ export default gql`
     username: String
     password: String
     email: String
-    roles: [Role!]
+    roles: [String!]
     googleId: String
     googleProfile: Json
   }
@@ -159,7 +155,7 @@ export default gql`
     username: String
     password: String
     email: String!
-    roles: [Role!]
+    roles: [String!]
     googleId: String
     googleProfile: Json
   }
@@ -169,7 +165,7 @@ export default gql`
     username: String
     password: String
     email: String
-    roles: [Role!]
+    roles: [String!]
     googleId: String
     googleProfile: Json
   }
@@ -180,7 +176,7 @@ export default gql`
     username: String
     password: String
     email: String
-    roles: [Role!]
+    roles: [String!]
     googleId: String
     googleProfile: Json
   }
@@ -237,11 +233,11 @@ export default gql`
     not: NestedStringFilter
   }
 
-  input EnumRoleNullableListFilter {
-    equals: [Role!]
-    has: Role
-    hasEvery: [Role!]
-    hasSome: [Role!]
+  input StringNullableListFilter {
+    equals: [String!]
+    has: String
+    hasEvery: [String!]
+    hasSome: [String!]
     isEmpty: Boolean
   }
 
@@ -384,7 +380,7 @@ export default gql`
   }
 
   input UserCreaterolesInput {
-    set: [Role!]!
+    set: [String!]!
   }
 
   input DateTimeFieldUpdateOperationsInput {
@@ -400,8 +396,8 @@ export default gql`
   }
 
   input UserUpdaterolesInput {
-    set: [Role!]
-    push: [Role!]
+    set: [String!]
+    push: [String!]
   }
 
   input IntFieldUpdateOperationsInput {
