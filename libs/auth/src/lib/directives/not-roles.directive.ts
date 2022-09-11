@@ -6,6 +6,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+import { Role } from '@zen/api-interfaces';
 import { UserRolesGQL } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
@@ -29,7 +30,7 @@ export class NotRolesDirective implements OnDestroy {
   }
 
   @Input()
-  set notRoles(roles: string | string[]) {
+  set notRoles(roles: keyof typeof Role | Array<keyof typeof Role>) {
     this.#roles = roles;
     this.update();
   }
