@@ -32,7 +32,7 @@ export interface User {
   username?: Resolver<Client.User, {}, string | null>;
   password?: Resolver<Client.User, {}, string | null>;
   email?: Resolver<Client.User, {}, string>;
-  roles?: Resolver<Client.User, {}, Client.Role[] | null>;
+  roles?: Resolver<Client.User, {}, string[] | null>;
   googleId?: Resolver<Client.User, {}, string | null>;
   googleProfile?: Resolver<Client.User, {}, any | null>;
 }
@@ -84,7 +84,7 @@ export interface UserGroupByOutputType {
   username?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string | null>;
   password?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string | null>;
   email?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string>;
-  roles?: Resolver<Client.Prisma.UserGroupByOutputType, {}, Client.Role[] | null>;
+  roles?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string[] | null>;
   googleId?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string | null>;
   googleProfile?: Resolver<Client.Prisma.UserGroupByOutputType, {}, any | null>;
   _count?: Resolver<
@@ -258,7 +258,7 @@ export interface UserWhereInput {
   username?: StringNullableFilter | null;
   password?: StringNullableFilter | null;
   email?: StringFilter;
-  roles?: EnumRoleNullableListFilter;
+  roles?: StringNullableListFilter;
   googleId?: StringNullableFilter | null;
   googleProfile?: JsonNullableFilter;
 }
@@ -306,7 +306,7 @@ export interface UserScalarWhereWithAggregatesInput {
   username?: StringNullableWithAggregatesFilter | null;
   password?: StringNullableWithAggregatesFilter | null;
   email?: StringWithAggregatesFilter;
-  roles?: EnumRoleNullableListFilter;
+  roles?: StringNullableListFilter;
   googleId?: StringNullableWithAggregatesFilter | null;
   googleProfile?: JsonNullableWithAggregatesFilter;
 }
@@ -437,11 +437,11 @@ export interface StringFilter {
   not?: NestedStringFilter;
 }
 
-export interface EnumRoleNullableListFilter {
-  equals?: Role[] | null;
-  has?: Role | null;
-  hasEvery?: Role[];
-  hasSome?: Role[];
+export interface StringNullableListFilter {
+  equals?: string[] | null;
+  has?: string | null;
+  hasEvery?: string[];
+  hasSome?: string[];
   isEmpty?: boolean;
 }
 
@@ -562,7 +562,7 @@ export interface JsonNullableWithAggregatesFilter {
 }
 
 export interface UserCreaterolesInput {
-  set: Role[];
+  set: string[];
 }
 
 export interface DateTimeFieldUpdateOperationsInput {
@@ -578,8 +578,8 @@ export interface StringFieldUpdateOperationsInput {
 }
 
 export interface UserUpdaterolesInput {
-  set?: Role[];
-  push?: Role;
+  set?: string[];
+  push?: string;
 }
 
 export interface IntFieldUpdateOperationsInput {
@@ -757,7 +757,4 @@ export enum JsonNullValueFilter {
   DbNull = 'DbNull',
   JsonNull = 'JsonNull',
   AnyNull = 'AnyNull',
-}
-export enum Role {
-  Super = 'Super',
 }

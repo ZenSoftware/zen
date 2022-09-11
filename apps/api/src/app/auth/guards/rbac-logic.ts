@@ -1,7 +1,6 @@
 import { UnauthorizedException } from '@nestjs/common';
-import { Role } from '@prisma/client';
 
-type RoleType = string[] | Role[] | undefined;
+type RoleType = string[] | undefined;
 
 /**
  * Imitates RBAC rules for [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-6.0).
@@ -16,7 +15,7 @@ export function rbacLogic(
   handlerRoles = handlerRoles ?? [];
 
   // Give super users unlimited access
-  if (userRoles.includes(Role.Super)) return true;
+  if (userRoles.includes('Super')) return true;
 
   if (classRoles.length > 0) {
     if (!userRoles.some(r => classRoles.includes(r))) {
