@@ -67,7 +67,7 @@ export class ZenGenerator {
     await pal.run();
     console.log(`- Wrote: ${palOutPath}`);
 
-    // Get Prisma type names via the directory names under the 'prisma' folder;
+    // Get Prisma type names via the directory names under the 'paljs' folder;
     const dirents = await readdir(palOutPath, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
     prismaNames = prismaNames.sort();
