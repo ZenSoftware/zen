@@ -2,7 +2,7 @@ import { DMMF } from '@prisma/client/runtime';
 import { GetDMMFOptions, getDMMF } from '@prisma/internals';
 import gql from 'graphql-tag';
 
-export interface SDLInputOptions {
+export interface SDLInputsOptions {
   dmmfOptions: GetDMMFOptions;
   excludeFields?: string[];
   filterInputs?: (input: DMMF.InputType) => DMMF.SchemaArg[];
@@ -11,7 +11,7 @@ export interface SDLInputOptions {
 
 const testedTypes: string[] = [];
 
-const hasEmptyTypeFields = (type: string, schema: DMMF.Schema, options?: SDLInputOptions) => {
+const hasEmptyTypeFields = (type: string, schema: DMMF.Schema, options?: SDLInputsOptions) => {
   testedTypes.push(type);
   const inputObjectTypes = schema ? [...schema.inputObjectTypes.prisma] : [];
   if (schema?.inputObjectTypes.model) inputObjectTypes.push(...schema.inputObjectTypes.model);
@@ -57,7 +57,7 @@ const getInputType = (
   return field.inputTypes[index];
 };
 
-async function generateInputsString(schema: DMMF.Schema, options?: SDLInputOptions) {
+async function generateInputsString(schema: DMMF.Schema, options?: SDLInputsOptions) {
   let fileContent = `
 scalar DateTime
 
@@ -130,13 +130,13 @@ type BatchPayload {
   return fileContent;
 }
 
-export const sdlInputs = async (options: SDLInputOptions) => {
+export const sdlInputs = async (options: SDLInputsOptions) => {
   const dmmf = await getDMMF(options.dmmfOptions);
   const inputString = await generateInputsString(dmmf.schema, options);
   return gql(inputString);
 };
 
-export const sdlInputsString = async (options: SDLInputOptions) => {
+export const sdlInputsString = async (options: SDLInputsOptions) => {
   const dmmf = await getDMMF(options.dmmfOptions);
   return generateInputsString(dmmf.schema, options);
 };
