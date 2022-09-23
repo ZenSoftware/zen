@@ -28,7 +28,7 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
-    "@apollo/federation": "^0.36.1",
+    "@apollo/federation": "^0.37.1",
     "@apollo/subgraph": "^2.1.1",
     "@casl/ability": "^6.0.0",
     "@casl/prisma": "^1.0.4",
@@ -155,4 +155,3 @@
     }
   }
 }
-
