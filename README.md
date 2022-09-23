@@ -4,17 +4,13 @@
 
 ---
 
-## 🏯 Project Founder's Notes
-
 What is really nice about Nest and Angular is that their programming idioms carry over seamlessly between the two, allowing for front-end devs to contribute to the back-end. Though, there are complexities in creating the GraphQL endpoint that exposes the various CRUD operations over the Prisma data model on the back-end.  A combination between Nest + Prisma + Angular has provided for new capabilities that the industry has not really seen before. This project code generates all the boilerplate required in bridging these 3 technologies together.
 
 There is a tremendous amount of value to be gained by treating the `schema.prisma` file as the single source of truth, and then code generating everything else from that. It guarantees consistency between the front-end and back-end. It also centralizes the CRUD operations over all the Prisma models via a single import endpoint.
 
 This project also provides solutions for the hardest parts of user authentication as well. I have strictly kept to the Angular and Nest best practices that are being utilized within the ecosystem. This project is an attempt to package the sum total of all the lessons I have learned, and making it publicly available to the community. All the services being generated should be fairly self explanatory, and lots of useful NPM scripts have been provided for the various stages of development to deployment. Better documentation will come with time. 🍜
 
-New contributors are welcome!
-
-> 🎐 "Give more than you take" ~ Peter Hoang
+> 🎐 New contributors are welcome!
 
 ---
 
@@ -72,8 +68,8 @@ npm start
 - [x] `Sign in with Google` via OpenID Connect.
 - [x] `Forgot password component` and full password reset flow.
 - [x] `Password change component` for user dashboards.
-- [x] `Angular route guards` and `Angular directives` to show/hide content depending on user's roles.
 - [x] [Nest guards & directives](https://github.com/ZenSoftware/zen/blob/base/apps/api/src/app/auth) for both RBAC & ABAC authorization schemes.  ABAC is the default authorization scheme and is implemented with [@casl/prisma](https://casl.js.org/v6/en/package/casl-prisma) & [@casl/angular](https://casl.js.org/v6/en/package/casl-angular).  All `@casl/prisma` subjects are code generated for you.  The user's Casl rules are sent from the server to the client and updates the `@casl/angular` ability.  This unifies the permissions across both the server and the client, fully exploiting Casl's isomorphic capabilities.
+- [x] `Angular route guards` and `Angular directives` to show/hide content depending on the user's roles or Casl abilities.
 
 ---
 
