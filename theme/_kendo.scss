@@ -2,7 +2,7 @@ $primary-palette-name: $zen-primary;
 $secondary-palette-name: $zen-accent;
 $theme-type: dark;
 
-@import '~@progress/kendo-theme-material/dist/all.scss';
+@import '@progress/kendo-theme-material/dist/all.scss';
 
 .k-pager-nav {
   background-color: #333333;
