@@ -92,7 +92,7 @@
     "@progress/kendo-angular-dropdowns": "^7.0.3",
     "@progress/kendo-angular-excel-export": "^5.0.1",
     "@progress/kendo-angular-grid": "^7.2.4",
-    "@progress/kendo-angular-inputs": "^9.0.4",
+    "@progress/kendo-angular-inputs": "^10.0.0",
     "@progress/kendo-angular-intl": "^4.0.1",
     "@progress/kendo-angular-l10n": "^4.0.0",
     "@progress/kendo-angular-label": "^4.0.1",
@@ -169,4 +169,3 @@
     }
   }
 }
-
