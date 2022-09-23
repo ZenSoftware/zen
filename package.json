@@ -41,10 +41,10 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/throttler": "^3.0.0",
     "@opentelemetry/exporter-jaeger": "^1.2.0",
-    "@opentelemetry/exporter-trace-otlp-http": "^0.32.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.33.0",
     "@opentelemetry/instrumentation-express": "^0.31.0",
-    "@opentelemetry/instrumentation-graphql": "^0.30.0",
-    "@opentelemetry/instrumentation-http": "^0.32.0",
+    "@opentelemetry/instrumentation-graphql": "^0.31.0",
+    "@opentelemetry/instrumentation-http": "^0.33.0",
     "@opentelemetry/sdk-trace-base": "^1.2.0",
     "@opentelemetry/sdk-trace-node": "^1.2.0",
     "@paljs/plugins": "4.1.0",
@@ -158,4 +158,3 @@
     }
   }
 }
-
