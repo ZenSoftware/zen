@@ -1,7 +1,7 @@
 import { EnvironmentBase } from './environment.base';
 
 export const environment: EnvironmentBase = {
-  siteUrl: 'https://site.com',
+  siteUrl: 'https://site.com/#',
   production: true,
   expressPort: process.env.PORT,
   publicRegistration: true,
