@@ -1,5 +1,5 @@
 export function NestCaslTemplate(names: string[]) {
-  let accum = `import { PrismaAbility, Subjects } from '@casl/prisma';
+  let accum = `import { Subjects } from '@casl/prisma';
 import { 
 `;
 
@@ -9,20 +9,14 @@ import {
 
   accum += `} from '@prisma/client';
 
-export type ZenAbility = PrismaAbility<
-  [
-    string,
-    Subjects<{
+export type PrismaSubjects = Subjects<{
 `;
 
   for (const name of names) {
-    accum += `      ${name}: ${name};\n`;
+    accum += `  ${name}: ${name};\n`;
   }
 
-  accum += `    }>
-  ]
->;
-`;
+  accum += `}>;\n`;
 
   return accum;
 }

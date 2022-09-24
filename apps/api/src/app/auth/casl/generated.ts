@@ -1,13 +1,8 @@
-import { PrismaAbility, Subjects } from '@casl/prisma';
+import { Subjects } from '@casl/prisma';
 import { 
   User,
 } from '@prisma/client';
 
-export type ZenAbility = PrismaAbility<
-  [
-    string,
-    Subjects<{
-      User: User;
-    }>
-  ]
->;
+export type PrismaSubjects = Subjects<{
+  User: User;
+}>;
