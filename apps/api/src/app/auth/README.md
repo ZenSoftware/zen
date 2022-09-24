@@ -1,5 +1,5 @@
 # Zen Authentication & Authorization
-Exported from *auth*, the following table lists the guards and directives for their respective ABAC & RBAC schemes.
+Exported from *auth*, the following table lists the guards and decorators for their respective ABAC & RBAC schemes.
 
 |                       | ABAC            | RBAC        | Common           |
 |-----------------------|-----------------|-------------|------------------|
@@ -7,8 +7,8 @@ Exported from *auth*, the following table lists the guards and directives for th
 | **Http Controllers**  | `HttpCaslGuard` | `HttpGuard` | `HttpUser`       |
 | **Common**            | `CaslSubject`   | `Roles`     | `AllowAnonymous` |
 
-These are a complete set of Nest guards & directives that can be applied to either classes or functions to declaritively apply permissions.
-`GqlCaslGuard` and `GqlGuard` extract the user from the JWT token and makes the `RequestUser` accessible via an injectable paramater `GqlUser`.  This is symmetric to how the Nest Http Controllers guards `HttpCaslGuard` & `HttpGuard` work to extract the `RequestUser` via `HttpUser`.  The definition for `RequestUser` is quite simple:
+These are a complete set of Nest guards & decorators that can be applied to either classes or functions to declaritively apply permissions.
+`GqlCaslGuard` and `GqlGuard` extract the user from the JWT token and makes the `RequestUser` accessible via the injectable paramater `GqlUser`.  This is symmetric to how the Nest HTTP controller guards `HttpCaslGuard` & `HttpGuard` work to extract the `RequestUser` via `HttpUser`.  The definition for `RequestUser` is quite simple:
 
 ```ts
 import { User } from '@prisma/client';
@@ -23,7 +23,7 @@ This is extracted from a valid JWT payload without hitting the database.  The fu
 
 ### GraphQL RBAC (Role-based access control)
 
-Simplest usage of GraphQL RBAC guards and directives
+Simplest usage of GraphQL RBAC guards and decorators
 
 *graphql/resolvers/Sample.ts*
 ```ts
@@ -52,7 +52,7 @@ export class SampleResolver {
 ```
 
 ### GraphQL ABAC (Attribute-based access control)
-Simplest usage of GraphQL ABAC guards and directives
+Simplest usage of GraphQL ABAC guards and decorators
 
 *graphql/resolvers/Sample.ts*
 ```ts
@@ -82,18 +82,48 @@ export class SampleResolver {
 
 *auth/casl/casl-ability.factory.ts*
 ```ts
-createAbility(user: RequestUser) {
-  const { can, cannot, build } = new AbilityBuilder(APP_ABILITY);
+import { AbilityBuilder, createMongoAbility } from '@casl/ability';
+import { createPrismaAbility } from '@casl/prisma';
+import { Injectable } from '@nestjs/common';
+import { Action } from '@zen/api-interfaces';
 
-  if (user.roles.includes('Super')) {
-    can('manage', 'all'); // read-write access to everything
-  } else {
-    // Customize user permissions here
-    can('read', 'Sample' as any);
+import { RequestUser } from '../models/request-user';
+import { PrismaSubjects } from './generated';
+
+/** @description A union of subjects to extend the ability beyond just Prisma models */
+export type ExtendedSubjects = 'all' | 'Sample';
+
+@Injectable()
+export class CaslAbilityFactory {
+  async createAbility(user: RequestUser) {
+    const prismaRules = this.#prismaRules(user);
+    const extendedRules = this.#extendedRules(user);
+    return createMongoAbility(prismaRules.concat(extendedRules as any));
   }
 
-  return build();
+  #prismaRules(user: RequestUser) {
+    const { can, cannot, rules } = new AbilityBuilder(createPrismaAbility);
+
+    // Customize user permissions over Prisma models here
+
+    return rules;
+  }
+
+  #extendedRules(user: RequestUser) {
+    const { can, cannot, rules } = new AbilityBuilder(
+      createMongoAbility<[Action, ExtendedSubjects | PrismaSubjects]>
+    );
+
+    if (user.roles.includes('Super')) {
+      can('manage', 'all');
+    }
+
+    // Customize extended user permissions here
+    can('read', 'Sample');
+
+    return rules;
+  }
 }
 ```
 
-ABAC over the Prisma schema is implemented utilizing [@casl/prisma](https://casl.js.org/v6/en/package/casl-prisma), which is utilizing the Prisma WhereInput as the Casl subject. Therefore `GqlCaslGuard` extracts the `where` paramaters from the args if it finds it, and utilizes it in conjuction with the `@CaslSubject` directive to describe the subject.
+ABAC over the Prisma schema is implemented utilizing [@casl/prisma](https://casl.js.org/v6/en/package/casl-prisma), which is utilizing the Prisma WhereInput as the Casl subject. Therefore `GqlCaslGuard` extracts the `where` paramater from the GraphQL request args if it finds it, and utilizes it in conjuction with the `@CaslSubject` decorator to describe the subject.
