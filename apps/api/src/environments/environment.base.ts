@@ -6,7 +6,7 @@ import { OTLPExporterNodeConfigBase } from '@opentelemetry/otlp-exporter-base';
 import { UploadOptions } from 'graphql-upload';
 import { StrategyOptions as GoogleStrategyOptions } from 'passport-google-oauth20';
 
-export class EnvironmentBase {
+export abstract class EnvironmentBase {
   readonly siteUrl: string;
   readonly production: boolean;
   readonly expressPort: string | number;
@@ -14,7 +14,7 @@ export class EnvironmentBase {
   readonly graphql: {
     readonly subscriptions: boolean;
     readonly trace?: boolean;
-    readonly sandbox: boolean; // http://localhost:7080/graphql
+    readonly sandbox: boolean;
     readonly introspection: boolean;
     readonly csrfPrevention?: boolean;
     readonly uploads?: UploadOptions;
