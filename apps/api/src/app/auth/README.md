@@ -8,7 +8,7 @@ Exported from *auth*, the following table lists the guards and decorators for th
 | **Common**            | `CaslSubject`   | `Roles`     | `AllowAnonymous` |
 
 These are a complete set of Nest guards & decorators that can be applied to either classes or functions to declaritively apply permissions.
-`GqlCaslGuard` and `GqlGuard` extract the user from the JWT token and makes the `RequestUser` accessible via an injectable paramater `GqlUser`.  This is symmetric to how the Nest HTTP controller guards `HttpCaslGuard` & `HttpGuard` work to extract the `RequestUser` via `HttpUser`.  The definition for `RequestUser` is quite simple:
+`GqlCaslGuard` and `GqlGuard` extract the user from the JWT token and makes the `RequestUser` accessible via the injectable paramater `GqlUser`.  This is symmetric to how the Nest HTTP controller guards `HttpCaslGuard` & `HttpGuard` work to extract the `RequestUser` via `HttpUser`.  The definition for `RequestUser` is quite simple:
 
 ```ts
 import { User } from '@prisma/client';
