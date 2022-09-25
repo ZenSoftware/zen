@@ -78,7 +78,6 @@ const DEFAULT_TAKE = 10;
 @Component({
   selector: 'zen-grid',
   templateUrl: 'zen-grid.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZenGridComponent<T extends object> implements AfterContentInit, OnDestroy {
   @ContentChild(ZenGridDetailTemplateDirective) details: ZenGridDetailTemplateDirective | undefined;
