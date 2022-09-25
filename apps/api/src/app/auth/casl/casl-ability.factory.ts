@@ -18,7 +18,9 @@ export class CaslAbilityFactory {
   }
 
   #prismaRules(user: RequestUser) {
-    const { can, cannot, rules } = new AbilityBuilder(createPrismaAbility);
+    const { can, cannot, rules } = new AbilityBuilder(
+      createPrismaAbility<[Action, PrismaSubjects]>
+    );
 
     // Customize user permissions over Prisma models here
 
