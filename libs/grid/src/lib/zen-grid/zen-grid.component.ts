@@ -104,7 +104,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() mode = GridMode.Default;
   @Input() reorderable = true;
   @Input() resizable = true;
-  @Input() selectBy = 'id';
+  @Input() selectBy!: string;
   @Input() selection: any[] = [];
   @Input() showAdd = true;
   @Input() showAutoFitColsButton = true;
@@ -126,6 +126,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     this.#settings = value;
     this.#settings.process = this.#settings.process ?? 'remote';
     this.#settings.keyField = 'id'; // default
+    this.selectBy = this.#settings.keyField;
 
     this.#defaultSettings = cloneDeep(value.defaultSettings);
     this.#defaultSettings.state = this.#defaultSettings.state ?? ({} as any);
