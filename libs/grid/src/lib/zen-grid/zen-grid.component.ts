@@ -51,6 +51,7 @@ export enum GridMode {
 
 export interface ZenGridSettings<T extends object> {
   typename: string;
+  /** Defaults to `'id'` */
   keyField?: string;
   findManyGQL: Apollo.Query;
   findManyCountGQL: Apollo.Query<any, any>;
