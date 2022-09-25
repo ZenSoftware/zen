@@ -5,7 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { Ability, PureAbility } from '@casl/ability';
+import { Ability, PureAbility, createMongoAbility } from '@casl/ability';
 import { AbilityModule } from '@casl/angular';
 import { AuthInterceptor, ZenAuthModule, tokenVar } from '@zen/auth';
 import { Environment } from '@zen/common';
@@ -62,7 +62,9 @@ import { AppComponent } from './app.component';
     { provide: Environment, useValue: environment },
     {
       provide: Ability,
-      useValue: new Ability(undefined, { detectSubjectType: object => object['__typename'] }),
+      useValue: createMongoAbility(undefined, {
+        detectSubjectType: object => object['__typename'],
+      }),
     },
     { provide: PureAbility, useExisting: Ability },
   ],
