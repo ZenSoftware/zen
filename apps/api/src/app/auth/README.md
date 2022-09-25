@@ -113,7 +113,7 @@ export class CaslAbilityFactory {
 
   #extendedRules(user: RequestUser) {
     const { can, cannot, rules } = new AbilityBuilder(
-      createMongoAbility<[Action, ExtendedSubjects | PrismaSubjects]>
+      createMongoAbility<[Action, PrismaSubjects | ExtendedSubjects]>
     );
 
     if (user.roles.includes('Super')) {
