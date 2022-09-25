@@ -51,6 +51,7 @@ export enum GridMode {
 
 export interface ZenGridSettings<T extends object> {
   typename: string;
+  keyField?: string;
   findManyGQL: Apollo.Query;
   findManyCountGQL: Apollo.Query<any, any>;
   deleteOneGQL?: Apollo.Mutation;
@@ -123,6 +124,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() set settings(value: ZenGridSettings<T>) {
     this.#settings = value;
     this.#settings.process = this.#settings.process ?? 'remote';
+    this.#settings.keyField = 'id'; // default
 
     this.#defaultSettings = cloneDeep(value.defaultSettings);
     this.#defaultSettings.state = this.#defaultSettings.state ?? ({} as any);
@@ -230,7 +232,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
           this.settings.deleteOneGQL
             ?.mutate(
-              { where: { id: event.dataItem.id } },
+              { where: { id: event.dataItem[this.settings.keyField as string] } },
               {
                 update: cache => {
                   if (this.settings.process === 'local') {
@@ -244,7 +246,9 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
                       const key = findManyKeyVal[0];
 
                       const newData = data[key].filter(
-                        (item: { id: any }) => item.id !== event.dataItem.id
+                        (item: { [key: string]: any }) =>
+                          item[this.settings.keyField as string] !==
+                          event.dataItem[this.settings.keyField as string]
                       );
 
                       const updateData = {
@@ -258,7 +262,10 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
                     }
                   } else {
                     cache.evict({
-                      id: this.settings.typename + ':' + event.dataItem.id,
+                      id:
+                        this.settings.typename +
+                        ':' +
+                        event.dataItem[this.settings.keyField as string],
                     });
 
                     cache.evict({
@@ -302,7 +309,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     this.gridSettings.expandedDetailKeys = [];
   }
 
-  expandDetailsBy = (dataItem: any) => dataItem.id;
+  expandDetailsBy = (dataItem: any) => dataItem[this.settings.keyField as string];
 
   refresh() {
     this.apollo.client.cache.evict({ fieldName: `findMany${this.settings.typename}` });
