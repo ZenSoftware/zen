@@ -51,12 +51,16 @@ export enum GridMode {
 
 export interface ZenGridSettings<T extends object> {
   typename: string;
-  /** Defaults to `'id'` */
-  keyField?: string;
   findManyGQL: Apollo.Query;
   findManyCountGQL: Apollo.Query<any, any>;
   deleteOneGQL?: Apollo.Mutation;
   defaultSettings: KendoGridSettings<T>;
+
+  /**
+   * @description The primary key used by the grid
+   * @default 'id'
+   */
+  keyField?: keyof Omit<T, '__typename'>;
 
   /**
    * @default 'remote'
@@ -125,8 +129,8 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() set settings(value: ZenGridSettings<T>) {
     this.#settings = value;
     this.#settings.process = this.#settings.process ?? 'remote';
-    this.#settings.keyField = 'id'; // default
-    this.selectBy = this.#settings.keyField;
+    this.#settings.keyField = 'id' as any;
+    this.selectBy = this.#settings.keyField as any;
 
     this.#defaultSettings = cloneDeep(value.defaultSettings);
     this.#defaultSettings.state = this.#defaultSettings.state ?? ({} as any);
