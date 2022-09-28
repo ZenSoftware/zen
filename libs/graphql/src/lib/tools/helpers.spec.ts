@@ -6,9 +6,9 @@ describe('omitIdAndTypename', () => {
       omitIdAndTypename({
         __typename: 'User',
         id: 1,
-        username: 'alan',
+        username: 'sam',
       })
-    ).toEqual({ username: 'alan' });
+    ).toEqual({ username: 'sam' });
 
     expect(omitIdAndTypename(null)).toEqual(null);
     expect(omitIdAndTypename(undefined)).toEqual(undefined);
