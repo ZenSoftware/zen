@@ -47,7 +47,7 @@ export class Misc {
 
   static execLocal(command: string) {
     console.log(command);
-    return execAsync('npx --no-install ' + command).then(({ stdout, stderr }) => {
+    return execAsync('npx ' + command).then(({ stdout, stderr }) => {
       if (stdout) console.log(stdout);
       if (stderr) console.log(stderr);
     });
