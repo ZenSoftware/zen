@@ -82,8 +82,8 @@ export class SampleResolver {
 
 *auth/casl/casl-ability.factory.ts*
 ```ts
-import { AbilityBuilder, createMongoAbility } from '@casl/ability';
-import { createPrismaAbility } from '@casl/prisma';
+import { AbilityBuilder, PureAbility } from '@casl/ability';
+import { PrismaQuery, createPrismaAbility } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Action } from '@zen/api-interfaces';
 
@@ -92,38 +92,21 @@ import { PrismaSubjects } from './generated';
 
 /** @description A union of subjects to extend the ability beyond just Prisma models */
 export type ExtendedSubjects = 'all' | 'Sample';
+export type AppAbility = PureAbility<[Action, PrismaSubjects | ExtendedSubjects], PrismaQuery>;
 
 @Injectable()
 export class CaslAbilityFactory {
   async createAbility(user: RequestUser) {
-    const prismaRules = this.#prismaRules(user);
-    const extendedRules = this.#extendedRules(user);
-    return createMongoAbility(prismaRules.concat(extendedRules as any));
-  }
-
-  #prismaRules(user: RequestUser) {
-    const { can, cannot, rules } = new AbilityBuilder(
-      createPrismaAbility<[Action, PrismaSubjects]>
-    );
-
-    // Customize user permissions over Prisma models here
-
-    return rules;
-  }
-
-  #extendedRules(user: RequestUser) {
-    const { can, cannot, rules } = new AbilityBuilder(
-      createMongoAbility<[Action, PrismaSubjects | ExtendedSubjects]>
-    );
+    const { can, cannot, build } = new AbilityBuilder<AppAbility>(createPrismaAbility);
 
     if (user.roles.includes('Super')) {
       can('manage', 'all');
     }
 
-    // Customize extended user permissions here
+    // Customize user permissions here
     can('read', 'Sample');
 
-    return rules;
+    return build();
   }
 }
 ```
