@@ -52,9 +52,8 @@ export class ZenUserInputComponent {
     private updateOneUserGQL: UpdateOneUserGQL
   ) {
     if (data.action === 'update') {
-      const item = data.item;
-      this.username.setValue(item.username);
-      this.email.setValue(item.email);
+      this.username.setValue(data.item.username);
+      this.email.setValue(data.item.email);
     }
   }
 
