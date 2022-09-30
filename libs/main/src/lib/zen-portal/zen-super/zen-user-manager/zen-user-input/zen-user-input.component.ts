@@ -73,6 +73,7 @@ export class ZenUserInputComponent {
           .subscribe({
             next: () => {
               this.loading = false;
+              this.apollo.client.cache.evict({ fieldName: `findManyUser` });
               this.snackBar.open('Updated', '', { duration: 1500 });
               this.dialogRef.close();
             },
