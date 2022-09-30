@@ -70,9 +70,9 @@ export interface ZenGridSettings<T extends object> {
   /**
    * @describe Optional Casl ability that will set `showAdd`, `showEdit`, `showDelete` according to `@zen/auth` ABAC rules
    * ```ts
-   * const showAdd = ability.can(Action.create, this.settings.typename);
-   * const showEdit = row => ability.can(Action.update, row);
-   * const showDelete = row => ability.can(Action.delete, row);
+   * const showAdd = ability.can('create', this.settings.typename);
+   * const showEdit = row => ability.can('update', row);
+   * const showDelete = row => ability.can('delete', row);
    * ```
    */
   ability?: Ability;
