@@ -7,7 +7,6 @@ import { promisify } from 'util';
 import { Generator as PalGenerator } from '@paljs/generator';
 import { Config as PalConfig } from '@paljs/types';
 
-import { sdlInputsString } from './sdl-inputs';
 import {
   ClientFieldsTemplate,
   ClientQueriesTemplate,
@@ -51,27 +50,18 @@ export class ZenGenerator {
       await mkdir(palOutPath);
     }
 
-    const inputsString = await sdlInputsString({
-      dmmfOptions: { datamodelPath: this.config.palConfig.schema },
-      doNotUseFieldUpdateOperationsInput:
-        this.config.palConfig.backend?.doNotUseFieldUpdateOperationsInput,
-    });
-    const inputOutPath = path.join(palOutPath, 'sdl-inputs.ts');
-    await writeFile(inputOutPath, SDLInputsTemplate(inputsString));
-    console.log(`- Wrote: ${inputOutPath}`);
-
     const pal = new PalGenerator(
       { name: palConfig.backend.generator, schemaPath: palConfig.schema },
       palConfig.backend
     );
     await pal.run();
+
     console.log(`- Wrote: ${palOutPath}`);
 
-    // Get Prisma type names via the directory names under the 'paljs' folder;
+    // Get Prisma type names via the directory names under the 'prisma' folder;
     const dirents = await readdir(palOutPath, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);
     prismaNames = prismaNames.sort();
-
     const palTypeDefsFilePath = path.join(palOutPath, 'typeDefs.ts');
     await writeFile(palTypeDefsFilePath, TypeDefsTemplate(prismaNames));
     console.log(`- Wrote: ${palTypeDefsFilePath}`);
@@ -90,9 +80,9 @@ export class ZenGenerator {
         console.log(`- Wrote: ${this.config.caslOutFile}`);
       }
 
-      wroteCount = await this.nestAbacResolvers(prismaNames);
+      wroteCount = await this.nestAbacResolvers(prismaNames, this.config.palConfig.backend?.federation);
     } else if (this.config.authScheme === 'RBAC') {
-      wroteCount = await this.nestRbacResolvers(prismaNames);
+      wroteCount = await this.nestRbacResolvers(prismaNames, this.config.palConfig.backend?.federation);
     }
 
     console.log(`* Total resolver files wrote: ${wroteCount}`);
@@ -158,13 +148,13 @@ export class ZenGenerator {
     }
   }
 
-  async nestAbacResolvers(prismaNames: string[]) {
+  async nestAbacResolvers(prismaNames: string[], federation?: string ) {
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
       const outPath = path.join(this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
 
       if (!fs.existsSync(outPath)) {
-        await writeFile(outPath, NestResolversABACTemplate(prismaName));
+        await writeFile(outPath, NestResolversABACTemplate(prismaName, federation));
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }
@@ -173,13 +163,13 @@ export class ZenGenerator {
     return wroteCount;
   }
 
-  async nestRbacResolvers(prismaNames: string[]) {
+  async nestRbacResolvers(prismaNames: string[], federation?: string ) {
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
       const outPath = path.join(this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
 
       if (!fs.existsSync(outPath)) {
-        await writeFile(outPath, NestResolversRBACTemplate(prismaName));
+        await writeFile(outPath, NestResolversRBACTemplate(prismaName, federation));
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }
@@ -190,7 +180,7 @@ export class ZenGenerator {
 
   private execLocal(command: string) {
     console.log(command);
-    return execAsync('npx ' + command).then(({ stdout, stderr }) => {
+    return execAsync('npx --no-install ' + command).then(({ stdout, stderr }) => {
       if (stdout) console.log(stdout);
       if (stderr) console.log(stderr);
     });

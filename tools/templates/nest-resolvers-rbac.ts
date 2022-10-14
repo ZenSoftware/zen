@@ -1,4 +1,5 @@
-export function NestResolversRBACTemplate(name: string) {
+export function NestResolversRBACTemplate(name: string, federation?: string) {
+const federationPrefix = federation ? `${federation}_` : ``
   return `import { UseGuards } from '@nestjs/common';
 import { Args, Context, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
@@ -8,16 +9,16 @@ import { PrismaSelectArgs } from '../../prisma';
 import { IContext } from '../models';
 import resolvers from '../paljs/${name}/resolvers';
 import type {
-  Aggregate${name}Args,
-  CreateOne${name}Args,
-  DeleteMany${name}Args,
-  DeleteOne${name}Args,
-  FindFirst${name}Args,
-  FindMany${name}Args,
-  FindUnique${name}Args,
-  UpdateMany${name}Args,
-  UpdateOne${name}Args,
-  UpsertOne${name}Args,
+  ${federationPrefix}Aggregate${name}Args,
+  ${federationPrefix}CreateOne${name}Args,
+  ${federationPrefix}DeleteMany${name}Args,
+  ${federationPrefix}DeleteOne${name}Args,
+  ${federationPrefix}FindFirst${name}Args,
+  ${federationPrefix}FindMany${name}Args,
+  ${federationPrefix}FindUnique${name}Args,
+  ${federationPrefix}UpdateMany${name}Args,
+  ${federationPrefix}UpdateOne${name}Args,
+  ${federationPrefix}UpsertOne${name}Args,
 } from '../resolversTypes';
 
 export const typeDefs = null;
@@ -38,102 +39,102 @@ export const typeDefs = null;
 @UseGuards(GqlGuard)
 export class ${name}Resolver {
   @Query()
-  async findUnique${name}(
-    @Args() args: FindUnique${name}Args,
+  async ${federationPrefix}findUnique${name}(
+    @Args() args: ${federationPrefix}FindUnique${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findUnique${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Query.${federationPrefix}findUnique${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Query()
-  async findFirst${name}(
-    @Args() args: FindFirst${name}Args,
+  async ${federationPrefix}findFirst${name}(
+    @Args() args: ${federationPrefix}FindFirst${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findFirst${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Query.${federationPrefix}findFirst${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Query()
-  async findMany${name}(
-    @Args() args: FindMany${name}Args,
+  async ${federationPrefix}findMany${name}(
+    @Args() args: ${federationPrefix}FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findMany${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Query.${federationPrefix}findMany${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Query()
-  async findMany${name}Count(
-    @Args() args: FindMany${name}Args,
+  async ${federationPrefix}findMany${name}Count(
+    @Args() args: ${federationPrefix}FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.findMany${name}Count(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Query.${federationPrefix}findMany${name}Count(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Query()
-  async aggregate${name}(
-    @Args() args: Aggregate${name}Args,
+  async ${federationPrefix}aggregate${name}(
+    @Args() args: ${federationPrefix}Aggregate${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Query.aggregate${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Query.${federationPrefix}aggregate${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async createOne${name}(
-    @Args() args: CreateOne${name}Args,
+  async ${federationPrefix}createOne${name}(
+    @Args() args: ${federationPrefix}CreateOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.createOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.${federationPrefix}createOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async updateOne${name}(
-    @Args() args: UpdateOne${name}Args,
+  async ${federationPrefix}updateOne${name}(
+    @Args() args: ${federationPrefix}UpdateOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.updateOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.${federationPrefix}updateOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async updateMany${name}(
-    @Args() args: UpdateMany${name}Args,
+  async ${federationPrefix}updateMany${name}(
+    @Args() args: ${federationPrefix}UpdateMany${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.updateMany${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.${federationPrefix}updateMany${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async upsertOne${name}(
-    @Args() args: UpsertOne${name}Args,
+  async ${federationPrefix}upsertOne${name}(
+    @Args() args: ${federationPrefix}UpsertOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.upsertOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.${federationPrefix}upsertOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async deleteOne${name}(
-    @Args() args: DeleteOne${name}Args,
+  async ${federationPrefix}deleteOne${name}(
+    @Args() args: ${federationPrefix}DeleteOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.deleteOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.${federationPrefix}deleteOne${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 
   @Mutation()
-  async deleteMany${name}(
-    @Args() args: DeleteMany${name}Args,
+  async ${federationPrefix}deleteMany${name}(
+    @Args() args: ${federationPrefix}DeleteMany${name}Args,
     @Info() info: GraphQLResolveInfo,
     @Context() ctx: IContext
   ) {
-    return resolvers.Mutation.deleteMany${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
+    return resolvers.Mutation.${federationPrefix}deleteMany${name}(undefined, PrismaSelectArgs(info, args), ctx, info);
   }
 }
 `;
