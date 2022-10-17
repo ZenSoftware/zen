@@ -1,7 +1,9 @@
 version: '3'
+name: zen
 services:
   postgres:
     image: postgres:14
+    container_name: zen
     restart: always
     environment:
       POSTGRES_USER: zenadmin
@@ -9,6 +11,6 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - "5445:5432"
+      - "5445:5445"
 volumes:
   postgres:

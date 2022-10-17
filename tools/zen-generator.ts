@@ -17,6 +17,7 @@ import {
   SDLInputsTemplate,
   TypeDefsTemplate,
 } from './templates';
+import { Datamodel, Document, Model } from '@paljs/generator/dist/Generators';
 
 const execAsync = promisify(exec);
 
@@ -54,7 +55,7 @@ export class ZenGenerator {
       { name: palConfig.backend.generator, schemaPath: palConfig.schema },
       palConfig.backend
     );
-    await pal.run();
+    const dmmf = await pal.run();
 
     console.log(`- Wrote: ${palOutPath}`);
 
@@ -80,9 +81,9 @@ export class ZenGenerator {
         console.log(`- Wrote: ${this.config.caslOutFile}`);
       }
 
-      wroteCount = await this.nestAbacResolvers(prismaNames, this.config.palConfig.backend?.federation);
+      wroteCount = await this.nestAbacResolvers(dmmf.datamodel.models, this.config.palConfig.backend?.federation);
     } else if (this.config.authScheme === 'RBAC') {
-      wroteCount = await this.nestRbacResolvers(prismaNames, this.config.palConfig.backend?.federation);
+      wroteCount = await this.nestRbacResolvers(dmmf.datamodel.models, this.config.palConfig.backend?.federation);
     }
 
     console.log(`* Total resolver files wrote: ${wroteCount}`);
@@ -148,13 +149,13 @@ export class ZenGenerator {
     }
   }
 
-  async nestAbacResolvers(prismaNames: string[], federation?: string ) {
+  async nestAbacResolvers(dataModels: Model[], federation?: string ) {
     let wroteCount = 0;
-    for (const prismaName of prismaNames) {
-      const outPath = path.join(this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
+    for (const model of dataModels) {
+      const outPath = path.join(this.config.apiOutPath, 'resolvers', `${model.name}.ts`);
 
       if (!fs.existsSync(outPath)) {
-        await writeFile(outPath, NestResolversABACTemplate(prismaName, federation));
+        await writeFile(outPath, NestResolversABACTemplate(model, federation));
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }
@@ -163,13 +164,13 @@ export class ZenGenerator {
     return wroteCount;
   }
 
-  async nestRbacResolvers(prismaNames: string[], federation?: string ) {
+  async nestRbacResolvers(dataModels: Model[], federation?: string ) {
     let wroteCount = 0;
-    for (const prismaName of prismaNames) {
-      const outPath = path.join(this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
+    for (const model of dataModels) {
+      const outPath = path.join(this.config.apiOutPath, 'resolvers', `${model.name}.ts`);
 
       if (!fs.existsSync(outPath)) {
-        await writeFile(outPath, NestResolversRBACTemplate(prismaName, federation));
+        await writeFile(outPath, NestResolversRBACTemplate(model, federation));
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }
