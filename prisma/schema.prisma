@@ -24,19 +24,6 @@ model User {
   googleProfile Json?
 }
 
-model Review {
-  id         Int     @id @default(autoincrement())
-  product    Product  @relation(fields: [product_id], references: [id])
-  product_id  Int    @unique
-  score Int
-}
-
-model Product {
-  id  Int @id @default(autoincrement())
-  review Review[]
-}
-
-
 enum Role {
   USER
   ADMIN
