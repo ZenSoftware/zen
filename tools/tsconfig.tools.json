@@ -1,0 +1,24 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es5",
+      "outDir": "../dist/out-tsc/tools",
+      "rootDir": ".",
+      "noUnusedLocals": true,
+      "sourceMap": true,
+      "declaration": false,
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "importHelpers": true,
+      "types": ["node"],
+      "typeRoots": ["node_modules/@types"],
+      "lib": ["es2017", "dom"],
+      "skipLibCheck": true,
+      "skipDefaultLibCheck": true,
+      "baseUrl": "."
+    },
+    "exclude": ["node_modules", "tmp"],
+    "include": ["**/*.ts"]
+  }

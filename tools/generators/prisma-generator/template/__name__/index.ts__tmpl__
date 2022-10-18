@@ -1,0 +1,2 @@
+export { PrismaClient as  <%= className %>Client } from '.prisma/<%= name %>-client';
+export * from '.prisma/<%= name %>-client'

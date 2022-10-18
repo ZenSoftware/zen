@@ -98,6 +98,7 @@
     "@nrwl/angular": "14.8.1",
     "@nrwl/cli": "14.8.1",
     "@nrwl/cypress": "14.8.1",
+    "@nrwl/devkit": "14.8.1",
     "@nrwl/eslint-plugin-nx": "14.8.1",
     "@nrwl/jest": "14.8.1",
     "@nrwl/linter": "14.8.1",

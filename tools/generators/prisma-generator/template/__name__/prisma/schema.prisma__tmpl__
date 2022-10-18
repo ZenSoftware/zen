@@ -1,0 +1,9 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "<%= outputLocation %>"
+}
+
+datasource db {
+  provider = "<%= dbType %>"
+  url      = env("<%= constantName %>_SOURCE_URL")
+}
