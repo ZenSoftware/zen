@@ -35,7 +35,11 @@ export default async function (tree: Tree, schema: GeneratorOptions) {
   }
 
   let envContents = tree.read('.env')?.toString() ?? ``
-  envContents += `${constantName}_SOURCE_URL=${schema.connectionString}\n`
+  if (envContents.includes(`${constantName}_SOURCE_URL=`)) {
+    envContents.replace(new RegExp(`${constantName}_SOURCE_URL=.*?\n`), `${constantName}_SOURCE_URL=${schema.connectionString}\n`)
+  } else {
+    envContents += `\n${constantName}_SOURCE_URL=${schema.connectionString}\n`
+  }
   tree.write('.env', envContents)
 
   // Write export
@@ -44,7 +48,9 @@ export default async function (tree: Tree, schema: GeneratorOptions) {
   }
 
   let exportsContents = tree.read('libs/prisma-clients/index.ts')?.toString() ?? ``
-  exportsContents += `export { ${className}Client } from './${name}';\n`
+  if (!exportsContents.includes(`export { ${className}Client } from './${name}';`)) {
+    exportsContents += `export { ${className}Client } from './${name}';\n`
+  }
   tree.write('libs/prisma-clients/index.ts', exportsContents)
 
   await formatFiles(tree)
