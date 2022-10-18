@@ -1,16 +1,22 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import {PrismaClient} from "@prisma/client";
+import Chance from 'chance'
 
-const prisma = new PrismaClient();
+const client = new PrismaClient()
+var chance = new Chance();
 
-async function main() {
-  /** Seed data */
+async function seed() {
+  for (let i = 0; i < 1; i++) {
+    await client.user.create({
+      data: {
+        id: i,
+        createdAt: chance.date(),
+        username: chance.name(),
+        password: chance.word(),
+        email: chance.email(),
+        roles: ["Super"],
+      }
+    })
+  }
 }
 
-main()
-  .catch(e => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+seed()

@@ -45,10 +45,10 @@ export default gql`
     googleProfile
   }
 
-  input UserWhereInput {
-    AND: [UserWhereInput!]
-    OR: [UserWhereInput!]
-    NOT: [UserWhereInput!]
+  input Product_UserWhereInput {
+    AND: [Product_UserWhereInput!]
+    OR: [Product_UserWhereInput!]
+    NOT: [Product_UserWhereInput!]
     id: IntFilter
     createdAt: DateTimeFilter
     username: StringNullableFilter
@@ -59,7 +59,7 @@ export default gql`
     googleProfile: JsonNullableFilter
   }
 
-  input UserOrderByWithRelationInput {
+  input Product_UserOrderByWithRelationInput {
     id: SortOrder
     createdAt: SortOrder
     username: SortOrder
@@ -70,14 +70,14 @@ export default gql`
     googleProfile: SortOrder
   }
 
-  input UserWhereUniqueInput {
+  input Product_UserWhereUniqueInput {
     id: Int
     username: String
     email: String
     googleId: String
   }
 
-  input UserOrderByWithAggregationInput {
+  input Product_UserOrderByWithAggregationInput {
     id: SortOrder
     createdAt: SortOrder
     username: SortOrder
@@ -86,17 +86,17 @@ export default gql`
     roles: SortOrder
     googleId: SortOrder
     googleProfile: SortOrder
-    _count: UserCountOrderByAggregateInput
-    _avg: UserAvgOrderByAggregateInput
-    _max: UserMaxOrderByAggregateInput
-    _min: UserMinOrderByAggregateInput
-    _sum: UserSumOrderByAggregateInput
+    _count: Product_UserCountOrderByAggregateInput
+    _avg: Product_UserAvgOrderByAggregateInput
+    _max: Product_UserMaxOrderByAggregateInput
+    _min: Product_UserMinOrderByAggregateInput
+    _sum: Product_UserSumOrderByAggregateInput
   }
 
-  input UserScalarWhereWithAggregatesInput {
-    AND: [UserScalarWhereWithAggregatesInput!]
-    OR: [UserScalarWhereWithAggregatesInput!]
-    NOT: [UserScalarWhereWithAggregatesInput!]
+  input Product_UserScalarWhereWithAggregatesInput {
+    AND: [Product_UserScalarWhereWithAggregatesInput!]
+    OR: [Product_UserScalarWhereWithAggregatesInput!]
+    NOT: [Product_UserScalarWhereWithAggregatesInput!]
     id: IntWithAggregatesFilter
     createdAt: DateTimeWithAggregatesFilter
     username: StringNullableWithAggregatesFilter
@@ -107,7 +107,7 @@ export default gql`
     googleProfile: JsonNullableWithAggregatesFilter
   }
 
-  input UserCreateInput {
+  input Product_UserCreateInput {
     createdAt: DateTime
     username: String
     password: String
@@ -117,7 +117,7 @@ export default gql`
     googleProfile: Json
   }
 
-  input UserUncheckedCreateInput {
+  input Product_UserUncheckedCreateInput {
     id: Int
     createdAt: DateTime
     username: String
@@ -128,7 +128,7 @@ export default gql`
     googleProfile: Json
   }
 
-  input UserUpdateInput {
+  input Product_UserUpdateInput {
     createdAt: DateTime
     username: String
     password: String
@@ -138,7 +138,7 @@ export default gql`
     googleProfile: Json
   }
 
-  input UserUncheckedUpdateInput {
+  input Product_UserUncheckedUpdateInput {
     id: Int
     createdAt: DateTime
     username: String
@@ -149,7 +149,7 @@ export default gql`
     googleProfile: Json
   }
 
-  input UserCreateManyInput {
+  input Product_UserCreateManyInput {
     id: Int
     createdAt: DateTime
     username: String
@@ -160,7 +160,7 @@ export default gql`
     googleProfile: Json
   }
 
-  input UserUpdateManyMutationInput {
+  input Product_UserUpdateManyMutationInput {
     createdAt: DateTime
     username: String
     password: String
@@ -170,7 +170,7 @@ export default gql`
     googleProfile: Json
   }
 
-  input UserUncheckedUpdateManyInput {
+  input Product_UserUncheckedUpdateManyInput {
     id: Int
     createdAt: DateTime
     username: String
@@ -257,7 +257,7 @@ export default gql`
     not: Json
   }
 
-  input UserCountOrderByAggregateInput {
+  input Product_UserCountOrderByAggregateInput {
     id: SortOrder
     createdAt: SortOrder
     username: SortOrder
@@ -268,20 +268,11 @@ export default gql`
     googleProfile: SortOrder
   }
 
-  input UserAvgOrderByAggregateInput {
+  input Product_UserAvgOrderByAggregateInput {
     id: SortOrder
   }
 
-  input UserMaxOrderByAggregateInput {
-    id: SortOrder
-    createdAt: SortOrder
-    username: SortOrder
-    password: SortOrder
-    email: SortOrder
-    googleId: SortOrder
-  }
-
-  input UserMinOrderByAggregateInput {
+  input Product_UserMaxOrderByAggregateInput {
     id: SortOrder
     createdAt: SortOrder
     username: SortOrder
@@ -290,7 +281,16 @@ export default gql`
     googleId: SortOrder
   }
 
-  input UserSumOrderByAggregateInput {
+  input Product_UserMinOrderByAggregateInput {
+    id: SortOrder
+    createdAt: SortOrder
+    username: SortOrder
+    password: SortOrder
+    email: SortOrder
+    googleId: SortOrder
+  }
+
+  input Product_UserSumOrderByAggregateInput {
     id: SortOrder
   }
 
@@ -379,7 +379,7 @@ export default gql`
     _max: NestedJsonNullableFilter
   }
 
-  input UserCreaterolesInput {
+  input Product_UserCreaterolesInput {
     set: [String!]!
   }
 
@@ -395,7 +395,7 @@ export default gql`
     set: String
   }
 
-  input UserUpdaterolesInput {
+  input Product_UserUpdaterolesInput {
     set: [String!]
     push: [String!]
   }
@@ -560,7 +560,7 @@ export default gql`
     not: Json
   }
 
-  type AggregateUser {
+  type AggregateUser @shareable {
     _count: UserCountAggregateOutputType
     _avg: UserAvgAggregateOutputType
     _sum: UserSumAggregateOutputType
@@ -568,7 +568,7 @@ export default gql`
     _max: UserMaxAggregateOutputType
   }
 
-  type UserCountAggregateOutputType {
+  type UserCountAggregateOutputType @shareable {
     id: Int!
     createdAt: Int!
     username: Int!
@@ -580,15 +580,15 @@ export default gql`
     _all: Int!
   }
 
-  type UserAvgAggregateOutputType {
+  type UserAvgAggregateOutputType @shareable {
     id: Float
   }
 
-  type UserSumAggregateOutputType {
+  type UserSumAggregateOutputType @shareable {
     id: Int
   }
 
-  type UserMinAggregateOutputType {
+  type UserMinAggregateOutputType @key(fields: "id") @key(fields: "email") @shareable {
     id: Int
     createdAt: DateTime
     username: String
@@ -597,7 +597,7 @@ export default gql`
     googleId: String
   }
 
-  type UserMaxAggregateOutputType {
+  type UserMaxAggregateOutputType @key(fields: "id") @key(fields: "email") @shareable {
     id: Int
     createdAt: DateTime
     username: String

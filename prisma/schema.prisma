@@ -8,13 +8,23 @@ generator client {
   binaryTargets = ["native", "linux-musl"]
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "../ERD.png"
+}
+
 model User {
   id            Int      @id @default(autoincrement())
   createdAt     DateTime @default(now())
   username      String?  @unique
   password      String?
   email         String   @unique
-  roles         String[]
+  roles         String[] 
   googleId      String?  @unique
   googleProfile Json?
+}
+
+enum Role {
+  USER
+  ADMIN
 }
