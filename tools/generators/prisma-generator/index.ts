@@ -12,7 +12,7 @@ interface GeneratorOptions {
   connectionString: string;
 }
 
-export default async function (tree: Tree, schema: GeneratorOptions) {
+export async function PrismaClientGenerator(tree: Tree, schema: GeneratorOptions) {
   const { name, className, constantName } = names(schema.name)
 
   generateFiles(
@@ -55,3 +55,5 @@ export default async function (tree: Tree, schema: GeneratorOptions) {
 
   await formatFiles(tree)
 }
+
+export default PrismaClientGenerator;
