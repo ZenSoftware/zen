@@ -2,10 +2,10 @@ import gql from 'graphql-tag';
 
 export default gql`
   scalar DateTime
-
   type BatchPayload {
     count: Int!
   }
+
   enum JsonNullValueFilter {
     DbNull
     JsonNull

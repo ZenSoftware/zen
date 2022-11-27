@@ -10,8 +10,9 @@ type Resolver<T extends {}, A extends {}, R extends any> = (
   info: GraphQLResolveInfo
 ) => Promise<R>;
 
-export interface Resolvers {
+export type Resolvers = {
   [key: string]: { [key: string]: Resolver<any, any, any> };
+} & {
   User?: User;
   Query?: Query;
   Mutation?: Mutation;
@@ -23,10 +24,9 @@ export interface Resolvers {
   UserSumAggregateOutputType?: UserSumAggregateOutputType;
   UserMinAggregateOutputType?: UserMinAggregateOutputType;
   UserMaxAggregateOutputType?: UserMaxAggregateOutputType;
-}
+};
 
-export interface User {
-  [key: string]: Resolver<any, any, any>;
+export type User = { [key: string]: Resolver<any, any, any> } & {
   id?: Resolver<Client.User, {}, number>;
   createdAt?: Resolver<Client.User, {}, Date>;
   username?: Resolver<Client.User, {}, string | null>;
@@ -35,11 +35,11 @@ export interface User {
   roles?: Resolver<Client.User, {}, string[] | null>;
   googleId?: Resolver<Client.User, {}, string | null>;
   googleProfile?: Resolver<Client.User, {}, any | null>;
-}
+};
 
-export interface Query {
-  [key: string]: Resolver<any, any, any>;
+export type Query = { [key: string]: Resolver<any, any, any> } & {
   findFirstUser?: Resolver<{}, FindFirstUserArgs, Client.User | null>;
+  findFirstUserOrThrow?: Resolver<{}, FindFirstUserOrThrowArgs, Client.User | null>;
   findManyUser?: Resolver<{}, FindManyUserArgs, Client.User[]>;
   findManyUserCount?: Resolver<{}, FindManyUserArgs, number>;
   aggregateUser?: Resolver<
@@ -49,10 +49,10 @@ export interface Query {
   >;
   groupByUser?: Resolver<{}, GroupByUserArgs, Client.Prisma.UserGroupByOutputType[]>;
   findUniqueUser?: Resolver<{}, FindUniqueUserArgs, Client.User | null>;
-}
+  findUniqueUserOrThrow?: Resolver<{}, FindUniqueUserOrThrowArgs, Client.User | null>;
+};
 
-export interface Mutation {
-  [key: string]: Resolver<any, any, any>;
+export type Mutation = { [key: string]: Resolver<any, any, any> } & {
   createOneUser?: Resolver<{}, CreateOneUserArgs, Client.User>;
   upsertOneUser?: Resolver<{}, UpsertOneUserArgs, Client.User>;
   createManyUser?: Resolver<{}, CreateManyUserArgs, Client.Prisma.BatchPayload>;
@@ -62,10 +62,9 @@ export interface Mutation {
   deleteManyUser?: Resolver<{}, DeleteManyUserArgs, Client.Prisma.BatchPayload>;
   executeRaw?: Resolver<{}, ExecuteRawArgs, any>;
   queryRaw?: Resolver<{}, QueryRawArgs, any>;
-}
+};
 
-export interface AggregateUser {
-  [key: string]: Resolver<any, any, any>;
+export type AggregateUser = { [key: string]: Resolver<any, any, any> } & {
   _count?: Resolver<
     Client.Prisma.AggregateUser,
     {},
@@ -75,10 +74,11 @@ export interface AggregateUser {
   _sum?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserSumAggregateOutputType | null>;
   _min?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMinAggregateOutputType | null>;
   _max?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMaxAggregateOutputType | null>;
-}
+};
 
-export interface UserGroupByOutputType {
+export type UserGroupByOutputType = {
   [key: string]: Resolver<any, any, any>;
+} & {
   id?: Resolver<Client.Prisma.UserGroupByOutputType, {}, number>;
   createdAt?: Resolver<Client.Prisma.UserGroupByOutputType, {}, Date>;
   username?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string | null>;
@@ -112,15 +112,15 @@ export interface UserGroupByOutputType {
     {},
     Client.Prisma.UserMaxAggregateOutputType | null
   >;
-}
+};
 
-export interface AffectedRowsOutput {
-  [key: string]: Resolver<any, any, any>;
+export type AffectedRowsOutput = { [key: string]: Resolver<any, any, any> } & {
   count?: Resolver<Client.Prisma.BatchPayload, {}, number>;
-}
+};
 
-export interface UserCountAggregateOutputType {
+export type UserCountAggregateOutputType = {
   [key: string]: Resolver<any, any, any>;
+} & {
   id?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
   createdAt?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
   username?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
@@ -130,39 +130,52 @@ export interface UserCountAggregateOutputType {
   googleId?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
   googleProfile?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
   _all?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
-}
+};
 
-export interface UserAvgAggregateOutputType {
+export type UserAvgAggregateOutputType = {
   [key: string]: Resolver<any, any, any>;
+} & {
   id?: Resolver<Client.Prisma.UserAvgAggregateOutputType, {}, number | null>;
-}
+};
 
-export interface UserSumAggregateOutputType {
+export type UserSumAggregateOutputType = {
   [key: string]: Resolver<any, any, any>;
+} & {
   id?: Resolver<Client.Prisma.UserSumAggregateOutputType, {}, number | null>;
-}
+};
 
-export interface UserMinAggregateOutputType {
+export type UserMinAggregateOutputType = {
   [key: string]: Resolver<any, any, any>;
+} & {
   id?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, number | null>;
   createdAt?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, Date | null>;
   username?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
   password?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
   email?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
   googleId?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
-}
+};
 
-export interface UserMaxAggregateOutputType {
+export type UserMaxAggregateOutputType = {
   [key: string]: Resolver<any, any, any>;
+} & {
   id?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, number | null>;
   createdAt?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, Date | null>;
   username?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
   password?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
   email?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
   googleId?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
-}
+};
 
 export interface FindFirstUserArgs {
+  where?: UserWhereInput | null;
+  orderBy?: UserOrderByWithRelationInput[] | null;
+  cursor?: UserWhereUniqueInput | null;
+  take?: number | null;
+  skip?: number | null;
+  distinct?: UserScalarFieldEnum[] | null;
+}
+
+export interface FindFirstUserOrThrowArgs {
   where?: UserWhereInput | null;
   orderBy?: UserOrderByWithRelationInput[] | null;
   cursor?: UserWhereUniqueInput | null;
@@ -203,6 +216,10 @@ export interface GroupByUserArgs {
 }
 
 export interface FindUniqueUserArgs {
+  where: UserWhereUniqueInput | null;
+}
+
+export interface FindUniqueUserOrThrowArgs {
   where: UserWhereUniqueInput | null;
 }
 
@@ -446,8 +463,19 @@ export interface StringNullableListFilter {
 }
 
 export interface JsonNullableFilter {
-  equals?: JsonNullValueFilter;
-  not?: JsonNullValueFilter;
+  equals?: any;
+  path?: string[];
+  string_contains?: string;
+  string_starts_with?: string;
+  string_ends_with?: string;
+  array_contains?: any | null;
+  array_starts_with?: any | null;
+  array_ends_with?: any | null;
+  lt?: any;
+  lte?: any;
+  gt?: any;
+  gte?: any;
+  not?: any;
 }
 
 export interface UserCountOrderByAggregateInput {
@@ -554,8 +582,19 @@ export interface StringWithAggregatesFilter {
 }
 
 export interface JsonNullableWithAggregatesFilter {
-  equals?: JsonNullValueFilter;
-  not?: JsonNullValueFilter;
+  equals?: any;
+  path?: string[];
+  string_contains?: string;
+  string_starts_with?: string;
+  string_ends_with?: string;
+  array_contains?: any | null;
+  array_starts_with?: any | null;
+  array_ends_with?: any | null;
+  lt?: any;
+  lte?: any;
+  gt?: any;
+  gte?: any;
+  not?: any;
   _count?: NestedIntNullableFilter;
   _min?: NestedJsonNullableFilter;
   _max?: NestedJsonNullableFilter;
@@ -727,23 +766,25 @@ export interface NestedStringWithAggregatesFilter {
 }
 
 export interface NestedJsonNullableFilter {
-  equals?: JsonNullValueFilter;
-  not?: JsonNullValueFilter;
+  equals?: any;
+  path?: string[];
+  string_contains?: string;
+  string_starts_with?: string;
+  string_ends_with?: string;
+  array_contains?: any | null;
+  array_starts_with?: any | null;
+  array_ends_with?: any | null;
+  lt?: any;
+  lte?: any;
+  gt?: any;
+  gte?: any;
+  not?: any;
 }
 
-export enum UserScalarFieldEnum {
-  id = 'id',
-  createdAt = 'createdAt',
-  username = 'username',
-  password = 'password',
-  email = 'email',
-  roles = 'roles',
-  googleId = 'googleId',
-  googleProfile = 'googleProfile',
-}
-export enum SortOrder {
-  asc = 'asc',
-  desc = 'desc',
+export enum JsonNullValueFilter {
+  DbNull = 'DbNull',
+  JsonNull = 'JsonNull',
+  AnyNull = 'AnyNull',
 }
 export enum NullableJsonNullValueInput {
   DbNull = 'DbNull',
@@ -753,8 +794,23 @@ export enum QueryMode {
   default = 'default',
   insensitive = 'insensitive',
 }
-export enum JsonNullValueFilter {
-  DbNull = 'DbNull',
-  JsonNull = 'JsonNull',
-  AnyNull = 'AnyNull',
+export enum SortOrder {
+  asc = 'asc',
+  desc = 'desc',
+}
+export enum TransactionIsolationLevel {
+  ReadUncommitted = 'ReadUncommitted',
+  ReadCommitted = 'ReadCommitted',
+  RepeatableRead = 'RepeatableRead',
+  Serializable = 'Serializable',
+}
+export enum UserScalarFieldEnum {
+  id = 'id',
+  createdAt = 'createdAt',
+  username = 'username',
+  password = 'password',
+  email = 'email',
+  roles = 'roles',
+  googleId = 'googleId',
+  googleProfile = 'googleProfile',
 }

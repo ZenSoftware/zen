@@ -40,7 +40,7 @@
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/throttler": "^3.0.0",
-    "@paljs/plugins": "4.1.0",
+    "@paljs/plugins": "5.0.3",
     "@prisma/client": "~4.6.1",
     "apollo-server-core": "~3.10.0",
     "apollo-server-express": "~3.10.0",
@@ -97,7 +97,7 @@
     "@nrwl/nest": "15.2.1",
     "@nrwl/node": "15.2.1",
     "@nrwl/workspace": "15.2.1",
-    "@paljs/cli": "4.1.0",
+    "@paljs/cli": "5.0.4",
     "@prisma/internals": "~4.6.1",
     "@types/apollo-upload-client": "^17.0.0",
     "@types/bcryptjs": "^2.4.2",
@@ -145,6 +145,9 @@
     },
     "apollo-angular": {
       "@angular/core": "$@angular/core"
+    },
+    "@paljs/plugins": {
+      "graphql": "$graphql"
     }
   },
   "config": {
