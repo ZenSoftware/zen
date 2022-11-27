@@ -98,7 +98,6 @@
     "@nrwl/node": "15.2.1",
     "@nrwl/workspace": "15.2.1",
     "@paljs/cli": "5.0.4",
-    "@prisma/internals": "~4.6.1",
     "@types/apollo-upload-client": "^17.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.11",

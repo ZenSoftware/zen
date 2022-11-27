@@ -129,23 +129,23 @@ export default gql`
   }
 
   input UserUpdateInput {
-    createdAt: DateTime
-    username: String
-    password: String
-    email: String
+    createdAt: DateTimeFieldUpdateOperationsInput
+    username: NullableStringFieldUpdateOperationsInput
+    password: NullableStringFieldUpdateOperationsInput
+    email: StringFieldUpdateOperationsInput
     roles: [String!]
-    googleId: String
+    googleId: NullableStringFieldUpdateOperationsInput
     googleProfile: Json
   }
 
   input UserUncheckedUpdateInput {
-    id: Int
-    createdAt: DateTime
-    username: String
-    password: String
-    email: String
+    id: IntFieldUpdateOperationsInput
+    createdAt: DateTimeFieldUpdateOperationsInput
+    username: NullableStringFieldUpdateOperationsInput
+    password: NullableStringFieldUpdateOperationsInput
+    email: StringFieldUpdateOperationsInput
     roles: [String!]
-    googleId: String
+    googleId: NullableStringFieldUpdateOperationsInput
     googleProfile: Json
   }
 
@@ -161,23 +161,23 @@ export default gql`
   }
 
   input UserUpdateManyMutationInput {
-    createdAt: DateTime
-    username: String
-    password: String
-    email: String
+    createdAt: DateTimeFieldUpdateOperationsInput
+    username: NullableStringFieldUpdateOperationsInput
+    password: NullableStringFieldUpdateOperationsInput
+    email: StringFieldUpdateOperationsInput
     roles: [String!]
-    googleId: String
+    googleId: NullableStringFieldUpdateOperationsInput
     googleProfile: Json
   }
 
   input UserUncheckedUpdateManyInput {
-    id: Int
-    createdAt: DateTime
-    username: String
-    password: String
-    email: String
+    id: IntFieldUpdateOperationsInput
+    createdAt: DateTimeFieldUpdateOperationsInput
+    username: NullableStringFieldUpdateOperationsInput
+    password: NullableStringFieldUpdateOperationsInput
+    email: StringFieldUpdateOperationsInput
     roles: [String!]
-    googleId: String
+    googleId: NullableStringFieldUpdateOperationsInput
     googleProfile: Json
   }
 
