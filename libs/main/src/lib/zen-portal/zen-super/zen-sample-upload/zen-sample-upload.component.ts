@@ -1,6 +1,6 @@
 import { ElementRef, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ZenSnackbarErrorService } from '@zen/components';
 import { GqlErrors, SampleUploadGQL, parseGqlErrors } from '@zen/graphql';
 import gql from 'graphql-tag';
