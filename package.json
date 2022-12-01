@@ -6,7 +6,7 @@
   "main": "apps/portal/src/electron.js",
   "scripts": {
     "start": "nx serve portal",
-    "start:electron": "ng build --project portal --configuration development --base-href ./ && electron .",
+    "start:electron": "ng build --project portal --configuration=development --outputHashing=all --base-href=./ && electron .",
     "start:api": "nx serve api",
     "start:e2e": "nx e2e portal-e2e --watch",
     "frontend:gen": "graphql-codegen -c apollo-angular.yml && graphql-codegen -c apollo-possible-types.yml",
