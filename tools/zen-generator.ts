@@ -7,7 +7,6 @@ import { promisify } from 'util';
 import { Generator as PalGenerator } from '@paljs/generator';
 import { Config as PalConfig } from '@paljs/types';
 
-import { sdlInputsString } from './sdl-inputs';
 import {
   ClientFieldsTemplate,
   ClientQueriesTemplate,
@@ -15,7 +14,6 @@ import {
   NestResolversABACTemplate,
   NestResolversIndexTemplate,
   NestResolversRBACTemplate,
-  SDLInputsTemplate,
   TypeDefsTemplate,
 } from './templates';
 
@@ -50,15 +48,6 @@ export class ZenGenerator {
       await rm(palOutPath, { recursive: true });
       await mkdir(palOutPath);
     }
-
-    const inputsString = await sdlInputsString({
-      dmmfOptions: { datamodelPath: this.config.palConfig.schema },
-      doNotUseFieldUpdateOperationsInput:
-        this.config.palConfig.backend?.doNotUseFieldUpdateOperationsInput,
-    });
-    const inputOutPath = path.join(palOutPath, 'sdl-inputs.ts');
-    await writeFile(inputOutPath, SDLInputsTemplate(inputsString));
-    console.log(`- Wrote: ${inputOutPath}`);
 
     const pal = new PalGenerator(
       { name: palConfig.backend.generator, schemaPath: palConfig.schema },

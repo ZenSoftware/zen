@@ -9,6 +9,6 @@ module.exports = {
   backend: {
     generator: 'sdl',
     output: 'apps/api/src/app/graphql/paljs',
-    doNotUseFieldUpdateOperationsInput: true,
+    // doNotUseFieldUpdateOperationsInput: true,
   },
 };

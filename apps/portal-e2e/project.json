@@ -25,5 +25,6 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["portal"]
+  "implicitDependencies": ["portal"],
+  "name": "portal-e2e"
 }
