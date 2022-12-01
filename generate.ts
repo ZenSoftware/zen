@@ -4,7 +4,7 @@ import { ZenGenerator } from './tools/zen-generator';
 
 async function main() {
   const generator = new ZenGenerator({
-    palConfig: require('./pal.js'),
+    palConfig: require('./pal.config.js'),
     apiOutPath: path.join(__dirname, 'apps/api/src/app/graphql'),
     caslOutFile: path.join(__dirname, 'apps/api/src/app/auth/casl/generated.ts'),
     frontend: {

@@ -1,37 +1,4 @@
-// Fixes the vertical alignment of FontAwesome icons within buttons
-button {
-  .fas,
-  .far,
-  .fal,
-  .fat,
-  .fad,
-  .fab,
-  .fa-solid,
-  .fa-regular,
-  .fa-light,
-  .fa-thin,
-  .fa-duotone,
-  .fa-brands {
-    vertical-align: unset !important;
-  }
-}
-
 // Increases the max height of Material dialog
 mat-dialog-content {
   max-height: 80vh !important;
-}
-
-// Have the mouse cursor display a not-allowed cursor on hover for disabled buttons
-.mat-button-disabled {
-  cursor: not-allowed !important;
-}
-
-// Styles for the password visibility icon
-[mat-icon-button] {
-  cursor: pointer;
-
-  mat-icon:hover {
-    transition: font-size 0.5s;
-    font-size: 170%;
-  }
 }
