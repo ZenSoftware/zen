@@ -16,12 +16,13 @@
 @import 'reset';
 @import 'kendo';
 
+// Angular Material Sidenav background
 .mat-sidenav-container,
-.mat-sidenav,
-.mat-dialog-container {
+.mat-sidenav {
   background-color: $body-bg;
 }
 
-.mat-card {
-  background: $card-bg;
+// Angular Material Dialog background
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: #272b30;
 }
