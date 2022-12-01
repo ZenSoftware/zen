@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
-  "main": "apps/portal/src/app.js",
+  "main": "apps/portal/src/electron.js",
   "scripts": {
     "start": "nx serve portal",
     "start:electron": "ng build --project portal --configuration development --base-href ./ && electron .",
