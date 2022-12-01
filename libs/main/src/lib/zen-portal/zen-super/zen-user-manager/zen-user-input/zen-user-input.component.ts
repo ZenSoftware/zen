@@ -63,8 +63,8 @@ export class ZenUserInputComponent {
 
       if (this.data.action === 'update') {
         const updateInput: UserUpdateInput = {
-          username: this.username.value,
-          email: this.email.value,
+          username: { set: this.username.value },
+          email: { set: this.email.value },
         };
 
         trimObjectStrings(updateInput);
