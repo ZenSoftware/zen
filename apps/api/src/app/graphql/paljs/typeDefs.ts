@@ -1,6 +1,6 @@
 import { mergeTypeDefs } from '@graphql-tools/merge';
 
-import SDLInputs from './sdl-inputs';
+import InputTypes from './InputTypes';
 import User from './User/typeDefs';
 
-export default mergeTypeDefs([SDLInputs, User]);
+export default mergeTypeDefs([InputTypes, User]);

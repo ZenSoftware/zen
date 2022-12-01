@@ -6,7 +6,6 @@
     "auth": "libs/auth",
     "common": "libs/common",
     "components": "libs/components",
-    "electron": "apps/electron",
     "graphql": "libs/graphql",
     "layout": "libs/layout",
     "main": "libs/main",

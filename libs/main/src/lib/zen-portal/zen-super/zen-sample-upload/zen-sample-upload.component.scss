@@ -5,8 +5,12 @@
   position: absolute;
 }
 
-.zen-no-wrap {
+.zen-select-file {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
 }
