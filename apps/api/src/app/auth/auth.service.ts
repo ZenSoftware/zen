@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 
-import { Injectable } from '@nestjs/common';
-import { JwtPayload, RequestUser } from '@zen/nest-auth';
+import { Inject, Injectable } from '@nestjs/common';
+import { CASL_FACTORY_TOKEN, JwtPayload, RequestUser } from '@zen/nest-auth';
 
 import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models/auth-session';
@@ -15,7 +15,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly jwtStrategy: JwtStrategy,
     private readonly config: ConfigService,
-    private readonly caslAbilityFactory: CaslAbilityFactory
+    @Inject(CASL_FACTORY_TOKEN) private readonly caslAbilityFactory: CaslAbilityFactory
   ) {}
 
   async getAuthSession(user: RequestUser, rememberMe = false) {
