@@ -24,9 +24,6 @@
     "build": "nx build portal",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main"
   },
-  "prisma": {
-    "seed": "ts-node apps/api/seed.ts"
-  },
   "dependencies": {
     "@casl/ability": "~6.3.0",
     "@casl/prisma": "~1.3.0",

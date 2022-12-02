@@ -10,7 +10,7 @@ generator client {
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
+  id            String   @id @default(uuid())
   createdAt     DateTime @default(now())
   username      String?  @unique
   password      String?
