@@ -1,6 +1,6 @@
-import * as Client from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
 
+import * as Client from '../prisma';
 import { Context } from './context';
 
 type Resolver<T extends {}, A extends {}, R extends any> = (
@@ -20,14 +20,12 @@ export type Resolvers = {
   UserGroupByOutputType?: UserGroupByOutputType;
   AffectedRowsOutput?: AffectedRowsOutput;
   UserCountAggregateOutputType?: UserCountAggregateOutputType;
-  UserAvgAggregateOutputType?: UserAvgAggregateOutputType;
-  UserSumAggregateOutputType?: UserSumAggregateOutputType;
   UserMinAggregateOutputType?: UserMinAggregateOutputType;
   UserMaxAggregateOutputType?: UserMaxAggregateOutputType;
 };
 
 export type User = { [key: string]: Resolver<any, any, any> } & {
-  id?: Resolver<Client.User, {}, number>;
+  id?: Resolver<Client.User, {}, string>;
   createdAt?: Resolver<Client.User, {}, Date>;
   username?: Resolver<Client.User, {}, string | null>;
   password?: Resolver<Client.User, {}, string | null>;
@@ -70,8 +68,6 @@ export type AggregateUser = { [key: string]: Resolver<any, any, any> } & {
     {},
     Client.Prisma.UserCountAggregateOutputType | null
   >;
-  _avg?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserAvgAggregateOutputType | null>;
-  _sum?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserSumAggregateOutputType | null>;
   _min?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMinAggregateOutputType | null>;
   _max?: Resolver<Client.Prisma.AggregateUser, {}, Client.Prisma.UserMaxAggregateOutputType | null>;
 };
@@ -79,7 +75,7 @@ export type AggregateUser = { [key: string]: Resolver<any, any, any> } & {
 export type UserGroupByOutputType = {
   [key: string]: Resolver<any, any, any>;
 } & {
-  id?: Resolver<Client.Prisma.UserGroupByOutputType, {}, number>;
+  id?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string>;
   createdAt?: Resolver<Client.Prisma.UserGroupByOutputType, {}, Date>;
   username?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string | null>;
   password?: Resolver<Client.Prisma.UserGroupByOutputType, {}, string | null>;
@@ -91,16 +87,6 @@ export type UserGroupByOutputType = {
     Client.Prisma.UserGroupByOutputType,
     {},
     Client.Prisma.UserCountAggregateOutputType | null
-  >;
-  _avg?: Resolver<
-    Client.Prisma.UserGroupByOutputType,
-    {},
-    Client.Prisma.UserAvgAggregateOutputType | null
-  >;
-  _sum?: Resolver<
-    Client.Prisma.UserGroupByOutputType,
-    {},
-    Client.Prisma.UserSumAggregateOutputType | null
   >;
   _min?: Resolver<
     Client.Prisma.UserGroupByOutputType,
@@ -132,22 +118,10 @@ export type UserCountAggregateOutputType = {
   _all?: Resolver<Client.Prisma.UserCountAggregateOutputType, {}, number>;
 };
 
-export type UserAvgAggregateOutputType = {
-  [key: string]: Resolver<any, any, any>;
-} & {
-  id?: Resolver<Client.Prisma.UserAvgAggregateOutputType, {}, number | null>;
-};
-
-export type UserSumAggregateOutputType = {
-  [key: string]: Resolver<any, any, any>;
-} & {
-  id?: Resolver<Client.Prisma.UserSumAggregateOutputType, {}, number | null>;
-};
-
 export type UserMinAggregateOutputType = {
   [key: string]: Resolver<any, any, any>;
 } & {
-  id?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, number | null>;
+  id?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
   createdAt?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, Date | null>;
   username?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
   password?: Resolver<Client.Prisma.UserMinAggregateOutputType, {}, string | null>;
@@ -158,7 +132,7 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
   [key: string]: Resolver<any, any, any>;
 } & {
-  id?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, number | null>;
+  id?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
   createdAt?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, Date | null>;
   username?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
   password?: Resolver<Client.Prisma.UserMaxAggregateOutputType, {}, string | null>;
@@ -200,8 +174,6 @@ export interface AggregateUserArgs {
   take?: number;
   skip?: number;
   _count?: Client.Prisma.UserCountAggregateInputType;
-  _avg?: Client.Prisma.UserAvgAggregateInputType;
-  _sum?: Client.Prisma.UserSumAggregateInputType;
   _min?: Client.Prisma.UserMinAggregateInputType;
   _max?: Client.Prisma.UserMaxAggregateInputType;
 }
@@ -270,7 +242,7 @@ export interface UserWhereInput {
   AND?: UserWhereInput[];
   OR?: UserWhereInput[];
   NOT?: UserWhereInput[];
-  id?: IntFilter;
+  id?: StringFilter;
   createdAt?: DateTimeFilter;
   username?: StringNullableFilter | null;
   password?: StringNullableFilter | null;
@@ -292,7 +264,7 @@ export interface UserOrderByWithRelationInput {
 }
 
 export interface UserWhereUniqueInput {
-  id?: number;
+  id?: string;
   username?: string;
   email?: string;
   googleId?: string;
@@ -308,17 +280,15 @@ export interface UserOrderByWithAggregationInput {
   googleId?: SortOrder;
   googleProfile?: SortOrder;
   _count?: UserCountOrderByAggregateInput;
-  _avg?: UserAvgOrderByAggregateInput;
   _max?: UserMaxOrderByAggregateInput;
   _min?: UserMinOrderByAggregateInput;
-  _sum?: UserSumOrderByAggregateInput;
 }
 
 export interface UserScalarWhereWithAggregatesInput {
   AND?: UserScalarWhereWithAggregatesInput[];
   OR?: UserScalarWhereWithAggregatesInput[];
   NOT?: UserScalarWhereWithAggregatesInput[];
-  id?: IntWithAggregatesFilter;
+  id?: StringWithAggregatesFilter;
   createdAt?: DateTimeWithAggregatesFilter;
   username?: StringNullableWithAggregatesFilter | null;
   password?: StringNullableWithAggregatesFilter | null;
@@ -329,6 +299,7 @@ export interface UserScalarWhereWithAggregatesInput {
 }
 
 export interface UserCreateInput {
+  id?: string;
   createdAt?: Date;
   username?: string | null;
   password?: string | null;
@@ -339,7 +310,7 @@ export interface UserCreateInput {
 }
 
 export interface UserUncheckedCreateInput {
-  id?: number;
+  id?: string;
   createdAt?: Date;
   username?: string | null;
   password?: string | null;
@@ -350,6 +321,7 @@ export interface UserUncheckedCreateInput {
 }
 
 export interface UserUpdateInput {
+  id?: StringFieldUpdateOperationsInput;
   createdAt?: DateTimeFieldUpdateOperationsInput;
   username?: NullableStringFieldUpdateOperationsInput | null;
   password?: NullableStringFieldUpdateOperationsInput | null;
@@ -360,7 +332,7 @@ export interface UserUpdateInput {
 }
 
 export interface UserUncheckedUpdateInput {
-  id?: IntFieldUpdateOperationsInput;
+  id?: StringFieldUpdateOperationsInput;
   createdAt?: DateTimeFieldUpdateOperationsInput;
   username?: NullableStringFieldUpdateOperationsInput | null;
   password?: NullableStringFieldUpdateOperationsInput | null;
@@ -371,7 +343,7 @@ export interface UserUncheckedUpdateInput {
 }
 
 export interface UserCreateManyInput {
-  id?: number;
+  id?: string;
   createdAt?: Date;
   username?: string | null;
   password?: string | null;
@@ -382,6 +354,7 @@ export interface UserCreateManyInput {
 }
 
 export interface UserUpdateManyMutationInput {
+  id?: StringFieldUpdateOperationsInput;
   createdAt?: DateTimeFieldUpdateOperationsInput;
   username?: NullableStringFieldUpdateOperationsInput | null;
   password?: NullableStringFieldUpdateOperationsInput | null;
@@ -392,7 +365,7 @@ export interface UserUpdateManyMutationInput {
 }
 
 export interface UserUncheckedUpdateManyInput {
-  id?: IntFieldUpdateOperationsInput;
+  id?: StringFieldUpdateOperationsInput;
   createdAt?: DateTimeFieldUpdateOperationsInput;
   username?: NullableStringFieldUpdateOperationsInput | null;
   password?: NullableStringFieldUpdateOperationsInput | null;
@@ -402,15 +375,19 @@ export interface UserUncheckedUpdateManyInput {
   googleProfile?: NullableJsonNullValueInput;
 }
 
-export interface IntFilter {
-  equals?: number;
-  in?: number[];
-  notIn?: number[];
-  lt?: number;
-  lte?: number;
-  gt?: number;
-  gte?: number;
-  not?: NestedIntFilter;
+export interface StringFilter {
+  equals?: string;
+  in?: string[];
+  notIn?: string[];
+  lt?: string;
+  lte?: string;
+  gt?: string;
+  gte?: string;
+  contains?: string;
+  startsWith?: string;
+  endsWith?: string;
+  mode?: QueryMode;
+  not?: NestedStringFilter;
 }
 
 export interface DateTimeFilter {
@@ -437,21 +414,6 @@ export interface StringNullableFilter {
   endsWith?: string;
   mode?: QueryMode;
   not?: NestedStringNullableFilter | null;
-}
-
-export interface StringFilter {
-  equals?: string;
-  in?: string[];
-  notIn?: string[];
-  lt?: string;
-  lte?: string;
-  gt?: string;
-  gte?: string;
-  contains?: string;
-  startsWith?: string;
-  endsWith?: string;
-  mode?: QueryMode;
-  not?: NestedStringFilter;
 }
 
 export interface StringNullableListFilter {
@@ -489,10 +451,6 @@ export interface UserCountOrderByAggregateInput {
   googleProfile?: SortOrder;
 }
 
-export interface UserAvgOrderByAggregateInput {
-  id?: SortOrder;
-}
-
 export interface UserMaxOrderByAggregateInput {
   id?: SortOrder;
   createdAt?: SortOrder;
@@ -511,24 +469,22 @@ export interface UserMinOrderByAggregateInput {
   googleId?: SortOrder;
 }
 
-export interface UserSumOrderByAggregateInput {
-  id?: SortOrder;
-}
-
-export interface IntWithAggregatesFilter {
-  equals?: number;
-  in?: number[];
-  notIn?: number[];
-  lt?: number;
-  lte?: number;
-  gt?: number;
-  gte?: number;
-  not?: NestedIntWithAggregatesFilter;
+export interface StringWithAggregatesFilter {
+  equals?: string;
+  in?: string[];
+  notIn?: string[];
+  lt?: string;
+  lte?: string;
+  gt?: string;
+  gte?: string;
+  contains?: string;
+  startsWith?: string;
+  endsWith?: string;
+  mode?: QueryMode;
+  not?: NestedStringWithAggregatesFilter;
   _count?: NestedIntFilter;
-  _avg?: NestedFloatFilter;
-  _sum?: NestedIntFilter;
-  _min?: NestedIntFilter;
-  _max?: NestedIntFilter;
+  _min?: NestedStringFilter;
+  _max?: NestedStringFilter;
 }
 
 export interface DateTimeWithAggregatesFilter {
@@ -563,24 +519,6 @@ export interface StringNullableWithAggregatesFilter {
   _max?: NestedStringNullableFilter;
 }
 
-export interface StringWithAggregatesFilter {
-  equals?: string;
-  in?: string[];
-  notIn?: string[];
-  lt?: string;
-  lte?: string;
-  gt?: string;
-  gte?: string;
-  contains?: string;
-  startsWith?: string;
-  endsWith?: string;
-  mode?: QueryMode;
-  not?: NestedStringWithAggregatesFilter;
-  _count?: NestedIntFilter;
-  _min?: NestedStringFilter;
-  _max?: NestedStringFilter;
-}
-
 export interface JsonNullableWithAggregatesFilter {
   equals?: any;
   path?: string[];
@@ -604,6 +542,10 @@ export interface UserCreaterolesInput {
   set: string[];
 }
 
+export interface StringFieldUpdateOperationsInput {
+  set?: string;
+}
+
 export interface DateTimeFieldUpdateOperationsInput {
   set?: Date;
 }
@@ -612,32 +554,23 @@ export interface NullableStringFieldUpdateOperationsInput {
   set?: string | null;
 }
 
-export interface StringFieldUpdateOperationsInput {
-  set?: string;
-}
-
 export interface UserUpdaterolesInput {
   set?: string[];
   push?: string;
 }
 
-export interface IntFieldUpdateOperationsInput {
-  set?: number;
-  increment?: number;
-  decrement?: number;
-  multiply?: number;
-  divide?: number;
-}
-
-export interface NestedIntFilter {
-  equals?: number;
-  in?: number[];
-  notIn?: number[];
-  lt?: number;
-  lte?: number;
-  gt?: number;
-  gte?: number;
-  not?: NestedIntFilter;
+export interface NestedStringFilter {
+  equals?: string;
+  in?: string[];
+  notIn?: string[];
+  lt?: string;
+  lte?: string;
+  gt?: string;
+  gte?: string;
+  contains?: string;
+  startsWith?: string;
+  endsWith?: string;
+  not?: NestedStringFilter;
 }
 
 export interface NestedDateTimeFilter {
@@ -665,7 +598,7 @@ export interface NestedStringNullableFilter {
   not?: NestedStringNullableFilter | null;
 }
 
-export interface NestedStringFilter {
+export interface NestedStringWithAggregatesFilter {
   equals?: string;
   in?: string[];
   notIn?: string[];
@@ -676,26 +609,13 @@ export interface NestedStringFilter {
   contains?: string;
   startsWith?: string;
   endsWith?: string;
-  not?: NestedStringFilter;
-}
-
-export interface NestedIntWithAggregatesFilter {
-  equals?: number;
-  in?: number[];
-  notIn?: number[];
-  lt?: number;
-  lte?: number;
-  gt?: number;
-  gte?: number;
-  not?: NestedIntWithAggregatesFilter;
+  not?: NestedStringWithAggregatesFilter;
   _count?: NestedIntFilter;
-  _avg?: NestedFloatFilter;
-  _sum?: NestedIntFilter;
-  _min?: NestedIntFilter;
-  _max?: NestedIntFilter;
+  _min?: NestedStringFilter;
+  _max?: NestedStringFilter;
 }
 
-export interface NestedFloatFilter {
+export interface NestedIntFilter {
   equals?: number;
   in?: number[];
   notIn?: number[];
@@ -703,7 +623,7 @@ export interface NestedFloatFilter {
   lte?: number;
   gt?: number;
   gte?: number;
-  not?: NestedFloatFilter;
+  not?: NestedIntFilter;
 }
 
 export interface NestedDateTimeWithAggregatesFilter {
@@ -746,23 +666,6 @@ export interface NestedIntNullableFilter {
   gt?: number;
   gte?: number;
   not?: NestedIntNullableFilter | null;
-}
-
-export interface NestedStringWithAggregatesFilter {
-  equals?: string;
-  in?: string[];
-  notIn?: string[];
-  lt?: string;
-  lte?: string;
-  gt?: string;
-  gte?: string;
-  contains?: string;
-  startsWith?: string;
-  endsWith?: string;
-  not?: NestedStringWithAggregatesFilter;
-  _count?: NestedIntFilter;
-  _min?: NestedStringFilter;
-  _max?: NestedStringFilter;
 }
 
 export interface NestedJsonNullableFilter {

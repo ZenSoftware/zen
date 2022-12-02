@@ -49,7 +49,7 @@ export default gql`
     AND: [UserWhereInput!]
     OR: [UserWhereInput!]
     NOT: [UserWhereInput!]
-    id: IntFilter
+    id: StringFilter
     createdAt: DateTimeFilter
     username: StringNullableFilter
     password: StringNullableFilter
@@ -71,7 +71,7 @@ export default gql`
   }
 
   input UserWhereUniqueInput {
-    id: Int
+    id: String
     username: String
     email: String
     googleId: String
@@ -87,17 +87,15 @@ export default gql`
     googleId: SortOrder
     googleProfile: SortOrder
     _count: UserCountOrderByAggregateInput
-    _avg: UserAvgOrderByAggregateInput
     _max: UserMaxOrderByAggregateInput
     _min: UserMinOrderByAggregateInput
-    _sum: UserSumOrderByAggregateInput
   }
 
   input UserScalarWhereWithAggregatesInput {
     AND: [UserScalarWhereWithAggregatesInput!]
     OR: [UserScalarWhereWithAggregatesInput!]
     NOT: [UserScalarWhereWithAggregatesInput!]
-    id: IntWithAggregatesFilter
+    id: StringWithAggregatesFilter
     createdAt: DateTimeWithAggregatesFilter
     username: StringNullableWithAggregatesFilter
     password: StringNullableWithAggregatesFilter
@@ -108,6 +106,7 @@ export default gql`
   }
 
   input UserCreateInput {
+    id: String
     createdAt: DateTime
     username: String
     password: String
@@ -118,7 +117,7 @@ export default gql`
   }
 
   input UserUncheckedCreateInput {
-    id: Int
+    id: String
     createdAt: DateTime
     username: String
     password: String
@@ -129,6 +128,7 @@ export default gql`
   }
 
   input UserUpdateInput {
+    id: StringFieldUpdateOperationsInput
     createdAt: DateTimeFieldUpdateOperationsInput
     username: NullableStringFieldUpdateOperationsInput
     password: NullableStringFieldUpdateOperationsInput
@@ -139,7 +139,7 @@ export default gql`
   }
 
   input UserUncheckedUpdateInput {
-    id: IntFieldUpdateOperationsInput
+    id: StringFieldUpdateOperationsInput
     createdAt: DateTimeFieldUpdateOperationsInput
     username: NullableStringFieldUpdateOperationsInput
     password: NullableStringFieldUpdateOperationsInput
@@ -150,7 +150,7 @@ export default gql`
   }
 
   input UserCreateManyInput {
-    id: Int
+    id: String
     createdAt: DateTime
     username: String
     password: String
@@ -161,6 +161,7 @@ export default gql`
   }
 
   input UserUpdateManyMutationInput {
+    id: StringFieldUpdateOperationsInput
     createdAt: DateTimeFieldUpdateOperationsInput
     username: NullableStringFieldUpdateOperationsInput
     password: NullableStringFieldUpdateOperationsInput
@@ -171,7 +172,7 @@ export default gql`
   }
 
   input UserUncheckedUpdateManyInput {
-    id: IntFieldUpdateOperationsInput
+    id: StringFieldUpdateOperationsInput
     createdAt: DateTimeFieldUpdateOperationsInput
     username: NullableStringFieldUpdateOperationsInput
     password: NullableStringFieldUpdateOperationsInput
@@ -181,15 +182,19 @@ export default gql`
     googleProfile: Json
   }
 
-  input IntFilter {
-    equals: Int
-    in: [Int!]
-    notIn: [Int!]
-    lt: Int
-    lte: Int
-    gt: Int
-    gte: Int
-    not: NestedIntFilter
+  input StringFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    mode: QueryMode
+    not: NestedStringFilter
   }
 
   input DateTimeFilter {
@@ -216,21 +221,6 @@ export default gql`
     endsWith: String
     mode: QueryMode
     not: NestedStringNullableFilter
-  }
-
-  input StringFilter {
-    equals: String
-    in: [String!]
-    notIn: [String!]
-    lt: String
-    lte: String
-    gt: String
-    gte: String
-    contains: String
-    startsWith: String
-    endsWith: String
-    mode: QueryMode
-    not: NestedStringFilter
   }
 
   input StringNullableListFilter {
@@ -268,10 +258,6 @@ export default gql`
     googleProfile: SortOrder
   }
 
-  input UserAvgOrderByAggregateInput {
-    id: SortOrder
-  }
-
   input UserMaxOrderByAggregateInput {
     id: SortOrder
     createdAt: SortOrder
@@ -290,24 +276,22 @@ export default gql`
     googleId: SortOrder
   }
 
-  input UserSumOrderByAggregateInput {
-    id: SortOrder
-  }
-
-  input IntWithAggregatesFilter {
-    equals: Int
-    in: [Int!]
-    notIn: [Int!]
-    lt: Int
-    lte: Int
-    gt: Int
-    gte: Int
-    not: NestedIntWithAggregatesFilter
+  input StringWithAggregatesFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    mode: QueryMode
+    not: NestedStringWithAggregatesFilter
     _count: NestedIntFilter
-    _avg: NestedFloatFilter
-    _sum: NestedIntFilter
-    _min: NestedIntFilter
-    _max: NestedIntFilter
+    _min: NestedStringFilter
+    _max: NestedStringFilter
   }
 
   input DateTimeWithAggregatesFilter {
@@ -342,24 +326,6 @@ export default gql`
     _max: NestedStringNullableFilter
   }
 
-  input StringWithAggregatesFilter {
-    equals: String
-    in: [String!]
-    notIn: [String!]
-    lt: String
-    lte: String
-    gt: String
-    gte: String
-    contains: String
-    startsWith: String
-    endsWith: String
-    mode: QueryMode
-    not: NestedStringWithAggregatesFilter
-    _count: NestedIntFilter
-    _min: NestedStringFilter
-    _max: NestedStringFilter
-  }
-
   input JsonNullableWithAggregatesFilter {
     equals: Json
     path: [String!]
@@ -383,6 +349,10 @@ export default gql`
     set: [String!]!
   }
 
+  input StringFieldUpdateOperationsInput {
+    set: String
+  }
+
   input DateTimeFieldUpdateOperationsInput {
     set: DateTime
   }
@@ -391,32 +361,23 @@ export default gql`
     set: String
   }
 
-  input StringFieldUpdateOperationsInput {
-    set: String
-  }
-
   input UserUpdaterolesInput {
     set: [String!]
     push: [String!]
   }
 
-  input IntFieldUpdateOperationsInput {
-    set: Int
-    increment: Int
-    decrement: Int
-    multiply: Int
-    divide: Int
-  }
-
-  input NestedIntFilter {
-    equals: Int
-    in: [Int!]
-    notIn: [Int!]
-    lt: Int
-    lte: Int
-    gt: Int
-    gte: Int
-    not: NestedIntFilter
+  input NestedStringFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringFilter
   }
 
   input NestedDateTimeFilter {
@@ -444,7 +405,7 @@ export default gql`
     not: NestedStringNullableFilter
   }
 
-  input NestedStringFilter {
+  input NestedStringWithAggregatesFilter {
     equals: String
     in: [String!]
     notIn: [String!]
@@ -455,10 +416,13 @@ export default gql`
     contains: String
     startsWith: String
     endsWith: String
-    not: NestedStringFilter
+    not: NestedStringWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedStringFilter
+    _max: NestedStringFilter
   }
 
-  input NestedIntWithAggregatesFilter {
+  input NestedIntFilter {
     equals: Int
     in: [Int!]
     notIn: [Int!]
@@ -466,23 +430,7 @@ export default gql`
     lte: Int
     gt: Int
     gte: Int
-    not: NestedIntWithAggregatesFilter
-    _count: NestedIntFilter
-    _avg: NestedFloatFilter
-    _sum: NestedIntFilter
-    _min: NestedIntFilter
-    _max: NestedIntFilter
-  }
-
-  input NestedFloatFilter {
-    equals: Float
-    in: [Float!]
-    notIn: [Float!]
-    lt: Float
-    lte: Float
-    gt: Float
-    gte: Float
-    not: NestedFloatFilter
+    not: NestedIntFilter
   }
 
   input NestedDateTimeWithAggregatesFilter {
@@ -527,23 +475,6 @@ export default gql`
     not: NestedIntNullableFilter
   }
 
-  input NestedStringWithAggregatesFilter {
-    equals: String
-    in: [String!]
-    notIn: [String!]
-    lt: String
-    lte: String
-    gt: String
-    gte: String
-    contains: String
-    startsWith: String
-    endsWith: String
-    not: NestedStringWithAggregatesFilter
-    _count: NestedIntFilter
-    _min: NestedStringFilter
-    _max: NestedStringFilter
-  }
-
   input NestedJsonNullableFilter {
     equals: Json
     path: [String!]
@@ -562,8 +493,6 @@ export default gql`
 
   type AggregateUser {
     _count: UserCountAggregateOutputType
-    _avg: UserAvgAggregateOutputType
-    _sum: UserSumAggregateOutputType
     _min: UserMinAggregateOutputType
     _max: UserMaxAggregateOutputType
   }
@@ -580,16 +509,8 @@ export default gql`
     _all: Int!
   }
 
-  type UserAvgAggregateOutputType {
-    id: Float
-  }
-
-  type UserSumAggregateOutputType {
-    id: Int
-  }
-
   type UserMinAggregateOutputType {
-    id: Int
+    id: String
     createdAt: DateTime
     username: String
     password: String
@@ -598,7 +519,7 @@ export default gql`
   }
 
   type UserMaxAggregateOutputType {
-    id: Int
+    id: String
     createdAt: DateTime
     username: String
     password: String

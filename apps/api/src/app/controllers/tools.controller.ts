@@ -1,6 +1,6 @@
-import { Controller, Get, Header, UseGuards } from '@nestjs/common';
+import { Controller, Get, Header, Logger, UseGuards } from '@nestjs/common';
+import { HttpGuard, Roles } from '@zen/nest-auth';
 
-import { HttpGuard, Roles } from '../auth';
 import { PrismaService } from '../prisma';
 
 @Controller()

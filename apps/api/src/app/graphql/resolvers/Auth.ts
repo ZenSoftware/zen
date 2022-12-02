@@ -1,15 +1,16 @@
 import { HttpException, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
-import { PrismaClient } from '@prisma/client';
 import { ApiError } from '@zen/api-interfaces';
+import { GqlGuard, GqlThrottlerGuard, GqlUser, RequestUser } from '@zen/nest-auth';
 import bcrypt from 'bcryptjs';
 import gql from 'graphql-tag';
 
-import { AuthService, GqlGuard, GqlThrottlerGuard, GqlUser, RequestUser } from '../../auth';
+import { AuthService } from '../../auth';
 import { ConfigService } from '../../config';
 import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
+import { PrismaClient } from '../../prisma';
 import {
   AccountInfo,
   AuthExchangeTokenInput,
@@ -36,7 +37,7 @@ export const typeDefs = gql`
   }
 
   type AuthSession {
-    id: Int! # Change to Int! or String! respective to the typeof User['id']
+    id: String! # Change to Int! or String! respective to the typeof User['id']
     token: String!
     roles: [String!]!
     rememberMe: Boolean!

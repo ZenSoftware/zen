@@ -7,7 +7,7 @@ import {
     accum += `  ${name},\n`;
   }
 
-  accum += `} from '@prisma/client';
+  accum += `} from '../../prisma';
 
 export type PrismaSubjects = Subjects<{
 `;
