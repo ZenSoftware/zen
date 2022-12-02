@@ -6,13 +6,14 @@ import { AuthGuard } from '@nestjs/passport';
 import { Action } from '@zen/api-interfaces';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
+import { CASL_FACTORY_TOKEN } from './casl-factory.token';
 import { SUBJECT_KEY } from './casl-subject.decorator';
 
 export function GqlCaslGuard(...actions: Array<Action>) {
   @Injectable()
   class CaslGuard extends AuthGuard('jwt') {
     constructor(
-      @Inject('CASL_FACTORY') readonly caslAbilityFactory,
+      @Inject(CASL_FACTORY_TOKEN) readonly caslAbilityFactory,
       readonly reflector: Reflector
     ) {
       super();
@@ -26,11 +27,12 @@ export function GqlCaslGuard(...actions: Array<Action>) {
         ALLOW_ANONYMOUS_KEY,
         ctx.getHandler()
       );
+      if (allowAnonymousHandler) return true;
+
       const allowAnonymousClass = this.reflector.get<boolean | undefined>(
         ALLOW_ANONYMOUS_KEY,
         ctx.getClass()
       );
-      if (allowAnonymousHandler) return true;
       if (allowAnonymousClass) return true;
 
       await super.canActivate(context);
