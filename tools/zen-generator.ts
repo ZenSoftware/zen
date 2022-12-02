@@ -56,6 +56,14 @@ export class ZenGenerator {
     await pal.run();
     console.log(`- Wrote: ${palOutPath}`);
 
+    // Replace '@prisma/client' path with '../prisma'
+    const resolverTypesPath = path.join(palOutPath, '../resolversTypes.ts');
+    const resolverTypesOriginal = (await readFile(resolverTypesPath)).toString();
+    const resolverTypesUpdated =
+      resolverTypesOriginal.slice(0, 25) + '../prisma' + resolverTypesOriginal.slice(39);
+    await writeFile(resolverTypesPath, resolverTypesUpdated);
+    console.log(`- Wrote: ${resolverTypesPath}`);
+
     // Get Prisma type names via the directory names under the 'paljs' folder;
     const dirents = await readdir(palOutPath, { withFileTypes: true });
     let prismaNames = dirents.filter(d => d.isDirectory()).map(d => d.name);

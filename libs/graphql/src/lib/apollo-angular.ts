@@ -29,11 +29,9 @@ export type AccountInfo = {
 
 export type AggregateUser = {
   __typename?: 'AggregateUser';
-  _avg?: Maybe<UserAvgAggregateOutputType>;
   _count?: Maybe<UserCountAggregateOutputType>;
   _max?: Maybe<UserMaxAggregateOutputType>;
   _min?: Maybe<UserMinAggregateOutputType>;
-  _sum?: Maybe<UserSumAggregateOutputType>;
 };
 
 export type AuthExchangeTokenInput = {
@@ -69,7 +67,7 @@ export type AuthRegisterInput = {
 export type AuthSession = {
   __typename?: 'AuthSession';
   expiresIn: Scalars['Int'];
-  id: Scalars['Int'];
+  id: Scalars['String'];
   rememberMe: Scalars['Boolean'];
   roles: Array<Scalars['String']>;
   rules: Array<Scalars['Json']>;
@@ -118,41 +116,6 @@ export type GoogleProfile = {
   locale?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
-};
-
-export type IntFieldUpdateOperationsInput = {
-  decrement?: InputMaybe<Scalars['Int']>;
-  divide?: InputMaybe<Scalars['Int']>;
-  increment?: InputMaybe<Scalars['Int']>;
-  multiply?: InputMaybe<Scalars['Int']>;
-  set?: InputMaybe<Scalars['Int']>;
-};
-
-export type IntFilter = {
-  equals?: InputMaybe<Scalars['Int']>;
-  gt?: InputMaybe<Scalars['Int']>;
-  gte?: InputMaybe<Scalars['Int']>;
-  in?: InputMaybe<Array<Scalars['Int']>>;
-  lt?: InputMaybe<Scalars['Int']>;
-  lte?: InputMaybe<Scalars['Int']>;
-  not?: InputMaybe<NestedIntFilter>;
-  notIn?: InputMaybe<Array<Scalars['Int']>>;
-};
-
-export type IntWithAggregatesFilter = {
-  _avg?: InputMaybe<NestedFloatFilter>;
-  _count?: InputMaybe<NestedIntFilter>;
-  _max?: InputMaybe<NestedIntFilter>;
-  _min?: InputMaybe<NestedIntFilter>;
-  _sum?: InputMaybe<NestedIntFilter>;
-  equals?: InputMaybe<Scalars['Int']>;
-  gt?: InputMaybe<Scalars['Int']>;
-  gte?: InputMaybe<Scalars['Int']>;
-  in?: InputMaybe<Array<Scalars['Int']>>;
-  lt?: InputMaybe<Scalars['Int']>;
-  lte?: InputMaybe<Scalars['Int']>;
-  not?: InputMaybe<NestedIntWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['Int']>>;
 };
 
 export enum JsonNullValueFilter {
@@ -295,17 +258,6 @@ export type NestedDateTimeWithAggregatesFilter = {
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
 };
 
-export type NestedFloatFilter = {
-  equals?: InputMaybe<Scalars['Float']>;
-  gt?: InputMaybe<Scalars['Float']>;
-  gte?: InputMaybe<Scalars['Float']>;
-  in?: InputMaybe<Array<Scalars['Float']>>;
-  lt?: InputMaybe<Scalars['Float']>;
-  lte?: InputMaybe<Scalars['Float']>;
-  not?: InputMaybe<NestedFloatFilter>;
-  notIn?: InputMaybe<Array<Scalars['Float']>>;
-};
-
 export type NestedIntFilter = {
   equals?: InputMaybe<Scalars['Int']>;
   gt?: InputMaybe<Scalars['Int']>;
@@ -325,22 +277,6 @@ export type NestedIntNullableFilter = {
   lt?: InputMaybe<Scalars['Int']>;
   lte?: InputMaybe<Scalars['Int']>;
   not?: InputMaybe<NestedIntNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['Int']>>;
-};
-
-export type NestedIntWithAggregatesFilter = {
-  _avg?: InputMaybe<NestedFloatFilter>;
-  _count?: InputMaybe<NestedIntFilter>;
-  _max?: InputMaybe<NestedIntFilter>;
-  _min?: InputMaybe<NestedIntFilter>;
-  _sum?: InputMaybe<NestedIntFilter>;
-  equals?: InputMaybe<Scalars['Int']>;
-  gt?: InputMaybe<Scalars['Int']>;
-  gte?: InputMaybe<Scalars['Int']>;
-  in?: InputMaybe<Array<Scalars['Int']>>;
-  lt?: InputMaybe<Scalars['Int']>;
-  lte?: InputMaybe<Scalars['Int']>;
-  not?: InputMaybe<NestedIntWithAggregatesFilter>;
   notIn?: InputMaybe<Array<Scalars['Int']>>;
 };
 
@@ -616,20 +552,11 @@ export type User = {
   email: Scalars['String'];
   googleId?: Maybe<Scalars['String']>;
   googleProfile?: Maybe<Scalars['Json']>;
-  id: Scalars['Int'];
+  id: Scalars['String'];
   password?: Maybe<Scalars['String']>;
   roles: Array<Scalars['String']>;
   rules: Array<Scalars['Json']>;
   username?: Maybe<Scalars['String']>;
-};
-
-export type UserAvgAggregateOutputType = {
-  __typename?: 'UserAvgAggregateOutputType';
-  id?: Maybe<Scalars['Float']>;
-};
-
-export type UserAvgOrderByAggregateInput = {
-  id?: InputMaybe<SortOrder>;
 };
 
 export type UserCountAggregateOutputType = {
@@ -661,6 +588,7 @@ export type UserCreateInput = {
   email: Scalars['String'];
   googleId?: InputMaybe<Scalars['String']>;
   googleProfile?: InputMaybe<Scalars['Json']>;
+  id?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Scalars['String']>>;
   username?: InputMaybe<Scalars['String']>;
@@ -671,7 +599,7 @@ export type UserCreateManyInput = {
   email: Scalars['String'];
   googleId?: InputMaybe<Scalars['String']>;
   googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Scalars['String']>>;
   username?: InputMaybe<Scalars['String']>;
@@ -686,7 +614,7 @@ export type UserMaxAggregateOutputType = {
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   googleId?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   username?: Maybe<Scalars['String']>;
 };
@@ -705,7 +633,7 @@ export type UserMinAggregateOutputType = {
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
   googleId?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   username?: Maybe<Scalars['String']>;
 };
@@ -720,11 +648,9 @@ export type UserMinOrderByAggregateInput = {
 };
 
 export type UserOrderByWithAggregationInput = {
-  _avg?: InputMaybe<UserAvgOrderByAggregateInput>;
   _count?: InputMaybe<UserCountOrderByAggregateInput>;
   _max?: InputMaybe<UserMaxOrderByAggregateInput>;
   _min?: InputMaybe<UserMinOrderByAggregateInput>;
-  _sum?: InputMaybe<UserSumOrderByAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   googleId?: InputMaybe<SortOrder>;
@@ -765,19 +691,10 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: InputMaybe<StringWithAggregatesFilter>;
   googleId?: InputMaybe<StringNullableWithAggregatesFilter>;
   googleProfile?: InputMaybe<JsonNullableWithAggregatesFilter>;
-  id?: InputMaybe<IntWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
   password?: InputMaybe<StringNullableWithAggregatesFilter>;
   roles?: InputMaybe<StringNullableListFilter>;
   username?: InputMaybe<StringNullableWithAggregatesFilter>;
-};
-
-export type UserSumAggregateOutputType = {
-  __typename?: 'UserSumAggregateOutputType';
-  id?: Maybe<Scalars['Int']>;
-};
-
-export type UserSumOrderByAggregateInput = {
-  id?: InputMaybe<SortOrder>;
 };
 
 export type UserUncheckedCreateInput = {
@@ -785,7 +702,7 @@ export type UserUncheckedCreateInput = {
   email: Scalars['String'];
   googleId?: InputMaybe<Scalars['String']>;
   googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Scalars['String']>>;
   username?: InputMaybe<Scalars['String']>;
@@ -796,7 +713,7 @@ export type UserUncheckedUpdateInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   roles?: InputMaybe<Array<Scalars['String']>>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -807,7 +724,7 @@ export type UserUncheckedUpdateManyInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<IntFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   roles?: InputMaybe<Array<Scalars['String']>>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -818,6 +735,7 @@ export type UserUpdateInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   googleProfile?: InputMaybe<Scalars['Json']>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   roles?: InputMaybe<Array<Scalars['String']>>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -828,6 +746,7 @@ export type UserUpdateManyMutationInput = {
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   googleProfile?: InputMaybe<Scalars['Json']>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   roles?: InputMaybe<Array<Scalars['String']>>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -846,7 +765,7 @@ export type UserWhereInput = {
   email?: InputMaybe<StringFilter>;
   googleId?: InputMaybe<StringNullableFilter>;
   googleProfile?: InputMaybe<JsonNullableFilter>;
-  id?: InputMaybe<IntFilter>;
+  id?: InputMaybe<StringFilter>;
   password?: InputMaybe<StringNullableFilter>;
   roles?: InputMaybe<StringNullableListFilter>;
   username?: InputMaybe<StringNullableFilter>;
@@ -855,7 +774,7 @@ export type UserWhereInput = {
 export type UserWhereUniqueInput = {
   email?: InputMaybe<Scalars['String']>;
   googleId?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
 };
 
@@ -864,14 +783,14 @@ export type AuthExchangeTokenVariables = Exact<{
 }>;
 
 
-export type AuthExchangeToken = { __typename?: 'Query', authExchangeToken: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
+export type AuthExchangeToken = { __typename?: 'Query', authExchangeToken: { __typename?: 'AuthSession', id: string, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
 
 export type AuthLoginVariables = Exact<{
   data: AuthLoginInput;
 }>;
 
 
-export type AuthLogin = { __typename?: 'Query', authLogin: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
+export type AuthLogin = { __typename?: 'Query', authLogin: { __typename?: 'AuthSession', id: string, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
 
 export type GetAccountInfoVariables = Exact<{ [key: string]: never; }>;
 
@@ -890,7 +809,7 @@ export type AuthPasswordResetConfirmationVariables = Exact<{
 }>;
 
 
-export type AuthPasswordResetConfirmation = { __typename?: 'Mutation', authPasswordResetConfirmation: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
+export type AuthPasswordResetConfirmation = { __typename?: 'Mutation', authPasswordResetConfirmation: { __typename?: 'AuthSession', id: string, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
 
 export type AuthPasswordResetRequestQueryVariables = Exact<{
   data: AuthPasswordResetRequestInput;
@@ -904,7 +823,7 @@ export type AuthRegisterVariables = Exact<{
 }>;
 
 
-export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
+export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', id: string, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
 
 export type LoggedInVariables = Exact<{ [key: string]: never; }>;
 
@@ -918,18 +837,18 @@ export type UserRoles = { __typename?: 'Query', userRoles: Array<string> };
 
 export type AccountInfoFields = { __typename?: 'AccountInfo', username?: string | null, hasPassword: boolean, googleProfile?: { __typename?: 'GoogleProfile', email?: string | null, picture?: string | null } | null };
 
-export type AuthSessionFields = { __typename?: 'AuthSession', id: number, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> };
+export type AuthSessionFields = { __typename?: 'AuthSession', id: string, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> };
 
 export type GoogleProfileFields = { __typename?: 'GoogleProfile', email?: string | null, picture?: string | null };
 
-export type UserFields = { __typename?: 'User', id: number, username?: string | null, email: string };
+export type UserFields = { __typename?: 'User', id: string, username?: string | null, email: string };
 
 export type FindUniqueUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: number, username?: string | null, email: string } | null };
+export type FindUniqueUser = { __typename?: 'Query', findUniqueUser?: { __typename?: 'User', id: string, username?: string | null, email: string } | null };
 
 export type FindFirstUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -941,7 +860,7 @@ export type FindFirstUserVariables = Exact<{
 }>;
 
 
-export type FindFirstUser = { __typename?: 'Query', findFirstUser?: { __typename?: 'User', id: number, username?: string | null, email: string } | null };
+export type FindFirstUser = { __typename?: 'Query', findFirstUser?: { __typename?: 'User', id: string, username?: string | null, email: string } | null };
 
 export type FindManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -953,7 +872,7 @@ export type FindManyUserVariables = Exact<{
 }>;
 
 
-export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: number, username?: string | null, email: string }> | null };
+export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: string, username?: string | null, email: string }> | null };
 
 export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
@@ -972,7 +891,7 @@ export type CreateOneUserVariables = Exact<{
 }>;
 
 
-export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: number, username?: string | null, email: string } };
+export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: string, username?: string | null, email: string } };
 
 export type UpdateOneUserVariables = Exact<{
   data: UserUpdateInput;
@@ -980,7 +899,7 @@ export type UpdateOneUserVariables = Exact<{
 }>;
 
 
-export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: number, username?: string | null, email: string } };
+export type UpdateOneUser = { __typename?: 'Mutation', updateOneUser: { __typename?: 'User', id: string, username?: string | null, email: string } };
 
 export type UpdateManyUserVariables = Exact<{
   data: UserUpdateManyMutationInput;
@@ -997,14 +916,14 @@ export type UpsertOneUserVariables = Exact<{
 }>;
 
 
-export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: number, username?: string | null, email: string } | null };
+export type UpsertOneUser = { __typename?: 'Mutation', upsertOneUser?: { __typename?: 'User', id: string, username?: string | null, email: string } | null };
 
 export type DeleteOneUserVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type DeleteOneUser = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: number } | null };
+export type DeleteOneUser = { __typename?: 'Mutation', deleteOneUser?: { __typename?: 'User', id: string } | null };
 
 export type DeleteManyUserVariables = Exact<{
   where: UserWhereInput;

@@ -1,18 +1,17 @@
-import { ExecutionContext, Injectable, mixin } from '@nestjs/common';
+import { ExecutionContext, Inject, Injectable, mixin } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { Action } from '@zen/api-interfaces';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
-import { CaslAbilityFactory } from './casl-ability.factory';
 import { SUBJECT_KEY } from './casl-subject.decorator';
 
 export function HttpCaslGuard(...actions: Array<Action>) {
   @Injectable()
   class CaslGuard extends AuthGuard('jwt') {
     constructor(
-      private readonly reflector: Reflector,
-      private readonly caslAbilityFactory: CaslAbilityFactory
+      @Inject('CASL_FACTORY') readonly caslAbilityFactory,
+      readonly reflector: Reflector
     ) {
       super();
     }
