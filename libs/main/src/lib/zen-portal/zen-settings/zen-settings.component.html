@@ -17,7 +17,8 @@
         </div>
     
         <div *ngIf="accountInfo.googleProfile">
-          <img *ngIf="accountInfo.googleProfile.picture" src="{{accountInfo.googleProfile.picture}}" referrerpolicy="no-referrer" class="me-2">
+          <img *ngIf="accountInfo.googleProfile.picture" src="{{accountInfo.googleProfile.picture}}" referrerpolicy="no-referrer"
+            class="me-2" style="max-width: 100px; max-height: 100px;">
           {{accountInfo.googleProfile.email}}
         </div>
       </div>

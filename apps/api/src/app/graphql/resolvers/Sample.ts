@@ -2,12 +2,12 @@ import { createWriteStream, existsSync, mkdirSync } from 'fs';
 
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
+import { GqlGuard, GqlUser, RequestUser, Roles } from '@zen/nest-auth';
 import { PubSub } from 'graphql-subscriptions';
 import gql from 'graphql-tag';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 import { interval } from 'rxjs';
 
-import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
 import type { FileUpload } from '../models';
 
 export const typeDefs = gql`
