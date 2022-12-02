@@ -9,11 +9,12 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { User } from '@prisma/client';
+import { CaslSubject, GqlCaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
-import { CaslAbilityFactory, CaslSubject, GqlCaslGuard } from '../../auth';
+import { CaslAbilityFactory } from '../../auth';
+import { User } from '../../prisma';
 import { PrismaSelectArgs } from '../../prisma';
 import { IContext } from '../models';
 import resolvers from '../paljs/User/resolvers';

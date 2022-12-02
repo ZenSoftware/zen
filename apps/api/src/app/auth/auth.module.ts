@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PassportModule } from '@nestjs/passport';
+import { NestAuthModule } from '@zen/nest-auth';
 
 import { environment } from '../../environments/environment';
 import { JwtModule } from '../jwt';
@@ -14,9 +14,13 @@ const oauthProviders = [];
 if (environment.oauth?.google?.clientID) oauthProviders.push(GoogleOAuthStrategy);
 
 @Module({
-  imports: [JwtModule, PrismaModule, PassportModule.register({ defaultStrategy: 'jwt' })],
+  imports: [
+    JwtModule,
+    PrismaModule,
+    NestAuthModule.register({ caslAbilityFactory: CaslAbilityFactory }),
+  ],
   providers: [JwtStrategy, AuthService, CaslAbilityFactory, ...oauthProviders],
-  exports: [JwtModule, PassportModule, AuthService, CaslAbilityFactory],
+  exports: [JwtModule, AuthService, CaslAbilityFactory],
   controllers: [AuthController],
 })
 export class ZenAuthModule {}

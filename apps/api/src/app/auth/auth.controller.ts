@@ -2,12 +2,11 @@ import { URLSearchParams } from 'url';
 
 import { Controller, Get, Res, UseFilters, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { HttpUser, RequestUser } from '@zen/nest-auth';
 import { Response } from 'express';
 
 import { ConfigService } from '../config';
 import { AuthService } from './auth.service';
-import { HttpUser } from './decorators/http-user.decorator';
-import { RequestUser } from './models/request-user';
 import { EmailTakenExceptionFilter } from './strategies/email-taken-exception.filter';
 
 @Controller('auth')

@@ -1,9 +1,9 @@
 import { ISendMailOptions, MailerService } from '@nestjs-modules/mailer';
 import { Injectable, Logger } from '@nestjs/common';
-import { User } from '@prisma/client';
 
 import { ConfigService } from '../config';
 import { JwtService } from '../jwt';
+import { User } from '../prisma';
 import { GeneralContext, PasswordResetContext } from './contexts';
 
 type MailOptions = ISendMailOptions & { template?: string };

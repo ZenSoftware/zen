@@ -1,9 +1,7 @@
-import { User } from '@prisma/client';
-
 export interface JwtPayload {
   readonly jti: string;
   readonly aud: string;
-  readonly sub: User['id'];
+  readonly sub: any;
   readonly roles: string[];
   readonly iat?: number;
   readonly exp?: number;

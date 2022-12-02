@@ -1,13 +1,12 @@
 import { randomUUID } from 'crypto';
 
 import { Injectable } from '@nestjs/common';
+import { JwtPayload, RequestUser } from '@zen/nest-auth';
 
 import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models/auth-session';
 import { JwtService } from '../jwt';
 import { CaslAbilityFactory } from './casl/casl-ability.factory';
-import { JwtPayload } from './models/jwt-payload';
-import { RequestUser } from './models/request-user';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Injectable()

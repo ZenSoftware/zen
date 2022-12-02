@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { User } from '../../prisma';
 
 export interface AuthSession {
   id: User['id'];
