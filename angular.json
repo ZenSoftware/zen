@@ -9,6 +9,7 @@
     "graphql": "libs/graphql",
     "layout": "libs/layout",
     "main": "libs/main",
+    "nest-auth": "libs/nest-auth",
     "portal": "apps/portal",
     "portal-e2e": "apps/portal-e2e"
   }

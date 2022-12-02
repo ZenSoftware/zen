@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
   type User {
-    id: Int!
+    id: String!
     createdAt: DateTime!
     username: String
     password: String

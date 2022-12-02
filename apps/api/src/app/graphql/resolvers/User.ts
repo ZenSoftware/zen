@@ -1,4 +1,4 @@
-import { UseGuards } from '@nestjs/common';
+import { Inject, UseGuards } from '@nestjs/common';
 import {
   Args,
   Context,
@@ -9,11 +9,12 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { User } from '@prisma/client';
+import { CASL_FACTORY_TOKEN, CaslSubject, GqlCaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
-import { CaslAbilityFactory, CaslSubject, GqlCaslGuard } from '../../auth';
+import { CaslAbilityFactory } from '../../auth';
+import { User } from '../../prisma';
 import { PrismaSelectArgs } from '../../prisma';
 import { IContext } from '../models';
 import resolvers from '../paljs/User/resolvers';
@@ -39,7 +40,9 @@ export const typeDefs = gql`
 @Resolver('User')
 @CaslSubject('User')
 export class UserResolver {
-  constructor(private readonly caslAbilityFactory: CaslAbilityFactory) {}
+  constructor(
+    @Inject(CASL_FACTORY_TOKEN) private readonly caslAbilityFactory: CaslAbilityFactory
+  ) {}
 
   @ResolveField()
   async password() {

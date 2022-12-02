@@ -5,11 +5,12 @@ datasource db {
 
 generator client {
   provider      = "prisma-client-js"
+  output        = "src/app/prisma/client"
   binaryTargets = ["native", "linux-musl"]
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
+  id            String   @id @default(uuid())
   createdAt     DateTime @default(now())
   username      String?  @unique
   password      String?
