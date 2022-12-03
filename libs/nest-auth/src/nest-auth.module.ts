@@ -9,13 +9,13 @@ import { CASL_FACTORY_TOKEN } from './casl/casl-factory.token';
 })
 export class NestAuthModule {
   /**
-   * @param caslAbilityFactory Class that implements ICaslAbilityFactory
+   * @param caslFactory Class that implements ICaslFactory
    */
-  static register(caslAbilityFactory: Type<any>): DynamicModule {
+  static register(caslFactory: Type<any>): DynamicModule {
     const providers: Provider[] = [
       {
         provide: CASL_FACTORY_TOKEN,
-        useClass: caslAbilityFactory,
+        useClass: caslFactory,
       },
     ];
 

@@ -10,10 +10,7 @@ import { SUBJECT_KEY } from './casl-subject.decorator';
 export function HttpCaslGuard(...actions: Array<Action>) {
   @Injectable()
   class CaslGuard extends AuthGuard('jwt') {
-    constructor(
-      @Inject(CASL_FACTORY_TOKEN) readonly caslAbilityFactory,
-      readonly reflector: Reflector
-    ) {
+    constructor(@Inject(CASL_FACTORY_TOKEN) readonly caslFactory, readonly reflector: Reflector) {
       super();
     }
 
@@ -38,7 +35,7 @@ export function HttpCaslGuard(...actions: Array<Action>) {
       const handlerSubject = this.reflector.get<string>(SUBJECT_KEY, context.getHandler());
       const subjectName = handlerSubject ? handlerSubject : classSubject;
 
-      const ability = await this.caslAbilityFactory.createAbility(user);
+      const ability = await this.caslFactory.createAbility(user);
 
       for (const action of actions) {
         const allowed = ability.can(action, subjectName as any);
