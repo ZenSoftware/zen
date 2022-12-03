@@ -1,5 +1,5 @@
 import { RequestUser } from '../models/request-user';
 
-export interface ICaslAbilityFactory {
+export interface ICaslFactory {
   createAbility(user: RequestUser): Promise<any>;
 }
