@@ -29,7 +29,7 @@ import { Logger, UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 
-import { GqlGuard, GqlUser, RequestUser, Roles } from '../../auth';
+import { GqlGuard, GqlUser, RequestUser, Roles } from '@zen/nest-auth';
 
 export const typeDefs = gql`
   extend type Query {
@@ -58,7 +58,7 @@ import { Logger, UseGuards } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 
-import { CaslSubject, GqlCaslGuard, GqlUser, RequestUser } from '../../auth';
+import { CaslSubject, GqlCaslGuard, GqlUser, RequestUser } from '@zen/nest-auth';
 
 export const typeDefs = gql`
   extend type Query {
@@ -78,14 +78,14 @@ export class SampleResolver {
 }
 ```
 
-*auth/casl/casl-ability.factory.ts*
+*auth/casl/casl.factory.ts*
 ```ts
 import { AbilityBuilder, PureAbility } from '@casl/ability';
 import { PrismaQuery, createPrismaAbility } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Action } from '@zen/api-interfaces';
+import { ICaslFactory, RequestUser } from '@zen/nest-auth';
 
-import { RequestUser } from '../models/request-user';
 import { PrismaSubjects } from './generated';
 
 /** @description A union of subjects to extend the ability beyond just Prisma models */
@@ -93,7 +93,7 @@ export type ExtendedSubjects = 'all' | 'Sample';
 export type AppAbility = PureAbility<[Action, PrismaSubjects | ExtendedSubjects], PrismaQuery>;
 
 @Injectable()
-export class CaslAbilityFactory {
+export class CaslFactory implements ICaslFactory {
   async createAbility(user: RequestUser) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(createPrismaAbility);
 
