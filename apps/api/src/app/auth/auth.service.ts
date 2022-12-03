@@ -1,12 +1,11 @@
 import { randomUUID } from 'crypto';
 
 import { Inject, Injectable } from '@nestjs/common';
-import { CASL_FACTORY_TOKEN, JwtPayload, RequestUser } from '@zen/nest-auth';
+import { CASL_FACTORY_TOKEN, ICaslFactory, JwtPayload, RequestUser } from '@zen/nest-auth';
 
 import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models/auth-session';
 import { JwtService } from '../jwt';
-import { CaslAbilityFactory } from './casl/casl-ability.factory';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Injectable()
@@ -15,7 +14,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly jwtStrategy: JwtStrategy,
     private readonly config: ConfigService,
-    @Inject(CASL_FACTORY_TOKEN) private readonly caslAbilityFactory: CaslAbilityFactory
+    @Inject(CASL_FACTORY_TOKEN) private readonly caslFactory: ICaslFactory
   ) {}
 
   async getAuthSession(user: RequestUser, rememberMe = false) {
@@ -32,7 +31,7 @@ export class AuthService {
 
     const token = this.jwtService.sign(jwtPayload, { expiresIn });
 
-    const ability = await this.caslAbilityFactory.createAbility(user);
+    const ability = await this.caslFactory.createAbility(user);
 
     const authSession: AuthSession = {
       id: user.id,
@@ -47,7 +46,7 @@ export class AuthService {
   }
 
   async createAbility(user: RequestUser) {
-    return this.caslAbilityFactory.createAbility(user);
+    return this.caslFactory.createAbility(user);
   }
 
   /**

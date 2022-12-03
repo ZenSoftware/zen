@@ -12,10 +12,7 @@ import { SUBJECT_KEY } from './casl-subject.decorator';
 export function GqlCaslGuard(...actions: Array<Action>) {
   @Injectable()
   class CaslGuard extends AuthGuard('jwt') {
-    constructor(
-      @Inject(CASL_FACTORY_TOKEN) readonly caslAbilityFactory,
-      readonly reflector: Reflector
-    ) {
+    constructor(@Inject(CASL_FACTORY_TOKEN) readonly caslFactory, readonly reflector: Reflector) {
       super();
     }
 
@@ -42,7 +39,7 @@ export function GqlCaslGuard(...actions: Array<Action>) {
       const handlerSubject = this.reflector.get<string>(SUBJECT_KEY, ctx.getHandler());
       const subjectName = handlerSubject ? handlerSubject : classSubject;
 
-      const ability = await this.caslAbilityFactory.createAbility(user);
+      const ability = await this.caslFactory.createAbility(user);
 
       const args = ctx.getArgs();
 
