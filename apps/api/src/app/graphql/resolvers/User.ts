@@ -9,7 +9,8 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { CASL_FACTORY_TOKEN, CaslSubject, GqlCaslGuard, ICaslFactory } from '@zen/nest-auth';
+import { CASL_FACTORY_TOKEN, CaslSubject, GqlCaslGuard } from '@zen/nest-auth';
+import type { ICaslFactory } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
