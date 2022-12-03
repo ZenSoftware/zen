@@ -1,7 +1,8 @@
 import { randomUUID } from 'crypto';
 
 import { Inject, Injectable } from '@nestjs/common';
-import { CASL_FACTORY_TOKEN, ICaslFactory, JwtPayload, RequestUser } from '@zen/nest-auth';
+import { CASL_FACTORY_TOKEN, JwtPayload, RequestUser } from '@zen/nest-auth';
+import type { ICaslFactory } from '@zen/nest-auth';
 
 import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models/auth-session';
