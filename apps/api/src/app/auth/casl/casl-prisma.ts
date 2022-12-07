@@ -1,7 +1,6 @@
 /**
- * @description
  * Custom PrismaClient output path requires a custom casl-prisma.ts file
- * https://casl.js.org/v6/en/package/casl-prisma
+ * Code copied from https://casl.js.org/v6/en/package/casl-prisma
  */
 import { hkt } from '@casl/ability';
 import {

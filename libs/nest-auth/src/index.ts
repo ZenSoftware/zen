@@ -1,6 +1,5 @@
 export { AllowAnonymous } from './decorators/allow-anonymous.decorator';
 export { AuthGuard } from '@nestjs/passport';
-export { ForbidNestedCreateGuard } from './guards/forbid-nested-create.guard';
 export { RequestUser } from './models/request-user';
 export { Roles } from './decorators/roles.decorator';
 export * from './casl/casl-factory.interface';
