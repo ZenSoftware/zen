@@ -4,7 +4,7 @@ import { Ability, Subject } from '@casl/ability';
 import { Action } from '@zen/api-interfaces';
 
 export class CaslGuard {
-  static can(action: Action, subject: Subject, field?: string | undefined) {
+  static can(action: Action, subject: Subject, conditions?: any) {
     @Injectable({
       providedIn: 'root',
     })
@@ -12,7 +12,9 @@ export class CaslGuard {
       constructor(private router: Router, private ability: Ability) {}
 
       canActivate() {
-        return this.ability.can(action, subject, field) ? true : this.router.parseUrl('/login');
+        return this.ability.can(action, subject, conditions)
+          ? true
+          : this.router.parseUrl('/login');
       }
 
       canActivateChild() {
