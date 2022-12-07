@@ -7,6 +7,7 @@ import {
   Input,
   OnDestroy,
   Output,
+  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,6 +19,7 @@ import {
   EditEvent,
   GridComponent,
   GridDataResult,
+  NoRecordsTemplateDirective,
   RemoveEvent,
   RowClassArgs,
   SortSettings,
@@ -87,6 +89,7 @@ const DEFAULT_TAKE = 10;
 export class ZenGridComponent<T extends object> implements AfterContentInit, OnDestroy {
   @ContentChild(ZenGridDetailTemplateDirective) details: ZenGridDetailTemplateDirective | undefined;
   @ViewChild('grid') grid!: GridComponent;
+  @ViewChild('errorTemplate') errorTemplate!: TemplateRef<any>;
 
   @Output() add = new EventEmitter<AddEvent>();
   @Output() edit = new EventEmitter<EditEvent>();
@@ -197,16 +200,21 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       }
 
       if (this.settings.process === 'local') {
-        this.#querySub = this.settings.findManyGQL
-          .watch()
-          .valueChanges.subscribe(({ data, loading }) => {
+        this.#querySub = this.settings.findManyGQL.watch().valueChanges.subscribe({
+          next: ({ data, loading }) => {
             this.loading = loading;
 
             const result = Object.entries(data)[0][1] as T[];
             this.#data = result ?? [];
             this.dataStateChangeHandler();
             this.changeDetectorRef.detectChanges();
-          });
+          },
+          error: e => {
+            this.loading = false;
+            this.grid.noRecordsTemplate = new NoRecordsTemplateDirective(this.errorTemplate);
+            console.error(e);
+          },
+        });
       } else {
         this.dataStateChangeHandler();
       }
@@ -355,13 +363,18 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
       this.loading = true;
 
-      this.#querySub = this.settings.findManyGQL
-        .watch(variables)
-        .valueChanges.subscribe(({ data, loading }) => {
+      this.#querySub = this.settings.findManyGQL.watch(variables).valueChanges.subscribe({
+        next: ({ data, loading }) => {
           this.loading = loading;
           this.gridData.data = Object.entries(data)[0][1] as T[];
           this.changeDetectorRef.detectChanges();
-        });
+        },
+        error: e => {
+          this.loading = false;
+          this.grid.noRecordsTemplate = new NoRecordsTemplateDirective(this.errorTemplate);
+          console.error(e);
+        },
+      });
     }
   };
 
