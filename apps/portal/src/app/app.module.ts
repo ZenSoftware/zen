@@ -5,8 +5,9 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { Ability, PureAbility, createMongoAbility } from '@casl/ability';
+import { Ability, PureAbility } from '@casl/ability';
 import { AbilityModule } from '@casl/angular';
+import { createPrismaAbility } from '@casl/prisma';
 import { AuthInterceptor, ZenAuthModule, tokenVar } from '@zen/auth';
 import { Environment } from '@zen/common';
 import { ZenGraphQLModule } from '@zen/graphql';
@@ -62,7 +63,7 @@ import { AppComponent } from './app.component';
     { provide: Environment, useValue: environment },
     {
       provide: Ability,
-      useValue: createMongoAbility(undefined, {
+      useValue: createPrismaAbility(undefined, {
         detectSubjectType: object => object['__typename'],
       }),
     },
