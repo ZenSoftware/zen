@@ -17,7 +17,7 @@ describe('Auth Controller', () => {
           useValue: {
             getAuthSession: () => {
               const authSession: Partial<AuthSession> = {
-                id: 1,
+                id: 'abc123',
                 roles: ['Super', 'Registered'],
                 expiresIn: 123,
                 rememberMe: true,
