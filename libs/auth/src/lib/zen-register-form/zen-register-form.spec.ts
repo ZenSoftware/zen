@@ -80,7 +80,7 @@ describe('ZenRegisterFormComponent', () => {
     const data: AuthRegister = {
       authRegister: {
         __typename: 'AuthSession',
-        id: 1,
+        id: 'abc123',
         expiresIn: 1000,
         rememberMe: true,
         roles: ['Super'],
