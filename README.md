@@ -18,7 +18,7 @@ This project also provides solutions for the hardest parts of user authenticatio
 
 **Requirements**
 
-- [Node v16](https://nodejs.org/)
+- [Node v18](https://nodejs.org/)
 - [Docker](https://www.docker.com/) or [Rancher Desktop](https://rancherdesktop.io/)
 
 ```bash
