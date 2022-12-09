@@ -3,7 +3,7 @@ export function NestResolversRBACTemplate(name: string) {
 import { Args, Context, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { GqlGuard, Roles } from '../../auth';
+import { GqlGuard, Roles } from '@zen/nest-auth';
 import { PrismaSelectArgs } from '../../prisma';
 import { IContext } from '../models';
 import resolvers from '../paljs/${name}/resolvers';
