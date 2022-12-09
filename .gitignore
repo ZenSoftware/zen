@@ -3,7 +3,7 @@
 /.env
 debug.log
 /android
-/apps/api/src/app/prisma/client
+/apps/**/prisma/generated/
 
 # documentation
 /documentation
