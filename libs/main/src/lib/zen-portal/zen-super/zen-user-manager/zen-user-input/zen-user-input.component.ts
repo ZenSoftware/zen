@@ -10,7 +10,7 @@ import { Apollo } from 'apollo-angular';
 
 export type DialogData =
   | {
-      action: 'update';
+      action: 'edit';
       item: UserFields;
     }
   | {
@@ -51,7 +51,7 @@ export class ZenUserInputComponent {
     private snackBarError: ZenSnackbarErrorService,
     private updateOneUserGQL: UpdateOneUserGQL
   ) {
-    if (data.action === 'update') {
+    if (data.action === 'edit') {
       this.username.setValue(data.item.username);
       this.email.setValue(data.item.email);
     }
@@ -61,7 +61,7 @@ export class ZenUserInputComponent {
     if (!this.loading) {
       this.loading = true;
 
-      if (this.data.action === 'update') {
+      if (this.data.action === 'edit') {
         const updateInput: UserUpdateInput = {
           username: { set: this.username.value },
           email: { set: this.email.value },

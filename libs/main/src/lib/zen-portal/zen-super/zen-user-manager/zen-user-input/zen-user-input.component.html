@@ -3,7 +3,7 @@
 
   <zen-register-form *ngIf="data.action === 'create'" (registered)="registered()"></zen-register-form>
 
-  <form id="user-form" [formGroup]="form" novalidate (ngSubmit)="onSubmit()" *ngIf="data.action === 'update'" class="k-form">
+  <form id="user-form" [formGroup]="form" novalidate (ngSubmit)="onSubmit()" *ngIf="data.action === 'edit'" class="k-form">
     <div class="row mb-3">
       <div class="col pe-2">
         <kendo-formfield>
@@ -28,7 +28,7 @@
 <mat-dialog-actions class="d-flex justify-content-between">
   <button type="submit" form="user-form"
     mat-raised-button color="primary"
-    *ngIf="data.action === 'update'"
+    *ngIf="data.action === 'edit'"
     [disabled]="loading || form.invalid">
     <i class="fa-solid fa-fw fa-save"></i>
     Save

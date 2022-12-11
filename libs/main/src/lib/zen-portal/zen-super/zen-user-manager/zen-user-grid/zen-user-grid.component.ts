@@ -67,7 +67,7 @@ export class ZenUserGridComponent {
   }
 
   editHandler({ dataItem }: { dataItem: UserFields }) {
-    this.inputDialog({ action: 'update', item: structuredClone(dataItem) });
+    this.inputDialog({ action: 'edit', item: structuredClone(dataItem) });
   }
 
   inputDialog(data: DialogData) {
