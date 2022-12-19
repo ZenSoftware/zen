@@ -1,4 +1,5 @@
 {
+  "name": "main",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/main/src",
@@ -19,6 +20,5 @@
       }
     }
   },
-  "tags": [],
-  "name": "main"
+  "tags": []
 }
