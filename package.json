@@ -42,7 +42,7 @@
     "apollo-server-express": "~3.11.1",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.0",
+    "class-validator": "^0.13.0",
     "date-fns": "^2.17.0",
     "graphql": "~16.6.0",
     "graphql-subscriptions": "^2.0.0",
@@ -76,7 +76,7 @@
     "@angular/platform-browser-dynamic": "~15.0.3",
     "@angular/router": "~15.0.3",
     "@apollo/client": "~3.7.1",
-    "@casl/angular": "~8.1.0",
+    "@casl/angular": "~8.2.0",
     "@graphql-codegen/cli": "^2.3.0",
     "@graphql-codegen/fragment-matcher": "^3.2.0",
     "@graphql-codegen/typescript": "^2.4.0",
@@ -135,9 +135,6 @@
     "zone.js": "~0.11.4"
   },
   "overrides": {
-    "@casl/angular": {
-      "@angular/core": "$@angular/core"
-    },
     "apollo-angular": {
       "@angular/core": "$@angular/core"
     },
