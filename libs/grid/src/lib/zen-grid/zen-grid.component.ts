@@ -539,15 +539,6 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     this.gridSettings.state.filter = value;
   }
 
-  get filters() {
-    return this.filter?.filters;
-  }
-
-  set filters(value) {
-    if (this.filter) this.filter.filters = value;
-    else this.filter = { filters: value, logic: 'and' };
-  }
-
   get expandedDetailKeys() {
     if (!this.gridSettings.expandedDetailKeys) this.gridSettings.expandedDetailKeys = [];
     return this.gridSettings.expandedDetailKeys;
