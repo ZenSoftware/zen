@@ -106,11 +106,8 @@ metadata:
   labels:
     name: zen-ingress
 spec:
-  tls:
-    - hosts:
-        - zen.rancher.localhost
   rules:
-    - host: zen.rancher.localhost
+    - host: zen.<IP>.nip.io # Replace <IP> to the IP of your ingress
       http:
         paths:
           - path: "/"

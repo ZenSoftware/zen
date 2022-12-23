@@ -1,4 +1,5 @@
 {
+  "name": "portal-e2e",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "apps/portal-e2e/src",
   "projectType": "application",
@@ -25,6 +26,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["portal"],
-  "name": "portal-e2e"
+  "implicitDependencies": ["portal"]
 }

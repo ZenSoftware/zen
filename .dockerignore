@@ -4,4 +4,4 @@
 # Allow files and directories
 !/dist/**
 !package*.json
-!prisma/schema.prisma
+!apps/api/schema.prisma

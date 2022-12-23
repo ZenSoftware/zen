@@ -1,4 +1,5 @@
 {
+  "name": "portal",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/portal/src",
@@ -87,6 +88,5 @@
       }
     }
   },
-  "tags": [],
-  "name": "portal"
+  "tags": []
 }

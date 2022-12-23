@@ -1,4 +1,5 @@
 {
+  "name": "api",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "apps/api/src",
   "projectType": "application",
@@ -33,7 +34,7 @@
       "options": {
         "commands": [
           {
-            "command": "npx compodoc -p apps/api/tsconfig.app.json -s"
+            "command": "npx compodoc -p apps/api/tsconfig.app.json -s --port 8088"
           }
         ]
       }
@@ -60,6 +61,5 @@
       }
     }
   },
-  "tags": [],
-  "name": "api"
+  "tags": []
 }
