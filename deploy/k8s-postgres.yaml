@@ -32,13 +32,13 @@ spec:
     spec:
       containers:
         - name: zen-pg
-          image: postgres:14
+          image: postgres:15
           resources:
             requests:
-              cpu: "100m"
+              cpu: "200m"
               memory: "2Gi"
             limits:
-              cpu: "0"
+              cpu: "1000m"
               memory: "4Gi"
           env:
             - name: PGDATA

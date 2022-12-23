@@ -1,4 +1,5 @@
 {
+  "name": "graphql",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/graphql/src",
@@ -19,6 +20,5 @@
       }
     }
   },
-  "tags": [],
-  "name": "graphql"
+  "tags": []
 }
