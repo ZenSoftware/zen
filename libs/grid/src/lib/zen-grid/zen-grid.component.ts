@@ -39,10 +39,10 @@ import { Subscription, map } from 'rxjs';
 import {
   KendoGridSettings,
   KendoGridSettingsService,
+  KendoToPrismaService,
   SortDescriptor,
   StyleService,
 } from '../services';
-import { KendoToPrismaService } from '../services';
 import { ZenGridDetailTemplateDirective } from './zen-grid-detail-template.directive';
 
 export enum GridMode {
