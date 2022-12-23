@@ -6,12 +6,12 @@ import {
   SubscribeMessage,
   WebSocketGateway,
 } from '@nestjs/websockets';
-import { User } from '@prisma/client';
+import { RequestUser } from '@zen/nest-auth';
 import { Server, Socket } from 'socket.io';
 
 import { environment } from '../../environments/environment';
-import { AuthService, RequestUser } from '../auth';
-import { PrismaService } from '../prisma';
+import { AuthService } from '../auth';
+import { PrismaService, User } from '../prisma';
 import { AllExceptionsFilter } from './all-exceptions.filter';
 
 @WebSocketGateway(environment.socketio.port, {
