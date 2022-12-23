@@ -33,7 +33,7 @@ export class EnvironmentDev implements Environment {
   url = {
     loginRedirect: '/',
     api: 'http://zen.rancher.localhost',
-    portal: 'http://localhost:4200/#/',
+    portal: 'http://localhost:4200/#',
     graphql: 'http://zen.rancher.localhost/graphql',
     graphqlSubscriptions: 'ws://zen.rancher.localhost/graphql',
   };
