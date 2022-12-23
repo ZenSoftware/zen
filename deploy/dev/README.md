@@ -17,6 +17,7 @@ kubectl apply -f deploy/dev/k8s-setup.yaml
 
 ```bash
 # Expose PostgreSQL pod via port forward
+kubectl get pods
 kubectl port-forward <POSTGRES_POD> 5446:5432
 
 # Set the port for the DATABASE_URL in the .env file to 5446
