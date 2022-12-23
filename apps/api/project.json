@@ -34,7 +34,7 @@
       "options": {
         "commands": [
           {
-            "command": "npx compodoc -p apps/api/tsconfig.app.json -s"
+            "command": "npx compodoc -p apps/api/tsconfig.app.json -s --port 8088"
           }
         ]
       }
