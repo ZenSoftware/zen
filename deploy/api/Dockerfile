@@ -4,7 +4,7 @@ WORKDIR /usr/src/api
 
 COPY dist/apps/api ./
 COPY dist/package-deploy.json ./package.json
-COPY apps/api/schema.prisma prisma/schema.prisma
+COPY apps/api/schema.prisma ./schema.prisma
 
 RUN npm i --omit=dev --loglevel warn
 
