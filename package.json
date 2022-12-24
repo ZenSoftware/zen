@@ -82,15 +82,15 @@
     "@graphql-codegen/typescript-operations": "^2.2.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
-    "@nrwl/angular": "15.4.0",
-    "@nrwl/cli": "15.4.0",
-    "@nrwl/cypress": "15.4.0",
-    "@nrwl/eslint-plugin-nx": "15.4.0",
-    "@nrwl/jest": "15.4.0",
-    "@nrwl/linter": "15.4.0",
-    "@nrwl/nest": "15.4.0",
-    "@nrwl/node": "15.4.0",
-    "@nrwl/workspace": "15.4.0",
+    "@nrwl/angular": "15.4.1",
+    "@nrwl/cli": "15.4.1",
+    "@nrwl/cypress": "15.4.1",
+    "@nrwl/eslint-plugin-nx": "15.4.1",
+    "@nrwl/jest": "15.4.1",
+    "@nrwl/linter": "15.4.1",
+    "@nrwl/nest": "15.4.1",
+    "@nrwl/node": "15.4.1",
+    "@nrwl/workspace": "15.4.1",
     "@paljs/cli": "5.1.0",
     "@types/apollo-upload-client": "^17.0.0",
     "@types/bcryptjs": "^2.4.2",
@@ -122,7 +122,7 @@
     "jest-preset-angular": "~12.2.3",
     "localstorage-slim": "^2.2.0",
     "lodash-es": "^4.17.20",
-    "nx": "15.4.0",
+    "nx": "15.4.1",
     "prettier": "^2.6.2",
     "prettier-plugin-import-sort": "^0.0.7",
     "prettier-plugin-prisma": "^4.2.0",
@@ -152,3 +152,4 @@
     }
   }
 }
+
