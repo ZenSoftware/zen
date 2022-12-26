@@ -12,14 +12,10 @@ export class ZenLoginLinkComponent {
   @Input() displayLogout = true;
   displayLogin$: Observable<boolean>;
 
-  constructor(public auth: AuthService, private router: Router) {
-    this.displayLogin$ = this.router.events.pipe(
+  constructor(public auth: AuthService, router: Router) {
+    this.displayLogin$ = router.events.pipe(
       filter((event: any) => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => {
-        const url = event.url.split('?')[0];
-        if (url === '/login') return false;
-        return true;
-      })
+      map((event: NavigationEnd) => event.url.split('?')[0] !== '/login')
     );
   }
 }

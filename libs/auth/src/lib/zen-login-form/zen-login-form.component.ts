@@ -35,7 +35,7 @@ export class ZenLoginFormComponent implements OnInit, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Input() doneMessage = 'Redirecting...';
-  @Input() enableDoneSection = true;
+  @Input() doneMessageVisible = true;
   @Output() loggedIn = new EventEmitter();
 
   #subs: Subscription[] = [];

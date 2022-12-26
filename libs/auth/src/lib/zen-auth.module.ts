@@ -72,6 +72,7 @@ import { ZenRegisterComponent } from './zen-register/zen-register.component';
   ],
   exports: [
     AbilityModule,
+
     IfLoggedInDirective,
     IfPublicRegistrationDirective,
     NotRolesDirective,
