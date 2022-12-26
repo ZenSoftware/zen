@@ -21,7 +21,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         // HTTP request
         let authHeader = req.header('Authorization');
         if (!authHeader) authHeader = req.header('authorization');
-        if (!authHeader) throw new HttpException(ApiError.JwtStrategy.NO_AUTH_HEADER, 400);
+        if (!authHeader) throw new HttpException(ApiError.JwtStrategy.NO_AUTH_HEADER, 401);
 
         // Strips `'Bearer '` and returns only the token
         return authHeader.substring(7);
