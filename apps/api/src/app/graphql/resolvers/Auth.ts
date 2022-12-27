@@ -1,10 +1,12 @@
+import crypto from 'crypto';
+
 import { HttpException, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/api-interfaces';
 import { GqlGuard, GqlThrottlerGuard, GqlUser, RequestUser } from '@zen/nest-auth';
-import bcrypt from 'bcryptjs';
 import gql from 'graphql-tag';
+import { bcrypt, bcryptVerify } from 'hash-wasm';
 
 import { AuthService } from '../../auth';
 import { ConfigService } from '../../config';
@@ -108,7 +110,7 @@ export class AuthResolver {
 
     if (!user) throw new HttpException(ApiError.AuthLogin.USER_NOT_FOUND, 400);
 
-    const correctPassword = await bcrypt.compare(args.password, user.password);
+    const correctPassword = await bcryptVerify({ password: args.password, hash: user.password });
     if (!correctPassword) throw new HttpException(ApiError.AuthLogin.INCORRECT_PASSWORD, 400);
 
     return this.auth.getAuthSession(user, args.rememberMe);
@@ -196,7 +198,7 @@ export class AuthResolver {
 
     if (!user) throw new HttpException(ApiError.AuthPasswordResetConfirmation.USER_NOT_FOUND, 400);
 
-    const hashedPassword = await bcrypt.hash(args.newPassword, this.config.bcryptSalt);
+    const hashedPassword = await this.hashPassword(args.newPassword);
 
     user = await ctx.prisma.user.update({
       where: { id: user.id },
@@ -217,7 +219,7 @@ export class AuthResolver {
     if (await this.getUserByEmail(args.email, ctx.prisma))
       throw new HttpException(ApiError.AuthRegister.EMAIL_TAKEN, 400);
 
-    const hashedPassword = await bcrypt.hash(args.password, this.config.bcryptSalt);
+    const hashedPassword = await this.hashPassword(args.password);
 
     const user = await ctx.prisma.user.create({
       data: {
@@ -256,10 +258,10 @@ export class AuthResolver {
     const user = await ctx.prisma.user.findUnique({ where: { id: reqUser.id } });
     if (!user) throw new HttpException(ApiError.AuthPasswordChange.USER_NOT_FOUND, 400);
 
-    const correctPassword = await bcrypt.compare(args.oldPassword, user.password);
+    const correctPassword = await bcryptVerify({ password: args.oldPassword, hash: user.password });
     if (!correctPassword) throw new HttpException(ApiError.AuthPasswordChange.WRONG_PASSWORD, 400);
 
-    const hashedPassword = await bcrypt.hash(args.newPassword, this.config.bcryptSalt);
+    const hashedPassword = await this.hashPassword(args.newPassword);
 
     await ctx.prisma.user.update({
       where: { id: user.id },
@@ -286,6 +288,14 @@ export class AuthResolver {
           equals: email,
         },
       },
+    });
+  }
+
+  private async hashPassword(password: string) {
+    return bcrypt({
+      costFactor: this.config.bcryptCost,
+      password,
+      salt: crypto.getRandomValues(new Uint8Array(16)),
     });
   }
 }
