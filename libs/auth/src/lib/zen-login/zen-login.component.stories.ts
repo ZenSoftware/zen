@@ -1,6 +1,6 @@
 import { Meta, Story, moduleMetadata } from '@storybook/angular';
 
-import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../storybook-deps';
+import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
 import { ZenLoginFormComponent } from '../zen-login-form/zen-login-form.component';
 import { ZenLoginComponent } from './zen-login.component';
 

@@ -1,7 +1,7 @@
 import { Meta, Story, moduleMetadata } from '@storybook/angular';
 import { AuthRegisterGQL } from '@zen/graphql';
 
-import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../storybook-deps';
+import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
 import { ZenRegisterFormComponent } from './zen-register-form.component';
 
 export default {

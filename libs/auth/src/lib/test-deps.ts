@@ -1,5 +1,5 @@
 /**
- * Common dependencies for Auth stories
+ * Common test dependencies
  */
 import { CommonModule } from '@angular/common';
 import { Provider } from '@angular/core';

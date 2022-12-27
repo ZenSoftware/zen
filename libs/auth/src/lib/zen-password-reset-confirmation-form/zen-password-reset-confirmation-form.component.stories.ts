@@ -1,7 +1,7 @@
 import { Meta, Story, moduleMetadata } from '@storybook/angular';
 import { AuthPasswordResetConfirmationGQL } from '@zen/graphql';
 
-import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../storybook-deps';
+import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
 import { ZenPasswordResetConfirmationFormComponent } from './zen-password-reset-confirmation-form.component';
 
 export default {

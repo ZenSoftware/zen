@@ -63,12 +63,12 @@ export class AuthService {
     if (this.validSession) {
       try {
         // Initialize apollo client state
-        const roles = ls.get(LocalStorageKey.roles, { decrypt: true }) as string[];
+        const roles = ls?.get(LocalStorageKey.roles, { decrypt: true }) as string[];
         userRolesVar(roles ? roles : []);
         loggedInVar(true);
-        this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
+        this.#userId = ls?.get(LocalStorageKey.userId, { decrypt: true });
 
-        const rules: any = ls.get(LocalStorageKey.rules, { decrypt: true });
+        const rules: any = ls?.get(LocalStorageKey.rules, { decrypt: true });
         if (rules) this.ability.update(rules);
 
         switch (env.auth.exchangeStrategy) {
@@ -119,12 +119,12 @@ export class AuthService {
 
   setSession(authSession: AuthSession) {
     const expiresOn = Date.now() + authSession.expiresIn * 1000;
-    ls.set(LocalStorageKey.userId, authSession.id, { encrypt: true });
-    ls.set(LocalStorageKey.token, authSession.token, { encrypt: true });
-    ls.set(LocalStorageKey.sessionExpiresOn, expiresOn);
-    ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
-    ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
-    ls.set(LocalStorageKey.rules, authSession.rules, { encrypt: true });
+    ls?.set(LocalStorageKey.userId, authSession.id, { encrypt: true });
+    ls?.set(LocalStorageKey.token, authSession.token, { encrypt: true });
+    ls?.set(LocalStorageKey.sessionExpiresOn, expiresOn);
+    ls?.set(LocalStorageKey.rememberMe, authSession.rememberMe);
+    ls?.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
+    ls?.set(LocalStorageKey.rules, authSession.rules, { encrypt: true });
 
     this.ability.update(authSession.rules);
 
@@ -169,7 +169,7 @@ export class AuthService {
   }
 
   private get rememberMe(): boolean {
-    return ls.get(LocalStorageKey.rememberMe) as boolean;
+    return ls?.get(LocalStorageKey.rememberMe) as boolean;
   }
 
   private get validSession(): boolean {
@@ -177,7 +177,7 @@ export class AuthService {
   }
 
   private get sessionTimeRemaining(): number {
-    const expiresOn = ls.get(LocalStorageKey.sessionExpiresOn) as number;
+    const expiresOn = ls?.get(LocalStorageKey.sessionExpiresOn) as number;
     if (!expiresOn) return 0;
 
     const timeRemaining = expiresOn - Date.now();
@@ -188,12 +188,12 @@ export class AuthService {
 
   private clearSession() {
     this.stopExchangeInterval();
-    ls.remove(LocalStorageKey.userId);
-    ls.remove(LocalStorageKey.token);
-    ls.remove(LocalStorageKey.sessionExpiresOn);
-    ls.remove(LocalStorageKey.rememberMe);
-    ls.remove(LocalStorageKey.roles);
-    ls.remove(LocalStorageKey.rules);
+    ls?.remove(LocalStorageKey.userId);
+    ls?.remove(LocalStorageKey.token);
+    ls?.remove(LocalStorageKey.sessionExpiresOn);
+    ls?.remove(LocalStorageKey.rememberMe);
+    ls?.remove(LocalStorageKey.roles);
+    ls?.remove(LocalStorageKey.rules);
 
     this.#userId = null;
     userRolesVar([]);
@@ -205,7 +205,7 @@ export class AuthService {
   private exchangeToken() {
     this.authExchangeTokenGQL
       .fetch(
-        { data: { rememberMe: ls.get(LocalStorageKey.rememberMe) as boolean } },
+        { data: { rememberMe: ls?.get(LocalStorageKey.rememberMe) as boolean } },
         { fetchPolicy: 'no-cache' }
       )
       .pipe(
