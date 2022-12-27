@@ -1,7 +1,7 @@
 import { Meta, Story, moduleMetadata } from '@storybook/angular';
 import { AuthPasswordResetRequestQueryGQL } from '@zen/graphql';
 
-import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../story-deps';
+import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../storybook-deps';
 import { ZenPasswordResetRequestFormComponent } from '../zen-password-reset-request-form/zen-password-reset-request-form.component';
 import { ZenPasswordResetRequestComponent } from '../zen-password-reset-request/zen-password-reset-request.component';
 import { ZenPasswordResetRequestPageComponent } from './zen-password-reset-request-page.component';
