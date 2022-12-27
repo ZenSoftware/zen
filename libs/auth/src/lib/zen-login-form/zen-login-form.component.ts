@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -31,7 +32,7 @@ interface FormType {
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenLoginFormComponent implements OnInit, OnDestroy {
+export class ZenLoginFormComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Input() doneMessage = 'Redirecting...';
@@ -77,6 +78,12 @@ export class ZenLoginFormComponent implements OnInit, OnDestroy {
         this.emailTakenError = emailTaken;
       });
     this.#subs.push(sub);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.usernameInput.nativeElement.select();
+    });
   }
 
   get username() {
