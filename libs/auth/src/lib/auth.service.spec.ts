@@ -35,7 +35,7 @@ describe('AuthService', () => {
     service = TestBed.inject(AuthService);
   }));
 
-  it('evaluates rolesEqual', () => {
+  it('evaluates rolesEqual correctly', () => {
     expect(service.rolesEqual('Editor', 'Editor')).toEqual(true);
     expect(service.rolesEqual('Editor', ['Editor'])).toEqual(true);
     expect(service.rolesEqual(['Editor'], 'Editor')).toEqual(true);
@@ -50,7 +50,7 @@ describe('AuthService', () => {
     expect(service.rolesEqual(['Editor'], ['Admin'])).toEqual(false);
   });
 
-  it('evaluates userHasRole', () => {
+  it('evaluates userHasRole correctly', () => {
     userRolesVar(['Editor']);
 
     expect(service.userHasRole('Editor')).toEqual(true);
@@ -62,7 +62,7 @@ describe('AuthService', () => {
     expect(service.userHasRole(['Admin'])).toEqual(false);
   });
 
-  it('evaluates userNotInRole', () => {
+  it('evaluates userNotInRole correctly', () => {
     userRolesVar(['Editor']);
 
     expect(service.userNotInRole('Editor')).toEqual(false);
