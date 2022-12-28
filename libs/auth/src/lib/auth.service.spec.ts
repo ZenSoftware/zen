@@ -3,18 +3,32 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Ability } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
 import { Environment, EnvironmentDev } from '@zen/common';
-import { AuthExchangeTokenGQL, AuthLoginGQL, GetAccountInfoGQL } from '@zen/graphql';
+import {
+  AuthExchangeTokenGQL,
+  AuthLogin,
+  AuthLoginDocument,
+  AuthLoginGQL,
+  GetAccountInfoGQL,
+} from '@zen/graphql';
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
+import ls from 'localstorage-slim';
 
-import { AuthService } from './auth.service';
+import { AuthService, LocalStorageKey } from './auth.service';
+import { tokenVar } from './token-var';
+import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 
 describe('AuthService', () => {
   let service: AuthService;
+  let controller: ApolloTestingController;
+  let ability: Ability;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ApolloTestingModule],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'login', component: ZenLoginPageComponent }]),
+        ApolloTestingModule,
+      ],
       declarations: [],
       providers: [
         AuthService,
@@ -31,8 +45,11 @@ describe('AuthService', () => {
       ],
     });
 
-    userRolesVar([]);
     service = TestBed.inject(AuthService);
+    controller = TestBed.inject(ApolloTestingController);
+    ability = TestBed.inject(Ability);
+
+    service.clearSession();
   }));
 
   it('evaluates rolesEqual correctly', () => {
@@ -72,5 +89,48 @@ describe('AuthService', () => {
     expect(service.userNotInRole([])).toEqual(true);
     expect(service.userNotInRole('Admin')).toEqual(true);
     expect(service.userNotInRole(['Admin'])).toEqual(true);
+  });
+
+  it('login correctly', done => {
+    const data: AuthLogin = {
+      authLogin: {
+        __typename: 'AuthSession',
+        id: 'abc123',
+        expiresIn: 1000,
+        rememberMe: true,
+        roles: ['Super'],
+        token: '1234',
+        rules: [{ action: 'manage', subject: 'all' }],
+      },
+    };
+
+    service
+      .login({
+        username: 'zen',
+        password: 'temp',
+        rememberMe: true,
+      })
+      .subscribe(authLogin => {
+        expect(authLogin.data).toEqual(data);
+
+        expect(ls.get(LocalStorageKey.userId, { decrypt: true })).toEqual(data.authLogin.id);
+        expect(ls.get(LocalStorageKey.token, { decrypt: true })).toEqual(data.authLogin.token);
+        expect(typeof ls.get(LocalStorageKey.sessionExpiresOn)).toEqual('number');
+        expect(ls.get(LocalStorageKey.rememberMe)).toEqual(data.authLogin.rememberMe);
+        expect(ls.get(LocalStorageKey.roles, { decrypt: true })).toEqual(data.authLogin.roles);
+        expect(ls.get(LocalStorageKey.rules, { decrypt: true })).toEqual(data.authLogin.rules);
+
+        expect(ability.rules).toEqual(data.authLogin.rules);
+
+        expect(tokenVar()).toEqual(data.authLogin.token);
+        expect(userRolesVar()).toEqual(data.authLogin.roles);
+        expect(loggedInVar()).toEqual(true);
+
+        done();
+      });
+
+    const op = controller.expectOne(AuthLoginDocument);
+    op.flush({ data });
+    controller.verify();
   });
 });
