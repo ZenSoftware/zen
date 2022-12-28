@@ -15,7 +15,7 @@ import {
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
-import { intersection, isEqual, orderBy } from 'lodash-es';
+import { intersection, isEqual } from 'lodash-es';
 import { Observable, Subscription, interval, map, share, throwError, timer } from 'rxjs';
 import { catchError, mergeMap, retryWhen, tap } from 'rxjs/operators';
 
@@ -63,9 +63,9 @@ export class AuthService {
     if (this.validSession) {
       try {
         // Initialize apollo client state
-        const roles = ls.get(LocalStorageKey.roles, { decrypt: true }) as string[];
+        const roles = ls.get<string[]>(LocalStorageKey.roles, { decrypt: true });
         userRolesVar(roles ? roles : []);
-        loggedInVar(true);
+        loggedInVar(roles ? true : false);
         this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
 
         const rules: any = ls.get(LocalStorageKey.rules, { decrypt: true });
@@ -130,18 +130,27 @@ export class AuthService {
 
     tokenVar(authSession.token);
 
-    if (!this.rolesEqual(this.roles, authSession.roles)) {
-      if (authSession.roles) userRolesVar(authSession.roles);
-      else userRolesVar([]);
-    }
+    if (!this.rolesEqual(this.roles, authSession.roles)) userRolesVar(authSession.roles);
+    if (!this.loggedIn) loggedInVar(true);
 
-    loggedInVar(true);
     this.startExchangeInterval();
   }
 
   rolesEqual(a: string | string[] | null | undefined, b: string | string[] | null | undefined) {
-    if (Array.isArray(a) && Array.isArray(b)) return isEqual(orderBy(a), orderBy(b));
-    return a === b;
+    let compareA: string[];
+    let compareB: string[];
+
+    if (Array.isArray(a)) compareA = [...a];
+    else if (typeof a === 'string') compareA = [a];
+    else if (a === null || a === undefined) compareA = [];
+    else throw new Error(`'a' is not a valid type for comparison`);
+
+    if (Array.isArray(b)) compareB = [...b];
+    else if (typeof b === 'string') compareB = [b];
+    else if (b === null || b === undefined) compareB = [];
+    else throw new Error(`'b' is not a valid type for comparison`);
+
+    return isEqual(compareA.sort(), compareB.sort());
   }
 
   userHasRole(role: string | string[]) {
@@ -168,8 +177,8 @@ export class AuthService {
     return loggedInVar();
   }
 
-  private get rememberMe(): boolean {
-    return ls.get(LocalStorageKey.rememberMe) as boolean;
+  private get rememberMe() {
+    return ls.get<boolean>(LocalStorageKey.rememberMe);
   }
 
   private get validSession(): boolean {
@@ -177,7 +186,7 @@ export class AuthService {
   }
 
   private get sessionTimeRemaining(): number {
-    const expiresOn = ls.get(LocalStorageKey.sessionExpiresOn) as number;
+    const expiresOn = ls.get<number>(LocalStorageKey.sessionExpiresOn);
     if (!expiresOn) return 0;
 
     const timeRemaining = expiresOn - Date.now();
@@ -205,7 +214,7 @@ export class AuthService {
   private exchangeToken() {
     this.authExchangeTokenGQL
       .fetch(
-        { data: { rememberMe: ls.get(LocalStorageKey.rememberMe) as boolean } },
+        { data: { rememberMe: !!ls.get<boolean>(LocalStorageKey.rememberMe) } },
         { fetchPolicy: 'no-cache' }
       )
       .pipe(
