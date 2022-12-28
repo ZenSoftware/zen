@@ -1,7 +1,12 @@
 import { ApiError } from '@zen/api-interfaces';
 import { throwError } from 'rxjs';
 
-type UnparsedError<T> = { extensions: { exception: { response: T } } };
+type UnparsedError<T> = {
+  extensions: {
+    exception: { response: T; status: number };
+    response: { statusCode: number };
+  };
+};
 type ErrorResponse<T> = { graphQLErrors: UnparsedError<T>[] };
 
 export const parseGqlErrors = (errors: ErrorResponse<unknown>) =>
@@ -20,6 +25,7 @@ export class GqlErrors<T = any> {
     if (errors?.graphQLErrors) {
       return errors.graphQLErrors.reduce((results: T[], item) => {
         const error = item?.extensions?.exception?.response;
+
         if (error !== undefined) results.push(error);
 
         return results;
@@ -30,7 +36,7 @@ export class GqlErrors<T = any> {
   }
 
   /**
-   * Returns the value of the first error where predicate is true, and undefined otherwise.
+   * Returns the value of the first error where predicate is true and undefined otherwise.
    */
   find(predicate: (value: T, index: number, obj: T[]) => unknown) {
     return this.parsed.find(predicate);

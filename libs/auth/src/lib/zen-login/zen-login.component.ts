@@ -5,5 +5,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: 'zen-login.component.html',
 })
 export class ZenLoginComponent {
-  @Output() loggedIn = new EventEmitter();
+  @Output() loggedIn = new EventEmitter<never>();
 }
