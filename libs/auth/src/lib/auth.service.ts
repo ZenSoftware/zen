@@ -264,7 +264,7 @@ export class AuthService {
 
 const retryStrategy =
   ({
-    maxRetryAttempts: maxRetry = Infinity,
+    maxRetryAttempts = Infinity,
     delay = 1000,
     excludedStatusCodes = [],
   }: {
@@ -278,7 +278,7 @@ const retryStrategy =
         const retryAttempt = i + 1;
 
         if (
-          retryAttempt > maxRetry ||
+          retryAttempt > maxRetryAttempts ||
           errors.find(e => excludedStatusCodes.find(exclude => exclude === e.statusCode))
         ) {
           return throwError(() => errors);
