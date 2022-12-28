@@ -31,7 +31,6 @@ describe('AuthService', () => {
       ],
     });
 
-    loggedInVar(false);
     userRolesVar([]);
     service = TestBed.inject(AuthService);
   }));
