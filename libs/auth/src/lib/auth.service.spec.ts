@@ -121,7 +121,6 @@ describe('AuthService', () => {
         expect(ls.get(LocalStorageKey.rules, { decrypt: true })).toEqual(data.authLogin.rules);
 
         expect(ability.rules).toEqual(data.authLogin.rules);
-
         expect(tokenVar()).toEqual(data.authLogin.token);
         expect(userRolesVar()).toEqual(data.authLogin.roles);
         expect(loggedInVar()).toEqual(true);
