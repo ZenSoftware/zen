@@ -30,7 +30,7 @@ export class GqlErrors<T = any> {
   }
 
   /**
-   * Returns the value of the first error where predicate is true, and undefined otherwise.
+   * Returns the value of the first error where predicate is true and undefined otherwise.
    */
   find(predicate: (value: T, index: number, obj: T[]) => unknown) {
     return this.parsed.find(predicate);
