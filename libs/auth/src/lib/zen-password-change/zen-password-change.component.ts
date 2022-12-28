@@ -5,5 +5,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: 'zen-password-change.component.html',
 })
 export class ZenPasswordChangeComponent {
-  @Output() changed = new EventEmitter();
+  @Output() changed = new EventEmitter<never>();
 }

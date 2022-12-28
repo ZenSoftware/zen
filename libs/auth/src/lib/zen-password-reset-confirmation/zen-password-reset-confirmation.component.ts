@@ -5,5 +5,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: 'zen-password-reset-confirmation.component.html',
 })
 export class ZenPasswordResetConfirmationComponent {
-  @Output() confirmed = new EventEmitter();
+  @Output() confirmed = new EventEmitter<never>();
 }
