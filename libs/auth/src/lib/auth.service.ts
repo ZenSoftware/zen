@@ -21,7 +21,7 @@ import { catchError, retry, tap } from 'rxjs/operators';
 
 import { tokenVar } from './token-var';
 
-enum LocalStorageKey {
+export enum LocalStorageKey {
   userId = 'userId',
   token = 'token',
   sessionExpiresOn = 'sessionExpiresOn',
@@ -188,7 +188,7 @@ export class AuthService {
     else return timeRemaining;
   }
 
-  private clearSession() {
+  clearSession() {
     this.stopExchangeInterval();
     ls.remove(LocalStorageKey.userId);
     ls.remove(LocalStorageKey.token);
@@ -201,6 +201,7 @@ export class AuthService {
     userRolesVar([]);
     tokenVar(null);
     loggedInVar(false);
+    this.ability.update([]);
     this.apollo.client.cache.reset();
   }
 
