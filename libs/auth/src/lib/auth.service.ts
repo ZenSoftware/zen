@@ -130,8 +130,13 @@ export class AuthService {
 
     tokenVar(authSession.token);
 
-    if (!this.rolesEqual(this.roles, authSession.roles)) userRolesVar(authSession.roles);
-    if (!this.loggedIn) loggedInVar(true);
+    if (!this.rolesEqual(this.roles, authSession.roles)) {
+      userRolesVar(authSession.roles);
+    }
+
+    if (!this.loggedIn) {
+      loggedInVar(true);
+    }
 
     this.startExchangeInterval();
   }
