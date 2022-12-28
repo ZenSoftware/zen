@@ -15,7 +15,7 @@ import {
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
-import { intersection, isEqual } from 'lodash-es';
+import { intersection, isEqual, orderBy } from 'lodash-es';
 import { Subscription, interval, map, share, throwError, timer } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 
@@ -62,7 +62,7 @@ export class AuthService {
 
     if (this.validSession) {
       try {
-        // Initialize apollo client state
+        // Initialize Apollo client state
         const roles = ls.get<string[]>(LocalStorageKey.roles, { decrypt: true });
         userRolesVar(roles ? roles : []);
         loggedInVar(roles ? true : false);
@@ -76,7 +76,7 @@ export class AuthService {
             this.exchangeToken();
             break;
           case 'efficient':
-            if (this.sessionTimeRemaining <= env.auth.jwtExchangeInterval) {
+            if (!this.rememberMe && this.sessionTimeRemaining <= env.auth.jwtExchangeInterval) {
               this.exchangeToken();
             } else if (
               this.rememberMe &&
@@ -142,20 +142,8 @@ export class AuthService {
   }
 
   rolesEqual(a: string | string[] | null | undefined, b: string | string[] | null | undefined) {
-    let compareA: string[];
-    let compareB: string[];
-
-    if (Array.isArray(a)) compareA = [...a];
-    else if (typeof a === 'string') compareA = [a];
-    else if (a === null || a === undefined) compareA = [];
-    else throw new Error(`'a' is not a valid type for comparison`);
-
-    if (Array.isArray(b)) compareB = [...b];
-    else if (typeof b === 'string') compareB = [b];
-    else if (b === null || b === undefined) compareB = [];
-    else throw new Error(`'b' is not a valid type for comparison`);
-
-    return isEqual(compareA.sort(), compareB.sort());
+    if (Array.isArray(a) && Array.isArray(b)) return isEqual(orderBy(a), orderBy(b));
+    return a === b;
   }
 
   userHasRole(role: string | string[]) {
