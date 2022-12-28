@@ -75,7 +75,7 @@ export class AuthService {
           case 'app-load':
             this.exchangeToken();
             break;
-          case 'on-push':
+          case 'efficient':
             if (this.sessionTimeRemaining <= env.auth.jwtExchangeInterval) {
               this.exchangeToken();
             } else if (

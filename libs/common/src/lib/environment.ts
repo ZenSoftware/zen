@@ -3,11 +3,11 @@ export abstract class Environment {
   abstract readonly publicRegistration: boolean;
   abstract readonly auth: {
     /**
-     * @value 'app-load' | 'on-push'
-     * 'app-load' will exchange the auth token every time the app loads
-     * 'on-push' will exchange the auth token only when intervals are exceeded
+     * `app-load` will exchange the auth token every time the app loads
+     *
+     * `efficient` will exchange the auth token only when intervals are exceeded
      */
-    readonly exchangeStrategy: 'app-load' | 'on-push' | string;
+    readonly exchangeStrategy: 'app-load' | 'efficient';
     readonly jwtExchangeInterval: number;
     readonly rememberMeExchangeThreshold: number;
   };
@@ -30,7 +30,7 @@ export class EnvironmentDev implements Environment {
     exchangeStrategy: 'app-load',
     jwtExchangeInterval: 30 * 60 * 1000, // 30 minutes
     rememberMeExchangeThreshold: 45 * 24 * 60 * 60 * 1000, // 45 days
-  };
+  } as const;
   enableGoogleOAuth = true;
   url = {
     loginRedirect: '/',
@@ -39,7 +39,7 @@ export class EnvironmentDev implements Environment {
     graphql: 'http://localhost:7080/graphql',
     graphqlSubscriptions: 'ws://localhost:7080/graphql',
     socketio: 'http://localhost:7081',
-  };
+  } as const;
 }
 
 export class EnvironmentProd implements Environment {
@@ -49,7 +49,7 @@ export class EnvironmentProd implements Environment {
     exchangeStrategy: 'app-load',
     jwtExchangeInterval: 30 * 60 * 1000, // 30 minutes
     rememberMeExchangeThreshold: 45 * 24 * 60 * 60 * 1000, // 45 days
-  };
+  } as const;
   enableGoogleOAuth = true;
   url = {
     loginRedirect: '/',
@@ -58,5 +58,5 @@ export class EnvironmentProd implements Environment {
     graphql: 'https://api.site.com/graphql',
     graphqlSubscriptions: 'wss://api.site.com/graphql',
     socketio: 'https://api.site.com:81',
-  };
+  } as const;
 }
