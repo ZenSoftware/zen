@@ -16,8 +16,8 @@ import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
 import { intersection, isEqual } from 'lodash-es';
-import { Observable, Subscription, interval, map, share, throwError, timer } from 'rxjs';
-import { catchError, mergeMap, retryWhen, tap } from 'rxjs/operators';
+import { Subscription, interval, map, share, throwError, timer } from 'rxjs';
+import { catchError, retry, tap } from 'rxjs/operators';
 
 import { tokenVar } from './token-var';
 
@@ -224,12 +224,9 @@ export class AuthService {
       )
       .pipe(
         catchError(parseGqlErrors),
-        retryWhen(
-          retryStrategy({
-            delay: 3000,
-            excludedStatusCodes: [401, 403],
-          })
-        )
+        retry({
+          delay: retryStrategy({ excludeStatusCodes: [401, 403] }),
+        })
       )
       .subscribe({
         next: ({ data: { authExchangeToken } }) => {
@@ -264,34 +261,35 @@ export class AuthService {
 
 const retryStrategy =
   ({
-    maxRetryAttempts = Infinity,
-    delay = 1000,
-    excludedStatusCodes = [],
+    maxAttempts = Infinity,
+    delay = 5000,
+    excludeStatusCodes = [],
   }: {
-    maxRetryAttempts?: number;
+    maxAttempts?: number;
     delay?: number;
-    excludedStatusCodes?: number[];
-  } = {}) =>
-  (attempts: Observable<any>) => {
-    return attempts.pipe(
-      mergeMap((errors: GqlErrors, i) => {
-        const retryAttempt = i + 1;
+    excludeStatusCodes?: number[];
+  }) =>
+  (errors: GqlErrors, retryCount: number) => {
+    const excludedStatusFound = !!errors.original?.graphQLErrors
+      .map(e => {
+        const status1 = e?.extensions?.exception?.status;
+        if (status1) return status1;
 
-        if (
-          retryAttempt > maxRetryAttempts ||
-          errors.find(e => excludedStatusCodes.find(exclude => exclude === e.statusCode))
-        ) {
-          return throwError(() => errors);
-        }
+        const status2 = e?.extensions?.response?.statusCode;
+        if (status2) return status2;
 
-        const delaySeconds = Math.round(delay / 1000);
-
-        console.warn(
-          `Exchange token attempt ${retryAttempt}: retrying in ${delaySeconds}s`,
-          errors
-        );
-
-        return timer(delay);
+        return undefined;
       })
+      .find(status => excludeStatusCodes.find(exclude => exclude === status));
+
+    if (retryCount > maxAttempts || excludedStatusFound) {
+      return throwError(() => errors);
+    }
+
+    console.warn(
+      `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}ms`,
+      errors
     );
+
+    return timer(delay);
   };

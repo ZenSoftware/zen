@@ -147,7 +147,7 @@ export class AuthResolver {
     if (user) {
       return this.auth.getAuthSession(user, args.rememberMe);
     } else {
-      throw new HttpException(ApiError.AuthExchangeToken.USER_NOT_FOUND, 400);
+      throw new HttpException(ApiError.AuthExchangeToken.USER_NOT_FOUND, 401);
     }
   }
 
