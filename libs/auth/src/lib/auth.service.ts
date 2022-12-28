@@ -16,8 +16,8 @@ import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
 import { intersection, isEqual, orderBy } from 'lodash-es';
-import { Observable, Subscription, interval, map, share, throwError, timer } from 'rxjs';
-import { catchError, mergeMap, retryWhen, tap } from 'rxjs/operators';
+import { Subscription, interval, map, share, throwError, timer } from 'rxjs';
+import { catchError, retry, tap } from 'rxjs/operators';
 
 import { tokenVar } from './token-var';
 
@@ -62,10 +62,10 @@ export class AuthService {
 
     if (this.validSession) {
       try {
-        // Initialize apollo client state
-        const roles = ls.get(LocalStorageKey.roles, { decrypt: true }) as string[];
+        // Initialize Apollo client state
+        const roles = ls.get<string[]>(LocalStorageKey.roles, { decrypt: true });
         userRolesVar(roles ? roles : []);
-        loggedInVar(true);
+        loggedInVar(roles ? true : false);
         this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
 
         const rules: any = ls.get(LocalStorageKey.rules, { decrypt: true });
@@ -75,8 +75,8 @@ export class AuthService {
           case 'app-load':
             this.exchangeToken();
             break;
-          case 'on-push':
-            if (this.sessionTimeRemaining <= env.auth.jwtExchangeInterval) {
+          case 'efficient':
+            if (!this.rememberMe && this.sessionTimeRemaining <= env.auth.jwtExchangeInterval) {
               this.exchangeToken();
             } else if (
               this.rememberMe &&
@@ -131,11 +131,13 @@ export class AuthService {
     tokenVar(authSession.token);
 
     if (!this.rolesEqual(this.roles, authSession.roles)) {
-      if (authSession.roles) userRolesVar(authSession.roles);
-      else userRolesVar([]);
+      userRolesVar(authSession.roles);
     }
 
-    loggedInVar(true);
+    if (!this.loggedIn) {
+      loggedInVar(true);
+    }
+
     this.startExchangeInterval();
   }
 
@@ -168,8 +170,8 @@ export class AuthService {
     return loggedInVar();
   }
 
-  private get rememberMe(): boolean {
-    return ls.get(LocalStorageKey.rememberMe) as boolean;
+  private get rememberMe() {
+    return ls.get<boolean>(LocalStorageKey.rememberMe);
   }
 
   private get validSession(): boolean {
@@ -177,7 +179,7 @@ export class AuthService {
   }
 
   private get sessionTimeRemaining(): number {
-    const expiresOn = ls.get(LocalStorageKey.sessionExpiresOn) as number;
+    const expiresOn = ls.get<number>(LocalStorageKey.sessionExpiresOn);
     if (!expiresOn) return 0;
 
     const timeRemaining = expiresOn - Date.now();
@@ -205,17 +207,14 @@ export class AuthService {
   private exchangeToken() {
     this.authExchangeTokenGQL
       .fetch(
-        { data: { rememberMe: ls.get(LocalStorageKey.rememberMe) as boolean } },
+        { data: { rememberMe: !!ls.get<boolean>(LocalStorageKey.rememberMe) } },
         { fetchPolicy: 'no-cache' }
       )
       .pipe(
         catchError(parseGqlErrors),
-        retryWhen(
-          retryStrategy({
-            delay: 3000,
-            excludedStatusCodes: [401, 403],
-          })
-        )
+        retry({
+          delay: retryStrategy({ excludeStatusCodes: [401, 403] }),
+        })
       )
       .subscribe({
         next: ({ data: { authExchangeToken } }) => {
@@ -250,34 +249,35 @@ export class AuthService {
 
 const retryStrategy =
   ({
-    maxRetryAttempts: maxRetry = Infinity,
-    delay = 1000,
-    excludedStatusCodes = [],
+    maxAttempts = Infinity,
+    delay = 5000,
+    excludeStatusCodes = [],
   }: {
-    maxRetryAttempts?: number;
+    maxAttempts?: number;
     delay?: number;
-    excludedStatusCodes?: number[];
-  } = {}) =>
-  (attempts: Observable<any>) => {
-    return attempts.pipe(
-      mergeMap((errors: GqlErrors, i) => {
-        const retryAttempt = i + 1;
+    excludeStatusCodes?: number[];
+  }) =>
+  (errors: GqlErrors, retryCount: number) => {
+    const excludedStatusFound = !!errors.original?.graphQLErrors
+      .map(e => {
+        const status1 = e?.extensions?.exception?.status;
+        if (status1) return status1;
 
-        if (
-          retryAttempt > maxRetry ||
-          errors.find(e => excludedStatusCodes.find(exclude => exclude === e.statusCode))
-        ) {
-          return throwError(() => errors);
-        }
+        const status2 = e?.extensions?.response?.statusCode;
+        if (status2) return status2;
 
-        const delaySeconds = Math.round(delay / 1000);
-
-        console.warn(
-          `Exchange token attempt ${retryAttempt}: retrying in ${delaySeconds}s`,
-          errors
-        );
-
-        return timer(delay);
+        return undefined;
       })
+      .find(status => excludeStatusCodes.find(exclude => exclude === status));
+
+    if (retryCount > maxAttempts || excludedStatusFound) {
+      return throwError(() => errors);
+    }
+
+    console.warn(
+      `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}ms`,
+      errors
     );
+
+    return timer(delay);
   };

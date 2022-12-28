@@ -8,5 +8,5 @@ import { verticalAccordion } from '../animations';
   animations: [...verticalAccordion],
 })
 export class ZenPasswordResetRequestComponent {
-  @Output() sent = new EventEmitter();
+  @Output() sent = new EventEmitter<never>();
 }

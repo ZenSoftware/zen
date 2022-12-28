@@ -51,7 +51,7 @@
     Log into your existing account to associate your third-party authentication from there.
   </mat-error>
 
-  <div @verticalAccordion *ngIf="done && enableDoneSection" class="text-center my-3">
+  <div @verticalAccordion *ngIf="done && doneMessageVisible" class="text-center my-3">
     <span class="text-sm">{{doneMessage}}</span>
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
