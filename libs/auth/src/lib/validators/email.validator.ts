@@ -1,9 +1,7 @@
 import { ValidatorFn } from '@angular/forms';
 
-const isEmail = (email: string) => {
-  const re = /\S+@\S+\.\S+/;
-  return re.test(String(email).toLowerCase());
-};
+const emailRegex = /\S+@\S+\.\S+/;
+const isEmail = (email: string) => emailRegex.test(String(email).toLowerCase());
 
 export function emailValidator(): ValidatorFn {
   return control => {

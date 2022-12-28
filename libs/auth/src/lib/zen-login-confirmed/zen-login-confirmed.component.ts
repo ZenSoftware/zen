@@ -10,7 +10,7 @@ import { tokenVar } from '../token-var';
 
 @Component({
   selector: 'zen-login-confirmed',
-  templateUrl: 'zen-login-confirmed.component.html',
+  template: ``,
 })
 export class ZenLoginConfirmedComponent {
   constructor(

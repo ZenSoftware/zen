@@ -11,22 +11,24 @@ export function usernameValidator(): ValidatorFn {
   return control => {
     const errors: UsernameErrors = {};
 
-    if (control.value && /\s/.test(control.value)) {
-      errors.includesSpace = true;
-    }
+    if (control.value) {
+      if (/\s/.test(control.value)) {
+        errors.includesSpace = true;
+      }
 
-    if (control.value && control.value.length < ApiConstants.USERNAME_MIN_LENGTH) {
-      errors.minlength = {
-        actualLength: control.value.length,
-        requiredLength: ApiConstants.USERNAME_MIN_LENGTH,
-      };
-    }
+      if (control.value.length < ApiConstants.USERNAME_MIN_LENGTH) {
+        errors.minlength = {
+          actualLength: control.value.length,
+          requiredLength: ApiConstants.USERNAME_MIN_LENGTH,
+        };
+      }
 
-    if (control.value && control.value.length > ApiConstants.USERNAME_MAX_LENGTH) {
-      errors.maxlength = {
-        actualLength: control.value.length,
-        requiredLength: ApiConstants.USERNAME_MAX_LENGTH,
-      };
+      if (control.value.length > ApiConstants.USERNAME_MAX_LENGTH) {
+        errors.maxlength = {
+          actualLength: control.value.length,
+          requiredLength: ApiConstants.USERNAME_MAX_LENGTH,
+        };
+      }
     }
 
     if (Object.keys(errors).length > 0) return errors;

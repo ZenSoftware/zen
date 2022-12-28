@@ -1,22 +1,13 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Environment, EnvironmentDev } from '@zen/common';
-import { ZenComponentsModule } from '@zen/components';
 import {
   AuthRegister,
   AuthRegisterDocument,
   AuthRegisterGQL,
   AuthRegisterVariables,
 } from '@zen/graphql';
-import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
+import { ApolloTestingController } from 'apollo-angular/testing';
 
-import { AuthService } from '../auth.service';
+import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
 import { ZenRegisterFormComponent } from './zen-register-form.component';
 
 describe('ZenRegisterFormComponent', () => {
@@ -26,23 +17,9 @@ describe('ZenRegisterFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ZenRegisterFormComponent],
-      providers: [
-        AuthRegisterGQL,
-        { provide: AuthService, useValue: {} },
-        { provide: Environment, useClass: EnvironmentDev },
-      ],
-      imports: [
-        NoopAnimationsModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        ApolloTestingModule,
-        ZenComponentsModule,
-      ],
+      declarations: [...AUTH_DECLARATIONS, ZenRegisterFormComponent],
+      providers: [...AUTH_PROVIDERS, AuthRegisterGQL],
+      imports: AUTH_IMPORTS,
     }).compileComponents();
   }));
 
@@ -59,7 +36,7 @@ describe('ZenRegisterFormComponent', () => {
 
   it('should register user', done => {
     component.username.setValue('zen');
-    component.email.setValue('me@zen.ca');
+    component.email.setValue('zen@me.ca');
     component.password.setValue('samplepass');
     component.passwordConfirm.setValue('samplepass');
     component.acceptTerms.setValue(true);
@@ -71,7 +48,7 @@ describe('ZenRegisterFormComponent', () => {
     const variables: AuthRegisterVariables = {
       data: {
         username: 'zen',
-        email: 'me@zen.ca',
+        email: 'zen@me.ca',
         password: 'samplepass',
       },
     };
