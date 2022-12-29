@@ -10,7 +10,6 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Ability } from '@casl/ability';
 import {
@@ -30,7 +29,7 @@ import {
   State,
   process,
 } from '@progress/kendo-data-query';
-import { ZenConfirmComponent, ZenSnackbarError } from '@zen/components';
+import { ZenConfirmModal, ZenSnackbarError } from '@zen/components';
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
 import { cloneDeep, omit } from 'lodash-es';
@@ -168,19 +167,20 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     },
   };
 
+  #confirmDeleteSub?: Subscription;
   #querySub?: Subscription;
   #countSub?: Subscription;
   #data?: T[];
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private dialog: MatDialog,
     private apollo: Apollo.Apollo,
     private snackBar: MatSnackBar,
     private snackBarError: ZenSnackbarError,
     private kendoGridSettingsService: KendoGridSettingsService,
     private styles: StyleService,
-    private kendoToPrisma: KendoToPrismaService
+    private kendoToPrisma: KendoToPrismaService,
+    private zenConfirmModal: ZenConfirmModal
   ) {}
 
   ngAfterContentInit() {
@@ -239,8 +239,9 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     this.remove.emit(event);
 
     if (!this.loading && this.settings.deleteOneGQL) {
-      const dialogRef = this.dialog.open(ZenConfirmComponent);
-      dialogRef.afterClosed().subscribe(confirmed => {
+      if (this.#confirmDeleteSub) this.#confirmDeleteSub.unsubscribe();
+
+      this.#confirmDeleteSub = this.zenConfirmModal.open().subscribe(confirmed => {
         if (confirmed) {
           this.loading = true;
 
@@ -551,6 +552,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   ngOnDestroy() {
     if (this.#querySub) this.#querySub.unsubscribe();
     if (this.#countSub) this.#countSub.unsubscribe();
+    if (this.#confirmDeleteSub) this.#confirmDeleteSub.unsubscribe();
 
     if (this.useGlobalState && this.settings) {
       this.kendoGridSettingsService.save(this.settingsName, this.grid, this.gridSettings);
