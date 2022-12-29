@@ -1,4 +1,5 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Ability } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
@@ -16,19 +17,16 @@ import ls from 'localstorage-slim';
 
 import { AuthService, LocalStorageKey } from './auth.service';
 import { tokenVar } from './token-var';
-import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 
 describe('AuthService', () => {
   let service: AuthService;
-  let controller: ApolloTestingController;
+  let apollo: ApolloTestingController;
   let ability: Ability;
+  let router: Router;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([{ path: 'login', component: ZenLoginPageComponent }]),
-        ApolloTestingModule,
-      ],
+      imports: [RouterTestingModule, ApolloTestingModule],
       declarations: [],
       providers: [
         AuthService,
@@ -46,10 +44,9 @@ describe('AuthService', () => {
     });
 
     service = TestBed.inject(AuthService);
-    controller = TestBed.inject(ApolloTestingController);
+    apollo = TestBed.inject(ApolloTestingController);
     ability = TestBed.inject(Ability);
-
-    service.clearSession();
+    router = TestBed.inject(Router);
   }));
 
   it('evaluates rolesEqual correctly', () => {
@@ -91,7 +88,7 @@ describe('AuthService', () => {
     expect(service.userNotInRole(['Admin'])).toEqual(true);
   });
 
-  it('login correctly', done => {
+  it('login & logout correctly', done => {
     const data: AuthLogin = {
       authLogin: {
         __typename: 'AuthSession',
@@ -121,15 +118,35 @@ describe('AuthService', () => {
         expect(ls.get(LocalStorageKey.rules, { decrypt: true })).toEqual(data.authLogin.rules);
 
         expect(ability.rules).toEqual(data.authLogin.rules);
+        expect(service.userId).toEqual(data.authLogin.id);
         expect(tokenVar()).toEqual(data.authLogin.token);
         expect(userRolesVar()).toEqual(data.authLogin.roles);
         expect(loggedInVar()).toEqual(true);
 
+        const routerSpy = jest.spyOn(router, 'navigateByUrl');
+
+        service.logout();
+
+        expect(ls.get(LocalStorageKey.userId, { decrypt: true })).toEqual(null);
+        expect(ls.get(LocalStorageKey.token, { decrypt: true })).toEqual(null);
+        expect(ls.get(LocalStorageKey.sessionExpiresOn)).toEqual(null);
+        expect(ls.get(LocalStorageKey.rememberMe)).toEqual(null);
+        expect(ls.get(LocalStorageKey.roles, { decrypt: true })).toEqual(null);
+        expect(ls.get(LocalStorageKey.rules, { decrypt: true })).toEqual(null);
+
+        expect(ability.rules).toEqual([]);
+        expect(service.userId).toEqual(null);
+        expect(tokenVar()).toEqual(null);
+        expect(userRolesVar()).toEqual([]);
+        expect(loggedInVar()).toEqual(false);
+
+        expect(routerSpy).toHaveBeenCalledWith('/login');
+
         done();
       });
 
-    const op = controller.expectOne(AuthLoginDocument);
+    const op = apollo.expectOne(AuthLoginDocument);
     op.flush({ data });
-    controller.verify();
+    apollo.verify();
   });
 });

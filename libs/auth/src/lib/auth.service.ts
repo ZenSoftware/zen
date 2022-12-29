@@ -118,13 +118,14 @@ export class AuthService {
   }
 
   setSession(authSession: AuthSession) {
-    const expiresOn = Date.now() + authSession.expiresIn * 1000;
     ls.set(LocalStorageKey.userId, authSession.id, { encrypt: true });
     ls.set(LocalStorageKey.token, authSession.token, { encrypt: true });
-    ls.set(LocalStorageKey.sessionExpiresOn, expiresOn);
+    ls.set(LocalStorageKey.sessionExpiresOn, Date.now() + authSession.expiresIn * 1000);
     ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
     ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
     ls.set(LocalStorageKey.rules, authSession.rules, { encrypt: true });
+
+    this.#userId = authSession.id;
 
     this.ability.update(authSession.rules);
 
@@ -198,10 +199,10 @@ export class AuthService {
     ls.remove(LocalStorageKey.rules);
 
     this.#userId = null;
-    userRolesVar([]);
-    tokenVar(null);
-    loggedInVar(false);
     this.ability.update([]);
+    tokenVar(null);
+    userRolesVar([]);
+    loggedInVar(false);
     this.apollo.client.cache.reset();
   }
 
