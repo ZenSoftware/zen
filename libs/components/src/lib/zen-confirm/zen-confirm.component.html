@@ -1,10 +1,10 @@
 <div class="m-3">
   <div class="text-center">
-    <h2>Are you sure?</h2>
+    <h2>{{title}}</h2>
   </div>
 
-  <mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" (click)="dialogRef.close(true)" cdkFocusInitial>OK</button>
-    <button mat-raised-button (click)="dialogRef.close(false)">Cancel</button>
-  </mat-dialog-actions>
+  <div class="d-flex justify-content-center">
+    <button mat-raised-button color="primary" class="me-5" (click)="dialogRef.close(true)" cdkFocusInitial>{{confirmText}}</button>
+    <button mat-raised-button (click)="dialogRef.close(false)">{{cancelText}}</button>
+  </div>
 </div>

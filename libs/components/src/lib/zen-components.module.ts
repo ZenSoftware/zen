@@ -5,9 +5,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { ZenConfirmModal } from './zen-confirm/zen-confirm-modal.service';
 import { ZenConfirmComponent } from './zen-confirm/zen-confirm.component';
 import { ZenLoadingComponent } from './zen-loading/zen-loading.component';
-import { ZenSnackbarErrorService } from './zen-snackbar-error/zen-snackbar-error.service';
+import { ZenSnackbarError } from './zen-snackbar-error/zen-snackbar-error.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { ZenSnackbarErrorService } from './zen-snackbar-error/zen-snackbar-error
   ],
   declarations: [ZenConfirmComponent, ZenLoadingComponent],
   exports: [ZenConfirmComponent, ZenLoadingComponent],
-  providers: [ZenSnackbarErrorService],
+  providers: [ZenConfirmModal, ZenSnackbarError],
 })
 export class ZenComponentsModule {}

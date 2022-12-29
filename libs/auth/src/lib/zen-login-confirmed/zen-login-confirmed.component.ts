@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Environment } from '@zen/common';
-import { ZenSnackbarErrorService } from '@zen/components';
+import { ZenSnackbarError } from '@zen/components';
 import { AuthExchangeTokenGQL, parseGqlErrors } from '@zen/graphql';
 import { catchError } from 'rxjs';
 
@@ -18,7 +18,7 @@ export class ZenLoginConfirmedComponent {
     private router: Router,
     private env: Environment,
     private auth: AuthService,
-    private snackbarError: ZenSnackbarErrorService,
+    private snackbarError: ZenSnackbarError,
     private authExchangeTokenGQL: AuthExchangeTokenGQL
   ) {
     const query = this.route.snapshot.queryParams;
