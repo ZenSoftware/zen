@@ -17,6 +17,7 @@ import ls from 'localstorage-slim';
 
 import { AuthService, LocalStorageKey } from './auth.service';
 import { tokenVar } from './token-var';
+import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -26,7 +27,10 @@ describe('AuthService', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ApolloTestingModule],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'login', component: ZenLoginPageComponent }]),
+        ApolloTestingModule,
+      ],
       declarations: [],
       providers: [
         AuthService,
