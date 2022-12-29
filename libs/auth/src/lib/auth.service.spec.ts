@@ -96,7 +96,7 @@ describe('AuthService', () => {
         expiresIn: 1000,
         rememberMe: true,
         roles: ['Super'],
-        token: '1234',
+        token: 'abc.def.ghi',
         rules: [{ action: 'manage', subject: 'all' }],
       },
     };
