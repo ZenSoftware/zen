@@ -7,9 +7,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CentsToDollarsPipe } from './cents-to-dollars.pipe';
 import { SafeHtmlPipe } from './safe-html.pipe';
+import { ZenConfirmModal } from './zen-confirm/zen-confirm-modal.service';
 import { ZenConfirmComponent } from './zen-confirm/zen-confirm.component';
 import { ZenLoadingComponent } from './zen-loading/zen-loading.component';
-import { ZenSnackbarErrorService } from './zen-snackbar-error/zen-snackbar-error.service';
+import { ZenSnackbarError } from './zen-snackbar-error/zen-snackbar-error.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { ZenSnackbarErrorService } from './zen-snackbar-error/zen-snackbar-error
   ],
   declarations: [ZenConfirmComponent, ZenLoadingComponent, CentsToDollarsPipe, SafeHtmlPipe],
   exports: [ZenConfirmComponent, ZenLoadingComponent, CentsToDollarsPipe, SafeHtmlPipe],
-  providers: [ZenSnackbarErrorService],
+  providers: [ZenConfirmModal, ZenSnackbarError],
 })
 export class ZenComponentsModule {}

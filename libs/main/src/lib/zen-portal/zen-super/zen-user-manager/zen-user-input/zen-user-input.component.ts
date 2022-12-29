@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { emailValidator } from '@zen/auth';
 import { trimObjectStrings } from '@zen/common';
-import { ZenSnackbarErrorService } from '@zen/components';
+import { ZenSnackbarError } from '@zen/components';
 import { UpdateOneUserGQL, UserFields, UserUpdateInput } from '@zen/graphql';
 import { Apollo } from 'apollo-angular';
 
@@ -48,7 +48,7 @@ export class ZenUserInputComponent {
     public dialogRef: MatDialogRef<ZenUserInputComponent>,
     private apollo: Apollo,
     private snackBar: MatSnackBar,
-    private snackBarError: ZenSnackbarErrorService,
+    private snackBarError: ZenSnackbarError,
     private updateOneUserGQL: UpdateOneUserGQL
   ) {
     if (data.action === 'edit') {

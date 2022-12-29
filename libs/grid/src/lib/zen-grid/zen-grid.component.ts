@@ -30,7 +30,7 @@ import {
   State,
   process,
 } from '@progress/kendo-data-query';
-import { ZenConfirmComponent, ZenSnackbarErrorService } from '@zen/components';
+import { ZenConfirmComponent, ZenSnackbarError } from '@zen/components';
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
 import { cloneDeep, omit } from 'lodash-es';
@@ -177,7 +177,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     private dialog: MatDialog,
     private apollo: Apollo.Apollo,
     private snackBar: MatSnackBar,
-    private snackBarError: ZenSnackbarErrorService,
+    private snackBarError: ZenSnackbarError,
     private kendoGridSettingsService: KendoGridSettingsService,
     private styles: StyleService,
     private kendoToPrisma: KendoToPrismaService
