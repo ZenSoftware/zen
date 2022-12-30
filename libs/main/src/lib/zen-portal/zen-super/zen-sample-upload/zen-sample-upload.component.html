@@ -10,7 +10,7 @@
     <zen-loading *ngIf="isUploading"></zen-loading>
 
     <input #fileInput id="file-input" name="file" type="file" class="zen-file-input" (change)="fileChange()" [disabled]="isUploading">
-    <label for="file-input" class="zen-select-file" [ngClass]="{'mat-button-disabled': isUploading}">
+    <label for="file-input" class="mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base mb-2" [ngClass]="{'mat-button-disabled': isUploading}">
       <i class="fa-solid fa-fw fa-hdd me-2"></i>
       <span *ngIf="!file">Select file</span>
       <span *ngIf="file" [innerHTML]="fileName"></span>
