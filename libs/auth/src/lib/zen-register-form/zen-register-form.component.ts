@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -40,7 +40,7 @@ interface FormType {
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
+export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
   @Output() registered = new EventEmitter<AuthSession>();
@@ -90,7 +90,7 @@ export class ZenRegisterFormComponent implements AfterViewInit, OnDestroy {
     this.#subs.push(sub2);
   }
 
-  ngAfterViewInit() {
+  ngAfterContentInit() {
     setTimeout(() => {
       this.usernameInput.nativeElement.select();
     });
