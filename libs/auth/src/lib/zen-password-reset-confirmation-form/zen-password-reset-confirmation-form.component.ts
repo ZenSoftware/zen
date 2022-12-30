@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -35,7 +35,7 @@ interface FormType {
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit, OnDestroy {
+export class ZenPasswordResetConfirmationFormComponent implements AfterContentInit, OnDestroy {
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Output() confirmed = new EventEmitter();
   @Input() redirectTime = 5; //default 5 seconds
@@ -69,7 +69,7 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterViewInit,
     this.#subs.push(sub);
   }
 
-  ngAfterViewInit() {
+  ngAfterContentInit() {
     setTimeout(() => {
       this.passwordInput.nativeElement.select();
     });

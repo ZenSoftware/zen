@@ -1,4 +1,5 @@
-import { Component, Inject, Input } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Inject, Input, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { ZenConfirmOptions } from './zen-confirm-options';
@@ -7,7 +8,8 @@ import { ZenConfirmOptions } from './zen-confirm-options';
   selector: 'zen-confirm',
   templateUrl: 'zen-confirm.component.html',
 })
-export class ZenConfirmComponent {
+export class ZenConfirmComponent implements AfterContentInit {
+  @ViewChild('confirmBtn') confirmBtn!: MatButton;
   @Input() title = 'Are you sure?';
   @Input() confirmText = 'Yes';
   @Input() cancelText = 'No';
@@ -19,5 +21,11 @@ export class ZenConfirmComponent {
     if (data?.title) this.title = data.title;
     if (data?.confirmText) this.confirmText = data.confirmText;
     if (data?.cancelText) this.cancelText = data.cancelText;
+  }
+
+  ngAfterContentInit() {
+    setTimeout(() => {
+      this.confirmBtn.focus();
+    });
   }
 }

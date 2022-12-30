@@ -4,7 +4,7 @@
   </div>
 
   <div class="d-flex justify-content-center">
-    <button mat-raised-button color="primary" class="me-5" (click)="dialogRef.close(true)" cdkFocusInitial>{{confirmText}}</button>
+    <button mat-raised-button #confirmBtn color="primary" class="me-5" (click)="dialogRef.close(true)">{{confirmText}}</button>
     <button mat-raised-button (click)="dialogRef.close(false)">{{cancelText}}</button>
   </div>
 </div>
