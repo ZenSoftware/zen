@@ -18,6 +18,37 @@
       "options": {
         "lintFilePatterns": ["libs/components/src/**/*.ts", "libs/components/src/**/*.html"]
       }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/components/.storybook",
+        "browserTarget": "components:build-storybook",
+        "compodoc": false,
+        "styles": ["apps/portal/src/styles.scss"]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/components",
+        "configDir": "libs/components/.storybook",
+        "browserTarget": "components:build-storybook",
+        "compodoc": false,
+        "styles": ["apps/portal/src/styles.scss"]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
     }
   },
   "tags": []

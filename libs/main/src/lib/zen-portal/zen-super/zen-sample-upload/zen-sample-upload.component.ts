@@ -1,7 +1,7 @@
 import { ElementRef, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ZenSnackbarErrorService } from '@zen/components';
+import { ZenSnackbarError } from '@zen/components';
 import { GqlErrors, SampleUploadGQL, parseGqlErrors } from '@zen/graphql';
 import gql from 'graphql-tag';
 import { catchError } from 'rxjs/operators';
@@ -25,7 +25,7 @@ export class ZenSampleUploadComponent {
 
   constructor(
     private snackbar: MatSnackBar,
-    private snackbarError: ZenSnackbarErrorService,
+    private snackbarError: ZenSnackbarError,
     private sampleUploadGQL: SampleUploadGQL
   ) {}
 

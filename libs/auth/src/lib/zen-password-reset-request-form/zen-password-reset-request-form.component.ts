@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -33,7 +33,7 @@ interface FormType {
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDestroy {
+export class ZenPasswordResetRequestFormComponent implements AfterContentInit, OnDestroy {
   @ViewChild('emailUsernameInput') emailUsernameInput!: ElementRef<HTMLInputElement>;
   @Output() sent = new EventEmitter();
 
@@ -66,7 +66,7 @@ export class ZenPasswordResetRequestFormComponent implements AfterViewInit, OnDe
     this.#subs.push(sub);
   }
 
-  ngAfterViewInit() {
+  ngAfterContentInit() {
     setTimeout(() => {
       this.emailUsernameInput.nativeElement.select();
     });
