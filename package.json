@@ -115,7 +115,6 @@
     "bootstrap": "~5.2.0",
     "bootswatch": "~5.2.0",
     "codelyzer": "^6.0.1",
-    "concurrently": "^7.0.0",
     "cypress": "^11.0.0",
     "cz-customizable": "^7.0.0",
     "dotenv": "^16.0.0",
