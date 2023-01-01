@@ -10,6 +10,7 @@ module.exports = {
       'libs/graphql/src/lib/apollo-angular.ts',
       '**/*.test.ts',
       '**/*.spec.ts',
+      '**/*.stories.ts',
       '**/*.d.ts',
     ],
   },
