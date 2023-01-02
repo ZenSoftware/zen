@@ -273,8 +273,6 @@ const retryStrategy =
       return accum;
     }, [] as (string | number)[]);
 
-    console.log('codes', codes);
-
     const excludedStatusFound = !!codes.find(status =>
       excludeStatusCodes.find(exclude => exclude === status)
     );
