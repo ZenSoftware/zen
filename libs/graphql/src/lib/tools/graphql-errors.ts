@@ -3,6 +3,7 @@ import { throwError } from 'rxjs';
 
 type UnparsedError<T> = {
   extensions: {
+    code: string;
     exception: { response: T; status: number };
     response: { statusCode: number };
   };
