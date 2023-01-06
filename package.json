@@ -110,7 +110,7 @@
     "@types/passport-jwt": "^3.0.4",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
-    "apollo-angular": "^4.0.0",
+    "apollo-angular": "~4.2.0",
     "apollo-upload-client": "^17.0.0",
     "bootstrap": "~5.2.0",
     "bootswatch": "~5.2.0",
@@ -140,11 +140,6 @@
     "webpack": "^5.64.0",
     "zone.js": "~0.11.4"
   },
-  "overrides": {
-    "apollo-angular": {
-      "@angular/core": "$@angular/core"
-    }
-  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-customizable"
@@ -157,4 +152,3 @@
     }
   }
 }
-
