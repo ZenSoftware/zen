@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 import { interval } from 'rxjs';
 
-import type { FileUpload } from '../models';
+import type { Upload } from '../models';
 
 export const typeDefs = gql`
   extend type Mutation {
@@ -40,7 +40,7 @@ interval(1000).subscribe(i =>
 @Roles('Super')
 export class SampleResolver {
   @Mutation()
-  async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: FileUpload) {
+  async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
     const readStream = file.createReadStream();
     const chunks = [];
     for await (const chunk of readStream) {
@@ -52,9 +52,7 @@ export class SampleResolver {
   }
 
   @Mutation()
-  async sampleUploadMany(
-    @Args('files', { type: () => [GraphQLUpload] }) files: Promise<FileUpload>[]
-  ) {
+  async sampleUploadMany(@Args('files', { type: () => [GraphQLUpload] }) files: Promise<Upload>[]) {
     const UPLOAD_PATH = './upload/';
     if (!existsSync(UPLOAD_PATH)) {
       Logger.log('Creating directory', UPLOAD_PATH);
