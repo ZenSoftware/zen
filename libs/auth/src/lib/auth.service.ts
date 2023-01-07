@@ -215,7 +215,9 @@ export class AuthService {
       .pipe(
         catchError(parseGqlErrors),
         retry({
-          delay: retryStrategy({ excludeStatusCodes: [401, 403, 'INTERNAL_SERVER_ERROR'] }),
+          delay: retryStrategy({
+            excludeStatusCodes: ['FORBIDDEN', 'UNAUTHENTICATED', 'INTERNAL_SERVER_ERROR'],
+          }),
         })
       )
       .subscribe({
@@ -249,29 +251,21 @@ export class AuthService {
   }
 }
 
-const retryStrategy =
-  ({
-    maxAttempts = Infinity,
-    delay = 5000,
-    excludeStatusCodes = [],
-  }: {
-    maxAttempts?: number;
-    delay?: number;
-    excludeStatusCodes?: (number | string)[];
-  }) =>
-  (errors: GqlErrors, retryCount: number) => {
+function retryStrategy({
+  maxAttempts = Infinity,
+  delay = 5000,
+  excludeStatusCodes = [],
+}: {
+  maxAttempts?: number;
+  delay?: number;
+  excludeStatusCodes?: string[];
+}) {
+  return (errors: GqlErrors, retryCount: number) => {
     const codes = errors.original?.graphQLErrors?.reduce((accum, e) => {
-      const status1 = e?.extensions?.exception?.status;
-      if (status1) accum.push(status1);
-
-      const status2 = e?.extensions?.response?.statusCode;
-      if (status2) accum.push(status2);
-
-      const status3 = e?.extensions?.code;
-      if (status3) accum.push(status3);
-
+      const status = e?.extensions?.code;
+      if (status) accum.push(status);
       return accum;
-    }, [] as (string | number)[]);
+    }, [] as string[]);
 
     const excludedStatusFound = !!codes.find(status =>
       excludeStatusCodes.find(exclude => exclude === status)
@@ -282,9 +276,10 @@ const retryStrategy =
     }
 
     console.warn(
-      `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}ms`,
+      `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}s`,
       errors
     );
 
     return timer(delay);
   };
+}

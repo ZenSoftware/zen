@@ -47,7 +47,6 @@ export class ZenGenerator {
 
     if (fs.existsSync(palOutPath)) {
       await rm(palOutPath, { recursive: true });
-      await mkdir(palOutPath);
     }
 
     const pal = new PalGenerator(
