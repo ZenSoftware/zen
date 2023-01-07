@@ -251,17 +251,16 @@ export class AuthService {
   }
 }
 
-const retryStrategy =
-  ({
-    maxAttempts = Infinity,
-    delay = 5000,
-    excludeStatusCodes = [],
-  }: {
-    maxAttempts?: number;
-    delay?: number;
-    excludeStatusCodes?: string[];
-  }) =>
-  (errors: GqlErrors, retryCount: number) => {
+function retryStrategy({
+  maxAttempts = Infinity,
+  delay = 5000,
+  excludeStatusCodes = [],
+}: {
+  maxAttempts?: number;
+  delay?: number;
+  excludeStatusCodes?: string[];
+}) {
+  return (errors: GqlErrors, retryCount: number) => {
     const codes = errors.original?.graphQLErrors?.reduce((accum, e) => {
       const status = e?.extensions?.code;
       if (status) accum.push(status);
@@ -283,3 +282,4 @@ const retryStrategy =
 
     return timer(delay);
   };
+}
