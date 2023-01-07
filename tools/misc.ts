@@ -5,7 +5,6 @@ import { promisify } from 'util';
 const execAsync = promisify(exec);
 
 export class Misc {
-  //---------------------------------------------------------------------------
   static async incrementVersion() {
     const packageFile = await readFile('package.json');
     const packageJson = JSON.parse(packageFile.toString());
@@ -30,13 +29,13 @@ export class Misc {
     await this.execGlobal(`docker push ${latestAddress}`);
     await this.execGlobal(`kubectl set image deployments/zen-api zen-api=${versionAddress}`);
   }
-  //---------------------------------------------------------------------------
+
   static clean(paths: string[]) {
     for (const path of paths) {
       rm(path, { recursive: true });
     }
   }
-  //---------------------------------------------------------------------------
+
   static execGlobal(command: string) {
     console.log(command);
     return execAsync(command).then(({ stdout, stderr }) => {

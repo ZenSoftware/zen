@@ -1,20 +1,15 @@
 import { readFile, writeFile } from 'fs/promises';
 
-class Tools {
-  static async createDeployPackage() {
-    const packageFile = await readFile('package.json');
-    const packageJson = JSON.parse(packageFile.toString());
-    delete packageJson.scripts.postinstall;
-    delete packageJson.devDependencies;
-    await writeFile('dist/package-deploy.json', JSON.stringify(packageJson, undefined, 2));
-  }
-}
-//=============================================================================
 /**
- * Main
- **/
+ * Creates a `package-deploy.json` file for the dist folder.
+ * Removes the Nx `postinstall` script.
+ * `deploy/api/Dockerfile` uses this file to install the dependencies.
+ */
 async function main() {
-  Tools.createDeployPackage();
+  const packageFile = await readFile('package.json');
+  const packageJson = JSON.parse(packageFile.toString());
+  delete packageJson.scripts.postinstall;
+  await writeFile('dist/package-deploy.json', JSON.stringify(packageJson, undefined, 2));
 }
 
 main().catch(e => {
