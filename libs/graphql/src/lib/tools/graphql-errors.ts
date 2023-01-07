@@ -4,8 +4,7 @@ import { throwError } from 'rxjs';
 type UnparsedError<T> = {
   extensions?: {
     code?: string;
-    exception?: { response?: T; status?: number };
-    response?: { statusCode?: number };
+    exception?: { response?: T };
   };
 };
 type ErrorResponse<T> = { graphQLErrors: UnparsedError<T>[] };

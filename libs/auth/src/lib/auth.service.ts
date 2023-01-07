@@ -259,21 +259,14 @@ const retryStrategy =
   }: {
     maxAttempts?: number;
     delay?: number;
-    excludeStatusCodes?: (number | string)[];
+    excludeStatusCodes?: string[];
   }) =>
   (errors: GqlErrors, retryCount: number) => {
     const codes = errors.original?.graphQLErrors?.reduce((accum, e) => {
-      const status1 = e?.extensions?.exception?.status;
-      if (status1) accum.push(status1);
-
-      const status2 = e?.extensions?.response?.statusCode;
-      if (status2) accum.push(status2);
-
-      const status3 = e?.extensions?.code;
-      if (status3) accum.push(status3);
-
+      const status = e?.extensions?.code;
+      if (status) accum.push(status);
       return accum;
-    }, [] as (string | number)[]);
+    }, [] as string[]);
 
     const excludedStatusFound = !!codes.find(status =>
       excludeStatusCodes.find(exclude => exclude === status)
