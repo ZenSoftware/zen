@@ -215,7 +215,9 @@ export class AuthService {
       .pipe(
         catchError(parseGqlErrors),
         retry({
-          delay: retryStrategy({ excludeStatusCodes: [401, 403, 'INTERNAL_SERVER_ERROR'] }),
+          delay: retryStrategy({
+            excludeStatusCodes: ['FORBIDDEN', 'UNAUTHENTICATED', 'INTERNAL_SERVER_ERROR'],
+          }),
         })
       )
       .subscribe({
