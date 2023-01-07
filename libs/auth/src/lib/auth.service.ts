@@ -276,7 +276,7 @@ function retryStrategy({
     }
 
     console.warn(
-      `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}ms`,
+      `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}s`,
       errors
     );
 
