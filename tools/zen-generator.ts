@@ -23,6 +23,7 @@ export type ZenGeneratorConfig = {
   palConfig: PalConfig;
   apiOutPath: string;
   caslOutFile?: string;
+  /** Defaults to 'ABAC' */
   authScheme?: 'ABAC' | 'RBAC';
   frontend?: {
     outPath: string;
