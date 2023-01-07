@@ -2,10 +2,10 @@ import { ApiError } from '@zen/api-interfaces';
 import { throwError } from 'rxjs';
 
 type UnparsedError<T> = {
-  extensions: {
-    code: string;
-    exception: { response: T; status: number };
-    response: { statusCode: number };
+  extensions?: {
+    code?: string;
+    exception?: { response?: T; status?: number };
+    response?: { statusCode?: number };
   };
 };
 type ErrorResponse<T> = { graphQLErrors: UnparsedError<T>[] };
