@@ -6,7 +6,7 @@ debug.log
 /apps/**/prisma/generated/
 
 # documentation
-/documentation
+/doc-*
 
 # compiled output
 /dist

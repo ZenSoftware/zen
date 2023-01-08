@@ -16,7 +16,7 @@
     "prod:api": "nx build api --prod && npm run dockerize:api",
     "dockerize:api": "ts-node tools/create-deploy-package.ts && docker build -f deploy/api/Dockerfile -t zen-api .",
     "docker:run-api": "docker run -d --name zen-api -p 7081:7080 zen-api",
-    "docs": "ng compodoc api",
+    "doc:api": "nx run api:compodoc",
     "test": "nx run-many --all --target=test --parallel",
     "lint": "nx run-many --all --target=lint --parallel",
     "format": "nx format:write --all",
