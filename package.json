@@ -22,7 +22,6 @@
     "test": "nx run-many --all --target=test --parallel",
     "lint": "nx run-many --all --target=lint --parallel",
     "format": "nx format:write --all",
-    "build": "nx build portal",
     "postinstall": "node ./decorate-angular-cli.js"
   },
   "dependencies": {
@@ -104,6 +103,8 @@
     "@nrwl/storybook": "15.4.5",
     "@nrwl/workspace": "15.4.5",
     "@paljs/cli": "5.2.0",
+    "@paljs/generator": "5.2.0",
+    "@paljs/types": "5.2.0",
     "@storybook/addon-essentials": "6.5.15",
     "@storybook/angular": "6.5.15",
     "@storybook/builder-webpack5": "6.5.15",
