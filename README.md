@@ -26,6 +26,8 @@ This project also provides solutions for the hardest parts of user authenticatio
 git clone https://github.com/ZenSoftware/zen.git --depth=1
 cd zen
 cp .env.example .env
+
+# Substitute npm for pnpm if you are using that
 npm i
 docker-compose up -d
 npm run prisma:migrate

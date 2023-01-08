@@ -4,10 +4,11 @@ WORKDIR /usr/src/api
 
 COPY dist/apps/api ./
 COPY dist/package-deploy.json ./package.json
-COPY package-lock.json ./
+COPY pnpm-lock.yaml ./
 COPY apps/api/schema.prisma ./schema.prisma
 
-RUN npm ci --omit=dev
+RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" && chmod +x /bin/pnpm
+RUN pnpm i --prod --frozen-lockfile
 RUN cp /usr/src/api/node_modules/prisma/libquery_engine-linux-musl-openssl-3.0.x.so.node ./
 
 # ENV DATABASE_URL=postgresql://user:pass@localhost:5432/database
