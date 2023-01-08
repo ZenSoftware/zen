@@ -7,7 +7,7 @@ export class ZenSnackbarError {
 
   open(error: unknown, config?: MatSnackBarConfig & { log?: boolean }) {
     const mergedConfig: MatSnackBarConfig & { log?: boolean } = {
-      panelClass: 'error-snackbar',
+      panelClass: 'snackbar-error',
       duration: 5000,
       log: true,
     };
