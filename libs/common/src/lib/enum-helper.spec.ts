@@ -1,7 +1,7 @@
 import { EnumHelper } from './enum-helper';
 
 describe('EnumHelper', () => {
-  it('gets keys & values from numeric enums', () => {
+  it('gets keys & values from a numeric enum', () => {
     enum Plain {
       First,
       Second,
@@ -22,7 +22,7 @@ describe('EnumHelper', () => {
     ]);
   });
 
-  it('gets keys & values from string enums', () => {
+  it('gets keys & values from a string-based enum', () => {
     enum Roles {
       Super = 'super',
       Admin = 'admin',
@@ -41,7 +41,7 @@ describe('EnumHelper', () => {
     ]);
   });
 
-  it('gets keys & values from heterogeneous enums', () => {
+  it('gets keys & values from a heterogeneous enum', () => {
     enum Hetero {
       First = 1,
       Second = 'second',
