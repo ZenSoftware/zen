@@ -8,7 +8,7 @@ import InputTypes from './InputTypes';
     accum += `import ${name} from './${name}/typeDefs';\n`;
   }
 
-  accum += `export default mergeTypeDefs([
+  accum += `\nexport default mergeTypeDefs([
   InputTypes,`;
 
   for (const name of names) {
