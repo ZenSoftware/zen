@@ -23,10 +23,10 @@
 
 // Angular Material Dialog background
 .mat-mdc-dialog-container {
-  --mdc-dialog-container-color: #272b30;
+  --mdc-dialog-container-color: #{$gray-800};
 }
 
 // zen-snackbar-error background
 .error-snackbar {
-  --mdc-snackbar-container-color: #ff0000;
+  --mdc-snackbar-container-color: #{$red};
 }
