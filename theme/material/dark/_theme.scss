@@ -1,58 +1,18 @@
-@import 'palette';
+@use '@angular/material' as mat;
+@use './palette' as palette;
+@use '../typography' as typography;
 
-// Available color palettes: https://material.io/design/color/
-$zen-dark-primary: mat-palette($zen-primary); // Custom _palette.scss
-$zen-dark-accent: mat-palette($zen-accent); // Custom _palette.scss
-
-$zen-dark-theme-foreground: (
-  base: $body-color,
-  divider: $light-dividers,
-  dividers: $light-dividers,
-  disabled: $light-disabled-text,
-  disabled-button: rgba(white, 0.3),
-  disabled-text: $light-disabled-text,
-  elevation: black,
-  hint-text: $light-disabled-text,
-  secondary-text: $light-secondary-text,
-  icon: $body-color,
-  icons: $body-color,
-  text: $body-color,
-  slider-min: $body-color,
-  slider-off: rgba(white, 0.3),
-  slider-off-active: rgba(white, 0.3),
-);
-
-$zen-dark-theme-background: (
-  status-bar: black,
-  app-bar: $gray-800,
-  background: $body-bg,
-  hover: rgba(white, 0.04),
-  card: $gray-800,
-  dialog: $gray-800,
-  disabled-button: rgba(white, 0.12),
-  raised-button: $gray-800,
-  focused-button: $light-focused,
-  selected-button: $gray-900,
-  selected-disabled-button: $gray-800,
-  disabled-button-toggle: black,
-  unselected-chip: $gray-700,
-  disabled-list-option: black,
-  tooltip: $gray-700,
-);
-
-// The warn palette is optional (defaults to red).
-$zen-dark-warn: mat-palette($mat-red);
-
-$zen-dark-theme: mat-dark-theme(
+$zen-dark-theme: mat.define-dark-theme(
   (
     color: (
-      primary: $zen-dark-primary,
-      accent: $zen-dark-accent,
-      warn: $zen-dark-warn,
-      foreground: $zen-dark-theme-foreground,
-      background: $zen-dark-theme-background,
+      primary: mat.define-palette(palette.$zen-primary),
+      accent: mat.define-palette(palette.$zen-accent),
+      warn: mat.define-palette(palette.$zen-warn),
     ),
+    typography: typography.$zen-typography,
   )
 );
 
-@include angular-material-theme($zen-dark-theme);
+@include mat.core();
+@include mat.all-component-typographies(typography.$zen-typography);
+@include mat.all-component-themes($zen-dark-theme);

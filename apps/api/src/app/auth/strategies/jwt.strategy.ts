@@ -2,7 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ApiError } from '@zen/api-interfaces';
 import { JwtPayload, RequestUser } from '@zen/nest-auth';
-import { Request as ExReq } from 'express';
+import { Request } from 'express';
 import { Strategy } from 'passport-jwt';
 
 import { ConfigService } from '../../config';
@@ -15,7 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         ? config.jwtOptions.publicKey
         : config.jwtOptions.secret,
 
-      jwtFromRequest: (req: ExReq & { token: any }) => {
+      jwtFromRequest: (req: Request & { token?: string }) => {
         // Websocket connection
         if (req.token) return req.token;
         // HTTP request
@@ -30,6 +30,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: JwtPayload) {
+    // Validate the audience
     if (payload.aud !== this.config.siteUrl) return null;
 
     const user: RequestUser = {
