@@ -26,7 +26,7 @@ body {
   --mdc-snackbar-container-color: #{$danger};
 }
 
-// Horizontal scrollbar fix
+// Horizontal scrollbar fix for Bootstrap grids overflowing in Angular material sidenav
 .row {
   --bs-gutter-x: 0;
 }
