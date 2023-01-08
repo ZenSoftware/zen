@@ -20,7 +20,6 @@
     "test": "nx run-many --all --target=test --parallel",
     "lint": "nx run-many --all --target=lint --parallel",
     "format": "nx format:write --all",
-    "build": "nx build portal",
     "postinstall": "node ./decorate-angular-cli.js"
   },
   "dependencies": {
