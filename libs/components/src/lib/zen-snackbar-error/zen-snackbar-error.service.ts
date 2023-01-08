@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { merge } from 'lodash-es';
 
 @Injectable()
 export class ZenSnackbarError {
@@ -8,12 +7,12 @@ export class ZenSnackbarError {
 
   open(error: unknown, config?: MatSnackBarConfig & { log?: boolean }) {
     const mergedConfig: MatSnackBarConfig & { log?: boolean } = {
-      panelClass: 'error-snackbar',
+      panelClass: 'snackbar-error',
       duration: 5000,
       log: true,
     };
 
-    merge(mergedConfig, config);
+    Object.assign(mergedConfig, config);
 
     if (mergedConfig.log) console.error(error);
 
