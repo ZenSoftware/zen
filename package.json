@@ -20,7 +20,6 @@
     "test": "nx run-many --all --target=test --parallel",
     "lint": "nx run-many --all --target=lint --parallel",
     "format": "nx format:write --all",
-    "build": "nx build portal",
     "postinstall": "node ./decorate-angular-cli.js"
   },
   "dependencies": {
@@ -101,6 +100,8 @@
     "@nrwl/storybook": "15.4.5",
     "@nrwl/workspace": "15.4.5",
     "@paljs/cli": "5.2.0",
+    "@paljs/generator": "5.2.0",
+    "@paljs/types": "5.2.0",
     "@progress/kendo-angular-buttons": "^8.0.0",
     "@progress/kendo-angular-common": "^3.1.0",
     "@progress/kendo-angular-dateinputs": "^7.1.0",
