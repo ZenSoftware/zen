@@ -4,4 +4,5 @@
 # Allow files and directories
 !/dist/**
 !package*.json
+!pnpm-lock.yaml
 !apps/api/schema.prisma
