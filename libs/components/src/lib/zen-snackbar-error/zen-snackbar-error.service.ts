@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { merge } from 'lodash-es';
 
 @Injectable()
 export class ZenSnackbarError {
@@ -13,7 +12,7 @@ export class ZenSnackbarError {
       log: true,
     };
 
-    merge(mergedConfig, config);
+    Object.assign(mergedConfig, config);
 
     if (mergedConfig.log) console.error(error);
 
