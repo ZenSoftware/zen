@@ -54,7 +54,9 @@ specifiers:
   '@nrwl/storybook': 15.4.5
   '@nrwl/workspace': 15.4.5
   '@paljs/cli': 5.2.0
+  '@paljs/generator': 5.2.0
   '@paljs/plugins': 5.2.0
+  '@paljs/types': 5.2.0
   '@prisma/client': ~4.8.0
   '@storybook/addon-essentials': 6.5.15
   '@storybook/angular': 6.5.15
@@ -199,6 +201,8 @@ devDependencies:
   '@nrwl/storybook': 15.4.5_nachg3iswu365tiq4dfsqa7gpi
   '@nrwl/workspace': 15.4.5_rhvjwzm4p5jogytifynkohdas4
   '@paljs/cli': 5.2.0
+  '@paljs/generator': 5.2.0
+  '@paljs/types': 5.2.0
   '@storybook/addon-essentials': 6.5.15_swjbyydk3776stgjlftd7d336y
   '@storybook/angular': 6.5.15_64pdjzgb6hodwipu57udnvgyqa
   '@storybook/builder-webpack5': 6.5.15_oy7hgmlo6357d5kkcjbkfgtg4q
@@ -5320,7 +5324,7 @@ packages:
     dependencies:
       '@jest/types': 28.1.3
       '@types/node': 18.11.18
-      chalk: 4.1.0
+      chalk: 4.1.2
       jest-message-util: 28.1.3
       jest-util: 28.1.3
       slash: 3.0.0
@@ -5435,7 +5439,7 @@ packages:
       '@jest/types': 28.1.3
       '@jridgewell/trace-mapping': 0.3.17
       '@types/node': 18.11.18
-      chalk: 4.1.0
+      chalk: 4.1.2
       collect-v8-coverage: 1.0.1
       exit: 0.1.2
       glob: 7.2.3
@@ -5572,7 +5576,7 @@ packages:
       '@jest/types': 28.1.3
       '@jridgewell/trace-mapping': 0.3.17
       babel-plugin-istanbul: 6.1.1
-      chalk: 4.1.0
+      chalk: 4.1.2
       convert-source-map: 1.9.0
       fast-json-stable-stringify: 2.1.0
       graceful-fs: 4.2.10
@@ -11711,7 +11715,7 @@ packages:
       '@types/babel__core': 7.1.20
       babel-plugin-istanbul: 6.1.1
       babel-preset-jest: 28.1.3_@babel+core@7.20.12
-      chalk: 4.1.0
+      chalk: 4.1.2
       graceful-fs: 4.2.10
       slash: 3.0.0
     transitivePeerDependencies:
@@ -16016,7 +16020,7 @@ packages:
       deepmerge: 4.2.2
       fs-extra: 10.1.0
       memfs: 3.4.13
-      minimatch: 3.0.5
+      minimatch: 3.1.2
       node-abort-controller: 3.0.1
       schema-utils: 3.1.1
       semver: 7.3.8
@@ -16402,7 +16406,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.5
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: true
@@ -18229,7 +18233,7 @@ packages:
       '@jest/test-result': 28.1.3
       '@jest/types': 28.1.3
       '@types/node': 18.11.18
-      chalk: 4.1.0
+      chalk: 4.1.2
       co: 4.6.0
       dedent: 0.7.0
       is-generator-fn: 2.1.0
@@ -18292,7 +18296,7 @@ packages:
       '@jest/types': 28.1.3
       '@types/node': 18.11.18
       babel-jest: 28.1.3_@babel+core@7.20.12
-      chalk: 4.1.0
+      chalk: 4.1.2
       ci-info: 3.7.1
       deepmerge: 4.2.2
       glob: 7.2.3
@@ -18377,7 +18381,7 @@ packages:
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     dependencies:
       '@jest/types': 28.1.3
-      chalk: 4.1.0
+      chalk: 4.1.2
       jest-get-type: 28.0.2
       jest-util: 28.1.3
       pretty-format: 28.1.3
@@ -18486,7 +18490,7 @@ packages:
       '@babel/code-frame': 7.18.6
       '@jest/types': 28.1.3
       '@types/stack-utils': 2.0.1
-      chalk: 4.1.0
+      chalk: 4.1.2
       graceful-fs: 4.2.10
       micromatch: 4.0.5
       pretty-format: 28.1.3
@@ -18583,7 +18587,7 @@ packages:
     resolution: {integrity: sha512-/d1UbyUkf9nvsgdBildLe6LAD4DalgkgZcKd0nZ8XUGPyA/7fsnaQIlKVnDiuUXv/IeZhPEDrRJubVSulxrShA==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       graceful-fs: 4.2.10
       jest-haste-map: 28.1.3
       jest-pnp-resolver: 1.2.3_jest-resolve@28.1.1
@@ -18619,7 +18623,7 @@ packages:
       '@jest/transform': 28.1.3
       '@jest/types': 28.1.3
       '@types/node': 18.11.18
-      chalk: 4.1.0
+      chalk: 4.1.2
       emittery: 0.10.2
       graceful-fs: 4.2.10
       jest-docblock: 28.1.1
@@ -18725,7 +18729,7 @@ packages:
     dependencies:
       '@jest/types': 28.1.3
       '@types/node': 18.11.18
-      chalk: 4.1.0
+      chalk: 4.1.2
       ci-info: 3.7.1
       graceful-fs: 4.2.10
       picomatch: 2.3.1
@@ -18749,7 +18753,7 @@ packages:
     dependencies:
       '@jest/types': 28.1.3
       camelcase: 6.3.0
-      chalk: 4.1.0
+      chalk: 4.1.2
       jest-get-type: 28.0.2
       leven: 3.1.0
       pretty-format: 28.1.3
@@ -23333,7 +23337,7 @@ packages:
     engines: {node: '>= 0.8.0'}
     dependencies:
       debug: 2.6.9
-      minimatch: 3.0.5
+      minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
     dev: true
