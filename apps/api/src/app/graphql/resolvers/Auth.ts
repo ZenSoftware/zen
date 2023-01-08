@@ -4,7 +4,7 @@ import { HttpException, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/api-interfaces';
-import { GqlGuard, GqlThrottlerGuard, GqlUser, RequestUser } from '@zen/nest-auth';
+import { GqlGuard, GqlThrottlerGuard, GqlUser, RequestUser, JwtPayload } from '@zen/nest-auth';
 import gql from 'graphql-tag';
 import { bcrypt, bcryptVerify } from 'hash-wasm';
 
@@ -187,7 +187,7 @@ export class AuthResolver {
     @Context() ctx: IContext,
     @Args('data') args: AuthPasswordResetConfirmationInput
   ) {
-    let tokenPayload;
+    let tokenPayload: JwtPayload;
     try {
       tokenPayload = this.jwtService.verify(args.token);
     } catch {

@@ -1,32 +1,32 @@
-@import 'fonts';
-@import 'helpers';
-
-/** === Dark Theme === */
+@use './material/dark/theme';
+// @use './material/light/theme';
+@use 'font';
 @import './bootstrap/dark-variables';
-@import './bootstrap/bootstrap';
-@import './material/material';
-@import './material/dark/theme';
-
-/** === Light Theme === */
 // @import './bootstrap/light-variables';
-// @import './bootstrap/bootstrap';
-// @import './material/material';
-// @import './material/light/theme';
+@import './bootstrap/bootstrap';
 
-@import 'reset';
+body {
+  min-height: 100vh;
+  font-family: font.$zen-default;
+}
 
-// Angular Material Sidenav background
+// Angular Material sidenav background
 .mat-sidenav-container,
 .mat-sidenav {
   background-color: $body-bg;
 }
 
-// Angular Material Dialog background
+// Angular Material dialog background
 .mat-mdc-dialog-container {
-  --mdc-dialog-container-color: #272b30;
+  --mdc-dialog-container-color: #{$gray-800};
 }
 
 // zen-snackbar-error background
-.error-snackbar {
-  --mdc-snackbar-container-color: #ff0000;
+.snackbar-error {
+  --mdc-snackbar-container-color: #{$danger};
+}
+
+// Horizontal scrollbar fix
+.row {
+  --bs-gutter-x: 0;
 }

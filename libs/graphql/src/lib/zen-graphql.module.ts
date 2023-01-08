@@ -21,7 +21,7 @@ import { OperationDefinitionNode } from 'graphql';
 import { ClientOptions, createClient } from 'graphql-ws';
 
 export abstract class GraphQLOptions {
-  resolvers?: any;
+  resolvers?: ApolloClientOptions<any>['resolvers'];
   cacheOptions?: InMemoryCacheConfig;
   uploadOptions?: createUploadLink.UploadLinkOptions & { mutationNames: string[] };
   batchOptions?: BatchOptions;

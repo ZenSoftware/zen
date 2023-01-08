@@ -1,26 +1,13 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-
 // https://itnext.io/what-do-need-know-about-enumerations-in-typescript-48b554cec43b
 export class EnumHelper {
-  // No instances guard
-  private constructor() {}
-
-  private static isNumeric(enumType: object) {
-    const members = Object.keys(enumType);
-    let parsedCount = 0;
-    members.forEach(x => {
-      const parsedValue = parseInt(x, 10);
-      if (!Number.isNaN(parsedValue)) {
-        parsedCount++;
-      }
-    });
-    return parsedCount === members.length / 2;
+  private constructor() {
+    // No instances guard
   }
 
-  public static keys(enumType: object) {
+  public static keys(enumType: any) {
     const members = Object.keys(enumType);
     let keys: string[];
-    if (!EnumHelper.isNumeric(enumType)) {
+    if (!isNumeric(enumType)) {
       keys = members;
     } else {
       keys = [];
@@ -46,4 +33,16 @@ export class EnumHelper {
       return { key, value: enumType[key] };
     });
   }
+}
+
+function isNumeric(enumType: object) {
+  const members = Object.keys(enumType);
+  let parsedCount = 0;
+  members.forEach(x => {
+    const parsedValue = parseInt(x, 10);
+    if (!Number.isNaN(parsedValue)) {
+      parsedCount++;
+    }
+  });
+  return parsedCount === members.length / 2;
 }
