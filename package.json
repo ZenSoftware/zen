@@ -18,7 +18,7 @@
     "prod:api": "nx build api --prod && npm run dockerize:api",
     "dockerize:api": "ts-node tools/create-deploy-package.ts && docker build -f deploy/api/Dockerfile -t zen-api .",
     "docker:run-api": "docker run -d --name zen-api -p 7081:7080 zen-api",
-    "docs": "ng compodoc api",
+    "doc:api": "nx run api:compodoc",
     "test": "nx run-many --all --target=test --parallel",
     "lint": "nx run-many --all --target=lint --parallel",
     "format": "nx format:write --all",
@@ -28,6 +28,7 @@
   "dependencies": {
     "@casl/ability": "~6.3.0",
     "@casl/prisma": "~1.3.0",
+    "@graphql-tools/merge": "^8.3.14",
     "@graphql-tools/schema": "^9.0.1",
     "@nestjs-modules/mailer": "^1.8.1",
     "@nestjs/apollo": "^10.0.4",
@@ -40,10 +41,14 @@
     "@nestjs/throttler": "^3.0.0",
     "@paljs/plugins": "5.2.0",
     "@prisma/client": "~4.8.0",
+    "apollo-server-core": "^3.11.1",
     "apollo-server-express": "~3.11.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "express": "^4.18.2",
     "graphql": "~16.6.0",
+    "graphql-tag": "^2.12.6",
+    "graphql-ws": "^5.11.2",
     "graphql-subscriptions": "^2.0.0",
     "graphql-upload": "^15.0.2",
     "hash-wasm": "^4.9.0",
@@ -54,7 +59,8 @@
     "passport-jwt": "^4.0.0",
     "prisma": "~4.8.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "~7.5.0"
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^15.0.0",
@@ -77,6 +83,7 @@
     "@angular/platform-browser-dynamic": "~15.0.0",
     "@angular/router": "~15.0.0",
     "@apollo/client": "~3.7.1",
+    "@babel/runtime": "^7.20.7",
     "@casl/angular": "~8.2.0",
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@graphql-codegen/cli": "^2.3.0",
@@ -139,7 +146,6 @@
     "prettier-plugin-prisma": "^4.2.0",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
-    "tslib": "^2.3.0",
     "typescript": "~4.8.4",
     "webpack": "^5.64.0",
     "zone.js": "~0.11.4"
