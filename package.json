@@ -12,7 +12,7 @@
     "prisma:migrate": "prisma migrate dev --schema apps/api/schema.prisma && ts-node generate.ts",
     "prisma:deploy": "prisma migrate deploy --schema apps/api/schema.prisma",
     "prisma:studio": "prisma studio --schema apps/api/schema.prisma",
-    "prod:apps": "nx build portal --prod",
+    "prod:portal": "nx build portal --prod",
     "prod:api": "nx build api --prod && npm run docker:build:api",
     "docker:build:api": "ts-node tools/create-deploy-package.ts && docker build -f deploy/api/Dockerfile -t zen-api .",
     "docker:run:api": "docker run -d --name zen-api -p 7081:7080 zen-api",
