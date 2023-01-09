@@ -204,7 +204,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
           next: ({ data, loading }) => {
             this.loading = loading;
 
-            const result = Object.entries(data)[0][1] as T[];
+            const result = Object.values(data)[0] as T[];
             this.#data = result ?? [];
             this.dataStateChangeHandler();
             this.changeDetectorRef.detectChanges();
@@ -255,11 +255,9 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
                       query: this.settings.findManyGQL.document,
                     }) as any;
 
-                    const findManyKeyVal = Object.entries(data)[0];
+                    const key = Object.keys(data)[0];
 
-                    if (findManyKeyVal) {
-                      const key = findManyKeyVal[0];
-
+                    if (key) {
                       const newData = data[key].filter(
                         (item: { [key: string]: any }) =>
                           item[this.settings.keyField as string] !==
@@ -357,7 +355,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       this.#countSub = this.settings.findManyCountGQL
         .watch({ where: variables.where })
         .valueChanges.subscribe(({ data }) => {
-          this.gridData.total = Object.entries(data)[0][1] as number;
+          this.gridData.total = Object.values(data)[0] as number;
         });
 
       if (this.#querySub) this.#querySub.unsubscribe();
@@ -367,7 +365,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       this.#querySub = this.settings.findManyGQL.watch(variables).valueChanges.subscribe({
         next: ({ data, loading }) => {
           this.loading = loading;
-          this.gridData.data = Object.entries(data)[0][1] as T[];
+          this.gridData.data = Object.values(data)[0] as T[];
           this.changeDetectorRef.detectChanges();
         },
         error: e => {
@@ -472,7 +470,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
       const $allData = this.settings.findManyGQL.fetch(variables).pipe(
         map(({ data }) => {
-          return { data: Object.entries(data)[0][1] as T[] };
+          return { data: Object.values(data)[0] as T[] };
         })
       );
 
