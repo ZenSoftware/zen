@@ -2,7 +2,7 @@
 - Install [Rancher Desktop](https://rancherdesktop.io/)
 - Review [simplest k8s deployment example](https://github.com/jwsy/simplest-k8s/tree/mount-local)
 - Review GitHub issue [Document an ingress traefix example](https://github.com/rancher-sandbox/rancher-desktop/issues/2460)
-- Build the API docker image via `npm run prod:api`.  It will utilize the production environment variables in `apps/api/src/environments/environment.prod.ts` and produce a Docker image tagged `zen-api:latest`
+- Build the API docker image via `npm run prod:api`.  It will utilize the production environment variables at `apps/api/src/environments/environment.prod.ts` and produce a Docker image tagged `zen-api:latest`
 - Fill out `JWT_PRIVATE_KEY` & `JWT_PUBLIC_KEY` under `deploy/dev/k8s-secrets.yaml`.  The other secrets can be left blank.  Refer to `deploy/notes.md` for instructions of how to generate keys using openssl.
 - Setup a minimal DNS with [nip.io](https://nip.io/)
   - Get your ingress IP via `kubectl get node/<MACHINE_NAME> -o json` under `status.addresses.address` with `"type": "InternalIP"`
