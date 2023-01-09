@@ -54,18 +54,21 @@ describe('AuthService', () => {
   }));
 
   it('evaluates rolesEqual correctly', () => {
+    // Should evaluate to equal
     expect(service.rolesEqual('Editor', 'Editor')).toEqual(true);
-    // expect(service.rolesEqual('Editor', ['Editor'])).toEqual(true);
-    // expect(service.rolesEqual(['Editor'], 'Editor')).toEqual(true);
+    expect(service.rolesEqual('Editor', ['Editor'])).toEqual(true);
+    expect(service.rolesEqual(['Editor'], 'Editor')).toEqual(true);
     expect(service.rolesEqual(['Admin', 'Editor'], ['Editor', 'Admin'])).toEqual(true);
     expect(service.rolesEqual([], [])).toEqual(true);
+    expect(service.rolesEqual(undefined, null)).toEqual(true);
+    expect(service.rolesEqual(null, [])).toEqual(true);
+    expect(service.rolesEqual(undefined, [])).toEqual(true);
 
-    expect(service.rolesEqual(null, [])).toEqual(false);
-    expect(service.rolesEqual(undefined, [])).toEqual(false);
+    // Should evaluate to not equal
     expect(service.rolesEqual('Editor', [])).toEqual(false);
-    expect(service.rolesEqual('Editor', 'Admin')).toEqual(false);
+    expect(service.rolesEqual('Editor', 'editor')).toEqual(false);
     expect(service.rolesEqual('Editor', ['Admin'])).toEqual(false);
-    expect(service.rolesEqual(['Editor'], ['Admin'])).toEqual(false);
+    expect(service.rolesEqual(['Editor'], ['Editor', 'Admin'])).toEqual(false);
   });
 
   it('evaluates userHasRole correctly', () => {
@@ -96,7 +99,7 @@ describe('AuthService', () => {
     const data: AuthLogin = {
       authLogin: {
         __typename: 'AuthSession',
-        id: 'abc123',
+        userId: 'abc123',
         expiresIn: 1000,
         rememberMe: true,
         roles: ['Super'],
@@ -114,7 +117,7 @@ describe('AuthService', () => {
       .subscribe(authLogin => {
         expect(authLogin.data).toEqual(data);
 
-        expect(ls.get(LocalStorageKey.userId, { decrypt: true })).toEqual(data.authLogin.id);
+        expect(ls.get(LocalStorageKey.userId, { decrypt: true })).toEqual(data.authLogin.userId);
         expect(ls.get(LocalStorageKey.token, { decrypt: true })).toEqual(data.authLogin.token);
         expect(typeof ls.get(LocalStorageKey.sessionExpiresOn)).toEqual('number');
         expect(ls.get(LocalStorageKey.rememberMe)).toEqual(data.authLogin.rememberMe);
@@ -122,7 +125,7 @@ describe('AuthService', () => {
         expect(ls.get(LocalStorageKey.rules, { decrypt: true })).toEqual(data.authLogin.rules);
 
         expect(ability.rules).toEqual(data.authLogin.rules);
-        expect(service.userId).toEqual(data.authLogin.id);
+        expect(service.userId).toEqual(data.authLogin.userId);
         expect(tokenVar()).toEqual(data.authLogin.token);
         expect(userRolesVar()).toEqual(data.authLogin.roles);
         expect(loggedInVar()).toEqual(true);

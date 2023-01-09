@@ -15,7 +15,6 @@ import {
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
-import { intersection, isEqual, orderBy } from 'lodash-es';
 import { Subscription, interval, map, share, throwError, timer } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 
@@ -36,8 +35,8 @@ export enum LocalStorageKey {
 export class AuthService {
   #exchangeIntervalSubscription?: Subscription;
 
-  #userId: AuthSession['id'] | null = null;
-  get userId(): AuthSession['id'] | null {
+  #userId: AuthSession['userId'] | null = null;
+  get userId(): AuthSession['userId'] | null {
     return this.#userId;
   }
 
@@ -118,20 +117,24 @@ export class AuthService {
   }
 
   setSession(authSession: AuthSession) {
-    ls.set(LocalStorageKey.userId, authSession.id, { encrypt: true });
+    ls.set(LocalStorageKey.userId, authSession.userId, { encrypt: true });
     ls.set(LocalStorageKey.token, authSession.token, { encrypt: true });
     ls.set(LocalStorageKey.sessionExpiresOn, Date.now() + authSession.expiresIn * 1000);
     ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
     ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
     ls.set(LocalStorageKey.rules, authSession.rules, { encrypt: true });
 
-    this.#userId = authSession.id;
+    this.#userId = authSession.userId;
 
     this.ability.update(authSession.rules);
 
     tokenVar(authSession.token);
 
-    if (!this.rolesEqual(this.roles, authSession.roles)) {
+    if (
+      !this.rolesEqual(this.roles, authSession.roles) ||
+      this.roles === null ||
+      this.roles === undefined
+    ) {
       userRolesVar(authSession.roles);
     }
 
@@ -143,8 +146,29 @@ export class AuthService {
   }
 
   rolesEqual(a: string | string[] | null | undefined, b: string | string[] | null | undefined) {
-    if (Array.isArray(a) && Array.isArray(b)) return isEqual(orderBy(a), orderBy(b));
-    return a === b;
+    let compareA: string[];
+    let compareB: string[];
+
+    if (Array.isArray(a)) compareA = [...a];
+    else if (typeof a === 'string') compareA = [a];
+    else if (a === null || a === undefined) compareA = [];
+    else throw new Error(`'a' is not a valid type for comparison`);
+
+    if (Array.isArray(b)) compareB = [...b];
+    else if (typeof b === 'string') compareB = [b];
+    else if (b === null || b === undefined) compareB = [];
+    else throw new Error(`'b' is not a valid type for comparison`);
+
+    if (compareA.length !== compareB.length) return false;
+
+    compareA.sort();
+    compareB.sort();
+
+    for (let i = 0; i < compareA.length; i++) {
+      if (compareA[i] !== compareB[i]) return false;
+    }
+
+    return true;
   }
 
   userHasRole(role: string | string[]) {
@@ -158,7 +182,7 @@ export class AuthService {
   userNotInRole(role: string | string[]) {
     if (role) {
       if (typeof role === 'string') return !this.roles.some(r => r === role);
-      else return intersection(this.roles, role).length === 0;
+      return this.roles.filter(r => role.includes(r)).length === 0;
     }
     return true;
   }
