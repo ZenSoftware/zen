@@ -35,7 +35,7 @@ export class AuthService {
     const ability = await this.caslFactory.createAbility(user);
 
     const authSession: AuthSession = {
-      id: user.id,
+      userId: user.id,
       roles: user.roles,
       rules: ability.rules,
       token,
