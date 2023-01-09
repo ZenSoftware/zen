@@ -39,7 +39,7 @@ export const typeDefs = gql`
   }
 
   type AuthSession {
-    id: String! # Change to Int! or String! respective to the typeof User['id']
+    userId: String! # Change to Int! or String! respective to the typeof User['id']
     token: String!
     roles: [String!]!
     rememberMe: Boolean!
