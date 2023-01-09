@@ -15,7 +15,6 @@ import {
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
-import { intersection } from 'lodash-es';
 import { Subscription, interval, map, share, throwError, timer } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
 
@@ -183,7 +182,7 @@ export class AuthService {
   userNotInRole(role: string | string[]) {
     if (role) {
       if (typeof role === 'string') return !this.roles.some(r => r === role);
-      else return intersection(this.roles, role).length === 0;
+      return this.roles.filter(r => role.includes(r)).length === 0;
     }
     return true;
   }
