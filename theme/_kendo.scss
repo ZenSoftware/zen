@@ -1,13 +1,10 @@
-$primary-palette-name: $zen-primary;
-$secondary-palette-name: $zen-accent;
+$primary-palette-name: cyan;
+$secondary-palette-name: pink;
 $theme-type: dark;
 
 @import '@progress/kendo-theme-material/dist/all.scss';
 
-.k-pager-nav {
-  background-color: #333333;
-}
-
+// Change icon colors of buttons in the grid
 .k-form,
 .k-grid {
   input,
@@ -22,14 +19,9 @@ $theme-type: dark;
   vertical-align: inherit;
 }
 
-// Fixes items per page drop down text being cut off within the <zen-grid> pager
-.k-pager-sizes .k-input-inner {
-  min-width: 100px;
-}
-
-// Narrow Kendo headers
-.k-grid-header .k-header > .k-link {
-  padding: 16px 10px;
+// Brighten form labels on focus
+.k-floating-label-container.k-focus > .k-label {
+  color: white;
 }
 
 // Narrow Kendo filter
@@ -37,45 +29,45 @@ $theme-type: dark;
   padding: 0 0 0 5px;
 }
 
-.k-grid .k-icon-button,
-.k-grid .k-button.k-button-icon {
-  width: inherit;
-  padding: 8px 0;
-}
+// // Narrow Kendo headers
+// .k-grid-header .k-header > .k-link {
+//   padding: 16px 10px;
+// }
 
-// Fix html editor
-.zen-html,
-.k-editor .k-editor-content {
-  line-height: 1.5em;
+// .k-pager-nav {
+//   background-color: #333333;
+// }
 
-  p {
-    margin: 0;
-  }
-}
+// // Fixes items per page drop down text being cut off within the <zen-grid> pager
+// .k-pager-sizes .k-input-inner {
+//   min-width: 100px;
+// }
 
-.k-editor-content > .ProseMirror {
-  padding: 0 16px;
-}
-// End
+// .k-grid .k-icon-button,
+// .k-grid .k-button.k-button-icon {
+//   width: inherit;
+//   padding: 8px 0;
+// }
 
-.k-form .k-form-field {
-  margin-top: 0;
-}
+// // Fix html editor
+// .zen-html,
+// .k-editor .k-editor-content {
+//   line-height: 1.5em;
 
-button.k-button i.fas {
-  margin-top: 3px;
-}
+//   p {
+//     margin: 0;
+//   }
+// }
 
-// Fixes the background change when hovering in Kendo Grid's details row
-html .k-grid tr.k-detail-row:hover {
-  background-color: transparent;
+// .k-editor-content > .ProseMirror {
+//   padding: 0 16px;
+// }
+// // End
 
-  .k-alt {
-    background-color: transparent;
-  }
-}
+// .k-form .k-form-field {
+//   margin-top: 0;
+// }
 
-// Brighten form labels on focus
-.k-floating-label-container.k-focus > .k-label {
-  color: white;
-}
+// button.k-button i.fas {
+//   margin-top: 3px;
+// }
