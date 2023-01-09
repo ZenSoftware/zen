@@ -1,7 +1,7 @@
 import { User } from '../../prisma';
 
 export interface AuthSession {
-  id: User['id'];
+  userId: User['id'];
   token: string;
   roles: string[];
   rememberMe: boolean;

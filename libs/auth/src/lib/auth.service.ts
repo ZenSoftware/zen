@@ -36,8 +36,8 @@ export enum LocalStorageKey {
 export class AuthService {
   #exchangeIntervalSubscription?: Subscription;
 
-  #userId: AuthSession['id'] | null = null;
-  get userId(): AuthSession['id'] | null {
+  #userId: AuthSession['userId'] | null = null;
+  get userId(): AuthSession['userId'] | null {
     return this.#userId;
   }
 
@@ -118,14 +118,14 @@ export class AuthService {
   }
 
   setSession(authSession: AuthSession) {
-    ls.set(LocalStorageKey.userId, authSession.id, { encrypt: true });
+    ls.set(LocalStorageKey.userId, authSession.userId, { encrypt: true });
     ls.set(LocalStorageKey.token, authSession.token, { encrypt: true });
     ls.set(LocalStorageKey.sessionExpiresOn, Date.now() + authSession.expiresIn * 1000);
     ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
     ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
     ls.set(LocalStorageKey.rules, authSession.rules, { encrypt: true });
 
-    this.#userId = authSession.id;
+    this.#userId = authSession.userId;
 
     this.ability.update(authSession.rules);
 
