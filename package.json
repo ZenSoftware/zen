@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "nx serve portal",
+    "start": "nx serve portal --host=127.0.0.1",
     "start:api": "nx serve api",
     "start:e2e": "nx e2e portal-e2e --watch",
     "frontend:gen": "graphql-codegen -c apollo-angular.yml && graphql-codegen -c apollo-possible-types.yml",
