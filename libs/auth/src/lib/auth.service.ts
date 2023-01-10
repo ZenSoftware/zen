@@ -97,14 +97,12 @@ export class AuthService {
   }
 
   login(data: AuthLoginInput) {
-    return this.authLoginGQL
-      .fetch({ data: <AuthLoginInput>data }, { fetchPolicy: 'no-cache' })
-      .pipe(
-        catchError(parseGqlErrors),
-        tap(({ data: { authLogin } }) => {
-          this.setSession(authLogin);
-        })
-      );
+    return this.authLoginGQL.fetch({ data }, { fetchPolicy: 'no-cache' }).pipe(
+      catchError(parseGqlErrors),
+      tap(({ data: { authLogin } }) => {
+        this.setSession(authLogin);
+      })
+    );
   }
 
   loginWithGoogle() {
