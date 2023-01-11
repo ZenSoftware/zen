@@ -39,7 +39,7 @@
  * selectOne(null);
  * undefined
  *
- * @param input - Array of items to be cleaned and serialized
+ * @param input - Item to be serialized as a select object.
  * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @return `{outputField: number | string} | undefined` - Cleaned and serialized select object.
@@ -80,9 +80,10 @@ export function selectOne<T>(
 
 /**
  * ## Cleans & transforms array into select objects
+ * Removes duplicates, null/undefined, empty strings and -1 values.
  *
  * @example
- * selectMany([1, 2, -1, null, undefined]); // Defaults to 'id'
+ * selectMany([-1, 1, 2, 2, null, undefined]); // Defaults to 'id'
  * [
  *   {id: 1},
  *   {id: 2}
@@ -142,20 +143,24 @@ export function selectOne<T>(
  * selectMany(null);
  * []
  *
- * @param input - Array of items to be cleaned and serialized
+ * @param input - Iterable of items to be cleaned and serialized as select objects.
  * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @return `Array<{outputField: number | string}> | undefined` - Cleaned and serialized array of select objects.
  */
 export function selectMany<T>(
-  input: Array<T | null | undefined> | null | undefined,
+  input: Iterable<T | null | undefined> | null | undefined,
   outputField: string = 'id',
   inputField?: keyof T
 ): Array<{ [outputField: string]: any }> {
   if (!inputField) (<string>inputField) = outputField;
 
   if (input) {
-    const items = (input as any[]).filter(x => x !== null && x !== undefined);
+    // Remove duplicates
+    const unique = new Set(input);
+
+    // Remove null/undefined
+    const items = Array.from(unique).filter(x => x !== null && x !== undefined);
 
     if (items.length > 0) {
       const result = items.reduce((accum: any[], item) => {
@@ -163,13 +168,13 @@ export function selectMany<T>(
 
         if (
           typeofItem === 'object' &&
-          item[inputField] !== null &&
-          item[inputField] !== undefined &&
-          item[inputField] !== -1 &&
-          item[inputField] !== ''
+          (<any>item)[inputField] !== null &&
+          (<any>item)[inputField] !== undefined &&
+          (<any>item)[inputField] !== -1 &&
+          (<any>item)[inputField] !== ''
         ) {
           const obj: any = {};
-          obj[outputField] = item[inputField];
+          obj[outputField] = (<any>item)[inputField];
           accum.push(obj);
         } else if (typeofItem === 'number' && item !== -1) {
           const obj: any = {};

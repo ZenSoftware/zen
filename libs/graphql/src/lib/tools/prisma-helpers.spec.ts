@@ -28,7 +28,7 @@ describe('selectMany', () => {
       null,
     ];
 
-    expect(selectMany([1, 2, -1, null, undefined])).toEqual([{ id: 1 }, { id: 2 }]);
+    expect(selectMany([-1, 1, 2, 2, null, undefined])).toEqual([{ id: 1 }, { id: 2 }]);
     expect(selectMany(['a', 'b', '', null, undefined])).toEqual([{ id: 'a' }, { id: 'b' }]);
     expect(selectMany(exampleArray)).toEqual([{ id: 1 }, { id: 2 }, { id: 3 }]);
     expect(selectMany(exampleArray, 'ex')).toEqual([{ ex: 'a' }, { ex: 'b' }]);
