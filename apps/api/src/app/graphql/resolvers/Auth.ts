@@ -4,7 +4,7 @@ import { HttpException, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/api-interfaces';
-import { GqlGuard, GqlThrottlerGuard, GqlUser, RequestUser, JwtPayload } from '@zen/nest-auth';
+import { GqlGuard, GqlThrottlerGuard, GqlUser, JwtPayload, RequestUser } from '@zen/nest-auth';
 import gql from 'graphql-tag';
 import { bcrypt, bcryptVerify } from 'hash-wasm';
 
