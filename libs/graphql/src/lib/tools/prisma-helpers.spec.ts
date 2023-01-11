@@ -7,7 +7,6 @@ describe('selectOne', () => {
     expect(selectOne({ id: 2, ex: 'example' })).toEqual({ id: 2 });
     expect(selectOne({ id: 2, ex: 'example' }, 'ex')).toEqual({ ex: 'example' });
     expect(selectOne({ id: 2, ex: 'example' }, 'out', 'ex')).toEqual({ out: 'example' });
-    expect(selectOne(-1)).toEqual(undefined);
     expect(selectOne('')).toEqual(undefined);
     expect(selectOne(undefined)).toEqual(undefined);
     expect(selectOne(null)).toEqual(undefined);
@@ -22,13 +21,12 @@ describe('selectMany', () => {
       { id: 3, ex: '' },
       { id: undefined },
       { id: null },
-      { id: -1 },
       { id: '' },
       undefined,
       null,
     ];
 
-    expect(selectMany([-1, 1, 2, 2, null, undefined])).toEqual([{ id: 1 }, { id: 2 }]);
+    expect(selectMany([1, 2, 2, null, undefined])).toEqual([{ id: 1 }, { id: 2 }]);
     expect(selectMany(['a', 'b', '', null, undefined])).toEqual([{ id: 'a' }, { id: 'b' }]);
     expect(selectMany(exampleArray)).toEqual([{ id: 1 }, { id: 2 }, { id: 3 }]);
     expect(selectMany(exampleArray, 'ex')).toEqual([{ ex: 'a' }, { ex: 'b' }]);

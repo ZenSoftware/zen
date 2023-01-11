@@ -24,10 +24,6 @@
  * {out: "example"}
  *
  * @example
- * selectOne(-1);
- * undefined
- *
- * @example
  * selectOne('');
  * undefined
  *
@@ -58,13 +54,12 @@ export function selectOne<T>(
       typeofItem === 'object' &&
       (<any>item)[inputField] !== null &&
       (<any>item)[inputField] !== undefined &&
-      (<any>item)[inputField] !== -1 &&
       (<any>item)[inputField] !== ''
     ) {
       const obj: any = {};
       obj[outputField] = (<any>item)[inputField];
       return obj;
-    } else if (typeofItem === 'number' && item !== -1) {
+    } else if (typeofItem === 'number') {
       const obj: any = {};
       obj[outputField] = item;
       return obj;
@@ -80,10 +75,10 @@ export function selectOne<T>(
 
 /**
  * ## Cleans & transforms array into select objects
- * Removes duplicates, null/undefined, empty strings and -1 values.
+ * Removes duplicates, null/undefined and empty strings.
  *
  * @example
- * selectMany([-1, 1, 2, 2, null, undefined]); // Defaults to 'id'
+ * selectMany([1, 2, 2, null, undefined]); // Defaults to 'id'
  * [
  *   {id: 1},
  *   {id: 2}
@@ -103,7 +98,6 @@ export function selectOne<T>(
  *   { id: 3, ex: '' },
  *   { id: undefined },
  *   { id: null },
- *   { id: -1 },
  *   { id: '' },
  *   undefined,
  *   null
@@ -170,13 +164,12 @@ export function selectMany<T>(
           typeofItem === 'object' &&
           (<any>item)[inputField] !== null &&
           (<any>item)[inputField] !== undefined &&
-          (<any>item)[inputField] !== -1 &&
           (<any>item)[inputField] !== ''
         ) {
           const obj: any = {};
           obj[outputField] = (<any>item)[inputField];
           accum.push(obj);
-        } else if (typeofItem === 'number' && item !== -1) {
+        } else if (typeofItem === 'number') {
           const obj: any = {};
           obj[outputField] = item;
           accum.push(obj);
