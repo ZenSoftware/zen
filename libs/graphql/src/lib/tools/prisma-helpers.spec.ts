@@ -18,19 +18,22 @@ describe('selectMany', () => {
     const exampleArray = [
       { id: 1, ex: 'a' },
       { id: 2, ex: 'b' },
+      { id: 2, ex: 'b' },
       { id: 3, ex: '' },
       { id: undefined },
       { id: null },
       { id: '' },
+      {},
       undefined,
       null,
     ];
 
-    expect(selectMany([1, 2, 2, null, undefined])).toEqual([{ id: 1 }, { id: 2 }]);
-    expect(selectMany(['a', 'b', '', null, undefined])).toEqual([{ id: 'a' }, { id: 'b' }]);
     expect(selectMany(exampleArray)).toEqual([{ id: 1 }, { id: 2 }, { id: 3 }]);
     expect(selectMany(exampleArray, 'ex')).toEqual([{ ex: 'a' }, { ex: 'b' }]);
     expect(selectMany(exampleArray, 'out', 'ex')).toEqual([{ out: 'a' }, { out: 'b' }]);
+
+    expect(selectMany([1, 2, 2, null, undefined])).toEqual([{ id: 1 }, { id: 2 }]);
+    expect(selectMany(['a', 'b', '', null, undefined])).toEqual([{ id: 'a' }, { id: 'b' }]);
     expect(selectMany([])).toEqual([]);
     expect(selectMany(undefined)).toEqual([]);
     expect(selectMany(null)).toEqual([]);

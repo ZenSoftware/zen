@@ -48,6 +48,7 @@ export function selectOne<T>(
   if (!inputField) (<string>inputField) = outputField;
 
   if (item !== undefined && item !== null) {
+    const obj: Record<string, any> = {};
     const typeofItem = typeof item;
 
     if (
@@ -56,15 +57,9 @@ export function selectOne<T>(
       (<any>item)[inputField] !== undefined &&
       (<any>item)[inputField] !== ''
     ) {
-      const obj: any = {};
       obj[outputField] = (<any>item)[inputField];
       return obj;
-    } else if (typeofItem === 'number') {
-      const obj: any = {};
-      obj[outputField] = item;
-      return obj;
-    } else if (typeofItem === 'string' && item !== '') {
-      const obj: any = {};
+    } else if (typeofItem === 'number' || (typeofItem === 'string' && item !== '')) {
       obj[outputField] = item;
       return obj;
     }
@@ -99,8 +94,9 @@ export function selectOne<T>(
  *   { id: undefined },
  *   { id: null },
  *   { id: '' },
+ *   {},
  *   undefined,
- *   null
+ *   null,
  * ];
  *
  * @example
@@ -150,39 +146,22 @@ export function selectMany<T>(
   if (!inputField) (<string>inputField) = outputField;
 
   if (input) {
-    // Remove duplicates
-    const unique = new Set(input);
-
-    // Remove null/undefined
-    const items = Array.from(unique).filter(x => x !== null && x !== undefined);
+    const items = Array.from(input).filter(x => x !== null && x !== undefined);
 
     if (items.length > 0) {
-      const result = items.reduce((accum: any[], item) => {
-        const typeofItem = typeof item;
-
-        if (
-          typeofItem === 'object' &&
-          (<any>item)[inputField] !== null &&
-          (<any>item)[inputField] !== undefined &&
-          (<any>item)[inputField] !== ''
-        ) {
-          const obj: any = {};
-          obj[outputField] = (<any>item)[inputField];
-          accum.push(obj);
-        } else if (typeofItem === 'number') {
-          const obj: any = {};
-          obj[outputField] = item;
-          accum.push(obj);
-        } else if (typeofItem === 'string' && item !== '') {
-          const obj: any = {};
-          obj[outputField] = item;
-          accum.push(obj);
+      const ids = items.reduce((accum: Set<T | null | undefined>, item) => {
+        if (typeof item === 'object') {
+          accum.add((<any>item)[inputField]);
+        } else {
+          accum.add(item);
         }
 
         return accum;
-      }, []);
+      }, new Set<T | null | undefined>());
 
-      return result;
+      return Array.from(ids)
+        .filter(id => id !== null && id !== undefined && id !== '')
+        .map(id => ({ [outputField]: id }));
     }
   }
 
