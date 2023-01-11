@@ -24,10 +24,6 @@
  * {out: "example"}
  *
  * @example
- * selectOne(-1);
- * undefined
- *
- * @example
  * selectOne('');
  * undefined
  *
@@ -39,7 +35,7 @@
  * selectOne(null);
  * undefined
  *
- * @param input - Array of items to be cleaned and serialized
+ * @param input - Item to be serialized as a select object.
  * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @return `{outputField: number | string} | undefined` - Cleaned and serialized select object.
@@ -52,24 +48,18 @@ export function selectOne<T>(
   if (!inputField) (<string>inputField) = outputField;
 
   if (item !== undefined && item !== null) {
+    const obj: Record<string, any> = {};
     const typeofItem = typeof item;
 
     if (
       typeofItem === 'object' &&
       (<any>item)[inputField] !== null &&
       (<any>item)[inputField] !== undefined &&
-      (<any>item)[inputField] !== -1 &&
       (<any>item)[inputField] !== ''
     ) {
-      const obj: any = {};
       obj[outputField] = (<any>item)[inputField];
       return obj;
-    } else if (typeofItem === 'number' && item !== -1) {
-      const obj: any = {};
-      obj[outputField] = item;
-      return obj;
-    } else if (typeofItem === 'string' && item !== '') {
-      const obj: any = {};
+    } else if (typeofItem === 'number' || (typeofItem === 'string' && item !== '')) {
       obj[outputField] = item;
       return obj;
     }
@@ -80,9 +70,10 @@ export function selectOne<T>(
 
 /**
  * ## Cleans & transforms array into select objects
+ * Removes duplicates, null/undefined and empty strings.
  *
  * @example
- * selectMany([1, 2, -1, null, undefined]); // Defaults to 'id'
+ * selectMany([1, 2, 2, null, undefined]); // Defaults to 'id'
  * [
  *   {id: 1},
  *   {id: 2}
@@ -102,10 +93,10 @@ export function selectOne<T>(
  *   { id: 3, ex: '' },
  *   { id: undefined },
  *   { id: null },
- *   { id: -1 },
  *   { id: '' },
+ *   {},
  *   undefined,
- *   null
+ *   null,
  * ];
  *
  * @example
@@ -142,49 +133,35 @@ export function selectOne<T>(
  * selectMany(null);
  * []
  *
- * @param input - Array of items to be cleaned and serialized
+ * @param input - Iterable of items to be cleaned and serialized as select objects.
  * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @return `Array<{outputField: number | string}> | undefined` - Cleaned and serialized array of select objects.
  */
 export function selectMany<T>(
-  input: Array<T | null | undefined> | null | undefined,
+  input: Iterable<T | null | undefined> | null | undefined,
   outputField: string = 'id',
   inputField?: keyof T
 ): Array<{ [outputField: string]: any }> {
   if (!inputField) (<string>inputField) = outputField;
 
   if (input) {
-    const items = (input as any[]).filter(x => x !== null && x !== undefined);
+    const items = Array.from(input).filter(x => x !== null && x !== undefined);
 
     if (items.length > 0) {
-      const result = items.reduce((accum: any[], item) => {
-        const typeofItem = typeof item;
-
-        if (
-          typeofItem === 'object' &&
-          item[inputField] !== null &&
-          item[inputField] !== undefined &&
-          item[inputField] !== -1 &&
-          item[inputField] !== ''
-        ) {
-          const obj: any = {};
-          obj[outputField] = item[inputField];
-          accum.push(obj);
-        } else if (typeofItem === 'number' && item !== -1) {
-          const obj: any = {};
-          obj[outputField] = item;
-          accum.push(obj);
-        } else if (typeofItem === 'string' && item !== '') {
-          const obj: any = {};
-          obj[outputField] = item;
-          accum.push(obj);
+      const ids = items.reduce((accum: Set<T | null | undefined>, item) => {
+        if (typeof item === 'object') {
+          accum.add((<any>item)[inputField]);
+        } else {
+          accum.add(item);
         }
 
         return accum;
-      }, []);
+      }, new Set<T | null | undefined>());
 
-      return result;
+      return Array.from(ids)
+        .filter(id => id !== null && id !== undefined && id !== '')
+        .map(id => ({ [outputField]: id }));
     }
   }
 
