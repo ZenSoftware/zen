@@ -9,8 +9,28 @@ type UnparsedError<T> = {
 };
 type ErrorResponse<T> = { graphQLErrors: UnparsedError<T>[] };
 
-export const parseGqlErrors = (errors: ErrorResponse<unknown>) =>
-  throwError(() => new GqlErrors(errors));
+/**
+ * Parses GraphQL errors and returns a `GqlErrors` object.
+ *
+ * @example
+ * ```ts
+ * login(data: AuthLoginInput) {
+ *   return this.authLoginGQL
+ *     .fetch({ data }, { fetchPolicy: 'no-cache' })
+ *     .pipe(catchError(parseGqlErrors))
+ *     .subscribe({
+ *       error: (errors: GqlErrors<ApiError.AuthLogin>) => {
+ *         if (errors.find(e => e === 'INCORRECT_PASSWORD')) {
+ *           // Handle incorrect password
+ *         }
+ *       },
+ *     });
+ * }
+ * ```
+ */
+export function parseGqlErrors(errors: ErrorResponse<unknown>) {
+  return throwError(() => new GqlErrors(errors));
+}
 
 export class GqlErrors<T = any> {
   parsed: T[] = [];
