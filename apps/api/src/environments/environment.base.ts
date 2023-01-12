@@ -2,7 +2,7 @@ import { MailerOptions } from '@nestjs-modules/mailer';
 import { NestApplicationOptions } from '@nestjs/common';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
-import { UploadOptions } from 'graphql-upload';
+import { UploadOptions } from 'graphql-upload-minimal';
 import { StrategyOptions as GoogleStrategyOptions } from 'passport-google-oauth20';
 
 export abstract class EnvironmentBase {
