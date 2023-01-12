@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, Inject, Input, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, Inject, Input, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
