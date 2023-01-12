@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
-import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.js';
+import { graphqlUploadExpress } from 'graphql-upload-minimal';
 
 import { environment } from '../environments/environment';
 import { ZenAuthModule } from './auth';
