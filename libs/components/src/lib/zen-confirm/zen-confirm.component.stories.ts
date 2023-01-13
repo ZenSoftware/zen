@@ -23,6 +23,11 @@ export default {
       ],
     }),
   ],
+  args: {
+    title: 'Are you sure?',
+    confirmText: 'Yes',
+    cancelText: 'No',
+  },
 } as Meta<ZenConfirmComponent>;
 
 const Template: Story<ZenConfirmComponent> = (args: ZenConfirmComponent) => ({
@@ -30,8 +35,4 @@ const Template: Story<ZenConfirmComponent> = (args: ZenConfirmComponent) => ({
 });
 
 export const Primary = Template.bind({});
-Primary.args = {
-  title: 'Are you sure?',
-  confirmText: 'Yes',
-  cancelText: 'No',
-};
+Primary.args = {};

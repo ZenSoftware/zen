@@ -13,6 +13,9 @@ export default {
       imports: [CommonModule, BrowserAnimationsModule, MatProgressSpinnerModule],
     }),
   ],
+  args: {
+    backdrop: true,
+  },
 } as Meta<ZenLoadingComponent>;
 
 const Template: Story<ZenLoadingComponent> = (args: ZenLoadingComponent) => ({
@@ -20,6 +23,4 @@ const Template: Story<ZenLoadingComponent> = (args: ZenLoadingComponent) => ({
 });
 
 export const Primary = Template.bind({});
-Primary.args = {
-  backdrop: true,
-};
+Primary.args = {};
