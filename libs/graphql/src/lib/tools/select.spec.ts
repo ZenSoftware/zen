@@ -1,4 +1,4 @@
-import { selectMany, selectOne } from './prisma-helpers';
+import { selectMany, selectOne } from './select';
 
 describe('selectOne', () => {
   it('produces correct select objects', () => {
