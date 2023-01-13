@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, CanLoad, Router } from '@angular/router';
+import { CanActivate, CanActivateChild, CanMatch, Router } from '@angular/router';
 import { Ability, Subject } from '@casl/ability';
 import { Action } from '@zen/api-interfaces';
 
@@ -8,7 +8,7 @@ export class CaslGuard {
     @Injectable({
       providedIn: 'root',
     })
-    class CaslCan implements CanActivate, CanActivateChild, CanLoad {
+    class CaslCan implements CanActivate, CanActivateChild, CanMatch {
       constructor(private router: Router, private ability: Ability) {}
 
       canActivate() {
@@ -21,7 +21,7 @@ export class CaslGuard {
         return this.canActivate();
       }
 
-      canLoad() {
+      canMatch() {
         return this.canActivate();
       }
     }
@@ -33,7 +33,7 @@ export class CaslGuard {
     @Injectable({
       providedIn: 'root',
     })
-    class CaslCannot implements CanActivate, CanActivateChild, CanLoad {
+    class CaslCannot implements CanActivate, CanActivateChild, CanMatch {
       constructor(private router: Router, private ability: Ability) {}
 
       canActivate() {
@@ -44,7 +44,7 @@ export class CaslGuard {
         return this.canActivate();
       }
 
-      canLoad() {
+      canMatch() {
         return this.canActivate();
       }
     }
