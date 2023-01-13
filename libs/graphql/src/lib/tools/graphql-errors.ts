@@ -20,7 +20,7 @@ type ErrorResponse<T> = { graphQLErrors: UnparsedError<T>[] };
  *     .pipe(catchError(parseGqlErrors))
  *     .subscribe({
  *       error: (errors: GqlErrors<ApiError.AuthLogin>) => {
- *         if (errors.find(e => e === 'INCORRECT_PASSWORD')) {
+ *         if (errors.find(e => e === ApiError.AuthLogin.INCORRECT_PASSWORD)) {
  *           // Handle incorrect password
  *         }
  *       },

@@ -179,14 +179,14 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
 
             this.generalError = true;
 
-            if (errors.find(e => e === 'EMAIL_TAKEN')) {
+            if (errors.find(e => e === ApiError.AuthRegister.EMAIL_TAKEN)) {
               this.generalError = false;
               this.#emailTaken = true;
               this.email.updateValueAndValidity();
               this.emailInput.nativeElement.select();
             }
 
-            if (errors.find(e => e === 'USERNAME_TAKEN')) {
+            if (errors.find(e => e === ApiError.AuthRegister.USERNAME_TAKEN)) {
               this.generalError = false;
               this.#usernameTaken = true;
               this.username.updateValueAndValidity();

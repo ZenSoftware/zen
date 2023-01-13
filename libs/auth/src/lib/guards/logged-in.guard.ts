@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, CanLoad, Router } from '@angular/router';
+import { CanActivate, CanActivateChild, CanMatch, Router } from '@angular/router';
 import { loggedInVar } from '@zen/graphql/client';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoggedInGuard implements CanActivate, CanActivateChild, CanLoad {
+export class LoggedInGuard implements CanActivate, CanActivateChild, CanMatch {
   constructor(private router: Router) {}
 
   canActivate() {
@@ -16,7 +16,7 @@ export class LoggedInGuard implements CanActivate, CanActivateChild, CanLoad {
     return this.canActivate();
   }
 
-  canLoad() {
+  canMatch() {
     return this.canActivate();
   }
 }

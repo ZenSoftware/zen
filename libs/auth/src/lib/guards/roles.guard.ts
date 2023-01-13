@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, CanLoad, Router } from '@angular/router';
+import { CanActivate, CanActivateChild, CanMatch, Router } from '@angular/router';
 import { Role } from '@zen/api-interfaces';
 
 import { AuthService } from '../auth.service';
@@ -9,7 +9,7 @@ export class RolesGuard {
     @Injectable({
       providedIn: 'root',
     })
-    class HasRoles implements CanActivate, CanActivateChild, CanLoad {
+    class HasRoles implements CanActivate, CanActivateChild, CanMatch {
       constructor(private auth: AuthService, private router: Router) {}
 
       canActivate() {
@@ -20,7 +20,7 @@ export class RolesGuard {
         return this.canActivate();
       }
 
-      canLoad() {
+      canMatch() {
         return this.canActivate();
       }
     }
@@ -32,7 +32,7 @@ export class RolesGuard {
     @Injectable({
       providedIn: 'root',
     })
-    class NotRoles implements CanActivate, CanActivateChild, CanLoad {
+    class NotRoles implements CanActivate, CanActivateChild, CanMatch {
       constructor(private auth: AuthService, private router: Router) {}
 
       canActivate() {
@@ -43,7 +43,7 @@ export class RolesGuard {
         return this.canActivate();
       }
 
-      canLoad() {
+      canMatch() {
         return this.canActivate();
       }
     }
