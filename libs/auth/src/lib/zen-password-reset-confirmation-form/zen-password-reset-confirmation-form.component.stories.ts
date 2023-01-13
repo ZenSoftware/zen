@@ -14,6 +14,9 @@ export default {
       declarations: AUTH_DECLARATIONS,
     }),
   ],
+  args: {
+    redirectTime: 5,
+  },
 } as Meta<ZenPasswordResetConfirmationFormComponent>;
 
 const Template: Story<ZenPasswordResetConfirmationFormComponent> = (
@@ -23,6 +26,4 @@ const Template: Story<ZenPasswordResetConfirmationFormComponent> = (
 });
 
 export const Primary = Template.bind({});
-Primary.args = {
-  redirectTime: 5,
-};
+Primary.args = {};
