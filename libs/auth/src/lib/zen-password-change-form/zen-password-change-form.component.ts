@@ -148,7 +148,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             this.loading = false;
             this.form.enable();
 
-            if (errors.find(e => e === 'WRONG_PASSWORD')) {
+            if (errors.find(e => e === ApiError.AuthPasswordChange.WRONG_PASSWORD)) {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.oldPassword.updateValueAndValidity();

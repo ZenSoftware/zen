@@ -21,8 +21,8 @@ const routes: Routes = [
       },
       {
         path: 'super',
-        canLoad: [CaslGuard.can('manage', 'all')],
-        // canLoad: [RolesGuard.has('Super')],
+        canMatch: [CaslGuard.can('manage', 'all')],
+        // canMatch : [RolesGuard.has('Super')],
         loadChildren: () => import('./zen-super/zen-super.module').then(m => m.ZenSuperModule),
       },
     ],

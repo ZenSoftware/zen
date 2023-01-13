@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: '',
-    canLoad: [LoggedInGuard],
+    canMatch: [LoggedInGuard],
     loadChildren: () => import('./zen-portal/zen-portal.module').then(m => m.ZenPortalModule),
   },
 ];
