@@ -1,4 +1,4 @@
-import { omitIdAndTypename } from './helpers';
+import { omitIdAndTypename } from './omit-id-and-typename';
 
 describe('omitIdAndTypename', () => {
   it('omits id and __typename fields', () => {
