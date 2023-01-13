@@ -13,6 +13,10 @@ export default {
       declarations: AUTH_DECLARATIONS,
     }),
   ],
+  args: {
+    doneMessage: 'Redirecting...',
+    doneMessageVisible: true,
+  },
 } as Meta<ZenLoginFormComponent>;
 
 const Template: Story<ZenLoginFormComponent> = (args: ZenLoginFormComponent) => ({
@@ -20,7 +24,4 @@ const Template: Story<ZenLoginFormComponent> = (args: ZenLoginFormComponent) => 
 });
 
 export const Primary = Template.bind({});
-Primary.args = {
-  doneMessage: 'Redirecting...',
-  doneMessageVisible: true,
-};
+Primary.args = {};
