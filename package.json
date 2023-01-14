@@ -119,7 +119,6 @@
     "apollo-upload-client": "^17.0.0",
     "bootstrap": "~5.2.3",
     "bootswatch": "~5.2.3",
-    "codelyzer": "^6.0.2",
     "cypress": "^12.3.0",
     "cz-customizable": "^7.0.0",
     "dotenv": "^16.0.3",
