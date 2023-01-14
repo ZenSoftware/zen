@@ -4,7 +4,6 @@
     "outDir": "../../dist/out-tsc",
     "types": ["node"],
     "emitDecoratorMetadata": true,
-    "allowSyntheticDefaultImports": true,
     "lib": ["ES2022"],
     "module": "ES2022",
     "moduleResolution": "node",

@@ -5,12 +5,11 @@
     "declaration": true,
     "types": ["node"],
     "emitDecoratorMetadata": true,
-    "allowSyntheticDefaultImports": true,
     "lib": ["ES2022"],
     "module": "ES2022",
     "moduleResolution": "node",
     "target": "ES2022"
   },
-  "include": ["**/*.ts"],
-  "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
 }
