@@ -1,13 +1,13 @@
 {
   "name": "graphql",
-  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/graphql/src",
   "prefix": "zen",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/graphql"],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "libs/graphql/jest.config.ts",
         "passWithNoTests": true
@@ -15,8 +15,9 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/graphql/src/**/*.ts", "libs/graphql/src/**/*.html"]
+        "lintFilePatterns": ["libs/graphql/**/*.ts", "libs/graphql/**/*.html"]
       }
     }
   },

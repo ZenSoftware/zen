@@ -9,11 +9,11 @@
   },
   "exclude": [
     "src/test-setup.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts",
+    "src/**/*.spec.ts",
     "jest.config.ts",
+    "src/**/*.test.ts",
     "**/*.stories.ts",
     "**/*.stories.js"
   ],
-  "include": ["**/*.ts"]
+  "include": ["src/**/*.ts"]
 }

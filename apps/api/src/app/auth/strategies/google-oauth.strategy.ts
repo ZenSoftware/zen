@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { RequestUser } from '@zen/nest-auth';
 import { Profile, Strategy } from 'passport-google-oauth20';
@@ -43,6 +43,8 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
           googleProfile: profile._json,
         },
       });
+
+      Logger.log(`Registered new user via Google signup: ${googleEmail}`);
     } else {
       this.prisma.user.update({
         where: { id: user.id },

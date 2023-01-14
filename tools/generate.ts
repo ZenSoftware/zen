@@ -1,4 +1,4 @@
-import { ZenGenerator } from './tools/zen-generator';
+import { ZenGenerator } from './zen-generator';
 
 async function main() {
   const generator = new ZenGenerator({
