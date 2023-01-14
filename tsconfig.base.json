@@ -8,12 +8,13 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2017",
+    "target": "es2022",
     "module": "esnext",
-    "lib": ["es2020", "dom", "esnext.asynciterable"],
+    "lib": ["es2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "esModuleInterop": true,
     "paths": {
       "@zen/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@zen/auth": ["libs/auth/src/index.ts"],
@@ -26,8 +27,7 @@
       "@zen/layout": ["libs/layout/src/index.ts"],
       "@zen/main": ["libs/main/src/index.ts"],
       "@zen/nest-auth": ["libs/nest-auth/src/index.ts"]
-    },
-    "allowSyntheticDefaultImports": true
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
