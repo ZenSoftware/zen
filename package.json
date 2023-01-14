@@ -14,13 +14,12 @@
     "prisma:studio": "prisma studio --schema apps/api/schema.prisma",
     "prod:portal": "nx build portal --prod",
     "prod:api": "nx build api --prod && npm run docker:build:api",
-    "docker:build:api": "ts-node tools/create-deploy-package.ts && docker build -f deploy/api/Dockerfile -t zen-api .",
+    "docker:build:api": "docker build -f deploy/api/Dockerfile -t zen-api .",
     "docker:run:api": "docker run -d --name zen-api -p 7081:7080 zen-api",
     "doc:api": "nx run api:compodoc",
     "test": "nx run-many --all --target=test --parallel",
     "lint": "nx run-many --all --target=lint --parallel",
-    "format": "nx format:write --all",
-    "postinstall": "node ./decorate-angular-cli.js"
+    "format": "nx format:write --all"
   },
   "dependencies": {
     "@casl/ability": "~6.3.3",
