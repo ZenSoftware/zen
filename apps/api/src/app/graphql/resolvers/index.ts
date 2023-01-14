@@ -1,8 +1,8 @@
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
-import PALJS_TYPE_DEFS from '../paljs/typeDefs';
 import { typeDefs as GlobalTypeDefs } from '../global-schema.gql';
+import PALJS_TYPE_DEFS from '../paljs/typeDefs';
 import { AuthResolver, typeDefs as AuthTypeDefs } from './Auth';
 import { SampleResolver, typeDefs as SampleTypeDefs } from './Sample';
 import { UserResolver, typeDefs as UserTypeDefs } from './User';
