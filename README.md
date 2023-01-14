@@ -52,7 +52,7 @@ npm start
 
 - [x] [Nest GraphQL](https://docs.nestjs.com/graphql/resolvers) resolvers to [Prisma Client](https://www.prisma.io).
 - [x] [Apollo GraphQL SDL bindings to Prisma](https://paljs.com/generator/sdl) generated via [Pal.js CLI](https://paljs.com/cli/generator)! Thank you [**@AhmedElywa**](https://github.com/paljs) 🎎
-- [x] [PrismaSelect](https://paljs.com/plugins/select/) to solve the GraphQL N+1 problem for all queries for free.
+- [x] [PrismaSelect](https://paljs.com/plugins/select/) to eliminate overfetching.  Queries are delegated to Prisma which solve the GraphQL N+1 problem for free.
 - [x] Custom npm scripts to code generate the Nest GraphQL api on Prisma schema changes.
 - [x] [@graphql-codegen/typescript-apollo-angular](https://graphql-code-generator.com/docs/plugins/typescript-apollo-angular) of [apollo-angular](https://www.apollographql.com/docs/angular/) services to enable simple, type safe access to the GraphQL API within Angular. 🎀 Modern dev tooling configured for the project, allowing for [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/) to provide auto-completion within `gql` tags for all `.ts` files.
 - [x] An Angular `GraphQLModule` to simplify the configuration of the `ApolloClient` to enable/disable the varying `ApolloLink` features.
