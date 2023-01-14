@@ -12,7 +12,7 @@
         "outputPath": "dist/apps/portal",
         "index": "apps/portal/src/index.html",
         "main": "apps/portal/src/main.ts",
-        "polyfills": "apps/portal/src/polyfills.ts",
+        "polyfills": ["zone.js"],
         "tsConfig": "apps/portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
@@ -62,10 +62,7 @@
           "browserTarget": "portal:build:development"
         }
       },
-      "defaultConfiguration": "development",
-      "options": {
-        "proxyConfig": "apps/portal/proxy.conf.json"
-      }
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -75,13 +72,14 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/portal/src/**/*.ts", "apps/portal/src/**/*.html"]
+        "lintFilePatterns": ["apps/portal/**/*.ts", "apps/portal/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/portal"],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/portal/jest.config.ts",
         "passWithNoTests": true

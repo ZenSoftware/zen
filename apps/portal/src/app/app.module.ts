@@ -43,8 +43,8 @@ import { AppComponent } from './app.component';
         uri: environment.url.graphql,
         mutationNames: ['SampleUpload', 'SampleUploadMany'],
         headers: { 'Apollo-Require-Preflight': 'true' },
-        fetch: (input, init) => {
-          (<any>init).headers['Authorization'] = 'Bearer ' + tokenVar();
+        fetch: (input: any, init: any) => {
+          init.headers['Authorization'] = 'Bearer ' + tokenVar();
           return fetch(input, init);
         },
       },
