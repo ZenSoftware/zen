@@ -14,7 +14,6 @@ specifiers:
   '@angular/core': 15.1.0
   '@angular/forms': 15.1.0
   '@angular/language-service': 15.1.0
-  '@angular/localize': 15.1.0
   '@angular/material': 15.1.0
   '@angular/platform-browser': 15.1.0
   '@angular/platform-browser-dynamic': 15.1.0
@@ -107,7 +106,7 @@ specifiers:
   passport: ^0.6.0
   passport-google-oauth20: ^2.0.0
   passport-jwt: ^4.0.1
-  prettier: ^2.8.2
+  prettier: ^2.8.3
   prettier-plugin-import-sort: ^0.0.7
   prettier-plugin-prisma: ^4.8.0
   prisma: ~4.8.1
@@ -159,7 +158,7 @@ dependencies:
   tslib: 2.4.1
 
 devDependencies:
-  '@angular-devkit/build-angular': 15.1.1_764r2rlbizfb26ba4p62d32yvy
+  '@angular-devkit/build-angular': 15.1.1_ttbw5laa76horzyoyokgx6meyq
   '@angular-eslint/eslint-plugin': 15.0.0_7xejdone6kwdndpjp5nwx3ofcu
   '@angular-eslint/eslint-plugin-template': 15.0.0_7xejdone6kwdndpjp5nwx3ofcu
   '@angular-eslint/template-parser': 15.0.0_7xejdone6kwdndpjp5nwx3ofcu
@@ -172,7 +171,6 @@ devDependencies:
   '@angular/core': 15.1.0_rxjs@7.8.0+zone.js@0.11.8
   '@angular/forms': 15.1.0_shtnd5whtbyicxnxmafd6uxkza
   '@angular/language-service': 15.1.0
-  '@angular/localize': 15.1.0_fchwuune66yenfb7lu6fwg7hzu
   '@angular/material': 15.1.0_xhldutzemzpk6my7yqzwgk3gdi
   '@angular/platform-browser': 15.1.0_eifxzngnnnjsj3jgsq7frmjnk4
   '@angular/platform-browser-dynamic': 15.1.0_bjmxt24dowfhcklhftsg4zga3a
@@ -187,17 +185,17 @@ devDependencies:
   '@graphql-codegen/typescript-operations': 2.5.12_graphql@16.6.0
   '@nestjs/schematics': 9.0.4_typescript@4.9.4
   '@nestjs/testing': 9.2.1_wdbvfsxfdwzlwdfiyh2gynjl4m
-  '@nrwl/angular': 15.5.1_jl3hzyhrcgdinydxm2yw4ixkfe
+  '@nrwl/angular': 15.5.1_yxwubgnzroqtee7td5yghhmpc4
   '@nrwl/cli': 15.5.1
-  '@nrwl/cypress': 15.5.1_yuofrxev2j6n2mz4a23cua6qd4
+  '@nrwl/cypress': 15.5.1_jqv7r4mnboych7dmllspvstlka
   '@nrwl/eslint-plugin-nx': 15.5.1_3p2nuu3lt4xxspevsnqfhxvwgu
   '@nrwl/jest': 15.5.1_7l4rixcx5ubqszdc32qlsco4sm
   '@nrwl/linter': 15.5.1_cj6hrtxsae6cqngh4fhifcpxqq
-  '@nrwl/nest': 15.5.1_jdcsmdgoy7qlik2n7xuogcuugi
-  '@nrwl/node': 15.5.1_jdcsmdgoy7qlik2n7xuogcuugi
-  '@nrwl/storybook': 15.5.1_yuofrxev2j6n2mz4a23cua6qd4
-  '@nrwl/webpack': 15.5.1_ln4z5iawrspnfxzutv65swdfky
-  '@nrwl/workspace': 15.5.1_vn6bcebxy2s3ogq26w4u36eiii
+  '@nrwl/nest': 15.5.1_w6c5rritcntetwxfrrwejkjxr4
+  '@nrwl/node': 15.5.1_w6c5rritcntetwxfrrwejkjxr4
+  '@nrwl/storybook': 15.5.1_jqv7r4mnboych7dmllspvstlka
+  '@nrwl/webpack': 15.5.1_6qsnfngc6s2jqfn5uac6ksnefe
+  '@nrwl/workspace': 15.5.1_u7o74kq4trtlxzokkzkcz24jzu
   '@paljs/cli': 5.2.0
   '@paljs/generator': 5.2.0
   '@paljs/types': 5.2.0
@@ -233,9 +231,9 @@ devDependencies:
   localstorage-slim: 2.3.0
   material-design-icons: 3.0.1
   nx: 15.5.1
-  prettier: 2.8.2
-  prettier-plugin-import-sort: 0.0.7_prettier@2.8.2
-  prettier-plugin-prisma: 4.8.0_prettier@2.8.2
+  prettier: 2.8.3
+  prettier-plugin-import-sort: 0.0.7_prettier@2.8.3
+  prettier-plugin-prisma: 4.8.0_prettier@2.8.3
   ts-jest: 28.0.5_pbrdg345hedxqulsx5dloc4fjm
   ts-node: 10.9.1_awa2wsr5thmg3i7jqycphctjfq
   typescript: 4.9.4
@@ -282,7 +280,7 @@ packages:
       - chokidar
     dev: true
 
-  /@angular-devkit/build-angular/15.1.1_764r2rlbizfb26ba4p62d32yvy:
+  /@angular-devkit/build-angular/15.1.1_ttbw5laa76horzyoyokgx6meyq:
     resolution: {integrity: sha512-9eziOA4uZwIg8OYjebkKz/yqQ1WIqajGrXr/goaAKcKhr8BprWXs5NhkIzMrELekA/dZOkR6Gpwz8d/XwplCww==}
     engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     peerDependencies:
@@ -316,7 +314,6 @@ packages:
       '@angular-devkit/build-webpack': 0.1501.1_oc46zsvsns3nh7f43oasdmifbu
       '@angular-devkit/core': 15.1.1_chokidar@3.5.3
       '@angular/compiler-cli': 15.1.0_cw5pxmpaualxc53b5r24ke3psi
-      '@angular/localize': 15.1.0_fchwuune66yenfb7lu6fwg7hzu
       '@babel/core': 7.20.12
       '@babel/generator': 7.20.7
       '@babel/helper-annotate-as-pure': 7.18.6
@@ -706,23 +703,6 @@ packages:
   /@angular/language-service/15.1.0:
     resolution: {integrity: sha512-+Hup4pCxHQ/QQzS5AIhztMUwVplT//zv5AlG2jtS60CdxhaT2DwYyFiJkF+amIh4cryVh7Hd/eQs/TH055vUhA==}
     engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0}
-    dev: true
-
-  /@angular/localize/15.1.0_fchwuune66yenfb7lu6fwg7hzu:
-    resolution: {integrity: sha512-BTEBMKqS4F8lK4rIsydRsxMbQ1hFnDZTZoifT33dmmOworWFJCGryYw0ZCTkeBtCnkRGgnr1aOTIHTvJPFIMiA==}
-    engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0}
-    hasBin: true
-    peerDependencies:
-      '@angular/compiler': 15.1.0
-      '@angular/compiler-cli': 15.1.0
-    dependencies:
-      '@angular/compiler': 15.1.0_@angular+core@15.1.0
-      '@angular/compiler-cli': 15.1.0_cw5pxmpaualxc53b5r24ke3psi
-      '@babel/core': 7.19.3
-      glob: 8.0.3
-      yargs: 17.6.2
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /@angular/material/15.1.0_xhldutzemzpk6my7yqzwgk3gdi:
@@ -5724,7 +5704,7 @@ packages:
       '@angular-devkit/build-angular': ^15.0.0-next.0
     dependencies:
       '@angular-devkit/architect': 0.1500.5_chokidar@3.5.3
-      '@angular-devkit/build-angular': 15.1.1_764r2rlbizfb26ba4p62d32yvy
+      '@angular-devkit/build-angular': 15.1.1_ttbw5laa76horzyoyokgx6meyq
       '@angular-devkit/core': 15.1.1_chokidar@3.5.3
       '@nguniversal/common': 15.0.0_uqqi3gwqbwkizcyszoilo5fotm
       browser-sync: 2.27.11
@@ -5882,18 +5862,18 @@ packages:
       - supports-color
     dev: true
 
-  /@nrwl/angular/15.5.1_jl3hzyhrcgdinydxm2yw4ixkfe:
+  /@nrwl/angular/15.5.1_yxwubgnzroqtee7td5yghhmpc4:
     resolution: {integrity: sha512-bfhSYJw6WbVOqPSDAy7KrfI3dpDsQB7hJztZ1nnczvzxLvz1o56lSJh8wW38NQSI03jES4SGVNLaUvlvCxjpfw==}
     requiresBuild: true
     dependencies:
       '@angular-devkit/schematics': 15.1.1_chokidar@3.5.3
       '@nguniversal/builders': 15.0.0_nelkq2nrpeq3rojoqipya2j6je
-      '@nrwl/cypress': 15.5.1_yuofrxev2j6n2mz4a23cua6qd4
+      '@nrwl/cypress': 15.5.1_jqv7r4mnboych7dmllspvstlka
       '@nrwl/devkit': 15.5.1_nx@15.5.1+typescript@4.9.4
       '@nrwl/jest': 15.5.1_7l4rixcx5ubqszdc32qlsco4sm
       '@nrwl/linter': 15.5.1_cj6hrtxsae6cqngh4fhifcpxqq
-      '@nrwl/webpack': 15.5.1_ln4z5iawrspnfxzutv65swdfky
-      '@nrwl/workspace': 15.5.1_vn6bcebxy2s3ogq26w4u36eiii
+      '@nrwl/webpack': 15.5.1_6qsnfngc6s2jqfn5uac6ksnefe
+      '@nrwl/workspace': 15.5.1_u7o74kq4trtlxzokkzkcz24jzu
       '@phenomnomnominal/tsquery': 4.1.1_typescript@4.9.4
       '@schematics/angular': 15.1.1_chokidar@3.5.3
       chalk: 4.1.0
@@ -5952,7 +5932,7 @@ packages:
       - debug
     dev: true
 
-  /@nrwl/cypress/15.5.1_yuofrxev2j6n2mz4a23cua6qd4:
+  /@nrwl/cypress/15.5.1_jqv7r4mnboych7dmllspvstlka:
     resolution: {integrity: sha512-YmiBiRltWGQofrsmtCJGgQPtzHgMwDCEjwUplysOBROBa3tF91doLpIM8rgJRxEACs49leSx7PeaLzHqhbXTGQ==}
     peerDependencies:
       cypress: '>= 3 < 13'
@@ -5962,7 +5942,7 @@ packages:
     dependencies:
       '@nrwl/devkit': 15.5.1_nx@15.5.1+typescript@4.9.4
       '@nrwl/linter': 15.5.1_cj6hrtxsae6cqngh4fhifcpxqq
-      '@nrwl/workspace': 15.5.1_vn6bcebxy2s3ogq26w4u36eiii
+      '@nrwl/workspace': 15.5.1_u7o74kq4trtlxzokkzkcz24jzu
       '@phenomnomnominal/tsquery': 4.1.1_typescript@4.9.4
       chalk: 4.1.0
       cypress: 12.3.0
@@ -6040,12 +6020,12 @@ packages:
       - typescript
     dev: true
 
-  /@nrwl/js/15.5.1_x5x445ajudt243tno7ykrnxysu:
+  /@nrwl/js/15.5.1_ixiqx6krdznskaez5zd2v3m72m:
     resolution: {integrity: sha512-q9h3fQiiKgduxPaGdY1G1gz5dhXqDwLuEn0VE6vnOOAxGD0tO7RcIAy1sXE97mv2pvZG5bLloOzn84fCfG6XLg==}
     dependencies:
       '@nrwl/devkit': 15.5.1_nx@15.5.1+typescript@4.9.4
       '@nrwl/linter': 15.5.1_cj6hrtxsae6cqngh4fhifcpxqq
-      '@nrwl/workspace': 15.5.1_vn6bcebxy2s3ogq26w4u36eiii
+      '@nrwl/workspace': 15.5.1_u7o74kq4trtlxzokkzkcz24jzu
       chalk: 4.1.0
       fast-glob: 3.2.7
       fs-extra: 11.1.0
@@ -6083,14 +6063,14 @@ packages:
       - typescript
     dev: true
 
-  /@nrwl/nest/15.5.1_jdcsmdgoy7qlik2n7xuogcuugi:
+  /@nrwl/nest/15.5.1_w6c5rritcntetwxfrrwejkjxr4:
     resolution: {integrity: sha512-Uy1zQ7WGyFZDzOqA/v16CQ5vgc1byRoYLXO8g3h/JHzVShHzW5NzeL5Dp9jG1KbDK4nCGUsl+NrOkuunMmuR8g==}
     dependencies:
       '@nestjs/schematics': 9.0.4_typescript@4.9.4
       '@nrwl/devkit': 15.5.1_nx@15.5.1+typescript@4.9.4
-      '@nrwl/js': 15.5.1_x5x445ajudt243tno7ykrnxysu
+      '@nrwl/js': 15.5.1_ixiqx6krdznskaez5zd2v3m72m
       '@nrwl/linter': 15.5.1_cj6hrtxsae6cqngh4fhifcpxqq
-      '@nrwl/node': 15.5.1_jdcsmdgoy7qlik2n7xuogcuugi
+      '@nrwl/node': 15.5.1_w6c5rritcntetwxfrrwejkjxr4
       enquirer: 2.3.6
     transitivePeerDependencies:
       - '@babel/core'
@@ -6122,15 +6102,15 @@ packages:
       - webpack-cli
     dev: true
 
-  /@nrwl/node/15.5.1_jdcsmdgoy7qlik2n7xuogcuugi:
+  /@nrwl/node/15.5.1_w6c5rritcntetwxfrrwejkjxr4:
     resolution: {integrity: sha512-UXIPG80+rrqJQZFZv5cji3N5scyjquJ04ivPTcb8kxE7G4SfG0gpb5AKuLgF2NKSnJU9OiyIFVVuTXHYUnEcnQ==}
     dependencies:
       '@nrwl/devkit': 15.5.1_nx@15.5.1+typescript@4.9.4
       '@nrwl/jest': 15.5.1_7l4rixcx5ubqszdc32qlsco4sm
-      '@nrwl/js': 15.5.1_x5x445ajudt243tno7ykrnxysu
+      '@nrwl/js': 15.5.1_ixiqx6krdznskaez5zd2v3m72m
       '@nrwl/linter': 15.5.1_cj6hrtxsae6cqngh4fhifcpxqq
-      '@nrwl/webpack': 15.5.1_ln4z5iawrspnfxzutv65swdfky
-      '@nrwl/workspace': 15.5.1_vn6bcebxy2s3ogq26w4u36eiii
+      '@nrwl/webpack': 15.5.1_6qsnfngc6s2jqfn5uac6ksnefe
+      '@nrwl/workspace': 15.5.1_u7o74kq4trtlxzokkzkcz24jzu
       chalk: 4.1.0
       enquirer: 2.3.6
       tslib: 2.4.1
@@ -6163,13 +6143,13 @@ packages:
       - webpack-cli
     dev: true
 
-  /@nrwl/storybook/15.5.1_yuofrxev2j6n2mz4a23cua6qd4:
+  /@nrwl/storybook/15.5.1_jqv7r4mnboych7dmllspvstlka:
     resolution: {integrity: sha512-EtSbTw+qkjbMf9UJYbHhIC61/09OfIzPOFZ7xBZyekJj93l2xS8vXB1lR9+TFDeu+t2Ew3SgzoxUwYKh8CRB0g==}
     dependencies:
-      '@nrwl/cypress': 15.5.1_yuofrxev2j6n2mz4a23cua6qd4
+      '@nrwl/cypress': 15.5.1_jqv7r4mnboych7dmllspvstlka
       '@nrwl/devkit': 15.5.1_nx@15.5.1+typescript@4.9.4
       '@nrwl/linter': 15.5.1_cj6hrtxsae6cqngh4fhifcpxqq
-      '@nrwl/workspace': 15.5.1_vn6bcebxy2s3ogq26w4u36eiii
+      '@nrwl/workspace': 15.5.1_u7o74kq4trtlxzokkzkcz24jzu
       dotenv: 10.0.0
       semver: 7.3.4
     transitivePeerDependencies:
@@ -6194,12 +6174,12 @@ packages:
       - debug
     dev: true
 
-  /@nrwl/webpack/15.5.1_ln4z5iawrspnfxzutv65swdfky:
+  /@nrwl/webpack/15.5.1_6qsnfngc6s2jqfn5uac6ksnefe:
     resolution: {integrity: sha512-zSVbTAlvnDCgkxtV1XCLUnGK4wcltXKnL/0Em14LMY1DFp8ldG/n/HqhZXjka0iQB+SX02LtgoYzmqhs0DW/IQ==}
     dependencies:
       '@nrwl/devkit': 15.5.1_nx@15.5.1+typescript@4.9.4
-      '@nrwl/js': 15.5.1_x5x445ajudt243tno7ykrnxysu
-      '@nrwl/workspace': 15.5.1_vn6bcebxy2s3ogq26w4u36eiii
+      '@nrwl/js': 15.5.1_ixiqx6krdznskaez5zd2v3m72m
+      '@nrwl/workspace': 15.5.1_u7o74kq4trtlxzokkzkcz24jzu
       autoprefixer: 10.4.13_postcss@8.4.21
       babel-loader: 8.3.0_webpack@5.75.0
       chalk: 4.1.0
@@ -6267,7 +6247,7 @@ packages:
       - webpack-cli
     dev: true
 
-  /@nrwl/workspace/15.5.1_vn6bcebxy2s3ogq26w4u36eiii:
+  /@nrwl/workspace/15.5.1_u7o74kq4trtlxzokkzkcz24jzu:
     resolution: {integrity: sha512-UmivhlIzQa3zz+N+sKcwBte7T9caNbpCWRmoC0WDXWCVYE0Som6yo+EeX5oGABZsGxtfJUoRBULm89DNsvYdLQ==}
     peerDependencies:
       prettier: ^2.6.2
@@ -6294,7 +6274,7 @@ packages:
       npm-run-path: 4.0.1
       nx: 15.5.1
       open: 8.4.0
-      prettier: 2.8.2
+      prettier: 2.8.3
       rxjs: 6.6.7
       semver: 7.3.4
       tmp: 0.2.1
@@ -6456,7 +6436,7 @@ packages:
       enquirer: 2.3.6
       fs-extra: 10.1.0
       pkg-dir: 5.0.0
-      prettier: 2.8.2
+      prettier: 2.8.3
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -6495,7 +6475,7 @@ packages:
       '@paljs/utils': 5.2.0
       pkg-dir: 5.0.0
       pluralize: 8.0.0
-      prettier: 2.8.2
+      prettier: 2.8.3
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -6513,7 +6493,7 @@ packages:
       graphql: 16.6.0
       graphql-parse-resolve-info: 4.13.0_graphql@16.6.0
       graphql-tag: 2.12.6_graphql@16.6.0
-      prettier: 2.8.2
+      prettier: 2.8.3
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -7222,7 +7202,7 @@ packages:
       '@nrwl/workspace':
         optional: true
     dependencies:
-      '@angular-devkit/build-angular': 15.1.1_764r2rlbizfb26ba4p62d32yvy
+      '@angular-devkit/build-angular': 15.1.1_ttbw5laa76horzyoyokgx6meyq
       '@angular/cli': 15.1.1
       '@angular/common': 15.1.0_da7kisvgd6fwe32k5n7hd5z3wa
       '@angular/compiler': 15.1.0_@angular+core@15.1.0
@@ -7231,7 +7211,7 @@ packages:
       '@angular/forms': 15.1.0_shtnd5whtbyicxnxmafd6uxkza
       '@angular/platform-browser': 15.1.0_eifxzngnnnjsj3jgsq7frmjnk4
       '@angular/platform-browser-dynamic': 15.1.0_bjmxt24dowfhcklhftsg4zga3a
-      '@nrwl/workspace': 15.5.1_vn6bcebxy2s3ogq26w4u36eiii
+      '@nrwl/workspace': 15.5.1_u7o74kq4trtlxzokkzkcz24jzu
       '@storybook/addons': 6.5.15_wcqkhtmu7mswc6yz4uyexck3ty
       '@storybook/api': 6.5.15_wcqkhtmu7mswc6yz4uyexck3ty
       '@storybook/client-logger': 6.5.15
@@ -17177,7 +17157,7 @@ packages:
       jest: ^28.0.0
       typescript: '>=4.4'
     dependencies:
-      '@angular-devkit/build-angular': 15.1.1_764r2rlbizfb26ba4p62d32yvy
+      '@angular-devkit/build-angular': 15.1.1_ttbw5laa76horzyoyokgx6meyq
       '@angular/compiler-cli': 15.1.0_cw5pxmpaualxc53b5r24ke3psi
       '@angular/core': 15.1.0_rxjs@7.8.0+zone.js@0.11.8
       '@angular/platform-browser-dynamic': 15.1.0_bjmxt24dowfhcklhftsg4zga3a
@@ -20995,7 +20975,7 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-import-sort/0.0.7_prettier@2.8.2:
+  /prettier-plugin-import-sort/0.0.7_prettier@2.8.3:
     resolution: {integrity: sha512-O0KlUSq+lwvh+UiN3wZDT6wWkf7TNxTVv2/XXE5KqpRNbFJq3nRg2ftzBYFFO8QGpdWIrOB0uCTCtFjIxmVKQw==}
     peerDependencies:
       prettier: '>= 2.0'
@@ -21004,19 +20984,19 @@ packages:
       import-sort-config: 6.0.0
       import-sort-parser-babylon: 6.0.0
       import-sort-parser-typescript: 6.0.0
-      prettier: 2.8.2
+      prettier: 2.8.3
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /prettier-plugin-prisma/4.8.0_prettier@2.8.2:
+  /prettier-plugin-prisma/4.8.0_prettier@2.8.3:
     resolution: {integrity: sha512-rCQsn+NktVbl1Sqq1oTgsB5w71vP7I5tjWJhypw6qzwnagqXsiFOLm4s3Z742EbJBS51c99CYds5s+GxGFlqNQ==}
     engines: {node: '>=14'}
     peerDependencies:
       prettier: '>=2'
     dependencies:
       '@prisma/prisma-fmt-wasm': 4.8.0-62.351fb726ff78e50c7d6db6331d66d4db0e378c53
-      prettier: 2.8.2
+      prettier: 2.8.3
     dev: true
 
   /prettier/2.3.0:
@@ -21025,8 +21005,8 @@ packages:
     hasBin: true
     dev: true
 
-  /prettier/2.8.2:
-    resolution: {integrity: sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==}
+  /prettier/2.8.3:
+    resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
 
