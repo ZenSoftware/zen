@@ -7,7 +7,7 @@
     "start": "nx serve portal --host=127.0.0.1",
     "start:api": "nx serve api",
     "start:e2e": "nx e2e portal-e2e --watch",
-    "frontend:gen": "graphql-codegen -c apollo-angular.yml && graphql-codegen -c apollo-possible-types.yml",
+    "frontend:gen": "graphql-codegen -c tools/apollo-angular.yml && graphql-codegen -c tools/apollo-possible-types.yml",
     "api:gen": "prisma generate --schema apps/api/schema.prisma && ts-node tools/generate.ts",
     "prisma:migrate": "prisma migrate dev --schema apps/api/schema.prisma && ts-node tools/generate.ts",
     "prisma:deploy": "prisma migrate deploy --schema apps/api/schema.prisma",
