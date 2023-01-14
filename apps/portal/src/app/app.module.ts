@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { Ability, PureAbility } from '@casl/ability';
-import { AbilityModule } from '@casl/angular';
 import { createPrismaAbility } from '@casl/prisma';
 import { AuthInterceptor, ZenAuthModule, tokenVar } from '@zen/auth';
 import { Environment } from '@zen/common';
@@ -21,7 +20,6 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    AbilityModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -43,8 +41,8 @@ import { AppComponent } from './app.component';
         uri: environment.url.graphql,
         mutationNames: ['SampleUpload', 'SampleUploadMany'],
         headers: { 'Apollo-Require-Preflight': 'true' },
-        fetch: (input, init) => {
-          (<any>init).headers['Authorization'] = 'Bearer ' + tokenVar();
+        fetch: (input: any, init: any) => {
+          init.headers['Authorization'] = 'Bearer ' + tokenVar();
           return fetch(input, init);
         },
       },

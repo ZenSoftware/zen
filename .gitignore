@@ -1,21 +1,19 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 /.env
-debug.log
-/android
 /apps/**/prisma/generated/
 
 # documentation
 /doc-*
 
 # compiled output
-/dist
-/tmp
+dist
+tmp
 /out-tsc
 .angular
 
 # dependencies
-/node_modules
+node_modules
 
 # IDEs and editors
 /.idea
@@ -46,3 +44,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+.angular

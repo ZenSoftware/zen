@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-import { HttpException, UseGuards } from '@nestjs/common';
+import { HttpException, Logger, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/api-interfaces';
@@ -244,6 +244,8 @@ export class AuthResolver {
         },
       });
     }
+
+    Logger.log(`Registered new user: ${user.username}`);
 
     return this.auth.getAuthSession(user);
   }
