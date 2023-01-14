@@ -32,7 +32,10 @@
       "rules": {}
     },
     {
-      "files": ["*.ts"],
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      },
       "rules": {
         "@typescript-eslint/no-explicit-any": 0
       }

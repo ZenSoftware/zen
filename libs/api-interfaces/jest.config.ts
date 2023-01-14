@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'common',
+  displayName: 'api-interfaces',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/libs/common',
+  coverageDirectory: '../../coverage/libs/api-interfaces',
 };
