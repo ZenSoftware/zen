@@ -12,7 +12,7 @@
         "outputPath": "dist/apps/portal",
         "index": "apps/portal/src/index.html",
         "main": "apps/portal/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": ["zone.js", "@angular/localize/init"],
         "tsConfig": "apps/portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
