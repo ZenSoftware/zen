@@ -2,28 +2,59 @@ const isObject = (x: any) => typeof x === 'object' && x !== null && !Array.isArr
 
 /**
  * Recursively finds all the string values on an object and trims the leading & trailing whitespace.
- * Mutates the input object.
- * @param defaults { convertEmptyStringTo: 'null'}
+ * Mutates the input object and returns it.
+ * @param options defaults to { convertEmptyStringTo: null }
+ *
+ * @example
+ * ```ts
+ * trimObjectStrings({
+ *   a: ' a ',
+ *   b: { c: ' c ' },
+ *   d: 123
+ * });
+ * ```
+ * ```ts
+ * {
+ *   a: 'a',
+ *   b: { c: 'c' },
+ *   d: 123
+ * }
+ * ```
+ *
+ * @example
+ * ```ts
+ * trimObjectStrings({ a: ''});
+ * ```
+ * ```ts
+ * { a: null }
+ * ```
+ *
+ * @example
+ * ```ts
+ * trimObjectStrings({ a: ''}, { convertEmptyStringTo: '' });
+ * ```
+ * ```ts
+ * { a: '' }
+ * ```
  */
-export function trimObjectStrings(
-  object: { [key: string]: any },
-  options: { convertEmptyStringTo: 'null' | 'undefined' | 'emptyString' } = {
-    convertEmptyStringTo: 'null',
+export function trimObjectStrings<T extends object>(
+  obj: T,
+  options: { convertEmptyStringTo: any } = {
+    convertEmptyStringTo: null,
   }
-) {
-  if (object) {
-    for (const [key, value] of Object.entries(object)) {
+): T {
+  if (obj) {
+    for (const [key, value] of Object.entries(obj)) {
       if (isObject(value)) {
         trimObjectStrings(value, options);
       } else if (typeof value === 'string') {
-        object[key] = value.trim();
-        if (object[key] === '') {
-          if (options?.convertEmptyStringTo === 'null') object[key] = null;
-          else if (options?.convertEmptyStringTo === 'undefined') object[key] = undefined;
+        (<any>obj)[key] = value.trim();
+        if ((<any>obj)[key] === '') {
+          (<any>obj)[key] = options.convertEmptyStringTo;
         }
       }
     }
   }
 
-  return object;
+  return obj;
 }
