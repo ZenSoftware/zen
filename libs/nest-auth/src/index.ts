@@ -3,7 +3,7 @@ export { AuthGuard } from '@nestjs/passport';
 export { CaslSubject } from './lib/casl/casl-subject.decorator';
 export { RequestUser } from './lib/models/request-user';
 export { Roles } from './lib/decorators/roles.decorator';
-export * from './lib/casl/casl-factory.interface';
+export type { ICaslFactory } from './lib/casl/casl-factory.interface';
 export * from './lib/casl/casl-factory.token';
 export * from './lib/casl/gql-casl.guard';
 export * from './lib/casl/http-casl.guard';

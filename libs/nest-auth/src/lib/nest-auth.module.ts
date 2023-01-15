@@ -1,7 +1,7 @@
 import { DynamicModule, Module, Provider, Type } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 
-import { ICaslFactory } from './casl/casl-factory.interface';
+import type { ICaslFactory } from './casl/casl-factory.interface';
 import { CASL_FACTORY_TOKEN } from './casl/casl-factory.token';
 
 @Module({
@@ -21,7 +21,6 @@ export class NestAuthModule {
     ];
 
     return {
-      global: true,
       module: NestAuthModule,
       providers: providers,
       exports: providers,

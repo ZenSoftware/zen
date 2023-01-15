@@ -8,7 +8,7 @@ import { Action } from '@zen/common';
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { CASL_FACTORY_TOKEN } from './casl-factory.token';
 import { CASL_SUBJECT_KEY } from './casl-subject.decorator';
-import { ICaslFactory } from './casl-factory.interface';
+import type { ICaslFactory } from './casl-factory.interface';
 
 export function GqlCaslGuard(...actions: Array<Action>) {
   @Injectable()
