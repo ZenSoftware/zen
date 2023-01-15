@@ -1,4 +1,4 @@
-import { ApiConstants } from '@zen/api-interfaces';
+import { ApiConstants } from '@zen/common';
 import { Length } from 'class-validator';
 
 export class AuthPasswordChangeInput {

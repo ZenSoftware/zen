@@ -1,5 +1,5 @@
 import { AbstractControl } from '@angular/forms';
-import { ApiConstants } from '@zen/api-interfaces';
+import { ApiConstants } from '@zen/common';
 
 interface PasswordErrors {
   minlength?: { actualLength: number; requiredLength: number };
