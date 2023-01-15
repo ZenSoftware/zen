@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import { HttpException, Logger, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
-import { ApiError } from '@zen/api-interfaces';
+import { ApiError } from '@zen/common';
 import { GqlGuard, GqlThrottlerGuard, GqlUser, JwtPayload, RequestUser } from '@zen/nest-auth';
 import gql from 'graphql-tag';
 import { bcrypt, bcryptVerify } from 'hash-wasm';

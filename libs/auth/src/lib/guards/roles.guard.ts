@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, CanMatch, Router } from '@angular/router';
-import { Role } from '@zen/api-interfaces';
+import { Role } from '@zen/common';
 
 import { AuthService } from '../auth.service';
 

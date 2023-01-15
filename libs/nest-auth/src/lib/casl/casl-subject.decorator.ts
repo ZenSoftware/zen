@@ -1,5 +1,5 @@
 import { SetMetadata } from '@nestjs/common';
 
-export const SUBJECT_KEY = 'subject';
+export const CASL_SUBJECT_KEY = 'CaslSubject';
 
-export const CaslSubject = (subject: string) => SetMetadata(SUBJECT_KEY, subject);
+export const CaslSubject = (subject: string) => SetMetadata(CASL_SUBJECT_KEY, subject);
