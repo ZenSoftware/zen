@@ -1,7 +1,7 @@
 import { ExecutionContext, Inject, Injectable, mixin } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
-import { Action } from '@zen/api-interfaces';
+import { Action } from '@zen/common';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { CASL_FACTORY_TOKEN } from './casl-factory.token';

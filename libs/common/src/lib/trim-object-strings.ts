@@ -3,7 +3,7 @@ const isObject = (x: any) => typeof x === 'object' && x !== null && !Array.isArr
 /**
  * Recursively finds all the string values on an object and trims the leading & trailing whitespace.
  * Mutates the input object.
- * @param defaults to { convertEmptyStringTo: 'null'}
+ * @param defaults { convertEmptyStringTo: 'null'}
  */
 export function trimObjectStrings(
   object: { [key: string]: any },
