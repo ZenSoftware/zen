@@ -18,8 +18,8 @@ export abstract class Environment {
     readonly api: string;
     readonly portal: string;
     readonly graphql: string;
-    readonly graphqlSubscriptions: string;
-    readonly socketio: string;
+    readonly graphqlSubscriptions?: string;
+    readonly socketio?: string;
   };
 }
 
