@@ -6,11 +6,15 @@ import { Action } from '@zen/common';
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { CASL_FACTORY_TOKEN } from './casl-factory.token';
 import { CASL_SUBJECT_KEY } from './casl-subject.decorator';
+import { ICaslFactory } from './casl-factory.interface';
 
 export function HttpCaslGuard(...actions: Array<Action>) {
   @Injectable()
   class CaslGuard extends AuthGuard('jwt') {
-    constructor(@Inject(CASL_FACTORY_TOKEN) readonly caslFactory, readonly reflector: Reflector) {
+    constructor(
+      @Inject(CASL_FACTORY_TOKEN) readonly caslFactory: ICaslFactory,
+      readonly reflector: Reflector
+    ) {
       super();
     }
 
