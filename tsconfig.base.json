@@ -16,7 +16,6 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "paths": {
-      "@zen/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@zen/auth": ["libs/auth/src/index.ts"],
       "@zen/common": ["libs/common/src/index.ts"],
       "@zen/components": ["libs/components/src/index.ts"],

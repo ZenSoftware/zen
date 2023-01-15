@@ -1,5 +1,5 @@
 import { ValidatorFn } from '@angular/forms';
-import { ApiConstants } from '@zen/api-interfaces';
+import { ApiConstants } from '@zen/common';
 
 interface UsernameErrors {
   includesSpace?: boolean;

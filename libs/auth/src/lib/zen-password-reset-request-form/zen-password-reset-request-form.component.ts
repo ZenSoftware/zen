@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { ApiConstants, ApiError } from '@zen/api-interfaces';
+import { ApiConstants, ApiError } from '@zen/common';
 import {
   AuthPasswordResetRequestInput,
   AuthPasswordResetRequestQueryGQL,

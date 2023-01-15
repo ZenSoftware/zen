@@ -16,7 +16,7 @@ if (environment.oauth?.google?.clientID) oauthProviders.push(GoogleOAuthStrategy
 @Module({
   imports: [JwtModule, PrismaModule, NestAuthModule.register(CaslFactory)],
   providers: [JwtStrategy, AuthService, ...oauthProviders],
-  exports: [JwtModule, AuthService],
+  exports: [JwtModule, AuthService, NestAuthModule],
   controllers: [AuthController],
 })
 export class ZenAuthModule {}

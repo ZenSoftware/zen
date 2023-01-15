@@ -1,4 +1,4 @@
-import { ApiConstants } from '@zen/api-interfaces';
+import { ApiConstants } from '@zen/common';
 import { IsNotEmpty, Length } from 'class-validator';
 
 export class AuthPasswordResetConfirmationInput {

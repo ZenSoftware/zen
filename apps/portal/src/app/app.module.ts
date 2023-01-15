@@ -1,4 +1,3 @@
-import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
@@ -24,7 +23,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MatListModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([], { useHash: true }),
     ZenAuthModule,
     ZenLayoutModule,
     ZenMainModule,
@@ -55,8 +54,6 @@ import { AppComponent } from './app.component';
     }),
   ],
   providers: [
-    Location,
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: Environment, useValue: environment },
     {

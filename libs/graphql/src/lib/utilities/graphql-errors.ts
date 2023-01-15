@@ -1,4 +1,4 @@
-import { ApiError } from '@zen/api-interfaces';
+import { ApiError } from '@zen/common';
 import { throwError } from 'rxjs';
 
 type UnparsedError<T> = {
