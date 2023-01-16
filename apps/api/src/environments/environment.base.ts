@@ -35,7 +35,6 @@ export abstract class EnvironmentBase {
         serviceName: string;
         exporters: {
           enableConsole?: boolean;
-          enableJaeger?: boolean;
           enableOtlp?: boolean;
         };
         collectorOptions?: OTLPExporterNodeConfigBase;
