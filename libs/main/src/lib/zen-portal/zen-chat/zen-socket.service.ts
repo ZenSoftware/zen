@@ -7,7 +7,7 @@ import { Socket } from 'ngx-socket-io';
 export class ZenSocketService extends Socket {
   constructor(env: Environment) {
     super({
-      url: env.url.socketio,
+      url: env.url.socketio as string,
       options: {
         extraHeaders: {
           Authorization: 'Bearer ' + tokenVar(),

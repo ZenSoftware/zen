@@ -37,7 +37,9 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
    */
   broadcastToUser(userId: User['id'], eventName: string, ...args: any[]) {
     const userClients = this.userIdToClientsMap.get(userId);
-    userClients.map(client => client.emit(eventName, args));
+    for (const client of userClients) {
+      client.emit(eventName, args);
+    }
   }
 
   afterInit(server: Server) {
