@@ -1,4 +1,3 @@
-import { JaegerExporter } from '@opentelemetry/exporter-jaeger';
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { registerInstrumentations } from '@opentelemetry/instrumentation';
 import { ExpressInstrumentation } from '@opentelemetry/instrumentation-express';
@@ -27,10 +26,6 @@ if (environment.openTelemetry) {
 
   if (environment.openTelemetry.exporters?.enableConsole) {
     provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
-  }
-
-  if (environment.openTelemetry.exporters?.enableJaeger) {
-    provider.addSpanProcessor(new BatchSpanProcessor(new JaegerExporter()));
   }
 
   if (environment.openTelemetry.exporters?.enableOtlp) {

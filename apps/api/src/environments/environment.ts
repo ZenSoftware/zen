@@ -63,6 +63,6 @@ export const environment: EnvironmentBase = {
   },
   openTelemetry: {
     serviceName: 'zen-api',
-    exporters: { enableConsole: true, enableJaeger: true },
+    exporters: { enableConsole: true, enableOtlp: true },
   },
 };
