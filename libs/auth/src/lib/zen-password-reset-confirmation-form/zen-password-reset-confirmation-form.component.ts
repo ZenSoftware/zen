@@ -38,7 +38,11 @@ interface FormType {
 export class ZenPasswordResetConfirmationFormComponent implements AfterContentInit, OnDestroy {
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Output() confirmed = new EventEmitter();
-  @Input() redirectTime = 5; //default 5 seconds
+
+  /**
+   * Time in seconds to redirect user after a successful password reset
+   */
+  @Input() redirectTime = 5;
 
   #subs: Subscription[] = [];
   loading = false;
