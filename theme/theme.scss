@@ -30,3 +30,8 @@ body {
 .row {
   --bs-gutter-x: 0;
 }
+
+// Bootstrap card header font
+.card-header {
+  font-family: font.$zen-heading;
+}
