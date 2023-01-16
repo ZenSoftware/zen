@@ -25,17 +25,17 @@
     </mat-nav-list>
 
     <mat-nav-list *ifLoggedIn="true">
-      <a mat-list-item routerLink="/dashboard">
+      <a mat-list-item routerLink="/portal/dashboard">
         <i class="fa-solid fa-fw fa-desktop me-2"></i>
         Dashboard
       </a>
 
-      <a mat-list-item routerLink="/settings">
+      <a mat-list-item routerLink="/portal/settings">
         <i class="fa-solid fa-fw fa-gear me-2"></i>
         Settings
       </a>
 
-      <a mat-list-item routerLink="/super" *roles="['Super']">
+      <a mat-list-item routerLink="/portal/super" *roles="['Super']">
         <i class="fa-solid fa-fw fa-user-shield me-2"></i>
         Super
       </a>
