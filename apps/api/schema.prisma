@@ -7,7 +7,7 @@ generator client {
   provider        = "prisma-client-js"
   output          = "src/app/prisma/generated"
   binaryTargets   = ["native", "linux-musl-openssl-3.0.x"]
-  previewFeatures = ["metrics"]
+  previewFeatures = ["tracing", "metrics"]
 }
 
 model User {

@@ -12,6 +12,7 @@ import {
 } from '@opentelemetry/sdk-trace-base';
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
+import { PrismaInstrumentation } from '@prisma/instrumentation';
 
 import { environment } from './environments/environment';
 
@@ -38,13 +39,15 @@ if (environment.openTelemetry) {
     );
   }
 
-  provider.register();
-
   registerInstrumentations({
+    tracerProvider: provider,
     instrumentations: [
       new HttpInstrumentation(),
       new ExpressInstrumentation(),
       new GraphQLInstrumentation(),
+      new PrismaInstrumentation(),
     ],
   });
+
+  provider.register();
 }
