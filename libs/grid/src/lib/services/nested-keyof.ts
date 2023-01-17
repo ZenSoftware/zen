@@ -4,9 +4,9 @@
  * - [Advanced TypeScript: Type-Level Nested Object Paths](https://javascript.plainenglish.io/advanced-typescript-type-level-nested-object-paths-7f3d8901f29a)
  */
 export type NestedKeyOf<T extends object> = {
-  [Key in keyof T & (string | number)]: T[Key] extends Array<any>
+  [Key in keyof T & (string | number)]: NonNullable<T[Key]> extends Array<any>
     ? `${Key}`
-    : T[Key] extends object
-    ? `${Key}` | `${Key}.${NestedKeyOf<Omit<T[Key], '__typename'>>}`
+    : NonNullable<T[Key]> extends object
+    ? `${Key}` | `${Key}.${NestedKeyOf<NonNullable<T[Key]>>}`
     : `${Key}`;
 }[keyof Omit<T, '__typename'> & (string | number)];
