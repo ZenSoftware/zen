@@ -19,7 +19,7 @@ export type SampleFields = {
 };
 
 describe('NestedKeyOf', () => {
-  it('should compile using available paths', () => {
+  it('compiles using available paths', () => {
     const keys1: NestedKeyOf<SampleFields> = 'a';
     const keys2: NestedKeyOf<SampleFields> = 'b';
     const keys3: NestedKeyOf<SampleFields> = 'c';
