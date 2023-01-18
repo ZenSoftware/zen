@@ -86,7 +86,7 @@ const DEFAULT_TAKE = 10;
   templateUrl: 'zen-grid.component.html',
 })
 export class ZenGridComponent<T extends object> implements AfterContentInit, OnDestroy {
-  @ContentChild(ZenGridDetailTemplateDirective) details: ZenGridDetailTemplateDirective | undefined;
+  @ContentChild(ZenGridDetailTemplateDirective) details?: ZenGridDetailTemplateDirective;
   @ViewChild('grid') grid!: GridComponent;
   @ViewChild('errorTemplate') errorTemplate!: TemplateRef<any>;
 
@@ -127,7 +127,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() useGlobalState = true;
 
   #defaultSettings!: KendoGridSettings<T>;
-  #settings?: ZenGridSettings<T>;
+  #settings!: ZenGridSettings<T>;
   @Input() set settings(value: ZenGridSettings<T>) {
     this.#settings = value;
     this.#settings.process = this.#settings.process ?? 'remote';
@@ -340,7 +340,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     if (state) this.gridSettings.state = state;
     this.dataStateChange.emit(this.gridSettings.state);
 
-    if (this.#settings?.process === 'local') {
+    if (this.#settings.process === 'local') {
       if (this.#data) {
         this.gridData = process(this.#data, {
           ...this.gridSettings.state,
