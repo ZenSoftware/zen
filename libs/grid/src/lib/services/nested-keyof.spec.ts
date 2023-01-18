@@ -2,21 +2,24 @@ import { NestedKeyOf } from './nested-keyof';
 
 export type SampleFields = {
   __typename?: 'Sample';
-  a?: any | null;
-  b?: any | null;
+  a?: number | null;
+  b?: number | null;
   c?: {
-    d?: any | null;
+    __typename?: 'C';
+    d?: number | null;
     e?: {
-      f?: Array<any> | null;
+      __typename?: 'E';
+      f?: Array<number> | null;
       g?: {
-        h?: any | null;
+        __typename?: 'G';
+        h?: number | null;
       } | null;
     } | null;
   } | null;
 };
 
 describe('NestedKeyOf', () => {
-  it('should compile with correct typings', () => {
+  it('should compile with available paths', () => {
     const keys1: NestedKeyOf<SampleFields> = 'a';
     const keys2: NestedKeyOf<SampleFields> = 'b';
     const keys3: NestedKeyOf<SampleFields> = 'c';
