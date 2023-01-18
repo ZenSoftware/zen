@@ -51,6 +51,7 @@ export class KendoGridSettingsService {
 
   private mapGridSettings(gridSettings: KendoGridSettings<any>): KendoGridSettings<any> {
     const result = { ...gridSettings };
+
     result.columnsConfig = gridSettings.columnsConfig.sort(
       (a: KendoGridColumnSettings<any>, b: KendoGridColumnSettings<any>) =>
         <number>a.orderIndex - <number>b.orderIndex
