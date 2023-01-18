@@ -6511,8 +6511,8 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /@oclif/core/1.24.0:
-    resolution: {integrity: sha512-J41suyV4fLfLcRRySZdtgFYSjIlpYqD90SY01Fm4+ZJUMcfDh/eQAD4sogyYOsIT0bfEzYOyYCjmfHmgcoX5aA==}
+  /@oclif/core/1.24.1:
+    resolution: {integrity: sha512-CQFCsj9fUALfTNGXR9qaP3yXiF9TuL6GKph1NwXMe2yzpAE4Zz8X8uFpi916rE3oAHEPX6bR9fhdUiBGgDBuGw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@oclif/linewrap': 1.0.0
@@ -6553,7 +6553,7 @@ packages:
     resolution: {integrity: sha512-8oyyu/yPz55Zhj0U58/YXGc51N65vOpVeqDalf5xby4T+VMo4naDVJMxcSpJF2YUTREXEfO2pcC0aA4PE5q8Ig==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      '@oclif/core': 1.24.0
+      '@oclif/core': 1.24.1
     dev: true
 
   /@oclif/plugin-plugins/2.1.12:
@@ -6561,7 +6561,7 @@ packages:
     engines: {node: '>=12.0.0'}
     dependencies:
       '@oclif/color': 1.0.3
-      '@oclif/core': 1.24.0
+      '@oclif/core': 1.24.1
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 9.1.0
@@ -6623,7 +6623,7 @@ packages:
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
-      '@oclif/core': 1.24.0
+      '@oclif/core': 1.24.1
       '@oclif/plugin-help': 5.1.23
       '@oclif/plugin-plugins': 2.1.12
       '@paljs/create': 5.2.0
@@ -10014,8 +10014,8 @@ packages:
     resolution: {integrity: sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==}
     dev: true
 
-  /@yarnpkg/parsers/3.0.0-rc.35:
-    resolution: {integrity: sha512-J6ySgEdQUqAmlttvZOoXOEsrDTAnHyR/MtEvuAG5a+gwKY/2Cc7xn4CWcpgfuwkp+0a4vXmt2BDwzacDoGDN1g==}
+  /@yarnpkg/parsers/3.0.0-rc.36:
+    resolution: {integrity: sha512-PvTlgUr7WO2qDnph8tVdItbJlo9hEcGSVd8+ppn/tvcn8XZUaD1z4EgvMEZcJYZi3LmHJGzSgVZzcFE+zQiz8A==}
     engines: {node: '>=14.15.0'}
     dependencies:
       js-yaml: 3.14.1
@@ -19856,7 +19856,7 @@ packages:
       '@nrwl/tao': 15.5.1
       '@parcel/watcher': 2.0.4
       '@yarnpkg/lockfile': 1.1.0
-      '@yarnpkg/parsers': 3.0.0-rc.35
+      '@yarnpkg/parsers': 3.0.0-rc.36
       '@zkochan/js-yaml': 0.0.6
       axios: 1.2.3
       chalk: 4.1.0
