@@ -40,7 +40,7 @@ specifiers:
   '@nestjs/platform-express': ^9.2.1
   '@nestjs/schematics': ^9.0.4
   '@nestjs/testing': ^9.2.1
-  '@nestjs/throttler': ^3.1.0
+  '@nestjs/throttler': ^4.0.0
   '@nrwl/angular': 15.5.2
   '@nrwl/cli': 15.5.2
   '@nrwl/cypress': 15.5.2
@@ -133,7 +133,7 @@ dependencies:
   '@nestjs/jwt': 10.0.1_@nestjs+common@9.2.1
   '@nestjs/passport': 9.0.0_6o47igfla2pj7yzh7agpvpttka
   '@nestjs/platform-express': 9.2.1_hjcqpoaebdr7gdo5hgc22hthbe
-  '@nestjs/throttler': 3.1.0_dntc3uqqknzoduyjojusds5kla
+  '@nestjs/throttler': 4.0.0_dntc3uqqknzoduyjojusds5kla
   '@paljs/plugins': 5.2.0_kn5fo7v45pdbg6gc4u2jrvgh4q
   '@prisma/client': 4.9.0_prisma@4.9.0
   apollo-server-core: 3.11.1_graphql@16.6.0
@@ -3856,8 +3856,8 @@ packages:
       '@graphql-tools/graphql-file-loader': 7.5.14_graphql@16.6.0
       '@graphql-tools/json-file-loader': 7.4.15_graphql@16.6.0
       '@graphql-tools/load': 7.8.0_graphql@16.6.0
-      '@graphql-tools/prisma-loader': 7.2.53_ykzowzmb7rcumunkscnbisnkom
-      '@graphql-tools/url-loader': 7.17.2_ykzowzmb7rcumunkscnbisnkom
+      '@graphql-tools/prisma-loader': 7.2.54_ykzowzmb7rcumunkscnbisnkom
+      '@graphql-tools/url-loader': 7.17.3_ykzowzmb7rcumunkscnbisnkom
       '@graphql-tools/utils': 9.1.4_graphql@16.6.0
       '@whatwg-node/fetch': 0.6.2
       chalk: 4.1.2
@@ -4100,8 +4100,8 @@ packages:
       value-or-promise: 1.0.12
     dev: true
 
-  /@graphql-tools/executor-graphql-ws/0.0.6_graphql@16.6.0:
-    resolution: {integrity: sha512-n6JvIviYO8iiasV/baclimQqNkYGP7JRlkNSnphNG5LULmVpQ2WsyvbgJHV7wtlTZ8ZQ3+dILgQF83PFyLsfdA==}
+  /@graphql-tools/executor-graphql-ws/0.0.7_graphql@16.6.0:
+    resolution: {integrity: sha512-C6EExKoukn4vu3BbvlqsqtC91F4pTLPDZvRceYjpFzTCQSGFSjfrxQGP/haGlemXVRpIDxBy7wpXoQlsF8UmFA==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
@@ -4325,12 +4325,12 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /@graphql-tools/prisma-loader/7.2.53_ykzowzmb7rcumunkscnbisnkom:
-    resolution: {integrity: sha512-XdZFL8asas4z68k1QuIqi/BGYJpD4GYOliZxSuN1pAVdSb2Gw1fHBWo8WKpEyIJ19LeWcW5l2q30htw5ZMGU7g==}
+  /@graphql-tools/prisma-loader/7.2.54_ykzowzmb7rcumunkscnbisnkom:
+    resolution: {integrity: sha512-OoH0JdMQ49IQwiZ8EKOE6sZX4oN5EQwToFnR+ptN5u4ukb4ignyZTrgePFmqOGgj7zyPzisxsWIUXD9szFXXNA==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-tools/url-loader': 7.17.2_ykzowzmb7rcumunkscnbisnkom
+      '@graphql-tools/url-loader': 7.17.3_ykzowzmb7rcumunkscnbisnkom
       '@graphql-tools/utils': 9.1.4_graphql@16.6.0
       '@types/js-yaml': 4.0.5
       '@types/json-stable-stringify': 1.0.34
@@ -4419,14 +4419,14 @@ packages:
       value-or-promise: 1.0.11
     dev: true
 
-  /@graphql-tools/url-loader/7.17.2_ykzowzmb7rcumunkscnbisnkom:
-    resolution: {integrity: sha512-VgCXa5vQzcM13+loJvVHLXltp3qN8PHUTeth50cImUhCm3qtRwOeuSYjpph38vllPb8DKxsZkNFxzYgzscWIow==}
+  /@graphql-tools/url-loader/7.17.3_ykzowzmb7rcumunkscnbisnkom:
+    resolution: {integrity: sha512-NY/NQpuf29gjt19XExjRyTj3z44Ohc2OwQZIR/RqHYn+cbdMeXIgJqV5vbPOCN8Umjmm5yVb7kP6oKNGjyeBvw==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       '@ardatan/sync-fetch': 0.0.1
       '@graphql-tools/delegate': 9.0.22_graphql@16.6.0
-      '@graphql-tools/executor-graphql-ws': 0.0.6_graphql@16.6.0
+      '@graphql-tools/executor-graphql-ws': 0.0.7_graphql@16.6.0
       '@graphql-tools/executor-http': 0.1.1_ykzowzmb7rcumunkscnbisnkom
       '@graphql-tools/executor-legacy-ws': 0.0.6_graphql@16.6.0
       '@graphql-tools/utils': 9.1.4_graphql@16.6.0
@@ -5844,8 +5844,8 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /@nestjs/throttler/3.1.0_dntc3uqqknzoduyjojusds5kla:
-    resolution: {integrity: sha512-u9a5+rci6ybYtJ2is6gZWxE2dMZEpnK0qJ0C1OnchuNCvM21Bg6qym1TB6Uihhci+JfTv6E15WuASLXcIclsbA==}
+  /@nestjs/throttler/4.0.0_dntc3uqqknzoduyjojusds5kla:
+    resolution: {integrity: sha512-2T2S/hFhxROa/PZRZhHWFkrukxg3T8Db32Y04m6U6j6N2XqFGSKXhjfIbORO8kk/S2jswa9oTX/K12E120tgaQ==}
     peerDependencies:
       '@nestjs/common': ^7.0.0 || ^8.0.0 || ^9.0.0
       '@nestjs/core': ^7.0.0 || ^8.0.0 || ^9.0.0
@@ -6433,8 +6433,8 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /@oclif/core/1.24.2:
-    resolution: {integrity: sha512-0wfAa6HG4sJ4j5c4/GV4BWZwALtJyw2ZO6titnrWKcowxU1BWd8mBM45ilTPnDhClMowz7+8EtK4kqUGc1rNwA==}
+  /@oclif/core/1.25.0:
+    resolution: {integrity: sha512-vS8L5Uqc5Wuq3zmKVvX5LLcyxhfH2X2q+LG1P6czzkh6k09uLeDaZfwaYPXD7ItM4Vfy+KEctfKiWePeLDnOpg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@oclif/linewrap': 1.0.0
@@ -6467,8 +6467,8 @@ packages:
       wrap-ansi: 7.0.0
     dev: true
 
-  /@oclif/core/2.0.2-beta.6:
-    resolution: {integrity: sha512-g3M/I2VrZaN6Ba8qyn2KggGoxDc2ys88LV/7+cGhxpaK98ZVWlgPCTLNHyY1DiA0KSDTTBhUsPV+Uis5mbHB4g==}
+  /@oclif/core/2.0.2-beta.10:
+    resolution: {integrity: sha512-FgJ5XHE6MjE7DOyQAcOZPD5Xs5cNOzP91zAQBkut8xhOkZA1NRQjv+7BczJqOTerXccohhTlu09pd7OAyDuitw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@types/cli-progress': 3.11.0
@@ -6509,7 +6509,7 @@ packages:
     resolution: {integrity: sha512-Sp6Eywj3V2Moif/CJeJsyInPJhzifs2JjsaVbsrLS77WOL2/XAmca1sE5QxfakOGYH21g8xz/Ht9ZgiNy8u1zQ==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      '@oclif/core': 2.0.2-beta.6
+      '@oclif/core': 2.0.2-beta.10
     dev: true
 
   /@oclif/plugin-plugins/2.2.2:
@@ -6517,7 +6517,7 @@ packages:
     engines: {node: '>=12.0.0'}
     dependencies:
       '@oclif/color': 1.0.3
-      '@oclif/core': 2.0.2-beta.6
+      '@oclif/core': 2.0.2-beta.10
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 9.1.0
@@ -6579,7 +6579,7 @@ packages:
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
-      '@oclif/core': 1.24.2
+      '@oclif/core': 1.25.0
       '@oclif/plugin-help': 5.2.0
       '@oclif/plugin-plugins': 2.2.2
       '@paljs/create': 5.2.0
@@ -9904,7 +9904,7 @@ packages:
       form-data-encoder: 1.7.2
       formdata-node: 4.4.1
       node-fetch: 2.6.8
-      undici: 5.15.0
+      undici: 5.15.1
       urlpattern-polyfill: 6.0.2
       web-streams-polyfill: 3.2.1
     transitivePeerDependencies:
@@ -11911,8 +11911,8 @@ packages:
     dependencies:
       source-map: 0.6.1
 
-  /clean-css/5.3.1:
-    resolution: {integrity: sha512-lCr8OHhiWCTw4v8POJovCoh4T7I9U11yVsPjMWWnnMmp9ZowCxyad1Pathle/9HjaDp+fdQKjO9fQydE6RHTZg==}
+  /clean-css/5.3.2:
+    resolution: {integrity: sha512-JVJbM+f3d3Q704rF4bqQ5UUyTtuJ0JRKNbTKVEeujCCBoMdkEi+V+e8oktO9qGQNSvHrFTM6JZRXrUvGR1czww==}
     engines: {node: '>= 10.0'}
     dependencies:
       source-map: 0.6.1
@@ -15057,7 +15057,7 @@ packages:
       '@graphql-tools/json-file-loader': 7.4.15_graphql@16.6.0
       '@graphql-tools/load': 7.8.0_graphql@16.6.0
       '@graphql-tools/merge': 8.3.15_graphql@16.6.0
-      '@graphql-tools/url-loader': 7.17.2_ykzowzmb7rcumunkscnbisnkom
+      '@graphql-tools/url-loader': 7.17.3_ykzowzmb7rcumunkscnbisnkom
       '@graphql-tools/utils': 9.1.4_graphql@16.6.0
       cosmiconfig: 8.0.0
       cosmiconfig-typescript-loader: 4.3.0_ygatqix6cqovqt4kqr2ccwfavi
@@ -15451,7 +15451,7 @@ packages:
     hasBin: true
     dependencies:
       camel-case: 4.1.2
-      clean-css: 5.3.1
+      clean-css: 5.3.2
       commander: 8.3.0
       he: 1.2.0
       param-case: 3.0.4
@@ -21035,8 +21035,8 @@ packages:
     resolution: {integrity: sha512-jmYNElW7yvO7TV33CjSmvSiE2yco3bV2czu/OzDKdMNVZQWfxCblURLhf+47syQRBntjfLdd/H0egrzIG+oaFQ==}
     dev: true
 
-  /punycode/2.2.0:
-    resolution: {integrity: sha512-LN6QV1IJ9ZhxWTNdktaPClrNfp8xdSAYS0Zk2ddX7XsXZAxckMHPCBcHRo0cTcEIgYPRiGEkmji3Idkh2yFtYw==}
+  /punycode/2.3.0:
+    resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
     dev: true
 
@@ -23234,7 +23234,7 @@ packages:
     engines: {node: '>=0.8'}
     dependencies:
       psl: 1.9.0
-      punycode: 2.2.0
+      punycode: 2.3.0
     dev: true
 
   /tough-cookie/4.1.2:
@@ -23242,7 +23242,7 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       psl: 1.9.0
-      punycode: 2.2.0
+      punycode: 2.3.0
       universalify: 0.2.0
       url-parse: 1.5.10
     dev: true
@@ -23254,7 +23254,7 @@ packages:
     resolution: {integrity: sha512-l7FvfAHlcmulp8kr+flpQZmVwtu7nfRV7NZujtN0OqES8EL4O4e0qqzL0DC5gAvx/ZC/9lk6rhcUwYvkBnBnYA==}
     engines: {node: '>=12'}
     dependencies:
-      punycode: 2.2.0
+      punycode: 2.3.0
     dev: true
 
   /tree-kill/1.2.2:
@@ -23629,8 +23629,8 @@ packages:
     dependencies:
       busboy: 1.6.0
 
-  /undici/5.15.0:
-    resolution: {integrity: sha512-wCAZJDyjw9Myv+Ay62LAoB+hZLPW9SmKbQkbHIhMw/acKSlpn7WohdMUc/Vd4j1iSMBO0hWwU8mjB7a5p5bl8g==}
+  /undici/5.15.1:
+    resolution: {integrity: sha512-XLk8g0WAngdvFqTI+VKfBtM4YWXgdxkf1WezC771Es0Dd+Pm1KmNx8t93WTC+Hh9tnghmVxkclU1HN+j+CvIUA==}
     engines: {node: '>=12.18'}
     dependencies:
       busboy: 1.6.0
@@ -23876,7 +23876,7 @@ packages:
   /uri-js/4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
-      punycode: 2.2.0
+      punycode: 2.3.0
     dev: true
 
   /urix/0.1.0:
