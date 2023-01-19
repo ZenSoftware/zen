@@ -9,7 +9,7 @@ import { CaslFactory } from './casl-factory';
 })
 export class NestAuthModule {
   /**
-   * @param caslFactory Class that implements CaslFactory
+   * @param caslFactory Class that implements CaslFactory that defines the user's abilities
    */
   static register(caslFactory: Type<CaslFactory>): DynamicModule {
     const providers: Provider[] = [
