@@ -33,6 +33,12 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
       title: 'Created At',
       filter: 'date',
     },
+    {
+      field: 'roles',
+      title: 'Roles',
+      filterable: false,
+      sortable: false,
+    },
   ],
 };
 
