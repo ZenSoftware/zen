@@ -1,4 +1,4 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException } from '@nestjs/common';
 
 type RoleType = string[] | undefined;
 
@@ -19,14 +19,14 @@ export function rbacLogic(
 
   if (classRoles.length > 0) {
     if (!userRoles.some(r => classRoles.includes(r))) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
 
     if (handlerRoles.length > 0 && !userRoles.some(r => handlerRoles.includes(r))) {
-      throw new UnauthorizedException();
+      throw new ForbiddenException();
     }
   } else if (handlerRoles.length > 0 && !userRoles.some(r => handlerRoles.includes(r))) {
-    throw new UnauthorizedException();
+    throw new ForbiddenException();
   }
 
   return true;
