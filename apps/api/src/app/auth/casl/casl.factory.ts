@@ -6,7 +6,7 @@ import { CaslFactory, RequestUser } from '@zen/nest-auth';
 import { PrismaQuery, createPrismaAbility } from './casl-prisma';
 import { PrismaSubjects } from './generated';
 
-/** @description A union of subjects to extend the ability beyond just Prisma models */
+/** A union of subjects to extend the ability beyond just Prisma models */
 export type ExtendedSubjects = 'all';
 export type AppAbility = PureAbility<[Action, PrismaSubjects | ExtendedSubjects], PrismaQuery>;
 
