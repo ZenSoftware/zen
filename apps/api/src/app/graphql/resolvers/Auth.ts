@@ -4,8 +4,7 @@ import { HttpException, Logger, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/common';
-import { RolesGuard, CurrentUser, JwtPayload, RequestUser } from '@zen/nest-auth';
-import { GqlThrottlerGuard } from '../gql-throttler.guard';
+import { CurrentUser, JwtPayload, RequestUser, RolesGuard } from '@zen/nest-auth';
 import gql from 'graphql-tag';
 import { bcrypt, bcryptVerify } from 'hash-wasm';
 
@@ -14,6 +13,7 @@ import { ConfigService } from '../../config';
 import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
 import { PrismaClient } from '../../prisma';
+import { GqlThrottlerGuard } from '../gql-throttler.guard';
 import {
   AccountInfo,
   AuthExchangeTokenInput,
