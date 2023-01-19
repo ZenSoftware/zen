@@ -16,19 +16,19 @@ export class ToolsController {
   //   return this.prisma.$metrics.prometheus();
   // }
 
-  @Get('meta')
-  @Header('Content-Type', 'text/plain')
-  async meta() {
-    let result = '';
+  // @Get('meta')
+  // @Header('Content-Type', 'text/plain')
+  // async meta() {
+  //   let result = '';
 
-    Prisma.dmmf.datamodel.models.forEach(model => {
-      result += '\n' + model.name + '\n';
-      model.fields.forEach(field => {
-        result += `  ${field.name} ${field.type}\n`;
-      });
-    });
+  //   Prisma.dmmf.datamodel.models.forEach(model => {
+  //     result += '\n' + model.name + '\n';
+  //     model.fields.forEach(field => {
+  //       result += `  ${field.name}: ${field.type}${field.isList ? '[]' : ''}\n`;
+  //     });
+  //   });
 
-    Logger.log(result);
-    return result;
-  }
+  //   Logger.log(result);
+  //   return result;
+  // }
 }
