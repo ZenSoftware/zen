@@ -1,4 +1,4 @@
-import { Inject, UseGuards } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import {
   Args,
   Context,
@@ -9,8 +9,7 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { CASL_FACTORY_TOKEN, CaslSubject, GqlCaslGuard } from '@zen/nest-auth';
-import type { ICaslFactory } from '@zen/nest-auth';
+import { CaslFactory, CaslSubject, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
@@ -40,7 +39,7 @@ export const typeDefs = gql`
 @Resolver('User')
 @CaslSubject('User')
 export class UserResolver {
-  constructor(@Inject(CASL_FACTORY_TOKEN) private readonly caslFactory: ICaslFactory) {}
+  constructor(private readonly caslFactory: CaslFactory) {}
 
   @ResolveField()
   async password() {
@@ -54,7 +53,7 @@ export class UserResolver {
   }
 
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async findUniqueUser(
     @Args() args: FindUniqueUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -64,7 +63,7 @@ export class UserResolver {
   }
 
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async findFirstUser(
     @Args() args: FindFirstUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -74,7 +73,7 @@ export class UserResolver {
   }
 
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async findManyUser(
     @Args() args: FindManyUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -84,7 +83,7 @@ export class UserResolver {
   }
 
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async findManyUserCount(
     @Args() args: FindManyUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -94,7 +93,7 @@ export class UserResolver {
   }
 
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async aggregateUser(
     @Args() args: AggregateUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -104,7 +103,7 @@ export class UserResolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('create'))
+  @UseGuards(CaslGuard('create'))
   async createOneUser(
     @Args() args: CreateOneUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -114,7 +113,7 @@ export class UserResolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('update'))
+  @UseGuards(CaslGuard('update'))
   async updateOneUser(
     @Args() args: UpdateOneUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -124,7 +123,7 @@ export class UserResolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('update'))
+  @UseGuards(CaslGuard('update'))
   async updateManyUser(
     @Args() args: UpdateManyUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -134,7 +133,7 @@ export class UserResolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('create', 'update'))
+  @UseGuards(CaslGuard('create', 'update'))
   async upsertOneUser(
     @Args() args: UpsertOneUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -144,7 +143,7 @@ export class UserResolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('delete'))
+  @UseGuards(CaslGuard('delete'))
   async deleteOneUser(
     @Args() args: DeleteOneUserArgs,
     @Info() info: GraphQLResolveInfo,
@@ -154,7 +153,7 @@ export class UserResolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('delete'))
+  @UseGuards(CaslGuard('delete'))
   async deleteManyUser(
     @Args() args: DeleteManyUserArgs,
     @Info() info: GraphQLResolveInfo,

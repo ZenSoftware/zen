@@ -96,7 +96,12 @@ export class ZenGenerator {
 
     // Get the data type names via the filename of the "resolvers" directory
     let dataTypeNames = (await readdir(nestResolversPath))
-      .filter(f => path.basename(f) !== 'index.ts')
+      .filter(
+        f =>
+          path.basename(f) !== 'index.ts' &&
+          !path.basename(f).endsWith('.spec.ts') &&
+          !path.basename(f).endsWith('.test.ts')
+      )
       .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
 
     const indexPath = path.join(nestResolversPath, 'index.ts');
@@ -110,7 +115,7 @@ export class ZenGenerator {
 
   async generateFrontend(prismaNames: string[]) {
     if (this.config.frontend) {
-      console.log(`----------------------- Front end generated ----------------------`);
+      console.log(`----------------------- Frontend generated -----------------------`);
       const fieldsPath = this.config.frontend.fieldsFolderName
         ? path.join(this.config.frontend.outPath, this.config.frontend.fieldsFolderName)
         : path.join(this.config.frontend.outPath, 'fields');
