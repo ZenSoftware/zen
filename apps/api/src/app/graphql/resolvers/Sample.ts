@@ -2,7 +2,7 @@ import { createWriteStream, existsSync, mkdirSync } from 'fs';
 
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
-import { RolesGuard, GqlUser, RequestUser, Roles } from '@zen/nest-auth';
+import { RolesGuard, CurrentUser, RequestUser, Roles } from '@zen/nest-auth';
 import { PubSub } from 'graphql-subscriptions';
 import gql from 'graphql-tag';
 import { GraphQLUpload } from 'graphql-upload-minimal';
@@ -88,7 +88,7 @@ export class SampleResolver {
   }
 
   @Subscription()
-  async sampleSubscription(@GqlUser() user: RequestUser) {
+  async sampleSubscription(@CurrentUser() user: RequestUser) {
     Logger.log(`sampleSubscription subscribed to by user with id ${user.id}`);
     return pubSub.asyncIterator('sampleSubscription');
   }

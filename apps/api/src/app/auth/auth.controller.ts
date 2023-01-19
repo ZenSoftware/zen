@@ -2,7 +2,7 @@ import { URLSearchParams } from 'url';
 
 import { Controller, Get, Res, UseFilters, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { HttpUser, RequestUser } from '@zen/nest-auth';
+import { CurrentUser, RequestUser } from '@zen/nest-auth';
 import { Response } from 'express';
 
 import { ConfigService } from '../config';
@@ -22,7 +22,7 @@ export class AuthController {
 
   @Get('google/redirect')
   @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@HttpUser() user, @Res() res: Response) {
+  async googleAuthRedirect(@CurrentUser() user, @Res() res: Response) {
     const url = await this.getLoginConfirmedURL(user);
     res.redirect(url);
   }

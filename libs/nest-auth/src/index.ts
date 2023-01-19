@@ -1,5 +1,4 @@
 export { AllowAnonymous } from './lib/decorators/allow-anonymous.decorator';
-export { AuthGuard } from '@nestjs/passport';
 export { CaslSubject } from './lib/casl/casl-subject.decorator';
 export { RequestUser } from './lib/models/request-user';
 export { Roles } from './lib/decorators/roles.decorator';
@@ -7,8 +6,7 @@ export type { ICaslFactory } from './lib/casl/casl-factory.interface';
 export * from './lib/casl/casl-factory.token';
 export * from './lib/casl/gql-casl.guard';
 export * from './lib/casl/http-casl.guard';
-export * from './lib/decorators/gql-user.decorator';
-export * from './lib/decorators/http-user.decorator';
+export * from './lib/decorators/current-user.decorator';
 export * from './lib/guards/roles.guard';
 export * from './lib/models/jwt-payload';
 export * from './lib/nest-auth.module';
