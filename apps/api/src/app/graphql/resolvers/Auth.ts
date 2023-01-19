@@ -4,7 +4,8 @@ import { HttpException, Logger, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/common';
-import { GqlGuard, GqlThrottlerGuard, GqlUser, JwtPayload, RequestUser } from '@zen/nest-auth';
+import { RolesGuard, CurrentUser, JwtPayload, RequestUser } from '@zen/nest-auth';
+import { GqlThrottlerGuard } from '../gql-throttler.guard';
 import gql from 'graphql-tag';
 import { bcrypt, bcryptVerify } from 'hash-wasm';
 
@@ -117,10 +118,10 @@ export class AuthResolver {
   }
 
   @Query()
-  @UseGuards(GqlGuard)
+  @UseGuards(RolesGuard)
   async accountInfo(
     @Context() ctx: IContext,
-    @GqlUser() reqUser: RequestUser
+    @CurrentUser() reqUser: RequestUser
   ): Promise<AccountInfo> {
     const user = await ctx.prisma.user.findUnique({
       where: { id: reqUser.id },
@@ -134,10 +135,10 @@ export class AuthResolver {
   }
 
   @Query()
-  @UseGuards(GqlGuard)
+  @UseGuards(RolesGuard)
   async authExchangeToken(
     @Context() ctx: IContext,
-    @GqlUser() reqUser: RequestUser,
+    @CurrentUser() reqUser: RequestUser,
     @Args('data') args: AuthExchangeTokenInput
   ) {
     const user = await ctx.prisma.user.findUnique({
@@ -251,11 +252,11 @@ export class AuthResolver {
   }
 
   @Mutation()
-  @UseGuards(GqlGuard)
+  @UseGuards(RolesGuard)
   async authPasswordChange(
     @Context() ctx: IContext,
     @Args('data') args: AuthPasswordChangeInput,
-    @GqlUser() reqUser: RequestUser
+    @CurrentUser() reqUser: RequestUser
   ) {
     const user = await ctx.prisma.user.findUnique({ where: { id: reqUser.id } });
     if (!user) throw new HttpException(ApiError.AuthPasswordChange.USER_NOT_FOUND, 400);
