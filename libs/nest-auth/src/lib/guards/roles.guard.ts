@@ -34,14 +34,12 @@ export class RolesGuard extends AuthGuard('jwt') {
 
     let user: RequestUser;
     const type = context.getType() as ContextType & 'graphql';
+
     if (type === 'http') {
       user = context.switchToHttp().getRequest().user;
     } else if (type === 'graphql') {
       user = GqlExecutionContext.create(context).getContext().req.user;
     }
-    // else if (type === 'rpc') {
-    // user = (<RpcArgumentsHost>host).getContext().req.user;
-    // }
 
     const classRoles = this.reflector.get<string[] | undefined>(ROLES_KEY, context.getClass());
     const handlerRoles = this.reflector.get<string[] | undefined>(ROLES_KEY, context.getHandler());
@@ -56,8 +54,5 @@ export class RolesGuard extends AuthGuard('jwt') {
     } else if (type === 'graphql') {
       return GqlExecutionContext.create(context).getContext().req;
     }
-    // else if (type === 'rpc') {
-    //   return context.switchToRpc().getContext().req;
-    // }
   }
 }

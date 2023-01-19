@@ -3,7 +3,7 @@ export function NestResolversABACTemplate(name: string) {
 import { Args, Context, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { CaslSubject, GqlCaslGuard } from '@zen/nest-auth';
+import { CaslSubject, CaslGuard } from '@zen/nest-auth';
 import { PrismaSelectArgs } from '../../prisma';
 import { IContext } from '../models';
 import resolvers from '../paljs/${name}/resolvers';
@@ -37,7 +37,7 @@ export const typeDefs = null;
 @CaslSubject('${name}')
 export class ${name}Resolver {
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async findUnique${name}(
     @Args() args: FindUnique${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -47,7 +47,7 @@ export class ${name}Resolver {
   }
 
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async findFirst${name}(
     @Args() args: FindFirst${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -57,7 +57,7 @@ export class ${name}Resolver {
   }
 
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async findMany${name}(
     @Args() args: FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -67,7 +67,7 @@ export class ${name}Resolver {
   }
 
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async findMany${name}Count(
     @Args() args: FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -77,7 +77,7 @@ export class ${name}Resolver {
   }
 
   @Query()
-  @UseGuards(GqlCaslGuard('read'))
+  @UseGuards(CaslGuard('read'))
   async aggregate${name}(
     @Args() args: Aggregate${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -87,7 +87,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('create'))
+  @UseGuards(CaslGuard('create'))
   async createOne${name}(
     @Args() args: CreateOne${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -97,7 +97,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('update'))
+  @UseGuards(CaslGuard('update'))
   async updateOne${name}(
     @Args() args: UpdateOne${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -107,7 +107,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('update'))
+  @UseGuards(CaslGuard('update'))
   async updateMany${name}(
     @Args() args: UpdateMany${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -117,7 +117,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('create', 'update'))
+  @UseGuards(CaslGuard('create', 'update'))
   async upsertOne${name}(
     @Args() args: UpsertOne${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -127,7 +127,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('delete'))
+  @UseGuards(CaslGuard('delete'))
   async deleteOne${name}(
     @Args() args: DeleteOne${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -137,7 +137,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  @UseGuards(GqlCaslGuard('delete'))
+  @UseGuards(CaslGuard('delete'))
   async deleteMany${name}(
     @Args() args: DeleteMany${name}Args,
     @Info() info: GraphQLResolveInfo,
