@@ -4,7 +4,7 @@ import { HttpException, Logger, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/common';
-import { GqlGuard, GqlThrottlerGuard, GqlUser, JwtPayload, RequestUser } from '@zen/nest-auth';
+import { RolesGuard, GqlThrottlerGuard, GqlUser, JwtPayload, RequestUser } from '@zen/nest-auth';
 import gql from 'graphql-tag';
 import { bcrypt, bcryptVerify } from 'hash-wasm';
 
@@ -117,7 +117,7 @@ export class AuthResolver {
   }
 
   @Query()
-  @UseGuards(GqlGuard)
+  @UseGuards(RolesGuard)
   async accountInfo(
     @Context() ctx: IContext,
     @GqlUser() reqUser: RequestUser
@@ -134,7 +134,7 @@ export class AuthResolver {
   }
 
   @Query()
-  @UseGuards(GqlGuard)
+  @UseGuards(RolesGuard)
   async authExchangeToken(
     @Context() ctx: IContext,
     @GqlUser() reqUser: RequestUser,
@@ -251,7 +251,7 @@ export class AuthResolver {
   }
 
   @Mutation()
-  @UseGuards(GqlGuard)
+  @UseGuards(RolesGuard)
   async authPasswordChange(
     @Context() ctx: IContext,
     @Args('data') args: AuthPasswordChangeInput,

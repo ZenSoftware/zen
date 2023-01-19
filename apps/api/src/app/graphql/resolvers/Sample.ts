@@ -2,7 +2,7 @@ import { createWriteStream, existsSync, mkdirSync } from 'fs';
 
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
-import { GqlGuard, GqlUser, RequestUser, Roles } from '@zen/nest-auth';
+import { RolesGuard, GqlUser, RequestUser, Roles } from '@zen/nest-auth';
 import { PubSub } from 'graphql-subscriptions';
 import gql from 'graphql-tag';
 import { GraphQLUpload } from 'graphql-upload-minimal';
@@ -36,7 +36,7 @@ interval(1000).subscribe(i =>
 );
 
 @Resolver()
-@UseGuards(GqlGuard)
+@UseGuards(RolesGuard)
 @Roles('Super')
 export class SampleResolver {
   @Mutation()

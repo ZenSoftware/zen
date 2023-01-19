@@ -1,11 +1,11 @@
 import { Controller, Get, Header, Logger, UseGuards } from '@nestjs/common';
-import { HttpGuard, Roles } from '@zen/nest-auth';
+import { RolesGuard, Roles } from '@zen/nest-auth';
 
 import { Prisma } from '../prisma';
 import { PrismaService } from '../prisma';
 
 @Controller()
-@UseGuards(HttpGuard)
+@UseGuards(RolesGuard)
 @Roles('Super')
 export class ToolsController {
   constructor(private readonly prisma: PrismaService) {}
@@ -16,19 +16,19 @@ export class ToolsController {
   //   return this.prisma.$metrics.prometheus();
   // }
 
-  // @Get('meta')
-  // @Header('Content-Type', 'text/plain')
-  // async meta() {
-  //   let result = '';
+  @Get('meta')
+  @Header('Content-Type', 'text/plain')
+  async meta() {
+    let result = '';
 
-  //   Prisma.dmmf.datamodel.models.forEach(model => {
-  //     result += '\n' + model.name + '\n';
-  //     model.fields.forEach(field => {
-  //       result += `  ${field.name} ${field.type}\n`;
-  //     });
-  //   });
+    Prisma.dmmf.datamodel.models.forEach(model => {
+      result += '\n' + model.name + '\n';
+      model.fields.forEach(field => {
+        result += `  ${field.name} ${field.type}\n`;
+      });
+    });
 
-  //   Logger.log(result);
-  //   return result;
-  // }
+    Logger.log(result);
+    return result;
+  }
 }

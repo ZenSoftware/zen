@@ -10,7 +10,6 @@ export * from './lib/casl/http-casl.guard';
 export * from './lib/decorators/gql-user.decorator';
 export * from './lib/decorators/http-user.decorator';
 export * from './lib/guards/gql-throttle.guard';
-export * from './lib/guards/gql.guard';
-export * from './lib/guards/http.guard';
+export * from './lib/guards/roles.guard';
 export * from './lib/models/jwt-payload';
 export * from './lib/nest-auth.module';
