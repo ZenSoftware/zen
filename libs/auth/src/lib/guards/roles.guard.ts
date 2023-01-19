@@ -5,7 +5,7 @@ import { Role } from '@zen/common';
 import { AuthService } from '../auth.service';
 
 export class RolesGuard {
-  static has(...roles: Array<keyof typeof Role>) {
+  static has(...roles: Array<Role>) {
     @Injectable({
       providedIn: 'root',
     })

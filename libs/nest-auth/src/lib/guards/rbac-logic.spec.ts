@@ -3,32 +3,30 @@ import { ForbiddenException } from '@nestjs/common';
 import { rbacLogic } from './rbac-logic';
 
 describe('rbac-logic', () => {
-  it('validates roles correctly', () => {
-    // Allow anonymous users for classes not decorated with Roles and handlers not decorated with Roles
-    expect(rbacLogic([], [], [])).toEqual(true);
-    expect(rbacLogic(null, null, null)).toEqual(true);
-    expect(rbacLogic(undefined, undefined, undefined)).toEqual(true);
+  it('should pass for no defined roles', () => {
+    expect(rbacLogic([], [])).toEqual(true);
+    expect(rbacLogic(null, null)).toEqual(true);
+    expect(rbacLogic(undefined, undefined)).toEqual(true);
+    expect(rbacLogic([], null)).toEqual(true);
+    expect(rbacLogic([], undefined)).toEqual(true);
+    expect(rbacLogic(null, [])).toEqual(true);
+    expect(rbacLogic(undefined, [])).toEqual(true);
+    expect(rbacLogic(null, undefined)).toEqual(true);
+    expect(rbacLogic(undefined, null)).toEqual(true);
+    expect(rbacLogic(['Editor'], [])).toEqual(true);
+    expect(rbacLogic(['Editor'], null)).toEqual(true);
+    expect(rbacLogic(['Editor'], undefined)).toEqual(true);
+  });
 
-    // Super gets unlimited access
-    expect(rbacLogic(['Super'], ['Admin'], ['Reviewer'])).toEqual(true);
+  it('should pass when user has one of the defined roles', () => {
+    expect(rbacLogic(['Editor'], ['Admin', 'Editor'])).toEqual(true);
+  });
 
-    // Class check
-    expect(() => rbacLogic([], ['Admin'], [])).toThrow(ForbiddenException);
-    expect(() => rbacLogic(null, ['Admin'], [])).toThrow(ForbiddenException);
-    expect(() => rbacLogic(undefined, ['Admin'], [])).toThrow(ForbiddenException);
+  it('should pass if user has Super role but not explicitly defined', () => {
+    expect(rbacLogic(['Super'], ['Admin', 'Editor'])).toEqual(true);
+  });
 
-    // Handler check
-    expect(() => rbacLogic([], [], ['Admin'])).toThrow(ForbiddenException);
-    expect(() => rbacLogic(null, [], ['Admin'])).toThrow(ForbiddenException);
-    expect(() => rbacLogic(undefined, [], ['Admin'])).toThrow(ForbiddenException);
-
-    // Class "or" check
-    expect(rbacLogic(['Editor'], ['Admin', 'Editor'], [])).toEqual(true);
-
-    // Handler "or" check
-    expect(rbacLogic(['Editor'], [], ['Admin', 'Editor'])).toEqual(true);
-
-    // Handler presedence check
-    expect(() => rbacLogic(['Editor'], ['Editor', 'Admin'], ['Admin'])).toThrow(ForbiddenException);
+  it('should throw if user does not contain any of the defined roles', () => {
+    expect(() => rbacLogic(['Registered'], ['Admin', 'Editor'])).toThrow(ForbiddenException);
   });
 });

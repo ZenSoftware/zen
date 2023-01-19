@@ -1,7 +1,6 @@
 export { AllowAnonymous } from './lib/decorators/allow-anonymous.decorator';
 export { CaslSubject } from './lib/decorators/casl-subject.decorator';
 export { RequestUser } from './lib/models/request-user';
-export { Roles } from './lib/decorators/roles.decorator';
 export * from './lib/casl-factory';
 export * from './lib/decorators/current-user.decorator';
 export * from './lib/guards/casl.guard';

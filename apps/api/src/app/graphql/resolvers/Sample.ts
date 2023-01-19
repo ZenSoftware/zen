@@ -2,7 +2,7 @@ import { createWriteStream, existsSync, mkdirSync } from 'fs';
 
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
-import { CurrentUser, RequestUser, Roles, RolesGuard } from '@zen/nest-auth';
+import { CurrentUser, RequestUser, RolesGuard } from '@zen/nest-auth';
 import { PubSub } from 'graphql-subscriptions';
 import gql from 'graphql-tag';
 import { GraphQLUpload } from 'graphql-upload-minimal';
@@ -36,8 +36,7 @@ interval(1000).subscribe(i =>
 );
 
 @Resolver()
-@UseGuards(RolesGuard)
-@Roles('Super')
+@UseGuards(RolesGuard('Super'))
 export class SampleResolver {
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
