@@ -52,7 +52,7 @@ export class AuthService {
   /**
    * @returns `RequestUser` if valid and `null` otherwise
    */
-  async authorizeJwt(token: string) {
+  async authorizeJwt(token: string): Promise<RequestUser | null> {
     const jwtPayload = this.jwtService.decode(token) as JwtPayload;
     return this.jwtStrategy.validate(jwtPayload);
   }
