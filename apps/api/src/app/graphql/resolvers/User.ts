@@ -9,7 +9,7 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { CaslFactory, CaslSubject, CaslGuard } from '@zen/nest-auth';
+import { CaslFactory, CaslGuard, CaslSubject } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
