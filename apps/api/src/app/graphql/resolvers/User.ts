@@ -1,4 +1,4 @@
-import { Inject, UseGuards } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import {
   Args,
   Context,
@@ -9,8 +9,7 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { CASL_FACTORY_TOKEN, CaslSubject, CaslGuard } from '@zen/nest-auth';
-import type { ICaslFactory } from '@zen/nest-auth';
+import { CaslFactory, CaslSubject, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
@@ -40,7 +39,7 @@ export const typeDefs = gql`
 @Resolver('User')
 @CaslSubject('User')
 export class UserResolver {
-  constructor(@Inject(CASL_FACTORY_TOKEN) private readonly caslFactory: ICaslFactory) {}
+  constructor(private readonly caslFactory: CaslFactory) {}
 
   @ResolveField()
   async password() {

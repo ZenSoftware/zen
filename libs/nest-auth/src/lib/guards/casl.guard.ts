@@ -6,18 +6,14 @@ import { AuthGuard } from '@nestjs/passport';
 import { Action } from '@zen/common';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
-import { CASL_FACTORY_TOKEN } from './casl-factory.token';
-import { CASL_SUBJECT_KEY } from './casl-subject.decorator';
-import type { ICaslFactory } from './casl-factory.interface';
+import { CaslFactory } from '../casl-factory';
+import { CASL_SUBJECT_KEY } from '../decorators/casl-subject.decorator';
 import { RequestUser } from '../models/request-user';
 
 export function CaslGuard(...actions: Array<Action>) {
   @Injectable()
   class MixinCaslGuard extends AuthGuard('jwt') {
-    constructor(
-      @Inject(CASL_FACTORY_TOKEN) readonly caslFactory: ICaslFactory,
-      readonly reflector: Reflector
-    ) {
+    constructor(readonly caslFactory: CaslFactory, readonly reflector: Reflector) {
       super();
     }
 

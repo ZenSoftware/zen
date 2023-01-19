@@ -1,8 +1,7 @@
 import { DynamicModule, Module, Provider, Type } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 
-import type { ICaslFactory } from './casl/casl-factory.interface';
-import { CASL_FACTORY_TOKEN } from './casl/casl-factory.token';
+import { CaslFactory } from './casl-factory';
 
 @Module({
   imports: [PassportModule.register({ defaultStrategy: 'jwt' })],
@@ -10,12 +9,12 @@ import { CASL_FACTORY_TOKEN } from './casl/casl-factory.token';
 })
 export class NestAuthModule {
   /**
-   * @param caslFactory Class that implements ICaslFactory
+   * @param caslFactory Class that implements CaslFactory
    */
-  static register(caslFactory: Type<ICaslFactory>): DynamicModule {
+  static register(caslFactory: Type<CaslFactory>): DynamicModule {
     const providers: Provider[] = [
       {
-        provide: CASL_FACTORY_TOKEN,
+        provide: CaslFactory,
         useClass: caslFactory,
       },
     ];

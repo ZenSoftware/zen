@@ -1,7 +1,7 @@
 import { AbilityBuilder, PureAbility } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { Action } from '@zen/common';
-import { ICaslFactory, RequestUser } from '@zen/nest-auth';
+import { CaslFactory, RequestUser } from '@zen/nest-auth';
 
 import { PrismaQuery, createPrismaAbility } from './casl-prisma';
 import { PrismaSubjects } from './generated';
@@ -11,7 +11,7 @@ export type ExtendedSubjects = 'all';
 export type AppAbility = PureAbility<[Action, PrismaSubjects | ExtendedSubjects], PrismaQuery>;
 
 @Injectable()
-export class CaslFactory implements ICaslFactory {
+export class ApiCaslFactory implements CaslFactory {
   async createAbility(user: RequestUser) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(createPrismaAbility);
 
