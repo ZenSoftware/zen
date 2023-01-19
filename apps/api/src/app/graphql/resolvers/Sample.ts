@@ -2,7 +2,7 @@ import { createWriteStream, existsSync, mkdirSync } from 'fs';
 
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
-import { RolesGuard, CurrentUser, RequestUser, Roles } from '@zen/nest-auth';
+import { CurrentUser, RequestUser, Roles, RolesGuard } from '@zen/nest-auth';
 import { PubSub } from 'graphql-subscriptions';
 import gql from 'graphql-tag';
 import { GraphQLUpload } from 'graphql-upload-minimal';
