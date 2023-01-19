@@ -110,7 +110,7 @@ export class ZenGenerator {
 
   async generateFrontend(prismaNames: string[]) {
     if (this.config.frontend) {
-      console.log(`----------------------- Front end generated ----------------------`);
+      console.log(`----------------------- Frontend generated -----------------------`);
       const fieldsPath = this.config.frontend.fieldsFolderName
         ? path.join(this.config.frontend.outPath, this.config.frontend.fieldsFolderName)
         : path.join(this.config.frontend.outPath, 'fields');
