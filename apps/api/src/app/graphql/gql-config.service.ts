@@ -8,7 +8,7 @@ import {
 } from 'apollo-server-core';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { print } from 'graphql';
-import { GraphQLUpload } from 'graphql-upload-minimal';
+import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 
 import { ConfigService } from '../config';
 import { PrismaService } from '../prisma';
