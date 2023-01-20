@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoggedInGuard } from '@zen/auth';
+
 import { ZenNotFoundComponent } from './zen-not-found/zen-not-found.component';
 
 const routes: Routes = [

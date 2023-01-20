@@ -3,11 +3,11 @@ import { ContextType } from '@nestjs/common/interfaces';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
+import { Role } from '@zen/common';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { RequestUser } from '../models/request-user';
 import { rbacLogic } from './rbac-logic';
-import { Role } from '@zen/common';
 
 export function RolesGuard(...roles: Array<Role>) {
   @Injectable()
