@@ -11,8 +11,8 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 import { Action } from '@zen/common';
 
-import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { CaslFactory } from '../casl-factory';
+import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { CASL_SUBJECT_KEY } from '../decorators/casl-subject.decorator';
 import { RequestUser } from '../models/request-user';
 
