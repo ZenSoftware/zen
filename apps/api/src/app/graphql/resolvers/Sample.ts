@@ -5,7 +5,7 @@ import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
 import { CurrentUser, RequestUser, RolesGuard } from '@zen/nest-auth';
 import { PubSub } from 'graphql-subscriptions';
 import gql from 'graphql-tag';
-import { GraphQLUpload } from 'graphql-upload-minimal';
+import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 import { interval } from 'rxjs';
 
 import type { Upload } from '../models';
