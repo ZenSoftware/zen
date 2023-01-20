@@ -1,5 +1,13 @@
 /**
- * Union of all Casl actions.
+ * Casl actions available for authorization.
  * This is intended to be extended as business requirements demand.
  */
-export type Action = 'manage' | 'create' | 'read' | 'update' | 'delete';
+export const Action = {
+  manage: 'manage',
+  create: 'create',
+  read: 'read',
+  update: 'update',
+  delete: 'delete',
+} as const;
+
+export type Action = (typeof Action)[keyof typeof Action];

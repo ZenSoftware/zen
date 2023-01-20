@@ -1,6 +1,6 @@
-export * as ApiConstants from './lib/api-constants';
 export * as ApiError from './lib/api-errors';
 export * from './lib/action';
+export * from './lib/api-constants';
 export * from './lib/assert-type';
 export * from './lib/enum-helper';
 export * from './lib/environment';
