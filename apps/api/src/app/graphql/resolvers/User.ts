@@ -133,7 +133,7 @@ export class UserResolver {
   }
 
   @Mutation()
-  @UseGuards(CaslGuard('create', 'update'))
+  @UseGuards(CaslGuard('create'), CaslGuard('update'))
   async upsertOneUser(
     @Args() args: UpsertOneUserArgs,
     @Info() info: GraphQLResolveInfo,
