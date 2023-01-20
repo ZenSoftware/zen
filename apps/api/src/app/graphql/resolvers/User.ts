@@ -14,6 +14,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
 import { User } from '../../prisma';
+import { AppAbility } from '../../auth';
 import { PrismaSelectArgs } from '../../prisma';
 import { IContext } from '../models';
 import resolvers from '../paljs/User/resolvers';
@@ -48,7 +49,7 @@ export class UserResolver {
 
   @ResolveField()
   async rules(@Parent() parent: User) {
-    const ability = await this.caslFactory.createAbility(parent);
+    const ability: AppAbility = await this.caslFactory.createAbility(parent);
     return ability.rules;
   }
 
