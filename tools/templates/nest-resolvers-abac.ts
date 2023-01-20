@@ -117,7 +117,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  @UseGuards(CaslGuard('create', 'update'))
+  @UseGuards(CaslGuard('create'), CaslGuard('update'))
   async upsertOne${name}(
     @Args() args: UpsertOne${name}Args,
     @Info() info: GraphQLResolveInfo,

@@ -1,5 +1,11 @@
 import { subject } from '@casl/ability';
-import { ContextType, ExecutionContext, Inject, Injectable, mixin } from '@nestjs/common';
+import {
+  ContextType,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+  mixin,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
@@ -45,15 +51,14 @@ export function CaslGuard(...actions: Array<Action>) {
         for (const action of actions) {
           const allowed = ability.can(action, subjectName);
           // console.log(`HTTP CaslGuard user: ${user.id} - ${action} ${subjectName} ${allowed}`);
-          if (!allowed) return false;
+          if (allowed) return true;
         }
       } else if (type === 'graphql') {
         const host = GqlExecutionContext.create(context);
         const args = host.getArgs();
 
-        // Utilize the `where` input for Casl subject if found
+        // Utilize the `where` input for the Casl subject if it exists in the args
         const inputSubject = args?.where ? subject(subjectName, args.where) : subjectName;
-
         const user: RequestUser = host.getContext().req.user;
         const ability = await this.caslFactory.createAbility(user);
 
@@ -63,11 +68,11 @@ export function CaslGuard(...actions: Array<Action>) {
           //   `GraphQL CaslGuard user: ${user.id} - ${action} ${subjectName} ${allowed}`,
           //   inputSubject
           // );
-          if (!allowed) return false;
+          if (allowed) return true;
         }
       }
 
-      return true;
+      return false;
     }
 
     getRequest(context: ExecutionContext) {

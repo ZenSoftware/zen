@@ -1,33 +1,22 @@
-import { UnauthorizedException } from '@nestjs/common';
-
-type RoleType = string[] | undefined;
+import { ForbiddenException } from '@nestjs/common';
 
 /**
  * Imitates RBAC rules for [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-6.0).
  */
 export function rbacLogic(
-  userRoles: RoleType,
-  classRoles: RoleType,
-  handlerRoles: RoleType
+  userRoles: string[] | undefined | null,
+  definedRoles: string[] | undefined | null
 ): boolean {
   userRoles = userRoles ?? [];
-  classRoles = classRoles ?? [];
-  handlerRoles = handlerRoles ?? [];
+  definedRoles = definedRoles ?? [];
 
-  // Give super users unlimited access
-  if (userRoles.includes('Super')) return true;
-
-  if (classRoles.length > 0) {
-    if (!userRoles.some(r => classRoles.includes(r))) {
-      throw new UnauthorizedException();
-    }
-
-    if (handlerRoles.length > 0 && !userRoles.some(r => handlerRoles.includes(r))) {
-      throw new UnauthorizedException();
-    }
-  } else if (handlerRoles.length > 0 && !userRoles.some(r => handlerRoles.includes(r))) {
-    throw new UnauthorizedException();
+  if (
+    definedRoles.length === 0 ||
+    userRoles.includes('Super') ||
+    definedRoles.some(definedRole => userRoles.includes(definedRole))
+  ) {
+    return true;
+  } else {
+    throw new ForbiddenException();
   }
-
-  return true;
 }

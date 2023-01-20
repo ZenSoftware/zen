@@ -35,7 +35,7 @@
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.2.1",
     "@nestjs/platform-socket.io": "^9.2.1",
-    "@nestjs/throttler": "^3.1.0",
+    "@nestjs/throttler": "^4.0.0",
     "@nestjs/websockets": "^9.2.1",
     "@paljs/plugins": "5.2.0",
     "@prisma/client": "~4.9.0",
@@ -153,7 +153,7 @@
     }
   },
   "importSort": {
-    ".js, .ts": {
+    ".js, .jsx, .ts, .tsx": {
       "style": "module",
       "parser": "typescript"
     }
