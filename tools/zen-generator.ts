@@ -92,8 +92,6 @@ export class ZenGenerator {
       wroteCount = await this.nestRbacResolvers(prismaNames);
     }
 
-    console.log(`* Total resolver files wrote: ${wroteCount}`);
-
     // Get the data type names via the filename of the "resolvers" directory
     let dataTypeNames = (await readdir(nestResolversPath))
       .filter(
@@ -107,6 +105,7 @@ export class ZenGenerator {
     const indexPath = path.join(nestResolversPath, 'index.ts');
     await writeFile(indexPath, NestResolversIndexTemplate(dataTypeNames));
     console.log(`- Wrote: ${indexPath}`);
+    console.log(`* Total resolver files wrote: ${wroteCount}`);
 
     await this.execLocal(`prettier --loglevel warn --write "${this.config.apiOutPath}/**/*.ts"`);
 
