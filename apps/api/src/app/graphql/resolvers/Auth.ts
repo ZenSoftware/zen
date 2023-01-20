@@ -118,7 +118,7 @@ export class AuthResolver {
   }
 
   @Query()
-  @UseGuards(RolesGuard)
+  @UseGuards(RolesGuard())
   async accountInfo(
     @Context() ctx: IContext,
     @CurrentUser() reqUser: RequestUser
@@ -135,7 +135,7 @@ export class AuthResolver {
   }
 
   @Query()
-  @UseGuards(RolesGuard)
+  @UseGuards(RolesGuard())
   async authExchangeToken(
     @Context() ctx: IContext,
     @CurrentUser() reqUser: RequestUser,
@@ -252,7 +252,7 @@ export class AuthResolver {
   }
 
   @Mutation()
-  @UseGuards(RolesGuard)
+  @UseGuards(RolesGuard())
   async authPasswordChange(
     @Context() ctx: IContext,
     @Args('data') args: AuthPasswordChangeInput,

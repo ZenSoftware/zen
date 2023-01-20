@@ -30,7 +30,7 @@ export class RolesDirective implements OnDestroy {
   }
 
   @Input()
-  set roles(roles: keyof typeof Role | Array<keyof typeof Role>) {
+  set roles(roles: Role | Array<Role>) {
     this.#roles = roles;
     this.update();
   }

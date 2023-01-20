@@ -34,7 +34,7 @@
     "@nestjs/jwt": "^10.0.1",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.2.1",
-    "@nestjs/throttler": "^3.1.0",
+    "@nestjs/throttler": "^4.0.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.35.0",
     "@opentelemetry/instrumentation": "^0.35.0",
     "@opentelemetry/instrumentation-express": "^0.32.0",
@@ -160,7 +160,7 @@
     }
   },
   "importSort": {
-    ".js, .ts": {
+    ".js, .jsx, .ts, .tsx": {
       "style": "module",
       "parser": "typescript"
     }
