@@ -30,7 +30,7 @@ export class NotRolesDirective implements OnDestroy {
   }
 
   @Input()
-  set notRoles(roles: keyof typeof Role | Array<keyof typeof Role>) {
+  set notRoles(roles: Role | Array<Role>) {
     this.#roles = roles;
     this.update();
   }

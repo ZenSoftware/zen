@@ -1,12 +1,11 @@
 import { Controller, Get, Header, Logger, UseGuards } from '@nestjs/common';
-import { RolesGuard, Roles } from '@zen/nest-auth';
+import { RolesGuard } from '@zen/nest-auth';
 
 import { Prisma } from '../prisma';
 import { PrismaService } from '../prisma';
 
 @Controller()
-@UseGuards(RolesGuard)
-@Roles('Super')
+@UseGuards(RolesGuard('Super'))
 export class ToolsController {
   constructor(private readonly prisma: PrismaService) {}
 
