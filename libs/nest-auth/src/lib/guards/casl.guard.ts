@@ -52,7 +52,7 @@ export function CaslGuard(...actions: Array<Action>) {
         const args = host.getArgs();
 
         // Utilize the `where` input for the Casl subject if it exists in the args
-        const inputSubject = args?.where ? subject(subjectName, args.where) : subjectName;
+        const inputSubject = args?.['where'] ? subject(subjectName, args['where']) : subjectName;
         const user: RequestUser = host.getContext().req.user;
         const ability = await this.caslFactory.createAbility(user);
 
