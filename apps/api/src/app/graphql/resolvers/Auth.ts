@@ -130,7 +130,7 @@ export class AuthResolver {
     return {
       username: user.username,
       hasPassword: !!user.password,
-      googleProfile: user.googleProfile as any,
+      googleProfile: user.googleProfile as AccountInfo['googleProfile'],
     };
   }
 
