@@ -3,13 +3,15 @@ const lowercase = (name: string) => name.charAt(0).toLowerCase() + name.slice(1)
 export function NestResolversABACTemplate(name: string) {
   return `import { subject } from '@casl/ability';
 import { ForbiddenException, UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CaslAbility, CaslGuard } from '@zen/nest-auth';
+import { GraphQLResolveInfo } from 'graphql';
 
 import { AppAbility } from '../../auth';
-import { PrismaService } from '../../prisma';
+import { PrismaSelect, PrismaService } from '../../prisma';
 import type {
   Aggregate${name}Args,
+  CreateMany${name}Args,
   CreateOne${name}Args,
   DeleteMany${name}Args,
   DeleteOne${name}Args,
@@ -40,55 +42,107 @@ export class ${name}Resolver {
   constructor(private readonly prisma: PrismaService) {}
 
   @Query()
-  async findUnique${name}(@CaslAbility() ability: AppAbility, @Args() args: FindUnique${name}Args) {
+  async findUnique${name}(
+    @Args() args: FindUnique${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     const item = await this.prisma.${lowercase(name)}.findUnique({ where: args.where });
     if (ability.cannot('read', subject('${name}', item))) throw new ForbiddenException();
-    return item;
+    return this.prisma.${lowercase(
+      name
+    )}.findUnique({ where: args.where, select: PrismaSelect(info, args) });
   }
 
   @Query()
-  async findFirst${name}(@CaslAbility() ability: AppAbility, @Args() args: FindFirst${name}Args) {
+  async findFirst${name}(
+    @Args() args: FindFirst${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     const item = await this.prisma.${lowercase(name)}.findFirst({ where: args.where });
     if (ability.cannot('read', subject('${name}', item))) throw new ForbiddenException();
-    return item;
+    return this.prisma.${lowercase(
+      name
+    )}.findFirst({ where: args.where, select: PrismaSelect(info, args) });
   }
 
   @Query()
-  async findMany${name}(@CaslAbility() ability: AppAbility, @Args() args: FindMany${name}Args) {
+  async findMany${name}(
+    @Args() args: FindMany${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     const items = await this.prisma.${lowercase(name)}.findMany({ where: args.where });
     for (const item of items) {
       if (ability.cannot('read', subject('${name}', item))) throw new ForbiddenException();
     }
-    return items;
+    return this.prisma.${lowercase(
+      name
+    )}.findMany({ where: args.where, select: PrismaSelect(info, args) });
   }
 
   @Query()
-  async findMany${name}Count(@CaslAbility() ability: AppAbility, @Args() args: FindMany${name}Args) {
+  async findMany${name}Count(
+    @Args() args: FindMany${name}Args,
+    @CaslAbility() ability: AppAbility
+  ) {
     if (ability.cannot('read', '${name}')) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.count({ where: args.where });
   }
 
   @Query()
-  async aggregate${name}(@CaslAbility() ability: AppAbility, @Args() args: Aggregate${name}Args) {
+  async aggregate${name}(
+    @Args() args: Aggregate${name}Args,
+    @CaslAbility() ability: AppAbility
+  ) {
     if (ability.cannot('read', '${name}')) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.aggregate({ where: args.where });
   }
 
   @Mutation()
-  async createOne${name}(@CaslAbility() ability: AppAbility, @Args() args: CreateOne${name}Args) {
+  async createOne${name}(
+    @Args() args: CreateOne${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     if (ability.cannot('create', subject('${name}', args.data as any))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.create({ data: args.data });
+    return this.prisma.${lowercase(
+      name
+    )}.create({ data: args.data, select: PrismaSelect(info, args) });
   }
 
   @Mutation()
-  async updateOne${name}(@CaslAbility() ability: AppAbility, @Args() args: UpdateOne${name}Args) {
+  async createMany${name}(
+    @Args() args: CreateMany${name}Args,
+    @CaslAbility() ability: AppAbility
+  ) {
+    for (const item of args.data) {
+      if (ability.cannot('create', subject('${name}', item as any))) throw new ForbiddenException();
+    }
+    return this.prisma.${lowercase(name)}.createMany({ data: args.data });
+  }
+
+  @Mutation()
+  async updateOne${name}(
+    @Args() args: UpdateOne${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     const item = await this.prisma.${lowercase(name)}.findUnique({ where: args.where });
     if (ability.cannot('update', subject('${name}', item))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.update({ where: args.where, data: args.data });
+    return this.prisma.${lowercase(name)}.update({
+      where: args.where,
+      data: args.data,
+      select: PrismaSelect(info, args),
+    });
   }
 
   @Mutation()
-  async updateMany${name}(@CaslAbility() ability: AppAbility, @Args() args: UpdateMany${name}Args) {
+  async updateMany${name}(
+    @Args() args: UpdateMany${name}Args,
+    @CaslAbility() ability: AppAbility
+  ) {
     const items = await this.prisma.${lowercase(name)}.findMany({ where: args.where });
     for (const item of items) {
       if (ability.cannot('update', subject('${name}', item))) throw new ForbiddenException();
@@ -97,27 +151,43 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  async upsertOne${name}(@CaslAbility() ability: AppAbility, @Args() args: UpsertOne${name}Args) {
+  async upsertOne${name}(
+    @Args() args: UpsertOne${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     if (
       ability.cannot('create', subject('${name}', args.create as any)) ||
       ability.cannot('update', subject('${name}', args.update as any))
     ) {
       throw new ForbiddenException();
     }
-    return this.prisma.${lowercase(
-      name
-    )}.upsert({ where: args.where, create: args.create, update: args.update });
+    return this.prisma.${lowercase(name)}.upsert({
+      where: args.where,
+      create: args.create,
+      update: args.update,
+      select: PrismaSelect(info, args),
+    });
   }
 
   @Mutation()
-  async deleteOne${name}(@CaslAbility() ability: AppAbility, @Args() args: DeleteOne${name}Args) {
+  async deleteOne${name}(
+    @Args() args: DeleteOne${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     const item = await this.prisma.${lowercase(name)}.findUnique({ where: args.where });
     if (ability.cannot('delete', subject('${name}', item))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.delete({ where: args.where });
+    return this.prisma.${lowercase(
+      name
+    )}.delete({ where: args.where, select: PrismaSelect(info, args) });
   }
 
   @Mutation()
-  async deleteMany${name}(@CaslAbility() ability: AppAbility, @Args() args: DeleteMany${name}Args) {
+  async deleteMany${name}(
+    @Args() args: DeleteMany${name}Args,
+    @CaslAbility() ability: AppAbility
+  ) {
     const items = await this.prisma.${lowercase(name)}.findMany({ where: args.where });
     for (const item of items) {
       if (ability.cannot('delete', subject('${name}', item))) throw new ForbiddenException();
