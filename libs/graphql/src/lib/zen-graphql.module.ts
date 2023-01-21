@@ -9,6 +9,7 @@ import {
   ApolloLink,
   InMemoryCache,
   InMemoryCacheConfig,
+  NormalizedCacheObject,
   split,
 } from '@apollo/client/core';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
@@ -21,7 +22,7 @@ import { OperationDefinitionNode } from 'graphql';
 import { ClientOptions, createClient } from 'graphql-ws';
 
 export abstract class GraphQLOptions {
-  resolvers?: ApolloClientOptions<any>['resolvers'];
+  resolvers?: ApolloClientOptions<NormalizedCacheObject>['resolvers'];
   cacheOptions?: InMemoryCacheConfig;
   uploadOptions?: createUploadLink.UploadLinkOptions & { mutationNames: string[] };
   batchOptions?: BatchOptions;
@@ -61,7 +62,7 @@ export class ZenGraphQLModule {
 export function createApollo(
   httpBatchLink: HttpBatchLink,
   options: GraphQLOptions
-): ApolloClientOptions<any> {
+): ApolloClientOptions<NormalizedCacheObject> {
   let link: ApolloLink;
 
   let batch_link: HttpBatchLinkHandler;

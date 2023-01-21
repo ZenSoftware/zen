@@ -7,7 +7,6 @@ import { Role } from '@zen/common';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { RequestUser } from '../models/request-user';
-import { rbacLogic } from './rbac-logic';
 
 export function RolesGuard(...roles: Array<Role>) {
   @Injectable()
@@ -33,6 +32,8 @@ export function RolesGuard(...roles: Array<Role>) {
 
       await super.canActivate(context);
 
+      if (roles.length === 0) return true;
+
       let user: RequestUser;
       const type = context.getType() as ContextType & 'graphql';
 
@@ -56,4 +57,10 @@ export function RolesGuard(...roles: Array<Role>) {
   }
 
   return mixin(MixinRolesGuard);
+}
+
+export function rbacLogic(userRoles: string[], definedRoles: string[]) {
+  return (
+    userRoles.includes('Super') || definedRoles.some(definedRole => userRoles.includes(definedRole))
+  );
 }

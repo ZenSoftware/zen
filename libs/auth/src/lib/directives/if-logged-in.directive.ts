@@ -15,11 +15,11 @@ import { Subscription } from 'rxjs';
 })
 export class IfLoggedInDirective implements OnDestroy {
   #subsciption: Subscription;
-  #embededViewRef: EmbeddedViewRef<any> | undefined;
+  #embededViewRef: EmbeddedViewRef<unknown> | undefined;
   #ifLoggedIn?: boolean;
 
   constructor(
-    private templateRef: TemplateRef<any>,
+    private templateRef: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
     private loggedInGQL: LoggedInGQL
   ) {
