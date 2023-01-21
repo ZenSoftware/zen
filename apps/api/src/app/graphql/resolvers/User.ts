@@ -6,10 +6,9 @@ import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
 import { AppAbility, AuthService } from '../../auth';
-import { PrismaSelect, PrismaService, User } from '../../prisma';
+import { PrismaSelectArgs, PrismaService, User } from '../../prisma';
 import type {
   AggregateUserArgs,
-  CreateManyUserArgs,
   CreateOneUserArgs,
   DeleteManyUserArgs,
   DeleteOneUserArgs,
@@ -49,9 +48,9 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const item = await this.prisma.user.findUnique({ where: args.where });
+    const item = await this.prisma.user.findUnique(args);
     if (ability.cannot('read', subject('User', item))) throw new ForbiddenException();
-    return this.prisma.user.findUnique({ where: args.where, select: PrismaSelect(info, args) });
+    return this.prisma.user.findUnique(PrismaSelectArgs(info, args));
   }
 
   @Query()
@@ -60,9 +59,9 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const item = await this.prisma.user.findFirst({ where: args.where });
+    const item = await this.prisma.user.findFirst(args);
     if (ability.cannot('read', subject('User', item))) throw new ForbiddenException();
-    return this.prisma.user.findFirst({ where: args.where, select: PrismaSelect(info, args) });
+    return this.prisma.user.findFirst(PrismaSelectArgs(info, args));
   }
 
   @Query()
@@ -71,23 +70,31 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const items = await this.prisma.user.findMany({ where: args.where });
+    const items = await this.prisma.user.findMany(args);
     for (const item of items) {
       if (ability.cannot('read', subject('User', item))) throw new ForbiddenException();
     }
-    return this.prisma.user.findMany({ where: args.where, select: PrismaSelect(info, args) });
+    return this.prisma.user.findMany(PrismaSelectArgs(info, args));
   }
 
   @Query()
-  async findManyUserCount(@Args() args: FindManyUserArgs, @CaslAbility() ability: AppAbility) {
+  async findManyUserCount(
+    @Args() args: FindManyUserArgs,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     if (ability.cannot('read', 'User')) throw new ForbiddenException();
-    return this.prisma.user.count({ where: args.where });
+    return this.prisma.user.count(PrismaSelectArgs(info, args));
   }
 
   @Query()
-  async aggregateUser(@Args() args: AggregateUserArgs, @CaslAbility() ability: AppAbility) {
+  async aggregateUser(
+    @Args() args: AggregateUserArgs,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     if (ability.cannot('read', 'User')) throw new ForbiddenException();
-    return this.prisma.user.aggregate({ where: args.where });
+    return this.prisma.user.aggregate(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
@@ -97,15 +104,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     if (ability.cannot('create', subject('User', args.data as any))) throw new ForbiddenException();
-    return this.prisma.user.create({ data: args.data, select: PrismaSelect(info, args) });
-  }
-
-  @Mutation()
-  async createManyUser(@Args() args: CreateManyUserArgs, @CaslAbility() ability: AppAbility) {
-    for (const item of args.data) {
-      if (ability.cannot('create', subject('User', item as any))) throw new ForbiddenException();
-    }
-    return this.prisma.user.createMany({ data: args.data });
+    return this.prisma.user.create(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
@@ -116,20 +115,20 @@ export class UserResolver {
   ) {
     const item = await this.prisma.user.findUnique({ where: args.where });
     if (ability.cannot('update', subject('User', item))) throw new ForbiddenException();
-    return this.prisma.user.update({
-      where: args.where,
-      data: args.data,
-      select: PrismaSelect(info, args),
-    });
+    return this.prisma.user.update(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
-  async updateManyUser(@Args() args: UpdateManyUserArgs, @CaslAbility() ability: AppAbility) {
+  async updateManyUser(
+    @Args() args: UpdateManyUserArgs,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     const items = await this.prisma.user.findMany({ where: args.where });
     for (const item of items) {
       if (ability.cannot('update', subject('User', item))) throw new ForbiddenException();
     }
-    return this.prisma.user.updateMany({ where: args.where, data: args.data });
+    return this.prisma.user.updateMany(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
@@ -144,12 +143,7 @@ export class UserResolver {
     ) {
       throw new ForbiddenException();
     }
-    return this.prisma.user.upsert({
-      where: args.where,
-      create: args.create,
-      update: args.update,
-      select: PrismaSelect(info, args),
-    });
+    return this.prisma.user.upsert(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
@@ -158,17 +152,21 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const item = await this.prisma.user.findUnique({ where: args.where });
+    const item = await this.prisma.user.findUnique(args);
     if (ability.cannot('delete', subject('User', item))) throw new ForbiddenException();
-    return this.prisma.user.delete({ where: args.where, select: PrismaSelect(info, args) });
+    return this.prisma.user.delete(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
-  async deleteManyUser(@Args() args: DeleteManyUserArgs, @CaslAbility() ability: AppAbility) {
-    const items = await this.prisma.user.findMany({ where: args.where });
+  async deleteManyUser(
+    @Args() args: DeleteManyUserArgs,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
+    const items = await this.prisma.user.findMany(args);
     for (const item of items) {
       if (ability.cannot('delete', subject('User', item))) throw new ForbiddenException();
     }
-    return this.prisma.user.deleteMany({ where: args.where });
+    return this.prisma.user.deleteMany(PrismaSelectArgs(info, args));
   }
 }

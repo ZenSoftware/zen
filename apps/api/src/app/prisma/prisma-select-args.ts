@@ -3,7 +3,7 @@ import { GraphQLResolveInfo } from 'graphql';
 
 import { Prisma } from './generated';
 
-export function PrismaSelect(info: GraphQLResolveInfo, args: object) {
+export function PrismaSelectArgs(info: GraphQLResolveInfo, args: object) {
   const result = new PalPrismaSelect(info, { dmmf: [Prisma.dmmf] }).value;
 
   if (!result.select || Object.keys(result.select).length > 0) {
