@@ -9,7 +9,7 @@ export class CaslGuard {
       providedIn: 'root',
     })
     class CaslCan implements CanActivate, CanActivateChild, CanMatch {
-      constructor(private router: Router, private ability: Ability) {}
+      constructor(public router: Router, public ability: Ability) {}
 
       canActivate() {
         return this.ability.can(action, subject, conditions)
@@ -34,7 +34,7 @@ export class CaslGuard {
       providedIn: 'root',
     })
     class CaslCannot implements CanActivate, CanActivateChild, CanMatch {
-      constructor(private router: Router, private ability: Ability) {}
+      constructor(public router: Router, public ability: Ability) {}
 
       canActivate() {
         return this.ability.cannot(action, subject, field) ? true : this.router.parseUrl('/login');

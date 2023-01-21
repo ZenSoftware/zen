@@ -18,10 +18,10 @@ import { AuthService } from '../auth.service';
 export class RolesDirective implements OnDestroy {
   #subsciption: Subscription;
   #roles?: string | string[];
-  #embededViewRef: EmbeddedViewRef<any> | undefined;
+  #embededViewRef: EmbeddedViewRef<unknown> | undefined;
 
   constructor(
-    private templateRef: TemplateRef<any>,
+    private templateRef: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
     private auth: AuthService,
     private userRolesGQL: UserRolesGQL

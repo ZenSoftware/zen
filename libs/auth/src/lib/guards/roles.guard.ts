@@ -10,7 +10,7 @@ export class RolesGuard {
       providedIn: 'root',
     })
     class HasRoles implements CanActivate, CanActivateChild, CanMatch {
-      constructor(private auth: AuthService, private router: Router) {}
+      constructor(public auth: AuthService, public router: Router) {}
 
       canActivate() {
         return this.auth.userHasRole(roles as string[]) ? true : this.router.parseUrl('/login');
@@ -33,7 +33,7 @@ export class RolesGuard {
       providedIn: 'root',
     })
     class NotRoles implements CanActivate, CanActivateChild, CanMatch {
-      constructor(private auth: AuthService, private router: Router) {}
+      constructor(public auth: AuthService, public router: Router) {}
 
       canActivate() {
         return this.auth.userNotInRole(roles as string[]) ? true : this.router.parseUrl('/login');

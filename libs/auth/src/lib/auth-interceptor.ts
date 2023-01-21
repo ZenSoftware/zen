@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
     this.gqlHost = new URL(env.url.graphql).host;
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = tokenVar();
     const reqHost = new URL(req.url).host;
 

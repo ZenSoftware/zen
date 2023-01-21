@@ -5,11 +5,11 @@ import { Environment } from '@zen/common';
   selector: '[ifPublicRegistration]',
 })
 export class IfPublicRegistrationDirective {
-  #embededViewRef: EmbeddedViewRef<any> | undefined;
+  #embededViewRef: EmbeddedViewRef<unknown> | undefined;
   #ifPublicRegistration?: boolean | '';
 
   constructor(
-    private templateRef: TemplateRef<any>,
+    private templateRef: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
     private env: Environment
   ) {
