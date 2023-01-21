@@ -1,4 +1,3 @@
-import { subject } from '@casl/ability';
 import { ContextType, ExecutionContext, Injectable, mixin } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
@@ -32,38 +31,27 @@ export function CaslGuard(...actions: Array<Action>) {
 
       await super.canActivate(context);
 
+      if (actions.length === 0) return true;
+
       const classSubject = this.reflector.get<string>(CASL_SUBJECT_KEY, context.getClass());
       const handlerSubject = this.reflector.get<string>(CASL_SUBJECT_KEY, context.getHandler());
       const subjectName = handlerSubject ? handlerSubject : classSubject;
 
+      let user: RequestUser;
       const type = context.getType() as ContextType & 'graphql';
 
       if (type === 'http') {
-        const user: RequestUser = context.switchToHttp().getRequest().user;
-        const ability = await this.caslFactory.createAbility(user);
-
-        for (const action of actions) {
-          const allowed = ability.can(action, subjectName);
-          // console.log(`HTTP CaslGuard user: ${user.id} - ${action} ${subjectName} ${allowed}`);
-          if (allowed) return true;
-        }
+        user = context.switchToHttp().getRequest().user;
       } else if (type === 'graphql') {
-        const host = GqlExecutionContext.create(context);
-        const args = host.getArgs();
+        user = GqlExecutionContext.create(context).getContext().req.user;
+      }
 
-        // Utilize the `where` input for the Casl subject if it exists in the args
-        const inputSubject = args?.['where'] ? subject(subjectName, args['where']) : subjectName;
-        const user: RequestUser = host.getContext().req.user;
-        const ability = await this.caslFactory.createAbility(user);
+      const ability = await this.caslFactory.createAbility(user);
 
-        for (const action of actions) {
-          const allowed = ability.can(action, inputSubject);
-          // console.log(
-          //   `GraphQL CaslGuard user: ${user.id} - ${action} ${subjectName} ${allowed}`,
-          //   inputSubject
-          // );
-          if (allowed) return true;
-        }
+      for (const action of actions) {
+        const allowed = ability.can(action, subjectName);
+        // console.log(`CaslGuard user: ${user.id} - ${action} ${subjectName} ${allowed}`);
+        if (allowed) return true;
       }
 
       return false;
