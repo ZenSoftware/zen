@@ -19,7 +19,7 @@ export const CaslAbility = createParamDecorator((data: unknown, context: Executi
     ability = GqlExecutionContext.create(context).getContext().req.ability;
   }
 
-  if (!ability) throw new UnauthorizedException('No user found for request');
+  if (!ability) throw new UnauthorizedException('No ability found for request');
 
   return ability;
 });
