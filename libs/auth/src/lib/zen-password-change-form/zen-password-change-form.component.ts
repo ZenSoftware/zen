@@ -84,7 +84,8 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
       if (this.form) {
         this.passwordConfirm.updateValueAndValidity();
 
-        let errors: any = passwordValidatorFn(control);
+        let errors: (ReturnType<typeof passwordValidatorFn> & { oldEqualsNew?: boolean }) | null =
+          passwordValidatorFn(control);
 
         if (this.newPassword.value && this.oldPassword.value === this.newPassword.value) {
           if (errors) errors.oldEqualsNew = true;

@@ -7,6 +7,7 @@ import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models/auth-session';
 import { JwtService } from '../jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { AppAbility } from './casl/casl.factory';
 
 @Injectable()
 export class AuthService {
@@ -31,7 +32,7 @@ export class AuthService {
 
     const token = this.jwtService.sign(jwtPayload, { expiresIn });
 
-    const ability = await this.caslFactory.createAbility(user);
+    const ability = await this.createAbility(user);
 
     const authSession: AuthSession = {
       userId: user.id,
@@ -45,7 +46,7 @@ export class AuthService {
     return authSession;
   }
 
-  async createAbility(user: RequestUser) {
+  async createAbility(user: RequestUser): Promise<AppAbility> {
     return this.caslFactory.createAbility(user);
   }
 
