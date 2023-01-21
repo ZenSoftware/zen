@@ -13,7 +13,6 @@ import {
   NestCaslTemplate,
   NestResolversABACTemplate,
   NestResolversIndexTemplate,
-  NestResolversRBACTemplate,
   TypeDefsTemplate,
 } from './templates';
 
@@ -23,8 +22,6 @@ export type ZenGeneratorConfig = {
   palConfig: PalConfig;
   apiOutPath: string;
   caslOutFile?: string;
-  /** Defaults to 'ABAC' */
-  authScheme?: 'ABAC' | 'RBAC';
   frontend?: {
     outPath: string;
     /** Defaults to 'fields' */
@@ -80,17 +77,12 @@ export class ZenGenerator {
       await mkdir(nestResolversPath);
     }
 
-    let wroteCount = 0;
-    if (!this.config.authScheme || this.config.authScheme === 'ABAC') {
-      if (this.config.caslOutFile) {
-        await writeFile(this.config.caslOutFile, NestCaslTemplate(prismaNames));
-        console.log(`- Wrote: ${this.config.caslOutFile}`);
-      }
-
-      wroteCount = await this.nestAbacResolvers(prismaNames);
-    } else if (this.config.authScheme === 'RBAC') {
-      wroteCount = await this.nestRbacResolvers(prismaNames);
+    if (this.config.caslOutFile) {
+      await writeFile(this.config.caslOutFile, NestCaslTemplate(prismaNames));
+      console.log(`- Wrote: ${this.config.caslOutFile}`);
     }
+
+    const wroteCount = await this.nestAbacResolvers(prismaNames);
 
     // Get the data type names via the filename of the "resolvers" directory
     let dataTypeNames = (await readdir(nestResolversPath))
@@ -166,21 +158,6 @@ export class ZenGenerator {
 
       if (!fs.existsSync(outPath)) {
         await writeFile(outPath, NestResolversABACTemplate(prismaName));
-        console.log(`- Wrote: ${outPath}`);
-        wroteCount++;
-      }
-    }
-
-    return wroteCount;
-  }
-
-  async nestRbacResolvers(prismaNames: string[]) {
-    let wroteCount = 0;
-    for (const prismaName of prismaNames) {
-      const outPath = path.join(this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
-
-      if (!fs.existsSync(outPath)) {
-        await writeFile(outPath, NestResolversRBACTemplate(prismaName));
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }

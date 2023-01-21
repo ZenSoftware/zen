@@ -42,11 +42,11 @@ export function selectOne<T>(
   item: T | number | string | null | undefined,
   outputField: string = 'id',
   inputField?: keyof T
-): { [outputField: string]: any } {
+): { [outputField: string]: unknown } {
   if (!inputField) (<string>inputField) = outputField;
 
   if (item !== undefined && item !== null) {
-    const obj: Record<string, any> = {};
+    const obj: Record<string, unknown> = {};
     const typeofItem = typeof item;
 
     if (
@@ -63,7 +63,8 @@ export function selectOne<T>(
     }
   }
 
-  return undefined as any;
+  // @ts-expect-error - This is a valid return type
+  return undefined;
 }
 
 /**
@@ -140,7 +141,7 @@ export function selectMany<T>(
   input: Iterable<T | null | undefined> | null | undefined,
   outputField: string = 'id',
   inputField?: keyof T
-): Array<{ [outputField: string]: any }> {
+): Array<{ [outputField: string]: unknown }> {
   if (!inputField) (<string>inputField) = outputField;
 
   if (input) {

@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 import { HttpException, Logger, UseGuards } from '@nestjs/common';
-import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/common';
 import { CurrentUser, JwtPayload, RequestUser, RolesGuard } from '@zen/nest-auth';
@@ -12,7 +12,7 @@ import { AuthService } from '../../auth';
 import { ConfigService } from '../../config';
 import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
-import { PrismaClient } from '../../prisma';
+import { PrismaClient, PrismaService } from '../../prisma';
 import { GqlThrottlerGuard } from '../gql-throttler.guard';
 import {
   AccountInfo,
@@ -22,7 +22,6 @@ import {
   AuthPasswordResetConfirmationInput,
   AuthPasswordResetRequestInput,
   AuthRegisterInput,
-  IContext,
 } from '../models';
 
 export const typeDefs = gql`
@@ -102,12 +101,13 @@ export class AuthResolver {
     private readonly auth: AuthService,
     private readonly config: ConfigService,
     private readonly jwtService: JwtService,
-    private readonly mail: MailService
+    private readonly mail: MailService,
+    private readonly prisma: PrismaService
   ) {}
 
   @Query()
-  async authLogin(@Context() ctx: IContext, @Args('data') args: AuthLoginInput) {
-    const user = await this.getUserByUsername(args.username, ctx.prisma);
+  async authLogin(@Args('data') args: AuthLoginInput) {
+    const user = await this.getUserByUsername(args.username, this.prisma);
 
     if (!user) throw new HttpException(ApiError.AuthLogin.USER_NOT_FOUND, 400);
 
@@ -119,29 +119,25 @@ export class AuthResolver {
 
   @Query()
   @UseGuards(RolesGuard())
-  async accountInfo(
-    @Context() ctx: IContext,
-    @CurrentUser() reqUser: RequestUser
-  ): Promise<AccountInfo> {
-    const user = await ctx.prisma.user.findUnique({
+  async accountInfo(@CurrentUser() reqUser: RequestUser): Promise<AccountInfo> {
+    const user = await this.prisma.user.findUnique({
       where: { id: reqUser.id },
     });
 
     return {
       username: user.username,
       hasPassword: !!user.password,
-      googleProfile: user.googleProfile as any,
+      googleProfile: user.googleProfile as AccountInfo['googleProfile'],
     };
   }
 
   @Query()
   @UseGuards(RolesGuard())
   async authExchangeToken(
-    @Context() ctx: IContext,
     @CurrentUser() reqUser: RequestUser,
     @Args('data') args: AuthExchangeTokenInput
   ) {
-    const user = await ctx.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: { id: reqUser.id },
     });
 
@@ -153,11 +149,8 @@ export class AuthResolver {
   }
 
   @Query()
-  async authPasswordResetRequest(
-    @Context() ctx: IContext,
-    @Args('data') args: AuthPasswordResetRequestInput
-  ) {
-    const possibleUsers = await ctx.prisma.user.findMany({
+  async authPasswordResetRequest(@Args('data') args: AuthPasswordResetRequestInput) {
+    const possibleUsers = await this.prisma.user.findMany({
       where: {
         OR: [
           {
@@ -184,10 +177,7 @@ export class AuthResolver {
   }
 
   @Mutation()
-  async authPasswordResetConfirmation(
-    @Context() ctx: IContext,
-    @Args('data') args: AuthPasswordResetConfirmationInput
-  ) {
+  async authPasswordResetConfirmation(@Args('data') args: AuthPasswordResetConfirmationInput) {
     let tokenPayload: JwtPayload;
     try {
       tokenPayload = this.jwtService.verify(args.token);
@@ -195,13 +185,13 @@ export class AuthResolver {
       throw new HttpException(ApiError.AuthPasswordResetConfirmation.UNAUTHORIZED, 400);
     }
 
-    let user = await ctx.prisma.user.findUnique({ where: { id: tokenPayload.sub } });
+    let user = await this.prisma.user.findUnique({ where: { id: tokenPayload.sub } });
 
     if (!user) throw new HttpException(ApiError.AuthPasswordResetConfirmation.USER_NOT_FOUND, 400);
 
     const hashedPassword = await this.hashPassword(args.newPassword);
 
-    user = await ctx.prisma.user.update({
+    user = await this.prisma.user.update({
       where: { id: user.id },
       data: { password: hashedPassword },
     });
@@ -210,19 +200,19 @@ export class AuthResolver {
   }
 
   @Mutation()
-  async authRegister(@Context() ctx: IContext, @Args('data') args: AuthRegisterInput) {
+  async authRegister(@Args('data') args: AuthRegisterInput) {
     if (!this.config.publicRegistration)
       throw new HttpException(ApiError.AuthRegister.NO_PUBLIC_REGISTRATIONS, 403);
 
-    if (await this.getUserByUsername(args.username, ctx.prisma))
+    if (await this.getUserByUsername(args.username, this.prisma))
       throw new HttpException(ApiError.AuthRegister.USERNAME_TAKEN, 400);
 
-    if (await this.getUserByEmail(args.email, ctx.prisma))
+    if (await this.getUserByEmail(args.email, this.prisma))
       throw new HttpException(ApiError.AuthRegister.EMAIL_TAKEN, 400);
 
     const hashedPassword = await this.hashPassword(args.password);
 
-    const user = await ctx.prisma.user.create({
+    const user = await this.prisma.user.create({
       data: {
         username: args.username,
         email: args.email,
@@ -254,11 +244,10 @@ export class AuthResolver {
   @Mutation()
   @UseGuards(RolesGuard())
   async authPasswordChange(
-    @Context() ctx: IContext,
     @Args('data') args: AuthPasswordChangeInput,
     @CurrentUser() reqUser: RequestUser
   ) {
-    const user = await ctx.prisma.user.findUnique({ where: { id: reqUser.id } });
+    const user = await this.prisma.user.findUnique({ where: { id: reqUser.id } });
     if (!user) throw new HttpException(ApiError.AuthPasswordChange.USER_NOT_FOUND, 400);
 
     const correctPassword = await bcryptVerify({ password: args.oldPassword, hash: user.password });
@@ -266,7 +255,7 @@ export class AuthResolver {
 
     const hashedPassword = await this.hashPassword(args.newPassword);
 
-    await ctx.prisma.user.update({
+    await this.prisma.user.update({
       where: { id: user.id },
       data: { password: hashedPassword },
     });

@@ -1,22 +1,12 @@
-import { UseGuards } from '@nestjs/common';
-import {
-  Args,
-  Context,
-  Info,
-  Mutation,
-  Parent,
-  Query,
-  ResolveField,
-  Resolver,
-} from '@nestjs/graphql';
-import { CaslFactory, CaslGuard, CaslSubject } from '@zen/nest-auth';
+import { subject } from '@casl/ability';
+import { ForbiddenException, UseGuards } from '@nestjs/common';
+import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { CaslAbility, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
-import { User } from '../../prisma';
-import { PrismaSelectArgs } from '../../prisma';
-import { IContext } from '../models';
-import resolvers from '../paljs/User/resolvers';
+import { AppAbility, AuthService } from '../../auth';
+import { PrismaSelectArgs, PrismaService, User } from '../../prisma';
 import type {
   AggregateUserArgs,
   CreateOneUserArgs,
@@ -37,9 +27,9 @@ export const typeDefs = gql`
 `;
 
 @Resolver('User')
-@CaslSubject('User')
+@UseGuards(CaslGuard)
 export class UserResolver {
-  constructor(private readonly caslFactory: CaslFactory) {}
+  constructor(private readonly auth: AuthService, private readonly prisma: PrismaService) {}
 
   @ResolveField()
   async password() {
@@ -48,117 +38,135 @@ export class UserResolver {
 
   @ResolveField()
   async rules(@Parent() parent: User) {
-    const ability = await this.caslFactory.createAbility(parent);
+    const ability = await this.auth.createAbility(parent);
     return ability.rules;
   }
 
   @Query()
-  @UseGuards(CaslGuard('read'))
   async findUniqueUser(
     @Args() args: FindUniqueUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Query.findUniqueUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    const item = await this.prisma.user.findUnique(args);
+    if (ability.cannot('read', subject('User', item))) throw new ForbiddenException();
+    return this.prisma.user.findUnique(PrismaSelectArgs(info, args));
   }
 
   @Query()
-  @UseGuards(CaslGuard('read'))
   async findFirstUser(
     @Args() args: FindFirstUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Query.findFirstUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    const item = await this.prisma.user.findFirst(args);
+    if (ability.cannot('read', subject('User', item))) throw new ForbiddenException();
+    return this.prisma.user.findFirst(PrismaSelectArgs(info, args));
   }
 
   @Query()
-  @UseGuards(CaslGuard('read'))
   async findManyUser(
     @Args() args: FindManyUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Query.findManyUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    const items = await this.prisma.user.findMany(args);
+    for (const item of items) {
+      if (ability.cannot('read', subject('User', item))) throw new ForbiddenException();
+    }
+    return this.prisma.user.findMany(PrismaSelectArgs(info, args));
   }
 
   @Query()
-  @UseGuards(CaslGuard('read'))
   async findManyUserCount(
     @Args() args: FindManyUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Query.findManyUserCount(undefined, PrismaSelectArgs(info, args), ctx, info);
+    if (ability.cannot('read', 'User')) throw new ForbiddenException();
+    return this.prisma.user.count(PrismaSelectArgs(info, args));
   }
 
   @Query()
-  @UseGuards(CaslGuard('read'))
   async aggregateUser(
     @Args() args: AggregateUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Query.aggregateUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    if (ability.cannot('read', 'User')) throw new ForbiddenException();
+    return this.prisma.user.aggregate(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
-  @UseGuards(CaslGuard('create'))
   async createOneUser(
     @Args() args: CreateOneUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Mutation.createOneUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    if (ability.cannot('create', subject('User', args.data as any))) throw new ForbiddenException();
+    return this.prisma.user.create(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
-  @UseGuards(CaslGuard('update'))
   async updateOneUser(
     @Args() args: UpdateOneUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Mutation.updateOneUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    const item = await this.prisma.user.findUnique({ where: args.where });
+    if (ability.cannot('update', subject('User', item))) throw new ForbiddenException();
+    return this.prisma.user.update(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
-  @UseGuards(CaslGuard('update'))
   async updateManyUser(
     @Args() args: UpdateManyUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Mutation.updateManyUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    const items = await this.prisma.user.findMany({ where: args.where });
+    for (const item of items) {
+      if (ability.cannot('update', subject('User', item))) throw new ForbiddenException();
+    }
+    return this.prisma.user.updateMany(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
-  @UseGuards(CaslGuard('create'), CaslGuard('update'))
   async upsertOneUser(
     @Args() args: UpsertOneUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Mutation.upsertOneUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    if (
+      ability.cannot('create', subject('User', args.create as any)) ||
+      ability.cannot('update', subject('User', args.update as any))
+    ) {
+      throw new ForbiddenException();
+    }
+    return this.prisma.user.upsert(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
-  @UseGuards(CaslGuard('delete'))
   async deleteOneUser(
     @Args() args: DeleteOneUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Mutation.deleteOneUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    const item = await this.prisma.user.findUnique(args);
+    if (ability.cannot('delete', subject('User', item))) throw new ForbiddenException();
+    return this.prisma.user.delete(PrismaSelectArgs(info, args));
   }
 
   @Mutation()
-  @UseGuards(CaslGuard('delete'))
   async deleteManyUser(
     @Args() args: DeleteManyUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @Context() ctx: IContext
+    @CaslAbility() ability: AppAbility
   ) {
-    return resolvers.Mutation.deleteManyUser(undefined, PrismaSelectArgs(info, args), ctx, info);
+    const items = await this.prisma.user.findMany(args);
+    for (const item of items) {
+      if (ability.cannot('delete', subject('User', item))) throw new ForbiddenException();
+    }
+    return this.prisma.user.deleteMany(PrismaSelectArgs(info, args));
   }
 }

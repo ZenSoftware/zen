@@ -1,11 +1,7 @@
 import { ApolloDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { GqlOptionsFactory } from '@nestjs/graphql';
-import {
-  ApolloServerPluginInlineTraceDisabled,
-  Context,
-  PluginDefinition,
-} from 'apollo-server-core';
+import { ApolloServerPluginInlineTraceDisabled, PluginDefinition } from 'apollo-server-core';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { print } from 'graphql';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
@@ -38,18 +34,18 @@ export class GqlConfigService implements GqlOptionsFactory {
       subscriptions: this.config.graphql.subscriptions
         ? {
             'graphql-ws': {
-              onConnect: (context: Context<any>) => {
+              onConnect: (context: any) => {
                 const { connectionParams, extra } = context;
                 extra.token = connectionParams.token;
               },
             },
           }
         : undefined,
-      context: async (ctx): Promise<IContext> => {
+      context: (ctx): IContext => {
         // Subscriptions pass through JWT token for authentication
-        if (ctx.extra) return { req: ctx.extra, prisma: this.prisma };
+        if (ctx.extra) return { req: ctx.extra };
         // Queries, Mutations
-        else return { ...ctx, prisma: this.prisma };
+        else return ctx;
       },
     };
   }

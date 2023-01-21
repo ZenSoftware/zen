@@ -7,7 +7,7 @@ import { PrismaQuery, createPrismaAbility } from './casl-prisma';
 import { PrismaSubjects } from './generated';
 
 /** A union of subjects to extend the ability beyond just Prisma models */
-export type ExtendedSubjects = 'all';
+type ExtendedSubjects = 'all';
 export type AppAbility = PureAbility<[Action, PrismaSubjects | ExtendedSubjects], PrismaQuery>;
 
 @Injectable()
