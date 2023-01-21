@@ -1,3 +1,3 @@
-import { IContext } from './models';
+import { PrismaService } from '../prisma';
 
-export type Context = IContext;
+export type Context = { prisma: PrismaService };
