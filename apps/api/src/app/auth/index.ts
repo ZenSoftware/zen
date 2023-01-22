@@ -1,3 +1,3 @@
 export * from './auth.module';
 export * from './auth.service';
-export { AppAbility } from './casl/casl.factory';
+export { AppAbility, AppSubjects } from './casl/casl.factory';
