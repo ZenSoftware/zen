@@ -8,7 +8,6 @@
     "apollographql.vscode-apollo",
     "Prisma.prisma",
     "KnisterPeter.vscode-commitizen",
-    "eamodio.gitlens",
-    "amatiasq.sort-imports"
+    "eamodio.gitlens"
   ]
 }

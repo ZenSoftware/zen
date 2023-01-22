@@ -35,7 +35,7 @@ export type PrismaQuery<T extends PrismaModel = PrismaModel> = WhereInput<
 > &
   hkt.Container<PrismaQueryTypeFactory>;
 
-type WhereInputPerModel = {
+export type WhereInputPerModel = {
   [K in ModelName]: WhereInput<K>;
 };
 
