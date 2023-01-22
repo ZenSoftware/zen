@@ -8,10 +8,10 @@
     "start:api": "nx serve api",
     "start:e2e": "nx e2e portal-e2e --watch",
     "frontend:gen": "graphql-codegen -c tools/apollo-angular.yml && graphql-codegen -c tools/apollo-possible-types.yml",
-    "api:gen": "prisma generate --schema apps/api/schema.prisma && ts-node tools/generate.ts",
-    "prisma:migrate": "prisma migrate dev --schema apps/api/schema.prisma && ts-node tools/generate.ts",
-    "prisma:deploy": "prisma migrate deploy --schema apps/api/schema.prisma",
-    "prisma:studio": "prisma studio --schema apps/api/schema.prisma",
+    "api:gen": "prisma generate --schema apps/api/prisma/schema.prisma && ts-node tools/generate.ts",
+    "prisma:migrate": "prisma migrate dev --schema apps/api/prisma/schema.prisma && ts-node tools/generate.ts",
+    "prisma:deploy": "prisma migrate deploy --schema apps/api/prisma/schema.prisma",
+    "prisma:studio": "prisma studio --schema apps/api/prisma/schema.prisma",
     "prod:portal": "nx build portal --prod",
     "prod:api": "nx build api --prod && npm run docker:build:api",
     "docker:build:api": "docker build -f deploy/api/Dockerfile -t zen-api .",
@@ -156,4 +156,3 @@
     }
   }
 }
-
