@@ -5,7 +5,7 @@ WORKDIR /usr/src/api
 COPY dist/apps/api ./
 COPY package.json ./
 COPY pnpm-lock.yaml ./
-COPY apps/api/schema.prisma ./schema.prisma
+COPY apps/api/prisma/schema.prisma ./schema.prisma
 
 RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" && chmod +x /bin/pnpm
 RUN pnpm i --prod --frozen-lockfile
