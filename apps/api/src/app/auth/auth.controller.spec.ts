@@ -18,7 +18,7 @@ describe('Auth Controller', () => {
             getAuthSession: () => {
               const authSession: Partial<AuthSession> = {
                 userId: 'abc123',
-                roles: ['Super', 'Registered'],
+                roles: ['Moderator', 'Editor'],
                 expiresIn: 123,
                 rememberMe: true,
                 token: 'abc.def_+/ghi.jkl==',
