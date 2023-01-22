@@ -6,7 +6,7 @@ import { JwtModule } from '../jwt';
 import { PrismaModule } from '../prisma';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { ApiCaslFactory } from './casl/casl.factory';
+import { AppCaslFactory } from './casl/casl.factory';
 import { GoogleOAuthStrategy } from './strategies/google-oauth.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
@@ -14,7 +14,7 @@ const oauthProviders = [];
 if (environment.oauth?.google?.clientID) oauthProviders.push(GoogleOAuthStrategy);
 
 @Module({
-  imports: [JwtModule, PrismaModule, NestAuthModule.register(ApiCaslFactory)],
+  imports: [JwtModule, PrismaModule, NestAuthModule.register(AppCaslFactory)],
   providers: [JwtStrategy, AuthService, ...oauthProviders],
   exports: [JwtModule, AuthService, NestAuthModule],
   controllers: [AuthController],

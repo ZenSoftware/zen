@@ -6,8 +6,9 @@ import { CaslFactory, JwtPayload, RequestUser } from '@zen/nest-auth';
 import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models/auth-session';
 import { JwtService } from '../jwt';
-import { JwtStrategy } from './strategies/jwt.strategy';
+import { accessibleBy } from './casl/casl-prisma';
 import { AppAbility } from './casl/casl.factory';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Injectable()
 export class AuthService {
@@ -49,6 +50,8 @@ export class AuthService {
   async createAbility(user: RequestUser): Promise<AppAbility> {
     return this.caslFactory.createAbility(user);
   }
+
+  accessibleBy = accessibleBy;
 
   /**
    * @returns `RequestUser` if valid and `null` otherwise

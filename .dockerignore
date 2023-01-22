@@ -5,4 +5,4 @@
 !/dist/**
 !package*.json
 !pnpm-lock.yaml
-!apps/api/schema.prisma
+!apps/api/prisma/schema.prisma

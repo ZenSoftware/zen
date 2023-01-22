@@ -8,10 +8,11 @@ import { PrismaSubjects } from './generated';
 
 /** A union of subjects to extend the ability beyond just Prisma models */
 type ExtendedSubjects = 'all';
-export type AppAbility = PureAbility<[Action, PrismaSubjects | ExtendedSubjects], PrismaQuery>;
+export type AppSubjects = PrismaSubjects | ExtendedSubjects;
+export type AppAbility = PureAbility<[Action, AppSubjects], PrismaQuery>;
 
 @Injectable()
-export class ApiCaslFactory implements CaslFactory {
+export class AppCaslFactory implements CaslFactory {
   async createAbility(user: RequestUser) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(createPrismaAbility);
 

@@ -3,7 +3,7 @@ import { ZenGenerator } from './zen-generator';
 async function main() {
   const generator = new ZenGenerator({
     palConfig: {
-      schema: 'apps/api/schema.prisma',
+      schema: 'apps/api/prisma/schema.prisma',
       backend: {
         generator: 'sdl',
         output: 'apps/api/src/app/graphql/paljs',
