@@ -4,10 +4,10 @@ export function NestResolversABACTemplate(name: string) {
   return `import { subject } from '@casl/ability';
 import { ForbiddenException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CaslAbility, CaslGuard } from '@zen/nest-auth';
+import { CaslAbility, CaslAccessible, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { AppAbility } from '../../auth';
+import { AppAbility, Accessible } from '../../auth';
 import { PrismaSelectArgs, PrismaService } from '../../prisma';
 import type {
   Aggregate${name}Args,
@@ -46,9 +46,9 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.${lowercase(name)}.findUnique(args);
+    const record = await this.prisma.${lowercase(name)}.findUnique(PrismaSelectArgs(info, args));
     if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.findUnique(PrismaSelectArgs(info, args));
+    return record;
   }
 
   @Query()
@@ -57,21 +57,18 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.${lowercase(name)}.findFirst(args);
+    const record = await this.prisma.${lowercase(name)}.findFirst(PrismaSelectArgs(info, args));
     if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.findFirst(PrismaSelectArgs(info, args));
+    return record;
   }
 
   @Query()
   async findMany${name}(
     @Args() args: FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
-    @CaslAbility() ability: AppAbility
+    @CaslAccessible('${name}') accessible: Accessible['${name}']
   ) {
-    const records = await this.prisma.${lowercase(name)}.findMany(args);
-    for (const record of records) {
-      if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
-    }
+    args.where = { AND: [accessible as any, args.where] };
     return this.prisma.${lowercase(name)}.findMany(PrismaSelectArgs(info, args));
   }
 
