@@ -11,7 +11,7 @@ type ExtendedSubjects = 'all';
 export type AppAbility = PureAbility<[Action, PrismaSubjects | ExtendedSubjects], PrismaQuery>;
 
 @Injectable()
-export class ApiCaslFactory implements CaslFactory {
+export class AppCaslFactory implements CaslFactory {
   async createAbility(user: RequestUser) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(createPrismaAbility);
 
