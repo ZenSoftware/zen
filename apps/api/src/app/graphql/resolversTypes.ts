@@ -1,8 +1,7 @@
-import * as Client from '../prisma';
-
-import { Context } from './context';
-
 import { GraphQLResolveInfo } from 'graphql';
+
+import * as Client from '../prisma';
+import { Context } from './context';
 
 type Resolver<T extends {}, A extends {}, R extends any> = (
   parent: T,

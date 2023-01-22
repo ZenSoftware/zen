@@ -6,8 +6,8 @@ import { CaslFactory, JwtPayload, RequestUser } from '@zen/nest-auth';
 import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models/auth-session';
 import { JwtService } from '../jwt';
-import { JwtStrategy } from './strategies/jwt.strategy';
 import { AppAbility } from './casl/casl.factory';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Injectable()
 export class AuthService {
