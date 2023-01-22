@@ -78,9 +78,9 @@ export class UserResolver {
   async findManyUserCount(
     @Args() args: FindManyUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @CaslAbility() ability: AppAbility
+    @CaslAccessible('User') accessible: Accessible['User']
   ) {
-    if (ability.cannot('read', 'User')) throw new ForbiddenException();
+    args.where = { AND: [accessible as any, args.where] };
     return this.prisma.user.count(PrismaSelectArgs(info, args));
   }
 
@@ -88,9 +88,9 @@ export class UserResolver {
   async aggregateUser(
     @Args() args: AggregateUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @CaslAbility() ability: AppAbility
+    @CaslAccessible('User') accessible: Accessible['User']
   ) {
-    if (ability.cannot('read', 'User')) throw new ForbiddenException();
+    args.where = { AND: [accessible as any, args.where] };
     return this.prisma.user.aggregate(PrismaSelectArgs(info, args));
   }
 
