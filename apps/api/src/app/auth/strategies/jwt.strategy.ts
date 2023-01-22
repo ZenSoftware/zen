@@ -10,6 +10,7 @@ import { ConfigService } from '../../config';
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(private readonly config: ConfigService) {
     super({
+      /** (passport-jwt docs)[http://www.passportjs.org/packages/passport-jwt/] */
       secretOrKey: config.jwtOptions.publicKey
         ? config.jwtOptions.publicKey
         : config.jwtOptions.secret,
