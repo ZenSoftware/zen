@@ -7,7 +7,7 @@ import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CaslAbility, CaslAccessible, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { AppAbility, Accessible } from '../../auth';
+import { Accessible, AppAbility } from '../../auth';
 import { PrismaSelectArgs, PrismaService } from '../../prisma';
 import type {
   Aggregate${name}Args,
@@ -76,9 +76,9 @@ export class ${name}Resolver {
   async findMany${name}Count(
     @Args() args: FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
-    @CaslAbility() ability: AppAbility
+    @CaslAccessible('${name}') accessible: Accessible['${name}']
   ) {
-    if (ability.cannot('read', '${name}')) throw new ForbiddenException();
+    args.where = { AND: [accessible as any, args.where] };
     return this.prisma.${lowercase(name)}.count(PrismaSelectArgs(info, args));
   }
 
@@ -86,9 +86,9 @@ export class ${name}Resolver {
   async aggregate${name}(
     @Args() args: Aggregate${name}Args,
     @Info() info: GraphQLResolveInfo,
-    @CaslAbility() ability: AppAbility
+    @CaslAccessible('${name}') accessible: Accessible['${name}']
   ) {
-    if (ability.cannot('read', '${name}')) throw new ForbiddenException();
+    args.where = { AND: [accessible as any, args.where] };
     return this.prisma.${lowercase(name)}.aggregate(PrismaSelectArgs(info, args));
   }
 
