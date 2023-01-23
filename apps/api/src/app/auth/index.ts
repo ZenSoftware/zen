@@ -1,4 +1,5 @@
+export { defaultFields } from './casl/casl.factory';
 export * from './auth.module';
 export * from './auth.service';
-export { AppAbility, AppSubjects } from './casl/casl.factory';
-export { WhereInputPerModel as Accessible } from './casl/casl-prisma';
+export type { AppAbility, AppSubjects } from './casl/casl.factory';
+export type { WhereInputPerModel as Accessible } from './casl/casl-prisma';
