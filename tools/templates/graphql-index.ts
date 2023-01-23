@@ -1,5 +1,6 @@
-export function NestResolversIndexTemplate(names: string[]) {
-  let indexSource = `import { mergeTypeDefs } from '@graphql-tools/merge';
+export function GraphQLIndexTemplate(names: string[]) {
+  let indexSource = `// This file is generated automatically. Do not edit it manually.
+import { mergeTypeDefs } from '@graphql-tools/merge';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 
 import { typeDefs as GlobalTypeDefs } from '../global-schema.gql';
