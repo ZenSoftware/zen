@@ -1,3 +1,4 @@
+// This file is generated automatically. Do not edit it manually.
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 

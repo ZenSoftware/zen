@@ -10,7 +10,8 @@ async function main() {
       },
     },
     apiOutPath: 'apps/api/src/app/graphql',
-    caslOutFile: 'apps/api/src/app/auth/casl/generated.ts',
+    caslSubjectsOutFile: 'apps/api/src/app/auth/casl/generated.ts',
+    prismaSelectionsOutFile: 'apps/api/src/app/prisma/prisma-selections.ts',
     frontend: {
       outPath: 'libs/graphql/src/lib',
     },
