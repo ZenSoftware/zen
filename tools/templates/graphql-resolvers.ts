@@ -1,13 +1,14 @@
 const lowercase = (name: string) => name.charAt(0).toLowerCase() + name.slice(1);
 
-export function NestResolversABACTemplate(name: string) {
+export function GraphQLResolversTemplate(name: string) {
   return `import { subject } from '@casl/ability';
 import { ForbiddenException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CaslAbility, CaslAccessible, CaslGuard } from '@zen/nest-auth';
+import { CaslAbility, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { Accessible, AppAbility } from '../../auth';
+import { defaultFields } from '../../auth';
+import type { AppAbility } from '../../auth';
 import { PrismaSelectArgs, PrismaService } from '../../prisma';
 import type {
   Aggregate${name}Args,
@@ -46,7 +47,9 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.${lowercase(name)}.findUnique(PrismaSelectArgs(info, args));
+    const record = await this.prisma.${lowercase(
+      name
+    )}.findUnique(PrismaSelectArgs(info, args, defaultFields));
     if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
     return record;
   }
@@ -57,7 +60,9 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.${lowercase(name)}.findFirst(PrismaSelectArgs(info, args));
+    const record = await this.prisma.${lowercase(
+      name
+    )}.findFirst(PrismaSelectArgs(info, args, defaultFields));
     if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
     return record;
   }
@@ -66,19 +71,24 @@ export class ${name}Resolver {
   async findMany${name}(
     @Args() args: FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
-    @CaslAccessible('${name}') accessible: Accessible['${name}']
+    @CaslAbility() ability: AppAbility
   ) {
-    args.where = { AND: [accessible as any, args.where] };
-    return this.prisma.${lowercase(name)}.findMany(PrismaSelectArgs(info, args));
+    const records = await this.prisma.${lowercase(
+      name
+    )}.findMany(PrismaSelectArgs(info, args, defaultFields));
+    for (const record of records) {
+      if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
+    }
+    return records;
   }
 
   @Query()
   async findMany${name}Count(
     @Args() args: FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
-    @CaslAccessible('${name}') accessible: Accessible['${name}']
+    @CaslAbility() ability: AppAbility
   ) {
-    args.where = { AND: [accessible as any, args.where] };
+    if (ability.cannot('read', '${name}')) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.count(PrismaSelectArgs(info, args));
   }
 
@@ -86,9 +96,9 @@ export class ${name}Resolver {
   async aggregate${name}(
     @Args() args: Aggregate${name}Args,
     @Info() info: GraphQLResolveInfo,
-    @CaslAccessible('${name}') accessible: Accessible['${name}']
+    @CaslAbility() ability: AppAbility
   ) {
-    args.where = { AND: [accessible as any, args.where] };
+    if (ability.cannot('read', '${name}')) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.aggregate(PrismaSelectArgs(info, args));
   }
 
@@ -108,8 +118,11 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.${lowercase(name)}.findUnique({ where: args.where });
-    if (ability.cannot('update', subject('${name}', record))) throw new ForbiddenException();
+    const record = await this.prisma.${lowercase(name)}.findUnique({
+      where: args.where,
+      select: defaultFields['${name}'],
+    });
+    if (ability.cannot('update', subject('${name}', record) as any)) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.update(PrismaSelectArgs(info, args));
   }
 
@@ -119,9 +132,12 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const records = await this.prisma.${lowercase(name)}.findMany({ where: args.where });
+    const records = await this.prisma.${lowercase(name)}.findMany({
+      where: args.where,
+      select: defaultFields['${name}'],
+    });
     for (const record of records) {
-      if (ability.cannot('update', subject('${name}', record))) throw new ForbiddenException();
+      if (ability.cannot('update', subject('${name}', record) as any)) throw new ForbiddenException();
     }
     return this.prisma.${lowercase(name)}.updateMany(PrismaSelectArgs(info, args));
   }
@@ -147,8 +163,11 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.${lowercase(name)}.findUnique(args);
-    if (ability.cannot('delete', subject('${name}', record))) throw new ForbiddenException();
+    const record = await this.prisma.${lowercase(name)}.findUnique({
+      where: args.where,
+      select: defaultFields['${name}'],
+    });
+    if (ability.cannot('delete', subject('${name}', record) as any)) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.delete(PrismaSelectArgs(info, args));
   }
 
@@ -158,9 +177,12 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const records = await this.prisma.${lowercase(name)}.findMany(args);
+    const records = await this.prisma.${lowercase(name)}.findMany({
+      where: args.where,
+      select: defaultFields['${name}'],
+    });
     for (const record of records) {
-      if (ability.cannot('delete', subject('${name}', record))) throw new ForbiddenException();
+      if (ability.cannot('delete', subject('${name}', record) as any)) throw new ForbiddenException();
     }
     return this.prisma.${lowercase(name)}.deleteMany(PrismaSelectArgs(info, args));
   }

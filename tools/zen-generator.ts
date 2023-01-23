@@ -8,12 +8,13 @@ import { Generator as PalGenerator } from '@paljs/generator';
 import { Config as PalConfig } from '@paljs/types';
 
 import {
+  CaslPrismaSubjectsTemplate,
   ClientFieldsTemplate,
   ClientQueriesTemplate,
-  NestCaslTemplate,
-  NestResolversABACTemplate,
-  NestResolversIndexTemplate,
-  TypeDefsTemplate,
+  GraphQLIndexTemplate,
+  GraphQLResolversTemplate,
+  PaljsTypeDefsTemplate,
+  PrismaSelectionsTemplate,
 } from './templates';
 
 const execAsync = promisify(exec);
@@ -21,12 +22,13 @@ const execAsync = promisify(exec);
 export type ZenGeneratorConfig = {
   palConfig: PalConfig;
   apiOutPath: string;
-  caslOutFile?: string;
+  caslSubjectsOutFile?: string;
+  prismaSelectionsOutFile?: string;
   frontend?: {
     outPath: string;
-    /** Defaults to 'fields' */
+    /** @defaults 'fields' */
     fieldsFolderName?: string;
-    /** Defaults to 'prisma' */
+    /** @defaults 'prisma' */
     queriesFolderName?: string;
   };
 };
@@ -67,7 +69,7 @@ export class ZenGenerator {
     prismaNames = prismaNames.sort();
 
     const palTypeDefsFilePath = path.join(palOutPath, 'typeDefs.ts');
-    await writeFile(palTypeDefsFilePath, TypeDefsTemplate(prismaNames));
+    await writeFile(palTypeDefsFilePath, PaljsTypeDefsTemplate(prismaNames));
     console.log(`- Wrote: ${palTypeDefsFilePath}`);
 
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
@@ -77,25 +79,30 @@ export class ZenGenerator {
       await mkdir(nestResolversPath);
     }
 
-    if (this.config.caslOutFile) {
-      await writeFile(this.config.caslOutFile, NestCaslTemplate(prismaNames));
-      console.log(`- Wrote: ${this.config.caslOutFile}`);
+    if (this.config.caslSubjectsOutFile) {
+      await writeFile(this.config.caslSubjectsOutFile, CaslPrismaSubjectsTemplate(prismaNames));
+      console.log(`- Wrote: ${this.config.caslSubjectsOutFile}`);
+    }
+
+    if (this.config.prismaSelectionsOutFile) {
+      await writeFile(this.config.prismaSelectionsOutFile, PrismaSelectionsTemplate(prismaNames));
+      console.log(`- Wrote: ${this.config.prismaSelectionsOutFile}`);
     }
 
     const wroteCount = await this.nestAbacResolvers(prismaNames);
 
-    // Get the data type names via the filename of the "resolvers" directory
-    let dataTypeNames = (await readdir(nestResolversPath))
+    // Get the type names via the filename of the `resolvers` directory
+    let indexTypeNames = (await readdir(nestResolversPath))
       .filter(
         f =>
           path.basename(f) !== 'index.ts' &&
           !path.basename(f).endsWith('.spec.ts') &&
           !path.basename(f).endsWith('.test.ts')
       )
-      .map(f => path.basename(f, '.ts')); // Remove ".ts" extension from all names
+      .map(f => path.basename(f, '.ts')); // Remove `.ts` extension
 
     const indexPath = path.join(nestResolversPath, 'index.ts');
-    await writeFile(indexPath, NestResolversIndexTemplate(dataTypeNames));
+    await writeFile(indexPath, GraphQLIndexTemplate(indexTypeNames));
     console.log(`- Wrote: ${indexPath}`);
     console.log(`* Total resolver files wrote: ${wroteCount}`);
 
@@ -157,7 +164,7 @@ export class ZenGenerator {
       const outPath = path.join(this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
 
       if (!fs.existsSync(outPath)) {
-        await writeFile(outPath, NestResolversABACTemplate(prismaName));
+        await writeFile(outPath, GraphQLResolversTemplate(prismaName));
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
       }

@@ -1,4 +1,4 @@
-export function TypeDefsTemplate(names: string[]) {
+export function PaljsTypeDefsTemplate(names: string[]) {
   let accum = `import { mergeTypeDefs } from '@graphql-tools/merge';
 
 import InputTypes from './InputTypes';
