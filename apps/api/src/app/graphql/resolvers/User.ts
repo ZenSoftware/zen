@@ -1,11 +1,12 @@
 import { subject } from '@casl/ability';
 import { ForbiddenException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { CaslAbility, CaslAccessible, CaslGuard } from '@zen/nest-auth';
+import { CaslAbility, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
-import { Accessible, AppAbility, AuthService } from '../../auth';
+import { AuthService, defaultFields } from '../../auth';
+import type { AppAbility } from '../../auth';
 import { PrismaSelectArgs, PrismaService, User } from '../../prisma';
 import type {
   AggregateUserArgs,
@@ -48,7 +49,7 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.user.findUnique(PrismaSelectArgs(info, args));
+    const record = await this.prisma.user.findUnique(PrismaSelectArgs(info, args, defaultFields));
     if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
     return record;
   }
@@ -59,7 +60,7 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.user.findFirst(PrismaSelectArgs(info, args));
+    const record = await this.prisma.user.findFirst(PrismaSelectArgs(info, args, defaultFields));
     if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
     return record;
   }
@@ -68,19 +69,22 @@ export class UserResolver {
   async findManyUser(
     @Args() args: FindManyUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @CaslAccessible('User') accessible: Accessible['User']
+    @CaslAbility() ability: AppAbility
   ) {
-    args.where = { AND: [accessible as any, args.where] };
-    return this.prisma.user.findMany(PrismaSelectArgs(info, args));
+    const records = await this.prisma.user.findMany(PrismaSelectArgs(info, args, defaultFields));
+    for (const record of records) {
+      if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
+    }
+    return records;
   }
 
   @Query()
   async findManyUserCount(
     @Args() args: FindManyUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @CaslAccessible('User') accessible: Accessible['User']
+    @CaslAbility() ability: AppAbility
   ) {
-    args.where = { AND: [accessible as any, args.where] };
+    if (ability.cannot('read', 'User')) throw new ForbiddenException();
     return this.prisma.user.count(PrismaSelectArgs(info, args));
   }
 
@@ -88,9 +92,9 @@ export class UserResolver {
   async aggregateUser(
     @Args() args: AggregateUserArgs,
     @Info() info: GraphQLResolveInfo,
-    @CaslAccessible('User') accessible: Accessible['User']
+    @CaslAbility() ability: AppAbility
   ) {
-    args.where = { AND: [accessible as any, args.where] };
+    if (ability.cannot('read', 'User')) throw new ForbiddenException();
     return this.prisma.user.aggregate(PrismaSelectArgs(info, args));
   }
 
@@ -110,8 +114,11 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.user.findUnique({ where: args.where });
-    if (ability.cannot('update', subject('User', record))) throw new ForbiddenException();
+    const record = await this.prisma.user.findUnique({
+      where: args.where,
+      select: defaultFields['User'],
+    });
+    if (ability.cannot('update', subject('User', record) as any)) throw new ForbiddenException();
     return this.prisma.user.update(PrismaSelectArgs(info, args));
   }
 
@@ -121,9 +128,12 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const records = await this.prisma.user.findMany({ where: args.where });
+    const records = await this.prisma.user.findMany({
+      where: args.where,
+      select: defaultFields['User'],
+    });
     for (const record of records) {
-      if (ability.cannot('update', subject('User', record))) throw new ForbiddenException();
+      if (ability.cannot('update', subject('User', record) as any)) throw new ForbiddenException();
     }
     return this.prisma.user.updateMany(PrismaSelectArgs(info, args));
   }
@@ -149,8 +159,11 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.user.findUnique(args);
-    if (ability.cannot('delete', subject('User', record))) throw new ForbiddenException();
+    const record = await this.prisma.user.findUnique({
+      where: args.where,
+      select: defaultFields['User'],
+    });
+    if (ability.cannot('delete', subject('User', record) as any)) throw new ForbiddenException();
     return this.prisma.user.delete(PrismaSelectArgs(info, args));
   }
 
@@ -160,9 +173,12 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const records = await this.prisma.user.findMany(args);
+    const records = await this.prisma.user.findMany({
+      where: args.where,
+      select: defaultFields['User'],
+    });
     for (const record of records) {
-      if (ability.cannot('delete', subject('User', record))) throw new ForbiddenException();
+      if (ability.cannot('delete', subject('User', record) as any)) throw new ForbiddenException();
     }
     return this.prisma.user.deleteMany(PrismaSelectArgs(info, args));
   }
