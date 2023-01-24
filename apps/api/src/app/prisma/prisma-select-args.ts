@@ -1,13 +1,13 @@
 import { PrismaSelect } from '@paljs/plugins';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { DefaultFields } from './default-fields';
+import { PaljsDefaultFields } from './default-fields';
 import { Prisma } from './generated';
 
 export function PrismaSelectArgs(
   info: GraphQLResolveInfo,
   args: object,
-  defaultFields?: DefaultFields
+  defaultFields?: PaljsDefaultFields
 ) {
   const result = new PrismaSelect(info, {
     defaultFields: defaultFields as any,

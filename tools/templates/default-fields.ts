@@ -8,7 +8,14 @@ export type DefaultFields = {\n`;
     accum += `  ${name}?: Prisma.${name}Select;\n`;
   }
 
-  accum += `};\n`;
+  accum += `};
+
+type ExctractSelections<T> = {
+  [P in keyof T]?: T[P] | ((select: T[P]) => T[P]);
+};
+
+export type PaljsDefaultFields = ExctractSelections<DefaultFields>;
+`;
 
   return accum;
 }
