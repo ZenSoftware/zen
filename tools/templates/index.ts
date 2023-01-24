@@ -4,4 +4,4 @@ export * from './client-queries';
 export * from './graphql-index';
 export * from './graphql-resolvers';
 export * from './paljs-type-defs';
-export * from './prisma-selections';
+export * from './default-fields';
