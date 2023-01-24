@@ -118,7 +118,7 @@ export class UserResolver {
       where: args.where,
       select: defaultFields.User,
     });
-    if (ability.cannot('update', subject('User', record) as any)) throw new ForbiddenException();
+    if (ability.cannot('update', subject('User', record as User))) throw new ForbiddenException();
     return this.prisma.user.update(PrismaSelectArgs(info, args));
   }
 
@@ -133,7 +133,7 @@ export class UserResolver {
       select: defaultFields.User,
     });
     for (const record of records) {
-      if (ability.cannot('update', subject('User', record) as any)) throw new ForbiddenException();
+      if (ability.cannot('update', subject('User', record as User))) throw new ForbiddenException();
     }
     return this.prisma.user.updateMany(PrismaSelectArgs(info, args));
   }
@@ -149,7 +149,7 @@ export class UserResolver {
       select: defaultFields.User,
     });
     if (
-      (record && ability.cannot('update', subject('User', record as any))) ||
+      (record && ability.cannot('update', subject('User', record as User))) ||
       ability.cannot('create', subject('User', args.create as any))
     ) {
       throw new ForbiddenException();
@@ -167,7 +167,7 @@ export class UserResolver {
       where: args.where,
       select: defaultFields.User,
     });
-    if (ability.cannot('delete', subject('User', record) as any)) throw new ForbiddenException();
+    if (ability.cannot('delete', subject('User', record as User))) throw new ForbiddenException();
     return this.prisma.user.delete(PrismaSelectArgs(info, args));
   }
 
@@ -182,7 +182,7 @@ export class UserResolver {
       select: defaultFields.User,
     });
     for (const record of records) {
-      if (ability.cannot('delete', subject('User', record) as any)) throw new ForbiddenException();
+      if (ability.cannot('delete', subject('User', record as User))) throw new ForbiddenException();
     }
     return this.prisma.user.deleteMany(PrismaSelectArgs(info, args));
   }
