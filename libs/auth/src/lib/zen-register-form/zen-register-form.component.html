@@ -1,5 +1,5 @@
 <form @verticalAccordionLeave [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
-  <zen-loading *ngIf="loading"></zen-loading>
+  <zen-loading *ngIf="loading"/>
 
   <ng-container *ngIf="env.enableGoogleOAuth">
     <button type="button" (click)="loginWithGoogle()" mat-raised-button class="w-100 fs-4 py-1 my-2" [disabled]="loading" style="background:#4F86EC">

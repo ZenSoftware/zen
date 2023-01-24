@@ -7,7 +7,7 @@
   </div>
   <div class="card-body text-center">
     
-    <zen-loading *ngIf="isUploading"></zen-loading>
+    <zen-loading *ngIf="isUploading"/>
 
     <input #fileInput id="file-input" name="file" type="file" class="zen-file-input" (change)="fileChange()" [disabled]="isUploading">
     <label for="file-input" class="mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base mb-2" [ngClass]="{'mat-button-disabled': isUploading}">
