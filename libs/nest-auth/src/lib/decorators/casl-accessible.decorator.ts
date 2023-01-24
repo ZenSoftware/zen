@@ -2,6 +2,7 @@ import { createAccessibleByFactory } from '@casl/prisma/runtime';
 import {
   ContextType,
   ExecutionContext,
+  ForbiddenException,
   UnauthorizedException,
   createParamDecorator,
 } from '@nestjs/common';
@@ -29,5 +30,9 @@ export const CaslAccessible = createParamDecorator((data: string, context: Execu
   if (!req.ability) throw new UnauthorizedException('No ability found for request');
   if (!req.accessibleWhere) req.accessibleWhere = accessibleBy(req.ability);
 
-  return req.accessibleWhere[data];
+  try {
+    return req.accessibleWhere[data];
+  } catch (error) {
+    throw new ForbiddenException(error);
+  }
 });
