@@ -144,12 +144,12 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.user.findUnique({
+    const record = await this.prisma.user.findFirst({
       where: args.where,
       select: defaultFields.User,
     });
     if (
-      ability.cannot('update', subject('User', record as any)) ||
+      (record && ability.cannot('update', subject('User', record as any))) ||
       ability.cannot('create', subject('User', args.create as any))
     ) {
       throw new ForbiddenException();
