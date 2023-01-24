@@ -13,7 +13,7 @@ export type AppSubjects = PrismaSubjects | ExtendedSubjects;
 export type AppAbility = PureAbility<[Action, AppSubjects], PrismaQuery>;
 
 /**
- * Default fields to include for Prisma queries to ensure that they exist to validate against.
+ * Default fields to include for Prisma queries to ensure that they exist during authorization.
  * Any fields that Casl ability rules are based on should be included here.
  * [Pal.js Select docs](https://paljs.com/plugins/select/#api)
  */
