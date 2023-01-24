@@ -11,7 +11,7 @@ async function main() {
     },
     apiOutPath: 'apps/api/src/app/graphql',
     caslSubjectsOutFile: 'apps/api/src/app/auth/casl/generated.ts',
-    prismaSelectionsOutFile: 'apps/api/src/app/prisma/prisma-selections.ts',
+    DefaultFieldsOutFile: 'apps/api/src/app/prisma/default-fields.ts',
     frontend: {
       outPath: 'libs/graphql/src/lib',
     },
