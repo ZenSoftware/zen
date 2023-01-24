@@ -11,10 +11,10 @@ import {
   CaslPrismaSubjectsTemplate,
   ClientFieldsTemplate,
   ClientQueriesTemplate,
+  DefaultFieldsTemplate,
   GraphQLIndexTemplate,
   GraphQLResolversTemplate,
   PaljsTypeDefsTemplate,
-  PrismaSelectionsTemplate,
 } from './templates';
 
 const execAsync = promisify(exec);
@@ -23,7 +23,7 @@ export type ZenGeneratorConfig = {
   palConfig: PalConfig;
   apiOutPath: string;
   caslSubjectsOutFile?: string;
-  prismaSelectionsOutFile?: string;
+  DefaultFieldsOutFile?: string;
   frontend?: {
     outPath: string;
     /** @defaults 'fields' */
@@ -84,9 +84,9 @@ export class ZenGenerator {
       console.log(`- Wrote: ${this.config.caslSubjectsOutFile}`);
     }
 
-    if (this.config.prismaSelectionsOutFile) {
-      await writeFile(this.config.prismaSelectionsOutFile, PrismaSelectionsTemplate(prismaNames));
-      console.log(`- Wrote: ${this.config.prismaSelectionsOutFile}`);
+    if (this.config.DefaultFieldsOutFile) {
+      await writeFile(this.config.DefaultFieldsOutFile, DefaultFieldsTemplate(prismaNames));
+      console.log(`- Wrote: ${this.config.DefaultFieldsOutFile}`);
     }
 
     const wroteCount = await this.nestAbacResolvers(prismaNames);
