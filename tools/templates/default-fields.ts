@@ -3,7 +3,7 @@ export function DefaultFieldsTemplate(names: string[]) {
 import { Prisma } from './generated';
 
 type BoolOnly<T> = {
-  [P in keyof T]: T[P] extends boolean ? boolean : never;
+  [P in keyof T]: boolean;
 };
 
 export type DefaultFields = {\n`;
