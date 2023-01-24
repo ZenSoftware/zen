@@ -120,7 +120,7 @@ export class ${name}Resolver {
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique({
       where: args.where,
-      select: defaultFields['${name}'],
+      select: defaultFields.${name},
     });
     if (ability.cannot('update', subject('${name}', record) as any)) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.update(PrismaSelectArgs(info, args));
@@ -134,7 +134,7 @@ export class ${name}Resolver {
   ) {
     const records = await this.prisma.${lowercase(name)}.findMany({
       where: args.where,
-      select: defaultFields['${name}'],
+      select: defaultFields.${name},
     });
     for (const record of records) {
       if (ability.cannot('update', subject('${name}', record) as any)) throw new ForbiddenException();
@@ -148,9 +148,13 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
+    const record = await this.prisma.${lowercase(name)}.findUnique({
+      where: args.where,
+      select: defaultFields.${name},
+    });
     if (
-      ability.cannot('create', subject('${name}', args.create as any)) ||
-      ability.cannot('update', subject('${name}', args.update as any))
+      ability.cannot('update', subject('${name}', record as any)) ||
+      ability.cannot('create', subject('${name}', args.create as any))
     ) {
       throw new ForbiddenException();
     }
@@ -165,7 +169,7 @@ export class ${name}Resolver {
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique({
       where: args.where,
-      select: defaultFields['${name}'],
+      select: defaultFields.${name},
     });
     if (ability.cannot('delete', subject('${name}', record) as any)) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.delete(PrismaSelectArgs(info, args));
@@ -179,7 +183,7 @@ export class ${name}Resolver {
   ) {
     const records = await this.prisma.${lowercase(name)}.findMany({
       where: args.where,
-      select: defaultFields['${name}'],
+      select: defaultFields.${name},
     });
     for (const record of records) {
       if (ability.cannot('delete', subject('${name}', record) as any)) throw new ForbiddenException();
