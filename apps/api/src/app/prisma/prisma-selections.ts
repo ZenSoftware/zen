@@ -2,7 +2,7 @@
 import { Prisma } from './generated';
 
 type BoolOnly<T> = {
-  [P in keyof T]: T[P] extends boolean ? boolean : never;
+  [P in keyof T]: boolean;
 };
 
 export type PrismaSelections = {
