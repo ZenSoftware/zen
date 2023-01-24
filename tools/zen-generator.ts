@@ -23,7 +23,7 @@ export type ZenGeneratorConfig = {
   palConfig: PalConfig;
   apiOutPath: string;
   caslSubjectsOutFile?: string;
-  DefaultFieldsOutFile?: string;
+  defaultFieldsOutFile?: string;
   frontend?: {
     outPath: string;
     /** @defaults 'fields' */
@@ -84,9 +84,9 @@ export class ZenGenerator {
       console.log(`- Wrote: ${this.config.caslSubjectsOutFile}`);
     }
 
-    if (this.config.DefaultFieldsOutFile) {
-      await writeFile(this.config.DefaultFieldsOutFile, DefaultFieldsTemplate(prismaNames));
-      console.log(`- Wrote: ${this.config.DefaultFieldsOutFile}`);
+    if (this.config.defaultFieldsOutFile) {
+      await writeFile(this.config.defaultFieldsOutFile, DefaultFieldsTemplate(prismaNames));
+      console.log(`- Wrote: ${this.config.defaultFieldsOutFile}`);
     }
 
     const wroteCount = await this.nestAbacResolvers(prismaNames);
