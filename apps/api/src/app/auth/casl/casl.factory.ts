@@ -19,7 +19,7 @@ export type AppAbility = PureAbility<[Action, AppSubjects], PrismaQuery>;
  */
 export const defaultFields: PrismaSelections = {
   // ... Add default fields here
-};
+} as const;
 
 @Injectable()
 export class AppCaslFactory implements CaslFactory {
