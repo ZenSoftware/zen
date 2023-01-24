@@ -9,4 +9,4 @@ type WithFuncSelect<T> = {
   [P in keyof T]?: T[P] | ((select: T[P]) => T[P]);
 };
 
-export type PaljsDefaultFields = WithFuncSelect<DefaultFields>;
+export type PalDefaultFields = WithFuncSelect<DefaultFields>;
