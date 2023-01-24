@@ -9,7 +9,7 @@ import { GraphQLResolveInfo } from 'graphql';
 
 import { defaultFields } from '../../auth';
 import type { AppAbility } from '../../auth';
-import { PrismaSelectArgs, PrismaService } from '../../prisma';
+import { PrismaSelectArgs, PrismaService, ${name} } from '../../prisma';
 import type {
   Aggregate${name}Args,
   CreateOne${name}Args,
@@ -122,7 +122,7 @@ export class ${name}Resolver {
       where: args.where,
       select: defaultFields.${name},
     });
-    if (ability.cannot('update', subject('${name}', record) as any)) throw new ForbiddenException();
+    if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.update(PrismaSelectArgs(info, args));
   }
 
@@ -137,7 +137,7 @@ export class ${name}Resolver {
       select: defaultFields.${name},
     });
     for (const record of records) {
-      if (ability.cannot('update', subject('${name}', record) as any)) throw new ForbiddenException();
+      if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
     }
     return this.prisma.${lowercase(name)}.updateMany(PrismaSelectArgs(info, args));
   }
@@ -153,7 +153,7 @@ export class ${name}Resolver {
       select: defaultFields.${name},
     });
     if (
-      (record && ability.cannot('update', subject('${name}', record as any))) ||
+      (record && ability.cannot('update', subject('${name}', record as ${name}))) ||
       ability.cannot('create', subject('${name}', args.create as any))
     ) {
       throw new ForbiddenException();
@@ -171,7 +171,7 @@ export class ${name}Resolver {
       where: args.where,
       select: defaultFields.${name},
     });
-    if (ability.cannot('delete', subject('${name}', record) as any)) throw new ForbiddenException();
+    if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.delete(PrismaSelectArgs(info, args));
   }
 
@@ -186,7 +186,7 @@ export class ${name}Resolver {
       select: defaultFields.${name},
     });
     for (const record of records) {
-      if (ability.cannot('delete', subject('${name}', record) as any)) throw new ForbiddenException();
+      if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
     }
     return this.prisma.${lowercase(name)}.deleteMany(PrismaSelectArgs(info, args));
   }
