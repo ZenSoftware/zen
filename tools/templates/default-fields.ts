@@ -10,11 +10,11 @@ export type DefaultFields = {\n`;
 
   accum += `};
 
-type ExctractSelections<T> = {
+type WithFuncSelect<T> = {
   [P in keyof T]?: T[P] | ((select: T[P]) => T[P]);
 };
 
-export type PaljsDefaultFields = ExctractSelections<DefaultFields>;
+export type PalDefaultFields = WithFuncSelect<DefaultFields>;
 `;
 
   return accum;
