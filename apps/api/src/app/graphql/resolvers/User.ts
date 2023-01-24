@@ -116,7 +116,7 @@ export class UserResolver {
   ) {
     const record = await this.prisma.user.findUnique({
       where: args.where,
-      select: defaultFields['User'],
+      select: defaultFields.User,
     });
     if (ability.cannot('update', subject('User', record) as any)) throw new ForbiddenException();
     return this.prisma.user.update(PrismaSelectArgs(info, args));
@@ -130,7 +130,7 @@ export class UserResolver {
   ) {
     const records = await this.prisma.user.findMany({
       where: args.where,
-      select: defaultFields['User'],
+      select: defaultFields.User,
     });
     for (const record of records) {
       if (ability.cannot('update', subject('User', record) as any)) throw new ForbiddenException();
@@ -144,9 +144,13 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
+    const record = await this.prisma.user.findFirst({
+      where: args.where,
+      select: defaultFields.User,
+    });
     if (
-      ability.cannot('create', subject('User', args.create as any)) ||
-      ability.cannot('update', subject('User', args.update as any))
+      (record && ability.cannot('update', subject('User', record as any))) ||
+      ability.cannot('create', subject('User', args.create as any))
     ) {
       throw new ForbiddenException();
     }
@@ -161,7 +165,7 @@ export class UserResolver {
   ) {
     const record = await this.prisma.user.findUnique({
       where: args.where,
-      select: defaultFields['User'],
+      select: defaultFields.User,
     });
     if (ability.cannot('delete', subject('User', record) as any)) throw new ForbiddenException();
     return this.prisma.user.delete(PrismaSelectArgs(info, args));
@@ -175,7 +179,7 @@ export class UserResolver {
   ) {
     const records = await this.prisma.user.findMany({
       where: args.where,
-      select: defaultFields['User'],
+      select: defaultFields.User,
     });
     for (const record of records) {
       if (ability.cannot('delete', subject('User', record) as any)) throw new ForbiddenException();
