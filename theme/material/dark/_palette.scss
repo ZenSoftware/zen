@@ -69,22 +69,22 @@ $zen-accent: (
   ),
 );
 
-// node_modules/@angular/material/core/theming/_palette.scss
+// http://mcg.mbitson.com/#!?mcgpalette0=%23ff0800
 $zen-warn: (
-  50: #ffebee,
-  100: #ffcdd2,
-  200: #ef9a9a,
-  300: #e57373,
-  400: #ef5350,
-  500: #f44336,
-  600: #e53935,
-  700: #d32f2f,
-  800: #c62828,
-  900: #b71c1c,
-  A100: #ff8a80,
-  A200: #ff5252,
-  A400: #ff1744,
-  A700: #d50000,
+  50: #ffe1e0,
+  100: #ffb5b3,
+  200: #ff8480,
+  300: #ff524d,
+  400: #ff2d26,
+  500: #ff0800,
+  600: #ff0700,
+  700: #ff0600,
+  800: #ff0400,
+  900: #ff0200,
+  A100: #ffffff,
+  A200: #fff2f2,
+  A400: #ffbfbf,
+  A700: #ffa6a6,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
