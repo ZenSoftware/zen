@@ -1,13 +1,13 @@
 import { subject } from '@casl/ability';
-import { ForbiddenException, UseGuards } from '@nestjs/common';
+import { ForbiddenException, Inject, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { CaslAbility, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
-import { AuthService, defaultFields } from '../../auth';
+import { AuthService, DEFAULT_FIELDS_TOKEN } from '../../auth';
 import type { AppAbility } from '../../auth';
-import { PrismaSelectArgs, PrismaService, User } from '../../prisma';
+import { DefaultFields, PrismaSelectArgs, PrismaService, User } from '../../prisma';
 import type {
   AggregateUserArgs,
   CreateOneUserArgs,
@@ -30,7 +30,11 @@ export const typeDefs = gql`
 @Resolver('User')
 @UseGuards(CaslGuard)
 export class UserResolver {
-  constructor(private readonly auth: AuthService, private readonly prisma: PrismaService) {}
+  constructor(
+    @Inject(DEFAULT_FIELDS_TOKEN) private readonly defaultFields: DefaultFields,
+    private readonly prisma: PrismaService,
+    private readonly auth: AuthService
+  ) {}
 
   @ResolveField()
   async password() {
@@ -49,7 +53,9 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.user.findUnique(PrismaSelectArgs(info, args, defaultFields));
+    const record = await this.prisma.user.findUnique(
+      PrismaSelectArgs(info, args, this.defaultFields)
+    );
     if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
     return record;
   }
@@ -60,7 +66,9 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.user.findFirst(PrismaSelectArgs(info, args, defaultFields));
+    const record = await this.prisma.user.findFirst(
+      PrismaSelectArgs(info, args, this.defaultFields)
+    );
     if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
     return record;
   }
@@ -71,7 +79,9 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const records = await this.prisma.user.findMany(PrismaSelectArgs(info, args, defaultFields));
+    const records = await this.prisma.user.findMany(
+      PrismaSelectArgs(info, args, this.defaultFields)
+    );
     for (const record of records) {
       if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
     }
@@ -116,7 +126,7 @@ export class UserResolver {
   ) {
     const record = await this.prisma.user.findUnique({
       where: args.where,
-      select: defaultFields.User,
+      select: this.defaultFields.User,
     });
     if (ability.cannot('update', subject('User', record as User))) throw new ForbiddenException();
     return this.prisma.user.update(PrismaSelectArgs(info, args));
@@ -130,7 +140,7 @@ export class UserResolver {
   ) {
     const records = await this.prisma.user.findMany({
       where: args.where,
-      select: defaultFields.User,
+      select: this.defaultFields.User,
     });
     for (const record of records) {
       if (ability.cannot('update', subject('User', record as User))) throw new ForbiddenException();
@@ -146,7 +156,7 @@ export class UserResolver {
   ) {
     const record = await this.prisma.user.findFirst({
       where: args.where,
-      select: defaultFields.User,
+      select: this.defaultFields.User,
     });
     if (
       (record && ability.cannot('update', subject('User', record as User))) ||
@@ -165,7 +175,7 @@ export class UserResolver {
   ) {
     const record = await this.prisma.user.findUnique({
       where: args.where,
-      select: defaultFields.User,
+      select: this.defaultFields.User,
     });
     if (ability.cannot('delete', subject('User', record as User))) throw new ForbiddenException();
     return this.prisma.user.delete(PrismaSelectArgs(info, args));
@@ -179,7 +189,7 @@ export class UserResolver {
   ) {
     const records = await this.prisma.user.findMany({
       where: args.where,
-      select: defaultFields.User,
+      select: this.defaultFields.User,
     });
     for (const record of records) {
       if (ability.cannot('delete', subject('User', record as User))) throw new ForbiddenException();
