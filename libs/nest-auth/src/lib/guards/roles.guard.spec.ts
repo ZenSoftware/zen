@@ -9,7 +9,7 @@ describe('rbac-logic', () => {
     expect(rbacLogic(['Super'], ['Admin', 'Editor'])).toEqual(true);
   });
 
-  it('should throw if user does not contain any of the defined roles', () => {
+  it('should fail if user does not contain any of the defined roles', () => {
     expect(rbacLogic(['Registered'], ['Admin', 'Editor'])).toEqual(false);
   });
 });

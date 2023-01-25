@@ -11,8 +11,15 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 const accessibleBy = createAccessibleByFactory();
 
 /**
- * Decorator to inject the Casl `accessibleBy` result
- * for the current user given Casl subject name as a paramater.
+ * Parameter decorator that provides a CASL `accessibleBy` result for the current user.
+ * Requires a string as a paramater that is a Prisma model name. It will provide the
+ * Prisma `WhereInput` for the specified subject which can be used within a Prisma query
+ * to filter the results. Works with either HTTP or GraphQL requests.
+ * Refer to the [CASL Prisma docs](https://casl.js.org/v6/en/package/casl-prisma).
+ * ```ts
+ * ＠UseGuards(CaslGuard)
+ * sample(＠CaslAccessible('Post') accessiblePosts: Prisma.PostWhereInput) { ... }
+ * ```
  */
 export const CaslAccessible = createParamDecorator((data: string, context: ExecutionContext) => {
   if (typeof data !== 'string')
@@ -28,10 +35,10 @@ export const CaslAccessible = createParamDecorator((data: string, context: Execu
   }
 
   if (!req.ability) throw new UnauthorizedException('No ability found for request');
-  if (!req.accessibleWhere) req.accessibleWhere = accessibleBy(req.ability);
+  if (!req.accessibleWhereInputs) req.accessibleWhereInputs = accessibleBy(req.ability);
 
   try {
-    return req.accessibleWhere[data];
+    return req.accessibleWhereInputs[data];
   } catch (error) {
     throw new ForbiddenException(error);
   }
