@@ -1,7 +1,7 @@
 import { RequestUser } from './models/request-user';
 
 /**
- * Abstract class for creating an ability for a user.  It is used by the `CaslGuard` to create an ability.
+ * Abstract class for creating an ability for a user.  It is used by the `CaslGuard` decorator to create an ability.
  * Register the factory with the `NestAuthModule` by passing it to the `register` method.
  * ```ts
  * ＠Module({ imports: [NestAuthModule.register(AppCaslFactory)] })
