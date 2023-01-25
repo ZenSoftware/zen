@@ -9,7 +9,13 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { RequestUser } from '../models/request-user';
 
 /**
- * Decorator to provide the `RequestUser`
+ * Parameter decorator to provide the `RequestUser`.
+ * Utilized in conjunction with either `RolesGuard` or `CaslGuard`.
+ * Works with either HTTP or GraphQL requests.
+ * ```ts
+ * ＠UseGuards(RolesGuard('Registered'))
+ * accountInfo(＠CurrentUser() user: RequestUser) { ... }
+ * ```
  */
 export const CurrentUser = createParamDecorator((data: unknown, context: ExecutionContext) => {
   let user: RequestUser;
