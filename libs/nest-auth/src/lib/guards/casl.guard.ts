@@ -6,6 +6,17 @@ import { AuthGuard } from '@nestjs/passport';
 import { CaslFactory } from '../casl-factory';
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 
+/**
+ * Guard that is used in conjunction with `＠CaslAbility` & `＠CaslAccessible` parameter decorators.
+ * Works with either HTTP or GraphQL requests.
+ * ```ts
+ * ＠UseGuards(CaslGuard)
+ * async findUniqueUser(
+ *   ＠CaslAbility() ability: AppAbility,
+ *   ＠CaslAccessible('Post') accessiblePosts: Prisma.PostWhereInput
+ * ) { ... }
+ * ```
+ */
 @Injectable()
 export class CaslGuard extends AuthGuard('jwt') {
   constructor(readonly caslFactory: CaslFactory, readonly reflector: Reflector) {

@@ -7,7 +7,12 @@ import {
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 /**
- * Decorator to inject the `CaslAbility` for the current user
+ * Parameter decorator to provide the `CaslAbility` for the current user.
+ * Works with either HTTP or GraphQL requests.
+ * ```ts
+ * ＠UseGuards(CaslGuard)
+ * sample(＠CaslAbility() ability: AppAbility) { ... }
+ * ```
  */
 export const CaslAbility = createParamDecorator((data: unknown, context: ExecutionContext) => {
   let ability;

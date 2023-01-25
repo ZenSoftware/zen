@@ -22,8 +22,8 @@ export const defaultFields: DefaultFields = {
 } as const;
 
 @Injectable()
-export class AppCaslFactory implements CaslFactory {
-  async createAbility(user: RequestUser<Role>) {
+export class AppCaslFactory extends CaslFactory {
+  async createAbility(user: RequestUser) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(createPrismaAbility);
 
     if (user.roles.includes('Super')) {
