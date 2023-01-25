@@ -8,6 +8,9 @@ import { Role } from '@zen/common';
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { RequestUser } from '../models/request-user';
 
+/**
+ * Imitates [ASP.NET Core RBAC](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/simple?view=aspnetcore-7.0)
+ */
 export function RolesGuard(...roles: Array<Role>) {
   @Injectable()
   class MixinRolesGuard extends AuthGuard('jwt') {
