@@ -11,8 +11,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 const accessibleBy = createAccessibleByFactory();
 
 /**
- * Decorator to inject the Casl `accessibleBy` result
- * for the current user given Casl subject name as a paramater.
+ * Decorator to inject the Casl `accessibleBy` result for the current user given a Casl subject name as a paramater.
  */
 export const CaslAccessible = createParamDecorator((data: string, context: ExecutionContext) => {
   if (typeof data !== 'string')
