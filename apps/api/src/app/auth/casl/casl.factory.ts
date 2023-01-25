@@ -1,5 +1,4 @@
 import { AbilityBuilder, PureAbility } from '@casl/ability';
-import { Injectable } from '@nestjs/common';
 import { Action } from '@zen/common';
 import { CaslFactory, RequestUser } from '@zen/nest-auth';
 
@@ -21,7 +20,6 @@ export const defaultFields: DefaultFields = {
   // ... Add default fields here
 } as const;
 
-@Injectable()
 export class AppCaslFactory extends CaslFactory {
   async createAbility(user: RequestUser) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(createPrismaAbility);
