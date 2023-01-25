@@ -1,6 +1,6 @@
 import { AbilityBuilder, PureAbility } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
-import { Action, Role } from '@zen/common';
+import { Action } from '@zen/common';
 import { CaslFactory, RequestUser } from '@zen/nest-auth';
 
 import type { DefaultFields } from '../../prisma';
