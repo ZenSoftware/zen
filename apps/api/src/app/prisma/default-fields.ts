@@ -2,7 +2,7 @@
 import { Prisma } from './generated';
 
 export type DefaultFields = {
-  User?: Prisma.UserSelect;
+  readonly User?: Prisma.UserSelect;
 };
 
 type WithFuncSelect<T> = {
