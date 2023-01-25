@@ -128,24 +128,24 @@ export default gql`
   }
 
   input UserUpdateInput {
-    id: StringFieldUpdateOperationsInput
-    createdAt: DateTimeFieldUpdateOperationsInput
-    username: NullableStringFieldUpdateOperationsInput
-    password: NullableStringFieldUpdateOperationsInput
-    email: StringFieldUpdateOperationsInput
+    id: String
+    createdAt: DateTime
+    username: String
+    password: String
+    email: String
     roles: [String!]
-    googleId: NullableStringFieldUpdateOperationsInput
+    googleId: String
     googleProfile: Json
   }
 
   input UserUncheckedUpdateInput {
-    id: StringFieldUpdateOperationsInput
-    createdAt: DateTimeFieldUpdateOperationsInput
-    username: NullableStringFieldUpdateOperationsInput
-    password: NullableStringFieldUpdateOperationsInput
-    email: StringFieldUpdateOperationsInput
+    id: String
+    createdAt: DateTime
+    username: String
+    password: String
+    email: String
     roles: [String!]
-    googleId: NullableStringFieldUpdateOperationsInput
+    googleId: String
     googleProfile: Json
   }
 
@@ -161,24 +161,24 @@ export default gql`
   }
 
   input UserUpdateManyMutationInput {
-    id: StringFieldUpdateOperationsInput
-    createdAt: DateTimeFieldUpdateOperationsInput
-    username: NullableStringFieldUpdateOperationsInput
-    password: NullableStringFieldUpdateOperationsInput
-    email: StringFieldUpdateOperationsInput
+    id: String
+    createdAt: DateTime
+    username: String
+    password: String
+    email: String
     roles: [String!]
-    googleId: NullableStringFieldUpdateOperationsInput
+    googleId: String
     googleProfile: Json
   }
 
   input UserUncheckedUpdateManyInput {
-    id: StringFieldUpdateOperationsInput
-    createdAt: DateTimeFieldUpdateOperationsInput
-    username: NullableStringFieldUpdateOperationsInput
-    password: NullableStringFieldUpdateOperationsInput
-    email: StringFieldUpdateOperationsInput
+    id: String
+    createdAt: DateTime
+    username: String
+    password: String
+    email: String
     roles: [String!]
-    googleId: NullableStringFieldUpdateOperationsInput
+    googleId: String
     googleProfile: Json
   }
 
