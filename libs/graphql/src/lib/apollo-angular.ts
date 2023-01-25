@@ -709,47 +709,47 @@ export type UserUncheckedCreateInput = {
 };
 
 export type UserUncheckedUpdateInput = {
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  googleId?: InputMaybe<Scalars['String']>;
   googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUncheckedUpdateManyInput = {
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  googleId?: InputMaybe<Scalars['String']>;
   googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUpdateInput = {
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  googleId?: InputMaybe<Scalars['String']>;
   googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUpdateManyMutationInput = {
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  googleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  googleId?: InputMaybe<Scalars['String']>;
   googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  password?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type UserUpdaterolesInput = {
