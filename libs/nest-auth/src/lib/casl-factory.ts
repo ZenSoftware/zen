@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 import { RequestUser } from './models/request-user';
 
 /**
@@ -9,6 +11,7 @@ import { RequestUser } from './models/request-user';
  * ```
  * Where `AppCaslFactory` is a class that extends `CaslFactory` and implements the `createAbility` method.
  */
+@Injectable()
 export abstract class CaslFactory {
   abstract createAbility(user: RequestUser): Promise<any>;
 }
