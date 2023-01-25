@@ -16,12 +16,13 @@ describe('Auth Controller', () => {
           provide: AuthService,
           useValue: {
             getAuthSession: () => {
-              const authSession: Partial<AuthSession> = {
+              const authSession: AuthSession = {
                 userId: 'abc123',
                 roles: ['Moderator', 'Editor'],
                 expiresIn: 123,
                 rememberMe: true,
                 token: 'abc.def_+/ghi.jkl==',
+                rules: [],
               };
 
               return Promise.resolve(authSession);
