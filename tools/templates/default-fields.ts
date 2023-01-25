@@ -5,7 +5,7 @@ import { Prisma } from './generated';
 export type DefaultFields = {\n`;
 
   for (const name of names) {
-    accum += `  ${name}?: Prisma.${name}Select;\n`;
+    accum += `  readonly ${name}?: Prisma.${name}Select;\n`;
   }
 
   accum += `};
