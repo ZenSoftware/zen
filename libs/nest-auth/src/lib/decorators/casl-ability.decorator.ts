@@ -7,7 +7,7 @@ import {
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 /**
- * Decorator to inject the `CaslAbility` for the current user
+ * Decorator to provide the `CaslAbility` for the current user
  */
 export const CaslAbility = createParamDecorator((data: unknown, context: ExecutionContext) => {
   let ability;

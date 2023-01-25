@@ -9,7 +9,7 @@ import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import { RequestUser } from '../models/request-user';
 
 /**
- * Imitates [ASP.NET Core RBAC](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/simple?view=aspnetcore-7.0)
+ * Imitates [ASP.NET Core RBAC](https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-7.0)
  */
 export function RolesGuard(...roles: Array<Role>) {
   @Injectable()

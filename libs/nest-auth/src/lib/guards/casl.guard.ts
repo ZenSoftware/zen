@@ -6,6 +6,10 @@ import { AuthGuard } from '@nestjs/passport';
 import { CaslFactory } from '../casl-factory';
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 
+/**
+ * Authenticates the user and creates an ability for the user.
+ * Used in conjunction with @CaslAbility & @CaslAccessible parameter decorators.
+ */
 @Injectable()
 export class CaslGuard extends AuthGuard('jwt') {
   constructor(readonly caslFactory: CaslFactory, readonly reflector: Reflector) {

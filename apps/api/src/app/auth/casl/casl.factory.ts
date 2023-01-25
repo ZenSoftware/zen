@@ -22,7 +22,7 @@ export const defaultFields: DefaultFields = {
 } as const;
 
 @Injectable()
-export class AppCaslFactory implements CaslFactory {
+export class AppCaslFactory extends CaslFactory {
   async createAbility(user: RequestUser<Role>) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(createPrismaAbility);
 
