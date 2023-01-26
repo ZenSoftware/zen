@@ -1,5 +1,5 @@
 import { AbilityBuilder, PureAbility } from '@casl/ability';
-import { Action } from '@zen/common';
+import { Action, Role } from '@zen/common';
 import { CaslFactory, RequestUser } from '@zen/nest-auth';
 
 import { PrismaQuery, createPrismaAbility } from './casl-prisma';
@@ -11,7 +11,7 @@ export type AppSubjects = PrismaSubjects | ExtendedSubjects;
 export type AppAbility = PureAbility<[Action, AppSubjects], PrismaQuery>;
 
 export class AppCaslFactory extends CaslFactory {
-  async createAbility(user: RequestUser) {
+  async createAbility(user: RequestUser<Role>) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(createPrismaAbility);
 
     if (user.roles.includes('Super')) {
