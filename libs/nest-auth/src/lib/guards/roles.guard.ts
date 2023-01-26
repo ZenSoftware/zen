@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable, mixin } from '@nestjs/common';
+import { ExecutionContext, Injectable, UnauthorizedException, mixin } from '@nestjs/common';
 import { ContextType } from '@nestjs/common/interfaces';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
@@ -47,20 +47,20 @@ export function RolesGuard(...roles: Array<Role>) {
 
       if (allowAnonymousClass) return true;
 
-      await super.canActivate(context);
-
-      if (roles.length === 0) return true;
-
-      let user: RequestUser;
+      let req;
       const type = context.getType() as ContextType & 'graphql';
 
       if (type === 'http') {
-        user = context.switchToHttp().getRequest().user;
+        req = context.switchToHttp().getRequest();
       } else if (type === 'graphql') {
-        user = GqlExecutionContext.create(context).getContext().req.user;
+        req = GqlExecutionContext.create(context).getContext().req;
       }
 
-      return rbacLogic(user.roles, roles);
+      if (!req.user) await super.canActivate(context);
+
+      if (roles.length === 0) return true;
+
+      return rbacLogic(req.user.roles, roles);
     }
 
     getRequest(context: ExecutionContext) {
