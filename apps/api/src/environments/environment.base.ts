@@ -14,10 +14,10 @@ export abstract class EnvironmentBase {
     port: number;
   };
   readonly graphql: {
-    readonly subscriptions: boolean;
+    readonly subscriptions?: boolean;
     readonly trace?: boolean;
-    readonly sandbox: boolean;
-    readonly introspection: boolean;
+    readonly sandbox?: boolean;
+    readonly introspection?: boolean;
     readonly csrfPrevention?: boolean;
     readonly uploads?: UploadOptions;
   };

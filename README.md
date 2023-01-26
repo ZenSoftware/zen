@@ -70,7 +70,7 @@ npm start
 - [x] `Sign in with Google` via OpenID Connect.
 - [x] `Forgot password component` and full password reset flow.
 - [x] `Password change component` for user dashboards.
-- [x] [Nest guards & directives](https://github.com/ZenSoftware/zen/blob/base/apps/api/src/app/auth) for both RBAC & ABAC authorization schemes.  ABAC is the default authorization scheme and is implemented with [@casl/prisma](https://casl.js.org/v6/en/package/casl-prisma) & [@casl/angular](https://casl.js.org/v6/en/package/casl-angular).  The user's Casl rules are sent from the server to the client and updates the `@casl/angular` ability.  This unifies the permissions across both the server and the client. Fully exploiting Casl's isomorphic capabilities.
+- [x] [Nest guards & directives](https://github.com/ZenSoftware/zen/blob/base/apps/api/src/app/auth) for both RBAC & ABAC authorization schemes.  ABAC is implemented with [@casl/prisma](https://casl.js.org/v6/en/package/casl-prisma) & [@casl/angular](https://casl.js.org/v6/en/package/casl-angular).  The user's Casl rules are sent from the server to the client and updates the `@casl/angular` ability.  This unifies the permissions across both the server and the client. Fully exploiting Casl's isomorphic capabilities.
 - [x] `Angular route guards` and `Angular directives` to show/hide content depending on the user's roles or Casl abilities.
 
 ---

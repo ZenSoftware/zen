@@ -3,8 +3,8 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { ThrottlerGuard } from '@nestjs/throttler';
 
 /**
- * According to [@nestjs/throttler docs](https://github.com/nestjs/throttler#working-with-graphql)
- * we need to create a custom guard to work with GraphQL.
+ * Custom throttle guard to work with GraphQL. Required according to
+ * [@nestjs/throttler docs](https://github.com/nestjs/throttler#working-with-graphql).
  */
 @Injectable()
 export class GqlThrottlerGuard extends ThrottlerGuard {
