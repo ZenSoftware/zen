@@ -26,11 +26,11 @@ export class GqlConfigService implements GqlOptionsFactory {
       debug: !this.config.production,
       playground: false,
       plugins,
-      introspection: this.config.graphql.introspection,
+      introspection: !!this.config.graphql.introspection,
       cors: this.config.cors,
       csrfPrevention: this.config.graphql.csrfPrevention,
       cache: 'bounded',
-      installSubscriptionHandlers: this.config.graphql.subscriptions,
+      installSubscriptionHandlers: !!this.config.graphql.subscriptions,
       subscriptions: this.config.graphql.subscriptions
         ? {
             'graphql-ws': {
