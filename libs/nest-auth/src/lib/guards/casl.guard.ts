@@ -1,4 +1,4 @@
-import { ContextType, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ContextType, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
@@ -36,10 +36,8 @@ export class CaslGuard extends AuthGuard('jwt') {
     );
     if (allowAnonymousClass) return true;
 
-    await super.canActivate(context);
-
-    const type = context.getType() as ContextType & 'graphql';
     let req;
+    const type = context.getType() as ContextType & 'graphql';
 
     if (type === 'http') {
       req = context.switchToHttp().getRequest();
@@ -47,7 +45,7 @@ export class CaslGuard extends AuthGuard('jwt') {
       req = GqlExecutionContext.create(context).getContext().req;
     }
 
-    if (!req.user) throw new UnauthorizedException('No user found for request');
+    if (!req.user) await super.canActivate(context);
 
     if (!req.ability) req.ability = await this.caslFactory.createAbility(req.user);
 
