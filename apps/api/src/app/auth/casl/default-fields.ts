@@ -5,7 +5,7 @@ import type { DefaultFields } from '../../prisma';
 /**
  * Default fields to include for Prisma queries to ensure that they exist during authorization.
  * Any fields that Casl ability rules are based on should be included here.
- * [Pal.js Select docs](https://paljs.com/plugins/select/#api)
+ * @see [Pal.js Select docs](https://paljs.com/plugins/select/#api)
  */
 const defaultFields: DefaultFields = {
   // ... Add default fields here
