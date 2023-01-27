@@ -25,6 +25,9 @@ import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
  * ```
  */
 export function RolesGuard(...roles: Array<Role>) {
+  if (new.target !== undefined)
+    throw new Error('RolesGuard cannot be instantiated directly. Use RolesGuard() instead.');
+
   @Injectable()
   class MixinRolesGuard extends AuthGuard('jwt') {
     constructor(readonly reflector: Reflector) {
