@@ -7,7 +7,7 @@ async function main() {
       backend: {
         generator: 'sdl',
         output: 'apps/api/src/app/graphql/paljs',
-        // Refer to (Pal.js GraphQL SDL Inputs Docs)[https://paljs.com/plugins/sdl-inputs]
+        /** @see [Pal.js GraphQL SDL Inputs Docs](https://paljs.com/plugins/sdl-inputs) */
         doNotUseFieldUpdateOperationsInput: true,
       },
     },
