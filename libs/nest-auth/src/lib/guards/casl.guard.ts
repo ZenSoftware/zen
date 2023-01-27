@@ -11,9 +11,9 @@ import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
  * Works with either HTTP or GraphQL requests.
  * ```ts
  * ＠UseGuards(CaslGuard)
- * async findUniqueUser(
+ * async getBlogs(
  *   ＠CaslAbility() ability: AppAbility,
- *   ＠CaslAccessible('Post') accessiblePosts: Prisma.PostWhereInput
+ *   ＠CaslAccessible('Blog') accessibleBlogs: Prisma.BlogWhereInput
  * ) { ... }
  * ```
  */

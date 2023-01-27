@@ -18,7 +18,7 @@ const accessibleBy = createAccessibleByFactory();
  * Refer to the [CASL Prisma docs](https://casl.js.org/v6/en/package/casl-prisma).
  * ```ts
  * ＠UseGuards(CaslGuard)
- * sample(＠CaslAccessible('Post') accessiblePosts: Prisma.PostWhereInput) { ... }
+ * async getBlogs(＠CaslAccessible('Blog') accessibleBlogs: Prisma.BlogWhereInput) { ... }
  * ```
  */
 export const CaslAccessible = createParamDecorator((data: string, context: ExecutionContext) => {
