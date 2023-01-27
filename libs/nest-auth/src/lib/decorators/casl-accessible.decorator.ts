@@ -15,11 +15,11 @@ const accessibleBy = createAccessibleByFactory();
  * Requires a string as a paramater that is a Prisma model name. It will provide the
  * Prisma `WhereInput` for the specified subject which can be used within a Prisma query
  * to filter the results. Works with either HTTP or GraphQL requests.
- * Refer to the [CASL Prisma docs](https://casl.js.org/v6/en/package/casl-prisma).
  * ```ts
  * ＠UseGuards(CaslGuard)
- * sample(＠CaslAccessible('Post') accessiblePosts: Prisma.PostWhereInput) { ... }
+ * async getBlogs(＠CaslAccessible('Blog') accessibleBlogs: Prisma.BlogWhereInput) { ... }
  * ```
+ * @see [CASL Prisma docs](https://casl.js.org/v6/en/package/casl-prisma)
  */
 export const CaslAccessible = createParamDecorator((data: string, context: ExecutionContext) => {
   if (typeof data !== 'string')

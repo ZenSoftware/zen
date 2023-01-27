@@ -1,4 +1,4 @@
-import { rbacLogic } from './roles.guard';
+import { RolesGuard, rbacLogic } from './roles.guard';
 
 describe('rbac-logic', () => {
   it('should pass when user has one of the defined roles', () => {
@@ -11,5 +11,9 @@ describe('rbac-logic', () => {
 
   it('should fail if user does not contain any of the defined roles', () => {
     expect(rbacLogic(['Registered'], ['Admin', 'Editor'])).toEqual(false);
+  });
+
+  it('should throw if called with new', () => {
+    expect(() => new (<any>RolesGuard)()).toThrow();
   });
 });
