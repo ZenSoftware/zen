@@ -5,7 +5,7 @@ import { ConfigService } from '../../config';
 
 export class EmailTakenException extends HttpException {
   constructor() {
-    super('USER_ALREADY_EXISTS', HttpStatus.CONFLICT);
+    super('Email taken', HttpStatus.CONFLICT);
   }
 }
 
