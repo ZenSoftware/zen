@@ -58,8 +58,7 @@ export class UserResolver {
     const record = await this.prisma.user.findUnique(
       PrismaSelectArgs(info, args, this.defaultFields)
     );
-    if (!record) return null;
-    if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
+    if (ability.cannot('read', subject('User', record as User))) throw new ForbiddenException();
     return record;
   }
 
@@ -72,8 +71,7 @@ export class UserResolver {
     const record = await this.prisma.user.findFirst(
       PrismaSelectArgs(info, args, this.defaultFields)
     );
-    if (!record) return null;
-    if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
+    if (ability.cannot('read', subject('User', record as User))) throw new ForbiddenException();
     return record;
   }
 
