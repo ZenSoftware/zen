@@ -41,7 +41,7 @@ export class SampleResolver {
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
     const readStream = file.createReadStream();
-    const chunks = [];
+    const chunks: any[] = [];
     for await (const chunk of readStream) {
       chunks.push(chunk);
     }

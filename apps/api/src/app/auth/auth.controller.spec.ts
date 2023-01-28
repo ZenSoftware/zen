@@ -16,13 +16,8 @@ describe('Auth Controller', () => {
           provide: AuthService,
           useValue: {
             getAuthSession: () => {
-              const authSession: AuthSession = {
-                userId: 'abc123',
-                roles: ['Moderator', 'Editor'],
-                expiresIn: 123,
-                rememberMe: true,
+              const authSession: Partial<AuthSession> = {
                 token: 'abc.def_+/ghi.jkl==',
-                rules: [],
               };
 
               return Promise.resolve(authSession);
@@ -43,7 +38,7 @@ describe('Auth Controller', () => {
   });
 
   it('constructs a valid query string from an AuthSession', () => {
-    controller.getLoginConfirmedURL(null).then(url => {
+    controller.getLoginConfirmedURL(undefined as any).then(url => {
       expect(url).toEqual(
         'http://site.com/login-confirmed?token=abc.def_%252B%252Fghi.jkl%253D%253D'
       );
