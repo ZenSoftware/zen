@@ -55,8 +55,7 @@ export class ${name}Resolver {
     const record = await this.prisma.${lowercase(name)}.findUnique(
       PrismaSelectArgs(info, args, this.defaultFields)
     );
-    if (!record) return null;
-    if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
+    if (ability.cannot('read', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return record;
   }
 
@@ -69,8 +68,7 @@ export class ${name}Resolver {
     const record = await this.prisma.${lowercase(name)}.findFirst(
       PrismaSelectArgs(info, args, this.defaultFields)
     );
-    if (!record) return null;
-    if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
+    if (ability.cannot('read', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return record;
   }
 
