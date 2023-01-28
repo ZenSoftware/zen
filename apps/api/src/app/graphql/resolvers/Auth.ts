@@ -109,7 +109,7 @@ export class AuthResolver {
   async authLogin(@Args('data') args: AuthLoginInput) {
     const user = await this.getUserByUsername(args.username, this.prisma);
 
-    if (!user) throw new HttpException(ApiError.AuthLogin.USER_NOT_FOUND, 401);
+    if (!user) throw new HttpException(ApiError.AuthLogin.USER_NOT_FOUND, 400);
 
     const correctPassword = await bcryptVerify({
       password: args.password,
@@ -149,7 +149,7 @@ export class AuthResolver {
     if (user) {
       return this.auth.getAuthSession(user, args.rememberMe);
     } else {
-      throw new HttpException(ApiError.AuthExchangeToken.USER_NOT_FOUND, 401);
+      throw new UnauthorizedException('User not found');
     }
   }
 
@@ -176,7 +176,7 @@ export class AuthResolver {
     });
 
     if (possibleUsers.length === 0)
-      throw new HttpException(ApiError.AuthPasswordResetRequest.USER_NOT_FOUND, 401);
+      throw new HttpException(ApiError.AuthPasswordResetRequest.USER_NOT_FOUND, 400);
 
     possibleUsers.forEach(user => this.mail.sendPasswordReset(user));
   }
@@ -192,7 +192,7 @@ export class AuthResolver {
 
     let user = await this.prisma.user.findUnique({ where: { id: tokenPayload.sub } });
 
-    if (!user) throw new HttpException(ApiError.AuthPasswordResetConfirmation.USER_NOT_FOUND, 401);
+    if (!user) throw new UnauthorizedException('User not found');
 
     const hashedPassword = await this.hashPassword(args.newPassword);
 
@@ -207,7 +207,7 @@ export class AuthResolver {
   @Mutation()
   async authRegister(@Args('data') args: AuthRegisterInput) {
     if (!this.config.publicRegistration)
-      throw new HttpException(ApiError.AuthRegister.NO_PUBLIC_REGISTRATIONS, 401);
+      throw new UnauthorizedException('No public registrations allowed');
 
     if (await this.getUserByUsername(args.username, this.prisma))
       throw new HttpException(ApiError.AuthRegister.USERNAME_TAKEN, 400);
@@ -253,7 +253,7 @@ export class AuthResolver {
     @CurrentUser() reqUser: RequestUser
   ) {
     const user = await this.prisma.user.findUnique({ where: { id: reqUser.id } });
-    if (!user) throw new HttpException(ApiError.AuthPasswordChange.USER_NOT_FOUND, 401);
+    if (!user) throw new UnauthorizedException('User not found');
 
     const correctPassword = await bcryptVerify({
       password: args.oldPassword,
