@@ -247,7 +247,7 @@ export class AuthService {
           this.setSession(authExchangeToken);
           console.log('Exchanged token');
         },
-        error: (errors: GqlErrors<ApiError.AuthExchangeToken>) => {
+        error: (errors: GqlErrors) => {
           this.logout();
           console.error('Exchange token failed', errors);
         },

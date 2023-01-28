@@ -29,7 +29,7 @@ export class AuthService {
 
     const expiresIn = rememberMe
       ? this.config.expiresInRememberMe
-      : (this.config.jwtOptions.signOptions.expiresIn as number);
+      : (this.config.jwtOptions.signOptions!.expiresIn as number);
 
     const token = this.jwtService.sign(jwtPayload, { expiresIn });
 

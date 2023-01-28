@@ -19,6 +19,8 @@ import type {
   UpdateManyUserArgs,
   UpdateOneUserArgs,
   UpsertOneUserArgs,
+  UserWhereInput,
+  UserWhereUniqueInput,
 } from '../resolversTypes';
 
 export const typeDefs = gql`
@@ -56,6 +58,7 @@ export class UserResolver {
     const record = await this.prisma.user.findUnique(
       PrismaSelectArgs(info, args, this.defaultFields)
     );
+    if (!record) return null;
     if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
     return record;
   }
@@ -69,6 +72,7 @@ export class UserResolver {
     const record = await this.prisma.user.findFirst(
       PrismaSelectArgs(info, args, this.defaultFields)
     );
+    if (!record) return null;
     if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
     return record;
   }
@@ -125,7 +129,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.user.findUnique({
-      where: args.where,
+      where: args.where as UserWhereUniqueInput,
       select: this.defaultFields.User,
     });
     if (ability.cannot('update', subject('User', record as User))) throw new ForbiddenException();
@@ -174,7 +178,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.user.findUnique({
-      where: args.where,
+      where: args.where as UserWhereUniqueInput,
       select: this.defaultFields.User,
     });
     if (ability.cannot('delete', subject('User', record as User))) throw new ForbiddenException();
@@ -188,7 +192,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     const records = await this.prisma.user.findMany({
-      where: args.where,
+      where: args.where as UserWhereInput,
       select: this.defaultFields.User,
     });
     for (const record of records) {
