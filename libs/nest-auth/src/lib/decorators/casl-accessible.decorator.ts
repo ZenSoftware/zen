@@ -26,12 +26,14 @@ export const CaslAccessible = createParamDecorator((data: string, context: Execu
     throw new Error('CaslAccessible decorator requires a subject name for a parameter');
 
   let req;
-  const type = context.getType() as ContextType & 'graphql';
+  const type = context.getType() as ContextType | 'graphql';
 
   if (type === 'http') {
     req = context.switchToHttp().getRequest();
   } else if (type === 'graphql') {
     req = GqlExecutionContext.create(context).getContext().req;
+  } else {
+    throw new UnauthorizedException(`Context ${type} not supported`);
   }
 
   if (!req.ability) throw new UnauthorizedException('No ability found for request');

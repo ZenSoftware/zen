@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable, mixin } from '@nestjs/common';
+import { ExecutionContext, Injectable, UnauthorizedException, mixin } from '@nestjs/common';
 import { ContextType } from '@nestjs/common/interfaces';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
@@ -50,12 +50,14 @@ export function RolesGuard(...roles: Array<Role>) {
       if (allowAnonymousClass) return true;
 
       let req;
-      const type = context.getType() as ContextType & 'graphql';
+      const type = context.getType() as ContextType | 'graphql';
 
       if (type === 'http') {
         req = context.switchToHttp().getRequest();
       } else if (type === 'graphql') {
         req = GqlExecutionContext.create(context).getContext().req;
+      } else {
+        throw new UnauthorizedException(`Context ${type} not supported`);
       }
 
       if (!req.user) await super.canActivate(context);
@@ -66,11 +68,13 @@ export function RolesGuard(...roles: Array<Role>) {
     }
 
     getRequest(context: ExecutionContext) {
-      const type = context.getType() as ContextType & 'graphql';
+      const type = context.getType() as ContextType | 'graphql';
       if (type === 'http') {
         return context.switchToHttp().getRequest();
       } else if (type === 'graphql') {
         return GqlExecutionContext.create(context).getContext().req;
+      } else {
+        throw new UnauthorizedException(`Context ${type} not supported`);
       }
     }
   }

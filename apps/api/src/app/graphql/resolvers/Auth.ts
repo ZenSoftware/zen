@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-import { HttpException, Logger, UseGuards } from '@nestjs/common';
+import { HttpException, Logger, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/common';
@@ -111,7 +111,10 @@ export class AuthResolver {
 
     if (!user) throw new HttpException(ApiError.AuthLogin.USER_NOT_FOUND, 400);
 
-    const correctPassword = await bcryptVerify({ password: args.password, hash: user.password });
+    const correctPassword = await bcryptVerify({
+      password: args.password,
+      hash: user.password as string,
+    });
     if (!correctPassword) throw new HttpException(ApiError.AuthLogin.INCORRECT_PASSWORD, 400);
 
     return this.auth.getAuthSession(user, args.rememberMe);
@@ -123,6 +126,8 @@ export class AuthResolver {
     const user = await this.prisma.user.findUnique({
       where: { id: reqUser.id },
     });
+
+    if (!user) throw new UnauthorizedException('User not found');
 
     return {
       username: user.username,
@@ -144,7 +149,7 @@ export class AuthResolver {
     if (user) {
       return this.auth.getAuthSession(user, args.rememberMe);
     } else {
-      throw new HttpException(ApiError.AuthExchangeToken.USER_NOT_FOUND, 401);
+      throw new UnauthorizedException('User not found');
     }
   }
 
@@ -182,12 +187,12 @@ export class AuthResolver {
     try {
       tokenPayload = this.jwtService.verify(args.token);
     } catch {
-      throw new HttpException(ApiError.AuthPasswordResetConfirmation.UNAUTHORIZED, 400);
+      throw new UnauthorizedException('JWT failed verification');
     }
 
     let user = await this.prisma.user.findUnique({ where: { id: tokenPayload.sub } });
 
-    if (!user) throw new HttpException(ApiError.AuthPasswordResetConfirmation.USER_NOT_FOUND, 400);
+    if (!user) throw new UnauthorizedException('User not found');
 
     const hashedPassword = await this.hashPassword(args.newPassword);
 
@@ -202,7 +207,7 @@ export class AuthResolver {
   @Mutation()
   async authRegister(@Args('data') args: AuthRegisterInput) {
     if (!this.config.publicRegistration)
-      throw new HttpException(ApiError.AuthRegister.NO_PUBLIC_REGISTRATIONS, 403);
+      throw new UnauthorizedException('No public registrations allowed');
 
     if (await this.getUserByUsername(args.username, this.prisma))
       throw new HttpException(ApiError.AuthRegister.USERNAME_TAKEN, 400);
@@ -248,9 +253,12 @@ export class AuthResolver {
     @CurrentUser() reqUser: RequestUser
   ) {
     const user = await this.prisma.user.findUnique({ where: { id: reqUser.id } });
-    if (!user) throw new HttpException(ApiError.AuthPasswordChange.USER_NOT_FOUND, 400);
+    if (!user) throw new UnauthorizedException('User not found');
 
-    const correctPassword = await bcryptVerify({ password: args.oldPassword, hash: user.password });
+    const correctPassword = await bcryptVerify({
+      password: args.oldPassword,
+      hash: user.password as string,
+    });
     if (!correctPassword) throw new HttpException(ApiError.AuthPasswordChange.WRONG_PASSWORD, 400);
 
     const hashedPassword = await this.hashPassword(args.newPassword);

@@ -1,4 +1,4 @@
-import { ContextType, ExecutionContext, Injectable } from '@nestjs/common';
+import { ContextType, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
@@ -37,12 +37,14 @@ export class CaslGuard extends AuthGuard('jwt') {
     if (allowAnonymousClass) return true;
 
     let req;
-    const type = context.getType() as ContextType & 'graphql';
+    const type = context.getType() as ContextType | 'graphql';
 
     if (type === 'http') {
       req = context.switchToHttp().getRequest();
     } else if (type === 'graphql') {
       req = GqlExecutionContext.create(context).getContext().req;
+    } else {
+      throw new UnauthorizedException(`Context ${type} not supported`);
     }
 
     if (!req.user) await super.canActivate(context);
@@ -53,11 +55,13 @@ export class CaslGuard extends AuthGuard('jwt') {
   }
 
   getRequest(context: ExecutionContext) {
-    const type = context.getType() as ContextType & 'graphql';
+    const type = context.getType() as ContextType | 'graphql';
     if (type === 'http') {
       return context.switchToHttp().getRequest();
     } else if (type === 'graphql') {
       return GqlExecutionContext.create(context).getContext().req;
+    } else {
+      throw new UnauthorizedException(`Context ${type} not supported`);
     }
   }
 }
