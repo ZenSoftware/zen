@@ -7,8 +7,15 @@
     "emitDecoratorMetadata": true,
     "target": "ES2022",
     "lib": ["ES2022"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "noImplicitAny": true
   },
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
+  "exclude": [
+    "jest.config.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/app/graphql/paljs/**/resolvers.ts"
+  ],
   "include": ["src/**/*.ts"]
 }

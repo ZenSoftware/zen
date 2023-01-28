@@ -22,7 +22,7 @@ export class AuthController {
 
   @Get('google/redirect')
   @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@CurrentUser() user, @Res() res: Response) {
+  async googleAuthRedirect(@CurrentUser() user: RequestUser, @Res() res: Response) {
     const url = await this.getLoginConfirmedURL(user);
     res.redirect(url);
   }
@@ -31,6 +31,6 @@ export class AuthController {
     const authSession = await this.auth.getAuthSession(user, false);
     const token = encodeURIComponent(authSession.token);
     const queryParams = new URLSearchParams({ token });
-    return this.config.oauth.loginConfirmedURL + '?' + queryParams;
+    return this.config.oauth!.loginConfirmedURL + '?' + queryParams;
   }
 }

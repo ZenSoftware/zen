@@ -10,11 +10,11 @@ import { EmailTakenException } from './email-taken-exception.filter';
 @Injectable()
 export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(config: ConfigService, private readonly prisma: PrismaService) {
-    super(config.oauth.google);
+    super(config.oauth!.google);
   }
 
   async validate(accessToken: string, refreshToken: string, profile: Profile) {
-    const googleEmail = profile.emails[0].value;
+    const googleEmail = profile.emails![0].value;
 
     const existingUserWithGoogleEmail = await this.prisma.user.findFirst({
       where: {

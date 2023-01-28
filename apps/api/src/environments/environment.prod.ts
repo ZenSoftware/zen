@@ -3,7 +3,7 @@ import { EnvironmentBase } from './environment.base';
 export const environment: EnvironmentBase = {
   siteUrl: 'https://site.com/#',
   production: true,
-  expressPort: process.env.PORT,
+  expressPort: process.env.PORT as string,
   publicRegistration: true,
   graphql: {
     subscriptions: true,
@@ -53,8 +53,8 @@ export const environment: EnvironmentBase = {
   oauth: {
     loginConfirmedURL: 'https://site.com/#/login-confirmed',
     google: {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientID: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       callbackURL: 'https://api.site.com/auth/google/redirect',
       scope: ['email'],
     },
