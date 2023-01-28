@@ -21,6 +21,8 @@ import type {
   UpdateMany${name}Args,
   UpdateOne${name}Args,
   UpsertOne${name}Args,
+  ${name}WhereInput,
+  ${name}WhereUniqueInput,
 } from '../resolversTypes';
 
 export const typeDefs = null;
@@ -53,6 +55,7 @@ export class ${name}Resolver {
     const record = await this.prisma.${lowercase(name)}.findUnique(
       PrismaSelectArgs(info, args, this.defaultFields)
     );
+    if (!record) return null;
     if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
     return record;
   }
@@ -66,6 +69,7 @@ export class ${name}Resolver {
     const record = await this.prisma.${lowercase(name)}.findFirst(
       PrismaSelectArgs(info, args, this.defaultFields)
     );
+    if (!record) return null;
     if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
     return record;
   }
@@ -122,7 +126,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique({
-      where: args.where,
+      where: args.where as ${name}WhereUniqueInput,
       select: this.defaultFields.${name},
     });
     if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
@@ -171,7 +175,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique({
-      where: args.where,
+      where: args.where as ${name}WhereUniqueInput,
       select: this.defaultFields.${name},
     });
     if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
@@ -185,7 +189,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const records = await this.prisma.${lowercase(name)}.findMany({
-      where: args.where,
+      where: args.where as ${name}WhereInput,
       select: this.defaultFields.${name},
     });
     for (const record of records) {

@@ -19,12 +19,14 @@ import { RequestUser } from '../models/request-user';
  */
 export const CurrentUser = createParamDecorator((data: unknown, context: ExecutionContext) => {
   let user: RequestUser;
-  const type = context.getType() as ContextType & 'graphql';
+  const type = context.getType() as ContextType | 'graphql';
 
   if (type === 'http') {
     user = context.switchToHttp().getRequest().user;
   } else if (type === 'graphql') {
     user = GqlExecutionContext.create(context).getContext().req.user;
+  } else {
+    throw new UnauthorizedException(`Context ${type} not supported`);
   }
 
   if (!user) throw new UnauthorizedException('No user found for request');
