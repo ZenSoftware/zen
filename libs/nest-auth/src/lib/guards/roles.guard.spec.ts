@@ -14,6 +14,8 @@ describe('rbac-logic', () => {
   });
 
   it('should throw if called with new', () => {
-    expect(() => new (<any>RolesGuard)()).toThrow();
+    expect(() => new (<any>RolesGuard)()).toThrow(
+      'RolesGuard cannot be instantiated directly. Use RolesGuard() instead.'
+    );
   });
 });

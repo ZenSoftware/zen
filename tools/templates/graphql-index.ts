@@ -1,6 +1,7 @@
 export function GraphQLIndexTemplate(names: string[]) {
   let indexSource = `// This file is generated automatically. Do not edit it manually.
 import { mergeTypeDefs } from '@graphql-tools/merge';
+import { DocumentNode } from 'graphql';
 
 import { typeDefs as GlobalTypeDefs } from '../global-schema.gql';
 import PALJS_TYPE_DEFS from '../paljs/typeDefs';\n`;
@@ -21,7 +22,7 @@ import PALJS_TYPE_DEFS from '../paljs/typeDefs';\n`;
     .map(n => `${n}TypeDefs`)
     .toString()
     .replace(/,/g, ',\n  ');
-  indexSource += `\n\nexport const NEST_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x);\n\n`;
+  indexSource += `\n\nexport const NEST_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x) as DocumentNode[];\n\n`;
 
   indexSource += `export const ALL_TYPE_DEFS = mergeTypeDefs([GlobalTypeDefs, PALJS_TYPE_DEFS, ...NEST_TYPE_DEFS]);\n`;
 
