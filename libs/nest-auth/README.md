@@ -1,6 +1,6 @@
 # Nest Authorization
 
-The `@zen/nest-auth` library contains the common guards & decorators needed to implement authorization for a Nest app. The library implements both Role-based access control (RBAC) and Attributes-based access control (ABAC). All guards and decorators work with both HTTP & GraphQL.
+The `@zen/nest-auth` library contains the common guards & decorators needed to implement authorization for a Nest app. The library implements both Role-based access control (RBAC) and Attributes-based access control (ABAC). All guards and decorators work with both HTTP & GraphQL.  Utilizing JWTs, the Authorization is 100% stateless allowing for horizontal scaling of container replicas in production.
 
 ---
 ## RBAC
