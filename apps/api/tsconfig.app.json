@@ -8,8 +8,10 @@
     "target": "ES2022",
     "lib": ["ES2022"],
     "moduleResolution": "node",
-    "strictNullChecks": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": [
     "jest.config.ts",
