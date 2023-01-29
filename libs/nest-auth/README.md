@@ -22,7 +22,7 @@ export class AppCaslFactory extends CaslFactory {
 }
 ```
 
-Default fields must be defined explicitly to be include for Prisma queries to ensure that they exist during authorization.  Any fields that CASL ability rules are based on should be included here.  As an example:
+Default fields must be defined explicitly to be included during Prisma queries to ensure that they exist during authorization.  Any fields that CASL ability rules are based on should be included here.  As an example:
 
 `apps/api/src/app/auth/casl/default-fields.ts`
 ```ts
