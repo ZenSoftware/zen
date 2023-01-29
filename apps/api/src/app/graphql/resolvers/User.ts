@@ -5,10 +5,9 @@ import { CaslAbility, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
-import { AuthService, DEFAULT_FIELDS_TOKEN } from '../../auth';
-import type { AppAbility } from '../../auth';
+import { AppAbility, AuthService, DEFAULT_FIELDS_TOKEN } from '../../auth';
 import { DefaultFields, PrismaSelectArgs, PrismaService, User } from '../../prisma';
-import type {
+import {
   AggregateUserArgs,
   CreateOneUserArgs,
   DeleteManyUserArgs,

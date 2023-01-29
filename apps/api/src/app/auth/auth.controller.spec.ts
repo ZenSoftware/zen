@@ -33,7 +33,6 @@ describe('Auth Controller', () => {
       ],
     }).compile();
 
-    await module.resolve(AuthService);
     controller = module.get(AuthController);
   });
 

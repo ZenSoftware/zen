@@ -6,6 +6,7 @@ import { promisify } from 'util';
 
 import { Generator as PalGenerator } from '@paljs/generator';
 import { Config as PalConfig } from '@paljs/types';
+import glob from 'glob-promise';
 
 import {
   CaslPrismaSubjectsTemplate,
@@ -53,6 +54,14 @@ export class ZenGenerator {
       palConfig.backend
     );
     await pal.run();
+
+    // Remove the `resolvers.ts` files
+    const resolversGlob = path.join(palOutPath, '**/resolvers.ts').replaceAll('\\', '/');
+    const resolversFiles = await glob(resolversGlob);
+    for (const file of resolversFiles) {
+      await rm(file);
+    }
+
     console.log(`- Wrote: ${palOutPath}`);
 
     // Replace '@prisma/client' path with '../prisma'
@@ -145,8 +154,8 @@ export class ZenGenerator {
 
         const exportScript = `export * from './${prismaName}.gql';`;
         if (!fieldsIndexSource.includes(exportScript)) {
-          await appendFile(fieldsIndexPath, exportScript + '\n');
-          fieldsIndexSource += exportScript + '\n';
+          await appendFile(fieldsIndexPath, exportScript + '/n');
+          fieldsIndexSource += exportScript + '/n';
         }
 
         const fieldsFolderName = this.config.frontend.fieldsFolderName

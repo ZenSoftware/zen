@@ -2,14 +2,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "module": "ES2022",
+    "module": "CommonJS",
     "types": ["node"],
     "emitDecoratorMetadata": true,
     "target": "ES2022",
     "lib": ["ES2022"],
     "moduleResolution": "node",
-    "strictNullChecks": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "strict": true,
+    "strictPropertyInitialization": false
   },
   "exclude": [
     "jest.config.ts",
