@@ -10,7 +10,7 @@ import {
   createAccessibleByFactory,
 } from '@casl/prisma/runtime';
 
-import type { Prisma, PrismaClient } from '../../prisma';
+import { Prisma, PrismaClient } from '../../prisma';
 
 type ModelName = Prisma.ModelName;
 type ModelWhereInput = {
