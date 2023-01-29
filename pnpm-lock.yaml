@@ -88,6 +88,7 @@ specifiers:
   eslint-config-prettier: 8.1.0
   eslint-plugin-cypress: ^2.12.1
   express: ^4.18.2
+  glob-promise: ^6.0.2
   graphql: ~16.6.0
   graphql-subscriptions: ^2.0.0
   graphql-tag: ^2.12.6
@@ -227,6 +228,7 @@ devDependencies:
   eslint: 8.15.0
   eslint-config-prettier: 8.1.0_eslint@8.15.0
   eslint-plugin-cypress: 2.12.1_eslint@8.15.0
+  glob-promise: 6.0.2
   html-webpack-plugin: 5.5.0_webpack@5.75.0
   import-sort-style-module: 6.0.0
   jest: 28.1.1_zfha7dvnw4nti6zkbsmhmn6xo4
@@ -10746,8 +10748,8 @@ packages:
     resolution: {integrity: sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==}
     engines: {node: '>=8'}
 
-  /async-each/1.0.4:
-    resolution: {integrity: sha512-qL5v0vnRtD4rxlrzLz3WMnMfTvTrMf3IK1xFCF0Q5vqXJkULhM13gO2ynE8RZMjE+bPcH0AUHgcd5BU1FtO1tA==}
+  /async-each/1.0.5:
+    resolution: {integrity: sha512-5QzqtU3BlagehwmdoqwaS2FBQF2P5eL6vFqXwNsb5jwoEsmtfAXg1ocFvW7I6/gGLFhBMKwcMwZuy7uv/Bo9jA==}
     dev: true
     optional: true
 
@@ -11945,7 +11947,7 @@ packages:
     deprecated: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
     dependencies:
       anymatch: 2.0.0
-      async-each: 1.0.4
+      async-each: 1.0.5
       braces: 2.3.2
       glob-parent: 3.1.0
       inherits: 2.0.4
@@ -15015,6 +15017,15 @@ packages:
     dependencies:
       '@types/glob': 8.0.1
       glob: 7.2.3
+    dev: true
+
+  /glob-promise/6.0.2:
+    resolution: {integrity: sha512-Ni2aDyD1ekD6x8/+K4hDriRDbzzfuK4yKpqSymJ4P7IxbtARiOOuU+k40kbHM0sLIlbf1Qh0qdMkAHMZYE6XJQ==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      glob: ^8.0.3
+    dependencies:
+      '@types/glob': 8.0.1
     dev: true
 
   /glob-to-regexp/0.3.0:

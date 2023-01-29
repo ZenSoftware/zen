@@ -4,7 +4,7 @@
 /coverage
 /doc-*
 /.angular
-/apps/api/src/app/prisma/generated/*
+/apps/api/src/app/prisma/generated/
 /apps/api/src/app/auth/casl/generated.ts
 /libs/graphql/src/lib/client/possible-types.ts
 /libs/graphql/src/lib/apollo-angular.ts
