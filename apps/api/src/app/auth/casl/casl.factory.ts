@@ -3,7 +3,7 @@ import { Action, Role } from '@zen/common';
 import { CaslFactory, RequestUser } from '@zen/nest-auth';
 
 import { PrismaQuery, createPrismaAbility } from './casl-prisma';
-import type { PrismaSubjects } from './generated';
+import { PrismaSubjects } from './generated';
 
 /** A union of subjects to extend the ability beyond just Prisma models */
 type ExtendedSubjects = 'all';
