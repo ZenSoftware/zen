@@ -4,7 +4,7 @@ import { Ability, Subject } from '@casl/ability';
 import { Action } from '@zen/common';
 
 export class CaslGuard {
-  static can(action: Action, subject: Subject, field?: string | undefined) {
+  static can(action: Action, subject: Subject) {
     @Injectable({
       providedIn: 'root',
     })
@@ -12,7 +12,7 @@ export class CaslGuard {
       constructor(public router: Router, public ability: Ability) {}
 
       canActivate() {
-        return this.ability.can(action, subject, field) ? true : this.router.parseUrl('/login');
+        return this.ability.can(action, subject) ? true : this.router.parseUrl('/login');
       }
 
       canActivateChild() {
@@ -27,7 +27,7 @@ export class CaslGuard {
     return CaslCan;
   }
 
-  static cannot(action: Action, subject: Subject, field?: string | undefined) {
+  static cannot(action: Action, subject: Subject) {
     @Injectable({
       providedIn: 'root',
     })
@@ -35,7 +35,7 @@ export class CaslGuard {
       constructor(public router: Router, public ability: Ability) {}
 
       canActivate() {
-        return this.ability.cannot(action, subject, field) ? true : this.router.parseUrl('/login');
+        return this.ability.cannot(action, subject) ? true : this.router.parseUrl('/login');
       }
 
       canActivateChild() {
