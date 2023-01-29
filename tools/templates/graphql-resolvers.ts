@@ -7,10 +7,9 @@ import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CaslAbility, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { DEFAULT_FIELDS_TOKEN } from '../../auth';
-import type { AppAbility } from '../../auth';
+import { AppAbility, DEFAULT_FIELDS_TOKEN } from '../../auth';
 import { DefaultFields, PrismaSelectArgs, PrismaService, ${name} } from '../../prisma';
-import type {
+import {
   Aggregate${name}Args,
   CreateOne${name}Args,
   DeleteMany${name}Args,

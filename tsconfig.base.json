@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "paths": {
       "@zen/auth": ["libs/auth/src/index.ts"],
       "@zen/common": ["libs/common/src/index.ts"],
