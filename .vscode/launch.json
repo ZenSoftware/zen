@@ -2,35 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug node",
+      "name": "nest",
       "type": "node",
       "request": "attach",
       "port": 9229,
       "restart": true
     },
     {
-      "name": "Debug angular",
+      "name": "angular",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}"
-    },
-    {
-      "name": "Debug jest",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/@angular/cli/bin/ng",
-      "args": ["test", "${input:project}", "--runInBand=true", "--codeCoverage=false"],
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen"
-    }
-  ],
-  "inputs": [
-    {
-      "id": "project",
-      "type": "promptString",
-      "description": "project name"
     }
   ]
 }
