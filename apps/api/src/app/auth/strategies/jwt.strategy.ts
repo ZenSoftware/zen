@@ -10,7 +10,7 @@ import { ConfigService } from '../../config';
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(private readonly config: ConfigService) {
     super({
-      /** (passport-jwt docs)[http://www.passportjs.org/packages/passport-jwt/] */
+      /** @see [passport-jwt docs](http://www.passportjs.org/packages/passport-jwt/) */
       secretOrKey: config.jwtOptions.publicKey
         ? config.jwtOptions.publicKey
         : config.jwtOptions.secret,
@@ -30,13 +30,12 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: JwtPayload) {
-    // Validate the audience
+    // Validate the audience as the site URL
     if (payload.aud !== this.config.siteUrl) return null;
 
-    const user: RequestUser = {
+    return {
       id: payload.sub,
       roles: payload.roles,
-    };
-    return user;
+    } satisfies RequestUser;
   }
 }
