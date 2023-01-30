@@ -8,7 +8,7 @@ import { CaslAbility, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
 import { AppAbility, DEFAULT_FIELDS_TOKEN } from '../../auth';
-import { DefaultFields, PrismaSelectArgs, PrismaService, ${name} } from '../../prisma';
+import { DefaultFields, PrismaSelectService, PrismaService, ${name} } from '../../prisma';
 import {
   Aggregate${name}Args,
   CreateOne${name}Args,
@@ -42,7 +42,8 @@ export const typeDefs = null;
 export class ${name}Resolver {
   constructor(
     @Inject(DEFAULT_FIELDS_TOKEN) private readonly defaultFields: DefaultFields,
-    private readonly prisma: PrismaService
+    private readonly prisma: PrismaService,
+    private readonly prismaSelect: PrismaSelectService
   ) {}
 
   @Query()
@@ -52,7 +53,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique(
-      PrismaSelectArgs(info, args, this.defaultFields)
+      this.prismaSelect.getArgs(info, args, this.defaultFields)
     );
     if (ability.cannot('read', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return record;
@@ -65,7 +66,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findFirst(
-      PrismaSelectArgs(info, args, this.defaultFields)
+      this.prismaSelect.getArgs(info, args, this.defaultFields)
     );
     if (ability.cannot('read', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return record;
@@ -78,7 +79,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const records = await this.prisma.${lowercase(name)}.findMany(
-      PrismaSelectArgs(info, args, this.defaultFields)
+      this.prismaSelect.getArgs(info, args, this.defaultFields)
     );
     for (const record of records) {
       if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
@@ -93,7 +94,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     if (ability.cannot('read', '${name}')) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.count(PrismaSelectArgs(info, args));
+    return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
@@ -103,7 +104,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     if (ability.cannot('read', '${name}')) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.aggregate(PrismaSelectArgs(info, args));
+    return this.prisma.${lowercase(name)}.aggregate(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -113,7 +114,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     if (ability.cannot('create', subject('${name}', args.data as any))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.create(PrismaSelectArgs(info, args));
+    return this.prisma.${lowercase(name)}.create(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -127,7 +128,7 @@ export class ${name}Resolver {
       select: this.defaultFields.${name},
     });
     if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.update(PrismaSelectArgs(info, args));
+    return this.prisma.${lowercase(name)}.update(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -143,7 +144,7 @@ export class ${name}Resolver {
     for (const record of records) {
       if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
     }
-    return this.prisma.${lowercase(name)}.updateMany(PrismaSelectArgs(info, args));
+    return this.prisma.${lowercase(name)}.updateMany(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -162,7 +163,7 @@ export class ${name}Resolver {
     ) {
       throw new ForbiddenException();
     }
-    return this.prisma.${lowercase(name)}.upsert(PrismaSelectArgs(info, args));
+    return this.prisma.${lowercase(name)}.upsert(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -176,7 +177,7 @@ export class ${name}Resolver {
       select: this.defaultFields.${name},
     });
     if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.delete(PrismaSelectArgs(info, args));
+    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -192,7 +193,7 @@ export class ${name}Resolver {
     for (const record of records) {
       if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
     }
-    return this.prisma.${lowercase(name)}.deleteMany(PrismaSelectArgs(info, args));
+    return this.prisma.${lowercase(name)}.deleteMany(this.prismaSelect.getArgs(info, args));
   }
 }
 `;
