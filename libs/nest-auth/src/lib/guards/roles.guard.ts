@@ -8,8 +8,9 @@ import { Role } from '@zen/common';
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 
 /**
- * A guard that takes a list of roles and checks if the user has at least one of them. Works with either HTTP
- * or GraphQL requests. The following will require the user to have either the `Admin` or `Moderator` roles.
+ * A guard that takes a list of roles for its parameters and checks if the user has at least
+ * one of them. Works with either HTTP or GraphQL requests. The following will require the
+ * user to have either the `Admin` or `Moderator` roles.
  * ```ts
  * ＠UseGuards(RolesGuard('Admin', 'Moderator'))
  * ```

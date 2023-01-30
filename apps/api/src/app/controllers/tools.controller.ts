@@ -1,7 +1,7 @@
 import { Controller, Get, Header, Logger, UseGuards } from '@nestjs/common';
 import { RolesGuard } from '@zen/nest-auth';
 
-import { PrismaService } from '../prisma';
+import { Prisma, PrismaService } from '../prisma';
 
 @Controller()
 @UseGuards(RolesGuard('Super'))
