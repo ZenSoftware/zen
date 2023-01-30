@@ -5,10 +5,12 @@ import { AuthGuard } from '@nestjs/passport';
 
 import { CaslFactory } from '../casl-factory';
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
+import { CASL_POLICY_KEY, CaslPolicyHandler } from '../decorators/casl-policy.decorator';
 
 /**
- * Guard that is used in conjunction with `＠CaslAbility` & `＠CaslAccessible` parameter decorators.
+ * Guard that is used in conjunction with `CaslAbility`, `CaslAccessible` and `CaslPolicy` decorators.
  * Works with either HTTP or GraphQL requests.
+ * @example
  * ```ts
  * ＠UseGuards(CaslGuard)
  * async getBlogs(
@@ -16,10 +18,16 @@ import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
  *   ＠CaslAccessible('Blog') accessibleBlogs: Prisma.BlogWhereInput
  * ) { ... }
  * ```
+ * @example
+ * ```ts
+ * ＠UseGuards(CaslGuard)
+ * ＠CaslPolicy((ability: AppAbility) => ability.can('read', 'Blog'))
+ * async getBlogs() { ... }
+ * ```
  */
 @Injectable()
 export class CaslGuard extends AuthGuard('jwt') {
-  constructor(readonly caslFactory: CaslFactory, readonly reflector: Reflector) {
+  constructor(private readonly reflector: Reflector, private readonly caslFactory: CaslFactory) {
     super();
   }
 
@@ -36,7 +44,7 @@ export class CaslGuard extends AuthGuard('jwt') {
     );
     if (allowAnonymousClass) return true;
 
-    let req;
+    let req: any;
     const type = context.getType() as ContextType | 'graphql';
 
     if (type === 'http') {
@@ -51,7 +59,13 @@ export class CaslGuard extends AuthGuard('jwt') {
 
     if (!req.ability) req.ability = await this.caslFactory.createAbility(req.user);
 
-    return true;
+    const classPolicies =
+      this.reflector.get<CaslPolicyHandler[]>(CASL_POLICY_KEY, context.getClass()) || [];
+    const handlerPolicies =
+      this.reflector.get<CaslPolicyHandler[]>(CASL_POLICY_KEY, context.getHandler()) || [];
+    const policies = classPolicies.concat(handlerPolicies);
+
+    return policies.every(handler => handler(req.ability));
   }
 
   getRequest(context: ExecutionContext) {

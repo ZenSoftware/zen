@@ -5,7 +5,7 @@ export const ALLOW_ANONYMOUS_KEY = 'AllowAnonymous';
 /**
  * Allows access for non-authenticated users to individual endpoints.
  * Works with both `RolesGuard` and `CaslGuard`.
- * The following will allow non-authenticated users access to the `viewBlog` endpoint,
+ * The following will allow non-authenticated users access to the `getBlog` endpoint,
  * but require a user to have the `Moderator` role for the `editBlog` endpoint.
  * ```ts
  * ＠Controller('blog')
@@ -13,7 +13,7 @@ export const ALLOW_ANONYMOUS_KEY = 'AllowAnonymous';
  * export class BlogController {
  *   ＠Get()
  *   ＠AllowAnonymous()
- *   viewBlog() { ... }
+ *   getBlog() { ... }
  *
  *   ＠Put()
  *   editBlog() { ... }
