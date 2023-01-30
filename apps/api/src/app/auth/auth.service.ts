@@ -35,16 +35,14 @@ export class AuthService {
 
     const ability = await this.createAbility(user);
 
-    const authSession: AuthSession = {
+    return {
       userId: user.id,
       roles: user.roles,
       rules: ability.rules,
       token,
       rememberMe,
       expiresIn,
-    };
-
-    return authSession;
+    } satisfies AuthSession;
   }
 
   async createAbility(user: RequestUser): Promise<AppAbility> {
