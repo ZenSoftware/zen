@@ -1,4 +1,5 @@
 export { AllowAnonymous } from './lib/decorators/allow-anonymous.decorator';
+export { CaslPolicy } from './lib/decorators/casl-policy.decorator';
 export { RequestUser } from './lib/models/request-user';
 export { RolesGuard } from './lib/guards/roles.guard';
 export * from './lib/casl-factory';

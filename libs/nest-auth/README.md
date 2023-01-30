@@ -80,22 +80,26 @@ You can then utilize `CaslGuard` in conjunction with the parameter decorator `Ca
 
 ```ts
 @UseGuards(CaslGuard)
-async updateBlog(
-  @CaslAbility() ability: AppAbility,
-) { 
+async updateBlog(@CaslAbility() ability: AppAbility) { 
   if(ability.can('update', subject('Blog', { authorId: 'abc123' }))) {
     ...
   }
 }
 ```
 
-A powerful feature of tightly integrating CASL with Prisma is the ability to simply get all the records from the database the user has access to.  You can utilize the parameter decorator `CaslAccessible` that takes a Prisma model name as a parameter. It will construct the WhereInput given the defined `read` abilities defined in the CASL factory above.  You can then apply the WhereInput as an `AND` condition in your Prisma query to narrow queries to only accessible records the user has access to.
+Alternatively, you can utilize the `CaslPolicy` decorator to apply authorization as a decorator instead of handling authorization within the method.  This approach is rather limited as the CASL ability is the only argument available with no other providers being injectable.  Though, it will suffice for simple ability checks.
 
 ```ts
 @UseGuards(CaslGuard)
-async getBlogs(
-  @CaslAccessible('Blog') accessibleWhereInput: Prisma.BlogWhereInput
-) { 
+@CaslPolicy((ability: AppAbility) => ability.can('read', 'Blog'))
+async getBlogs() { ... }
+```
+
+A powerful feature of tightly integrating CASL with Prisma is the ability to get all the records from the database the user has access to.  You can achieve this by utilizing the parameter decorator `CaslAccessible` that takes a Prisma model name as an argument. It will construct the WhereInput given the defined `read` abilities defined in the CASL factory above.  You can then apply the WhereInput as an `AND` condition in your Prisma query to narrow queries to only accessible records the user has access to.
+
+```ts
+@UseGuards(CaslGuard)
+async getBlogs(@CaslAccessible('Blog') accessibleWhereInput: Prisma.BlogWhereInput) { 
   const accessibleBlogs = await prisma.blog.findMany({
     where: {
       AND: [
@@ -106,4 +110,3 @@ async getBlogs(
   });
 }
 ```
-
