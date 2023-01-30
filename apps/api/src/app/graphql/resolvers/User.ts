@@ -6,7 +6,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import { gql } from 'graphql-tag';
 
 import { AppAbility, AuthService, DEFAULT_FIELDS_TOKEN } from '../../auth';
-import { DefaultFields, PrismaSelectArgs, PrismaService, User } from '../../prisma';
+import { DefaultFields, PrismaSelectService, PrismaService, User } from '../../prisma';
 import {
   AggregateUserArgs,
   CreateOneUserArgs,
@@ -34,6 +34,7 @@ export class UserResolver {
   constructor(
     @Inject(DEFAULT_FIELDS_TOKEN) private readonly defaultFields: DefaultFields,
     private readonly prisma: PrismaService,
+    private readonly prismaSelect: PrismaSelectService,
     private readonly auth: AuthService
   ) {}
 
@@ -55,7 +56,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.user.findUnique(
-      PrismaSelectArgs(info, args, this.defaultFields)
+      this.prismaSelect.getArgs(info, args, this.defaultFields)
     );
     if (ability.cannot('read', subject('User', record as User))) throw new ForbiddenException();
     return record;
@@ -68,7 +69,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.user.findFirst(
-      PrismaSelectArgs(info, args, this.defaultFields)
+      this.prismaSelect.getArgs(info, args, this.defaultFields)
     );
     if (ability.cannot('read', subject('User', record as User))) throw new ForbiddenException();
     return record;
@@ -81,7 +82,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     const records = await this.prisma.user.findMany(
-      PrismaSelectArgs(info, args, this.defaultFields)
+      this.prismaSelect.getArgs(info, args, this.defaultFields)
     );
     for (const record of records) {
       if (ability.cannot('read', subject('User', record))) throw new ForbiddenException();
@@ -96,7 +97,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     if (ability.cannot('read', 'User')) throw new ForbiddenException();
-    return this.prisma.user.count(PrismaSelectArgs(info, args));
+    return this.prisma.user.count(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
@@ -106,7 +107,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     if (ability.cannot('read', 'User')) throw new ForbiddenException();
-    return this.prisma.user.aggregate(PrismaSelectArgs(info, args));
+    return this.prisma.user.aggregate(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -116,7 +117,7 @@ export class UserResolver {
     @CaslAbility() ability: AppAbility
   ) {
     if (ability.cannot('create', subject('User', args.data as any))) throw new ForbiddenException();
-    return this.prisma.user.create(PrismaSelectArgs(info, args));
+    return this.prisma.user.create(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -130,7 +131,7 @@ export class UserResolver {
       select: this.defaultFields.User,
     });
     if (ability.cannot('update', subject('User', record as User))) throw new ForbiddenException();
-    return this.prisma.user.update(PrismaSelectArgs(info, args));
+    return this.prisma.user.update(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -146,7 +147,7 @@ export class UserResolver {
     for (const record of records) {
       if (ability.cannot('update', subject('User', record as User))) throw new ForbiddenException();
     }
-    return this.prisma.user.updateMany(PrismaSelectArgs(info, args));
+    return this.prisma.user.updateMany(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -165,7 +166,7 @@ export class UserResolver {
     ) {
       throw new ForbiddenException();
     }
-    return this.prisma.user.upsert(PrismaSelectArgs(info, args));
+    return this.prisma.user.upsert(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -179,7 +180,7 @@ export class UserResolver {
       select: this.defaultFields.User,
     });
     if (ability.cannot('delete', subject('User', record as User))) throw new ForbiddenException();
-    return this.prisma.user.delete(PrismaSelectArgs(info, args));
+    return this.prisma.user.delete(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -195,6 +196,6 @@ export class UserResolver {
     for (const record of records) {
       if (ability.cannot('delete', subject('User', record as User))) throw new ForbiddenException();
     }
-    return this.prisma.user.deleteMany(PrismaSelectArgs(info, args));
+    return this.prisma.user.deleteMany(this.prismaSelect.getArgs(info, args));
   }
 }
