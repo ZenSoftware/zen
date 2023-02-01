@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 import { interval } from 'rxjs';
 
-import { Upload } from '../models';
+import type { Upload } from '../models';
 
 export const typeDefs = gql`
   extend type Mutation {
