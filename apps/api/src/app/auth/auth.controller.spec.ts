@@ -16,7 +16,7 @@ describe('Auth Controller', () => {
           provide: AuthService,
           useValue: {
             getAuthSession: () => {
-              const authSession: Partial<AuthSession> = {
+              const authSession: Pick<AuthSession, 'token'> = {
                 token: 'abc.def_+/ghi.jkl==',
               };
 
