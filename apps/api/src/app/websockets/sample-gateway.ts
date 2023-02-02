@@ -13,7 +13,7 @@ export class SampleGateway extends BaseGateway {
   }
 
   @SubscribeMessage('msgToServer')
-  handleMessage(client: Socket, payload: unknown): void {
+  msgToServer(client: Socket, payload: unknown): void {
     const user = this.clientIdToUserMap.get(client.id);
     if (user) {
       logger.log(`msgToServer by ${user.id}`, payload);
