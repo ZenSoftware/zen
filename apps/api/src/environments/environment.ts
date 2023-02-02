@@ -9,7 +9,7 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   cors: { credentials: true, origin: true },
   socketio: {
-    port: +process.env.SOCKETIO_PORT,
+    port: +(process.env.SOCKETIO_PORT as string),
   },
   graphql: {
     subscriptions: true,

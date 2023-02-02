@@ -6,7 +6,7 @@ export const environment: EnvironmentBase = {
   expressPort: process.env.PORT as string,
   publicRegistration: true,
   socketio: {
-    port: +process.env.SOCKETIO_PORT,
+    port: +(process.env.SOCKETIO_PORT as string),
   },
   graphql: {
     subscriptions: true,
