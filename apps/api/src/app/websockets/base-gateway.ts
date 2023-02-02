@@ -29,13 +29,21 @@ export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
   /**
    * Emit to all connected devices for a given user
    */
-  broadcastToUser(userId: RequestUser['id'], eventName: string, ...args: any[]) {
-    const userClients = this.userIdToClientsMap.get(userId);
+  broadcastToUser(user: RequestUser, eventName: string, ...args: any[]) {
+    const userClients = this.userIdToClientsMap.get(user.id);
     if (userClients) {
       for (const client of userClients) {
         client.emit(eventName, args);
       }
     }
+  }
+
+  getUserByClientId(clientId: string) {
+    return this.clientIdToUserMap.get(clientId) as UserWithAbility;
+  }
+
+  getClientsByUserId(userId: RequestUser['id']) {
+    return this.userIdToClientsMap.get(userId) as Socket[];
   }
 
   afterInit(server: Server) {
