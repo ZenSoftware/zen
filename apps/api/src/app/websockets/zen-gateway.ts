@@ -12,10 +12,9 @@ import { Server, Socket } from 'socket.io';
 
 import { environment } from '../../environments/environment';
 import { AppAbility, AuthService } from '../auth';
-import { PrismaService, User } from '../prisma';
 import { AllExceptionsFilter } from './all-exceptions.filter';
 
-type UserWithAbility = Partial<User> & { ability: AppAbility };
+type UserWithAbility = RequestUser & { ability: AppAbility };
 
 @WebSocketGateway(environment.socketio.port, {
   cors: environment.cors,
@@ -23,25 +22,25 @@ type UserWithAbility = Partial<User> & { ability: AppAbility };
 export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   private logger: Logger = new Logger('ZenGateway');
   clientIdToUserMap = new Map<string, UserWithAbility>();
-  userIdToClientsMap = new Map<User['id'], Socket[]>();
+  userIdToClientsMap = new Map<RequestUser['id'], Socket[]>();
 
-  constructor(private readonly prisma: PrismaService, private readonly auth: AuthService) {}
+  constructor(private readonly auth: AuthService) {}
 
   @SubscribeMessage('msgToServer')
   @UseFilters(new AllExceptionsFilter())
   handleMessage(client: Socket, payload: unknown): void {
     const user = this.clientIdToUserMap.get(client.id);
     if (user) {
-      this.logger.log(`msgToServer by ${user?.username}`, payload);
+      this.logger.log(`msgToServer by ${user.id}`, payload);
       // Echo to all connected devices of user
-      this.broadcastToUser(user.id as User['id'], 'msgToClient', payload);
+      this.broadcastToUser(user.id, 'msgToClient', payload);
     }
   }
 
   /**
    * Emit to all connected devices for a given user
    */
-  broadcastToUser(userId: User['id'], eventName: string, ...args: any[]) {
+  broadcastToUser(userId: RequestUser['id'], eventName: string, ...args: any[]) {
     const userClients = this.userIdToClientsMap.get(userId);
     if (userClients) {
       for (const client of userClients) {
@@ -58,58 +57,51 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     const user = this.clientIdToUserMap.get(client.id);
 
     if (user) {
-      const clients = this.userIdToClientsMap.get(user.id as User['id']);
+      const clients = this.userIdToClientsMap.get(user.id);
 
       if (clients) {
         const remainingClients = clients.filter(c => c !== client);
 
-        if (remainingClients.length === 0) this.userIdToClientsMap.delete(user.id as User['id']);
-        else this.userIdToClientsMap.set(user.id as User['id'], remainingClients);
+        if (remainingClients.length === 0) this.userIdToClientsMap.delete(user.id);
+        else this.userIdToClientsMap.set(user.id, remainingClients);
 
         this.clientIdToUserMap.delete(client.id);
 
         this.logger.log(
-          `Disconnected ${user.username} with ${remainingClients.length} connected devices remaining`
+          `Disconnected ${user.id} with ${remainingClients.length} connected devices remaining`
         );
       }
     }
   }
 
   async handleConnection(client: Socket, ...args: any[]) {
-    let requestUser: RequestUser | null;
-
     try {
       const token = client.handshake.headers.authorization?.substring(7);
       if (!token) throw new WsException('No authorization token provided');
 
-      requestUser = await this.auth.authorizeJwt(token);
+      const requestUser = await this.auth.authorizeJwt(token);
       if (!requestUser) throw new WsException('JWT failed to authorize');
 
-      const user = (await this.prisma.user.findUnique({
-        where: { id: requestUser.id },
-        select: {
-          id: true,
-          roles: true,
-          username: true,
-        },
-      })) as UserWithAbility;
-
-      user.ability = await this.auth.createAbility(requestUser);
+      const ability = await this.auth.createAbility(requestUser);
+      const user: UserWithAbility = {
+        ...requestUser,
+        ability,
+      };
 
       if (!user) throw new WsException('User not found');
       this.clientIdToUserMap.set(client.id, user);
 
-      const userClients = this.userIdToClientsMap.get(user.id as User['id']);
+      const userClients = this.userIdToClientsMap.get(user.id);
       if (!userClients || userClients.length === 0) {
         // Initialize user's client list
-        this.userIdToClientsMap.set(user.id as User['id'], [client]);
+        this.userIdToClientsMap.set(user.id, [client]);
       } else {
         userClients.push(client);
       }
 
-      this.logger.log(`Connected ${user?.username} with client id ${client.id}`);
+      this.logger.log(`Connected ${user.id} with client id ${client.id}`);
     } catch (error) {
-      this.logger.error('Authorization failed', error);
+      this.logger.error(error);
       client.disconnect();
       return;
     }
