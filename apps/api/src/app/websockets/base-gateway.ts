@@ -24,7 +24,7 @@ export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
   clientIdToUserMap = new Map<string, UserWithAbility>();
   userIdToClientsMap = new Map<RequestUser['id'], Socket[]>();
 
-  constructor(private readonly auth: AuthService) {}
+  constructor(public readonly auth: AuthService) {}
 
   /**
    * Emit to all connected devices for a given user
