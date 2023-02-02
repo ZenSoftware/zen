@@ -15,23 +15,23 @@ import { AppAbility, AuthService } from '../auth';
 import { AllExceptionsFilter } from './all-exceptions.filter';
 
 type UserWithAbility = RequestUser & { ability: AppAbility };
+const logger = new Logger('ZenGateway');
 
 @WebSocketGateway(environment.socketio.port, {
   cors: environment.cors,
 })
+@UseFilters(new AllExceptionsFilter())
 export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-  private logger: Logger = new Logger('ZenGateway');
   clientIdToUserMap = new Map<string, UserWithAbility>();
   userIdToClientsMap = new Map<RequestUser['id'], Socket[]>();
 
   constructor(private readonly auth: AuthService) {}
 
   @SubscribeMessage('msgToServer')
-  @UseFilters(new AllExceptionsFilter())
   handleMessage(client: Socket, payload: unknown): void {
     const user = this.clientIdToUserMap.get(client.id);
     if (user) {
-      this.logger.log(`msgToServer by ${user.id}`, payload);
+      logger.log(`msgToServer by ${user.id}`, payload);
       // Echo to all connected devices of user
       this.broadcastToUser(user.id, 'msgToClient', payload);
     }
@@ -50,7 +50,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
   }
 
   afterInit(server: Server) {
-    this.logger.log('Initialized');
+    logger.log('Initialized');
   }
 
   handleDisconnect(client: Socket) {
@@ -67,7 +67,7 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
         this.clientIdToUserMap.delete(client.id);
 
-        this.logger.log(
+        logger.log(
           `Disconnected ${user.id} with ${remainingClients.length} connected devices remaining`
         );
       }
@@ -99,9 +99,9 @@ export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         userClients.push(client);
       }
 
-      this.logger.log(`Connected ${user.id} with client id ${client.id}`);
+      logger.log(`Connected ${user.id} with client id ${client.id}`);
     } catch (error) {
-      this.logger.error(error);
+      logger.error(error);
       client.disconnect();
       return;
     }
