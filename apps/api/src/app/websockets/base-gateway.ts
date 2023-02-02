@@ -3,7 +3,6 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
-  SubscribeMessage,
   WebSocketGateway,
   WsException,
 } from '@nestjs/websockets';
@@ -15,27 +14,17 @@ import { AppAbility, AuthService } from '../auth';
 import { AllExceptionsFilter } from './all-exceptions.filter';
 
 type UserWithAbility = RequestUser & { ability: AppAbility };
-const logger = new Logger('ZenGateway');
+const logger = new Logger('SocketIO');
 
 @WebSocketGateway(environment.socketio.port, {
   cors: environment.cors,
 })
 @UseFilters(new AllExceptionsFilter())
-export class ZenGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   clientIdToUserMap = new Map<string, UserWithAbility>();
   userIdToClientsMap = new Map<RequestUser['id'], Socket[]>();
 
   constructor(private readonly auth: AuthService) {}
-
-  @SubscribeMessage('msgToServer')
-  handleMessage(client: Socket, payload: unknown): void {
-    const user = this.clientIdToUserMap.get(client.id);
-    if (user) {
-      logger.log(`msgToServer by ${user.id}`, payload);
-      // Echo to all connected devices of user
-      this.broadcastToUser(user.id, 'msgToClient', payload);
-    }
-  }
 
   /**
    * Emit to all connected devices for a given user

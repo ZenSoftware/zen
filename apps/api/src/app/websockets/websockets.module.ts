@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 
 import { ZenAuthModule } from '../auth';
 import { PrismaModule } from '../prisma';
-import { ZenGateway } from './zen-gateway';
+import { SampleGateway } from './sample-gateway';
 
 @Module({
   imports: [PrismaModule, ZenAuthModule],
-  providers: [ZenGateway],
+  providers: [SampleGateway],
 })
 export class WebsocketsModule {}
