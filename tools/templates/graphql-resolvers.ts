@@ -4,6 +4,7 @@ export function GraphQLResolversTemplate(name: string) {
   return `import { subject } from '@casl/ability';
 import { ForbiddenException, Inject, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
+import type { NonNullableFields } from '@zen/common';
 import { CaslAbility, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
@@ -21,8 +22,6 @@ import type {
   UpdateMany${name}Args,
   UpdateOne${name}Args,
   UpsertOne${name}Args,
-  ${name}WhereInput,
-  ${name}WhereUniqueInput,
 } from '../resolversTypes';
 
 export const typeDefs = null;
@@ -49,7 +48,7 @@ export class ${name}Resolver {
 
   @Query()
   async findUnique${name}(
-    @Args() args: FindUnique${name}Args,
+    @Args() args: NonNullableFields<FindUnique${name}Args>,
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
@@ -62,7 +61,7 @@ export class ${name}Resolver {
 
   @Query()
   async findFirst${name}(
-    @Args() args: FindFirst${name}Args,
+    @Args() args: NonNullableFields<FindFirst${name}Args>,
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
@@ -120,12 +119,12 @@ export class ${name}Resolver {
 
   @Mutation()
   async updateOne${name}(
-    @Args() args: UpdateOne${name}Args,
+    @Args() args: NonNullableFields<UpdateOne${name}Args>,
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique({
-      where: args.where as ${name}WhereUniqueInput,
+      where: args.where,
       select: this.defaultFields.${name},
     });
     if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
@@ -169,12 +168,12 @@ export class ${name}Resolver {
 
   @Mutation()
   async deleteOne${name}(
-    @Args() args: DeleteOne${name}Args,
+    @Args() args: NonNullableFields<DeleteOne${name}Args>,
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique({
-      where: args.where as ${name}WhereUniqueInput,
+      where: args.where,
       select: this.defaultFields.${name},
     });
     if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
@@ -188,7 +187,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const records = await this.prisma.${lowercase(name)}.findMany({
-      where: args.where as ${name}WhereInput,
+      where: args.where,
       select: this.defaultFields.${name},
     });
     for (const record of records) {
