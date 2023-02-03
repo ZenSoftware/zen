@@ -19,7 +19,7 @@ export class AuthService {
     private readonly caslFactory: CaslFactory
   ) {}
 
-  async getAuthSession(user: RequestUser, rememberMe = false) {
+  async getAuthSession(user: RequestUser, rememberMe = false): Promise<AuthSession> {
     const jwtPayload: JwtPayload = {
       jti: randomUUID(),
       aud: this.config.siteUrl,
@@ -42,7 +42,7 @@ export class AuthService {
       token,
       rememberMe,
       expiresIn,
-    } satisfies AuthSession;
+    };
   }
 
   async createAbility(user: RequestUser): Promise<AppAbility> {
