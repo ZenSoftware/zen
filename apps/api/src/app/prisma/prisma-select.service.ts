@@ -7,7 +7,7 @@ import { Prisma } from './generated';
 
 @Injectable()
 export class PrismaSelectService {
-  getArgs(info: GraphQLResolveInfo, args: object, defaultFields?: PalDefaultFields) {
+  getArgs<Args>(info: GraphQLResolveInfo, args: Args, defaultFields?: PalDefaultFields): Args {
     const result = new PrismaSelect(info, {
       defaultFields: defaultFields as any,
       dmmf: [Prisma.dmmf],
