@@ -147,6 +147,11 @@
     "webpack": "^5.75.0",
     "zone.js": "~0.12.0"
   },
+  "overrides": {
+    "@storybook/angular": {
+      "zone.js": "$zone.js"
+    }
+  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-customizable"
