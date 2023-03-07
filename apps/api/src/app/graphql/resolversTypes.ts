@@ -206,7 +206,7 @@ export interface UpsertOneUserArgs {
 }
 
 export interface CreateManyUserArgs {
-  data: UserCreateManyInput[];
+  data: UserCreateManyInput;
   skipDuplicates?: boolean;
 }
 
