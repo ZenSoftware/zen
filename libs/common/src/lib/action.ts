@@ -1,5 +1,5 @@
 /**
- * Casl actions available for authorization.
+ * CASL actions available for authorization.
  * This is intended to be extended as business requirements demand.
  */
 export const Action = {
