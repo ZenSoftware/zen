@@ -7540,8 +7540,8 @@ packages:
       postcss-import: 14.1.0_postcss@8.4.21
       postcss-loader: 6.2.1_mquw4qchulb5tpkmg3p2j6qala
       rxjs: 6.6.7
-      sass: 1.59.1
-      sass-loader: 12.6.0_sass@1.59.1+webpack@5.76.1
+      sass: 1.59.2
+      sass-loader: 12.6.0_sass@1.59.2+webpack@5.76.1
       source-map-loader: 3.0.2_webpack@5.76.1
       style-loader: 3.3.1_webpack@5.76.1
       stylus: 0.55.0
@@ -7723,8 +7723,8 @@ packages:
     resolution: {integrity: sha512-Ups2dShK52xXa8w6iBWLgcjPJWjais6KPJQq3gQ/88AY6BXoTX+MIGFPrWQO1KLMiQfoTpcLnUwloN4brrVUHw==}
     dev: true
 
-  /@oclif/plugin-help/5.2.7_lwgqdwokjtwlohdqtbb6s252kq:
-    resolution: {integrity: sha512-p6DJk0QMfzGvXGqrSZTQPitUGi68oGzr48tRKdrVxDDPMAELxHeXXFbkNRNdvjldPpTk44m0PbxV5tWhwurRwg==}
+  /@oclif/plugin-help/5.2.8_lwgqdwokjtwlohdqtbb6s252kq:
+    resolution: {integrity: sha512-Fl1DD6Hm7USG/BYqcUmc/hMXK6Bnd3HvkZsRG+qi0dbYaNtY9zJ58C5b3lgPn69bXJlyi1eWX4S8djSUWD8VYg==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@oclif/core': 2.6.2_lwgqdwokjtwlohdqtbb6s252kq
@@ -7735,8 +7735,8 @@ packages:
       - typescript
     dev: true
 
-  /@oclif/plugin-plugins/2.4.0_lwgqdwokjtwlohdqtbb6s252kq:
-    resolution: {integrity: sha512-npbid+jbN86fVaE2aq8eftVJo5vHEQD8UrMsEnVA4/pm2xMZuYb87ZC70ZMT3vBSz1Ndcgpry7In9OS7py5eyg==}
+  /@oclif/plugin-plugins/2.4.1_lwgqdwokjtwlohdqtbb6s252kq:
+    resolution: {integrity: sha512-IZIceVzjI5RjCR7TkWN51aEPi243Mtme5dmOD4Y3HlXI1ul8gtXFeJNRKODKcUQVsJWBqRFhsH1TREfGqE06cA==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@oclif/color': 1.0.4
@@ -7808,8 +7808,8 @@ packages:
     hasBin: true
     dependencies:
       '@oclif/core': 1.26.2
-      '@oclif/plugin-help': 5.2.7_lwgqdwokjtwlohdqtbb6s252kq
-      '@oclif/plugin-plugins': 2.4.0_lwgqdwokjtwlohdqtbb6s252kq
+      '@oclif/plugin-help': 5.2.8_lwgqdwokjtwlohdqtbb6s252kq
+      '@oclif/plugin-plugins': 2.4.1_lwgqdwokjtwlohdqtbb6s252kq
       '@paljs/create': 5.2.0
       '@paljs/display': 5.2.0
       '@paljs/generator': 5.2.0
@@ -12791,7 +12791,7 @@ packages:
       fs-minipass: 3.0.1
       glob: 8.1.0
       lru-cache: 7.18.3
-      minipass: 4.2.4
+      minipass: 4.2.5
       minipass-collect: 1.0.2
       minipass-flush: 1.0.5
       minipass-pipeline: 1.2.4
@@ -16018,7 +16018,7 @@ packages:
     resolution: {integrity: sha512-MhaJDcFRTuLidHrIttu0RDGyyXs/IYHVmlcxfLAEFIWjc1vdLAkdwT7Ace2u7DbitWC0toKMl5eJZRYNVreIMw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      minipass: 4.2.4
+      minipass: 4.2.5
     dev: true
 
   /fs-monkey/1.0.3:
@@ -19760,7 +19760,7 @@ packages:
       https-proxy-agent: 5.0.1
       is-lambda: 1.0.1
       lru-cache: 7.18.3
-      minipass: 4.2.4
+      minipass: 4.2.5
       minipass-fetch: 3.0.1
       minipass-flush: 1.0.5
       minipass-pipeline: 1.2.4
@@ -20140,7 +20140,7 @@ packages:
     resolution: {integrity: sha512-t9/wowtf7DYkwz8cfMSt0rMwiyNIBXf5CKZ3S5ZMqRqMYT0oLTp0x1WorMI9WTwvaPg21r1JbFxJMum8JrLGfw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      minipass: 4.2.4
+      minipass: 4.2.5
       minipass-sized: 1.0.3
       minizlib: 2.1.2
     optionalDependencies:
@@ -20182,8 +20182,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /minipass/4.2.4:
-    resolution: {integrity: sha512-lwycX3cBMTvcejsHITUgYj6Gy6A7Nh4Q6h9NP4sTHY1ccJlC7yKzDmiShEHsJ16Jf1nKGDEaiHxiltsJEvk0nQ==}
+  /minipass/4.2.5:
+    resolution: {integrity: sha512-+yQl7SX3bIT83Lhb4BVorMAHVuqsskxRdlmO9kTpyukp8vsm2Sn/fUOV9xlnG8/a5JsypJzap21lz/y3FBMJ8Q==}
     engines: {node: '>=8'}
     dev: true
 
@@ -20967,7 +20967,7 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       make-fetch-happen: 11.0.3
-      minipass: 4.2.4
+      minipass: 4.2.5
       minipass-fetch: 3.0.1
       minipass-json-stream: 1.0.1
       minizlib: 2.1.2
@@ -21456,7 +21456,7 @@ packages:
       '@npmcli/run-script': 6.0.0
       cacache: 17.0.4
       fs-minipass: 3.0.1
-      minipass: 4.2.4
+      minipass: 4.2.5
       npm-package-arg: 10.1.0
       npm-packlist: 7.0.4
       npm-pick-manifest: 8.0.1
@@ -23520,7 +23520,7 @@ packages:
       webpack: 5.76.1
     dev: true
 
-  /sass-loader/12.6.0_sass@1.59.1+webpack@5.76.1:
+  /sass-loader/12.6.0_sass@1.59.2+webpack@5.76.1:
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -23541,7 +23541,7 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      sass: 1.59.1
+      sass: 1.59.2
       webpack: 5.76.1
     dev: true
 
@@ -23580,8 +23580,8 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /sass/1.59.1:
-    resolution: {integrity: sha512-KUqJ1AJdXOs448ocHI9FLKXhCkuZbXtyY6hf1gQNJFp/sCSCjxJOLh27k1Ut7i84s4j0zfQW+rjmfW3VNU0JsA==}
+  /sass/1.59.2:
+    resolution: {integrity: sha512-jJyO6SmbzkJexF8MUorHx5tAilcgabioYxT/BHbY4+OvoqmbHxsYlrjZ8Adhqcgl6Zqwie0TgMXLCAmPFxXOuw==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
@@ -24197,7 +24197,7 @@ packages:
     resolution: {integrity: sha512-WVy6di9DlPOeBWEjMScpNipeSX2jIZBGEn5Uuo8Q7aIuFEuDX0pw8RxcOjlD1TWP4obi24ki7m/13+nFpcbXrw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      minipass: 4.2.4
+      minipass: 4.2.5
     dev: true
 
   /ssri/6.0.2:
@@ -24707,7 +24707,7 @@ packages:
     dependencies:
       chownr: 2.0.0
       fs-minipass: 2.1.0
-      minipass: 4.2.4
+      minipass: 4.2.5
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
