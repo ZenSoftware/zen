@@ -1,8 +1,11 @@
+import { ApolloServerPlugin } from '@apollo/server';
+import {
+  ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault,
+} from '@apollo/server/plugin/landingPage/default';
 import { ApolloDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { GqlOptionsFactory } from '@nestjs/graphql';
-import { ApolloServerPluginInlineTraceDisabled, PluginDefinition } from 'apollo-server-core';
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { print } from 'graphql';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 
@@ -16,18 +19,19 @@ export class GqlConfigService implements GqlOptionsFactory {
   constructor(private readonly config: ConfigService, private readonly prisma: PrismaService) {}
 
   createGqlOptions(): ApolloDriverConfig {
-    const plugins: PluginDefinition[] = [];
-    if (this.config.graphql.sandbox) plugins.push(ApolloServerPluginLandingPageLocalDefault);
-    if (!this.config.graphql.trace) plugins.push(ApolloServerPluginInlineTraceDisabled());
+    const plugins: ApolloServerPlugin[] = [];
+    if (this.config.graphql.sandbox && !this.config.production)
+      plugins.push(ApolloServerPluginLandingPageLocalDefault());
+    if (this.config.graphql.sandbox && this.config.production)
+      plugins.push(ApolloServerPluginLandingPageProductionDefault());
 
     return {
       typeDefs: print(ALL_TYPE_DEFS),
       resolvers: { Upload: GraphQLUpload },
-      debug: !this.config.production,
       playground: false,
       plugins,
       introspection: !!this.config.graphql.introspection,
-      cors: this.config.cors,
+      allowBatchedHttpRequests: true,
       csrfPrevention: this.config.graphql.csrfPrevention,
       cache: 'bounded',
       installSubscriptionHandlers: !!this.config.graphql.subscriptions,
@@ -41,7 +45,7 @@ export class GqlConfigService implements GqlOptionsFactory {
             },
           }
         : undefined,
-      context: (ctx): IContext => {
+      context: (ctx: any): IContext => {
         // Subscriptions pass through JWT token for authentication
         if (ctx.extra) return { req: ctx.extra };
         // Queries, Mutations

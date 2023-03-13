@@ -13,7 +13,6 @@ export const environment: EnvironmentBase = {
   },
   graphql: {
     subscriptions: true,
-    trace: false,
     sandbox: true,
     introspection: true,
     csrfPrevention: true,

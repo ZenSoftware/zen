@@ -15,7 +15,6 @@ export abstract class EnvironmentBase {
   };
   readonly graphql: {
     readonly subscriptions?: boolean;
-    readonly trace?: boolean;
     readonly sandbox?: boolean;
     readonly introspection?: boolean;
     readonly csrfPrevention?: boolean;
