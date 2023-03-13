@@ -10,7 +10,6 @@ export const environment: EnvironmentBase = {
   cors: { credentials: true, origin: true },
   graphql: {
     subscriptions: true,
-    trace: false,
     sandbox: true,
     introspection: true,
     csrfPrevention: true,
