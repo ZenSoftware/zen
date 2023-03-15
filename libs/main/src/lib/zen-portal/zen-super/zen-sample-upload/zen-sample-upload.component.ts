@@ -2,9 +2,8 @@ import { ElementRef, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ZenSnackbarError } from '@zen/components';
-import { GqlErrors, SampleUploadGQL, parseGqlErrors } from '@zen/graphql';
+import { SampleUploadGQL } from '@zen/graphql';
 import gql from 'graphql-tag';
-import { catchError } from 'rxjs/operators';
 
 gql`
   mutation SampleUpload($file: Upload!) {
@@ -49,7 +48,6 @@ export class ZenSampleUploadComponent {
       .mutate({
         file: this.file,
       })
-      .pipe(catchError(parseGqlErrors))
       .subscribe({
         next: () => {
           this.isUploading = false;
@@ -57,9 +55,9 @@ export class ZenSampleUploadComponent {
           this.reset();
         },
 
-        error: (errors: GqlErrors) => {
+        error: e => {
           this.isUploading = false;
-          this.snackbarError.open(errors);
+          this.snackbarError.open(e);
         },
       });
   }

@@ -12,8 +12,9 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ApolloError } from '@apollo/client/errors';
 import { Environment } from '@zen/common';
-import { ApiError, AuthLoginInput, GqlErrors } from '@zen/graphql';
+import { ApiError, AuthLoginInput } from '@zen/graphql';
 import { Subscription, map } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
@@ -124,19 +125,17 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
             this.loggedIn.emit();
           },
 
-          error: (errors: GqlErrors<ApiError.AuthLogin>) => {
+          error: (e: ApolloError) => {
             this.loading = false;
             this.generalError = true;
             this.form.enable();
 
-            if (errors.find(e => e === ApiError.AuthLogin.INCORRECT_PASSWORD)) {
+            if (e.message === ApiError.AuthLogin.INCORRECT_PASSWORD) {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.password.updateValueAndValidity();
               this.passwordInput.nativeElement.select();
-            }
-
-            if (errors.find(e => e === ApiError.AuthLogin.USER_NOT_FOUND)) {
+            } else if (e.message === ApiError.AuthLogin.USER_NOT_FOUND) {
               this.generalError = false;
               this.#usernameNotFound = true;
               this.username.updateValueAndValidity();
