@@ -5,6 +5,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Throttle } from '@nestjs/throttler';
 import { ApiError } from '@zen/common';
 import { CurrentUser, JwtPayload, RequestUser, RolesGuard } from '@zen/nest-auth';
+import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
 import { bcrypt, bcryptVerify } from 'hash-wasm';
 
@@ -110,6 +111,10 @@ export class AuthResolver {
     const user = await this.getUserByUsername(args.username, this.prisma);
 
     if (!user) throw new HttpException(ApiError.AuthLogin.USER_NOT_FOUND, 400);
+    // if (!user)
+    //   throw new GraphQLError('Sam Harris is my hero', {
+    //     extensions: { code: ApiError.AuthLogin.USER_NOT_FOUND },
+    //   });
 
     const correctPassword = await bcryptVerify({
       password: args.password,

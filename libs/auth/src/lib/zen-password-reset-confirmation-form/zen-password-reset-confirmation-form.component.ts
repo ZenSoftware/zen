@@ -15,10 +15,9 @@ import {
   AuthPasswordResetConfirmation,
   AuthPasswordResetConfirmationGQL,
   AuthPasswordResetConfirmationInput,
-  parseGqlErrors,
 } from '@zen/graphql';
 import { Subscription } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -122,7 +121,6 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterContentIn
           },
           { fetchPolicy: 'no-cache' }
         )
-        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
