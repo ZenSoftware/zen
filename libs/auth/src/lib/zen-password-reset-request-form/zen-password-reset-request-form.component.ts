@@ -9,15 +9,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ApolloError } from '@apollo/client/errors';
 import { ApiConstants, ApiError } from '@zen/common';
-import {
-  AuthPasswordResetRequestInput,
-  AuthPasswordResetRequestQueryGQL,
-  GqlErrors,
-  parseGqlErrors,
-} from '@zen/graphql';
+import { AuthPasswordResetRequestInput, AuthPasswordResetRequestQueryGQL } from '@zen/graphql';
 import { Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 
@@ -104,19 +99,18 @@ export class ZenPasswordResetRequestFormComponent implements AfterContentInit, O
           },
           { fetchPolicy: 'no-cache' }
         )
-        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: () => {
             this.loading = false;
             this.completed = true;
             this.sent.emit();
           },
-          error: (errors: GqlErrors<ApiError.AuthPasswordResetRequest>) => {
+          error: (e: ApolloError) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            if (errors.find(e => e === ApiError.AuthPasswordResetRequest.USER_NOT_FOUND)) {
+            if (e.message === ApiError.AuthPasswordResetRequest.USER_NOT_FOUND) {
               this.generalError = false;
               this.#notFound = true;
               this.emailOrUsername.updateValueAndValidity();

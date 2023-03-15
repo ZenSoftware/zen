@@ -9,15 +9,9 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  ApiError,
-  AuthPasswordChangeGQL,
-  AuthPasswordChangeInput,
-  GqlErrors,
-  parseGqlErrors,
-} from '@zen/graphql';
+import { ApolloError } from '@apollo/client/errors';
+import { ApiError, AuthPasswordChangeGQL, AuthPasswordChangeInput } from '@zen/graphql';
 import { Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { passwordValidatorFn } from '../validators';
@@ -137,19 +131,18 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
           },
           { fetchPolicy: 'no-cache' }
         )
-        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: () => {
             this.loading = false;
             this.completed = true;
             this.changed.emit();
           },
-          error: (errors: GqlErrors<ApiError.AuthPasswordChange>) => {
+          error: (e: ApolloError) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            if (errors.find(e => e === ApiError.AuthPasswordChange.WRONG_PASSWORD)) {
+            if (e.message === ApiError.AuthPasswordChange.WRONG_PASSWORD) {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.oldPassword.updateValueAndValidity();
