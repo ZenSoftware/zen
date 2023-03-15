@@ -9,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ApolloError } from '@apollo/client/errors';
 import { Environment } from '@zen/common';
 import {
   ApiError,
@@ -16,11 +17,8 @@ import {
   AuthRegisterGQL,
   AuthRegisterInput,
   AuthSession,
-  GqlErrors,
-  parseGqlErrors,
 } from '@zen/graphql';
 import { Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
@@ -166,27 +164,24 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
           },
           { fetchPolicy: 'no-cache' }
         )
-        .pipe(catchError(parseGqlErrors))
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
             this.registered.emit((<AuthRegister>data).authRegister);
           },
 
-          error: (errors: GqlErrors<ApiError.AuthRegister>) => {
+          error: (e: ApolloError) => {
             this.loading = false;
             this.form.enable();
 
             this.generalError = true;
 
-            if (errors.find(e => e === ApiError.AuthRegister.EMAIL_TAKEN)) {
+            if (e.message === ApiError.AuthRegister.EMAIL_TAKEN) {
               this.generalError = false;
               this.#emailTaken = true;
               this.email.updateValueAndValidity();
               this.emailInput.nativeElement.select();
-            }
-
-            if (errors.find(e => e === ApiError.AuthRegister.USERNAME_TAKEN)) {
+            } else if (e.message === ApiError.AuthRegister.USERNAME_TAKEN) {
               this.generalError = false;
               this.#usernameTaken = true;
               this.username.updateValueAndValidity();

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Environment } from '@zen/common';
 import { ZenSnackbarError } from '@zen/components';
-import { AuthExchangeTokenGQL, parseGqlErrors } from '@zen/graphql';
-import { catchError } from 'rxjs';
+import { AuthExchangeTokenGQL } from '@zen/graphql';
 
 import { AuthService } from '../auth.service';
 import { tokenVar } from '../token-var';
@@ -34,14 +33,13 @@ export class ZenLoginConfirmedComponent {
           fetchPolicy: 'no-cache',
         }
       )
-      .pipe(catchError(parseGqlErrors))
       .subscribe({
         next: ({ data: { authExchangeToken } }) => {
           this.auth.setSession(authExchangeToken);
           this.router.navigateByUrl(this.env.url.loginRedirect);
         },
-        error: errors => {
-          this.snackbarError.open(errors);
+        error: e => {
+          this.snackbarError.open(e);
           this.auth.logout();
         },
       });
