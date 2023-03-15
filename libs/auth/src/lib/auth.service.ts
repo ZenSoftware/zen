@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApolloError } from '@apollo/client/errors';
 import { Ability } from '@casl/ability';
 import { Environment } from '@zen/common';
 import {
-  ApiError,
   AuthExchangeTokenGQL,
   AuthLoginGQL,
   AuthLoginInput,
   AuthSession,
   GetAccountInfoGQL,
-  GqlErrors,
-  parseGqlErrors,
 } from '@zen/graphql';
 import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
 import { Subscription, interval, map, share, throwError, timer } from 'rxjs';
-import { catchError, retry, tap } from 'rxjs/operators';
+import { retry, tap } from 'rxjs/operators';
 
 import { tokenVar } from './token-var';
 
@@ -98,7 +96,6 @@ export class AuthService {
 
   login(data: AuthLoginInput) {
     return this.authLoginGQL.fetch({ data }, { fetchPolicy: 'no-cache' }).pipe(
-      catchError(parseGqlErrors),
       tap(({ data: { authLogin } }) => {
         this.setSession(authLogin);
       })
@@ -235,7 +232,6 @@ export class AuthService {
         { fetchPolicy: 'no-cache' }
       )
       .pipe(
-        catchError(parseGqlErrors),
         retry({
           delay: retryStrategy({
             excludeStatusCodes: ['FORBIDDEN', 'UNAUTHENTICATED', 'INTERNAL_SERVER_ERROR'],
@@ -247,9 +243,9 @@ export class AuthService {
           this.setSession(authExchangeToken);
           console.log('Exchanged token');
         },
-        error: (errors: GqlErrors) => {
+        error: (e: ApolloError) => {
           this.logout();
-          console.error('Exchange token failed', errors);
+          console.error('Exchange token failed', e);
         },
       });
   }
@@ -282,24 +278,16 @@ function retryStrategy({
   delay?: number;
   excludeStatusCodes?: string[];
 }) {
-  return (errors: GqlErrors, retryCount: number) => {
-    const codes = errors.original?.graphQLErrors?.reduce((accum, e) => {
-      const status = e?.extensions?.code;
-      if (status) accum.push(status);
-      return accum;
-    }, [] as string[]);
-
-    const excludedStatusFound = !!codes.find(status =>
-      excludeStatusCodes.find(exclude => exclude === status)
-    );
+  return (e: ApolloError, retryCount: number) => {
+    const excludedStatusFound = !!excludeStatusCodes.find(exclude => exclude === e.message);
 
     if (retryCount > maxAttempts || excludedStatusFound) {
-      return throwError(() => errors);
+      return throwError(() => e);
     }
 
     console.warn(
       `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}s`,
-      errors
+      e
     );
 
     return timer(delay);
