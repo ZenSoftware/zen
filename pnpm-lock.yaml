@@ -22,7 +22,7 @@ specifiers:
   '@angular/router': ~15.2.5
   '@apollo/client': ~3.7.11
   '@apollo/server': ^4.5.0
-  '@casl/ability': ~6.3.3
+  '@casl/ability': ~6.3.4
   '@casl/angular': ~8.2.0
   '@casl/prisma': ~1.3.3
   '@fortawesome/fontawesome-free': ^6.4.0
@@ -126,8 +126,8 @@ specifiers:
 
 dependencies:
   '@apollo/server': 4.5.0_graphql@16.6.0
-  '@casl/ability': 6.3.3
-  '@casl/prisma': 1.3.3_pduawqivh7wuuhbu2wkaekfr6e
+  '@casl/ability': 6.3.4
+  '@casl/prisma': 1.3.3_m3zvzzg23splkq23veh5oh4lue
   '@graphql-tools/merge': 8.4.0_graphql@16.6.0
   '@nestjs-modules/mailer': 1.8.1_jt3jpdk6bknafyfkpkeexozije
   '@nestjs/apollo': 11.0.4_z776ehpvxfjlz7x55yh3o556p4
@@ -181,7 +181,7 @@ devDependencies:
   '@angular/platform-browser-dynamic': 15.2.5_q7pdso3tfnujpmliompw7qvcae
   '@angular/router': 15.2.5_fei2hpjube2jyptjjr23apcui4
   '@apollo/client': 3.7.11_5iwt3wsize4z7ilvhpabnxgrre
-  '@casl/angular': 8.2.0_kxfaygg33filmsc4gtwhcacuiu
+  '@casl/angular': 8.2.0_zhdltjv6b3haggda7xvizoc3ue
   '@fortawesome/fontawesome-free': 6.4.0
   '@graphql-codegen/cli': 3.2.2_3q6avhgaaacez4ctqk4xik246q
   '@graphql-codegen/fragment-matcher': 4.0.1_graphql@16.6.0
@@ -4297,12 +4297,12 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@casl/ability/6.3.3:
-    resolution: {integrity: sha512-UzbqsE9etu6QzZrRmqIyVun2kztAzJ46Tz7lC/2P2buCE6B6Ll7Vptz7JTQtGwapLbeKo2jS7dL966TVOQ7x4g==}
+  /@casl/ability/6.3.4:
+    resolution: {integrity: sha512-ht1Rijj9A089zT5qhtH4jea8uTdJYfjwhbp7lgV6OPXy/tAeCsyXM0YkXHQo4muithxIEQzYfL53Jwlhe8iqug==}
     dependencies:
       '@ucast/mongo2js': 1.3.4
 
-  /@casl/angular/8.2.0_kxfaygg33filmsc4gtwhcacuiu:
+  /@casl/angular/8.2.0_zhdltjv6b3haggda7xvizoc3ue:
     resolution: {integrity: sha512-wFvSTyeRIq68cGHXk5u/4waVx0cS/a7KUM7eHsDxx+GgT1oZVZLSWFaJKHCR2HCVsOu1xW/oX4wRD6DCxqzq4A==}
     peerDependencies:
       '@angular/core': ^14.0.0 || ^15.0.0
@@ -4311,18 +4311,18 @@ packages:
       tslib: ^2.0.0
     dependencies:
       '@angular/core': 15.2.5_rxjs@7.8.0+zone.js@0.12.0
-      '@casl/ability': 6.3.3
+      '@casl/ability': 6.3.4
       rxjs: 7.8.0
       tslib: 2.5.0
     dev: true
 
-  /@casl/prisma/1.3.3_pduawqivh7wuuhbu2wkaekfr6e:
+  /@casl/prisma/1.3.3_m3zvzzg23splkq23veh5oh4lue:
     resolution: {integrity: sha512-G55pyNsIJlS18lfcf4Gj56g0TSHFF3kh8G6rLuUIac2e+lLzrkSWxSS15+YqPDkkVRr0rynKyCR/60CXNTMnhA==}
     peerDependencies:
       '@casl/ability': ^5.3.0 || ^6.0.0
       '@prisma/client': ^2.14.0 || ^3.0.0 || ^4.0.0
     dependencies:
-      '@casl/ability': 6.3.3
+      '@casl/ability': 6.3.4
       '@prisma/client': 4.12.0_prisma@4.12.0
       '@ucast/core': 1.10.2
       '@ucast/js': 3.0.3
@@ -12706,7 +12706,7 @@ packages:
     dependencies:
       '@npmcli/fs': 3.1.0
       fs-minipass: 3.0.1
-      glob: 9.3.2
+      glob: 9.3.4
       lru-cache: 7.18.3
       minipass: 4.2.5
       minipass-collect: 1.0.2
@@ -16205,12 +16205,12 @@ packages:
       minimatch: 5.1.6
       once: 1.4.0
 
-  /glob/9.3.2:
-    resolution: {integrity: sha512-BTv/JhKXFEHsErMte/AnfiSv8yYOLLiyH2lTg8vn02O21zWFgHPTfxtgn1QRe7NRgggUhC8hacR2Re94svHqeA==}
+  /glob/9.3.4:
+    resolution: {integrity: sha512-qaSc49hojMOv1EPM4EuyITjDSgSKI0rthoHnvE81tcOi1SCVndHko7auqxdQ14eiQG2NDBJBE86+2xIrbIvrbA==}
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
       fs.realpath: 1.0.0
-      minimatch: 7.4.4
+      minimatch: 8.0.2
       minipass: 4.2.5
       path-scurry: 1.6.3
     dev: true
@@ -17880,7 +17880,7 @@ packages:
     resolution: {integrity: sha512-pzqtp31nLv/XFOzXGuvhCb8qhjmTVo5vjVk19XE4CRlSWz0KoeJ3bw9XsA7nOp9YBf4qHjwBxkDzKcME/J29Yg==}
     engines: {node: '>=8'}
     dependencies:
-      '@babel/core': 7.21.4
+      '@babel/core': 7.20.12
       '@babel/parser': 7.21.4
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.0
@@ -20045,6 +20045,13 @@ packages:
   /minimatch/7.4.4:
     resolution: {integrity: sha512-T+8B3kNrLP7jDb5eaC4rUIp6DKoeTSb6f9SwF2phcY2gxJUA0GEf1i29/FHxBMEfx0ppWlr434/D0P+6jb8bOQ==}
     engines: {node: '>=10'}
+    dependencies:
+      brace-expansion: 2.0.1
+    dev: true
+
+  /minimatch/8.0.2:
+    resolution: {integrity: sha512-ikHGF67ODxj7vS5NKU2wvTsFLbExee+KXVCnBWh8Cg2hVJfBMQIrlo50qru/09E0EifjnU8dZhJ/iHhyXJM6Mw==}
+    engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
       brace-expansion: 2.0.1
     dev: true
@@ -22875,7 +22882,7 @@ packages:
     resolution: {integrity: sha512-AaHqXxfAVa+fNL07x8iAghfKOds/XXsu7zoouIVsbm7PEbQ3nMWXlvjcbrNLjElnUHWQtAo4QEa0RXuvD4XlpA==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      glob: 9.3.2
+      glob: 9.3.4
       json-parse-even-better-errors: 3.0.0
       normalize-package-data: 5.0.0
       npm-normalize-package-bin: 3.0.0
@@ -23006,7 +23013,7 @@ packages:
   /regenerator-transform/0.15.1:
     resolution: {integrity: sha512-knzmNAcuyxV+gQCufkYcvOqX/qIIfHLv0u5x79kRxuGojfYVky1f15TzZEu2Avte8QGepvUNTnLskf8E6X6Vyg==}
     dependencies:
-      '@babel/runtime': 7.21.0
+      '@babel/runtime': 7.20.13
     dev: true
 
   /regex-not/1.0.2:
