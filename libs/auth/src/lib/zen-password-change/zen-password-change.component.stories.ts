@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
 import { AuthPasswordChangeGQL } from '@zen/graphql';
 
 import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
@@ -17,9 +17,9 @@ export default {
   ],
 } as Meta<ZenPasswordChangeComponent>;
 
-const Template: Story<ZenPasswordChangeComponent> = (args: ZenPasswordChangeComponent) => ({
-  props: args,
-});
-
-export const Primary = Template.bind({});
-Primary.args = {};
+export const Primary = {
+  render: (args: ZenPasswordChangeComponent) => ({
+    props: args,
+  }),
+  args: {},
+};
