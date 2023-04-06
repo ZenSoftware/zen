@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
 import { AuthPasswordResetRequestQueryGQL } from '@zen/graphql';
 
 import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
@@ -22,11 +22,9 @@ export default {
   ],
 } as Meta<ZenPasswordResetRequestPageComponent>;
 
-const Template: Story<ZenPasswordResetRequestPageComponent> = (
-  args: ZenPasswordResetRequestPageComponent
-) => ({
-  props: args,
-});
-
-export const Primary = Template.bind({});
-Primary.args = {};
+export const Primary = {
+  render: (args: ZenPasswordResetRequestPageComponent) => ({
+    props: args,
+  }),
+  args: {},
+};
