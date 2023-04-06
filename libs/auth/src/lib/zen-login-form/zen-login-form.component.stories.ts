@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
 
 import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
 import { ZenLoginFormComponent } from './zen-login-form.component';
@@ -13,15 +13,14 @@ export default {
       declarations: AUTH_DECLARATIONS,
     }),
   ],
+} as Meta<ZenLoginFormComponent>;
+
+export const Primary = {
+  render: (args: ZenLoginFormComponent) => ({
+    props: args,
+  }),
   args: {
     doneMessage: 'Redirecting...',
     doneMessageVisible: true,
   },
-} as Meta<ZenLoginFormComponent>;
-
-const Template: Story<ZenLoginFormComponent> = (args: ZenLoginFormComponent) => ({
-  props: args,
-});
-
-export const Primary = Template.bind({});
-Primary.args = {};
+};

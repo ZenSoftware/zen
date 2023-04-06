@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
 import { AuthRegisterGQL } from '@zen/graphql';
 
 import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
@@ -17,9 +17,9 @@ export default {
   ],
 } as Meta<ZenRegisterComponent>;
 
-const Template: Story<ZenRegisterComponent> = (args: ZenRegisterComponent) => ({
-  props: args,
-});
-
-export const Primary = Template.bind({});
-Primary.args = {};
+export const Primary = {
+  render: (args: ZenRegisterComponent) => ({
+    props: args,
+  }),
+  args: {},
+};

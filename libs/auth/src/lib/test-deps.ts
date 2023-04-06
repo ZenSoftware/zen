@@ -19,6 +19,7 @@ import { ZenComponentsModule } from '@zen/components';
 import { AuthExchangeTokenGQL, AuthLoginGQL, GetAccountInfoGQL } from '@zen/graphql';
 import { ApolloTestingModule } from 'apollo-angular/testing';
 
+import { AuthService } from './auth.service';
 import {
   IfLoggedInDirective,
   IfPublicRegistrationDirective,
@@ -56,6 +57,7 @@ export const AUTH_PROVIDERS: Provider[] = [
       detectSubjectType: object => object['__typename'],
     }),
   },
+  AuthService,
   AuthLoginGQL,
   AuthExchangeTokenGQL,
   GetAccountInfoGQL,

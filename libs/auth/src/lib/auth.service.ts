@@ -65,7 +65,7 @@ export class AuthService {
         loggedInVar(roles ? true : false);
         this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
 
-        const rules: Array<unknown> | null = ls.get(LocalStorageKey.rules, { decrypt: true });
+        const rules: Array<any> | null = ls.get(LocalStorageKey.rules, { decrypt: true });
         if (Array.isArray(rules)) this.ability.update(rules);
 
         switch (env.auth.exchangeStrategy) {
