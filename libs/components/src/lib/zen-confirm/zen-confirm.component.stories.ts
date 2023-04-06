@@ -1,6 +1,6 @@
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
 
 import { ZenConfirmComponent } from './zen-confirm.component';
 
@@ -23,16 +23,15 @@ export default {
       ],
     }),
   ],
+} as Meta<ZenConfirmComponent>;
+
+export const Primary = {
+  render: (args: ZenConfirmComponent) => ({
+    props: args,
+  }),
   args: {
     title: 'Are you sure?',
     confirmText: 'Yes',
     cancelText: 'No',
   },
-} as Meta<ZenConfirmComponent>;
-
-const Template: Story<ZenConfirmComponent> = (args: ZenConfirmComponent) => ({
-  props: args,
-});
-
-export const Primary = Template.bind({});
-Primary.args = {};
+};
