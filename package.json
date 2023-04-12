@@ -142,7 +142,7 @@
     "cz-customizable": "^7.0.0",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
-    "eslint": "~8.37.0",
+    "eslint": "~8.38.0",
     "eslint-config-prettier": "~8.8.0",
     "eslint-plugin-cypress": "^2.13.2",
     "eslint-plugin-storybook": "^0.6.11",
