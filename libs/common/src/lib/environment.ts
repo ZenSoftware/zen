@@ -4,7 +4,6 @@ export abstract class Environment {
   abstract readonly auth: {
     /**
      * `app-load` will exchange the auth token every time the app loads
-     *
      * `efficient` will exchange the auth token only when intervals are exceeded
      */
     readonly exchangeStrategy: 'app-load' | 'efficient';
