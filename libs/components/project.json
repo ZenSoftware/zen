@@ -1,9 +1,10 @@
 {
   "name": "components",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "library",
   "sourceRoot": "libs/components/src",
   "prefix": "zen",
+  "tags": [],
+  "projectType": "library",
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -11,6 +12,12 @@
       "options": {
         "jestConfig": "libs/components/jest.config.ts",
         "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
       }
     },
     "lint": {
@@ -51,6 +58,5 @@
         }
       }
     }
-  },
-  "tags": []
+  }
 }
