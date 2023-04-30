@@ -15,7 +15,6 @@
     "prod:api": "nx build api --prod && npm run docker:build:api",
     "docker:build:api": "docker build -f deploy/api/Dockerfile -t zen-api .",
     "docker:run:api": "docker run -d --name zen-api -p 7081:7080 zen-api",
-    "doc:api": "nx run api:compodoc",
     "test": "nx run-many --all --target=test --parallel",
     "lint": "nx run-many --all --target=lint --parallel",
     "format": "nx format:write --all"
@@ -120,7 +119,6 @@
     "@progress/kendo-theme-material": "^6.0.3",
     "@schematics/angular": "~15.2.7",
     "@storybook/addon-essentials": "7.0.7",
-    "@storybook/addon-mdx-gfm": "7.0.7",
     "@storybook/angular": "7.0.7",
     "@storybook/core-server": "7.0.7",
     "@types/apollo-upload-client": "^17.0.2",

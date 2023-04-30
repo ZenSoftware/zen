@@ -17,6 +17,12 @@
       "options": {
         "jestConfig": "libs/nest-auth/jest.config.ts",
         "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
       }
     }
   },
