@@ -87,8 +87,8 @@ const DEFAULT_TAKE = 10;
 })
 export class ZenGridComponent<T extends object> implements AfterContentInit, OnDestroy {
   @ContentChild(ZenGridDetailTemplateDirective) details?: ZenGridDetailTemplateDirective;
-  @ViewChild('grid') grid!: GridComponent;
   @ViewChild('errorTemplate') errorTemplate!: TemplateRef<any>;
+  @ViewChild('grid') grid!: GridComponent;
 
   @Output() add = new EventEmitter<AddEvent>();
   @Output() edit = new EventEmitter<EditEvent>();
