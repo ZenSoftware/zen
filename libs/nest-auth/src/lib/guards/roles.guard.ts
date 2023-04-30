@@ -35,7 +35,7 @@ export function RolesGuard(...roles: Array<Role>) {
       super();
     }
 
-    async canActivate(context: ExecutionContext) {
+    override async canActivate(context: ExecutionContext) {
       const allowAnonymousHandler = this.reflector.get<boolean | undefined>(
         ALLOW_ANONYMOUS_KEY,
         context.getHandler()

@@ -1,9 +1,10 @@
 {
   "name": "layout",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "library",
   "sourceRoot": "libs/layout/src",
   "prefix": "zen",
+  "tags": [],
+  "projectType": "library",
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -11,6 +12,12 @@
       "options": {
         "jestConfig": "libs/layout/jest.config.ts",
         "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
       }
     },
     "lint": {
@@ -20,6 +27,5 @@
         "lintFilePatterns": ["libs/layout/**/*.ts", "libs/layout/**/*.html"]
       }
     }
-  },
-  "tags": []
+  }
 }
