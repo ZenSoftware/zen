@@ -158,17 +158,22 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const record = await this.prisma.${lowercase(name)}.findFirst({
+    const existingRecord = await this.prisma.${lowercase(name)}.findFirst({
       where: args.where,
       select: this.authFields.${name},
     });
-    if (
-      (record && ability.cannot('update', subject('${name}', record as ${name}))) ||
-      ability.cannot('create', subject('${name}', args.create as any))
-    ) {
+
+    if (existingRecord && ability.cannot('update', subject('${name}', existingRecord as ${name})))
       throw new ForbiddenException();
-    }
-    return this.prisma.${lowercase(name)}.upsert(this.prismaSelect.getArgs(info, args));
+
+    return this.prisma.$transaction(async tx => {
+      const record = await tx.${lowercase(
+        name
+      )}.upsert(this.prismaSelect.getArgs(info, args, this.authFields));
+      if (!existingRecord && ability.cannot('create', subject('${name}', record)))
+        throw new ForbiddenException();
+      return record;
+    });
   }
 
   @Mutation()
