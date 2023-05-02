@@ -116,8 +116,13 @@ export class UserResolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    if (ability.cannot('create', subject('User', args.data as any))) throw new ForbiddenException();
-    return this.prisma.user.create(this.prismaSelect.getArgs(info, args));
+    return this.prisma.$transaction(async tx => {
+      const record = await tx.user.create(
+        this.prismaSelect.getArgs(info, args, this.defaultFields)
+      );
+      if (ability.cannot('create', subject('User', record))) throw new ForbiddenException();
+      return record;
+    });
   }
 
   @Mutation()

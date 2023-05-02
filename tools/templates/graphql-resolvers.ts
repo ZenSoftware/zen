@@ -27,13 +27,13 @@ import type {
 export const typeDefs = null;
 // export const typeDefs = gql\`
 //   extend type Query {
-//     sample${name}Query: ${name}
+//     samplePostQuery: Post
 //   }
 //   extend type Mutation {
-//     sample${name}Mutation(args: Int!): Boolean
+//     samplePostMutation(args: Int!): Boolean
 //   }
-//   extend type ${name} {
-//     sample${name}Field: String
+//   extend type Post {
+//     samplePostField: String
 //   }
 // \`;
 
@@ -113,8 +113,13 @@ export class ${name}Resolver {
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    if (ability.cannot('create', subject('${name}', args.data as any))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.create(this.prismaSelect.getArgs(info, args));
+    return this.prisma.$transaction(async tx => {
+      const record = await tx.${lowercase(name)}.create(
+        this.prismaSelect.getArgs(info, args, this.defaultFields)
+      );
+      if (ability.cannot('create', subject('${name}', record))) throw new ForbiddenException();
+      return record;
+    });
   }
 
   @Mutation()
