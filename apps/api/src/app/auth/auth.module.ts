@@ -6,8 +6,8 @@ import { JwtModule } from '../jwt';
 import { PrismaModule } from '../prisma';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { authFieldsProvider } from './casl/auth-fields';
 import { AppCaslFactory } from './casl/casl.factory';
-import { defaultFieldsProvider } from './casl/default-fields';
 import { GoogleOAuthStrategy } from './strategies/google-oauth.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
@@ -16,8 +16,8 @@ if (environment.oauth?.google?.clientID) oauthProviders.push(GoogleOAuthStrategy
 
 @Module({
   imports: [JwtModule, PrismaModule, NestAuthModule.register(AppCaslFactory)],
-  providers: [JwtStrategy, AuthService, defaultFieldsProvider, ...oauthProviders],
-  exports: [JwtModule, AuthService, NestAuthModule, defaultFieldsProvider],
+  providers: [JwtStrategy, AuthService, authFieldsProvider, ...oauthProviders],
+  exports: [JwtModule, AuthService, NestAuthModule, authFieldsProvider],
   controllers: [AuthController],
 })
 export class ZenAuthModule {}
