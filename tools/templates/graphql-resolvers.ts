@@ -8,7 +8,7 @@ import type { NonNullableFields } from '@zen/common';
 import { CaslAbility, CaslGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { DEFAULT_FIELDS_TOKEN } from '../../auth';
+import { AUTH_FIELDS_TOKEN } from '../../auth';
 import type { AppAbility } from '../../auth';
 import { DefaultFields, PrismaSelectService, PrismaService, ${name} } from '../../prisma';
 import type {
@@ -27,13 +27,13 @@ import type {
 export const typeDefs = null;
 // export const typeDefs = gql\`
 //   extend type Query {
-//     samplePostQuery: Post
+//     sample${name}Query: ${name}
 //   }
 //   extend type Mutation {
-//     samplePostMutation(args: Int!): Boolean
+//     sample${name}Mutation(args: Int!): Boolean
 //   }
-//   extend type Post {
-//     samplePostField: String
+//   extend type ${name} {
+//     sample${name}Field: String
 //   }
 // \`;
 
@@ -41,7 +41,7 @@ export const typeDefs = null;
 @UseGuards(CaslGuard)
 export class ${name}Resolver {
   constructor(
-    @Inject(DEFAULT_FIELDS_TOKEN) private readonly defaultFields: DefaultFields,
+    @Inject(AUTH_FIELDS_TOKEN) private readonly authFields: DefaultFields,
     private readonly prisma: PrismaService,
     private readonly prismaSelect: PrismaSelectService
   ) {}
@@ -53,7 +53,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique(
-      this.prismaSelect.getArgs(info, args, this.defaultFields)
+      this.prismaSelect.getArgs(info, args, this.authFields)
     );
     if (ability.cannot('read', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return record;
@@ -66,7 +66,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findFirst(
-      this.prismaSelect.getArgs(info, args, this.defaultFields)
+      this.prismaSelect.getArgs(info, args, this.authFields)
     );
     if (ability.cannot('read', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return record;
@@ -79,7 +79,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const records = await this.prisma.${lowercase(name)}.findMany(
-      this.prismaSelect.getArgs(info, args, this.defaultFields)
+      this.prismaSelect.getArgs(info, args, this.authFields)
     );
     for (const record of records) {
       if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
@@ -114,9 +114,9 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     return this.prisma.$transaction(async tx => {
-      const record = await tx.${lowercase(name)}.create(
-        this.prismaSelect.getArgs(info, args, this.defaultFields)
-      );
+      const record = await tx.${lowercase(
+        name
+      )}.create(this.prismaSelect.getArgs(info, args, this.authFields));
       if (ability.cannot('create', subject('${name}', record))) throw new ForbiddenException();
       return record;
     });
@@ -130,7 +130,7 @@ export class ${name}Resolver {
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique({
       where: args.where,
-      select: this.defaultFields.${name},
+      select: this.authFields.${name},
     });
     if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.update(this.prismaSelect.getArgs(info, args));
@@ -144,7 +144,7 @@ export class ${name}Resolver {
   ) {
     const records = await this.prisma.${lowercase(name)}.findMany({
       where: args.where,
-      select: this.defaultFields.${name},
+      select: this.authFields.${name},
     });
     for (const record of records) {
       if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
@@ -160,7 +160,7 @@ export class ${name}Resolver {
   ) {
     const record = await this.prisma.${lowercase(name)}.findFirst({
       where: args.where,
-      select: this.defaultFields.${name},
+      select: this.authFields.${name},
     });
     if (
       (record && ability.cannot('update', subject('${name}', record as ${name}))) ||
@@ -179,7 +179,7 @@ export class ${name}Resolver {
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique({
       where: args.where,
-      select: this.defaultFields.${name},
+      select: this.authFields.${name},
     });
     if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
@@ -193,7 +193,7 @@ export class ${name}Resolver {
   ) {
     const records = await this.prisma.${lowercase(name)}.findMany({
       where: args.where,
-      select: this.defaultFields.${name},
+      select: this.authFields.${name},
     });
     for (const record of records) {
       if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
