@@ -40,7 +40,7 @@
  */
 export function selectOne<T>(
   item: T | number | string | null | undefined,
-  outputField: string = 'id',
+  outputField = 'id',
   inputField?: keyof T
 ): { [outputField: string]: unknown } {
   if (!inputField) (<string>inputField) = outputField;
@@ -139,7 +139,7 @@ export function selectOne<T>(
  */
 export function selectMany<T>(
   input: Iterable<T | null | undefined> | null | undefined,
-  outputField: string = 'id',
+  outputField = 'id',
   inputField?: keyof T
 ): Array<{ [outputField: string]: unknown }> {
   if (!inputField) (<string>inputField) = outputField;

@@ -1,4 +1,4 @@
-import { createWriteStream, existsSync, mkdirSync } from 'fs';
+import { createWriteStream, existsSync, mkdirSync } from 'node:fs';
 
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
