@@ -128,7 +128,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
   #defaultSettings!: KendoGridSettings<T>;
   #settings!: ZenGridSettings<T>;
-  @Input() set settings(value: ZenGridSettings<T>) {
+  @Input({ required: true }) set settings(value: ZenGridSettings<T>) {
     this.#settings = value;
     this.#settings.process = this.#settings.process ?? 'remote';
     this.#settings.keyField = 'id' as any;
