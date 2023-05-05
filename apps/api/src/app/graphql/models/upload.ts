@@ -1,5 +1,5 @@
-import { ReadStream } from 'fs';
-import { CreateReadStreamOptions } from 'fs/promises';
+import { ReadStream } from 'node:fs';
+import { CreateReadStreamOptions } from 'node:fs/promises';
 
 export interface Upload {
   createReadStream: (options?: CreateReadStreamOptions) => ReadStream;
