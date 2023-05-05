@@ -1,8 +1,8 @@
-import { exec } from 'child_process';
-import * as fs from 'fs';
-import { appendFile, mkdir, readFile, readdir, rm, writeFile } from 'fs/promises';
-import * as path from 'path';
-import { promisify } from 'util';
+import { exec } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { appendFile, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import * as path from 'node:path';
+import { promisify } from 'node:util';
 
 import { Generator as PalGenerator } from '@paljs/generator';
 import { Config as PalConfig } from '@paljs/types';
@@ -45,7 +45,7 @@ export class ZenGenerator {
       : path.join(this.config.apiOutPath, 'paljs');
     palConfig.backend.output = palOutPath;
 
-    if (fs.existsSync(palOutPath)) {
+    if (existsSync(palOutPath)) {
       await rm(palOutPath, { recursive: true });
     }
 
@@ -84,7 +84,7 @@ export class ZenGenerator {
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
     const nestResolversPath = path.join(this.config.apiOutPath, 'resolvers');
 
-    if (!fs.existsSync(nestResolversPath)) {
+    if (!existsSync(nestResolversPath)) {
       await mkdir(nestResolversPath);
     }
 
@@ -123,20 +123,30 @@ export class ZenGenerator {
   async generateFrontend(prismaNames: string[]) {
     if (this.config.frontend) {
       console.log(`----------------------- Frontend generated -----------------------`);
-      const fieldsPath = this.config.frontend.fieldsFolderName
-        ? path.join(this.config.frontend.outPath, this.config.frontend.fieldsFolderName)
-        : path.join(this.config.frontend.outPath, 'fields');
+      if (!this.config.frontend.fieldsFolderName) {
+        this.config.frontend.fieldsFolderName = 'fields';
+      }
 
-      const queriesPath = this.config.frontend.queriesFolderName
-        ? path.join(this.config.frontend.outPath, this.config.frontend.queriesFolderName)
-        : path.join(this.config.frontend.outPath, 'prisma');
+      if (!this.config.frontend.queriesFolderName) {
+        this.config.frontend.queriesFolderName = 'prisma';
+      }
 
-      if (!fs.existsSync(fieldsPath)) await mkdir(fieldsPath);
-      if (!fs.existsSync(queriesPath)) await mkdir(queriesPath);
+      const fieldsPath = path.join(
+        this.config.frontend.outPath,
+        this.config.frontend.fieldsFolderName
+      );
+
+      const queriesPath = path.join(
+        this.config.frontend.outPath,
+        this.config.frontend.queriesFolderName
+      );
+
+      if (!existsSync(fieldsPath)) await mkdir(fieldsPath);
+      if (!existsSync(queriesPath)) await mkdir(queriesPath);
 
       const fieldsIndexPath = path.join(fieldsPath, `index.ts`);
 
-      if (!fs.existsSync(fieldsIndexPath)) {
+      if (!existsSync(fieldsIndexPath)) {
         await writeFile(fieldsIndexPath, '');
         console.log(`- Wrote: ${fieldsIndexPath}`);
       }
@@ -147,7 +157,7 @@ export class ZenGenerator {
         const fieldsOutPath = path.join(fieldsPath, `${prismaName}.gql.ts`);
         const queriesOutPath = path.join(queriesPath, `${prismaName}.gql.ts`);
 
-        if (!fs.existsSync(fieldsOutPath)) {
+        if (!existsSync(fieldsOutPath)) {
           await writeFile(fieldsOutPath, ClientFieldsTemplate(prismaName));
           console.log(`- Wrote: ${fieldsOutPath}`);
         }
@@ -158,10 +168,10 @@ export class ZenGenerator {
           fieldsIndexSource += exportScript + '/n';
         }
 
-        const fieldsFolderName = this.config.frontend.fieldsFolderName
-          ? this.config.frontend.fieldsFolderName
-          : 'fields';
-        await writeFile(queriesOutPath, ClientQueriesTemplate(prismaName, fieldsFolderName));
+        await writeFile(
+          queriesOutPath,
+          ClientQueriesTemplate(prismaName, this.config.frontend.fieldsFolderName)
+        );
         console.log(`- Wrote: ${queriesOutPath}`);
       }
     }
@@ -172,7 +182,7 @@ export class ZenGenerator {
     for (const prismaName of prismaNames) {
       const outPath = path.join(this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
 
-      if (!fs.existsSync(outPath)) {
+      if (!existsSync(outPath)) {
         await writeFile(outPath, GraphQLResolversTemplate(prismaName));
         console.log(`- Wrote: ${outPath}`);
         wroteCount++;
