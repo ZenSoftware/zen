@@ -14,6 +14,7 @@ import { AuthService } from '../auth.service';
 
 @Directive({
   selector: '[notRoles]',
+  standalone: true,
 })
 export class NotRolesDirective implements OnDestroy {
   #subsciption: Subscription;
