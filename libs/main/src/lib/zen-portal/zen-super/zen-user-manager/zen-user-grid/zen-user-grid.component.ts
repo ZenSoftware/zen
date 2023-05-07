@@ -47,7 +47,7 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
   selector: 'zen-user-grid',
   templateUrl: 'zen-user-grid.component.html',
   standalone: true,
-  imports: [ZenGridComponent, MatDialogModule],
+  imports: [MatDialogModule, ZenGridComponent],
 })
 export class ZenUserGridComponent {
   @Input() mode = GridMode.Default;
