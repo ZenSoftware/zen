@@ -1,1 +1,1 @@
-export * from './lib/zen-main.module';
+export * from './lib/zen-main.routes';

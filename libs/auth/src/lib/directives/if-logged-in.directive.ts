@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 
 @Directive({
   selector: '[ifLoggedIn]',
+  standalone: true,
 })
 export class IfLoggedInDirective implements OnDestroy {
   #subsciption: Subscription;

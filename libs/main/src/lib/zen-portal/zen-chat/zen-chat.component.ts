@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 
-import { ZenSocketService } from '../zen-socket.service';
+import { ZenSocketService } from './zen-socket.service';
 
 @Component({
+  standalone: true,
+  imports: [MatButtonModule],
   selector: 'zen-chat',
   templateUrl: 'zen-chat.component.html',
 })
