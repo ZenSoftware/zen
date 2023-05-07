@@ -6476,7 +6476,7 @@ packages:
       tsconfig-paths-webpack-plugin: 4.0.0
       tslib: 2.5.0
       webpack: 5.82.0(esbuild@0.17.18)
-      webpack-dev-server: 4.14.0(webpack@5.82.0)
+      webpack-dev-server: 4.15.0(webpack@5.82.0)
       webpack-node-externals: 3.0.0
       webpack-subresource-integrity: 5.1.0(html-webpack-plugin@5.5.1)(webpack@5.82.0)
     transitivePeerDependencies:
@@ -20384,8 +20384,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webpack-dev-server@4.14.0(webpack@5.82.0):
-    resolution: {integrity: sha512-KUgiUNUZldyx5xz3uK0dnXmvsSz03TAMCLtO1cUOb5oishh9sfP3vaI4XNY3EztrPUu98WKzamNfuaydTedYWQ==}
+  /webpack-dev-server@4.15.0(webpack@5.82.0):
+    resolution: {integrity: sha512-HmNB5QeSl1KpulTBQ8UT4FPrByYyaLxpJoQ0+s7EvUrMc16m0ZS1sgb1XGqzmgCPk0c9y+aaXxn11tbLzuM7NQ==}
     engines: {node: '>= 12.13.0'}
     hasBin: true
     peerDependencies:
