@@ -13,7 +13,7 @@ import { map, shareReplay } from 'rxjs/operators';
   selector: 'zen-layout',
   templateUrl: './zen-layout.component.html',
   standalone: true,
-  imports: [MatSidenavModule, MatToolbarModule, NgIf, MatButtonModule, MatIconModule, AsyncPipe],
+  imports: [AsyncPipe, MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule, NgIf],
 })
 export class ZenLayoutComponent implements OnDestroy {
   @ViewChild('drawer') drawer!: MatSidenav;
