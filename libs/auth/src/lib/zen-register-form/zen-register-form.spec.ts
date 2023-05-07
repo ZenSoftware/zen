@@ -7,7 +7,7 @@ import {
 } from '@zen/graphql';
 import { ApolloTestingController } from 'apollo-angular/testing';
 
-import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
+import { AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
 import { ZenRegisterFormComponent } from './zen-register-form.component';
 
 describe('ZenRegisterFormComponent', () => {
@@ -17,9 +17,8 @@ describe('ZenRegisterFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [...AUTH_DECLARATIONS, ZenRegisterFormComponent],
+      imports: [...AUTH_IMPORTS, ZenRegisterFormComponent],
       providers: [...AUTH_PROVIDERS, AuthRegisterGQL],
-      imports: AUTH_IMPORTS,
     }).compileComponents();
   }));
 

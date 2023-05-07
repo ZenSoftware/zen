@@ -15,17 +15,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Ability } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
 import { Environment, EnvironmentDev } from '@zen/common';
-import { ZenComponentsModule } from '@zen/components';
 import { AuthExchangeTokenGQL, AuthLoginGQL, GetAccountInfoGQL } from '@zen/graphql';
 import { ApolloTestingModule } from 'apollo-angular/testing';
 
 import { AuthService } from './auth.service';
-import {
-  IfLoggedInDirective,
-  IfPublicRegistrationDirective,
-  NotRolesDirective,
-  RolesDirective,
-} from './directives';
 
 export const AUTH_IMPORTS = [
   CommonModule,
@@ -39,14 +32,6 @@ export const AUTH_IMPORTS = [
   MatButtonModule,
   MatCheckboxModule,
   MatProgressBarModule,
-  ZenComponentsModule,
-];
-
-export const AUTH_DECLARATIONS = [
-  IfLoggedInDirective,
-  IfPublicRegistrationDirective,
-  NotRolesDirective,
-  RolesDirective,
 ];
 
 export const AUTH_PROVIDERS: Provider[] = [
