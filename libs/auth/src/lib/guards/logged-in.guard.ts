@@ -1,5 +1,7 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { loggedInVar } from '@zen/graphql/client';
 
-export const LoggedInGuard = () => (loggedInVar() ? true : inject(Router).parseUrl('/login'));
+import { AuthService } from '../auth.service';
+
+export const LoggedInGuard = () =>
+  inject(AuthService).loggedIn ? true : inject(Router).parseUrl('/login');
