@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectorRef,
@@ -10,7 +11,11 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Ability } from '@casl/ability';
 import {
   AddEvent,
@@ -23,13 +28,23 @@ import {
   RowClassArgs,
   SortSettings,
 } from '@progress/kendo-angular-grid';
+import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
+import { InputsModule } from '@progress/kendo-angular-inputs';
 import {
   CompositeFilterDescriptor,
   GroupDescriptor,
   State,
   process,
 } from '@progress/kendo-data-query';
-import { ZenConfirmModal, ZenSnackbarError } from '@zen/components';
+import {
+  CentsToDollarsPipe,
+  SafeHtmlPipe,
+  ZenConfirmModal,
+  ZenConfirmModalModule,
+  ZenLoadingComponent,
+  ZenSnackbarError,
+  ZenSnackbarModule,
+} from '@zen/components';
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
 import { cloneDeep, omit } from 'lodash-es';
@@ -84,6 +99,24 @@ const DEFAULT_TAKE = 10;
 @Component({
   selector: 'zen-grid',
   templateUrl: 'zen-grid.component.html',
+  standalone: true,
+  imports: [
+    CentsToDollarsPipe,
+    CommonModule,
+    ExcelModule,
+    GridModule,
+    InputsModule,
+    MatBadgeModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    ReactiveFormsModule,
+    SafeHtmlPipe,
+    ZenConfirmModalModule,
+    ZenGridDetailTemplateDirective,
+    ZenLoadingComponent,
+    ZenSnackbarModule,
+  ],
+  providers: [KendoToPrismaService],
 })
 export class ZenGridComponent<T extends object> implements AfterContentInit, OnDestroy {
   @ContentChild(ZenGridDetailTemplateDirective) details?: ZenGridDetailTemplateDirective;

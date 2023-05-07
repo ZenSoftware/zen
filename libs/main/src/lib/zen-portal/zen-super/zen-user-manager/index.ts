@@ -1,1 +1,1 @@
-export * from './zen-user-manager.module';
+export * from './zen-user-grid/zen-user-grid.component';

@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { Ability } from '@casl/ability';
 import { DeleteOneUserGQL, FindManyUserCountGQL, FindManyUserGQL, UserFields } from '@zen/graphql';
-import { GridMode, KendoGridSettings, ZenGridSettings } from '@zen/grid';
+import { GridMode, KendoGridSettings, ZenGridComponent, ZenGridSettings } from '@zen/grid';
 
 import { DialogData, ZenUserInputComponent } from '../zen-user-input/zen-user-input.component';
 
@@ -45,6 +46,8 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
 @Component({
   selector: 'zen-user-grid',
   templateUrl: 'zen-user-grid.component.html',
+  standalone: true,
+  imports: [ZenGridComponent, MatDialogModule],
 })
 export class ZenUserGridComponent {
   @Input() mode = GridMode.Default;
