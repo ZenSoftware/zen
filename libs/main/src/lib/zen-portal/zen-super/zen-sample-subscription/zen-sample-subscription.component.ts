@@ -14,6 +14,7 @@ gql`
 @Component({
   selector: 'zen-sample-subscription',
   templateUrl: 'zen-sample-subscription.component.html',
+  standalone: true,
 })
 export class ZenSampleSubscriptionComponent implements OnDestroy {
   recentValue: any;
