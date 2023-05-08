@@ -16,7 +16,7 @@ import ls from 'localstorage-slim';
 import { Subscription, interval, map, share, throwError, timer } from 'rxjs';
 import { retry, tap } from 'rxjs/operators';
 
-import { tokenVar } from './token-var';
+import { token } from './token.signal';
 
 export enum LocalStorageKey {
   userId = 'userId',
@@ -123,7 +123,7 @@ export class AuthService {
 
     this.ability.update(authSession.rules);
 
-    tokenVar(authSession.token);
+    token.set(authSession.token);
 
     if (
       !this.rolesEqual(this.roles, authSession.roles) ||
@@ -219,7 +219,7 @@ export class AuthService {
 
     this.#userId = null;
     this.ability.update([]);
-    tokenVar(null);
+    token.set(null);
     userRolesVar([]);
     loggedInVar(false);
     this.apollo.client.cache.reset();
