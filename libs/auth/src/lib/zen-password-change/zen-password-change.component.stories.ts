@@ -1,8 +1,6 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { AuthPasswordChangeGQL } from '@zen/graphql';
 
-import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
-import { ZenPasswordChangeFormComponent } from '../zen-password-change-form/zen-password-change-form.component';
 import { ZenPasswordChangeComponent } from './zen-password-change.component';
 
 export default {
@@ -10,9 +8,7 @@ export default {
   component: ZenPasswordChangeComponent,
   decorators: [
     moduleMetadata({
-      imports: AUTH_IMPORTS,
-      providers: [...AUTH_PROVIDERS, AuthPasswordChangeGQL],
-      declarations: [...AUTH_DECLARATIONS, ZenPasswordChangeFormComponent],
+      providers: [AuthPasswordChangeGQL],
     }),
   ],
 } as Meta<ZenPasswordChangeComponent>;

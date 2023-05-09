@@ -1,7 +1,6 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { AuthPasswordResetConfirmationGQL } from '@zen/graphql';
 
-import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
 import { ZenPasswordResetConfirmationFormComponent } from './zen-password-reset-confirmation-form.component';
 
 export default {
@@ -9,9 +8,7 @@ export default {
   component: ZenPasswordResetConfirmationFormComponent,
   decorators: [
     moduleMetadata({
-      imports: AUTH_IMPORTS,
-      providers: [...AUTH_PROVIDERS, AuthPasswordResetConfirmationGQL],
-      declarations: AUTH_DECLARATIONS,
+      providers: [AuthPasswordResetConfirmationGQL],
     }),
   ],
 } as Meta<ZenPasswordResetConfirmationFormComponent>;
