@@ -41,22 +41,6 @@
           "quiet": true
         }
       }
-    },
-    "build-storybook": {
-      "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputDir}"],
-      "options": {
-        "outputDir": "dist/storybook/components",
-        "configDir": "libs/components/.storybook",
-        "browserTarget": "components:build-storybook",
-        "compodoc": false,
-        "styles": ["apps/portal/src/styles.scss"]
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
     }
   }
 }
