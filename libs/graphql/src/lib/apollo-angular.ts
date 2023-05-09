@@ -378,8 +378,7 @@ export type Query = {
   findManyUser?: Maybe<Array<User>>;
   findManyUserCount: Scalars['Int'];
   findUniqueUser?: Maybe<User>;
-  loggedIn: Scalars['Boolean'];
-  userRoles: Array<Scalars['String']>;
+  sample: Scalars['Boolean'];
 };
 
 
@@ -825,15 +824,10 @@ export type AuthRegisterVariables = Exact<{
 
 export type AuthRegister = { __typename?: 'Mutation', authRegister: { __typename?: 'AuthSession', userId: string, token: string, rememberMe: boolean, roles: Array<string>, expiresIn: number, rules: Array<any> } };
 
-export type LoggedInVariables = Exact<{ [key: string]: never; }>;
+export type SampleVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LoggedIn = { __typename?: 'Query', loggedIn: boolean };
-
-export type UserRolesVariables = Exact<{ [key: string]: never; }>;
-
-
-export type UserRoles = { __typename?: 'Query', userRoles: Array<string> };
+export type Sample = { __typename?: 'Query', sample: boolean };
 
 export type AccountInfoFields = { __typename?: 'AccountInfo', username?: string | null, hasPassword: boolean, googleProfile?: { __typename?: 'GoogleProfile', email?: string | null, picture?: string | null } | null };
 
@@ -1101,33 +1095,17 @@ export const AuthRegisterDocument = /*#__PURE__*/ gql`
       super(apollo);
     }
   }
-export const LoggedInDocument = /*#__PURE__*/ gql`
-    query LoggedIn {
-  loggedIn @client
+export const SampleDocument = /*#__PURE__*/ gql`
+    query Sample {
+  sample @client
 }
     `;
 
   @Injectable({
     providedIn: ZenGraphQLModule
   })
-  export class LoggedInGQL extends Apollo.Query<LoggedIn, LoggedInVariables> {
-    override document = LoggedInDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const UserRolesDocument = /*#__PURE__*/ gql`
-    query UserRoles {
-  userRoles @client
-}
-    `;
-
-  @Injectable({
-    providedIn: ZenGraphQLModule
-  })
-  export class UserRolesGQL extends Apollo.Query<UserRoles, UserRolesVariables> {
-    override document = UserRolesDocument;
+  export class SampleGQL extends Apollo.Query<Sample, SampleVariables> {
+    override document = SampleDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

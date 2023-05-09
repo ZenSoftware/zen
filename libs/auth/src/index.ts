@@ -3,7 +3,7 @@ export * from './lib/auth-interceptor';
 export * from './lib/auth.service';
 export * from './lib/directives';
 export * from './lib/guards';
-export * from './lib/token-var';
+export * from './lib/token.signal';
 export * from './lib/validators';
 export * from './lib/zen-auth.routes';
 export * from './lib/zen-login-confirmed/zen-login-confirmed.component';
