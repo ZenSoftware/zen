@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { PublicRegistrationGuard } from './guards';
 import { LoginPageGuard } from './guards/login-page.guard';

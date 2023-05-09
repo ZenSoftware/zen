@@ -11,7 +11,6 @@ import {
   AuthLoginGQL,
   GetAccountInfoGQL,
 } from '@zen/graphql';
-import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 import ls from 'localstorage-slim';
 
@@ -72,7 +71,7 @@ describe('AuthService', () => {
   });
 
   it('evaluates userHasRole correctly', () => {
-    userRolesVar(['Editor']);
+    service.roles.set(['Editor']);
 
     expect(service.userHasRole('Editor')).toEqual(true);
     expect(service.userHasRole(['Editor'])).toEqual(true);
@@ -84,7 +83,7 @@ describe('AuthService', () => {
   });
 
   it('evaluates userNotInRole correctly', () => {
-    userRolesVar(['Editor']);
+    service.roles.set(['Editor']);
 
     expect(service.userNotInRole('Editor')).toEqual(false);
     expect(service.userNotInRole(['Editor'])).toEqual(false);
@@ -127,8 +126,8 @@ describe('AuthService', () => {
         expect(ability.rules).toEqual(data.authLogin.rules);
         expect(service.userId).toEqual(data.authLogin.userId);
         expect(token()).toEqual(data.authLogin.token);
-        expect(userRolesVar()).toEqual(data.authLogin.roles);
-        expect(loggedInVar()).toEqual(true);
+        expect(service.roles()).toEqual(data.authLogin.roles);
+        expect(service.loggedIn()).toEqual(true);
 
         const routerSpy = jest.spyOn(router, 'navigateByUrl');
 
@@ -144,8 +143,8 @@ describe('AuthService', () => {
         expect(ability.rules).toEqual([]);
         expect(service.userId).toEqual(null);
         expect(token()).toEqual(null);
-        expect(userRolesVar()).toEqual([]);
-        expect(loggedInVar()).toEqual(false);
+        expect(service.roles()).toEqual([]);
+        expect(service.loggedIn()).toEqual(false);
 
         expect(routerSpy).toHaveBeenCalledWith('/login');
 
