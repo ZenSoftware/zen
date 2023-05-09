@@ -16,7 +16,7 @@ import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/tes
 import ls from 'localstorage-slim';
 
 import { AuthService, LocalStorageKey } from './auth.service';
-import { tokenVar } from './token-var';
+import { token } from './token.signal';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 
 describe('AuthService', () => {
@@ -126,7 +126,7 @@ describe('AuthService', () => {
 
         expect(ability.rules).toEqual(data.authLogin.rules);
         expect(service.userId).toEqual(data.authLogin.userId);
-        expect(tokenVar()).toEqual(data.authLogin.token);
+        expect(token()).toEqual(data.authLogin.token);
         expect(userRolesVar()).toEqual(data.authLogin.roles);
         expect(loggedInVar()).toEqual(true);
 
@@ -143,7 +143,7 @@ describe('AuthService', () => {
 
         expect(ability.rules).toEqual([]);
         expect(service.userId).toEqual(null);
-        expect(tokenVar()).toEqual(null);
+        expect(token()).toEqual(null);
         expect(userRolesVar()).toEqual([]);
         expect(loggedInVar()).toEqual(false);
 
