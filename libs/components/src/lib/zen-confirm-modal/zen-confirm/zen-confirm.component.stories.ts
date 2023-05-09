@@ -1,5 +1,4 @@
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Meta, moduleMetadata } from '@storybook/angular';
 
 import { ZenConfirmComponent } from './zen-confirm.component';
@@ -9,7 +8,6 @@ export default {
   component: ZenConfirmComponent,
   decorators: [
     moduleMetadata({
-      imports: [MatButtonModule, MatDialogModule],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         {
