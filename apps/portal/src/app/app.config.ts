@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 import { Ability, PureAbility } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
-import { authInterceptorFn, tokenVar } from '@zen/auth';
+import { authInterceptorFn, token } from '@zen/auth';
 import { Environment } from '@zen/common';
 import { ZenGraphQLModule } from '@zen/graphql';
 import { possibleTypes, typePolicies } from '@zen/graphql/client';
@@ -44,13 +44,13 @@ export const appConfig: ApplicationConfig = {
           mutationNames: ['SampleUpload', 'SampleUploadMany'],
           headers: { 'Apollo-Require-Preflight': 'true' },
           fetch: (input: any, init: any) => {
-            init.headers['Authorization'] = 'Bearer ' + tokenVar();
+            init.headers['Authorization'] = 'Bearer ' + token();
             return fetch(input, init);
           },
         },
         websocketOptions: {
           url: environment.url.graphqlSubscriptions,
-          connectionParams: () => ({ token: tokenVar() }),
+          connectionParams: () => ({ token: token() }),
           shouldRetry: () => true,
           retryAttempts: Infinity,
         },
