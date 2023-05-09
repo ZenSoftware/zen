@@ -2,15 +2,10 @@ import gql from 'graphql-tag';
 
 export default gql`
   extend type Query {
-    loggedIn: Boolean!
-    userRoles: [String!]!
+    sample: Boolean!
   }
 
-  query LoggedIn {
-    loggedIn @client
-  }
-
-  query UserRoles {
-    userRoles @client
+  query Sample {
+    sample @client
   }
 `;

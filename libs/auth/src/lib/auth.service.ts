@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApolloError } from '@apollo/client/errors';
 import { Ability } from '@casl/ability';
@@ -10,7 +10,6 @@ import {
   AuthSession,
   GetAccountInfoGQL,
 } from '@zen/graphql';
-import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
 import { Subscription, interval, map, share, throwError, timer } from 'rxjs';
@@ -31,6 +30,9 @@ export enum LocalStorageKey {
   providedIn: 'root',
 })
 export class AuthService {
+  loggedIn = signal(false);
+  roles = signal<string[]>([]);
+
   #exchangeIntervalSubscription?: Subscription;
 
   #userId: AuthSession['userId'] | null = null;
@@ -61,8 +63,8 @@ export class AuthService {
       try {
         // Initialize Apollo client state
         const roles = ls.get<string[]>(LocalStorageKey.roles, { decrypt: true });
-        userRolesVar(roles ? roles : []);
-        loggedInVar(roles ? true : false);
+        this.roles.set(roles ? roles : []);
+        this.loggedIn.set(roles ? true : false);
         this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
 
         const rules: Array<any> | null = ls.get(LocalStorageKey.rules, { decrypt: true });
@@ -126,15 +128,15 @@ export class AuthService {
     token.set(authSession.token);
 
     if (
-      !this.rolesEqual(this.roles, authSession.roles) ||
-      this.roles === null ||
-      this.roles === undefined
+      !this.rolesEqual(this.roles(), authSession.roles) ||
+      this.roles() === null ||
+      this.roles() === undefined
     ) {
-      userRolesVar(authSession.roles);
+      this.roles.set(authSession.roles);
     }
 
-    if (!this.loggedIn) {
-      loggedInVar(true);
+    if (!this.loggedIn()) {
+      this.loggedIn.set(true);
     }
 
     this.startExchangeInterval();
@@ -168,26 +170,18 @@ export class AuthService {
 
   userHasRole(role: string | string[]) {
     if (role) {
-      if (typeof role === 'string') return this.roles.some(r => r === role);
-      else return this.roles.some(r => role.includes(r));
+      if (typeof role === 'string') return this.roles().some(r => r === role);
+      else return this.roles().some(r => role.includes(r));
     }
     return false;
   }
 
   userNotInRole(role: string | string[]) {
     if (role) {
-      if (typeof role === 'string') return !this.roles.some(r => r === role);
-      return this.roles.filter(r => role.includes(r)).length === 0;
+      if (typeof role === 'string') return !this.roles().some(r => r === role);
+      return this.roles().filter(r => role.includes(r)).length === 0;
     }
     return true;
-  }
-
-  get roles() {
-    return userRolesVar();
-  }
-
-  get loggedIn() {
-    return loggedInVar();
   }
 
   private get rememberMe() {
@@ -220,8 +214,8 @@ export class AuthService {
     this.#userId = null;
     this.ability.update([]);
     token.set(null);
-    userRolesVar([]);
-    loggedInVar(false);
+    this.roles.set([]);
+    this.loggedIn.set(false);
     this.apollo.client.cache.reset();
   }
 
