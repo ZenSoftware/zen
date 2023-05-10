@@ -30,8 +30,8 @@ export enum LocalStorageKey {
   providedIn: 'root',
 })
 export class AuthService {
-  loggedIn = signal(false);
-  roles = signal<string[]>([]);
+  readonly loggedIn = signal(false);
+  readonly roles = signal<string[]>([]);
 
   #exchangeIntervalSubscription?: Subscription;
 
