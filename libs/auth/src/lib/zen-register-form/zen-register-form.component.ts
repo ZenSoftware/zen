@@ -194,18 +194,18 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
             this.registered.emit((<AuthRegister>data).authRegister);
           },
 
-          error: (e: ApolloError) => {
+          error: (error: ApolloError) => {
             this.loading = false;
             this.form.enable();
 
             this.generalError = true;
 
-            if (e.message === ApiError.AuthRegister.EMAIL_TAKEN) {
+            if (error.message === ApiError.AuthRegister.EMAIL_TAKEN) {
               this.generalError = false;
               this.#emailTaken = true;
               this.email.updateValueAndValidity();
               this.emailInput.nativeElement.select();
-            } else if (e.message === ApiError.AuthRegister.USERNAME_TAKEN) {
+            } else if (error.message === ApiError.AuthRegister.USERNAME_TAKEN) {
               this.generalError = false;
               this.#usernameTaken = true;
               this.username.updateValueAndValidity();

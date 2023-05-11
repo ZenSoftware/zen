@@ -151,17 +151,17 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
             this.loggedIn.emit();
           },
 
-          error: (e: ApolloError) => {
+          error: (error: ApolloError) => {
             this.loading = false;
             this.generalError = true;
             this.form.enable();
 
-            if (e.message === ApiError.AuthLogin.INCORRECT_PASSWORD) {
+            if (error.message === ApiError.AuthLogin.INCORRECT_PASSWORD) {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.password.updateValueAndValidity();
               this.passwordInput.nativeElement.select();
-            } else if (e.message === ApiError.AuthLogin.USER_NOT_FOUND) {
+            } else if (error.message === ApiError.AuthLogin.USER_NOT_FOUND) {
               this.generalError = false;
               this.#usernameNotFound = true;
               this.username.updateValueAndValidity();
