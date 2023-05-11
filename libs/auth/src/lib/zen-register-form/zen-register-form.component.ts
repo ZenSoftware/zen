@@ -52,14 +52,14 @@ interface FormType {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    NgIf,
-    ZenLoadingComponent,
     MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
     MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    NgIf,
+    ReactiveFormsModule,
+    ZenLoadingComponent,
   ],
 })
 export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
