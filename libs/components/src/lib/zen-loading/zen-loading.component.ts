@@ -7,7 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   templateUrl: 'zen-loading.component.html',
   styleUrls: ['zen-loading.component.scss'],
   standalone: true,
-  imports: [NgClass, MatProgressSpinnerModule],
+  imports: [MatProgressSpinnerModule, NgClass],
 })
 export class ZenLoadingComponent {
   @Input() backdrop = true;

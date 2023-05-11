@@ -7,7 +7,7 @@ import { ZenPasswordChangeComponent } from '@zen/auth';
   selector: 'zen-settings',
   templateUrl: 'zen-settings.component.html',
   standalone: true,
-  imports: [NgIf, ZenPasswordChangeComponent, AsyncPipe],
+  imports: [AsyncPipe, NgIf, ZenPasswordChangeComponent],
 })
 export class ZenSettingsComponent {
   constructor(public auth: AuthService) {}
