@@ -24,7 +24,7 @@ export class NotRolesDirective {
     private auth: AuthService
   ) {
     effect(() => {
-      this.auth.roles();
+      this.auth.userRoles();
       this.update();
     });
   }
