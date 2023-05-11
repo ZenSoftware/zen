@@ -48,15 +48,15 @@ interface FormType {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    NgIf,
-    ZenLoadingComponent,
-    MatFormFieldModule,
-    MatInputModule,
     MatButtonModule,
-    MatIconModule,
     MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
     MatProgressBarModule,
+    NgIf,
+    ReactiveFormsModule,
+    ZenLoadingComponent,
   ],
 })
 export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestroy {

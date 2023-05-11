@@ -40,12 +40,12 @@ interface FormType {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     NgIf,
     ReactiveFormsModule,
     ZenLoadingComponent,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
   ],
 })
 export class ZenPasswordResetRequestFormComponent implements AfterContentInit, OnDestroy {

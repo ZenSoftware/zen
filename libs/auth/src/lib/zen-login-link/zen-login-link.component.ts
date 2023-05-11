@@ -10,7 +10,7 @@ import { IfLoggedInDirective } from '../directives/if-logged-in.directive';
   selector: 'zen-login-link',
   templateUrl: 'zen-login-link.component.html',
   standalone: true,
-  imports: [NgIf, IfLoggedInDirective, RouterLink, AsyncPipe],
+  imports: [AsyncPipe, IfLoggedInDirective, NgIf, RouterLink],
 })
 export class ZenLoginLinkComponent {
   @Input() displayLogout = true;
