@@ -15,7 +15,7 @@ dependencies:
     version: 8.4.2(graphql@16.6.0)
   '@nestjs-modules/mailer':
     specifier: ^1.8.1
-    version: 1.8.1(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(nodemailer@6.9.1)
+    version: 1.8.1(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(nodemailer@6.9.2)
   '@nestjs/apollo':
     specifier: ^11.0.5
     version: 11.0.5(@apollo/server@4.7.1)(@apollo/subgraph@2.4.3)(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(@nestjs/graphql@11.0.5)(graphql@16.6.0)
@@ -80,8 +80,8 @@ dependencies:
     specifier: ^7.0.0
     version: 7.0.0
   nodemailer:
-    specifier: ^6.9.1
-    version: 6.9.1
+    specifier: ^6.9.2
+    version: 6.9.2
   passport:
     specifier: ^0.6.0
     version: 0.6.0
@@ -5443,7 +5443,7 @@ packages:
       tar-fs: 2.1.1
     dev: true
 
-  /@nestjs-modules/mailer@1.8.1(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(nodemailer@6.9.1):
+  /@nestjs-modules/mailer@1.8.1(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(nodemailer@6.9.2):
     resolution: {integrity: sha512-rNlKzNB+Vr/aRDVcTibj2JCJQcTSE59EBQIpCwh/FkKg0Be1xoF3dQDZ4dmc9X1j396fkIBI5aQ5XAtJNPdxpw==}
     peerDependencies:
       '@nestjs/common': ^7.0.9 || ^8.0.0 || ^9.0.0
@@ -5455,7 +5455,7 @@ packages:
       glob: 8.0.3
       inline-css: 4.0.1
       mjml: 4.14.1
-      nodemailer: 6.9.1
+      nodemailer: 6.9.2
       preview-email: 3.0.5
     optionalDependencies:
       '@types/ejs': 3.1.2
@@ -16326,6 +16326,11 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: false
 
+  /nodemailer@6.9.2:
+    resolution: {integrity: sha512-4+TYaa/e1nIxQfyw/WzNPYTEZ5OvHIDEnmjs4LPmIfccPQN+2CYKmGHjWixn/chzD3bmUTu5FMfpltizMxqzdg==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
   /nopt@6.0.0:
     resolution: {integrity: sha512-ZwLpbTgdhuZUnZzjd7nb1ZV+4DoiC6/sfiVKok72ym/4Tlf+DFdlHYmT2JPmcNNWV6Pi3SDf1kT+A4r9RTuT9g==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
@@ -17632,7 +17637,7 @@ packages:
       dayjs: 1.11.7
       debug: 4.3.4(supports-color@8.1.1)
       mailparser: 3.6.4
-      nodemailer: 6.9.1
+      nodemailer: 6.9.2
       open: 7.4.2
       pug: 3.0.2
       uuid: 8.3.2
