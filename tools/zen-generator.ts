@@ -43,7 +43,6 @@ export class ZenGenerator {
     const palOutPath = palConfig.backend.output
       ? palConfig.backend.output
       : path.join(this.config.apiOutPath, 'paljs');
-    palConfig.backend.output = palOutPath;
 
     if (existsSync(palOutPath)) {
       await rm(palOutPath, { recursive: true });
