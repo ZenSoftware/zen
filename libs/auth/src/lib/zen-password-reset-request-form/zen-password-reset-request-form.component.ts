@@ -125,12 +125,12 @@ export class ZenPasswordResetRequestFormComponent implements AfterContentInit, O
             this.completed = true;
             this.sent.emit();
           },
-          error: (e: ApolloError) => {
+          error: (error: ApolloError) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            if (e.message === ApiError.AuthPasswordResetRequest.USER_NOT_FOUND) {
+            if (error.message === ApiError.AuthPasswordResetRequest.USER_NOT_FOUND) {
               this.generalError = false;
               this.#notFound = true;
               this.emailOrUsername.updateValueAndValidity();

@@ -237,9 +237,9 @@ export class AuthService {
           this.setSession(authExchangeToken);
           console.log('Exchanged token');
         },
-        error: (e: ApolloError) => {
+        error: (error: ApolloError) => {
           this.logout();
-          console.error('Exchange token failed', e);
+          console.error('Exchange token failed', error);
         },
       });
   }
@@ -272,16 +272,16 @@ function retryStrategy({
   delay?: number;
   excludeStatusCodes?: string[];
 }) {
-  return (e: ApolloError, retryCount: number) => {
-    const excludedStatusFound = !!excludeStatusCodes.find(exclude => exclude === e.message);
+  return (error: ApolloError, retryCount: number) => {
+    const excludedStatusFound = !!excludeStatusCodes.find(exclude => exclude === error.message);
 
     if (retryCount > maxAttempts || excludedStatusFound) {
-      return throwError(() => e);
+      return throwError(() => error);
     }
 
     console.warn(
       `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}s`,
-      e
+      error
     );
 
     return timer(delay);

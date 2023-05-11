@@ -160,12 +160,12 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             this.completed = true;
             this.changed.emit();
           },
-          error: (e: ApolloError) => {
+          error: (error: ApolloError) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            if (e.message === ApiError.AuthPasswordChange.WRONG_PASSWORD) {
+            if (error.message === ApiError.AuthPasswordChange.WRONG_PASSWORD) {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.oldPassword.updateValueAndValidity();
