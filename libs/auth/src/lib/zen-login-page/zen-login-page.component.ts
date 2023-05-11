@@ -12,7 +12,7 @@ import { ZenLoginFormComponent } from '../zen-login-form/zen-login-form.componen
   templateUrl: 'zen-login-page.component.html',
   animations: [...verticalAccordion],
   standalone: true,
-  imports: [ZenLoginFormComponent, IfPublicRegistrationDirective, MatButtonModule, RouterLink],
+  imports: [IfPublicRegistrationDirective, MatButtonModule, RouterLink, ZenLoginFormComponent],
 })
 export class ZenLoginPageComponent {
   constructor(private router: Router, private env: Environment) {}

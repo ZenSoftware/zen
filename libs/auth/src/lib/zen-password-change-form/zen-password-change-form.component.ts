@@ -41,14 +41,14 @@ interface FormType {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
     NgIf,
     ReactiveFormsModule,
-    ZenLoadingComponent,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
     RouterLink,
+    ZenLoadingComponent,
   ],
 })
 export class ZenPasswordChangeFormComponent implements OnDestroy {
