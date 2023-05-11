@@ -31,7 +31,7 @@ export enum LocalStorageKey {
 })
 export class AuthService {
   readonly loggedIn = signal(false);
-  readonly roles = signal<string[]>([]);
+  readonly userRoles = signal<string[]>([]);
 
   #exchangeIntervalSubscription?: Subscription;
 
@@ -63,7 +63,7 @@ export class AuthService {
       try {
         // Initialize Apollo client state
         const roles = ls.get<string[]>(LocalStorageKey.roles, { decrypt: true });
-        this.roles.set(roles ? roles : []);
+        this.userRoles.set(roles ? roles : []);
         this.loggedIn.set(roles ? true : false);
         this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
 
@@ -128,11 +128,11 @@ export class AuthService {
     token.set(authSession.token);
 
     if (
-      !this.rolesEqual(this.roles(), authSession.roles) ||
-      this.roles() === null ||
-      this.roles() === undefined
+      !this.rolesEqual(this.userRoles(), authSession.roles) ||
+      this.userRoles() === null ||
+      this.userRoles() === undefined
     ) {
-      this.roles.set(authSession.roles);
+      this.userRoles.set(authSession.roles);
     }
 
     if (!this.loggedIn()) {
@@ -170,16 +170,16 @@ export class AuthService {
 
   userHasRole(role: string | string[]) {
     if (role) {
-      if (typeof role === 'string') return this.roles().some(r => r === role);
-      else return this.roles().some(r => role.includes(r));
+      if (typeof role === 'string') return this.userRoles().some(r => r === role);
+      else return this.userRoles().some(r => role.includes(r));
     }
     return false;
   }
 
   userNotInRole(role: string | string[]) {
     if (role) {
-      if (typeof role === 'string') return !this.roles().some(r => r === role);
-      return this.roles().filter(r => role.includes(r)).length === 0;
+      if (typeof role === 'string') return !this.userRoles().some(r => r === role);
+      return this.userRoles().filter(r => role.includes(r)).length === 0;
     }
     return true;
   }
@@ -214,7 +214,7 @@ export class AuthService {
     this.#userId = null;
     this.ability.update([]);
     token.set(null);
-    this.roles.set([]);
+    this.userRoles.set([]);
     this.loggedIn.set(false);
     this.apollo.client.cache.reset();
   }
