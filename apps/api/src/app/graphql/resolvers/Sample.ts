@@ -1,4 +1,4 @@
-import { createWriteStream } from 'node:fs';
+import { PathLike, createWriteStream } from 'node:fs';
 import { mkdir, stat } from 'node:fs/promises';
 
 import { Logger, UseGuards } from '@nestjs/common';
@@ -10,6 +10,8 @@ import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 import { interval } from 'rxjs';
 
 import type { Upload } from '../models';
+
+const logger = new Logger('SampleResolver');
 
 export const typeDefs = gql`
   extend type Mutation {
@@ -28,7 +30,22 @@ export const typeDefs = gql`
 
 const UPLOADS_PATH = './uploads/';
 const pubSub = new PubSub();
-const fileExists = async (path: any) => !!(await stat(path).catch(() => false));
+
+async function fileExists(path: PathLike) {
+  try {
+    await stat(path);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+async function createUploadDirectory() {
+  if (!(await fileExists(UPLOADS_PATH))) {
+    logger.log(`Creating directory ${UPLOADS_PATH}`);
+    await mkdir(UPLOADS_PATH);
+  }
+}
 
 interval(1000).subscribe(i =>
   pubSub.publish('sampleSubscription', {
@@ -43,23 +60,20 @@ interval(1000).subscribe(i =>
 export class SampleResolver {
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
-    if (!(await fileExists(UPLOADS_PATH))) {
-      Logger.log(`Creating directory ${UPLOADS_PATH}`);
-      await mkdir(UPLOADS_PATH);
-    }
+    await createUploadDirectory();
 
     const { filename, mimetype, encoding, createReadStream } = file;
 
     createReadStream()
       .on('error', err => {
-        Logger.error(`${filename} ReadStream Error`, err);
+        logger.error(`${filename} ReadStream Error`, err);
       })
       .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
       .on('close', () => {
-        Logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
+        logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
       })
       .on('error', err => {
-        Logger.error(`${filename} WriteStream Error`, err);
+        logger.error(`${filename} WriteStream Error`, err);
       });
 
     return true;
@@ -67,26 +81,24 @@ export class SampleResolver {
 
   @Mutation()
   async sampleUploadMany(@Args('files', { type: () => [GraphQLUpload] }) files: Promise<Upload>[]) {
-    if (!(await fileExists(UPLOADS_PATH))) {
-      Logger.log(`Creating directory ${UPLOADS_PATH}`);
-      await mkdir(UPLOADS_PATH);
-    }
+    await createUploadDirectory();
 
     return Promise.all(
       files.map(async file => {
         const { filename, mimetype, encoding, createReadStream } = await file;
+
         return new Promise((resolve, reject) => {
           createReadStream()
             .on('error', err => {
-              Logger.error(`${filename} ReadStream Error`, err);
+              logger.error(`${filename} ReadStream Error`, err);
             })
             .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
             .on('close', () => {
-              Logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
+              logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
               resolve(filename);
             })
             .on('error', err => {
-              Logger.error(`${filename} WriteStream Error`, err);
+              logger.error(`${filename} WriteStream Error`, err);
               reject(`error ${filename}`);
             });
         });
@@ -96,7 +108,7 @@ export class SampleResolver {
 
   @Subscription()
   async sampleSubscription(@CurrentUser() user: RequestUser) {
-    Logger.log(`sampleSubscription subscribed to by user with id ${user.id}`);
+    logger.log(`sampleSubscription subscribed to by user with id ${user.id}`);
     return pubSub.asyncIterator('sampleSubscription');
   }
 }
