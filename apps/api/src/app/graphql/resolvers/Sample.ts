@@ -44,7 +44,7 @@ export class SampleResolver {
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
     if (!(await fileExists(UPLOADS_PATH))) {
-      Logger.log('Creating directory', UPLOADS_PATH);
+      Logger.log(`Creating directory ${UPLOADS_PATH}`);
       await mkdir(UPLOADS_PATH);
     }
 
@@ -68,7 +68,7 @@ export class SampleResolver {
   @Mutation()
   async sampleUploadMany(@Args('files', { type: () => [GraphQLUpload] }) files: Promise<Upload>[]) {
     if (!(await fileExists(UPLOADS_PATH))) {
-      Logger.log('Creating directory', UPLOADS_PATH);
+      Logger.log(`Creating directory ${UPLOADS_PATH}`);
       await mkdir(UPLOADS_PATH);
     }
 
