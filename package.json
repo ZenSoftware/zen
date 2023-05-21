@@ -22,7 +22,7 @@
     "@apollo/server": "^4.7.1",
     "@casl/ability": "~6.5.0",
     "@casl/prisma": "~1.4.0",
-    "@graphql-tools/merge": "^8.4.2",
+    "@graphql-tools/merge": "^9.0.0",
     "@nestjs-modules/mailer": "^1.8.1",
     "@nestjs/apollo": "^11.0.5",
     "@nestjs/common": "^9.4.1",
