@@ -77,19 +77,23 @@ export class SampleResolver {
     return Promise.all(
       files.map(async file => {
         const { filename, mimetype, encoding, createReadStream } = await file;
-        return createReadStream()
-          .on('error', err => {
-            Logger.error(`${filename} ReadStream Error`, err);
-          })
-          .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
-          .on('close', () => {
-            Logger.log(
-              `uploaded: ${filename} uploaded successfully with mimetype: ${mimetype} | encoding: ${encoding}`
-            );
-          })
-          .on('error', err => {
-            Logger.error(`${filename} WriteStream Error`, err);
-          });
+        return new Promise((resolve, reject) => {
+          createReadStream()
+            .on('error', err => {
+              Logger.error(`${filename} ReadStream Error`, err);
+            })
+            .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
+            .on('close', () => {
+              Logger.log(
+                `uploaded: ${filename} uploaded successfully with mimetype: ${mimetype} | encoding: ${encoding}`
+              );
+              resolve(`${filename} close`);
+            })
+            .on('error', err => {
+              Logger.error(`${filename} WriteStream Error`, err);
+              reject(`${filename} error`);
+            });
+        });
       })
     );
   }
