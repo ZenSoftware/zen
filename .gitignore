@@ -4,6 +4,7 @@
 /apps/**/prisma/generated/
 .angular
 **/cypress/downloads
+/uploads/
 
 # compiled output
 dist
