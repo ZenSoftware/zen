@@ -56,9 +56,7 @@ export class SampleResolver {
       })
       .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
       .on('close', () => {
-        Logger.log(
-          `uploaded: ${filename} successfully with mimetype: ${mimetype} | encoding: ${encoding}`
-        );
+        Logger.log(`uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
       })
       .on('error', err => {
         Logger.error(`${filename} WriteStream Error`, err);
@@ -84,9 +82,7 @@ export class SampleResolver {
             })
             .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
             .on('close', () => {
-              Logger.log(
-                `uploaded: ${filename} uploaded successfully with mimetype: ${mimetype} | encoding: ${encoding}`
-              );
+              Logger.log(`uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
               resolve(`${filename} close`);
             })
             .on('error', err => {
