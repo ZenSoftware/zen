@@ -87,7 +87,7 @@ export class SampleResolver {
             })
             .on('error', err => {
               Logger.error(`${filename} WriteStream Error`, err);
-              reject(`${filename} error`);
+              reject(`error ${filename}`);
             });
         });
       })
