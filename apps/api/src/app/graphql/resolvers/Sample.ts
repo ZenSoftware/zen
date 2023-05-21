@@ -44,7 +44,7 @@ export class SampleResolver {
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
     if (!(await fileExists(UPLOADS_PATH))) {
-      Logger.log('Creating directory', UPLOADS_PATH);
+      Logger.log(`Creating directory ${UPLOADS_PATH}`);
       await mkdir(UPLOADS_PATH);
     }
 
@@ -56,9 +56,7 @@ export class SampleResolver {
       })
       .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
       .on('close', () => {
-        Logger.log(
-          `${filename} uploaded successfully with mimetype: ${mimetype} | encoding: ${encoding}`
-        );
+        Logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
       })
       .on('error', err => {
         Logger.error(`${filename} WriteStream Error`, err);
@@ -70,31 +68,26 @@ export class SampleResolver {
   @Mutation()
   async sampleUploadMany(@Args('files', { type: () => [GraphQLUpload] }) files: Promise<Upload>[]) {
     if (!(await fileExists(UPLOADS_PATH))) {
-      Logger.log('Creating directory', UPLOADS_PATH);
+      Logger.log(`Creating directory ${UPLOADS_PATH}`);
       await mkdir(UPLOADS_PATH);
     }
 
     return Promise.all(
       files.map(async file => {
         const { filename, mimetype, encoding, createReadStream } = await file;
-        Logger.log('Attachment:', filename, mimetype, encoding);
-        const stream = createReadStream();
-
         return new Promise((resolve, reject) => {
-          stream
+          createReadStream()
             .on('error', err => {
               Logger.error(`${filename} ReadStream Error`, err);
             })
             .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
             .on('close', () => {
-              Logger.log(
-                `${filename} uploaded successfully with mimetype: ${mimetype} | encoding: ${encoding}`
-              );
-              resolve(`${filename} close`);
+              Logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
+              resolve(filename);
             })
             .on('error', err => {
               Logger.error(`${filename} WriteStream Error`, err);
-              reject(`${filename} error`);
+              reject(`error ${filename}`);
             });
         });
       })
