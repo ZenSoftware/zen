@@ -1,4 +1,5 @@
-import { createWriteStream, existsSync, mkdirSync } from 'node:fs';
+import { createWriteStream } from 'node:fs';
+import { mkdir, stat } from 'node:fs/promises';
 
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
@@ -25,7 +26,9 @@ export const typeDefs = gql`
   }
 `;
 
+const UPLOADS_PATH = './uploads/';
 const pubSub = new PubSub();
+const fileExists = async (path: any) => !!(await stat(path).catch(() => false));
 
 interval(1000).subscribe(i =>
   pubSub.publish('sampleSubscription', {
@@ -40,25 +43,38 @@ interval(1000).subscribe(i =>
 export class SampleResolver {
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
-    const readStream = file.createReadStream();
-    const chunks: any[] = [];
-    for await (const chunk of readStream) {
-      chunks.push(chunk);
+    if (!(await fileExists(UPLOADS_PATH))) {
+      Logger.log('Creating directory', UPLOADS_PATH);
+      await mkdir(UPLOADS_PATH);
     }
-    const buffer = Buffer.concat(chunks);
-    Logger.log(`Recieved '${file.filename}' ${buffer.byteLength} bytes`);
+
+    const { filename, mimetype, encoding, createReadStream } = file;
+
+    createReadStream()
+      .on('error', err => {
+        Logger.error(`${filename} ReadStream Error`, err);
+      })
+      .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
+      .on('close', () => {
+        Logger.log(
+          `${filename} uploaded successfully with mimetype: ${mimetype} | encoding: ${encoding}`
+        );
+      })
+      .on('error', err => {
+        Logger.error(`${filename} WriteStream Error`, err);
+      });
+
     return true;
   }
 
   @Mutation()
   async sampleUploadMany(@Args('files', { type: () => [GraphQLUpload] }) files: Promise<Upload>[]) {
-    const UPLOAD_PATH = './upload/';
-    if (!existsSync(UPLOAD_PATH)) {
-      Logger.log('Creating directory', UPLOAD_PATH);
-      mkdirSync(UPLOAD_PATH);
+    if (!(await fileExists(UPLOADS_PATH))) {
+      Logger.log('Creating directory', UPLOADS_PATH);
+      await mkdir(UPLOADS_PATH);
     }
 
-    return await Promise.all(
+    return Promise.all(
       files.map(async file => {
         const { filename, mimetype, encoding, createReadStream } = await file;
         Logger.log('Attachment:', filename, mimetype, encoding);
@@ -66,15 +82,14 @@ export class SampleResolver {
 
         return new Promise((resolve, reject) => {
           stream
-            .on('close', () => {
-              Logger.log(`${filename} ReadStream Closed`);
-            })
             .on('error', err => {
               Logger.error(`${filename} ReadStream Error`, err);
             })
-            .pipe(createWriteStream(`${UPLOAD_PATH}${filename}`))
+            .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
             .on('close', () => {
-              Logger.log(`${filename} WriteStream Closed`);
+              Logger.log(
+                `${filename} uploaded successfully with mimetype: ${mimetype} | encoding: ${encoding}`
+              );
               resolve(`${filename} close`);
             })
             .on('error', err => {
