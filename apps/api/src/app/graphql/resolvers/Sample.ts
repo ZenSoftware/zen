@@ -83,7 +83,7 @@ export class SampleResolver {
             .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
             .on('close', () => {
               Logger.log(`uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
-              resolve(`${filename} close`);
+              resolve(filename);
             })
             .on('error', err => {
               Logger.error(`${filename} WriteStream Error`, err);
