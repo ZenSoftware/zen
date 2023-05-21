@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -8,9 +9,19 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ApolloError } from '@apollo/client/errors';
 import { ApiConstants, ApiError } from '@zen/common';
+import { ZenLoadingComponent } from '@zen/components';
 import { AuthPasswordResetRequestInput, AuthPasswordResetRequestQueryGQL } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
@@ -27,6 +38,15 @@ interface FormType {
   templateUrl: './zen-password-reset-request-form.component.html',
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgIf,
+    ReactiveFormsModule,
+    ZenLoadingComponent,
+  ],
 })
 export class ZenPasswordResetRequestFormComponent implements AfterContentInit, OnDestroy {
   @ViewChild('emailUsernameInput') emailUsernameInput!: ElementRef<HTMLInputElement>;
@@ -105,12 +125,12 @@ export class ZenPasswordResetRequestFormComponent implements AfterContentInit, O
             this.completed = true;
             this.sent.emit();
           },
-          error: (e: ApolloError) => {
+          error: (error: ApolloError) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            if (e.message === ApiError.AuthPasswordResetRequest.USER_NOT_FOUND) {
+            if (error.message === ApiError.AuthPasswordResetRequest.USER_NOT_FOUND) {
               this.generalError = false;
               this.#notFound = true;
               this.emailOrUsername.updateValueAndValidity();

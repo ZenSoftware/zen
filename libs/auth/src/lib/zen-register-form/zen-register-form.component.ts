@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -8,9 +9,21 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { ApolloError } from '@apollo/client/errors';
 import { Environment } from '@zen/common';
+import { ZenLoadingComponent } from '@zen/components';
 import {
   ApiError,
   AuthRegister,
@@ -37,6 +50,17 @@ interface FormType {
   templateUrl: 'zen-register-form.component.html',
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    NgIf,
+    ReactiveFormsModule,
+    ZenLoadingComponent,
+  ],
 })
 export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
@@ -170,18 +194,18 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
             this.registered.emit((<AuthRegister>data).authRegister);
           },
 
-          error: (e: ApolloError) => {
+          error: (error: ApolloError) => {
             this.loading = false;
             this.form.enable();
 
             this.generalError = true;
 
-            if (e.message === ApiError.AuthRegister.EMAIL_TAKEN) {
+            if (error.message === ApiError.AuthRegister.EMAIL_TAKEN) {
               this.generalError = false;
               this.#emailTaken = true;
               this.email.updateValueAndValidity();
               this.emailInput.nativeElement.select();
-            } else if (e.message === ApiError.AuthRegister.USERNAME_TAKEN) {
+            } else if (error.message === ApiError.AuthRegister.USERNAME_TAKEN) {
               this.generalError = false;
               this.#usernameTaken = true;
               this.username.updateValueAndValidity();

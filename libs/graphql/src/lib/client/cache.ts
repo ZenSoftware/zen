@@ -1,4 +1,7 @@
 import { makeVar } from '@apollo/client/core';
 
-export const loggedInVar = makeVar(false);
-export const userRolesVar = makeVar<string[]>([]);
+/**
+ * Define Apollo reactive variables here
+ * [Apollo docs](https://www.apollographql.com/docs/react/local-state/reactive-variables/)
+ */
+export const sampleVar = makeVar(false);

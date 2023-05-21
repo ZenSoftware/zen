@@ -11,12 +11,11 @@ import {
   AuthLoginGQL,
   GetAccountInfoGQL,
 } from '@zen/graphql';
-import { loggedInVar, userRolesVar } from '@zen/graphql/client';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 import ls from 'localstorage-slim';
 
 import { AuthService, LocalStorageKey } from './auth.service';
-import { tokenVar } from './token-var';
+import { token } from './token.signal';
 import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 
 describe('AuthService', () => {
@@ -72,7 +71,7 @@ describe('AuthService', () => {
   });
 
   it('evaluates userHasRole correctly', () => {
-    userRolesVar(['Editor']);
+    service.userRoles.set(['Editor']);
 
     expect(service.userHasRole('Editor')).toEqual(true);
     expect(service.userHasRole(['Editor'])).toEqual(true);
@@ -84,7 +83,7 @@ describe('AuthService', () => {
   });
 
   it('evaluates userNotInRole correctly', () => {
-    userRolesVar(['Editor']);
+    service.userRoles.set(['Editor']);
 
     expect(service.userNotInRole('Editor')).toEqual(false);
     expect(service.userNotInRole(['Editor'])).toEqual(false);
@@ -126,9 +125,9 @@ describe('AuthService', () => {
 
         expect(ability.rules).toEqual(data.authLogin.rules);
         expect(service.userId).toEqual(data.authLogin.userId);
-        expect(tokenVar()).toEqual(data.authLogin.token);
-        expect(userRolesVar()).toEqual(data.authLogin.roles);
-        expect(loggedInVar()).toEqual(true);
+        expect(token()).toEqual(data.authLogin.token);
+        expect(service.userRoles()).toEqual(data.authLogin.roles);
+        expect(service.loggedIn()).toEqual(true);
 
         const routerSpy = jest.spyOn(router, 'navigateByUrl');
 
@@ -143,9 +142,9 @@ describe('AuthService', () => {
 
         expect(ability.rules).toEqual([]);
         expect(service.userId).toEqual(null);
-        expect(tokenVar()).toEqual(null);
-        expect(userRolesVar()).toEqual([]);
-        expect(loggedInVar()).toEqual(false);
+        expect(token()).toEqual(null);
+        expect(service.userRoles()).toEqual([]);
+        expect(service.loggedIn()).toEqual(false);
 
         expect(routerSpy).toHaveBeenCalledWith('/login');
 

@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Environment } from '@zen/common';
-import { ZenSnackbarError } from '@zen/components';
+import { ZenSnackbarError, ZenSnackbarModule } from '@zen/components';
 import { AuthExchangeTokenGQL } from '@zen/graphql';
 
 import { AuthService } from '../auth.service';
-import { tokenVar } from '../token-var';
+import { token } from '../token.signal';
 
 @Component({
   selector: 'zen-login-confirmed',
   template: ``,
+  standalone: true,
+  imports: [ZenSnackbarModule],
 })
 export class ZenLoginConfirmedComponent {
   constructor(
@@ -21,8 +23,8 @@ export class ZenLoginConfirmedComponent {
     private authExchangeTokenGQL: AuthExchangeTokenGQL
   ) {
     const query = this.route.snapshot.queryParams;
-    const token = decodeURIComponent(query['token']);
-    tokenVar(token);
+    const queryToken = decodeURIComponent(query['token']);
+    token.set(queryToken);
 
     this.authExchangeTokenGQL
       .fetch(

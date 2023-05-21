@@ -1,32 +1,27 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { Environment } from '@zen/common';
-import { Observable } from 'rxjs';
 
-import { tokenVar } from './token-var';
+import { token } from './token.signal';
 
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  apiHost: string;
-  gqlHost: string;
+export const authInterceptorFn: HttpInterceptorFn = (
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn
+) => {
+  const env = inject(Environment);
+  const reqHost = new URL(req.url).host;
+  const apiHost = new URL(env.url.api).host;
+  const gqlHost = new URL(env.url.graphql).host;
 
-  constructor(env: Environment) {
-    this.apiHost = new URL(env.url.api).host;
-    this.gqlHost = new URL(env.url.graphql).host;
+  if (token() && (reqHost === apiHost || reqHost === gqlHost)) {
+    const modifiedReq = req.clone({
+      setHeaders: {
+        Authorization: 'Bearer ' + token(),
+      },
+    });
+
+    return next(modifiedReq);
+  } else {
+    return next(req);
   }
-
-  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = tokenVar();
-    const reqHost = new URL(req.url).host;
-
-    if (token && (reqHost === this.apiHost || reqHost === this.gqlHost)) {
-      const modifiedReq = req.clone({
-        headers: req.headers.set('Authorization', 'Bearer ' + token),
-      });
-
-      return next.handle(modifiedReq);
-    } else {
-      return next.handle(req);
-    }
-  }
-}
+};

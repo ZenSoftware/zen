@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Environment, EnvironmentDev } from '@zen/common';
 import {
   AuthRegister,
   AuthRegisterDocument,
   AuthRegisterGQL,
   AuthRegisterVariables,
 } from '@zen/graphql';
-import { ApolloTestingController } from 'apollo-angular/testing';
+import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 
-import { AUTH_DECLARATIONS, AUTH_IMPORTS, AUTH_PROVIDERS } from '../test-deps';
+import { AuthService } from '../auth.service';
 import { ZenRegisterFormComponent } from './zen-register-form.component';
 
 describe('ZenRegisterFormComponent', () => {
@@ -17,9 +19,12 @@ describe('ZenRegisterFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [...AUTH_DECLARATIONS, ZenRegisterFormComponent],
-      providers: [...AUTH_PROVIDERS, AuthRegisterGQL],
-      imports: AUTH_IMPORTS,
+      imports: [ApolloTestingModule, ZenRegisterFormComponent, NoopAnimationsModule],
+      providers: [
+        AuthRegisterGQL,
+        { provide: AuthService, useValue: {} },
+        { provide: Environment, useClass: EnvironmentDev },
+      ],
     }).compileComponents();
   }));
 

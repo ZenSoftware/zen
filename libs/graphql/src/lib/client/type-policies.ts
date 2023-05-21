@@ -1,18 +1,17 @@
 import { TypePolicies } from '@apollo/client/core';
 
-import { loggedInVar, userRolesVar } from './cache';
+import { sampleVar } from './cache';
 
+/**
+ * Implement Apollo client TypePolicy fields here
+ * [Apollo docs](https://www.apollographql.com/docs/react/caching/cache-configuration/#typepolicy-fields)
+ */
 export const typePolicies: TypePolicies = {
   Query: {
     fields: {
-      loggedIn: {
+      sample: {
         read() {
-          return loggedInVar();
-        },
-      },
-      userRoles: {
-        read() {
-          return userRolesVar();
+          return sampleVar();
         },
       },
     },

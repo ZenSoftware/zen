@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,9 +8,20 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { Router, RouterLink } from '@angular/router';
 import { ApolloError } from '@apollo/client/errors';
+import { ZenLoadingComponent } from '@zen/components';
 import { ApiError, AuthPasswordChangeGQL, AuthPasswordChangeInput } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
@@ -27,6 +39,17 @@ interface FormType {
   templateUrl: 'zen-password-change-form.component.html',
   animations: [...verticalAccordion],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    NgIf,
+    ReactiveFormsModule,
+    RouterLink,
+    ZenLoadingComponent,
+  ],
 })
 export class ZenPasswordChangeFormComponent implements OnDestroy {
   @ViewChild('oldPasswordInput') oldPasswordInput!: ElementRef<HTMLInputElement>;
@@ -137,12 +160,12 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             this.completed = true;
             this.changed.emit();
           },
-          error: (e: ApolloError) => {
+          error: (error: ApolloError) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();
 
-            if (e.message === ApiError.AuthPasswordChange.WRONG_PASSWORD) {
+            if (error.message === ApiError.AuthPasswordChange.WRONG_PASSWORD) {
               this.generalError = false;
               this.#incorrectPassword = true;
               this.oldPassword.updateValueAndValidity();

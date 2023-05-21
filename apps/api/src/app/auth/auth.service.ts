@@ -1,5 +1,3 @@
-import { randomUUID } from 'crypto';
-
 import { Injectable } from '@nestjs/common';
 import { CaslFactory, JwtPayload, RequestUser } from '@zen/nest-auth';
 
@@ -21,7 +19,6 @@ export class AuthService {
 
   async getAuthSession(user: RequestUser, rememberMe = false): Promise<AuthSession> {
     const jwtPayload: JwtPayload = {
-      jti: randomUUID(),
       aud: this.config.siteUrl,
       sub: user.id,
       roles: user.roles,
