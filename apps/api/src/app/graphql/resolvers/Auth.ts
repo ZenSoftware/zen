@@ -142,15 +142,7 @@ export class AuthResolver {
     @CurrentUser() reqUser: RequestUser,
     @Args('data') args: AuthExchangeTokenInput
   ) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: reqUser.id },
-    });
-
-    if (user) {
-      return this.auth.getAuthSession(user, args.rememberMe);
-    } else {
-      throw new UnauthorizedException('User not found');
-    }
+    return this.auth.getAuthSession(reqUser, args.rememberMe);
   }
 
   @Query()
