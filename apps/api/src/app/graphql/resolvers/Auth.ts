@@ -107,7 +107,19 @@ export class AuthResolver {
 
   @Query()
   async authLogin(@Args('data') args: AuthLoginInput) {
-    const user = await this.getUserByUsername(args.username, this.prisma);
+    const user = await this.prisma.user.findFirst({
+      where: {
+        username: {
+          mode: 'insensitive',
+          equals: args.username,
+        },
+      },
+      select: {
+        id: true,
+        roles: true,
+        password: true,
+      },
+    });
 
     if (!user) throw new HttpException(ApiError.AuthLogin.USER_NOT_FOUND, 400);
 
@@ -125,6 +137,7 @@ export class AuthResolver {
   async accountInfo(@CurrentUser() reqUser: RequestUser): Promise<AccountInfo> {
     const user = await this.prisma.user.findUnique({
       where: { id: reqUser.id },
+      select: { username: true, password: true, googleProfile: true },
     });
 
     if (!user) throw new UnauthorizedException('User not found');
@@ -144,6 +157,7 @@ export class AuthResolver {
   ) {
     const user = await this.prisma.user.findUnique({
       where: { id: reqUser.id },
+      select: { id: true, roles: true },
     });
 
     if (user) {
@@ -173,6 +187,7 @@ export class AuthResolver {
         ],
         AND: [{ username: { not: null } }],
       },
+      select: { id: true, email: true },
     });
 
     if (possibleUsers.length === 0)
@@ -190,18 +205,21 @@ export class AuthResolver {
       throw new UnauthorizedException('JWT failed verification');
     }
 
-    let user = await this.prisma.user.findUnique({ where: { id: tokenPayload.sub } });
-
-    if (!user) throw new UnauthorizedException('User not found');
+    const userExists = await this.prisma.user.findUnique({
+      where: { id: tokenPayload.sub },
+      select: { id: true },
+    });
+    if (!userExists) throw new UnauthorizedException('User not found');
 
     const hashedPassword = await this.hashPassword(args.newPassword);
 
-    user = await this.prisma.user.update({
-      where: { id: user.id },
+    const updatedUser = await this.prisma.user.update({
+      where: { id: tokenPayload.sub },
+      select: { id: true, roles: true },
       data: { password: hashedPassword },
     });
 
-    return this.auth.getAuthSession(user);
+    return this.auth.getAuthSession(updatedUser);
   }
 
   @Mutation()
@@ -209,11 +227,17 @@ export class AuthResolver {
     if (!this.config.publicRegistration)
       throw new UnauthorizedException('No public registrations allowed');
 
-    if (await this.getUserByUsername(args.username, this.prisma))
-      throw new HttpException(ApiError.AuthRegister.USERNAME_TAKEN, 400);
+    const usernameTaken = await this.prisma.user.findFirst({
+      where: { username: { equals: args.username, mode: 'insensitive' } },
+      select: { username: true },
+    });
+    if (usernameTaken) throw new HttpException(ApiError.AuthRegister.USERNAME_TAKEN, 400);
 
-    if (await this.getUserByEmail(args.email, this.prisma))
-      throw new HttpException(ApiError.AuthRegister.EMAIL_TAKEN, 400);
+    const emailTaken = await this.prisma.user.findFirst({
+      where: { email: { equals: args.email, mode: 'insensitive' } },
+      select: { email: true },
+    });
+    if (emailTaken) throw new HttpException(ApiError.AuthRegister.EMAIL_TAKEN, 400);
 
     const hashedPassword = await this.hashPassword(args.password);
 
@@ -222,6 +246,12 @@ export class AuthResolver {
         username: args.username,
         email: args.email,
         password: hashedPassword,
+      },
+      select: {
+        id: true,
+        roles: true,
+        username: true,
+        email: true,
       },
     });
 
@@ -252,7 +282,14 @@ export class AuthResolver {
     @Args('data') args: AuthPasswordChangeInput,
     @CurrentUser() reqUser: RequestUser
   ) {
-    const user = await this.prisma.user.findUnique({ where: { id: reqUser.id } });
+    const user = await this.prisma.user.findUnique({
+      where: { id: reqUser.id },
+      select: {
+        id: true,
+        password: true,
+      },
+    });
+
     if (!user) throw new UnauthorizedException('User not found');
 
     const correctPassword = await bcryptVerify({
@@ -266,28 +303,7 @@ export class AuthResolver {
     await this.prisma.user.update({
       where: { id: user.id },
       data: { password: hashedPassword },
-    });
-  }
-
-  private async getUserByUsername(username: string, prisma: PrismaClient) {
-    return prisma.user.findFirst({
-      where: {
-        username: {
-          mode: 'insensitive',
-          equals: username,
-        },
-      },
-    });
-  }
-
-  private async getUserByEmail(email: string, prisma: PrismaClient) {
-    return prisma.user.findFirst({
-      where: {
-        email: {
-          mode: 'insensitive',
-          equals: email,
-        },
-      },
+      select: { id: true },
     });
   }
 
