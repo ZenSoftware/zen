@@ -3,9 +3,9 @@ import { ContextType } from '@nestjs/common/interfaces';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-import { Role } from '@zen/common';
 
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
+// import { Role } from '@zen/common';
 
 /**
  * A guard that takes a list of roles for its parameters and checks if the user has at least
@@ -25,7 +25,7 @@ import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
  * accountInfo(＠CurrentUser() user: RequestUser) { ... }
  * ```
  */
-export function RolesGuard(...roles: Array<Role>) {
+export function RolesGuard<R extends string>(...roles: Array<R>) {
   if (new.target !== undefined)
     throw new Error('RolesGuard cannot be instantiated directly. Use RolesGuard() instead.');
 
