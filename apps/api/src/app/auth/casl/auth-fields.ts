@@ -9,6 +9,7 @@ import { DefaultFields } from '../../prisma';
  */
 const authFields: DefaultFields = {
   // ... List authorization fields here
+  User: { email: true },
 };
 
 export const AUTH_FIELDS_TOKEN = 'AUTH_FIELDS';
