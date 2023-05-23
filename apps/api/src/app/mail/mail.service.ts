@@ -30,7 +30,7 @@ export class MailService {
     }).then();
   }
   //--------------------------------------------------------------------------
-  sendPasswordReset(user: User) {
+  sendPasswordReset(user: Pick<User, 'id' | 'email'>) {
     const token = this.jwtService.sign({ sub: user.id, aud: user.email }, { expiresIn: '1d' });
 
     const context: PasswordResetContext = {
