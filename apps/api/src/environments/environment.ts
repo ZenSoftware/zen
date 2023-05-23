@@ -1,6 +1,11 @@
-import 'dotenv/config';
+import { Logger } from '@nestjs/common';
+import * as dotenv from 'dotenv';
 
 import { EnvironmentBase } from './environment.base';
+
+const logger = new Logger('EnvironmentDevelopment');
+dotenv.config();
+logger.log(`.env file loaded`);
 
 export const environment: EnvironmentBase = {
   siteUrl: 'http://localhost:4200/#',
