@@ -1,4 +1,4 @@
-export class RequestUser<Role = string> {
+export interface RequestUser {
   id: string; // Change type to number if using integer ids
-  roles: Role[];
+  roles: string[];
 }
