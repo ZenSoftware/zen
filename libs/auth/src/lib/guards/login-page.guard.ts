@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { CanMatchFn, Router } from '@angular/router';
 import { Environment } from '@zen/common';
 
 import { AuthService } from '../auth.service';
 
-export const LoginPageGuard = () => {
+export const LoginPageGuard: CanMatchFn = () => {
   const router = inject(Router);
   const env = inject(Environment);
   const auth = inject(AuthService);
