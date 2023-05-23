@@ -1,4 +1,9 @@
+import { Logger } from '@nestjs/common';
+
 import { EnvironmentBase } from './environment.base';
+
+const logger = new Logger('EnvironmentProduction');
+logger.log(`loaded`);
 
 export const environment: EnvironmentBase = {
   siteUrl: 'https://site.com/#',
