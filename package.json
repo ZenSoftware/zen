@@ -146,6 +146,11 @@
     "webpack": "^5.83.1",
     "zone.js": "0.13.0"
   },
+  "overrides": {
+    "@casl/angular": {
+      "@angular/core": "$@angular/core"
+    }
+  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-customizable"
