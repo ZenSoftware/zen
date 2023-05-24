@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { Subscription } from 'rxjs';
 
 import { ZenSocketService } from './zen-socket.service';
 
@@ -9,22 +10,21 @@ import { ZenSocketService } from './zen-socket.service';
   selector: 'zen-chat',
   templateUrl: 'zen-chat.component.html',
 })
-export class ZenChatComponent implements OnInit, OnDestroy {
-  constructor(private socket: ZenSocketService) {}
+export class ZenChatComponent implements OnDestroy {
+  #subs: Subscription[] = [];
 
-  ngOnInit(): void {
-    this.socket.on('msgToClient', this.msgToClient);
+  constructor(private socket: ZenSocketService) {
+    const sub = socket.fromEvent('msgToClient').subscribe(data => {
+      console.log('fromEvent', data);
+    });
+    this.#subs.push(sub);
   }
-
-  msgToClient = (args: any) => {
-    console.log('msgToClient:', args);
-  };
 
   msgToServer() {
     this.socket.emit('msgToServer', { test: 'hello world' });
   }
 
   ngOnDestroy(): void {
-    this.socket.removeListener('msgToClient', this.msgToClient);
+    this.#subs.forEach(sub => sub.unsubscribe());
   }
 }
