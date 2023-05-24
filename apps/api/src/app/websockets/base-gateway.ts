@@ -14,13 +14,13 @@ import { AppAbility, AuthService } from '../auth';
 import { AllExceptionsFilter } from './all-exceptions.filter';
 
 type UserWithAbility = RequestUser & { ability: AppAbility };
-const logger = new Logger('SocketIO');
 
 @WebSocketGateway(environment.socketio.port, {
   cors: environment.cors,
 })
 @UseFilters(new AllExceptionsFilter())
 export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+  logger = new Logger('SocketIO');
   clientIdToUserMap = new Map<string, UserWithAbility>();
   userIdToClientsMap = new Map<RequestUser['id'], Socket[]>();
 
@@ -47,7 +47,7 @@ export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
   }
 
   afterInit(server: Server) {
-    logger.log('Initialized');
+    this.logger.log('Initialized');
   }
 
   handleDisconnect(client: Socket) {
@@ -64,7 +64,7 @@ export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 
         this.clientIdToUserMap.delete(client.id);
 
-        logger.log(
+        this.logger.log(
           `Disconnected ${user.id} with ${remainingClients.length} connected devices remaining`
         );
       }
@@ -96,9 +96,9 @@ export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
         userClients.push(client);
       }
 
-      logger.log(`Connected ${user.id} with client id ${client.id}`);
+      this.logger.log(`Connected ${user.id} with client id ${client.id}`);
     } catch (error) {
-      logger.error(error);
+      this.logger.error(error);
       client.disconnect();
       return;
     }
