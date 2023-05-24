@@ -7,10 +7,10 @@ import { ZenSampleSocketService } from './zen-sample-socket.service';
 @Component({
   standalone: true,
   imports: [MatButtonModule],
-  selector: 'zen-chat',
-  templateUrl: 'zen-chat.component.html',
+  selector: 'zen-sample-socket',
+  templateUrl: 'zen-sample-socket.component.html',
 })
-export class ZenChatComponent implements OnDestroy {
+export class ZenSampleSocketComponent implements OnDestroy {
   #subs: Subscription[] = [];
 
   constructor(private socket: ZenSampleSocketService) {
