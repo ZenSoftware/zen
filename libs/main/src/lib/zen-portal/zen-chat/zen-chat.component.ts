@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 
-import { ZenSocketService } from './zen-socket.service';
+import { ZenSampleSocketService } from './zen-sample-socket.service';
 
 @Component({
   standalone: true,
@@ -13,9 +13,7 @@ import { ZenSocketService } from './zen-socket.service';
 export class ZenChatComponent implements OnDestroy {
   #subs: Subscription[] = [];
 
-  constructor(private socket: ZenSocketService) {
-    socket.ioSocket.nsp = '/sample';
-
+  constructor(private socket: ZenSampleSocketService) {
     const sub = socket.fromEvent('msgToClient').subscribe(data => {
       console.log('msgToClient', data);
     });
