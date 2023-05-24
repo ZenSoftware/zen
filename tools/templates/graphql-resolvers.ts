@@ -2,10 +2,10 @@ const lowercase = (name: string) => name.charAt(0).toLowerCase() + name.slice(1)
 
 export function GraphQLResolversTemplate(name: string) {
   return `import { subject } from '@casl/ability';
-import { ForbiddenException, Inject, UseGuards } from '@nestjs/common';
+import { ForbiddenException, Inject, NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import type { NonNullableFields } from '@zen/common';
-import { CaslAbility, CaslGuard } from '@zen/nest-auth';
+import { CaslAbility, CaslGuard, CaslPolicy } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
 import { AUTH_FIELDS_TOKEN } from '../../auth';
@@ -47,6 +47,7 @@ export class ${name}Resolver {
   ) {}
 
   @Query()
+  @CaslPolicy(ability => ability.can('read', '${name}'))
   async findUnique${name}(
     @Args() args: NonNullableFields<FindUnique${name}Args>,
     @Info() info: GraphQLResolveInfo,
@@ -55,11 +56,12 @@ export class ${name}Resolver {
     const record = await this.prisma.${lowercase(name)}.findUnique(
       this.prismaSelect.getArgs(info, args, this.authFields)
     );
-    if (ability.cannot('read', subject('${name}', record as ${name}))) throw new ForbiddenException();
+    if (record && ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
     return record;
   }
 
   @Query()
+  @CaslPolicy(ability => ability.can('read', '${name}'))
   async findFirst${name}(
     @Args() args: NonNullableFields<FindFirst${name}Args>,
     @Info() info: GraphQLResolveInfo,
@@ -68,11 +70,12 @@ export class ${name}Resolver {
     const record = await this.prisma.${lowercase(name)}.findFirst(
       this.prismaSelect.getArgs(info, args, this.authFields)
     );
-    if (ability.cannot('read', subject('${name}', record as ${name}))) throw new ForbiddenException();
+    if (record && ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
     return record;
   }
 
   @Query()
+  @CaslPolicy(ability => ability.can('read', '${name}'))
   async findMany${name}(
     @Args() args: FindMany${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -88,26 +91,19 @@ export class ${name}Resolver {
   }
 
   @Query()
-  async findMany${name}Count(
-    @Args() args: FindMany${name}Args,
-    @Info() info: GraphQLResolveInfo,
-    @CaslAbility() ability: AppAbility
-  ) {
-    if (ability.cannot('read', '${name}')) throw new ForbiddenException();
+  @CaslPolicy(ability => ability.can('read', '${name}'))
+  async findMany${name}Count(@Args() args: FindMany${name}Args, @Info() info: GraphQLResolveInfo) {
     return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
-  async aggregate${name}(
-    @Args() args: Aggregate${name}Args,
-    @Info() info: GraphQLResolveInfo,
-    @CaslAbility() ability: AppAbility
-  ) {
-    if (ability.cannot('read', '${name}')) throw new ForbiddenException();
+  @CaslPolicy(ability => ability.can('read', '${name}'))
+  async aggregate${name}(@Args() args: Aggregate${name}Args, @Info() info: GraphQLResolveInfo) {
     return this.prisma.${lowercase(name)}.aggregate(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
+  @CaslPolicy(ability => ability.can('create', '${name}'))
   async createOne${name}(
     @Args() args: CreateOne${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -123,6 +119,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
+  @CaslPolicy(ability => ability.can('update', '${name}'))
   async updateOne${name}(
     @Args() args: NonNullableFields<UpdateOne${name}Args>,
     @Info() info: GraphQLResolveInfo,
@@ -132,11 +129,13 @@ export class ${name}Resolver {
       where: args.where,
       select: this.authFields.${name},
     });
+    if (!record) throw new NotFoundException();
     if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
     return this.prisma.${lowercase(name)}.update(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
+  @CaslPolicy(ability => ability.can('update', '${name}'))
   async updateMany${name}(
     @Args() args: UpdateMany${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -153,6 +152,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
+  @CaslPolicy(ability => ability.can('create', '${name}') && ability.can('update', '${name}'))
   async upsertOne${name}(
     @Args() args: UpsertOne${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -177,6 +177,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
+  @CaslPolicy(ability => ability.can('delete', '${name}'))
   async deleteOne${name}(
     @Args() args: NonNullableFields<DeleteOne${name}Args>,
     @Info() info: GraphQLResolveInfo,
@@ -191,6 +192,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
+  @CaslPolicy(ability => ability.can('delete', '${name}'))
   async deleteMany${name}(
     @Args() args: DeleteMany${name}Args,
     @Info() info: GraphQLResolveInfo,
