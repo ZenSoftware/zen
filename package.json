@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nx serve portal --host=127.0.0.1",
     "start:api": "nx serve api",
-    "start:e2e": "nx e2e portal-e2e --watch",
+    "e2e:portal": "nx e2e portal-e2e --watch",
+    "e2e:portal:ci": "nx run portal-e2e:e2e",
     "gen:frontend": "graphql-codegen -c tools/apollo-angular.yml && graphql-codegen -c tools/apollo-possible-types.yml",
     "gen:api": "prisma generate --schema apps/api/prisma/schema.prisma && ts-node --project tools/tsconfig.json tools/generate.ts",
     "prisma:migrate": "prisma migrate dev --schema apps/api/prisma/schema.prisma && ts-node --project tools/tsconfig.json tools/generate.ts",
@@ -128,7 +129,7 @@
     "apollo-upload-client": "^17.0.0",
     "bootstrap": "~5.2.3",
     "bootswatch": "~5.2.3",
-    "cypress": "^12.12.0",
+    "cypress": "^12.13.0",
     "cz-customizable": "^7.0.0",
     "eslint": "~8.41.0",
     "eslint-config-prettier": "~8.8.0",
