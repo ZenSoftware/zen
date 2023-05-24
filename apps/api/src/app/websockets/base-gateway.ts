@@ -6,7 +6,7 @@ import {
   WsException,
 } from '@nestjs/websockets';
 import { RequestUser } from '@zen/nest-auth';
-import { Server, Socket } from 'socket.io';
+import { Socket } from 'socket.io';
 
 import { AppAbility, AuthService } from '../auth';
 import { AllExceptionsFilter } from './all-exceptions.filter';
@@ -41,7 +41,7 @@ export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
     return this.userIdToClientsMap.get(userId) as Socket[];
   }
 
-  afterInit(server: Server) {
+  afterInit() {
     this.logger.log('Initialized');
   }
 
@@ -66,7 +66,7 @@ export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
     }
   }
 
-  async handleConnection(client: Socket, ...args: any[]) {
+  async handleConnection(client: Socket) {
     try {
       const token = client.handshake.headers.authorization?.substring(7);
       if (!token) throw new WsException('No authorization token provided');
