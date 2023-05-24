@@ -14,9 +14,12 @@ export class ZenChatComponent implements OnDestroy {
   #subs: Subscription[] = [];
 
   constructor(private socket: ZenSocketService) {
+    socket.ioSocket.nsp = '/sample';
+
     const sub = socket.fromEvent('msgToClient').subscribe(data => {
-      console.log('fromEvent', data);
+      console.log('msgToClient', data);
     });
+
     this.#subs.push(sub);
   }
 

@@ -3,21 +3,16 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
-  WebSocketGateway,
   WsException,
 } from '@nestjs/websockets';
 import { RequestUser } from '@zen/nest-auth';
 import { Server, Socket } from 'socket.io';
 
-import { environment } from '../../environments/environment';
 import { AppAbility, AuthService } from '../auth';
 import { AllExceptionsFilter } from './all-exceptions.filter';
 
 type UserWithAbility = RequestUser & { ability: AppAbility };
 
-@WebSocketGateway(environment.socketio.port, {
-  cors: environment.cors,
-})
 @UseFilters(new AllExceptionsFilter())
 export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   logger = new Logger('SocketIO');
