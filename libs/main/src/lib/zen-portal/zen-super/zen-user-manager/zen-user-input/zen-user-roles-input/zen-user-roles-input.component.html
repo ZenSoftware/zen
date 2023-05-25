@@ -1,0 +1,6 @@
+<section [formGroup]="form" class="d-inline-block">
+  <ng-container *ngFor="let role of formControlKeys" #checkboxes>
+    <mat-checkbox formControlName="{{role}}">{{role}}</mat-checkbox>
+    <span class="mx-2"></span>
+  </ng-container>
+</section>

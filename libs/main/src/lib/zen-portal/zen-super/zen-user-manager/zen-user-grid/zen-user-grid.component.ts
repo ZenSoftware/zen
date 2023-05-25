@@ -5,7 +5,7 @@ import { Ability } from '@casl/ability';
 import { DeleteOneUserGQL, FindManyUserCountGQL, FindManyUserGQL, UserFields } from '@zen/graphql';
 import { GridMode, KendoGridSettings, ZenGridComponent, ZenGridSettings } from '@zen/grid';
 
-import { DialogData, ZenUserInputComponent } from '../zen-user-input/zen-user-input.component';
+import { DialogData, ZenUserInputComponent } from '../zen-user-input';
 
 const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
   rowColorStyles: [

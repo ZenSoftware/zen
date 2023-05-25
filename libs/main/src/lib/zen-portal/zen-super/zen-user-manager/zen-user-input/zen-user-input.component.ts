@@ -12,6 +12,8 @@ import { ZenLoadingComponent, ZenSnackbarError, ZenSnackbarModule } from '@zen/c
 import { UpdateOneUserGQL, UserFields, UserUpdateInput } from '@zen/graphql';
 import { Apollo } from 'apollo-angular';
 
+import { ZenUserRolesInputComponent } from './zen-user-roles-input';
+
 export type DialogData =
   | {
       action: 'edit';
@@ -24,6 +26,7 @@ export type DialogData =
 interface FormType {
   username: FormControl<UserFields['username']>;
   email: FormControl<UserFields['email']>;
+  roles: FormControl<UserFields['roles']>;
 }
 
 @Component({
@@ -41,6 +44,7 @@ interface FormType {
     ZenLoadingComponent,
     ZenRegisterFormComponent,
     ZenSnackbarModule,
+    ZenUserRolesInputComponent,
   ],
 })
 export class ZenUserInputComponent {
@@ -51,6 +55,9 @@ export class ZenUserInputComponent {
     }),
     email: new FormControl('', {
       validators: [Validators.required, emailValidator()],
+      nonNullable: true,
+    }),
+    roles: new FormControl([], {
       nonNullable: true,
     }),
   });
@@ -71,6 +78,7 @@ export class ZenUserInputComponent {
     if (data.action === 'edit') {
       this.username.setValue(data.item.username);
       this.email.setValue(data.item.email);
+      this.roles.setValue(data.item.roles);
     }
   }
 
@@ -82,6 +90,7 @@ export class ZenUserInputComponent {
         const updateInput: UserUpdateInput = {
           username: this.username.value,
           email: this.email.value,
+          roles: this.roles.value,
         };
 
         trimObjectStrings(updateInput);
@@ -121,5 +130,9 @@ export class ZenUserInputComponent {
 
   get email() {
     return this.form.get('email') as FormType['email'];
+  }
+
+  get roles() {
+    return this.form.get('roles') as FormType['roles'];
   }
 }

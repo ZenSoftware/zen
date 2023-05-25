@@ -8,21 +8,25 @@
       <div class="col pe-2">
         <kendo-formfield>
           <kendo-floatinglabel text="Username">
-            <input kendoTextBox [formControl]="username" />
+            <input kendoTextBox [formControl]="username"/>
           </kendo-floatinglabel>
         </kendo-formfield>
       </div>
       <div class="col">
         <kendo-formfield>
           <kendo-floatinglabel text="Email">
-            <input kendoTextBox [formControl]="email" />
+            <input kendoTextBox [formControl]="email"/>
           </kendo-floatinglabel>
           <kendo-formerror *ngIf="email.errors?.['email'] && !email.errors?.['required']" >Not a valid email</kendo-formerror>
           <kendo-formerror *ngIf="email.errors?.['required']">Required</kendo-formerror>
         </kendo-formfield>
       </div>
     </div>
+
+    <h4 class="mb-0 d-inline-block">Roles:</h4>
+    <zen-user-roles-input [formControl]="roles"></zen-user-roles-input>
   </form>
+
 </mat-dialog-content>
 
 <mat-dialog-actions class="d-flex justify-content-between">
