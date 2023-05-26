@@ -1,3 +1,4 @@
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Ability } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
@@ -14,6 +15,8 @@ const preview: Preview = {
       imports: [ApolloTestingModule, RouterTestingModule],
       providers: [
         { provide: Environment, useValue: EnvironmentDev },
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+
         {
           provide: Ability,
           useValue: createPrismaAbility(undefined, {
