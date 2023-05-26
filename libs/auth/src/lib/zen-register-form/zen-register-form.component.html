@@ -12,15 +12,9 @@
     <h1 class="text-center">Or sign up with e-mail</h1>
   </ng-container>
   
-  <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
-    <mat-label>Username</mat-label>
-    <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="username" hideRequiredMarker="true" maxlength="254">
-    <mat-error *ngIf="username.hasError('required')">Required</mat-error>
-    <mat-error *ngIf="username.hasError('minlength')">Minimum length of {{username.getError('minlength')?.['requiredLength']}} characters</mat-error>
-    <mat-error *ngIf="username.hasError('maxlength')">Maximum length of {{username.getError('maxlength')?.['requiredLength']}} characters</mat-error>
-    <mat-error *ngIf="username.hasError('includesSpace')">Cannot contain spaces</mat-error>
-    <mat-error *ngIf="username.hasError('usernameTaken')">Username is already taken</mat-error>
-  </mat-form-field>
+  <div class="mb-2">
+    <zen-username-input #usernameInput [formControl]="username" required></zen-username-input>
+  </div>
 
   <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
     <mat-label>E-mail</mat-label>

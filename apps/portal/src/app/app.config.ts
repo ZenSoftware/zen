@@ -1,5 +1,6 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptorFn])),
     provideRouter(APP_ROUTES, withEnabledBlockingInitialNavigation(), withHashLocation()),
     { provide: Environment, useValue: environment },
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     {
       provide: Ability,
       useValue: createPrismaAbility(undefined, {
