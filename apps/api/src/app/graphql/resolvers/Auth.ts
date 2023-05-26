@@ -134,7 +134,7 @@ export class AuthResolver {
 
   @Query()
   @UseGuards(RolesGuard())
-  async accountInfo(@CurrentUser() reqUser: RequestUser): Promise<AccountInfo> {
+  async accountInfo(@CurrentUser() reqUser: RequestUser) {
     const user = await this.prisma.user.findUnique({
       where: { id: reqUser.id },
       select: { username: true, password: true, googleProfile: true },
@@ -146,7 +146,7 @@ export class AuthResolver {
       username: user.username,
       hasPassword: !!user.password,
       googleProfile: user.googleProfile as AccountInfo['googleProfile'],
-    };
+    } satisfies AccountInfo;
   }
 
   @Query()
