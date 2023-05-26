@@ -50,7 +50,7 @@ export const environment: EnvironmentBase = {
       },
     },
     defaults: {
-      from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_EMAIL}>`,
+      from: process.env.SMTP_FROM_NAME,
     },
   },
   throttle: {

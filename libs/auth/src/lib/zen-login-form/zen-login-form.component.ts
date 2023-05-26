@@ -33,7 +33,7 @@ import { Subscription, map } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
-import { usernameValidator } from '../validators';
+import { ZenUsernameInputComponent } from '../inputs';
 
 interface FormType {
   username: FormControl<AuthLoginInput['username']>;
@@ -57,10 +57,11 @@ interface FormType {
     NgIf,
     ReactiveFormsModule,
     ZenLoadingComponent,
+    ZenUsernameInputComponent,
   ],
 })
 export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestroy {
-  @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('usernameInput') usernameInput!: ZenUsernameInputComponent;
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
   @Input() doneMessage = 'Redirecting...';
   @Input() doneMessageVisible = true;
@@ -68,17 +69,13 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
 
   #subs: Subscription[] = [];
   #incorrectPassword = false;
-  #usernameNotFound = false;
   loading = false;
   done = false;
   hidePassword = true;
   generalError = false;
   emailTakenError = false;
   form = new FormGroup<FormType>({
-    username: new FormControl('', {
-      validators: [Validators.required, usernameValidator(), this.usernameNotFoundValidator()],
-      nonNullable: true,
-    }),
+    username: new FormControl(),
     password: new FormControl('', {
       validators: [Validators.required, this.incorrectPasswordValidator()],
       nonNullable: true,
@@ -87,11 +84,6 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
   });
 
   constructor(private route: ActivatedRoute, private auth: AuthService, public env: Environment) {
-    const sub1 = this.username.valueChanges.subscribe(() => {
-      this.#usernameNotFound = false;
-    });
-    this.#subs.push(sub1);
-
     const sub2 = this.password.valueChanges.subscribe(() => {
       this.#incorrectPassword = false;
     });
@@ -109,7 +101,7 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
 
   ngAfterContentInit() {
     setTimeout(() => {
-      this.usernameInput.nativeElement.select();
+      this.usernameInput.select();
     });
   }
 
@@ -123,10 +115,6 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
 
   get rememberMe() {
     return this.form.get('rememberMe') as FormType['rememberMe'];
-  }
-
-  usernameNotFoundValidator(): ValidatorFn {
-    return () => (this.#usernameNotFound ? { notFound: true } : null);
   }
 
   incorrectPasswordValidator(): ValidatorFn {
@@ -163,9 +151,8 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
               this.passwordInput.nativeElement.select();
             } else if (error.message === ApiError.AuthLogin.USER_NOT_FOUND) {
               this.generalError = false;
-              this.#usernameNotFound = true;
-              this.username.updateValueAndValidity();
-              this.usernameInput.nativeElement.select();
+              this.usernameInput.customErrorMessage = 'User not found';
+              this.usernameInput.select();
             }
           },
         });
