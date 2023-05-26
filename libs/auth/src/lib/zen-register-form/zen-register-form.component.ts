@@ -193,7 +193,7 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
               this.emailInput.nativeElement.select();
             } else if (error.message === ApiError.AuthRegister.USERNAME_TAKEN) {
               this.generalError = false;
-              this.usernameInput.usernameTaken = true;
+              this.usernameInput.customErrorMessage = 'Username is already taken';
               this.usernameInput.select();
             }
           },

@@ -151,7 +151,7 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
               this.passwordInput.nativeElement.select();
             } else if (error.message === ApiError.AuthLogin.USER_NOT_FOUND) {
               this.generalError = false;
-              this.usernameInput.usernameNotFound = true;
+              this.usernameInput.customErrorMessage = 'User not found';
               this.usernameInput.select();
             }
           },

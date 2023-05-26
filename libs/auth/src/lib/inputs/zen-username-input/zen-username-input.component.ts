@@ -39,16 +39,16 @@ import { usernameValidator } from '../../validators';
 export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
 
-  #usernameNotFound = false;
-  @Input() set usernameNotFound(value: boolean) {
-    this.#usernameNotFound = value;
+  #showCustomError = false;
+  #customErrorMessage = '';
+  @Input() set customErrorMessage(value: string) {
+    this.#showCustomError = !!value;
+    this.#customErrorMessage = value;
     this.formControl.updateValueAndValidity();
   }
 
-  #usernameTaken = false;
-  @Input() set usernameTaken(value: boolean) {
-    this.#usernameTaken = value;
-    this.formControl.updateValueAndValidity();
+  get customErrorMessage() {
+    return this.#customErrorMessage;
   }
 
   @Input() set required(value: boolean | string | undefined) {
@@ -64,36 +64,23 @@ export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestro
   #subs: Subscription[] = [];
   touchedListeners: Array<() => unknown> = [];
   formControl = new FormControl('', {
-    validators: [
-      usernameValidator(),
-      this.usernameNotFoundValidator(),
-      this.usernameTakenValidator(),
-    ],
+    validators: [usernameValidator(), this.customErrorValidator()],
     nonNullable: true,
   });
 
   constructor() {
-    const sub1 = this.formControl.valueChanges.subscribe(() => {
-      this.#usernameNotFound = false;
+    const sub = this.formControl.valueChanges.subscribe(() => {
+      this.#showCustomError = false;
     });
-    this.#subs.push(sub1);
-
-    const sub2 = this.formControl.valueChanges.subscribe(() => {
-      this.#usernameTaken = false;
-    });
-    this.#subs.push(sub2);
+    this.#subs.push(sub);
   }
 
   select() {
     this.usernameInput.nativeElement.select();
   }
 
-  usernameNotFoundValidator(): ValidatorFn {
-    return () => (this.#usernameNotFound ? { notFound: true } : null);
-  }
-
-  usernameTakenValidator(): ValidatorFn {
-    return () => (this.#usernameTaken ? { usernameTaken: true } : null);
+  customErrorValidator(): ValidatorFn {
+    return () => (this.#showCustomError ? { custom: true } : null);
   }
 
   writeValue(value: string) {

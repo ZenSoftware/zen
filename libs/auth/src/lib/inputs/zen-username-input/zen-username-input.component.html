@@ -5,6 +5,5 @@
   <mat-error *ngIf="formControl.hasError('minlength')">Minimum length of {{formControl.getError('minlength')?.['requiredLength']}} characters</mat-error>
   <mat-error *ngIf="formControl.hasError('maxlength')">Maximum length of {{formControl.getError('maxlength')?.['requiredLength']}} characters</mat-error>
   <mat-error *ngIf="formControl.hasError('includesSpace')">Cannot contain spaces</mat-error>
-  <mat-error *ngIf="formControl.hasError('notFound')">User not found</mat-error>
-  <mat-error *ngIf="formControl.hasError('usernameTaken')">Username is already taken</mat-error>
+  <mat-error *ngIf="formControl.hasError('custom')">{{customErrorMessage}}</mat-error>
 </mat-form-field>
