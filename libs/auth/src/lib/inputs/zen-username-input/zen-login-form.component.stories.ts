@@ -13,5 +13,6 @@ export const Primary = {
   }),
   args: {
     required: true,
+    customErrorMessage: '',
   },
 };
