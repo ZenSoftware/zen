@@ -12,7 +12,7 @@ import { AuthService } from '../../auth';
 import { ConfigService } from '../../config';
 import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
-import { PrismaClient, PrismaService } from '../../prisma';
+import { PrismaService } from '../../prisma';
 import { GqlThrottlerGuard } from '../gql-throttler.guard';
 import {
   AccountInfo,
