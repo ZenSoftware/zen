@@ -12,7 +12,7 @@ import { AuthService } from '../../auth';
 import { ConfigService } from '../../config';
 import { JwtService } from '../../jwt';
 import { MailService } from '../../mail';
-import { PrismaClient, PrismaService } from '../../prisma';
+import { PrismaService } from '../../prisma';
 import { GqlThrottlerGuard } from '../gql-throttler.guard';
 import {
   AccountInfo,
@@ -134,7 +134,7 @@ export class AuthResolver {
 
   @Query()
   @UseGuards(RolesGuard())
-  async accountInfo(@CurrentUser() reqUser: RequestUser): Promise<AccountInfo> {
+  async accountInfo(@CurrentUser() reqUser: RequestUser) {
     const user = await this.prisma.user.findUnique({
       where: { id: reqUser.id },
       select: { username: true, password: true, googleProfile: true },
@@ -146,7 +146,7 @@ export class AuthResolver {
       username: user.username,
       hasPassword: !!user.password,
       googleProfile: user.googleProfile as AccountInfo['googleProfile'],
-    };
+    } satisfies AccountInfo;
   }
 
   @Query()
