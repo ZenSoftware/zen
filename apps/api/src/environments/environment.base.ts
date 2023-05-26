@@ -36,6 +36,6 @@ export abstract class EnvironmentBase {
           enableConsole?: boolean;
           enableOtlp?: boolean;
         };
-        collectorOptions?: OTLPExporterNodeConfigBase;
+        traceExporter?: OTLPExporterNodeConfigBase;
       };
 }

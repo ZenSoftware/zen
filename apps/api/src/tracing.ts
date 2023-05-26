@@ -30,7 +30,7 @@ if (environment.openTelemetry) {
 
   if (environment.openTelemetry.exporters?.enableOtlp) {
     provider.addSpanProcessor(
-      new BatchSpanProcessor(new OTLPTraceExporter(environment.openTelemetry.collectorOptions))
+      new BatchSpanProcessor(new OTLPTraceExporter(environment.openTelemetry.traceExporter))
     );
   }
 
