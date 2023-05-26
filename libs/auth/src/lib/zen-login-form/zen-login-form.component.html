@@ -5,7 +5,7 @@
     <zen-username-input #usernameInput [formControl]="username" required></zen-username-input>
   </div>
 
-  <mat-form-field hideRequiredMarker appearance="outline" class="w-100 mb-2">
+  <mat-form-field hideRequiredMarker class="w-100 mb-2">
     <mat-label>Password</mat-label>
     <input #passwordInput matInput autocomplete="current-password" [type]="hidePassword ? 'password' : 'text'" [formControl]="password">
     <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="Toggle show password" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
