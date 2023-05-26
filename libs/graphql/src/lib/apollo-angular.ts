@@ -7,24 +7,26 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  DateTime: any;
-  Json: any;
+  ID: { input: string | number; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
+  Json: { input: any; output: any; }
   /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
+  Upload: { input: any; output: any; }
 };
 
 export type AccountInfo = {
   __typename?: 'AccountInfo';
   googleProfile?: Maybe<GoogleProfile>;
-  hasPassword: Scalars['Boolean'];
-  username?: Maybe<Scalars['String']>;
+  hasPassword: Scalars['Boolean']['output'];
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type AggregateUser = {
@@ -35,87 +37,87 @@ export type AggregateUser = {
 };
 
 export type AuthExchangeTokenInput = {
-  rememberMe: Scalars['Boolean'];
+  rememberMe: Scalars['Boolean']['input'];
 };
 
 export type AuthLoginInput = {
-  password: Scalars['String'];
-  rememberMe: Scalars['Boolean'];
-  username: Scalars['String'];
+  password: Scalars['String']['input'];
+  rememberMe: Scalars['Boolean']['input'];
+  username: Scalars['String']['input'];
 };
 
 export type AuthPasswordChangeInput = {
-  newPassword: Scalars['String'];
-  oldPassword: Scalars['String'];
+  newPassword: Scalars['String']['input'];
+  oldPassword: Scalars['String']['input'];
 };
 
 export type AuthPasswordResetConfirmationInput = {
-  newPassword: Scalars['String'];
-  token: Scalars['String'];
+  newPassword: Scalars['String']['input'];
+  token: Scalars['String']['input'];
 };
 
 export type AuthPasswordResetRequestInput = {
-  emailOrUsername: Scalars['String'];
+  emailOrUsername: Scalars['String']['input'];
 };
 
 export type AuthRegisterInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-  username: Scalars['String'];
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  username: Scalars['String']['input'];
 };
 
 export type AuthSession = {
   __typename?: 'AuthSession';
-  expiresIn: Scalars['Int'];
-  rememberMe: Scalars['Boolean'];
-  roles: Array<Scalars['String']>;
-  rules: Array<Scalars['Json']>;
-  token: Scalars['String'];
-  userId: Scalars['String'];
+  expiresIn: Scalars['Int']['output'];
+  rememberMe: Scalars['Boolean']['output'];
+  roles: Array<Scalars['String']['output']>;
+  rules: Array<Scalars['Json']['output']>;
+  token: Scalars['String']['output'];
+  userId: Scalars['String']['output'];
 };
 
 export type BatchPayload = {
   __typename?: 'BatchPayload';
-  count: Scalars['Int'];
+  count: Scalars['Int']['output'];
 };
 
 export type DateTimeFieldUpdateOperationsInput = {
-  set?: InputMaybe<Scalars['DateTime']>;
+  set?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type DateTimeFilter = {
-  equals?: InputMaybe<Scalars['DateTime']>;
-  gt?: InputMaybe<Scalars['DateTime']>;
-  gte?: InputMaybe<Scalars['DateTime']>;
-  in?: InputMaybe<Array<Scalars['DateTime']>>;
-  lt?: InputMaybe<Scalars['DateTime']>;
-  lte?: InputMaybe<Scalars['DateTime']>;
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<Scalars['DateTime']['input']>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<NestedDateTimeFilter>;
-  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+  notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
 };
 
 export type DateTimeWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntFilter>;
   _max?: InputMaybe<NestedDateTimeFilter>;
   _min?: InputMaybe<NestedDateTimeFilter>;
-  equals?: InputMaybe<Scalars['DateTime']>;
-  gt?: InputMaybe<Scalars['DateTime']>;
-  gte?: InputMaybe<Scalars['DateTime']>;
-  in?: InputMaybe<Array<Scalars['DateTime']>>;
-  lt?: InputMaybe<Scalars['DateTime']>;
-  lte?: InputMaybe<Scalars['DateTime']>;
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<Scalars['DateTime']['input']>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<NestedDateTimeWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+  notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
 };
 
 export type GoogleProfile = {
   __typename?: 'GoogleProfile';
-  email?: Maybe<Scalars['String']>;
-  family_name?: Maybe<Scalars['String']>;
-  given_name?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  picture?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']['output']>;
+  family_name?: Maybe<Scalars['String']['output']>;
+  given_name?: Maybe<Scalars['String']['output']>;
+  locale?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  picture?: Maybe<Scalars['String']['output']>;
 };
 
 export enum JsonNullValueFilter {
@@ -125,50 +127,50 @@ export enum JsonNullValueFilter {
 }
 
 export type JsonNullableFilter = {
-  array_contains?: InputMaybe<Scalars['Json']>;
-  array_ends_with?: InputMaybe<Scalars['Json']>;
-  array_starts_with?: InputMaybe<Scalars['Json']>;
-  equals?: InputMaybe<Scalars['Json']>;
-  gt?: InputMaybe<Scalars['Json']>;
-  gte?: InputMaybe<Scalars['Json']>;
-  lt?: InputMaybe<Scalars['Json']>;
-  lte?: InputMaybe<Scalars['Json']>;
-  not?: InputMaybe<Scalars['Json']>;
-  path?: InputMaybe<Array<Scalars['String']>>;
-  string_contains?: InputMaybe<Scalars['String']>;
-  string_ends_with?: InputMaybe<Scalars['String']>;
-  string_starts_with?: InputMaybe<Scalars['String']>;
+  array_contains?: InputMaybe<Scalars['Json']['input']>;
+  array_ends_with?: InputMaybe<Scalars['Json']['input']>;
+  array_starts_with?: InputMaybe<Scalars['Json']['input']>;
+  equals?: InputMaybe<Scalars['Json']['input']>;
+  gt?: InputMaybe<Scalars['Json']['input']>;
+  gte?: InputMaybe<Scalars['Json']['input']>;
+  lt?: InputMaybe<Scalars['Json']['input']>;
+  lte?: InputMaybe<Scalars['Json']['input']>;
+  not?: InputMaybe<Scalars['Json']['input']>;
+  path?: InputMaybe<Array<Scalars['String']['input']>>;
+  string_contains?: InputMaybe<Scalars['String']['input']>;
+  string_ends_with?: InputMaybe<Scalars['String']['input']>;
+  string_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type JsonNullableWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntNullableFilter>;
   _max?: InputMaybe<NestedJsonNullableFilter>;
   _min?: InputMaybe<NestedJsonNullableFilter>;
-  array_contains?: InputMaybe<Scalars['Json']>;
-  array_ends_with?: InputMaybe<Scalars['Json']>;
-  array_starts_with?: InputMaybe<Scalars['Json']>;
-  equals?: InputMaybe<Scalars['Json']>;
-  gt?: InputMaybe<Scalars['Json']>;
-  gte?: InputMaybe<Scalars['Json']>;
-  lt?: InputMaybe<Scalars['Json']>;
-  lte?: InputMaybe<Scalars['Json']>;
-  not?: InputMaybe<Scalars['Json']>;
-  path?: InputMaybe<Array<Scalars['String']>>;
-  string_contains?: InputMaybe<Scalars['String']>;
-  string_ends_with?: InputMaybe<Scalars['String']>;
-  string_starts_with?: InputMaybe<Scalars['String']>;
+  array_contains?: InputMaybe<Scalars['Json']['input']>;
+  array_ends_with?: InputMaybe<Scalars['Json']['input']>;
+  array_starts_with?: InputMaybe<Scalars['Json']['input']>;
+  equals?: InputMaybe<Scalars['Json']['input']>;
+  gt?: InputMaybe<Scalars['Json']['input']>;
+  gte?: InputMaybe<Scalars['Json']['input']>;
+  lt?: InputMaybe<Scalars['Json']['input']>;
+  lte?: InputMaybe<Scalars['Json']['input']>;
+  not?: InputMaybe<Scalars['Json']['input']>;
+  path?: InputMaybe<Array<Scalars['String']['input']>>;
+  string_contains?: InputMaybe<Scalars['String']['input']>;
+  string_ends_with?: InputMaybe<Scalars['String']['input']>;
+  string_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  authPasswordChange?: Maybe<Scalars['Boolean']>;
+  authPasswordChange?: Maybe<Scalars['Boolean']['output']>;
   authPasswordResetConfirmation: AuthSession;
   authRegister: AuthSession;
   createOneUser: User;
   deleteManyUser?: Maybe<BatchPayload>;
   deleteOneUser?: Maybe<User>;
-  sampleUpload: Scalars['Boolean'];
-  sampleUploadMany: Array<Scalars['String']>;
+  sampleUpload: Scalars['Boolean']['output'];
+  sampleUploadMany: Array<Scalars['String']['output']>;
   updateManyUser?: Maybe<BatchPayload>;
   updateOneUser: User;
   upsertOneUser?: Maybe<User>;
@@ -206,12 +208,12 @@ export type MutationDeleteOneUserArgs = {
 
 
 export type MutationSampleUploadArgs = {
-  file: Scalars['Upload'];
+  file: Scalars['Upload']['input'];
 };
 
 
 export type MutationSampleUploadManyArgs = {
-  files: Array<Scalars['Upload']>;
+  files: Array<Scalars['Upload']['input']>;
 };
 
 
@@ -234,128 +236,128 @@ export type MutationUpsertOneUserArgs = {
 };
 
 export type NestedDateTimeFilter = {
-  equals?: InputMaybe<Scalars['DateTime']>;
-  gt?: InputMaybe<Scalars['DateTime']>;
-  gte?: InputMaybe<Scalars['DateTime']>;
-  in?: InputMaybe<Array<Scalars['DateTime']>>;
-  lt?: InputMaybe<Scalars['DateTime']>;
-  lte?: InputMaybe<Scalars['DateTime']>;
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<Scalars['DateTime']['input']>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<NestedDateTimeFilter>;
-  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+  notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
 };
 
 export type NestedDateTimeWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntFilter>;
   _max?: InputMaybe<NestedDateTimeFilter>;
   _min?: InputMaybe<NestedDateTimeFilter>;
-  equals?: InputMaybe<Scalars['DateTime']>;
-  gt?: InputMaybe<Scalars['DateTime']>;
-  gte?: InputMaybe<Scalars['DateTime']>;
-  in?: InputMaybe<Array<Scalars['DateTime']>>;
-  lt?: InputMaybe<Scalars['DateTime']>;
-  lte?: InputMaybe<Scalars['DateTime']>;
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<Scalars['DateTime']['input']>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<NestedDateTimeWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+  notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
 };
 
 export type NestedIntFilter = {
-  equals?: InputMaybe<Scalars['Int']>;
-  gt?: InputMaybe<Scalars['Int']>;
-  gte?: InputMaybe<Scalars['Int']>;
-  in?: InputMaybe<Array<Scalars['Int']>>;
-  lt?: InputMaybe<Scalars['Int']>;
-  lte?: InputMaybe<Scalars['Int']>;
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
   not?: InputMaybe<NestedIntFilter>;
-  notIn?: InputMaybe<Array<Scalars['Int']>>;
+  notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
 export type NestedIntNullableFilter = {
-  equals?: InputMaybe<Scalars['Int']>;
-  gt?: InputMaybe<Scalars['Int']>;
-  gte?: InputMaybe<Scalars['Int']>;
-  in?: InputMaybe<Array<Scalars['Int']>>;
-  lt?: InputMaybe<Scalars['Int']>;
-  lte?: InputMaybe<Scalars['Int']>;
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
   not?: InputMaybe<NestedIntNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['Int']>>;
+  notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
 export type NestedJsonNullableFilter = {
-  array_contains?: InputMaybe<Scalars['Json']>;
-  array_ends_with?: InputMaybe<Scalars['Json']>;
-  array_starts_with?: InputMaybe<Scalars['Json']>;
-  equals?: InputMaybe<Scalars['Json']>;
-  gt?: InputMaybe<Scalars['Json']>;
-  gte?: InputMaybe<Scalars['Json']>;
-  lt?: InputMaybe<Scalars['Json']>;
-  lte?: InputMaybe<Scalars['Json']>;
-  not?: InputMaybe<Scalars['Json']>;
-  path?: InputMaybe<Array<Scalars['String']>>;
-  string_contains?: InputMaybe<Scalars['String']>;
-  string_ends_with?: InputMaybe<Scalars['String']>;
-  string_starts_with?: InputMaybe<Scalars['String']>;
+  array_contains?: InputMaybe<Scalars['Json']['input']>;
+  array_ends_with?: InputMaybe<Scalars['Json']['input']>;
+  array_starts_with?: InputMaybe<Scalars['Json']['input']>;
+  equals?: InputMaybe<Scalars['Json']['input']>;
+  gt?: InputMaybe<Scalars['Json']['input']>;
+  gte?: InputMaybe<Scalars['Json']['input']>;
+  lt?: InputMaybe<Scalars['Json']['input']>;
+  lte?: InputMaybe<Scalars['Json']['input']>;
+  not?: InputMaybe<Scalars['Json']['input']>;
+  path?: InputMaybe<Array<Scalars['String']['input']>>;
+  string_contains?: InputMaybe<Scalars['String']['input']>;
+  string_ends_with?: InputMaybe<Scalars['String']['input']>;
+  string_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NestedStringFilter = {
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<NestedStringFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NestedStringNullableFilter = {
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<NestedStringNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NestedStringNullableWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntNullableFilter>;
   _max?: InputMaybe<NestedStringNullableFilter>;
   _min?: InputMaybe<NestedStringNullableFilter>;
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<NestedStringNullableWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NestedStringWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntFilter>;
   _max?: InputMaybe<NestedStringFilter>;
   _min?: InputMaybe<NestedStringFilter>;
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<NestedStringWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum NullableJsonNullValueInput {
@@ -364,7 +366,7 @@ export enum NullableJsonNullValueInput {
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
-  set?: InputMaybe<Scalars['String']>;
+  set?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
@@ -373,20 +375,20 @@ export type Query = {
   aggregateUser?: Maybe<AggregateUser>;
   authExchangeToken: AuthSession;
   authLogin: AuthSession;
-  authPasswordResetRequest?: Maybe<Scalars['Boolean']>;
+  authPasswordResetRequest?: Maybe<Scalars['Boolean']['output']>;
   findFirstUser?: Maybe<User>;
   findManyUser?: Maybe<Array<User>>;
-  findManyUserCount: Scalars['Int'];
+  findManyUserCount: Scalars['Int']['output'];
   findUniqueUser?: Maybe<User>;
-  sample: Scalars['Boolean'];
+  sample: Scalars['Boolean']['output'];
 };
 
 
 export type QueryAggregateUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserWhereInput>;
 };
 
@@ -410,8 +412,8 @@ export type QueryFindFirstUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserWhereInput>;
 };
 
@@ -420,8 +422,8 @@ export type QueryFindManyUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserWhereInput>;
 };
 
@@ -430,8 +432,8 @@ export type QueryFindManyUserCountArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<UserWhereInput>;
 };
 
@@ -447,7 +449,7 @@ export enum QueryMode {
 
 export type SampleSubscriptionResult = {
   __typename?: 'SampleSubscriptionResult';
-  message: Scalars['String'];
+  message: Scalars['String']['output'];
 };
 
 export enum SortOrder {
@@ -456,81 +458,81 @@ export enum SortOrder {
 }
 
 export type StringFieldUpdateOperationsInput = {
-  set?: InputMaybe<Scalars['String']>;
+  set?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type StringFilter = {
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   mode?: InputMaybe<QueryMode>;
   not?: InputMaybe<NestedStringFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type StringNullableFilter = {
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   mode?: InputMaybe<QueryMode>;
   not?: InputMaybe<NestedStringNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type StringNullableListFilter = {
-  equals?: InputMaybe<Array<Scalars['String']>>;
-  has?: InputMaybe<Scalars['String']>;
-  hasEvery?: InputMaybe<Array<Scalars['String']>>;
-  hasSome?: InputMaybe<Array<Scalars['String']>>;
-  isEmpty?: InputMaybe<Scalars['Boolean']>;
+  equals?: InputMaybe<Array<Scalars['String']['input']>>;
+  has?: InputMaybe<Scalars['String']['input']>;
+  hasEvery?: InputMaybe<Array<Scalars['String']['input']>>;
+  hasSome?: InputMaybe<Array<Scalars['String']['input']>>;
+  isEmpty?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type StringNullableWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntNullableFilter>;
   _max?: InputMaybe<NestedStringNullableFilter>;
   _min?: InputMaybe<NestedStringNullableFilter>;
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   mode?: InputMaybe<QueryMode>;
   not?: InputMaybe<NestedStringNullableWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type StringWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntFilter>;
   _max?: InputMaybe<NestedStringFilter>;
   _min?: InputMaybe<NestedStringFilter>;
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   mode?: InputMaybe<QueryMode>;
   not?: InputMaybe<NestedStringWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Subscription = {
@@ -547,28 +549,28 @@ export enum TransactionIsolationLevel {
 
 export type User = {
   __typename?: 'User';
-  createdAt: Scalars['DateTime'];
-  email: Scalars['String'];
-  googleId?: Maybe<Scalars['String']>;
-  googleProfile?: Maybe<Scalars['Json']>;
-  id: Scalars['String'];
-  password?: Maybe<Scalars['String']>;
-  roles: Array<Scalars['String']>;
-  rules: Array<Scalars['Json']>;
-  username?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime']['output'];
+  email: Scalars['String']['output'];
+  googleId?: Maybe<Scalars['String']['output']>;
+  googleProfile?: Maybe<Scalars['Json']['output']>;
+  id: Scalars['String']['output'];
+  password?: Maybe<Scalars['String']['output']>;
+  roles: Array<Scalars['String']['output']>;
+  rules: Array<Scalars['Json']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserCountAggregateOutputType = {
   __typename?: 'UserCountAggregateOutputType';
-  _all: Scalars['Int'];
-  createdAt: Scalars['Int'];
-  email: Scalars['Int'];
-  googleId: Scalars['Int'];
-  googleProfile: Scalars['Int'];
-  id: Scalars['Int'];
-  password: Scalars['Int'];
-  roles: Scalars['Int'];
-  username: Scalars['Int'];
+  _all: Scalars['Int']['output'];
+  createdAt: Scalars['Int']['output'];
+  email: Scalars['Int']['output'];
+  googleId: Scalars['Int']['output'];
+  googleProfile: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  password: Scalars['Int']['output'];
+  roles: Scalars['Int']['output'];
+  username: Scalars['Int']['output'];
 };
 
 export type UserCountOrderByAggregateInput = {
@@ -583,39 +585,39 @@ export type UserCountOrderByAggregateInput = {
 };
 
 export type UserCreateInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  email: Scalars['String'];
-  googleId?: InputMaybe<Scalars['String']>;
-  googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email: Scalars['String']['input'];
+  googleId?: InputMaybe<Scalars['String']['input']>;
+  googleProfile?: InputMaybe<Scalars['Json']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  roles?: InputMaybe<Array<Scalars['String']['input']>>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserCreateManyInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  email: Scalars['String'];
-  googleId?: InputMaybe<Scalars['String']>;
-  googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email: Scalars['String']['input'];
+  googleId?: InputMaybe<Scalars['String']['input']>;
+  googleProfile?: InputMaybe<Scalars['Json']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  roles?: InputMaybe<Array<Scalars['String']['input']>>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserCreaterolesInput = {
-  set: Array<Scalars['String']>;
+  set: Array<Scalars['String']['input']>;
 };
 
 export type UserMaxAggregateOutputType = {
   __typename?: 'UserMaxAggregateOutputType';
-  createdAt?: Maybe<Scalars['DateTime']>;
-  email?: Maybe<Scalars['String']>;
-  googleId?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
-  username?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  googleId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  password?: Maybe<Scalars['String']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserMaxOrderByAggregateInput = {
@@ -629,12 +631,12 @@ export type UserMaxOrderByAggregateInput = {
 
 export type UserMinAggregateOutputType = {
   __typename?: 'UserMinAggregateOutputType';
-  createdAt?: Maybe<Scalars['DateTime']>;
-  email?: Maybe<Scalars['String']>;
-  googleId?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
-  username?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  googleId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  password?: Maybe<Scalars['String']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserMinOrderByAggregateInput = {
@@ -697,63 +699,63 @@ export type UserScalarWhereWithAggregatesInput = {
 };
 
 export type UserUncheckedCreateInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  email: Scalars['String'];
-  googleId?: InputMaybe<Scalars['String']>;
-  googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email: Scalars['String']['input'];
+  googleId?: InputMaybe<Scalars['String']['input']>;
+  googleProfile?: InputMaybe<Scalars['Json']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  roles?: InputMaybe<Array<Scalars['String']['input']>>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserUncheckedUpdateInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  email?: InputMaybe<Scalars['String']>;
-  googleId?: InputMaybe<Scalars['String']>;
-  googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  googleId?: InputMaybe<Scalars['String']['input']>;
+  googleProfile?: InputMaybe<Scalars['Json']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  roles?: InputMaybe<Array<Scalars['String']['input']>>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserUncheckedUpdateManyInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  email?: InputMaybe<Scalars['String']>;
-  googleId?: InputMaybe<Scalars['String']>;
-  googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  googleId?: InputMaybe<Scalars['String']['input']>;
+  googleProfile?: InputMaybe<Scalars['Json']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  roles?: InputMaybe<Array<Scalars['String']['input']>>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserUpdateInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  email?: InputMaybe<Scalars['String']>;
-  googleId?: InputMaybe<Scalars['String']>;
-  googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  googleId?: InputMaybe<Scalars['String']['input']>;
+  googleProfile?: InputMaybe<Scalars['Json']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  roles?: InputMaybe<Array<Scalars['String']['input']>>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserUpdateManyMutationInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  email?: InputMaybe<Scalars['String']>;
-  googleId?: InputMaybe<Scalars['String']>;
-  googleProfile?: InputMaybe<Scalars['Json']>;
-  id?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  roles?: InputMaybe<Array<Scalars['String']>>;
-  username?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  googleId?: InputMaybe<Scalars['String']['input']>;
+  googleProfile?: InputMaybe<Scalars['Json']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  roles?: InputMaybe<Array<Scalars['String']['input']>>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserUpdaterolesInput = {
-  push?: InputMaybe<Array<Scalars['String']>>;
-  set?: InputMaybe<Array<Scalars['String']>>;
+  push?: InputMaybe<Array<Scalars['String']['input']>>;
+  set?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type UserWhereInput = {
@@ -771,10 +773,10 @@ export type UserWhereInput = {
 };
 
 export type UserWhereUniqueInput = {
-  email?: InputMaybe<Scalars['String']>;
-  googleId?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['String']>;
-  username?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  googleId?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AuthExchangeTokenVariables = Exact<{
@@ -848,8 +850,8 @@ export type FindFirstUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  take?: InputMaybe<Scalars['Int']>;
-  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
@@ -860,8 +862,8 @@ export type FindManyUserVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  take?: InputMaybe<Scalars['Int']>;
-  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
@@ -872,8 +874,8 @@ export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>> | InputMaybe<UserOrderByWithRelationInput>>;
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  take?: InputMaybe<Scalars['Int']>;
-  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
   distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
@@ -932,7 +934,7 @@ export type SampleSubscriptionVariables = Exact<{ [key: string]: never; }>;
 export type SampleSubscription = { __typename?: 'Subscription', sampleSubscription: { __typename?: 'SampleSubscriptionResult', message: string } };
 
 export type SampleUploadVariables = Exact<{
-  file: Scalars['Upload'];
+  file: Scalars['Upload']['input'];
 }>;
 
 

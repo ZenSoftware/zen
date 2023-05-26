@@ -35,7 +35,8 @@ import { Subscription } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
-import { emailValidator, passwordValidatorFn, usernameValidator } from '../validators';
+import { ZenUsernameInputComponent } from '../inputs';
+import { emailValidator, passwordValidatorFn } from '../validators';
 
 interface FormType {
   username: FormControl<AuthRegisterInput['username']>;
@@ -60,24 +61,21 @@ interface FormType {
     NgIf,
     ReactiveFormsModule,
     ZenLoadingComponent,
+    ZenUsernameInputComponent,
   ],
 })
 export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
-  @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('usernameInput') usernameInput!: ZenUsernameInputComponent;
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
   @Output() registered = new EventEmitter<AuthSession>();
 
   #subs: Subscription[] = [];
-  #usernameTaken = false;
   #emailTaken = false;
   loading = false;
   generalError = false;
   hidePassword = true;
   form = new FormGroup<FormType>({
-    username: new FormControl('', {
-      validators: [Validators.required, usernameValidator(), this.usernameTakenValidator()],
-      nonNullable: true,
-    }),
+    username: new FormControl(),
     email: new FormControl('', {
       validators: [Validators.required, emailValidator(), this.emailTakenValidator()],
       nonNullable: true,
@@ -101,11 +99,6 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
     private authRegisterGQL: AuthRegisterGQL,
     public env: Environment
   ) {
-    const sub1 = this.username.valueChanges.subscribe(() => {
-      this.#usernameTaken = false;
-    });
-    this.#subs.push(sub1);
-
     const sub2 = this.email.valueChanges.subscribe(() => {
       this.#emailTaken = false;
     });
@@ -114,7 +107,7 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
 
   ngAfterContentInit() {
     setTimeout(() => {
-      this.usernameInput.nativeElement.select();
+      this.usernameInput.select();
     });
   }
 
@@ -136,13 +129,6 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
 
   get acceptTerms() {
     return this.form.get('acceptTerms') as FormType['acceptTerms'];
-  }
-
-  usernameTakenValidator(): ValidatorFn {
-    return () => {
-      if (this.#usernameTaken) return { usernameTaken: true };
-      return null;
-    };
   }
 
   emailTakenValidator(): ValidatorFn {
@@ -207,9 +193,8 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
               this.emailInput.nativeElement.select();
             } else if (error.message === ApiError.AuthRegister.USERNAME_TAKEN) {
               this.generalError = false;
-              this.#usernameTaken = true;
-              this.username.updateValueAndValidity();
-              this.usernameInput.nativeElement.select();
+              this.usernameInput.customErrorMessage = 'Username is already taken';
+              this.usernameInput.select();
             }
           },
         });

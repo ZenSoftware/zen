@@ -11,7 +11,9 @@ import { interval } from 'rxjs';
 
 import type { Upload } from '../models';
 
+const UPLOADS_PATH = './uploads/';
 const logger = new Logger('SampleResolver');
+const pubSub = new PubSub();
 
 export const typeDefs = gql`
   extend type Mutation {
@@ -27,9 +29,6 @@ export const typeDefs = gql`
     sampleSubscription: SampleSubscriptionResult!
   }
 `;
-
-const UPLOADS_PATH = './uploads/';
-const pubSub = new PubSub();
 
 async function fileExists(path: PathLike) {
   try {
