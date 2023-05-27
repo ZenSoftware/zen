@@ -44,23 +44,34 @@ export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestro
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
 
   control = new FormControl('', {
-    validators: [Validators.required, this.customErrorValidator()],
+    validators: [this.customErrorValidator()],
     nonNullable: true,
   });
   hide = true;
   touchedListeners: Array<() => unknown> = [];
   #subs: Subscription[] = [];
   #showCustomError = false;
+
   #customErrorMessage = '';
   @Input() set customErrorMessage(value: string) {
     this.#showCustomError = !!value;
     this.#customErrorMessage = value;
     this.control.updateValueAndValidity();
   }
-
   get customErrorMessage() {
     return this.#customErrorMessage;
   }
+
+  @Input() set required(value: boolean | string | undefined) {
+    const isRequired = value !== 'false' && value !== false;
+
+    if (isRequired && !this.control.hasValidator(Validators.required)) {
+      this.control.addValidators(Validators.required);
+    } else if (!isRequired && this.control.hasValidator(Validators.required)) {
+      this.control.removeValidators(Validators.required);
+    }
+  }
+
   constructor() {
     const sub = this.control.valueChanges.subscribe(() => {
       this.#showCustomError = false;
