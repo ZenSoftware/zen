@@ -3,7 +3,6 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   EventEmitter,
   OnDestroy,
   Output,
