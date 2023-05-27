@@ -65,9 +65,15 @@ export const environment: EnvironmentBase = {
   },
   openTelemetry: {
     serviceName: 'zen-api',
-    exporters: { enableOtlp: true },
-    traceExporter: {
-      url: 'http://localhost:4318/v1/traces',
+    exporters: {
+      traceConsole: true,
+      trace: {
+        url: 'http://localhost:4318/v1/traces',
+      },
+      meterConsole: true,
+      meter: {
+        url: 'http://localhost:4318/v1/metrics',
+      },
     },
   },
 };
