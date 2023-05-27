@@ -15,24 +15,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Subscription } from 'rxjs';
 
-import { usernameValidator } from '../../validators';
-
 @Component({
-  selector: 'zen-username-input',
-  templateUrl: 'zen-username-input.component.html',
+  selector: 'zen-password-input',
+  templateUrl: 'zen-password-input.component.html',
   standalone: true,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: ZenUsernameInputComponent,
-      multi: true,
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: ZenUsernameInputComponent,
-      multi: true,
-    },
-  ],
   imports: [
     MatButtonModule,
     MatFormFieldModule,
@@ -41,10 +27,29 @@ import { usernameValidator } from '../../validators';
     NgIf,
     ReactiveFormsModule,
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: ZenPasswordInputComponent,
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: ZenPasswordInputComponent,
+      multi: true,
+    },
+  ],
 })
-export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestroy {
-  @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
+export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestroy {
+  @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
 
+  control = new FormControl('', {
+    validators: [Validators.required, this.customErrorValidator()],
+    nonNullable: true,
+  });
+  hide = true;
+  touchedListeners: Array<() => unknown> = [];
+  #subs: Subscription[] = [];
   #showCustomError = false;
   #customErrorMessage = '';
   @Input() set customErrorMessage(value: string) {
@@ -56,24 +61,6 @@ export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestro
   get customErrorMessage() {
     return this.#customErrorMessage;
   }
-
-  @Input() set required(value: boolean | string | undefined) {
-    const isRequired = value !== 'false' && value !== false;
-
-    if (isRequired && !this.control.hasValidator(Validators.required)) {
-      this.control.addValidators(Validators.required);
-    } else if (!isRequired && this.control.hasValidator(Validators.required)) {
-      this.control.removeValidators(Validators.required);
-    }
-  }
-
-  #subs: Subscription[] = [];
-  touchedListeners: Array<() => unknown> = [];
-  control = new FormControl('', {
-    validators: [usernameValidator(), this.customErrorValidator()],
-    nonNullable: true,
-  });
-
   constructor() {
     const sub = this.control.valueChanges.subscribe(() => {
       this.#showCustomError = false;
@@ -81,12 +68,12 @@ export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestro
     this.#subs.push(sub);
   }
 
-  select() {
-    this.usernameInput.nativeElement.select();
-  }
-
   customErrorValidator(): ValidatorFn {
     return () => (this.#showCustomError ? { custom: true } : null);
+  }
+
+  select() {
+    this.passwordInput.nativeElement.select();
   }
 
   writeValue(value: string) {
