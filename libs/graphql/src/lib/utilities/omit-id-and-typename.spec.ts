@@ -13,6 +13,7 @@ describe('omitIdAndTypename', () => {
     expect(omitIdAndTypename(null)).toEqual(null);
     expect(omitIdAndTypename(undefined)).toEqual(undefined);
     expect(omitIdAndTypename(1)).toEqual(1);
+    expect(omitIdAndTypename(true)).toEqual(true);
     expect(omitIdAndTypename({})).toEqual({});
     expect(omitIdAndTypename({ annaka: '☯️' })).toEqual({ annaka: '☯️' });
     expect(omitIdAndTypename(new Date('1967-4-9'))).toEqual(new Date('1967-4-9'));
