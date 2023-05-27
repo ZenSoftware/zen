@@ -34,8 +34,11 @@ import { Subscription } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
-import { ZenEmailInputComponent, ZenUsernameInputComponent } from '../inputs';
-import { passwordValidatorFn } from '../validators';
+import {
+  ZenEmailInputComponent,
+  ZenPasswordInputComponent,
+  ZenUsernameInputComponent,
+} from '../inputs';
 
 interface FormType {
   username: FormControl<AuthRegisterInput['username']>;
@@ -61,6 +64,7 @@ interface FormType {
     ReactiveFormsModule,
     ZenEmailInputComponent,
     ZenLoadingComponent,
+    ZenPasswordInputComponent,
     ZenUsernameInputComponent,
   ],
 })
@@ -76,10 +80,7 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
   form = new FormGroup<FormType>({
     username: new FormControl(),
     email: new FormControl(),
-    password: new FormControl('', {
-      validators: [Validators.required, this.passwordValidator()],
-      nonNullable: true,
-    }),
+    password: new FormControl(),
     passwordConfirm: new FormControl('', {
       validators: [Validators.required, this.passwordConfirmValidator()],
       nonNullable: true,
@@ -120,16 +121,6 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
 
   get acceptTerms() {
     return this.form.get('acceptTerms') as FormType['acceptTerms'];
-  }
-
-  passwordValidator(): ValidatorFn {
-    return control => {
-      if (this.form) {
-        this.passwordConfirm.updateValueAndValidity();
-        return passwordValidatorFn(control);
-      }
-      return null;
-    };
   }
 
   passwordConfirmValidator(): ValidatorFn {
