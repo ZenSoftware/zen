@@ -1,9 +1,9 @@
 <mat-form-field hideRequiredMarker class="w-100">
   <mat-label>Username</mat-label>
-  <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="formControl" hideRequiredMarker="true" maxlength="254">
-  <mat-error *ngIf="formControl.hasError('required')">Required</mat-error>
-  <mat-error *ngIf="formControl.hasError('minlength')">Minimum length of {{formControl.getError('minlength')?.['requiredLength']}} characters</mat-error>
-  <mat-error *ngIf="formControl.hasError('maxlength')">Maximum length of {{formControl.getError('maxlength')?.['requiredLength']}} characters</mat-error>
-  <mat-error *ngIf="formControl.hasError('includesSpace')">Cannot contain spaces</mat-error>
-  <mat-error *ngIf="formControl.hasError('custom')">{{customErrorMessage}}</mat-error>
+  <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="control" hideRequiredMarker="true" maxlength="254">
+  <mat-error *ngIf="control.hasError('required')">Required</mat-error>
+  <mat-error *ngIf="control.hasError('minlength')">Minimum length of {{control.getError('minlength')?.['requiredLength']}} characters</mat-error>
+  <mat-error *ngIf="control.hasError('maxlength')">Maximum length of {{control.getError('maxlength')?.['requiredLength']}} characters</mat-error>
+  <mat-error *ngIf="control.hasError('includesSpace')">Cannot contain spaces</mat-error>
+  <mat-error *ngIf="control.hasError('custom')">{{customErrorMessage}}</mat-error>
 </mat-form-field>

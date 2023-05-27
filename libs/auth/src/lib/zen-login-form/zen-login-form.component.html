@@ -5,15 +5,9 @@
     <zen-username-input #usernameInput [formControl]="username" required></zen-username-input>
   </div>
 
-  <mat-form-field hideRequiredMarker class="w-100 mb-2">
-    <mat-label>Password</mat-label>
-    <input #passwordInput matInput autocomplete="current-password" [type]="hidePassword ? 'password' : 'text'" [formControl]="password">
-    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="Toggle show password" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-    <mat-error *ngIf="password.hasError('required')">Required</mat-error>
-    <mat-error *ngIf="password.hasError('incorrect')">Incorrect password</mat-error>
-  </mat-form-field>
+  <div class="mb-2">
+    <zen-password-input #passwordInput [formControl]="password"></zen-password-input>
+  </div>
 
   <div class="mb-4">
     <mat-checkbox color="primary" [formControl]="rememberMe">Remember me</mat-checkbox>
