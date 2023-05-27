@@ -36,5 +36,16 @@ describe('trimObjectStrings', () => {
     ).toEqual({
       a: undefined,
     });
+
+    expect(
+      trimObjectStrings(
+        {
+          a: '   ',
+        },
+        { convertEmptyStringTo: '' }
+      )
+    ).toEqual({
+      a: '',
+    });
   });
 });
