@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Subscription } from 'rxjs';
 
+import { passwordValidatorFn } from '../../validators';
+
 @Component({
   selector: 'zen-password-input',
   templateUrl: 'zen-password-input.component.html',
@@ -44,7 +46,7 @@ export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestro
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
 
   control = new FormControl('', {
-    validators: [this.customErrorValidator()],
+    validators: [passwordValidatorFn, this.customErrorValidator()],
     nonNullable: true,
   });
   hide = true;
