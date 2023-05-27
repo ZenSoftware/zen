@@ -54,6 +54,8 @@ export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestro
   #subs: Subscription[] = [];
   #showCustomError = false;
 
+  @Input() label = 'Password';
+
   #customErrorMessage = '';
   @Input() set customErrorMessage(value: string) {
     this.#showCustomError = !!value;
