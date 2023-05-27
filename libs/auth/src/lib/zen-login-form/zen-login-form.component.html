@@ -5,10 +5,8 @@
     <zen-username-input #usernameInput [formControl]="username" required></zen-username-input>
   </div>
 
-  <div class="mb-2">
-    <zen-password-input #passwordInput [formControl]="password"></zen-password-input>
-  </div>
-
+  <zen-password-input #passwordInput [formControl]="password" required></zen-password-input>
+  
   <div class="mb-4">
     <mat-checkbox color="primary" [formControl]="rememberMe">Remember me</mat-checkbox>
   </div>
