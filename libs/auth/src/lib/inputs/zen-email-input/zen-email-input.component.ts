@@ -15,21 +15,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Subscription } from 'rxjs';
 
-import { usernameValidator } from '../../validators';
+import { emailValidator } from '../../validators';
 
 @Component({
-  selector: 'zen-username-input',
-  templateUrl: 'zen-username-input.component.html',
+  selector: 'zen-email-input',
+  templateUrl: 'zen-email-input.component.html',
   standalone: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: ZenUsernameInputComponent,
+      useExisting: ZenEmailInputComponent,
       multi: true,
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: ZenUsernameInputComponent,
+      useExisting: ZenEmailInputComponent,
       multi: true,
     },
   ],
@@ -42,8 +42,8 @@ import { usernameValidator } from '../../validators';
     ReactiveFormsModule,
   ],
 })
-export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestroy {
-  @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
+export class ZenEmailInputComponent implements ControlValueAccessor, OnDestroy {
+  @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
 
   private showCustomError = false;
   #customErrorMessage = '';
@@ -70,7 +70,7 @@ export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestro
   #subs: Subscription[] = [];
   touchedListeners: Array<() => unknown> = [];
   control = new FormControl('', {
-    validators: [usernameValidator(), this.customErrorValidator()],
+    validators: [emailValidator(), this.customErrorValidator()],
     nonNullable: true,
   });
 
@@ -82,7 +82,7 @@ export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestro
   }
 
   select() {
-    this.usernameInput.nativeElement.select();
+    this.emailInput.nativeElement.select();
   }
 
   customErrorValidator(): ValidatorFn {
