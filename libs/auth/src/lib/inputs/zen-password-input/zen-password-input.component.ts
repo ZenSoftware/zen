@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Subscription } from 'rxjs';
 
+import { passwordValidatorFn } from '../../validators';
+
 @Component({
   selector: 'zen-password-input',
   templateUrl: 'zen-password-input.component.html',
@@ -44,17 +46,19 @@ export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestro
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
 
   control = new FormControl('', {
-    validators: [this.customErrorValidator()],
+    validators: [passwordValidatorFn, this.customErrorValidator()],
     nonNullable: true,
   });
   hide = true;
   touchedListeners: Array<() => unknown> = [];
   #subs: Subscription[] = [];
-  #showCustomError = false;
+  private showCustomError = false;
+
+  @Input() label = 'Password';
 
   #customErrorMessage = '';
   @Input() set customErrorMessage(value: string) {
-    this.#showCustomError = !!value;
+    this.showCustomError = !!value;
     this.#customErrorMessage = value;
     this.control.updateValueAndValidity();
   }
@@ -74,13 +78,13 @@ export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestro
 
   constructor() {
     const sub = this.control.valueChanges.subscribe(() => {
-      this.#showCustomError = false;
+      this.showCustomError = false;
     });
     this.#subs.push(sub);
   }
 
   customErrorValidator(): ValidatorFn {
-    return () => (this.#showCustomError ? { custom: true } : null);
+    return () => (this.showCustomError ? { custom: true } : null);
   }
 
   select() {

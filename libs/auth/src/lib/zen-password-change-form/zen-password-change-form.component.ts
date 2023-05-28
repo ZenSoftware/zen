@@ -26,6 +26,7 @@ import { ApiError, AuthPasswordChangeGQL, AuthPasswordChangeInput } from '@zen/g
 import { Subscription } from 'rxjs';
 
 import { verticalAccordion } from '../animations';
+import { ZenPasswordInputComponent } from '../inputs';
 import { passwordValidatorFn } from '../validators';
 
 interface FormType {
@@ -49,10 +50,11 @@ interface FormType {
     ReactiveFormsModule,
     RouterLink,
     ZenLoadingComponent,
+    ZenPasswordInputComponent,
   ],
 })
 export class ZenPasswordChangeFormComponent implements OnDestroy {
-  @ViewChild('oldPasswordInput') oldPasswordInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('oldPasswordInput') oldPasswordInput!: ZenPasswordInputComponent;
   @Output() changed = new EventEmitter();
 
   #subs: Subscription[] = [];
@@ -62,10 +64,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
   generalError = false;
   hidePassword = true;
   form = new FormGroup<FormType>({
-    oldPassword: new FormControl('', {
-      validators: [Validators.required, this.incorrectPasswordValidator()],
-      nonNullable: true,
-    }),
+    oldPassword: new FormControl(),
     newPassword: new FormControl('', {
       validators: [Validators.required, this.passwordValidator()],
       nonNullable: true,
@@ -136,7 +135,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
     this.completed = false;
     this.form.reset();
     this.form.enable();
-    setTimeout(() => this.oldPasswordInput.nativeElement.select());
+    setTimeout(() => this.oldPasswordInput.select());
   }
 
   onSubmit() {
@@ -168,8 +167,8 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             if (error.message === ApiError.AuthPasswordChange.WRONG_PASSWORD) {
               this.generalError = false;
               this.#incorrectPassword = true;
-              this.oldPassword.updateValueAndValidity();
-              this.oldPasswordInput.nativeElement.select();
+              this.oldPasswordInput.customErrorMessage = 'Incorrect password';
+              this.oldPasswordInput.select();
             }
           },
         });
