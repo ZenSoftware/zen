@@ -45,10 +45,10 @@ import { emailValidator } from '../../validators';
 export class ZenEmailInputComponent implements ControlValueAccessor, OnDestroy {
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
 
-  #showCustomError = false;
+  private showCustomError = false;
   #customErrorMessage = '';
   @Input() set customErrorMessage(value: string) {
-    this.#showCustomError = !!value;
+    this.showCustomError = !!value;
     this.#customErrorMessage = value;
     this.control.updateValueAndValidity();
   }
@@ -76,7 +76,7 @@ export class ZenEmailInputComponent implements ControlValueAccessor, OnDestroy {
 
   constructor() {
     const sub = this.control.valueChanges.subscribe(() => {
-      this.#showCustomError = false;
+      this.showCustomError = false;
     });
     this.#subs.push(sub);
   }
@@ -86,7 +86,7 @@ export class ZenEmailInputComponent implements ControlValueAccessor, OnDestroy {
   }
 
   customErrorValidator(): ValidatorFn {
-    return () => (this.#showCustomError ? { custom: true } : null);
+    return () => (this.showCustomError ? { custom: true } : null);
   }
 
   writeValue(value: string) {

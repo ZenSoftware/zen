@@ -45,10 +45,10 @@ import { usernameValidator } from '../../validators';
 export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
 
-  #showCustomError = false;
+  private showCustomError = false;
   #customErrorMessage = '';
   @Input() set customErrorMessage(value: string) {
-    this.#showCustomError = !!value;
+    this.showCustomError = !!value;
     this.#customErrorMessage = value;
     this.control.updateValueAndValidity();
   }
@@ -76,7 +76,7 @@ export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestro
 
   constructor() {
     const sub = this.control.valueChanges.subscribe(() => {
-      this.#showCustomError = false;
+      this.showCustomError = false;
     });
     this.#subs.push(sub);
   }
@@ -86,7 +86,7 @@ export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestro
   }
 
   customErrorValidator(): ValidatorFn {
-    return () => (this.#showCustomError ? { custom: true } : null);
+    return () => (this.showCustomError ? { custom: true } : null);
   }
 
   writeValue(value: string) {

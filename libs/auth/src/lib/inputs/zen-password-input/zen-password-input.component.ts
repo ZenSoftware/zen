@@ -52,13 +52,13 @@ export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestro
   hide = true;
   touchedListeners: Array<() => unknown> = [];
   #subs: Subscription[] = [];
-  #showCustomError = false;
+  private showCustomError = false;
 
   @Input() label = 'Password';
 
   #customErrorMessage = '';
   @Input() set customErrorMessage(value: string) {
-    this.#showCustomError = !!value;
+    this.showCustomError = !!value;
     this.#customErrorMessage = value;
     this.control.updateValueAndValidity();
   }
@@ -78,13 +78,13 @@ export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestro
 
   constructor() {
     const sub = this.control.valueChanges.subscribe(() => {
-      this.#showCustomError = false;
+      this.showCustomError = false;
     });
     this.#subs.push(sub);
   }
 
   customErrorValidator(): ValidatorFn {
-    return () => (this.#showCustomError ? { custom: true } : null);
+    return () => (this.showCustomError ? { custom: true } : null);
   }
 
   select() {
