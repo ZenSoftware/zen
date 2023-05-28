@@ -23,7 +23,8 @@ export abstract class Environment {
     readonly rememberMeExchangeThreshold: number;
 
     /**
-     * The delay in milliseconds at which the client will retry the exchange if the client is disconnected and has a JWT auth session expiring soon.
+     * The delay in milliseconds at which the client will retry on a failed JWT exchange.
+     * For example if the client is disconnected and has a JWT auth session expiring soon, it will retry at the provided interval.
      * @example 5000 is 5 seconds.
      */
     readonly retryExchangeTokenDelay?: number;
