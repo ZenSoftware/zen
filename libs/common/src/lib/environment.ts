@@ -24,7 +24,7 @@ export abstract class Environment {
 
     /**
      * The delay in milliseconds at which the client will retry on a failed JWT exchange.
-     * For example if the client is disconnected and has a JWT auth session expiring soon, it will retry at the provided interval.
+     * For example if the client is disconnected and has their auth session expiring soon, it will retry at the provided interval.
      * @example 5000 is 5 seconds.
      */
     readonly retryExchangeTokenDelay?: number;
@@ -32,7 +32,7 @@ export abstract class Environment {
 
   /**
    * Whether or not to enable Google OAuth for the client application.
-   * Will hide `Sign in with Google` button if false.
+   * Will hide the `Sign in with Google` button if false.
    */
   abstract readonly enableGoogleOAuth: boolean;
 
