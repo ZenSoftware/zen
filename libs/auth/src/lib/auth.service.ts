@@ -229,6 +229,7 @@ export class AuthService {
         retry({
           delay: retryStrategy({
             excludeStatusCodes: ['FORBIDDEN', 'UNAUTHENTICATED', 'INTERNAL_SERVER_ERROR'],
+            delay: this.env.auth.retryExchangeTokenDelay,
           }),
         })
       )
@@ -272,6 +273,7 @@ function retryStrategy({
   delay?: number;
   excludeStatusCodes?: string[];
 }) {
+  console.log('retryStrategy delay', delay);
   return (error: ApolloError, retryCount: number) => {
     const excludedStatusFound = !!excludeStatusCodes.find(exclude => exclude === error.message);
 

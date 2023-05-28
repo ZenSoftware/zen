@@ -13,27 +13,16 @@
   </ng-container>
   
   <div class="mb-2">
-    <zen-username-input #usernameInput [formControl]="username" required></zen-username-input>
+    <zen-username-input #usernameInput [formControl]="username" required/>
   </div>
 
-  <mat-form-field hideRequiredMarker class="w-100 mb-2">
-    <mat-label>E-mail</mat-label>
-    <input #emailInput type="email" matInput placeholder="enter@email.com" autocomplete="email" [formControl]="email" maxlength="254" hideRequiredMarker="true">
-    <mat-error *ngIf="email.hasError('required')">Required</mat-error>
-    <mat-error *ngIf="email.hasError('email')">Not a valid email</mat-error>
-    <mat-error *ngIf="email.hasError('emailTaken')">E-mail is already taken</mat-error>
-  </mat-form-field>
+  <div class="mb-2">
+    <zen-email-input #emailInput [formControl]="email" required/>
+  </div>
 
-  <mat-form-field hideRequiredMarker class="w-100 mb-2">
-    <mat-label>Password</mat-label>
-    <input matInput autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" [formControl]="password">
-    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="Toggle show password" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-    <mat-error *ngIf="password.hasError('required')">Required</mat-error>
-    <mat-error *ngIf="password.hasError('minlength')">Minimum length of {{password.getError('minlength')?.['requiredLength']}} characters</mat-error>
-    <mat-error *ngIf="password.hasError('maxlength')">Maximum length of {{password.getError('maxlength')?.['requiredLength']}} characters</mat-error>
-  </mat-form-field>
+  <div class="mb-2">
+    <zen-password-input [formControl]="password" required/>
+  </div>
 
   <mat-form-field hideRequiredMarker class="w-100 mb-2">
     <mat-label>Confirm Password</mat-label>

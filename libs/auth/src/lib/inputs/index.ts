@@ -1,2 +1,3 @@
-export * from './zen-username-input';
+export * from './zen-email-input';
 export * from './zen-password-input';
+export * from './zen-username-input';
