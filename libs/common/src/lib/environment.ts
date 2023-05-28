@@ -9,6 +9,7 @@ export abstract class Environment {
     readonly exchangeStrategy: 'app-load' | 'efficient';
     readonly jwtExchangeInterval: number;
     readonly rememberMeExchangeThreshold: number;
+    readonly retryExchangeTokenDelay?: number;
   };
 
   abstract readonly enableGoogleOAuth: boolean;
@@ -29,6 +30,7 @@ export class EnvironmentDev implements Environment {
     exchangeStrategy: 'app-load',
     jwtExchangeInterval: 30 * 60 * 1000, // 30 minutes
     rememberMeExchangeThreshold: 45 * 24 * 60 * 60 * 1000, // 45 days
+    retryExchangeTokenDelay: 5000,
   } as const;
   enableGoogleOAuth = true;
   url = {
@@ -48,6 +50,7 @@ export class EnvironmentProd implements Environment {
     exchangeStrategy: 'app-load',
     jwtExchangeInterval: 30 * 60 * 1000, // 30 minutes
     rememberMeExchangeThreshold: 45 * 24 * 60 * 60 * 1000, // 45 days
+    retryExchangeTokenDelay: 5000,
   } as const;
   enableGoogleOAuth = true;
   url = {
