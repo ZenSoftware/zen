@@ -2,7 +2,6 @@ import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   EventEmitter,
   OnDestroy,
   Output,
