@@ -7,6 +7,9 @@ import { AuthExchangeTokenGQL } from '@zen/graphql';
 import { AuthService } from '../auth.service';
 import { token } from '../token.signal';
 
+/**
+ * OIDC providers will redirect to this component after a successful login.
+ */
 @Component({
   selector: 'zen-login-confirmed',
   template: ``,
