@@ -9,6 +9,7 @@ import { token } from '../token.signal';
 
 /**
  * OIDC providers will redirect to this component after a successful login.
+ * A JWT is provided in the query string, which is exchanged for a session.
  */
 @Component({
   selector: 'zen-login-confirmed',
