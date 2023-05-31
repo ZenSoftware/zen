@@ -512,7 +512,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   };
 
   get excelFileName() {
-    let result = format(Date.now(), 'yyyy-MM-dd') + ' - ';
+    let result = format(Date.now(), 'yyyy-MM-dd') + ' ';
     if (this.settings?.typename)
       result += this.settings.typename ? this.settings.typename + ' ' : '';
     result += `${this.gridData?.total} items.xlsx`;
