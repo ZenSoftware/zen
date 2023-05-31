@@ -273,7 +273,6 @@ function retryStrategy({
   delay?: number;
   excludeStatusCodes?: string[];
 }) {
-  console.log('retryStrategy delay', delay);
   return (error: ApolloError, retryCount: number) => {
     const excludedStatusFound = !!excludeStatusCodes.find(exclude => exclude === error.message);
 
