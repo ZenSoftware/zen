@@ -3,8 +3,9 @@
 
   <zen-register-form *ngIf="data.action === 'create'" (registered)="registered()"></zen-register-form>
 
-  <form id="user-form" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="data.action === 'edit'" class="k-form">
-    <div class="row mb-3">
+  <form id="user-form" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="data.action === 'edit'">
+
+    <div class="row">
       <div class="col pe-2">
         <zen-username-input [formControl]="username" required/>
       </div>
@@ -13,10 +14,9 @@
       </div>
     </div>
 
-    <h4 class="mb-0 d-inline-block">Roles:</h4>
-    <zen-user-roles-input [formControl]="roles"></zen-user-roles-input>
-  </form>
+    <zen-user-roles-input [formControl]="roles"/>
 
+  </form>
 </mat-dialog-content>
 
 <mat-dialog-actions class="d-flex justify-content-between">

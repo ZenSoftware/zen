@@ -1,13 +1,15 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { NgFor } from '@angular/common';
-import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
-  FormGroup,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { Role } from '@zen/common';
 import { Subscription } from 'rxjs';
 
@@ -15,7 +17,7 @@ import { Subscription } from 'rxjs';
   selector: 'zen-user-roles-input',
   templateUrl: 'zen-user-roles-input.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, MatCheckboxModule, NgFor],
+  imports: [MatChipsModule, MatFormFieldModule, MatIconModule, NgFor, ReactiveFormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -25,59 +27,39 @@ import { Subscription } from 'rxjs';
   ],
 })
 export class ZenUserRolesInputComponent implements ControlValueAccessor, OnDestroy {
-  @ViewChild('checkboxes') checkboxes!: ElementRef<HTMLDivElement>;
   readonly ROLES = Object.values(Role);
-  form;
+  control = new FormControl<string[]>([], { nonNullable: true });
   #subs: Subscription[] = [];
   touchedListeners: Array<() => unknown> = [];
 
-  constructor() {
-    const formControls: Record<string, FormControl> = {};
-    for (const role of this.ROLES) {
-      formControls[role] = new FormControl(false, { nonNullable: true });
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.control.setValue([...this.control.value, value]);
     }
-    this.form = new FormGroup(formControls);
+
+    event.chipInput!.clear();
   }
 
-  get formControlKeys() {
-    return Object.keys(this.form.controls);
+  remove(role: string): void {
+    this.control.setValue(this.control.value.filter(r => r !== role));
   }
 
   writeValue(value: string[]) {
     if (value) {
-      for (const role of this.ROLES) {
-        this.form.get(role)!.setValue(value.includes(role));
-      }
-
-      const uniqueRoles = value.filter(v => !this.ROLES.includes(v as any));
-      for (const role of uniqueRoles) {
-        if (this.form.get(role)) {
-          this.form.get(role)!.setValue(true);
-        } else {
-          this.form.addControl(role, new FormControl(true, { nonNullable: true }));
-        }
-      }
+      this.control.setValue(value);
     } else {
-      this.form.reset();
+      this.control.reset();
     }
-  }
-
-  getCheckedRoles() {
-    const values: string[] = [];
-    for (const role of this.ROLES) {
-      if (this.form.get(role)?.value) values.push(role);
-    }
-    return values;
   }
 
   registerOnChange(fn: (_: any) => void) {
-    const sub = this.form.valueChanges.subscribe(fn);
-    this.form.valueChanges.subscribe(() => {
-      fn(this.getCheckedRoles());
-    });
+    const sub = this.control.valueChanges.subscribe(fn);
     this.#subs.push(sub);
-
-    fn(this.getCheckedRoles());
   }
 
   emitTouched() {
@@ -89,8 +71,8 @@ export class ZenUserRolesInputComponent implements ControlValueAccessor, OnDestr
   }
 
   setDisabledState(isDisabled: boolean) {
-    if (isDisabled) this.form.disable();
-    else this.form.enable();
+    if (isDisabled) this.control.disable();
+    else this.control.enable();
   }
 
   ngOnDestroy() {
