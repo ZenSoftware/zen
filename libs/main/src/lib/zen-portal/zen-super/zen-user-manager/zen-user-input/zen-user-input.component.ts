@@ -4,8 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { InputsModule } from '@progress/kendo-angular-inputs';
-import { FloatingLabelModule } from '@progress/kendo-angular-label';
 import {
   ZenEmailInputComponent,
   ZenRegisterFormComponent,
@@ -39,18 +37,16 @@ interface FormType {
   standalone: true,
   imports: [
     CommonModule,
-    FloatingLabelModule,
-    InputsModule,
     MatButtonModule,
     MatDialogModule,
     MatSnackBarModule,
     ReactiveFormsModule,
+    ZenEmailInputComponent,
     ZenLoadingComponent,
     ZenRegisterFormComponent,
     ZenSnackbarModule,
-    ZenUserRolesInputComponent,
     ZenUsernameInputComponent,
-    ZenEmailInputComponent,
+    ZenUserRolesInputComponent,
   ],
 })
 export class ZenUserInputComponent {
