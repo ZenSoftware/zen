@@ -7,14 +7,13 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import {
   ZenEmailInputComponent,
   ZenRegisterFormComponent,
+  ZenRolesInputComponent,
   ZenUsernameInputComponent,
 } from '@zen/auth';
 import { trimObjectStrings } from '@zen/common';
 import { ZenLoadingComponent, ZenSnackbarError, ZenSnackbarModule } from '@zen/components';
 import { UpdateOneUserGQL, UserFields, UserUpdateInput } from '@zen/graphql';
 import { Apollo } from 'apollo-angular';
-
-import { ZenUserRolesInputComponent } from './zen-user-roles-input';
 
 export type DialogData =
   | {
@@ -44,9 +43,9 @@ interface FormType {
     ZenEmailInputComponent,
     ZenLoadingComponent,
     ZenRegisterFormComponent,
+    ZenRolesInputComponent,
     ZenSnackbarModule,
     ZenUsernameInputComponent,
-    ZenUserRolesInputComponent,
   ],
 })
 export class ZenUserInputComponent {
