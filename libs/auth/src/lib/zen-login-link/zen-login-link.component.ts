@@ -17,6 +17,7 @@ export class ZenLoginLinkComponent {
   displayLogin$: Observable<boolean>;
 
   constructor(public auth: AuthService, router: Router) {
+    // only show the login link if not on the login page
     this.displayLogin$ = router.events.pipe(
       filter((event: any) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => event.url.split('?')[0] !== '/login')
