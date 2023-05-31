@@ -53,9 +53,7 @@ export class ZenUserInputComponent {
   form = new FormGroup<FormType>({
     username: new FormControl(),
     email: new FormControl(),
-    roles: new FormControl([], {
-      nonNullable: true,
-    }),
+    roles: new FormControl(),
   });
 
   @HostListener('keydown.escape')
