@@ -1,12 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, Inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { FloatingLabelModule } from '@progress/kendo-angular-label';
-import { ZenRegisterFormComponent, emailValidator } from '@zen/auth';
+import {
+  ZenEmailInputComponent,
+  ZenRegisterFormComponent,
+  ZenUsernameInputComponent,
+} from '@zen/auth';
 import { trimObjectStrings } from '@zen/common';
 import { ZenLoadingComponent, ZenSnackbarError, ZenSnackbarModule } from '@zen/components';
 import { UpdateOneUserGQL, UserFields, UserUpdateInput } from '@zen/graphql';
@@ -45,18 +49,15 @@ interface FormType {
     ZenRegisterFormComponent,
     ZenSnackbarModule,
     ZenUserRolesInputComponent,
+    ZenUsernameInputComponent,
+    ZenEmailInputComponent,
   ],
 })
 export class ZenUserInputComponent {
   loading = false;
   form = new FormGroup<FormType>({
-    username: new FormControl('', {
-      nonNullable: true,
-    }),
-    email: new FormControl('', {
-      validators: [Validators.required, emailValidator()],
-      nonNullable: true,
-    }),
+    username: new FormControl(),
+    email: new FormControl(),
     roles: new FormControl([], {
       nonNullable: true,
     }),
