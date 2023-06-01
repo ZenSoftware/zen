@@ -11,5 +11,9 @@ export const Primary = {
   render: (args: ZenPasswordInputComponent) => ({
     props: args,
   }),
-  args: {},
+  args: {
+    required: false,
+    label: 'Password',
+    customErrorMessage: '',
+  },
 };

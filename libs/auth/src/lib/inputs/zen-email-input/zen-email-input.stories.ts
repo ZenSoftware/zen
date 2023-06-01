@@ -11,5 +11,9 @@ export const Primary = {
   render: (args: ZenEmailInputComponent) => ({
     props: args,
   }),
-  args: {},
+  args: {
+    required: false,
+    label: 'E-mail',
+    customErrorMessage: '',
+  },
 };
