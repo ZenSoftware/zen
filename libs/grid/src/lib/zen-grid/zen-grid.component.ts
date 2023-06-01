@@ -421,30 +421,9 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   setBackgroundStyle(hexColor: string) {
     const cssClass = this.getCssClass(hexColor);
 
-    // Set the background color
     this.styles.setStyles(`.${cssClass}, .k-grid tr.${cssClass}.k-alt`, {
       backgroundColor: hexColor,
     });
-
-    // Set the hover background color
-    let hoverColor = hexColor;
-    let alpha = 0xff;
-
-    if (hexColor.length === 9) {
-      hoverColor = hexColor.substring(0, 7);
-      alpha = parseInt(hexColor.substring(7, 2), 16);
-    }
-
-    if (hoverColor.length === 7) {
-      let newAlpha = alpha - 0x2f;
-      if (newAlpha < 0) newAlpha = 0;
-      hoverColor += newAlpha.toString(16);
-    }
-
-    this.styles.setStyles(
-      `html .k-grid tr.${cssClass}:hover, html .k-grid tr.${cssClass}.k-alt:hover, html .k-grid tr.${cssClass}.k-state-selected`,
-      { backgroundColor: hoverColor }
-    );
 
     return cssClass;
   }
