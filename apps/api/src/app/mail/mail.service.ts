@@ -6,6 +6,8 @@ import { JwtService } from '../jwt';
 import { User } from '../prisma';
 import { GeneralContext, PasswordResetContext } from './contexts';
 
+const logger = new Logger('MailService');
+
 type MailOptions = ISendMailOptions & { template?: string };
 
 @Injectable()
@@ -17,8 +19,8 @@ export class MailService {
   ) {}
   //--------------------------------------------------------------------------
   send(options: MailOptions) {
-    Logger.log(`Sent ${options.template} email to ${options.to}`);
-    return this.mailer.sendMail(options).catch(e => Logger.error(e, options));
+    logger.log(`Sent ${options.template} email to ${options.to}`);
+    return this.mailer.sendMail(options).catch(e => logger.error(e, options));
   }
   //--------------------------------------------------------------------------
   sendGeneral(options: { to: string; subject: string; context: GeneralContext }) {
@@ -27,7 +29,9 @@ export class MailService {
       to: options.to,
       subject: options.subject,
       context: options.context,
-    }).then();
+    })
+      .catch(logger.error)
+      .then();
   }
   //--------------------------------------------------------------------------
   sendPasswordReset(user: Pick<User, 'id' | 'email'>) {
