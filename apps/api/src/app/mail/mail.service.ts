@@ -19,7 +19,7 @@ export class MailService {
   ) {}
   //--------------------------------------------------------------------------
   send(options: MailOptions) {
-    logger.log(`Sent ${options.template} email to ${options.to}`);
+    logger.log(`Sent ${options.template} to ${options.to}`);
     return this.mailer.sendMail(options).catch(e => logger.error(e, options));
   }
   //--------------------------------------------------------------------------
