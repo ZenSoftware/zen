@@ -6,6 +6,7 @@ export * from './lib/guards';
 export * from './lib/inputs';
 export * from './lib/token.signal';
 export * from './lib/validators';
+export * from './lib/zen-account-info/zen-account-info.component';
 export * from './lib/zen-auth.routes';
 export * from './lib/zen-login-confirmed/zen-login-confirmed.component';
 export * from './lib/zen-login-form/zen-login-form.component';
