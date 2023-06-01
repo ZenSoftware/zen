@@ -3,7 +3,7 @@ export function GraphQLApiIndexTemplate(names: string[]) {
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { DocumentNode } from 'graphql';
 
-import { typeDefs as GlobalTypeDefs } from '../global-schema.gql';
+import { typeDefs as GLOBAL_TYPE_DEFS } from '../global-schema.gql';
 import PALJS_TYPE_DEFS from '../paljs/typeDefs';
 
 import { PRISMA_RESOLVERS, PRISMA_TYPE_DEFS } from './prisma';\n`;
@@ -29,7 +29,7 @@ import { PRISMA_RESOLVERS, PRISMA_TYPE_DEFS } from './prisma';\n`;
   indexSource += `export const ALL_RESOLVERS = [...PRISMA_RESOLVERS, ...API_RESOLVERS];
 
 export const ALL_TYPE_DEFS = mergeTypeDefs([
-  GlobalTypeDefs,
+  GLOBAL_TYPE_DEFS,
   PALJS_TYPE_DEFS,
   ...PRISMA_TYPE_DEFS,
   ...API_TYPE_DEFS,

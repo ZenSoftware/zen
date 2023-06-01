@@ -2,7 +2,7 @@
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { DocumentNode } from 'graphql';
 
-import { typeDefs as GlobalTypeDefs } from '../global-schema.gql';
+import { typeDefs as GLOBAL_TYPE_DEFS } from '../global-schema.gql';
 import PALJS_TYPE_DEFS from '../paljs/typeDefs';
 import { AuthResolver, typeDefs as AuthTypeDefs } from './Auth';
 import { PRISMA_RESOLVERS, PRISMA_TYPE_DEFS } from './prisma';
@@ -15,7 +15,7 @@ const API_TYPE_DEFS = [AuthTypeDefs, SampleTypeDefs].filter(x => x) as DocumentN
 export const ALL_RESOLVERS = [...PRISMA_RESOLVERS, ...API_RESOLVERS];
 
 export const ALL_TYPE_DEFS = mergeTypeDefs([
-  GlobalTypeDefs,
+  GLOBAL_TYPE_DEFS,
   PALJS_TYPE_DEFS,
   ...PRISMA_TYPE_DEFS,
   ...API_TYPE_DEFS,
