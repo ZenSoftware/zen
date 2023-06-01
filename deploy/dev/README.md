@@ -44,4 +44,4 @@ export class EnvironmentDev implements Environment {
 
 - Run `npm start` to start the Angular app to test the API running in k8s
 
-- To build the static HTML/CSS assets for production, utilize the npm script `npm run prod:apps`
+- To build the static HTML/CSS assets for production, utilize the npm script `npm run prod:portal`
