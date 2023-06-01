@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { NgFor } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -45,6 +45,8 @@ export class ZenRolesInputComponent implements ControlValueAccessor, OnDestroy {
   readonly control = new FormControl<string[]>([], { nonNullable: true });
   readonly #subs: Subscription[] = [];
   touchedListeners: Array<() => unknown> = [];
+
+  @Input() label = 'Roles';
 
   constructor(private zenSnackbarError: ZenSnackbarError) {}
 
