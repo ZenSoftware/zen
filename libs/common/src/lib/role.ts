@@ -4,6 +4,7 @@
  */
 export const Role = {
   Super: 'Super',
+  Prisma: 'Prisma',
 } as const;
 
 export type Role = (typeof Role)[keyof typeof Role];

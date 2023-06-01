@@ -1,0 +1,27 @@
+<mat-form-field class="example-chip-list" class="w-100">
+  <mat-label>Roles</mat-label>
+  
+  <mat-chip-grid #chipGrid aria-label="Enter roles">
+
+    <mat-chip-row *ngFor="let role of control.value"
+                  (removed)="remove(role)"
+                  [aria-description]="'press enter to edit ' + role">
+      {{role}}
+      <button matChipRemove [attr.aria-label]="'remove ' + role">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+
+    <input placeholder="New role..." #roleInput
+      [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)"/>
+
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let role of filteredRoles" [value]="role">
+        {{role}}
+      </mat-option>
+    </mat-autocomplete>
+
+  </mat-chip-grid>
+</mat-form-field>
