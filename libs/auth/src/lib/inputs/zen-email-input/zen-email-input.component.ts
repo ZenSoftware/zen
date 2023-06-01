@@ -57,6 +57,8 @@ export class ZenEmailInputComponent implements ControlValueAccessor, OnDestroy {
     return this.#customErrorMessage;
   }
 
+  @Input() label = 'E-mail';
+
   @Input() set required(value: boolean | string | undefined) {
     const isRequired = value !== 'false' && value !== false;
 

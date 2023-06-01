@@ -12,7 +12,8 @@ export const Primary = {
     props: args,
   }),
   args: {
-    required: true,
+    required: false,
+    label: 'Username',
     customErrorMessage: '',
   },
 };
