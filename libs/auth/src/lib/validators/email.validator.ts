@@ -5,7 +5,10 @@ const isEmail = (email: string) => emailRegex.test(String(email).toLowerCase());
 
 export function emailValidator(): ValidatorFn {
   return control => {
-    const notEmail = !isEmail(control.value);
-    return notEmail ? { email: control.value } : null;
+    if (control.value) {
+      const notEmail = !isEmail(control.value);
+      return notEmail ? { email: control.value } : null;
+    }
+    return null;
   };
 }

@@ -57,6 +57,8 @@ export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestro
     return this.#customErrorMessage;
   }
 
+  @Input() label = 'Username';
+
   @Input() set required(value: boolean | string | undefined) {
     const isRequired = value !== 'false' && value !== false;
 

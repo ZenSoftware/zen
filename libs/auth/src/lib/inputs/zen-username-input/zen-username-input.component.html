@@ -1,5 +1,5 @@
 <mat-form-field hideRequiredMarker class="w-100">
-  <mat-label>Username</mat-label>
+  <mat-label>{{label}}</mat-label>
   <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="control" hideRequiredMarker="true" maxlength="254">
   <mat-error *ngIf="control.hasError('required')">Required</mat-error>
   <mat-error *ngIf="control.hasError('minlength')">Minimum length of {{control.getError('minlength')?.['requiredLength']}} characters</mat-error>
