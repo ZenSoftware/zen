@@ -4,5 +4,6 @@ export * from './client-queries';
 export * from './default-fields';
 export * from './graphql-api-index';
 export * from './graphql-prisma-index';
-export * from './graphql-resolvers';
+export * from './graphql-resolvers-abac';
+export * from './graphql-resolvers-rbac';
 export * from './paljs-type-defs';

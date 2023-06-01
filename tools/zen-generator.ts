@@ -15,7 +15,8 @@ import {
   DefaultFieldsTemplate,
   GraphQLApiIndexTemplate,
   GraphQLPrismaIndexTemplate,
-  GraphQLResolversTemplate,
+  GraphQLResolversABACTemplate,
+  GraphQLResolversRBACTemplate,
   PaljsTypeDefsTemplate,
 } from './templates';
 
@@ -24,13 +25,15 @@ const execAsync = promisify(exec);
 export type ZenGeneratorConfig = {
   palConfig: PalConfig;
   apiOutPath: string;
+  /** @default 'RBAC' */
+  authScheme?: 'ABAC' | 'RBAC';
   caslSubjectsOutFile?: string;
   defaultFieldsOutFile?: string;
   frontend?: {
     outPath: string;
-    /** @defaults 'fields' */
+    /** @default 'fields' */
     fieldsFolderName?: string;
-    /** @defaults 'prisma' */
+    /** @default 'prisma' */
     queriesFolderName?: string;
   };
 };
@@ -92,7 +95,20 @@ export class ZenGenerator {
       await mkdir(prismaResolversPath);
     }
 
-    const wroteCount = await this.prismaAbacResolvers(prismaNames, prismaResolversPath);
+    let wroteCount = 0;
+    if (this.config.authScheme === 'ABAC') {
+      wroteCount = await this.prismaResolvers(
+        prismaNames,
+        prismaResolversPath,
+        GraphQLResolversABACTemplate
+      );
+    } else {
+      wroteCount = await this.prismaResolvers(
+        prismaNames,
+        prismaResolversPath,
+        GraphQLResolversRBACTemplate
+      );
+    }
     console.log(`* Total resolver files wrote: ${wroteCount}`);
 
     let prismaIndexFileNames = await this.getFileNames(prismaResolversPath);
@@ -177,13 +193,17 @@ export class ZenGenerator {
     }
   }
 
-  async prismaAbacResolvers(prismaNames: string[], outPath: string) {
+  async prismaResolvers(
+    prismaNames: string[],
+    outPath: string,
+    template: (prismaName: string) => string
+  ) {
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
       const outFile = path.join(outPath, `${prismaName}.ts`);
 
       if (!existsSync(outFile)) {
-        await writeFile(outFile, GraphQLResolversTemplate(prismaName));
+        await writeFile(outFile, template(prismaName));
         console.log(`- Wrote: ${outFile}`);
         wroteCount++;
       }
