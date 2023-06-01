@@ -13,7 +13,8 @@ import {
   ClientFieldsTemplate,
   ClientQueriesTemplate,
   DefaultFieldsTemplate,
-  GraphQLIndexTemplate,
+  GraphQLApiIndexTemplate,
+  GraphQLPrismaIndexTemplate,
   GraphQLResolversTemplate,
   PaljsTypeDefsTemplate,
 } from './templates';
@@ -81,11 +82,28 @@ export class ZenGenerator {
     console.log(`- Wrote: ${palTypeDefsFilePath}`);
 
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
-    const nestResolversPath = path.join(this.config.apiOutPath, 'resolvers');
-
-    if (!existsSync(nestResolversPath)) {
-      await mkdir(nestResolversPath);
+    const apiResolversPath = path.join(this.config.apiOutPath, 'resolvers');
+    if (!existsSync(apiResolversPath)) {
+      await mkdir(apiResolversPath);
     }
+
+    const prismaResolversPath = path.join(apiResolversPath, 'prisma');
+    if (!existsSync(prismaResolversPath)) {
+      await mkdir(prismaResolversPath);
+    }
+
+    const wroteCount = await this.prismaAbacResolvers(prismaNames, prismaResolversPath);
+    console.log(`* Total resolver files wrote: ${wroteCount}`);
+
+    let prismaIndexFileNames = await this.getFileNames(prismaResolversPath);
+    const prismaIndexPath = path.join(prismaResolversPath, 'index.ts');
+    await writeFile(prismaIndexPath, GraphQLPrismaIndexTemplate(prismaIndexFileNames));
+    console.log(`- Wrote: ${prismaIndexPath}`);
+
+    let apiIndexFileNames = await this.getFileNames(apiResolversPath);
+    const apiIndexPath = path.join(apiResolversPath, 'index.ts');
+    await writeFile(apiIndexPath, GraphQLApiIndexTemplate(apiIndexFileNames));
+    console.log(`- Wrote: ${apiIndexPath}`);
 
     if (this.config.caslSubjectsOutFile) {
       await writeFile(this.config.caslSubjectsOutFile, CaslPrismaSubjectsTemplate(prismaNames));
@@ -96,23 +114,6 @@ export class ZenGenerator {
       await writeFile(this.config.defaultFieldsOutFile, DefaultFieldsTemplate(prismaNames));
       console.log(`- Wrote: ${this.config.defaultFieldsOutFile}`);
     }
-
-    const wroteCount = await this.nestAbacResolvers(prismaNames);
-
-    // Get the type names via the filename of the `resolvers` directory
-    let indexTypeNames = (await readdir(nestResolversPath))
-      .filter(
-        f =>
-          path.basename(f) !== 'index.ts' &&
-          !path.basename(f).endsWith('.spec.ts') &&
-          !path.basename(f).endsWith('.test.ts')
-      )
-      .map(f => path.basename(f, '.ts')); // Remove `.ts` extension
-
-    const indexPath = path.join(nestResolversPath, 'index.ts');
-    await writeFile(indexPath, GraphQLIndexTemplate(indexTypeNames));
-    console.log(`- Wrote: ${indexPath}`);
-    console.log(`* Total resolver files wrote: ${wroteCount}`);
 
     await this.execLocal(`prettier --loglevel warn --write "${this.config.apiOutPath}/**/*.ts"`);
 
@@ -176,19 +177,34 @@ export class ZenGenerator {
     }
   }
 
-  async nestAbacResolvers(prismaNames: string[]) {
+  async prismaAbacResolvers(prismaNames: string[], outPath: string) {
     let wroteCount = 0;
     for (const prismaName of prismaNames) {
-      const outPath = path.join(this.config.apiOutPath, 'resolvers', `${prismaName}.ts`);
+      const outFile = path.join(outPath, `${prismaName}.ts`);
 
-      if (!existsSync(outPath)) {
-        await writeFile(outPath, GraphQLResolversTemplate(prismaName));
-        console.log(`- Wrote: ${outPath}`);
+      if (!existsSync(outFile)) {
+        await writeFile(outFile, GraphQLResolversTemplate(prismaName));
+        console.log(`- Wrote: ${outFile}`);
         wroteCount++;
       }
     }
 
     return wroteCount;
+  }
+
+  /**
+   * Get the type names via the filename of the `resolvers` directory
+   */
+  async getFileNames(directory: string) {
+    return (await readdir(directory, { withFileTypes: true }))
+      .filter(dirent => dirent.isFile())
+      .filter(
+        f =>
+          path.basename(f.name) !== 'index.ts' &&
+          !path.basename(f.name).endsWith('.spec.ts') &&
+          !path.basename(f.name).endsWith('.test.ts')
+      )
+      .map(f => path.basename(f.name, '.ts')); // Remove `.ts` extension
   }
 
   private execLocal(command: string) {

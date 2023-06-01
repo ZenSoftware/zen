@@ -8,9 +8,9 @@ import type { NonNullableFields } from '@zen/common';
 import { CaslAbility, CaslGuard, CaslPolicy } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { AUTH_FIELDS_TOKEN } from '../../auth';
-import type { AppAbility } from '../../auth';
-import { DefaultFields, PrismaSelectService, PrismaService, ${name} } from '../../prisma';
+import { AUTH_FIELDS_TOKEN } from '../../../auth';
+import type { AppAbility } from '../../../auth';
+import { DefaultFields, PrismaSelectService, PrismaService, ${name} } from '../../../prisma';
 import type {
   Aggregate${name}Args,
   CreateOne${name}Args,
@@ -22,7 +22,7 @@ import type {
   UpdateMany${name}Args,
   UpdateOne${name}Args,
   UpsertOne${name}Args,
-} from '../resolversTypes';
+} from '../../resolversTypes';
 
 export const typeDefs = null;
 // export const typeDefs = gql\`
