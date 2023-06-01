@@ -20,7 +20,7 @@ export class MailService {
   //--------------------------------------------------------------------------
   send(options: MailOptions) {
     logger.log(`Sent ${options.template} to ${options.to}`);
-    return this.mailer.sendMail(options).catch(error => logger.error(error, options));
+    return this.mailer.sendMail(options).catch(error => logger.error({ error, options }));
   }
   //--------------------------------------------------------------------------
   sendGeneral(options: { to: string; subject: string; context: GeneralContext }) {
