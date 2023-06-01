@@ -27,7 +27,7 @@ export const typeDefs = gql`
 `;
 
 @Resolver('User')
-@UseGuards(RolesGuard('Super'))
+@UseGuards(RolesGuard('Prisma'))
 export class UserResolver {
   constructor(
     @Inject(AUTH_FIELDS_TOKEN) private readonly authFields: DefaultFields,

@@ -36,7 +36,7 @@ export const typeDefs = null;
 // \`;
 
 @Resolver('${name}')
-@UseGuards(RolesGuard('Super'))
+@UseGuards(RolesGuard('Prisma'))
 export class ${name}Resolver {
   constructor(
     @Inject(AUTH_FIELDS_TOKEN) private readonly authFields: DefaultFields,
