@@ -6,9 +6,9 @@ import { CaslAbility, CaslGuard, CaslPolicy } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import gql from 'graphql-tag';
 
-import { AUTH_FIELDS_TOKEN, AuthService } from '../../auth';
-import type { AppAbility } from '../../auth';
-import { DefaultFields, PrismaSelectService, PrismaService, User } from '../../prisma';
+import { AUTH_FIELDS_TOKEN, AuthService } from '../../../auth';
+import type { AppAbility } from '../../../auth';
+import { DefaultFields, PrismaSelectService, PrismaService, User } from '../../../prisma';
 import type {
   AggregateUserArgs,
   CreateOneUserArgs,
@@ -20,7 +20,7 @@ import type {
   UpdateManyUserArgs,
   UpdateOneUserArgs,
   UpsertOneUserArgs,
-} from '../resolversTypes';
+} from '../../resolversTypes';
 
 export const typeDefs = gql`
   extend type User {
