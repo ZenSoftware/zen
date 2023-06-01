@@ -29,9 +29,7 @@ export class MailService {
       to: options.to,
       subject: options.subject,
       context: options.context,
-    })
-      .catch(logger.error)
-      .then();
+    }).then();
   }
   //--------------------------------------------------------------------------
   sendPasswordReset(user: Pick<User, 'id' | 'email'>) {
