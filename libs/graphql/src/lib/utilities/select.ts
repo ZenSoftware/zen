@@ -36,7 +36,7 @@
  * @param input - Item to be serialized as a select object.
  * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
- * @return `{outputField: number | string} | undefined` - Cleaned and serialized select object.
+ * @return `{ [outputField]: number | string } | undefined` - Cleaned and serialized select object.
  */
 export function selectOne<T>(
   item: T | number | string | null | undefined,
@@ -135,7 +135,7 @@ export function selectOne<T>(
  * @param input - Iterable of items to be cleaned and serialized as select objects.
  * @param outputField  - Output field name of the return objects. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
  * @param inputField - Input field name to select over. Defaults to `'id'` and `inputField = outputField` if `inputField` is not specified.
- * @return `Array<{outputField: number | string}> | undefined` - Cleaned and serialized array of select objects.
+ * @return `Array<{ [outputField]: number | string }>` - Serialized and cleaned array of select objects.
  */
 export function selectMany<T>(
   input: Iterable<T | null | undefined> | null | undefined,
