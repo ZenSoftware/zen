@@ -32,14 +32,21 @@
     <div class="row m-0 w-100">
       <div class="col-auto p-0">
         <button kendoGridAddCommand title="New"
-        *ngIf="showAdd" [disabled]="disableAdd" [ngClass]="{'k-primary': !disableAdd}" class="me-2">
+        *ngIf="showAdd" [disabled]="loading || disableAdd" [ngClass]="{'k-primary': !disableAdd}" class="me-2">
           <i class="fa-solid fa-fw fa-plus"></i>
         </button>
     
-        <button type="button" title="Toggle Group Visibility" matBadge="{{groupLength}}" matBadgeSize="small" matBadgeColor="accent"
-        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2" [ngClass]="{'k-primary': groupLength > 0 && !disableGroupButton}" (click)="gridSettings.showGroups = !gridSettings.showGroups"
-        *ngIf="showGroupButton" [disabled]="disableGroupButton">
+        <button (click)="gridSettings.showGroups = !gridSettings.showGroups" title="Toggle Group Visibility"
+        matBadge="{{groupLength}}" matBadgeSize="small" matBadgeColor="accent"
+        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2" [ngClass]="{'k-primary': groupLength > 0 && !disableGroupButton}"
+        *ngIf="showGroupButton" [disabled]="loading || disableGroupButton">
           <i class="fa-solid fa-fw fa-layer-group"></i>
+        </button>
+
+        <button (click)="exportToCSV()" title="Export to CSV"
+        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2"
+        *ngIf="showCSV" [disabled]="loading || disableCSV">
+        <i class="fa-solid fa-fw fa-file-csv"></i>
         </button>
 
         <button title="Export to Excel" kendoGridExcelCommand class="me-2"
@@ -53,17 +60,20 @@
       <div class="col p-0 text-end">
         <ng-content select="[toolbar-right]"></ng-content>
 
-        <button type="button" title="Refresh" class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2" (click)="refresh()"
+        <button (click)="refresh()" title="Refresh"
+        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2"
         *ngIf="showRefresh" [disabled]="loading || disableRefresh">
           <i class="fa-solid fa-fw fa-sync"></i>
         </button>
 
-        <button type="button" title="AutoFit Columns" class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2" (click)="autoFitCols()"
+        <button (click)="autoFitCols()" title="AutoFit Columns"
+        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2"
         *ngIf="showAutoFitColsButton" [disabled]="disableAutoFitColsButton">
           <i class="fa-solid fa-fw fa-compress"></i>
         </button>
 
-        <button type="button" title="Reset" class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid" (click)="resetClick()"
+        <button (click)="resetClick()" title="Reset"
+        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid"
         *ngIf="showReset" [disabled]="disableReset">
           <i class="fa-solid fa-fw fa-eraser"></i>
         </button>
