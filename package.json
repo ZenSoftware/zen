@@ -132,7 +132,7 @@
     "bootswatch": "~5.3.0",
     "cypress": "^12.13.0",
     "cz-customizable": "^7.0.0",
-    "eslint": "~8.41.0",
+    "eslint": "~8.42.0",
     "eslint-config-prettier": "~8.8.0",
     "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-storybook": "^0.6.12",
@@ -176,4 +176,3 @@
     }
   }
 }
-
