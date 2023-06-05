@@ -46,7 +46,7 @@
 
         <button [matMenuTriggerFor]="menu" title="Export"
         class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
-        *ngIf="showGroupButton" [disabled]="loading || disableExports">
+        *ngIf="showExports" [disabled]="loading || disableExports">
           <i class="fa-solid fa-fw fa-file-export"></i>
         </button>
         <mat-menu #menu="matMenu">
