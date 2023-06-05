@@ -1,5 +1,6 @@
 import { PathLike, createWriteStream } from 'node:fs';
 import { mkdir, stat } from 'node:fs/promises';
+import path from 'node:path';
 
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
@@ -67,7 +68,7 @@ export class SampleResolver {
       .on('error', err => {
         logger.error(`${filename} ReadStream Error`, err);
       })
-      .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
+      .pipe(createWriteStream(path.join(UPLOADS_PATH, filename)))
       .on('close', () => {
         logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
       })
@@ -91,7 +92,7 @@ export class SampleResolver {
             .on('error', err => {
               logger.error(`${filename} ReadStream Error`, err);
             })
-            .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
+            .pipe(createWriteStream(path.join(UPLOADS_PATH, filename)))
             .on('close', () => {
               logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
               resolve(filename);
