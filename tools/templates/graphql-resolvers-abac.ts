@@ -1,7 +1,8 @@
 const lowercase = (name: string) => name.charAt(0).toLowerCase() + name.slice(1);
 
 export function GraphQLResolversABACTemplate(name: string) {
-  return `import { subject } from '@casl/ability';
+  return `// Experimental
+import { subject } from '@casl/ability';
 import { ForbiddenException, Inject, NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import type { NonNullableFields } from '@zen/common';
