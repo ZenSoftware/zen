@@ -496,70 +496,36 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
   saveAsCSV() {
     const filename = this.excelFileName.replace('.xlsx', '.csv');
-
-    const fields = this.gridSettings.columnsConfig
-      .sort((a, b) => <number>a.orderIndex - <number>b.orderIndex)
-      .filter(c => !c.hidden)
-      .map(c => c.field as string);
+    const fields = this.fields;
 
     if (this.settings.process === 'local') {
-      const allData = this.allData() as { data: any[] };
+      const data = this.allData() as { data: any[] };
 
-      this.exporter.exportCSV({
-        data: allData.data,
-        filename,
-        fields,
-      });
+      this.exporter.exportCSV({ data, filename, fields });
     } else {
       const allData$ = this.allData() as Observable<{ data: T[] }>;
 
       allData$.subscribe(({ data }) => {
-        this.exporter.exportCSV({
-          data,
-          filename,
-          fields,
-        });
+        this.exporter.exportCSV({ data, filename, fields });
       });
     }
   }
 
   saveAsJSON() {
     const filename = this.excelFileName.replace('.xlsx', '.json');
+    const fields = this.fields;
 
-    const fields = this.gridSettings.columnsConfig
-      .sort((a, b) => <number>a.orderIndex - <number>b.orderIndex)
-      .filter(c => !c.hidden)
-      .map(c => c.field as string);
+    if (this.settings.process === 'local') {
+      const data = this.allData() as { data: any[] };
 
-    const data = this.gridData.data.map(row => {
-      const redactedRow: Record<string, unknown> = {};
+      this.exporter.exportJSON({ data, filename, fields });
+    } else {
+      const allData$ = this.allData() as Observable<{ data: T[] }>;
 
-      for (const field of fields) {
-        const fieldSplit = field.split('.');
-        let next: any = {};
-
-        if (fieldSplit.length > 1) {
-          for (let i = 0; i < fieldSplit.length; i++) {
-            const fieldToken = fieldSplit[i];
-
-            if (i === fieldSplit.length - 1) {
-              next[fieldToken] = row[fieldToken];
-            } else {
-              next[fieldToken] = {};
-              next = next[fieldToken];
-            }
-          }
-
-          merge(redactedRow, next);
-        } else {
-          redactedRow[field] = row[field];
-        }
-      }
-
-      return redactedRow;
-    });
-
-    this.exporter.exportJSON({ data, filename });
+      allData$.subscribe(({ data }) => {
+        this.exporter.exportJSON({ data, filename, fields });
+      });
+    }
   }
 
   get excelFileName() {
@@ -568,6 +534,13 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       result += this.settings.typename ? this.settings.typename + ' ' : '';
     result += `${this.gridData?.total} items.xlsx`;
     return result;
+  }
+
+  get fields() {
+    return this.gridSettings.columnsConfig
+      .sort((a, b) => <number>a.orderIndex - <number>b.orderIndex)
+      .filter(c => !c.hidden)
+      .map(c => c.field as string);
   }
 
   get columnsConfig(): any {
