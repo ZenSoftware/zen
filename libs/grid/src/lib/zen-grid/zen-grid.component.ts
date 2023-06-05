@@ -48,7 +48,7 @@ import {
 } from '@zen/components';
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
-import { cloneDeep, omit } from 'lodash-es';
+import { cloneDeep, merge, omit } from 'lodash-es';
 import { Observable, Subscription, map } from 'rxjs';
 
 import {
@@ -532,10 +532,30 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       .map(c => c.field as string);
 
     const data = this.gridData.data.map(row => {
-      const redactedRow: Record<any, unknown> = {};
-      for (const field in row) {
-        if (fields.includes(field)) redactedRow[field] = row[field];
+      const redactedRow: Record<string, unknown> = {};
+
+      for (const field of fields) {
+        const fieldSplit = field.split('.');
+        let next: any = {};
+
+        if (fieldSplit.length > 1) {
+          for (let i = 0; i < fieldSplit.length; i++) {
+            const fieldToken = fieldSplit[i];
+
+            if (i === fieldSplit.length - 1) {
+              next[fieldToken] = row[fieldToken];
+            } else {
+              next[fieldToken] = {};
+              next = next[fieldToken];
+            }
+          }
+
+          merge(redactedRow, next);
+        } else {
+          redactedRow[field] = row[field];
+        }
       }
+
       return redactedRow;
     });
 
