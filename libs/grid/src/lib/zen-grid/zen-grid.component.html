@@ -43,16 +43,17 @@
           <i class="fa-solid fa-fw fa-layer-group"></i>
         </button>
 
-        <button (click)="exportToCSV()" title="Export to CSV"
-        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2"
-        *ngIf="showCSV" [disabled]="loading || disableCSV">
-        <i class="fa-solid fa-fw fa-file-csv"></i>
-        </button>
 
-        <button title="Export to Excel" kendoGridExcelCommand class="me-2"
-        *ngIf="showExcel" [disabled]="loading || disableExcel">
-          <i class="fa-solid fa-fw fa-file-excel"></i>
+        <button [matMenuTriggerFor]="menu" title="Export"
+        class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
+        *ngIf="showGroupButton" [disabled]="loading || disableExports">
+          <i class="fa-solid fa-fw fa-file-export"></i>
         </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="grid.saveAsExcel()">Excel</button>
+          <button mat-menu-item (click)="saveAsCSV()">CSV</button>
+          <button mat-menu-item (click)="saveAsJSON()">JSON</button>
+        </mat-menu>
 
         <ng-content select="[toolbar-left]"></ng-content>
       </div>
@@ -61,19 +62,19 @@
         <ng-content select="[toolbar-right]"></ng-content>
 
         <button (click)="refresh()" title="Refresh"
-        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2"
+        class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
         *ngIf="showRefresh" [disabled]="loading || disableRefresh">
           <i class="fa-solid fa-fw fa-sync"></i>
         </button>
 
         <button (click)="autoFitCols()" title="AutoFit Columns"
-        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2"
+        class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
         *ngIf="showAutoFitColsButton" [disabled]="disableAutoFitColsButton">
           <i class="fa-solid fa-fw fa-compress"></i>
         </button>
 
         <button (click)="resetClick()" title="Reset"
-        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid"
+        class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
         *ngIf="showReset" [disabled]="disableReset">
           <i class="fa-solid fa-fw fa-eraser"></i>
         </button>

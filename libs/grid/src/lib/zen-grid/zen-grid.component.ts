@@ -14,6 +14,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Ability } from '@casl/ability';
@@ -51,7 +52,7 @@ import { cloneDeep, omit } from 'lodash-es';
 import { Observable, Subscription, map } from 'rxjs';
 
 import {
-  CSVExporterService,
+  ExporterService,
   KendoGridSettings,
   KendoGridSettingsService,
   KendoToPrismaService,
@@ -109,6 +110,7 @@ const DEFAULT_TAKE = 10;
     InputsModule,
     MatBadgeModule,
     MatButtonModule,
+    MatMenuModule,
     MatSnackBarModule,
     ReactiveFormsModule,
     SafeHtmlPipe,
@@ -135,8 +137,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() disableAutoFitColsButton = false;
   @Input() disableDelete = false;
   @Input() disableEdit = false;
-  @Input() disableExcel = false;
-  @Input() disableCSV = false;
+  @Input() disableExports = false;
   @Input() disableGroupButton = false;
   @Input() disableRefresh = false;
   @Input() disableReset = false;
@@ -151,8 +152,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() showAutoFitColsButton = true;
   @Input() showDelete: boolean | ((row: T) => boolean) = true;
   @Input() showEdit: boolean | ((row: T) => boolean) = true;
-  @Input() showExcel = true;
-  @Input() showCSV = true;
+  @Input() showExports = true;
   @Input() showFilters = true;
   @Input() showGroupButton = false;
   @Input() showPager = true;
@@ -211,7 +211,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   constructor(
     private apollo: Apollo.Apollo,
     private changeDetectorRef: ChangeDetectorRef,
-    private csvExporterService: CSVExporterService,
+    private exporter: ExporterService,
     private kendoGridSettingsService: KendoGridSettingsService,
     private kendoToPrisma: KendoToPrismaService,
     private snackBar: MatSnackBar,
@@ -494,18 +494,18 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     }
   };
 
-  exportToCSV() {
+  saveAsCSV() {
     const filename = this.excelFileName.replace('.xlsx', '.csv');
+
     const fields = this.gridSettings.columnsConfig
+      .sort((a, b) => <number>a.orderIndex - <number>b.orderIndex)
       .filter(c => !c.hidden)
       .map(c => c.field as string);
-
-    fields.sort();
 
     if (this.settings.process === 'local') {
       const allData = this.allData() as { data: any[] };
 
-      this.csvExporterService.export({
+      this.exporter.exportCSV({
         data: allData.data,
         filename,
         fields,
@@ -514,13 +514,32 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       const allData$ = this.allData() as Observable<{ data: T[] }>;
 
       allData$.subscribe(({ data }) => {
-        this.csvExporterService.export({
+        this.exporter.exportCSV({
           data,
           filename,
           fields,
         });
       });
     }
+  }
+
+  saveAsJSON() {
+    const filename = this.excelFileName.replace('.xlsx', '.json');
+
+    const fields = this.gridSettings.columnsConfig
+      .sort((a, b) => <number>a.orderIndex - <number>b.orderIndex)
+      .filter(c => !c.hidden)
+      .map(c => c.field as string);
+
+    const data = this.gridData.data.map(row => {
+      const redactedRow: Record<any, unknown> = {};
+      for (const field in row) {
+        if (fields.includes(field)) redactedRow[field] = row[field];
+      }
+      return redactedRow;
+    });
+
+    this.exporter.exportJSON({ data, filename });
   }
 
   get excelFileName() {
