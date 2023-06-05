@@ -1,5 +1,6 @@
 import { PathLike, createWriteStream } from 'node:fs';
 import { mkdir, stat } from 'node:fs/promises';
+import path from 'node:path';
 
 import { Logger, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver, Subscription } from '@nestjs/graphql';
@@ -11,7 +12,7 @@ import { interval } from 'rxjs';
 
 import type { Upload } from '../models';
 
-const UPLOADS_PATH = './uploads/';
+const UPLOADS_PATH = './uploads';
 const logger = new Logger('SampleResolver');
 const pubSub = new PubSub();
 
@@ -59,6 +60,12 @@ interval(1000).subscribe(i =>
 export class SampleResolver {
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
+    /**
+     * You normally would pipe the stream directly to a blob service in
+     * the cloud somewhere and then store the file meta within your database.
+     * But local storage is fine for demonstrating gaining access to the
+     * pertinent streams and file meta.
+     */
     await createUploadDirectory();
 
     const { filename, mimetype, encoding, createReadStream } = file;
@@ -67,7 +74,7 @@ export class SampleResolver {
       .on('error', err => {
         logger.error(`${filename} ReadStream Error`, err);
       })
-      .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
+      .pipe(createWriteStream(path.join(UPLOADS_PATH, filename)))
       .on('close', () => {
         logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
       })
@@ -91,7 +98,7 @@ export class SampleResolver {
             .on('error', err => {
               logger.error(`${filename} ReadStream Error`, err);
             })
-            .pipe(createWriteStream(`${UPLOADS_PATH}${filename}`))
+            .pipe(createWriteStream(path.join(UPLOADS_PATH, filename)))
             .on('close', () => {
               logger.log(`Uploaded: ${filename} | mimetype: ${mimetype} | encoding: ${encoding}`);
               resolve(filename);
