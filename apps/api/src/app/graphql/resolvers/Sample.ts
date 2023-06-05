@@ -12,7 +12,7 @@ import { interval } from 'rxjs';
 
 import type { Upload } from '../models';
 
-const UPLOADS_PATH = './uploads/';
+const UPLOADS_PATH = './uploads';
 const logger = new Logger('SampleResolver');
 const pubSub = new PubSub();
 
