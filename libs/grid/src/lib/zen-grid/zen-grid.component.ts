@@ -537,10 +537,11 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   }
 
   get fields() {
-    return this.gridSettings.columnsConfig
+    return this.grid.columnList
+      .toArray()
+      .filter(c => (<any>c).field && c.isVisible)
       .sort((a, b) => <number>a.orderIndex - <number>b.orderIndex)
-      .filter(c => !c.hidden)
-      .map(c => c.field as string);
+      .map(c => (<any>c).field as string);
   }
 
   get columnsConfig(): any {
