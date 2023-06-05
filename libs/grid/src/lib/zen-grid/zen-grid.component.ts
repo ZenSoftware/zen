@@ -496,7 +496,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
   saveAsCSV() {
     const filename = this.excelFileName.replace('.xlsx', '.csv');
-    const fields = this.fields;
+    const fields = this.visibleFields;
 
     if (this.settings.process === 'local') {
       const data = this.allData() as { data: any[] };
@@ -513,12 +513,12 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
   saveAsJSON() {
     const filename = this.excelFileName.replace('.xlsx', '.json');
-    const fields = this.fields;
+    const fields = this.visibleFields;
 
     if (this.settings.process === 'local') {
       const data = this.allData() as { data: any[] };
 
-      this.exporter.exportJSON({ data, filename, fields });
+      this.exporter.exportJSON({ data, filename, fields: this.visibleFields });
     } else {
       const allData$ = this.allData() as Observable<{ data: T[] }>;
 
@@ -536,7 +536,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     return result;
   }
 
-  get fields() {
+  get visibleFields() {
     return this.grid.columnList
       .toArray()
       .filter(c => (<any>c).field && c.isVisible)
