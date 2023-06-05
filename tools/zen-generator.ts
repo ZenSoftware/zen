@@ -29,10 +29,10 @@ export type ZenGeneratorConfig = {
    * The authorization scheme to utilize for the generated resolvers.
    * 'ABAC' is experimental due to requiring a way to recursively validate dynamic Prisma queries with nested get & create operations.
    * The industry does not have a solution to authorize dynamic queries with nested get & create operations yet and thus `'RBAC'` is the default.
-   * Users will require the `'Prisma'` role for access to any of the generated Prisma GraphQL resolvers.
+   * With `'RBAC'`, users will require the `'Prisma'` role for access to any of the generated Prisma GraphQL resolvers.
    * This makes the API clear for what is accessible and what is not.
    * The Prisma resolvers are endpoints into your database and generally should not be exposed to the public.
-   * Though, there are applications for trusted internal services.
+   * Though, there are applications for trusted internal services and end-to-end type generation.
    *
    * @default 'RBAC'
    */
