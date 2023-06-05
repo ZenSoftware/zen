@@ -62,10 +62,9 @@ export class SampleResolver {
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
     /**
      * You normally would pipe the stream directly to a blob service in
-     * the cloud somewhere and store the file meta within your database.
+     * the cloud somewhere and then store the file meta within your database.
      * But local storage is fine for demonstrating gaining access to the
-     * pertinent streams and file meta.  Running the mimetype through a
-     * sanitizer is also a good idea.
+     * pertinent streams and file meta.
      */
     await createUploadDirectory();
 
