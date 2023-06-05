@@ -52,7 +52,7 @@ export class UserResolver {
     @Args() args: NonNullableFields<FindUniqueUserArgs>,
     @Info() info: GraphQLResolveInfo
   ) {
-    return this.prisma.user.findUnique(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.user.findUnique(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
@@ -60,12 +60,12 @@ export class UserResolver {
     @Args() args: NonNullableFields<FindFirstUserArgs>,
     @Info() info: GraphQLResolveInfo
   ) {
-    return this.prisma.user.findFirst(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.user.findFirst(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
   async findManyUser(@Args() args: FindManyUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.findMany(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.user.findMany(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
@@ -80,7 +80,7 @@ export class UserResolver {
 
   @Mutation()
   async createOneUser(@Args() args: CreateOneUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.create(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.user.create(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -98,7 +98,7 @@ export class UserResolver {
 
   @Mutation()
   async upsertOneUser(@Args() args: UpsertOneUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.upsert(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.user.upsert(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
