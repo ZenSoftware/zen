@@ -60,6 +60,11 @@ interval(1000).subscribe(i =>
 export class SampleResolver {
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
+    /**
+     * You normally would pipe the stream directly to a blob service in
+     * the cloud somewhere and store the file meta within your database.
+     * But local storage is fine for demonstrating gaining access to the pertinent streams.
+     */
     await createUploadDirectory();
 
     const { filename, mimetype, encoding, createReadStream } = file;
@@ -81,6 +86,11 @@ export class SampleResolver {
 
   @Mutation()
   async sampleUploadMany(@Args('files', { type: () => [GraphQLUpload] }) files: Promise<Upload>[]) {
+    /**
+     * You normally would pipe the stream directly to a blob service in
+     * the cloud somewhere and store the file meta within your database.
+     * But local storage is fine for demonstrating gaining access to the pertinent streams.
+     */
     await createUploadDirectory();
 
     return Promise.all(
