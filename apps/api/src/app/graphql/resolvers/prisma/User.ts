@@ -1,12 +1,12 @@
-import { Inject, UseGuards } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import type { NonNullableFields } from '@zen/common';
 import { RolesGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import gql from 'graphql-tag';
 
-import { AUTH_FIELDS_TOKEN, AuthService } from '../../../auth';
-import { DefaultFields, PrismaSelectService, PrismaService, User } from '../../../prisma';
+import { AuthService } from '../../../auth';
+import { PrismaSelectService, PrismaService, User } from '../../../prisma';
 import type {
   AggregateUserArgs,
   CreateOneUserArgs,
@@ -30,7 +30,6 @@ export const typeDefs = gql`
 @UseGuards(RolesGuard('Prisma'))
 export class UserResolver {
   constructor(
-    @Inject(AUTH_FIELDS_TOKEN) private readonly authFields: DefaultFields,
     private readonly auth: AuthService,
     private readonly prisma: PrismaService,
     private readonly prismaSelect: PrismaSelectService
