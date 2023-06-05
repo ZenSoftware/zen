@@ -63,7 +63,9 @@ export class SampleResolver {
     /**
      * You normally would pipe the stream directly to a blob service in
      * the cloud somewhere and store the file meta within your database.
-     * But local storage is fine for demonstrating gaining access to the pertinent streams.
+     * But local storage is fine for demonstrating gaining access to the
+     * pertinent streams and file meta.  Running the mimetype through a
+     * sanitizer is also a good idea.
      */
     await createUploadDirectory();
 
@@ -86,11 +88,6 @@ export class SampleResolver {
 
   @Mutation()
   async sampleUploadMany(@Args('files', { type: () => [GraphQLUpload] }) files: Promise<Upload>[]) {
-    /**
-     * You normally would pipe the stream directly to a blob service in
-     * the cloud somewhere and store the file meta within your database.
-     * But local storage is fine for demonstrating gaining access to the pertinent streams.
-     */
     await createUploadDirectory();
 
     return Promise.all(
