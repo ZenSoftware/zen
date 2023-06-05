@@ -21,8 +21,7 @@ gql`
   imports: [MatButtonModule, NgClass, NgIf, ZenLoadingComponent, ZenSnackbarModule],
 })
 export class ZenSampleUploadComponent {
-  @ViewChild('fileInput', { static: true })
-  fileInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
   fileName = '';
   isUploading = false;
 
