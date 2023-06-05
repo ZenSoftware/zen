@@ -2,7 +2,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { ElementRef, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ZenLoadingComponent, ZenSnackbarError, ZenSnackbarModule } from '@zen/components';
 import { SampleUploadGQL } from '@zen/graphql';
 import gql from 'graphql-tag';
@@ -18,7 +18,14 @@ gql`
   styleUrls: ['zen-sample-upload.component.scss'],
   templateUrl: 'zen-sample-upload.component.html',
   standalone: true,
-  imports: [MatButtonModule, NgClass, NgIf, ZenLoadingComponent, ZenSnackbarModule],
+  imports: [
+    MatButtonModule,
+    MatSnackBarModule,
+    NgClass,
+    NgIf,
+    ZenLoadingComponent,
+    ZenSnackbarModule,
+  ],
 })
 export class ZenSampleUploadComponent {
   @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
