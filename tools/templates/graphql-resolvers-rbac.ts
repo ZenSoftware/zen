@@ -1,6 +1,6 @@
 const lowercase = (name: string) => name.charAt(0).toLowerCase() + name.slice(1);
 
-export function GraphQLResolversRBACTemplate(name: string) {
+export function GraphQLResolversRBACTemplate(name: string, role: string) {
   return `import { Inject, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import type { NonNullableFields } from '@zen/common';
@@ -36,7 +36,7 @@ export const typeDefs = null;
 // \`;
 
 @Resolver('${name}')
-@UseGuards(RolesGuard('Prisma'))
+@UseGuards(RolesGuard('${role}'))
 export class ${name}Resolver {
   constructor(
     @Inject(AUTH_FIELDS_TOKEN) private readonly authFields: DefaultFields,
