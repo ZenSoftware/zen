@@ -1,14 +1,13 @@
 const lowercase = (name: string) => name.charAt(0).toLowerCase() + name.slice(1);
 
 export function GraphQLResolversRBACTemplate(name: string, role: string) {
-  return `import { Inject, UseGuards } from '@nestjs/common';
+  return `import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
 import type { NonNullableFields } from '@zen/common';
 import { RolesGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
-import { AUTH_FIELDS_TOKEN } from '../../../auth';
-import { DefaultFields, PrismaSelectService, PrismaService } from '../../../prisma';
+import { PrismaSelectService, PrismaService } from '../../../prisma';
 import type {
   Aggregate${name}Args,
   CreateOne${name}Args,
@@ -39,7 +38,6 @@ export const typeDefs = null;
 @UseGuards(RolesGuard('${role}'))
 export class ${name}Resolver {
   constructor(
-    @Inject(AUTH_FIELDS_TOKEN) private readonly authFields: DefaultFields,
     private readonly prisma: PrismaService,
     private readonly prismaSelect: PrismaSelectService
   ) {}
@@ -49,9 +47,7 @@ export class ${name}Resolver {
     @Args() args: NonNullableFields<FindUnique${name}Args>,
     @Info() info: GraphQLResolveInfo
   ) {
-    return this.prisma.${lowercase(
-      name
-    )}.findUnique(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.${lowercase(name)}.findUnique(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
@@ -59,16 +55,12 @@ export class ${name}Resolver {
     @Args() args: NonNullableFields<FindFirst${name}Args>,
     @Info() info: GraphQLResolveInfo
   ) {
-    return this.prisma.${lowercase(
-      name
-    )}.findFirst(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.${lowercase(name)}.findFirst(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
   async findMany${name}(@Args() args: FindMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(
-      name
-    )}.findMany(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.${lowercase(name)}.findMany(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
@@ -83,9 +75,7 @@ export class ${name}Resolver {
 
   @Mutation()
   async createOne${name}(@Args() args: CreateOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(
-      name
-    )}.create(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.${lowercase(name)}.create(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -103,9 +93,7 @@ export class ${name}Resolver {
 
   @Mutation()
   async upsertOne${name}(@Args() args: UpsertOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(
-      name
-    )}.upsert(this.prismaSelect.getArgs(info, args, this.authFields));
+    return this.prisma.${lowercase(name)}.upsert(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
