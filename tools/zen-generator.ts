@@ -32,7 +32,8 @@ export type ZenGeneratorConfig = {
    * With `'RBAC'`, users will require the `'Prisma'` role for access to any of the generated Prisma GraphQL resolvers.
    * This makes the API clear for what is accessible and what is not.
    * The Prisma resolvers are endpoints into your database and generally should not be exposed to the public.
-   * Though, there are applications for trusted internal services and end-to-end type generation.
+   * Though, there are applications for trusted internal services to access the Prisma resolvers via GraphQL.
+   * `<zen-grid>` under the `kendo` branch is an example of this.
    *
    * @default 'RBAC'
    */
