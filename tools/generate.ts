@@ -11,7 +11,10 @@ async function main() {
         doNotUseFieldUpdateOperationsInput: true,
       },
     },
-    authScheme: 'RBAC',
+    auth: {
+      scheme: 'RBAC',
+      defaultRBACRole: 'Prisma',
+    },
     apiOutPath: 'apps/api/src/app/graphql',
     caslSubjectsOutFile: 'apps/api/src/app/auth/casl/generated.ts',
     defaultFieldsOutFile: 'apps/api/src/app/prisma/default-fields.ts',
