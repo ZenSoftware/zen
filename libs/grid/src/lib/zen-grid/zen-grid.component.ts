@@ -518,7 +518,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     if (this.settings.process === 'local') {
       const data = this.allData() as { data: any[] };
 
-      this.exporter.exportJSON({ data, filename, fields: this.visibleFields });
+      this.exporter.exportJSON({ data, filename, fields });
     } else {
       const allData$ = this.allData() as Observable<{ data: T[] }>;
 
