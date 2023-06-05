@@ -48,9 +48,10 @@ import {
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
 import { cloneDeep, omit } from 'lodash-es';
-import { Subscription, map } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 
 import {
+  CSVExporterService,
   KendoGridSettings,
   KendoGridSettingsService,
   KendoToPrismaService,
@@ -135,6 +136,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() disableDelete = false;
   @Input() disableEdit = false;
   @Input() disableExcel = false;
+  @Input() disableCSV = false;
   @Input() disableGroupButton = false;
   @Input() disableRefresh = false;
   @Input() disableReset = false;
@@ -150,6 +152,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() showDelete: boolean | ((row: T) => boolean) = true;
   @Input() showEdit: boolean | ((row: T) => boolean) = true;
   @Input() showExcel = true;
+  @Input() showCSV = true;
   @Input() showFilters = true;
   @Input() showGroupButton = false;
   @Input() showPager = true;
@@ -206,13 +209,14 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   #data?: T[];
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
     private apollo: Apollo.Apollo,
+    private changeDetectorRef: ChangeDetectorRef,
+    private csvExporterService: CSVExporterService,
+    private kendoGridSettingsService: KendoGridSettingsService,
+    private kendoToPrisma: KendoToPrismaService,
     private snackBar: MatSnackBar,
     private snackBarError: ZenSnackbarError,
-    private kendoGridSettingsService: KendoGridSettingsService,
     private styles: StyleService,
-    private kendoToPrisma: KendoToPrismaService,
     private zenConfirmModal: ZenConfirmModal
   ) {}
 
@@ -480,15 +484,44 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       let variables: any = this.kendoToPrisma.getVariables(this.gridSettings.state);
       variables = omit(variables, ['take', 'skip']);
 
-      const $allData = this.settings.findManyGQL.fetch(variables).pipe(
+      const allData$ = this.settings.findManyGQL.fetch(variables).pipe(
         map(({ data }) => {
           return { data: Object.values(data)[0] as T[] };
         })
       );
 
-      return $allData;
+      return allData$;
     }
   };
+
+  exportToCSV() {
+    const filename = this.excelFileName.replace('.xlsx', '.csv');
+    const fields = this.gridSettings.columnsConfig
+      .filter(c => !c.hidden)
+      .map(c => c.field as string);
+
+    fields.sort();
+
+    if (this.settings.process === 'local') {
+      const allData = this.allData() as { data: any[] };
+
+      this.csvExporterService.export({
+        data: allData.data,
+        filename,
+        fields,
+      });
+    } else {
+      const allData$ = this.allData() as Observable<{ data: T[] }>;
+
+      allData$.subscribe(({ data }) => {
+        this.csvExporterService.export({
+          data,
+          filename,
+          fields,
+        });
+      });
+    }
+  }
 
   get excelFileName() {
     let result = format(Date.now(), 'yyyy-MM-dd') + ' ';
