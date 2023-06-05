@@ -25,19 +25,23 @@ const execAsync = promisify(exec);
 export type ZenGeneratorConfig = {
   palConfig: PalConfig;
   apiOutPath: string;
-  /**
-   * The authorization scheme to utilize for the generated resolvers.
-   * 'ABAC' is experimental due to requiring a way to recursively validate dynamic Prisma queries with nested get & create operations.
-   * The industry does not have a solution to authorize dynamic queries with nested get & create operations yet and thus `'RBAC'` is the default.
-   * With `'RBAC'`, users will require the `'Prisma'` role for access to any of the generated Prisma GraphQL resolvers.
-   * This makes the API clear for what is accessible and what is not.
-   * The Prisma resolvers are endpoints into your database and generally should not be exposed to the public.
-   * Though, there are applications for trusted internal services to access the Prisma resolvers via GraphQL.
-   * `<zen-grid>` under the `kendo` branch is an example of this.
-   *
-   * @default 'RBAC'
-   */
-  authScheme?: 'RBAC' | 'ABAC';
+  auth?: {
+    /**
+     * The authorization scheme to utilize for the generated resolvers.
+     * 'ABAC' is experimental due to requiring a way to recursively validate dynamic Prisma queries with nested get & create operations.
+     * The industry does not have a solution to authorize dynamic queries with nested get & create operations yet and thus `'RBAC'` is the default.
+     * With `'RBAC'`, users will require the `defaultRBACRole` role for access to any of the generated Prisma GraphQL resolvers.
+     * The generated GraphQL resolvers do not overwrite if the file already exists, thus further customization for authorization can be customized as needed.
+     * Though, there are applications for trusted internal services to access the Prisma resolvers via GraphQL.
+     * `<zen-grid>` under the `kendo` branch is an example of this.
+     *
+     * @default 'RBAC'
+     */
+    scheme: 'RBAC' | 'ABAC';
+
+    /** @default 'Prisma' */
+    defaultRBACRole?: string;
+  };
   caslSubjectsOutFile?: string;
   defaultFieldsOutFile?: string;
   frontend?: {
@@ -107,18 +111,29 @@ export class ZenGenerator {
     }
 
     let wroteCount = 0;
-    if (this.config.authScheme === 'ABAC') {
-      wroteCount = await this.prismaResolvers(
-        prismaNames,
-        prismaResolversPath,
-        GraphQLResolversABACTemplate
-      );
+    if (this.config.auth.scheme === 'ABAC') {
+      for (const prismaName of prismaNames) {
+        const outFile = path.join(prismaResolversPath, `${prismaName}.ts`);
+
+        if (!existsSync(outFile)) {
+          await writeFile(outFile, GraphQLResolversABACTemplate(prismaName));
+          console.log(`- Wrote: ${outFile}`);
+          wroteCount++;
+        }
+      }
     } else {
-      wroteCount = await this.prismaResolvers(
-        prismaNames,
-        prismaResolversPath,
-        GraphQLResolversRBACTemplate
-      );
+      for (const prismaName of prismaNames) {
+        const outFile = path.join(prismaResolversPath, `${prismaName}.ts`);
+
+        if (!existsSync(outFile)) {
+          await writeFile(
+            outFile,
+            GraphQLResolversRBACTemplate(prismaName, this.config.auth?.defaultRBACRole ?? 'Prisma')
+          );
+          console.log(`- Wrote: ${outFile}`);
+          wroteCount++;
+        }
+      }
     }
     console.log(`* Total resolver files wrote: ${wroteCount}`);
 
@@ -202,25 +217,6 @@ export class ZenGenerator {
         console.log(`- Wrote: ${queriesOutPath}`);
       }
     }
-  }
-
-  async prismaResolvers(
-    prismaNames: string[],
-    outPath: string,
-    template: (prismaName: string) => string
-  ) {
-    let wroteCount = 0;
-    for (const prismaName of prismaNames) {
-      const outFile = path.join(outPath, `${prismaName}.ts`);
-
-      if (!existsSync(outFile)) {
-        await writeFile(outFile, template(prismaName));
-        console.log(`- Wrote: ${outFile}`);
-        wroteCount++;
-      }
-    }
-
-    return wroteCount;
   }
 
   /**
