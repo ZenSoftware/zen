@@ -494,22 +494,22 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     }
   };
 
-  saveAsCSV() {
-    const filename = this.excelFileName.replace('.xlsx', '.csv');
-    const fields = this.visibleFields;
+  // saveAsCSV() {
+  //   const filename = this.excelFileName.replace('.xlsx', '.csv');
+  //   const fields = this.visibleFields;
 
-    if (this.settings.process === 'local') {
-      const data = this.allData() as { data: any[] };
+  //   if (this.settings.process === 'local') {
+  //     const data = this.allData() as { data: any[] };
 
-      this.exporter.exportCSV({ data, filename, fields });
-    } else {
-      const allData$ = this.allData() as Observable<{ data: T[] }>;
+  //     this.exporter.exportCSV({ data, filename, fields });
+  //   } else {
+  //     const allData$ = this.allData() as Observable<{ data: T[] }>;
 
-      allData$.subscribe(({ data }) => {
-        this.exporter.exportCSV({ data, filename, fields });
-      });
-    }
-  }
+  //     allData$.subscribe(({ data }) => {
+  //       this.exporter.exportCSV({ data, filename, fields });
+  //     });
+  //   }
+  // }
 
   saveAsJSON() {
     const filename = this.excelFileName.replace('.xlsx', '.json');
