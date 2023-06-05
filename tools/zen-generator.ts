@@ -32,8 +32,6 @@ export type ZenGeneratorConfig = {
      * The industry does not have a solution to authorize dynamic queries with nested get & create operations yet and thus `'RBAC'` is the default.
      * With `'RBAC'`, users will require the `defaultRBACRole` role for access to any of the generated Prisma GraphQL resolvers.
      * The generated GraphQL resolvers do not overwrite if the file already exists, thus further customization for authorization can be customized as needed.
-     * Though, there are applications for trusted internal services to access the Prisma resolvers via GraphQL.
-     * `<zen-grid>` under the `kendo` branch is an example of this.
      *
      * @default 'RBAC'
      */
