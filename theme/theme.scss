@@ -31,7 +31,15 @@ body {
   --bs-gutter-x: 0;
 }
 
-// Bootstrap card header font
+// Bootstrap card header font & no margins on header HTML elements
 .card-header {
   font-family: font.$zen-heading;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+  }
 }
