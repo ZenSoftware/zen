@@ -22,7 +22,7 @@
     "format": "nx format:write --all"
   },
   "dependencies": {
-    "@apollo/server": "^4.7.1",
+    "@apollo/server": "^4.7.2",
     "@casl/ability": "~6.5.0",
     "@casl/prisma": "~1.4.0",
     "@graphql-tools/merge": "^9.0.0",
