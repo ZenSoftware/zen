@@ -6,8 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Event, NavigationStart, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'zen-layout',
@@ -27,12 +27,17 @@ export class ZenLayoutComponent implements OnDestroy {
       }
     });
     this.#subs.push(routerSub);
-  }
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(result => (this.isMobile = result.matches)),
-    shareReplay(1)
-  );
+    const breakpointSub = this.breakpointObserver
+      .observe(Breakpoints.Handset)
+      .pipe(
+        tap(state => {
+          this.isMobile = state.matches;
+        })
+      )
+      .subscribe();
+    this.#subs.push(breakpointSub);
+  }
 
   ngOnDestroy() {
     this.#subs.forEach(s => s.unsubscribe());
