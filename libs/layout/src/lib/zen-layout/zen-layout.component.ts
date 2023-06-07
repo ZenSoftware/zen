@@ -30,11 +30,8 @@ export class ZenLayoutComponent implements OnDestroy {
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(result => {
-      this.isMobile = result.matches;
-      return this.isMobile;
-    }),
-    shareReplay()
+    map(result => (this.isMobile = result.matches)),
+    shareReplay(1)
   );
 
   ngOnDestroy() {
