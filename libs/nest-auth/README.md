@@ -84,6 +84,8 @@ export class AppCaslFactory extends CaslFactory {
 }
 ```
 
+The user's CASL rules are sent from the server to the client and updates the `@casl/angular` ability. This unifies the permissions across both the server and the client. Fully exploiting CASL's isomorphic capabilities.
+
 Default fields must be defined explicitly to be included during Prisma queries to ensure that they exist during authorization.  Any fields that CASL ability rules are based on should be included here.  As an example:
 
 `apps/api/src/app/auth/casl/auth-fields.ts`
