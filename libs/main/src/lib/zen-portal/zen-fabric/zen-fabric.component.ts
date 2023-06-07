@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { fabric } from 'fabric';
-import { debounce, fromEvent, interval } from 'rxjs';
+import { Subscription, debounce, fromEvent, interval } from 'rxjs';
 
 const ASPECT_RATIO = 16 / 9;
 
@@ -10,10 +10,11 @@ const ASPECT_RATIO = 16 / 9;
   styleUrls: ['zen-fabric.component.scss'],
   standalone: true,
 })
-export class ZenFabricComponent implements AfterViewInit {
+export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>;
   @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
   canvas!: fabric.Canvas;
+  #subs: Subscription[] = [];
 
   getWidth = () => this.stubDiv.nativeElement.clientWidth;
   getHeight = () => this.stubDiv.nativeElement.clientWidth / ASPECT_RATIO;
@@ -23,7 +24,7 @@ export class ZenFabricComponent implements AfterViewInit {
     this.canvasElement.nativeElement.height = this.getHeight();
     this.canvas = new fabric.Canvas(this.canvasElement.nativeElement);
 
-    fromEvent(window, 'resize')
+    const sub = fromEvent(window, 'resize')
       .pipe(debounce(() => interval(300)))
       .subscribe(() => {
         this.canvas.setDimensions({
@@ -31,6 +32,7 @@ export class ZenFabricComponent implements AfterViewInit {
           height: this.getHeight(),
         });
       });
+    this.#subs.push(sub);
 
     this.addSampleSquare();
   }
@@ -45,5 +47,9 @@ export class ZenFabricComponent implements AfterViewInit {
     });
 
     this.canvas.add(rect);
+  }
+
+  ngOnDestroy() {
+    this.#subs.forEach(sub => sub.unsubscribe());
   }
 }
