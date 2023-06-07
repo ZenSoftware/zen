@@ -6,26 +6,6 @@
       [opened]="isMobile === false">
     <mat-toolbar>
       <ng-content select="[slot=menu-toolbar]"></ng-content>
-
-      <button
-        mat-icon-button
-        class="ms-auto"
-        type="button"
-        title="Collapse menu"
-        (click)="isMobile = true"
-        *ngIf="!isMobile">
-        <i class="fa-solid fa-chevron-left"></i>
-      </button>
-
-      <button
-        mat-icon-button
-        class="ms-auto"
-        type="button"
-        title="Pin menu"
-        (click)="isMobile = false"
-        *ngIf="isMobile">
-        <i class="fa-solid fa-thumbtack"></i>
-      </button>
     </mat-toolbar>
 
     <ng-content select="[slot=menu-content]"></ng-content>
@@ -39,7 +19,7 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isMobile">
+        *ngIf="!this.drawer.opened || this.drawer.mode === 'over'">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
