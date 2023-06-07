@@ -27,9 +27,6 @@ export class ZenLayoutComponent implements OnDestroy {
       }
     });
     this.#subs.push(routerSub);
-
-    const isHandsetSub = this.isHandset$.subscribe();
-    this.#subs.push(isHandsetSub);
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
