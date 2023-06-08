@@ -17,16 +17,16 @@ The project implements a fully featured authentication & authorization system wi
 - 📲 100% responsive design.
 - 💻 100% cross-platform.  Develop on any OS and deploy to any OS, including mobile.
 - ♾️ Minimal number of concepts required to understand. Unifying as many solutions as possible such that they are isomorphic between the frontend and backend.
-- 🎐 Modern developer conveniences and an exceptional developer experience with high quality Visual Studio Code extensions preconfigured for the project.
+- 🎐 Modern developer conveniences with high quality Visual Studio Code extensions preconfigured for the project.
 - 🧰 [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) VSCode extension is the UI for all Nx workspaces.  This really helps to simplify the usage of the varying Angular & Nest schematics available in the ecosystem.
-- ❤️ [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for VSCode enables sophisticated IDE tooling over all templates.
+- ❤️ [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for VSCode enables sophisticated IDE tooling over all Angular templates.
 - 🚀 [Apollo extension](https://www.apollographql.com/docs/devtools/editor-plugins/) for VSCode is preconfigured and enables code completion for `gql` tags.
-- 🚀 [apollo-angular](https://the-guild.dev/graphql/apollo-angular/docs/development-and-testing/using-typescript) is our GraphQL client for Angular.  This project code generates everything needed so that all queries/mutations are ready for dependency injection within Angular and are strictly typed.  This project automates everything for you.
-- [@nestjs/graphql - Schema first](https://docs.nestjs.com/graphql/quick-start#schema-first) is an exceptional way of building GraphQL servers.  This project configures and code generates everything needed to create a GraphQL server with end-to-end type safety.
-- [Pal.js Generator - SDL first](https://paljs.com/generator/sdl) to help generate the GraphQL API for Prisma. [Pal.js - Select](https://paljs.com/plugins/select) to solve the GraphQL N+1 problem for all queries for free.
+- 🛰️ [apollo-angular](https://the-guild.dev/graphql/apollo-angular/docs/development-and-testing/using-typescript) is our GraphQL client for Angular.  This project code generates everything needed so that all queries/mutations are ready for dependency injection within Angular and are strictly typed.
+- 🐈‍⬛ [@nestjs/graphql - Schema first](https://docs.nestjs.com/graphql/quick-start#schema-first) is an exceptional way of building GraphQL servers.  This project configures and code generates everything needed to create a GraphQL server with end-to-end type safety.
+- 🔵 [Pal.js Generator - SDL first](https://paljs.com/generator/sdl) to help generate the GraphQL API for Prisma. [Pal.js - Select](https://paljs.com/plugins/select) to solve the GraphQL N+1 problem for all queries for free.
 - 🔐 Purpose-built user authentication & authorization modules. Full suite of authorization components, guards & directives for both Angular & Nest to tailor showing/hiding content and accepting/denying requests for a given user.
 - 🧼 Enforced linting and formatting rules to ensure all contributions have predictable structure and clear legibility.
-- 📖 [Storybook](https://storybook.js.org/docs/angular/get-started/why-storybook) integrated to catalogue available components and makes it much simpler for discoverability of reusable components.
+- 📖 [Storybook](https://storybook.js.org/docs/angular/get-started/why-storybook) is integrated to catalogue available components and makes it much simpler for discoverability of reusable components.
 
 - 💾 Example deployment scripts to Kubernetes and instructions on [setting up a local Kubernetes cluster](https://github.com/ZenSoftware/zen/tree/base/deploy/dev) for testing purposes.
 - ⚙️ Feature branches are available to `git merge` to enable features such as [data grids](https://www.telerik.com/kendo-angular-ui/components/grid/), [telemetry](https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/), or [SocketIO](https://socket.io/).
@@ -111,8 +111,8 @@ npm start
 - [x] SASS chosen as the CSS transpiler of choice.
 - [x] [Angular Material](https://material.angular.io/) components & theme.
 - [x] Mobile first approach to build the framework's core components (login form, etc).
-- [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SCSS imports and exclude the Bootstrap theme and conflicting component styles. These features are missing from Angular Material and greatly simplify the creation of responsive, mobile first applications.
-- [x] [Bootswatch](https://bootswatch.com/) SCSS variables integrated for a large assortment of high quality color themes to choose from.
+- [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SASS (.scss) imports and exclude the Bootstrap theme and conflicting component styles. These features are missing from Angular Material and greatly simplify the creation of responsive, mobile first applications.
+- [x] [Bootswatch](https://bootswatch.com/) SASS (.scss) variables integrated for a large assortment of high quality color themes to choose from.
 
 ---
 
