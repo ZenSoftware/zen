@@ -20,10 +20,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ApolloError } from '@apollo/client/errors';
 import { Environment } from '@zen/common';
 import { ZenLoadingComponent } from '@zen/components';
+import { verticalAccordion } from '@zen/components/animations';
 import { ApiError, AuthLoginInput } from '@zen/graphql';
 import { Subscription, map } from 'rxjs';
 
-import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
 import { ZenPasswordInputComponent, ZenUsernameInputComponent } from '../inputs';
 
