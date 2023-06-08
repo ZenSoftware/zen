@@ -38,7 +38,7 @@ import { Ability } from '@casl/ability';
 import { DeleteOneUserGQL, FindManyUserCountGQL, FindManyUserGQL, UserFields } from '@zen/graphql';
 import { GridMode, KendoGridSettings, ZenGridComponent, ZenGridSettings } from '@zen/grid';
 
-import { DialogData, ZenUserInputComponent } from '../zen-user-input/zen-user-input.component';
+import { DialogData, ZenUserInputComponent } from '../zen-user-input';
 
 const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
   rowColorStyles: [
@@ -80,7 +80,7 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
   selector: 'zen-user-grid',
   templateUrl: 'zen-user-grid.component.html',
   standalone: true,
-  imports: [ZenGridComponent, MatDialogModule],
+  imports: [MatDialogModule, ZenGridComponent],
 })
 export class ZenUserGridComponent {
   @Input() mode = GridMode.Default;
