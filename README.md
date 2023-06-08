@@ -111,8 +111,8 @@ npm start
 - [x] SASS chosen as the CSS transpiler of choice.
 - [x] [Angular Material](https://material.angular.io/) components & theme.
 - [x] Mobile first approach to build the framework's core components (login form, etc).
-- [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SCSS imports and exclude the Bootstrap theme and conflicting component styles. These features are missing from Angular Material and greatly simplify the creation of responsive, mobile first applications.
-- [x] [Bootswatch](https://bootswatch.com/) SCSS variables integrated for a large assortment of high quality color themes to choose from.
+- [x] Directly import [Bootstrap reset, utilities, & grid](https://www.amadousall.com/the-good-parts-of-bootstrap-4-you-are-missing-in-your-angular-material-projects/) features through SASS (.scss) imports and exclude the Bootstrap theme and conflicting component styles. These features are missing from Angular Material and greatly simplify the creation of responsive, mobile first applications.
+- [x] [Bootswatch](https://bootswatch.com/) SASS (.scss) variables integrated for a large assortment of high quality color themes to choose from.
 
 ---
 
