@@ -19,7 +19,7 @@ The project implements a fully featured authentication & authorization system wi
 - ♾️ Minimal number of concepts required to understand. Unifying as many solutions as possible such that they are isomorphic between the frontend and backend.
 - 🎐 Modern developer conveniences with high quality Visual Studio Code extensions preconfigured for the project.
 - 🧰 [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) VSCode extension is the UI for all Nx workspaces.  This really helps to simplify the usage of the varying Angular & Nest schematics available in the ecosystem.
-- ❤️ [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for VSCode enables sophisticated IDE tooling over all templates.
+- ❤️ [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for VSCode enables sophisticated IDE tooling over all Angular templates.
 - 🚀 [Apollo extension](https://www.apollographql.com/docs/devtools/editor-plugins/) for VSCode is preconfigured and enables code completion for `gql` tags.
 - 🛰️ [apollo-angular](https://the-guild.dev/graphql/apollo-angular/docs/development-and-testing/using-typescript) is our GraphQL client for Angular.  This project code generates everything needed so that all queries/mutations are ready for dependency injection within Angular and are strictly typed.  This project automates everything for you.
 - 🐈‍⬛ [@nestjs/graphql - Schema first](https://docs.nestjs.com/graphql/quick-start#schema-first) is an exceptional way of building GraphQL servers.  This project configures and code generates everything needed to create a GraphQL server with end-to-end type safety.
