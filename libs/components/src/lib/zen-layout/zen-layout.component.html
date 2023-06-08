@@ -1,9 +1,9 @@
 <mat-sidenav-container style="height: 100vh">
   <mat-sidenav #drawer fixedInViewport
-      style="min-width: 14em"
-      [attr.role]="isMobile ? 'dialog' : 'navigation'"
-      [mode]="isMobile ? 'over' : 'side'"
-      [opened]="isMobile === false">
+    style="min-width: 14em"
+    [attr.role]="isMobile ? 'dialog' : 'navigation'"
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="isMobile === false">
     <mat-toolbar>
       <ng-content select="[slot=menu-toolbar]"></ng-content>
     </mat-toolbar>

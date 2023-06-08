@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { AuthService, IfLoggedInDirective, RolesDirective, ZenLoginLinkComponent } from '@zen/auth';
-import { ZenLayoutComponent } from '@zen/layout';
+import { ZenLayoutComponent } from '@zen/components';
 
 @Component({
   selector: 'zen-root',
