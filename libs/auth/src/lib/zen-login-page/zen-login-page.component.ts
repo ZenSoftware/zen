@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { Environment } from '@zen/common';
+import { verticalAccordion } from '@zen/components/animations';
 
-import { verticalAccordion } from '../animations';
 import { IfPublicRegistrationDirective } from '../directives/if-public-registration.directive';
 import { ZenLoginFormComponent } from '../zen-login-form/zen-login-form.component';
 
