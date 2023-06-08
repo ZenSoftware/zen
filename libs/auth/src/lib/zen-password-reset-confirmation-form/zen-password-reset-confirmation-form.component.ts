@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ZenLoadingComponent } from '@zen/components';
+import { verticalAccordion } from '@zen/components/animations';
 import {
   AuthPasswordResetConfirmation,
   AuthPasswordResetConfirmationGQL,
@@ -32,7 +33,6 @@ import {
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
 import { passwordValidatorFn } from '../validators';
 
