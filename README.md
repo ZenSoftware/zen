@@ -17,7 +17,7 @@ The project implements a fully featured authentication & authorization system wi
 - 📲 100% responsive design.
 - 💻 100% cross-platform.  Develop on any OS and deploy to any OS, including mobile.
 - ♾️ Minimal number of concepts required to understand. Unifying as many solutions as possible such that they are isomorphic between the frontend and backend.
-- 🎐 Modern developer conveniences and an exceptional developer experience with high quality Visual Studio Code extensions preconfigured for the project.
+- 🎐 Modern developer conveniences with high quality Visual Studio Code extensions preconfigured for the project.
 - 🧰 [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) VSCode extension is the UI for all Nx workspaces.  This really helps to simplify the usage of the varying Angular & Nest schematics available in the ecosystem.
 - ❤️ [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for VSCode enables sophisticated IDE tooling over all templates.
 - 🚀 [Apollo extension](https://www.apollographql.com/docs/devtools/editor-plugins/) for VSCode is preconfigured and enables code completion for `gql` tags.
