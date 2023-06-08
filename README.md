@@ -1,48 +1,54 @@
 # ⛩ Zen ⛩
 
-#### Nest + Prisma + Angular 🏮 Full Stack GraphQL Starter Kit
+#### Nest + Prisma + Apollo + Angular 🏮 Full Stack GraphQL Starter Kit
+
+Zen is a starter kit to build web portals as a stateful single-page application.  This kit has everything needed for building a customized user experience utilizing only TypeScript & GraphQL.  The project has end-to-end typings and is achieved by combining several code generation packages together.
+
+Specifically, this is an [Nx](https://nx.dev/) integrated monorepo, utilizing [Angular](https://angular.io/) for the frontend, [Nest](https://nestjs.com/) for the backend, and [Prisma](https://www.prisma.io/) for the data layer.
+[Apollo](https://www.apollographql.com/) is deeply integrated throughout the entire tech stack, enabling for a modern approach to communication between the client and the server via GraphQL.
+
+The project implements a fully featured authentication & authorization system with a minimalistic implementation.  This includes a login component, registration component, password change component and a fully featured password reset flow.  All of this while only having 1 model in the `schema.prisma` file, the `User` model. Guards & directives are also integrated for both [RBAC](https://docs.nestjs.com/guards#role-based-authentication) & [ABAC](https://casl.js.org/v6/en/guide/intro) authorization schemes.  Everything needed for a malleable and robust user managment system has been wired up for you.
 
 ---
 
-What is really nice about Nest and Angular is that their programming idioms carry over seamlessly between the two, allowing for frontend devs to contribute to the backend. Though, there are complexities in creating the GraphQL endpoint that exposes the various CRUD operations over the Prisma data model on the backend.  A combination between Nest + Prisma + Angular has provided for new capabilities that the industry has not really seen before. This project code generates all the boilerplate required in bridging these 3 technologies together.
-
-There is a tremendous amount of value to be gained by treating the `schema.prisma` file as the single source of truth and then code generating everything else from that. It guarantees consistency between the frontend and backend. It also centralizes the CRUD operations over all the Prisma models via a single import endpoint.
-
-This project also provides solutions for the hardest parts of user authentication as well. I have strictly kept to the Angular and Nest best practices that are being utilized within the ecosystem. This project is an attempt to package the sum total of all the lessons I have learned and making it publicly available to the community. All the services being generated should be fairly self explanatory and lots of useful npm scripts have been provided for the various stages of development to deployment. Better documentation will come with time. 🍜
-
-> 🎐 New contributors are welcome!
-
----
-
-## 🍣 Project Setup Instructions - [GitHub Repo](https://github.com/ZenSoftware/Zen)
+## 🍣 Setup Instructions - [GitHub Repo](https://github.com/ZenSoftware/zen)
 
 **Requirements**
 
-- [Node v18](https://nodejs.org/)
+- [Node v20](https://nodejs.org/)
 - [Docker](https://www.docker.com/) or [Rancher Desktop](https://rancherdesktop.io/)
 
 ```bash
 # Project setup steps
-git clone https://github.com/ZenSoftware/zen.git --depth=1
+git clone https://github.com/ZenSoftware/zen.git
 cd zen
+
+# Make a copy of the .env file
 cp .env.example .env
 
 # Substitute npm for pnpm if you are using that
 npm i
+
+# Start the PostgreSQL server
 docker-compose up -d
+
+# Run the initial Prisma migration
 npm run prisma:migrate
 ```
+---
 
 ```bash
 # Start the Nest API
 npm run start:api
 
-# Start the Angular site at localhost:4200
+# Start the Angular app at localhost:4200
 npm start
 ```
 
+---
+
 ```bash
-# Reload Apollo VSCode extension via command palette
+# Reload Apollo VSCode extension via command palette after the API has started
 >Apollo: Reload schema
 ```
 
