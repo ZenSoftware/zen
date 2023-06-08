@@ -7,7 +7,32 @@ Zen is a starter kit to build web portals as a stateful single-page application.
 Specifically, this is an [Nx](https://nx.dev/) integrated monorepo, utilizing [Angular](https://angular.io/) for the frontend, [Nest](https://nestjs.com/) for the backend, and [Prisma](https://www.prisma.io/) for the data layer.
 [Apollo](https://www.apollographql.com/) is deeply integrated throughout the entire tech stack, enabling for a modern approach to communication between the client and the server via GraphQL.
 
-The project implements a fully featured authentication & authorization system with a minimalistic implementation.  This includes a login component, registration component, password change component and a fully featured password reset flow.  All of this while only having 1 model in the `schema.prisma` file, the `User` model. Guards & directives are also integrated for both [RBAC](https://docs.nestjs.com/guards#role-based-authentication) & [ABAC](https://casl.js.org/v6/en/guide/intro) authorization schemes.  Everything needed for a malleable and robust user managment system has been wired up for you.
+The project implements a fully featured authentication & authorization system with a minimalistic implementation.  This includes a login component, registration component, password change component and a fully featured password reset flow.  All of this while only having 1 model in the `schema.prisma` file, the `User` model. Guards & directives are also integrated for both [RBAC](https://docs.nestjs.com/guards#role-based-authentication) & [ABAC](https://casl.js.org/v6/en/guide/intro) authorization schemes and can be used in conjunction.  Everything needed for a malleable and robust user managment system has been wired up for you.
+
+## Key Features
+
+- 🏡 [Nx](https://nx.dev/), [Nest](https://nestjs.com/), [Prisma](https://www.prisma.io/), [Apollo](https://www.apollographql.com/) and [Angular](https://angular.io/).
+- 💙 Everything is written in TypeScript, even code generation scripts are written in TypeScript.
+- 🗃️ End-to-end type safety.  Code generation is preconfigured and polished to perfection.
+- 📲 100% responsive design.
+- 💻 100% cross-platform.  Develop on any OS and deploy to any OS, including mobile.
+- ♾️ Minimal number of concepts required to understand. Unifying as many solutions as possible such that they are isomorphic between the frontend and backend.
+- 🎐 Modern developer conveniences and an exceptional developer experience with high quality Visual Studio Code extensions preconfigured for the project.
+- 🧰 [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) VSCode extension is the UI for all Nx workspaces.  This really helps to simplify the usage of the varying Angular & Nest schematics available in the ecosystem.
+- ❤️ [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for VSCode enables sophisticated IDE tooling over all templates.
+- 🚀 [Apollo extension](https://www.apollographql.com/docs/devtools/editor-plugins/) for VSCode is preconfigured and enables code completion for `gql` tags.
+- 🚀 [apollo-angular](https://the-guild.dev/graphql/apollo-angular/docs/development-and-testing/using-typescript) is our GraphQL client for Angular.  This project code generates everything needed so that all queries/mutations are ready for dependency injection within Angular and are strictly typed.  This project automates everything for you.
+- [@nestjs/graphql - Schema first](https://docs.nestjs.com/graphql/quick-start#schema-first) is an exceptional way of building GraphQL servers.  This project configures and code generates everything needed to create a GraphQL server with end-to-end type safety.
+- [Pal.js Generator - SDL first](https://paljs.com/generator/sdl) to help generate the GraphQL API for Prisma. [Pal.js - Select](https://paljs.com/plugins/select) to solve the GraphQL N+1 problem for all queries for free.
+- 🔐 Purpose-built user authentication & authorization modules. Full suite of authorization components, guards & directives for both Angular & Nest to tailor showing/hiding content and accepting/denying requests for a given user.
+- 🧼 Enforced linting and formatting rules to ensure all contributions have predictable structure and clear legibility.
+- 📖 [Storybook](https://storybook.js.org/docs/angular/get-started/why-storybook) integrated to catalogue available components and makes it much simpler for discoverability of reusable components.
+
+- 💾 Example deployment scripts to Kubernetes and instructions on [setting up a local Kubernetes cluster](https://github.com/ZenSoftware/zen/tree/base/deploy/dev) for testing purposes.
+- ⚙️ Feature branches are available to `git merge` to enable features such as [data grids](https://www.telerik.com/kendo-angular-ui/components/grid/), [telemetry](https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/), or [SocketIO](https://socket.io/).
+- 🔌 Seamless communication with the API server. Interceptors have been inserted before all client service network calls to automatically handle authorization.  This in combination with the end-to-end type safety for all GraphQL requests makes communicating with the server incredibly simple.
+- 🧪 [Jest](https://jestjs.io/) as the testing framework.  Clean output for results and extraordinarily versatile with [@nx/jest](https://nx.dev/packages/jest) as the test runner.
+- 🎨 Modern responsive components & theme with SASS (.scss) as the CSS transpiler of choice.
 
 ---
 
@@ -104,7 +129,6 @@ npm start
 ## 🍡 Developer Operations
 
 - [x] [Nx for project management](https://nx.dev/angular) to allow for the use of [Nx Console extensions for VSCode](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console). Nx Console is a GUI interface for monorepos that adds a lot of modern developer conveniences. It also helps to simplify the use of the various Angular & Nest code generation schematics available in the ecosystem.
-- [x] Strict typings with Typescript for everything. Even the code generation tools are written in Typescript.
 - [x] [Angular Language Service for VSCode](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for modern IDE tooling.
 - [x] npm scripts for versioned releases of the Nest **api** server as a containerized Docker image. [node:18-alpine](https://hub.docker.com/_/node?tab=description&ref=hackernoon.com) is used as the Docker container base image and the appropriate `tsconfig.app.json` configurations are being applied for the Nest app.
 - [x] Example [Kubernetes](https://kubernetes.io/) deployment scripts.
