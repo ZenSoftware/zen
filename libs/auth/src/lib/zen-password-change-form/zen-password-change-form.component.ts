@@ -21,10 +21,10 @@ import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { ApolloError } from '@apollo/client/errors';
 import { ZenLoadingComponent } from '@zen/components';
+import { verticalAccordion } from '@zen/components/animations';
 import { ApiError, AuthPasswordChangeGQL, AuthPasswordChangeInput } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
-import { verticalAccordion } from '../animations';
 import { ZenPasswordInputComponent } from '../inputs';
 import { passwordValidatorFn } from '../validators';
 
