@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { verticalAccordion } from '@zen/components/animations';
 
-import { verticalAccordion } from '../animations';
 import { ZenPasswordResetRequestFormComponent } from '../zen-password-reset-request-form/zen-password-reset-request-form.component';
 
 @Component({

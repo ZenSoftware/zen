@@ -22,10 +22,9 @@ import { MatInputModule } from '@angular/material/input';
 import { ApolloError } from '@apollo/client/errors';
 import { ApiConstants, ApiError } from '@zen/common';
 import { ZenLoadingComponent } from '@zen/components';
+import { verticalAccordion } from '@zen/components/animations';
 import { AuthPasswordResetRequestInput, AuthPasswordResetRequestQueryGQL } from '@zen/graphql';
 import { Subscription } from 'rxjs';
-
-import { verticalAccordion } from '../animations';
 
 const EMAIL_MIN_LENGTH = 6;
 
