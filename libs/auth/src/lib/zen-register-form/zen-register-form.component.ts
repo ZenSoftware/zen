@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ApolloError } from '@apollo/client/errors';
 import { Environment } from '@zen/common';
 import { ZenLoadingComponent } from '@zen/components';
+import { verticalAccordion } from '@zen/components/animations';
 import {
   ApiError,
   AuthRegister,
@@ -32,7 +33,6 @@ import {
 } from '@zen/graphql';
 import { Subscription } from 'rxjs';
 
-import { verticalAccordion } from '../animations';
 import { AuthService } from '../auth.service';
 import {
   ZenEmailInputComponent,
