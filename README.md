@@ -26,7 +26,7 @@ The project implements a fully featured authentication & authorization system wi
 - 🔵 [Pal.js Generator - SDL first](https://paljs.com/generator/sdl) to help generate the GraphQL API for Prisma. [Pal.js - Select](https://paljs.com/plugins/select) to solve the GraphQL N+1 problem for all queries for free.
 - 🔐 Purpose-built user authentication & authorization modules. Full suite of authorization components, guards & directives for both Angular & Nest to tailor showing/hiding content and accepting/denying requests for a given user.
 - 🧼 Enforced linting and formatting rules to ensure all contributions have predictable structure and clear legibility.
-- 📖 [Storybook](https://storybook.js.org/docs/angular/get-started/why-storybook) integrated to catalogue available components and makes it much simpler for discoverability of reusable components.
+- 📖 [Storybook](https://storybook.js.org/docs/angular/get-started/why-storybook) is integrated to catalogue available components and makes it much simpler for discoverability of reusable components.
 
 - 💾 Example deployment scripts to Kubernetes and instructions on [setting up a local Kubernetes cluster](https://github.com/ZenSoftware/zen/tree/base/deploy/dev) for testing purposes.
 - ⚙️ Feature branches are available to `git merge` to enable features such as [data grids](https://www.telerik.com/kendo-angular-ui/components/grid/), [telemetry](https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/), or [SocketIO](https://socket.io/).
