@@ -15,12 +15,14 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   #subs: Subscription[] = [];
 
   ngAfterViewInit() {
-    this.canvas = new fabric.Canvas(this.canvasElement.nativeElement);
-    this.updateDimensions();
+    this.canvas = new fabric.Canvas(this.canvasElement.nativeElement, {
+      width: this.getWidth(),
+      height: this.getHeight(),
+    });
 
     setTimeout(() => {
       this.updateDimensions();
-    }, 10);
+    });
 
     const sub = fromEvent(window, 'resize')
       .pipe(debounce(() => interval(300)))
@@ -32,10 +34,13 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     this.addSampleSquare();
   }
 
+  getWidth = () => this.stubDiv.nativeElement.offsetWidth;
+  getHeight = () => window.innerHeight - this.stubDiv.nativeElement.getBoundingClientRect().y - 10;
+
   updateDimensions() {
     this.canvas.setDimensions({
-      width: this.stubDiv.nativeElement.offsetWidth,
-      height: window.innerHeight - this.stubDiv.nativeElement.getBoundingClientRect().y - 10,
+      width: this.getWidth(),
+      height: this.getHeight(),
     });
   }
 
