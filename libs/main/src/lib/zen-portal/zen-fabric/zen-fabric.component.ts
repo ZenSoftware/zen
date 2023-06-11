@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@ang
 import { fabric } from 'fabric';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
 
-const ASPECT_RATIO = 16 / 9;
+const ASPECT_RATIO = 20 / 9;
 
 @Component({
   selector: 'zen-fabric',
@@ -16,21 +16,24 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   canvas!: fabric.Canvas;
   #subs: Subscription[] = [];
 
-  getWidth = () => this.stubDiv.nativeElement.clientWidth;
-  getHeight = () => this.stubDiv.nativeElement.clientWidth / ASPECT_RATIO;
+  getWidth = () => this.stubDiv.nativeElement.offsetWidth;
+  getHeight = () => this.getWidth() / ASPECT_RATIO;
+
+  updateDimensions() {
+    this.canvas.setDimensions({
+      width: this.getWidth(),
+      height: this.getHeight(),
+    });
+  }
 
   ngAfterViewInit() {
-    this.canvasElement.nativeElement.width = this.getWidth();
-    this.canvasElement.nativeElement.height = this.getHeight();
     this.canvas = new fabric.Canvas(this.canvasElement.nativeElement);
+    this.updateDimensions();
 
     const sub = fromEvent(window, 'resize')
       .pipe(debounce(() => interval(300)))
       .subscribe(() => {
-        this.canvas.setDimensions({
-          width: this.getWidth(),
-          height: this.getHeight(),
-        });
+        this.updateDimensions();
       });
     this.#subs.push(sub);
 
