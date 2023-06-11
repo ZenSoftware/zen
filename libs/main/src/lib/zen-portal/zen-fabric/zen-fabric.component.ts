@@ -9,7 +9,7 @@ import { Subscription, debounce, fromEvent, interval } from 'rxjs';
   standalone: true,
 })
 export class ZenFabricComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>;
+  @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>; // Used to calculate width
   @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
   canvas!: fabric.Canvas;
   #subs: Subscription[] = [];
