@@ -18,6 +18,14 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     this.canvas = new fabric.Canvas(this.canvasElement.nativeElement, {
       width: this.getWidth(),
       height: this.getHeight(),
+      stopContextMenu: true,
+      fireRightClick: true,
+    });
+
+    this.canvas.on('mouse:down', e => {
+      if (e.button === 3) {
+        console.log(`right-click: ${e.absolutePointer!.x}, ${e.absolutePointer!.y}`);
+      }
     });
 
     setTimeout(() => {
@@ -45,6 +53,10 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   }
 
   addSampleSquare() {
+    fabric.Image.fromURL('assets/take_in_the_sky_by_yuumei-dar9m8b.jpg', img => {
+      this.canvas.add(img);
+    });
+
     const rect = new fabric.Rect({
       left: 100,
       top: 100,
