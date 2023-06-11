@@ -26,7 +26,9 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.canvas = new fabric.Canvas(this.canvasElement.nativeElement);
-    this.updateDimensions();
+    setTimeout(() => {
+      this.updateDimensions();
+    }, 50);
 
     const sub = fromEvent(window, 'resize')
       .pipe(debounce(() => interval(300)))
