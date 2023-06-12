@@ -107,14 +107,25 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   }
 
   addSamples() {
-    fabric.Image.fromURL('assets/take_in_the_sky_by_yuumei-dar9m8b.jpg', img => {
-      this.canvas.add(img);
-      img.sendToBack();
+    const chatText = new fabric.Textbox('Sample text', {
+      left: 250,
+      top: 300,
+      width: 300,
+      fontFamily: 'zen-default',
+      editable: true,
+      textAlign: 'center',
     });
+    this.canvas.add(chatText);
 
     fabric.Image.fromURL('assets/chat-bubble.svg', img => {
       this.canvas.add(img);
       img.moveTo(100);
+      chatText.moveTo(200);
+    });
+
+    fabric.Image.fromURL('assets/take_in_the_sky_by_yuumei-dar9m8b.jpg', img => {
+      this.canvas.add(img);
+      img.sendToBack();
     });
   }
 
