@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
@@ -10,7 +9,7 @@ import { Subscription, debounce, fromEvent, interval } from 'rxjs';
   templateUrl: 'zen-fabric.component.html',
   styleUrls: ['zen-fabric.component.scss'],
   standalone: true,
-  imports: [MatListModule, MatMenuModule, NgFor],
+  imports: [MatListModule, MatMenuModule],
 })
 export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>; // Used to calculate width
@@ -50,6 +49,11 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       height: this.getHeight(),
       stopContextMenu: true,
       fireRightClick: true,
+    });
+
+    this.canvas.on('selection:created', ev => {
+      const selection = this.canvas.getActiveObject();
+      console.log('selection', selection);
     });
 
     this.canvas.on('mouse:down', ev => {
