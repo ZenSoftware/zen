@@ -109,17 +109,13 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   addSamples() {
     fabric.Image.fromURL('assets/take_in_the_sky_by_yuumei-dar9m8b.jpg', img => {
       this.canvas.add(img);
+      img.sendToBack();
     });
 
-    this.canvas.add(
-      new fabric.Rect({
-        left: 100,
-        top: 100,
-        fill: '#e83e8c',
-        width: 50,
-        height: 50,
-      })
-    );
+    fabric.Image.fromURL('assets/chat-bubble.svg', img => {
+      this.canvas.add(img);
+      img.moveTo(100);
+    });
   }
 
   ngOnDestroy() {
