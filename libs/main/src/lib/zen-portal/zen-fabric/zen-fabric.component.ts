@@ -26,9 +26,8 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       fireRightClick: true,
     });
 
-    this.canvas.on('selection:created', ev => {
-      const selection = this.canvas.getActiveObject();
-      console.log('selection', selection);
+    setTimeout(() => {
+      this.updateDimensions();
     });
 
     this.contextMenu.menuItems = [
@@ -47,8 +46,9 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       }
     });
 
-    setTimeout(() => {
-      this.updateDimensions();
+    this.canvas.on('selection:created', ev => {
+      const selection = this.canvas.getActiveObject();
+      console.log('selection', selection);
     });
 
     const sub = fromEvent(window, 'resize')
@@ -76,15 +76,15 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       this.canvas.add(img);
     });
 
-    const rect = new fabric.Rect({
-      left: 100,
-      top: 100,
-      fill: '#e83e8c',
-      width: 50,
-      height: 50,
-    });
-
-    this.canvas.add(rect);
+    this.canvas.add(
+      new fabric.Rect({
+        left: 100,
+        top: 100,
+        fill: '#e83e8c',
+        width: 50,
+        height: 50,
+      })
+    );
   }
 
   ngOnDestroy() {
