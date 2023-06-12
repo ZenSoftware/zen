@@ -10,7 +10,7 @@ document.addEventListener('contextmenu', event => {
 
 export interface ZenMenuItem {
   label: string;
-  action?: (item: any) => void;
+  action?: (data: any) => void;
 }
 
 @Component({
