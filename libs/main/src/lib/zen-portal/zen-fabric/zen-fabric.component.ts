@@ -1,49 +1,24 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { fabric } from 'fabric';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
+
+import { ZenContextmenuComponent } from './zen-contextmenu/zen-contextmenu.component';
 
 @Component({
   selector: 'zen-fabric',
   templateUrl: 'zen-fabric.component.html',
   styleUrls: ['zen-fabric.component.scss'],
   standalone: true,
-  imports: [MatListModule, MatMenuModule],
+  imports: [ZenContextmenuComponent],
 })
 export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>; // Used to calculate width
   @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('contextMenu') contextMenu!: ZenContextmenuComponent;
   canvas!: fabric.Canvas;
   #subs: Subscription[] = [];
 
-  @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;
-  contextMenuPosition = { x: '0px', y: '0px' };
-
-  onContextMenu(event: MouseEvent, item: any) {
-    event.preventDefault();
-    this.contextMenuPosition.x = event.clientX + 'px';
-    this.contextMenuPosition.y = event.clientY + 'px';
-    this.contextMenu.menuData = { item: item };
-    this.contextMenu.menu?.focusFirstItem('mouse');
-    this.contextMenu.openMenu();
-  }
-
-  onContextMenuAction1(obj: fabric.Object) {
-    obj.set({ left: 50, top: 50 });
-    this.canvas.renderAll();
-  }
-
-  onContextMenuAction2(obj: fabric.Object) {
-    alert(`Click on Action 2 for ${obj}`);
-  }
-
   ngAfterViewInit() {
-    document.addEventListener('contextmenu', event => {
-      const eventTarget = event?.target as HTMLElement;
-      eventTarget?.className?.includes('cdk-overlay') && event.preventDefault();
-    });
-
     this.canvas = new fabric.Canvas(this.canvasElement.nativeElement, {
       width: this.getWidth(),
       height: this.getHeight(),
@@ -56,9 +31,19 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       console.log('selection', selection);
     });
 
+    this.contextMenu.menuItems = [
+      {
+        label: 'Move to 50, 50',
+        action: (obj: fabric.Object) => {
+          obj.set({ left: 50, top: 50 });
+          this.canvas.renderAll();
+        },
+      },
+    ];
+
     this.canvas.on('mouse:down', ev => {
       if (ev.button === 3 && ev.target) {
-        this.onContextMenu(ev.e, ev.target);
+        this.contextMenu.open(ev.e, ev.target);
       }
     });
 
