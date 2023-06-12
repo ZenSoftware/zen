@@ -19,6 +19,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   #subs: Subscription[] = [];
 
   ngAfterViewInit() {
+    // Create the Fabric canvas
     this.canvas = new fabric.Canvas(this.canvasElement.nativeElement, {
       width: this.getWidth(),
       height: this.getHeight(),
@@ -26,37 +27,42 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       fireRightClick: true,
     });
 
+    // Wait for the canvas to be rendered before updating dimensions
     setTimeout(() => {
       this.updateDimensions();
     });
 
-    this.contextMenu.menuItems = [
-      {
-        label: 'Move to 50, 50',
-        action: (obj: fabric.Object) => {
-          obj.set({ left: 50, top: 50 });
-          this.canvas.renderAll();
-        },
-      },
-    ];
-
-    this.canvas.on('mouse:down', ev => {
-      if (ev.button === 3 && ev.target) {
-        this.contextMenu.open(ev.e, ev.target);
-      }
-    });
-
-    this.canvas.on('selection:created', ev => {
-      const selection = this.canvas.getActiveObject();
-      console.log('selection', selection);
-    });
-
+    // Update canvas dimensions on resize
     const sub = fromEvent(window, 'resize')
       .pipe(debounce(() => interval(200)))
       .subscribe(() => {
         this.updateDimensions();
       });
     this.#subs.push(sub);
+
+    // Define contextmenu items
+    this.contextMenu.menuItems = [
+      {
+        label: 'Reset position',
+        action: (obj: fabric.Object) => {
+          obj.set({ left: 0, top: 0 });
+          this.canvas.renderAll();
+        },
+      },
+    ];
+
+    // Open contextmenu on right click
+    this.canvas.on('mouse:down', ev => {
+      if (ev.button === 3 && ev.target) {
+        this.contextMenu.open(ev.e, ev.target);
+      }
+    });
+
+    // Log selection
+    this.canvas.on('selection:created', ev => {
+      const selection = this.canvas.getActiveObject();
+      console.log('selection', selection);
+    });
 
     this.addSamples();
   }
