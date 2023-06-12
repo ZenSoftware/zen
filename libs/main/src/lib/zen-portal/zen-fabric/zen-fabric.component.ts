@@ -25,6 +25,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       height: this.getHeight(),
       stopContextMenu: true,
       fireRightClick: true,
+      preserveObjectStacking: true,
     });
 
     // Wait for the canvas to be rendered before updating dimensions
@@ -46,6 +47,34 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
         label: 'Reset position',
         action: (obj: fabric.Object) => {
           obj.set({ left: 0, top: 0 });
+          this.canvas.renderAll();
+        },
+      },
+      {
+        label: 'Bring forward',
+        action: (obj: fabric.Object) => {
+          obj.bringForward();
+          this.canvas.renderAll();
+        },
+      },
+      {
+        label: 'Bring to front',
+        action: (obj: fabric.Object) => {
+          obj.bringToFront();
+          this.canvas.renderAll();
+        },
+      },
+      {
+        label: 'Send to back',
+        action: (obj: fabric.Object) => {
+          obj.sendToBack();
+          this.canvas.renderAll();
+        },
+      },
+      {
+        label: 'Send backwards',
+        action: (obj: fabric.Object) => {
+          obj.sendBackwards();
           this.canvas.renderAll();
         },
       },
