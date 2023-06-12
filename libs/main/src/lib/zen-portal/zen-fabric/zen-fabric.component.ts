@@ -58,7 +58,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       });
     this.#subs.push(sub);
 
-    this.addSampleSquare();
+    this.addSamples();
   }
 
   getWidth = () => this.stubDiv.nativeElement.offsetWidth;
@@ -71,7 +71,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  addSampleSquare() {
+  addSamples() {
     fabric.Image.fromURL('assets/take_in_the_sky_by_yuumei-dar9m8b.jpg', img => {
       this.canvas.add(img);
     });
