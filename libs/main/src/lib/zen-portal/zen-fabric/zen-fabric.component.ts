@@ -124,9 +124,10 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
           return undefined;
         }
       }
-      return styles[0];
+      if (styles.length > 0) return styles[0];
+      else return undefined;
     } else {
-      return object[styleName];
+      return object.get(styleName);
     }
   }
 
