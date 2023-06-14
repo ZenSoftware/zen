@@ -94,12 +94,14 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
 
   setFontColor() {
     const color = '#00ffff';
-    const textbox = this.canvas.getObjects().find(obj => obj.type === 'textbox') as fabric.Textbox;
+    const textbox = this.canvas.getActiveObject() as fabric.Textbox;
 
-    this.setTextStyle(textbox, 'fill', color);
+    if (textbox?.type === 'textbox') {
+      this.setTextStyle(textbox, 'fill', color);
 
-    if (textbox.isEditing) {
-      textbox.hiddenTextarea?.focus();
+      if (textbox.isEditing) {
+        textbox.hiddenTextarea?.focus();
+      }
     }
   }
 
@@ -114,7 +116,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     this.canvas.renderAll();
   }
 
-  getStyle(object: fabric.IText & Record<string, any>, styleName: string) {
+  getTextStyle(object: fabric.IText & Record<string, any>, styleName: string) {
     if (object.getSelectionStyles && object.isEditing) {
       const styles = object.getSelectionStyles().map((x: any) => x[styleName]);
       for (let i = 1; i < styles.length; i++) {
