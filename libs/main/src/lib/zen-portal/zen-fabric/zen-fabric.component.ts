@@ -42,7 +42,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     this.#subs.push(sub);
 
     // Define contextmenu items
-    const menuItems: ZenMenuItem[] = [
+    const menu: ZenMenuItem[] = [
       {
         label: 'Reset position',
         action: obj => obj.set({ left: 0, top: 0 }),
@@ -64,7 +64,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
         action: obj => obj.sendBackwards(),
       },
     ];
-    this.contextMenu.setMenuItems(menuItems, this.canvas);
+    this.contextMenu.setMenu(menu, this.canvas);
 
     // Open contextmenu on right click
     this.canvas.on('mouse:down', ev => {

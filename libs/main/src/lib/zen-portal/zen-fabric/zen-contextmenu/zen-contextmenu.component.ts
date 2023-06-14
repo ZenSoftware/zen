@@ -34,7 +34,7 @@ export class ZenContextmenuComponent {
     this.contextMenu.openMenu();
   }
 
-  setMenuItems(menuItems: ZenMenuItem[], canvas: fabric.Canvas) {
+  setMenu(menuItems: ZenMenuItem[], canvas: fabric.Canvas) {
     this.canvas = canvas;
     this.menuItems = menuItems;
   }
