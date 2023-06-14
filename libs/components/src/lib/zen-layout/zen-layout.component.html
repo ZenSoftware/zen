@@ -4,6 +4,7 @@
     [attr.role]="isMobile ? 'dialog' : 'navigation'"
     [mode]="isMobile ? 'over' : 'side'"
     [opened]="isMobile === false">
+
     <mat-toolbar>
       <ng-content select="[slot=menu-toolbar]"></ng-content>
     </mat-toolbar>
