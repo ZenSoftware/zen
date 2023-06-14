@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@ang
 import { fabric } from 'fabric';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
 
-import { ZenContextmenuComponent } from './zen-contextmenu/zen-contextmenu.component';
+import { ZenContextmenuComponent, ZenMenuItem } from './zen-contextmenu/zen-contextmenu.component';
 
 @Component({
   selector: 'zen-fabric',
@@ -42,43 +42,29 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     this.#subs.push(sub);
 
     // Define contextmenu items
-    this.contextMenu.menuItems = [
+    const menuItems: ZenMenuItem[] = [
       {
         label: 'Reset position',
-        action: (obj: fabric.Object) => {
-          obj.set({ left: 0, top: 0 });
-          this.canvas.renderAll();
-        },
+        action: obj => obj.set({ left: 0, top: 0 }),
       },
       {
         label: 'Bring forward',
-        action: (obj: fabric.Object) => {
-          obj.bringForward();
-          this.canvas.renderAll();
-        },
+        action: obj => obj.bringForward(),
       },
       {
         label: 'Bring to front',
-        action: (obj: fabric.Object) => {
-          obj.bringToFront();
-          this.canvas.renderAll();
-        },
+        action: obj => obj.bringToFront(),
       },
       {
         label: 'Send to back',
-        action: (obj: fabric.Object) => {
-          obj.sendToBack();
-          this.canvas.renderAll();
-        },
+        action: obj => obj.sendToBack(),
       },
       {
         label: 'Send backwards',
-        action: (obj: fabric.Object) => {
-          obj.sendBackwards();
-          this.canvas.renderAll();
-        },
+        action: obj => obj.sendBackwards(),
       },
     ];
+    this.contextMenu.setMenuItems(menuItems, this.canvas);
 
     // Open contextmenu on right click
     this.canvas.on('mouse:down', ev => {

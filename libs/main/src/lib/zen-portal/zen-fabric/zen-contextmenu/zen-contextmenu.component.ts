@@ -10,7 +10,7 @@ document.addEventListener('contextmenu', event => {
 
 export interface ZenMenuItem {
   label: string;
-  action?: (data: any) => void;
+  action?: (obj: fabric.Object) => void;
 }
 
 @Component({
@@ -21,6 +21,7 @@ export interface ZenMenuItem {
 })
 export class ZenContextmenuComponent {
   @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;
+  canvas!: fabric.Canvas;
   menuItems: ZenMenuItem[] = [];
   contextMenuPosition = { x: '0px', y: '0px' };
 
@@ -33,7 +34,13 @@ export class ZenContextmenuComponent {
     this.contextMenu.openMenu();
   }
 
+  setMenuItems(menuItems: ZenMenuItem[], canvas: fabric.Canvas) {
+    this.canvas = canvas;
+    this.menuItems = menuItems;
+  }
+
   action(menuItem: ZenMenuItem, data: any) {
     menuItem.action?.(data);
+    this.canvas.renderAll();
   }
 }
