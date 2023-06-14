@@ -28,7 +28,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       preserveObjectStacking: true,
     });
 
-    // Wait for the canvas to be rendered before updating dimensions
+    // Wait for the app to be rendered before updating dimensions
     setTimeout(() => {
       this.updateDimensions();
     });
@@ -96,6 +96,40 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     this.addSamples();
   }
 
+  sample() {
+    const textbox = this.canvas.getObjects().find(obj => obj.type === 'textbox') as fabric.Textbox;
+    textbox.set({ fill: '#00ffff' });
+    this.canvas.renderAll();
+    // this.setStyle(textbox, 'fill', '#00ffff');
+    // const fill = this.getStyle(textbox, 'fill');
+    console.log('fill', textbox.fill);
+  }
+
+  setStyle(object: fabric.IText & Record<string, any>, styleName: string, value: any) {
+    if (object.setSelectionStyles && object.isEditing) {
+      const style: Record<string, any> = {};
+      style[styleName] = value;
+      object.setSelectionStyles(style).setCoords();
+    } else {
+      object[styleName] = value;
+    }
+    this.canvas.renderAll();
+  }
+
+  getStyle(object: fabric.IText & Record<string, any>, styleName: string) {
+    if (object.getSelectionStyles && object.isEditing) {
+      const styles = object.getSelectionStyles().map((x: any) => x[styleName]);
+      for (let i = 1; i < styles.length; i++) {
+        if (styles[i] !== styles[0]) {
+          return undefined;
+        }
+      }
+      return styles[0];
+    } else {
+      return object[styleName];
+    }
+  }
+
   getWidth = () => this.stubDiv.nativeElement.offsetWidth;
   getHeight = () => window.innerHeight - this.stubDiv.nativeElement.getBoundingClientRect().y - 10;
 
@@ -114,6 +148,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       fontFamily: 'zen-default',
       editable: true,
       textAlign: 'center',
+      // isEditing: true,
     });
     this.canvas.add(chatText);
 
