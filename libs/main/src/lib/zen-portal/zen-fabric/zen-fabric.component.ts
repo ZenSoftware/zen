@@ -73,34 +73,43 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     this.canvas.on('mouse:down', ev => {
       if (ev.button === 3 && ev.target) {
         this.contextMenu.open(ev.e, ev.target);
+        this.canvas.setActiveObject(ev.target);
+        this.canvas.renderAll();
       }
     });
 
     // Log selection
     this.canvas.on('selection:created', ev => {
       const selection = this.canvas.getActiveObject();
-      console.log('selection', selection);
+      console.log('selection:created', selection);
+    });
+
+    this.canvas.on('selection:updated', ev => {
+      const selection = this.canvas.getActiveObject();
+      console.log('selection:updated', selection);
     });
 
     this.addSamples();
   }
 
-  sample() {
+  setFontColor() {
+    const color = '#00ffff';
     const textbox = this.canvas.getObjects().find(obj => obj.type === 'textbox') as fabric.Textbox;
-    textbox.set({ fill: '#00ffff' });
-    this.canvas.renderAll();
-    // this.setStyle(textbox, 'fill', '#00ffff');
-    // const fill = this.getStyle(textbox, 'fill');
-    console.log('fill', textbox.fill);
+
+    this.setTextStyle(textbox, 'fill', color);
+
+    if (textbox.isEditing) {
+      textbox.hiddenTextarea?.focus();
+    }
   }
 
-  setStyle(object: fabric.IText & Record<string, any>, styleName: string, value: any) {
+  setTextStyle(object: fabric.IText & Record<string, any>, styleName: string, value: any) {
     if (object.setSelectionStyles && object.isEditing) {
       const style: Record<string, any> = {};
       style[styleName] = value;
       object.setSelectionStyles(style).setCoords();
     } else {
-      object[styleName] = value;
+      object.set({ [styleName]: value });
     }
     this.canvas.renderAll();
   }
