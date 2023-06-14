@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    <h1>
+      <i class="fa-solid fa-fw fa-table me-1"></i>
+      User Grid
+    </h1>
+  </div>
+  <div class="card-body p-0">
+    <zen-grid
+      [mode]="mode"
+      [settings]="settings"
+      [selection]="selection"
+      (add)="addHandler()" 
+      (edit)="editHandler($event)">
+    </zen-grid>
+  </div>
+</div>

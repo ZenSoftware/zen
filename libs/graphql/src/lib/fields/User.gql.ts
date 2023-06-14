@@ -5,5 +5,8 @@ export const UserFields = gql`
     id
     username
     email
+    createdAt
+    roles
+    rules
   }
 `;
