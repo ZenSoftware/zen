@@ -48,20 +48,23 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
         action: obj => obj.set({ left: 0, top: 0 }),
       },
       {
-        label: 'Bring forward',
-        action: obj => obj.bringForward(),
+        type: 'divider',
       },
       {
         label: 'Bring to front',
         action: obj => obj.bringToFront(),
       },
       {
-        label: 'Send to back',
-        action: obj => obj.sendToBack(),
+        label: 'Bring forward',
+        action: obj => obj.bringForward(),
       },
       {
         label: 'Send backwards',
         action: obj => obj.sendBackwards(),
+      },
+      {
+        label: 'Send to back',
+        action: obj => obj.sendToBack(),
       },
     ];
     this.contextMenu.setMenu(menu, this.canvas);

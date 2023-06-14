@@ -5,6 +5,9 @@
 </div>
 <mat-menu #contextMenu="matMenu">
 	<ng-template matMenuContent let-data="data">
-		<button mat-menu-item *ngFor="let menu of menuItems" (click)="action(menu, data)" >{{menu.label}}</button>
+    <ng-container *ngFor="let item of menuItems">
+      <hr *ngIf="item.type === 'divider'" class="m-0">
+      <button mat-menu-item *ngIf="item.type !== 'divider'" (click)="action(item, data)" >{{item.label}}</button>
+    </ng-container>
 	</ng-template>
 </mat-menu>

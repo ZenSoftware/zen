@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
@@ -9,7 +9,8 @@ document.addEventListener('contextmenu', event => {
 });
 
 export interface ZenMenuItem {
-  label: string;
+  type?: 'divider';
+  label?: string;
   action?: (obj: fabric.Object) => void;
 }
 
@@ -17,7 +18,7 @@ export interface ZenMenuItem {
   selector: 'zen-contextmenu',
   templateUrl: 'zen-contextmenu.component.html',
   standalone: true,
-  imports: [MatListModule, MatMenuModule, NgFor],
+  imports: [MatListModule, MatMenuModule, NgFor, NgIf],
 })
 export class ZenContextmenuComponent {
   @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;
@@ -40,7 +41,7 @@ export class ZenContextmenuComponent {
   }
 
   action(menuItem: ZenMenuItem, data: any) {
-    menuItem.action?.(data);
+    (<any>menuItem).action?.(data);
     this.canvas.renderAll();
   }
 }
