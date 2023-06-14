@@ -2,7 +2,7 @@
 
 #### Nest + Prisma + Apollo + Angular 🏮 Full Stack GraphQL Starter Kit
 
-Zen is a starter kit to build web portals as a stateful single-page application.  This kit has everything needed for building a customized user experience utilizing only TypeScript & GraphQL.  The project has end-to-end typings and is achieved by combining several code generation packages together.
+Zen is a starter kit to build web portals as a stateful single-page application.  This kit has everything needed for building a customized user experience utilizing only TypeScript & GraphQL.  The project has end-to-end typings and this is achieved by combining several code generation packages together.
 
 Specifically, this is an [Nx](https://nx.dev/) integrated monorepo, utilizing [Angular](https://angular.io/) for the frontend, [Nest](https://nestjs.com/) for the backend, and [Prisma](https://www.prisma.io/) for the data layer.
 [Apollo](https://www.apollographql.com/) is deeply integrated throughout the entire tech stack, enabling for a modern approach to communication between the client and the server via GraphQL.
