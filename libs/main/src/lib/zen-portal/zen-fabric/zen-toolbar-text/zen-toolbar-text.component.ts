@@ -1,24 +1,30 @@
 import { Component, Input } from '@angular/core';
+import { ColorPickerModule } from '@progress/kendo-angular-inputs';
 
 @Component({
   selector: 'zen-toolbar-text',
   templateUrl: 'zen-toolbar-text.component.html',
   standalone: true,
-  imports: [],
+  imports: [ColorPickerModule],
 })
 export class ZenToolbarTextComponent {
   @Input() canvas!: fabric.Canvas;
+  fill = '#000000';
 
-  setFontColor(value: string) {
+  fillClosed() {
+    const textbox = this.canvas.getActiveObject() as fabric.Textbox;
+
+    if (textbox?.type === 'textbox' && textbox.isEditing) {
+      textbox.hiddenTextarea!.focus();
+    }
+  }
+
+  setFill(value: string) {
     const textbox = this.canvas.getActiveObject() as fabric.Textbox;
 
     if (textbox?.type === 'textbox') {
       this.setTextStyle(textbox, 'fill', value);
       this.canvas.renderAll();
-
-      if (textbox.isEditing) {
-        textbox.hiddenTextarea?.focus();
-      }
     }
   }
 
