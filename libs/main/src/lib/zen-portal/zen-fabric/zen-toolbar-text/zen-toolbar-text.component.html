@@ -4,7 +4,7 @@ Fill:
 
 <mat-form-field>
   <mat-label>Font</mat-label>
-  <mat-select (valueChange)="setFont($event)">
+  <mat-select #fontSelect (valueChange)="setFont($event)" [style.font-family]="fontSelect.value">
     <mat-option *ngFor="let font of fonts" [value]="font" [style.font-family]="font">{{font}}</mat-option>
   </mat-select>
 </mat-form-field>
