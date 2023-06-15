@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { fabric } from 'fabric';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
 
@@ -19,6 +26,23 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   @ViewChild('toolbarText') toolbarText!: ZenToolbarTextComponent;
   canvas!: fabric.Canvas;
   #subs: Subscription[] = [];
+
+  @HostListener('window:keydown.delete')
+  handleDelete() {
+    const selection = this.canvas.getActiveObjects();
+
+    const isEditing = selection.find(
+      obj => obj.type === 'textbox' && (<fabric.Textbox>obj).isEditing
+    );
+
+    if (isEditing) return;
+
+    for (const obj of selection) {
+      this.canvas.remove(obj);
+    }
+
+    this.canvas.discardActiveObject();
+  }
 
   ngAfterViewInit() {
     // Create the Fabric canvas
