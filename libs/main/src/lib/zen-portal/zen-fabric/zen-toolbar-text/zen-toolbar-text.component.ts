@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { ColorPickerModule } from '@progress/kendo-angular-inputs';
+import FontFaceObserver from 'fontfaceobserver';
 
 @Component({
   selector: 'zen-toolbar-text',
   templateUrl: 'zen-toolbar-text.component.html',
+  styleUrls: ['zen-toolbar-text.component.scss'],
   standalone: true,
   imports: [ColorPickerModule],
 })
@@ -51,5 +53,20 @@ export class ZenToolbarTextComponent {
     } else {
       return object.get(styleName);
     }
+  }
+
+  setFont(font: string) {
+    const myfont = new FontFaceObserver(font);
+    myfont
+      .load()
+      .then(() => {
+        const textbox = this.canvas.getActiveObject() as fabric.Textbox;
+        this.setTextStyle(textbox, 'fontFamily', font);
+        this.canvas.requestRenderAll();
+      })
+      .catch(function (e) {
+        console.log(e);
+        alert('font loading failed ' + font);
+      });
   }
 }
