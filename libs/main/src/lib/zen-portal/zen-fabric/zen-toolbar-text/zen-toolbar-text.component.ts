@@ -1,4 +1,6 @@
+import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { MatSelectModule } from '@angular/material/select';
 import { ColorPickerModule } from '@progress/kendo-angular-inputs';
 import FontFaceObserver from 'fontfaceobserver';
 
@@ -7,11 +9,12 @@ import FontFaceObserver from 'fontfaceobserver';
   templateUrl: 'zen-toolbar-text.component.html',
   styleUrls: ['zen-toolbar-text.component.scss'],
   standalone: true,
-  imports: [ColorPickerModule],
+  imports: [ColorPickerModule, MatSelectModule, NgFor],
 })
 export class ZenToolbarTextComponent {
   @Input() canvas!: fabric.Canvas;
   fill = '#000000';
+  fonts = ['Pacifico', 'zen-default', 'zen-heading'];
 
   fillClosed() {
     const textbox = this.canvas.getActiveObject() as fabric.Textbox;
@@ -56,17 +59,20 @@ export class ZenToolbarTextComponent {
   }
 
   setFont(font: string) {
-    const myfont = new FontFaceObserver(font);
-    myfont
-      .load()
-      .then(() => {
-        const textbox = this.canvas.getActiveObject() as fabric.Textbox;
-        this.setTextStyle(textbox, 'fontFamily', font);
-        this.canvas.requestRenderAll();
-      })
-      .catch(function (e) {
-        console.log(e);
-        alert('font loading failed ' + font);
-      });
+    const textbox = this.canvas.getActiveObject() as fabric.Textbox;
+
+    if (textbox?.type === 'textbox') {
+      const myfont = new FontFaceObserver(font);
+      myfont
+        .load()
+        .then(() => {
+          this.setTextStyle(textbox, 'fontFamily', font);
+          this.canvas.requestRenderAll();
+        })
+        .catch(function (e) {
+          console.log(e);
+          alert('font loading failed ' + font);
+        });
+    }
   }
 }
