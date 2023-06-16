@@ -1,22 +1,48 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { fabric } from 'fabric';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
 
-import { ZenContextmenuComponent, ZenMenuItem } from './zen-contextmenu/zen-contextmenu.component';
+import { ZenContextmenuComponent, ZenMenuItem } from './zen-contextmenu';
+import { ZenToolbarTextComponent } from './zen-toolbar-text';
 
 @Component({
   selector: 'zen-fabric',
   templateUrl: 'zen-fabric.component.html',
   styleUrls: ['zen-fabric.component.scss'],
   standalone: true,
-  imports: [ZenContextmenuComponent],
+  imports: [ZenContextmenuComponent, ZenToolbarTextComponent],
 })
 export class ZenFabricComponent implements AfterViewInit, OnDestroy {
   @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>; // Used to calculate width
   @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
   @ViewChild('contextMenu') contextMenu!: ZenContextmenuComponent;
+  @ViewChild('toolbarText') toolbarText!: ZenToolbarTextComponent;
   canvas!: fabric.Canvas;
   #subs: Subscription[] = [];
+
+  @HostListener('window:keydown.delete')
+  handleDelete() {
+    const selection = this.canvas.getActiveObjects();
+
+    const isEditing = selection.find(
+      obj => obj.type === 'textbox' && (<fabric.Textbox>obj).isEditing
+    );
+
+    if (isEditing) return;
+
+    for (const obj of selection) {
+      this.canvas.remove(obj);
+    }
+
+    this.canvas.discardActiveObject();
+  }
 
   ngAfterViewInit() {
     // Create the Fabric canvas
@@ -27,6 +53,9 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       fireRightClick: true,
       preserveObjectStacking: true,
     });
+
+    // Set the canvas on for the toolbar
+    this.toolbarText.canvas = this.canvas;
 
     // Wait for the app to be rendered before updating dimensions
     setTimeout(() => {
@@ -90,45 +119,6 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     });
 
     this.addSamples();
-  }
-
-  setFontColor() {
-    const color = '#00ffff';
-    const textbox = this.canvas.getActiveObject() as fabric.Textbox;
-
-    if (textbox?.type === 'textbox') {
-      this.setTextStyle(textbox, 'fill', color);
-
-      if (textbox.isEditing) {
-        textbox.hiddenTextarea?.focus();
-      }
-    }
-  }
-
-  setTextStyle(object: fabric.IText & Record<string, any>, styleName: string, value: any) {
-    if (object.setSelectionStyles && object.isEditing) {
-      const style: Record<string, any> = {};
-      style[styleName] = value;
-      object.setSelectionStyles(style).setCoords();
-    } else {
-      object.set({ [styleName]: value });
-    }
-    this.canvas.renderAll();
-  }
-
-  getTextStyle(object: fabric.IText & Record<string, any>, styleName: string) {
-    if (object.getSelectionStyles && object.isEditing) {
-      const styles = object.getSelectionStyles().map((x: any) => x[styleName]);
-      for (let i = 1; i < styles.length; i++) {
-        if (styles[i] !== styles[0]) {
-          return undefined;
-        }
-      }
-      if (styles.length > 0) return styles[0];
-      else return undefined;
-    } else {
-      return object.get(styleName);
-    }
   }
 
   getWidth = () => this.stubDiv.nativeElement.offsetWidth;
