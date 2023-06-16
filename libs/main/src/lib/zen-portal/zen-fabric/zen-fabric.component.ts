@@ -139,7 +139,6 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       fontFamily: 'zen-default',
       editable: true,
       textAlign: 'center',
-      // isEditing: true,
     });
     this.canvas.add(chatText);
 
