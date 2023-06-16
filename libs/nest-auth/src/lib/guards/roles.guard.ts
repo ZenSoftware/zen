@@ -69,7 +69,7 @@ export function RolesGuard<R extends string>(...roles: Array<R>) {
       return rbacLogic(req.user.roles, roles);
     }
 
-    getRequest(context: ExecutionContext) {
+    override getRequest(context: ExecutionContext) {
       const type = context.getType() as ContextType | 'graphql';
       if (type === 'http') {
         return context.switchToHttp().getRequest();
