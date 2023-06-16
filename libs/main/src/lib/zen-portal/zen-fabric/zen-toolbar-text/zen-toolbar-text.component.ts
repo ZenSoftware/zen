@@ -26,7 +26,7 @@ export class ZenToolbarTextComponent {
 
   setFill(value: string) {
     for (const obj of this.canvas.getActiveObjects()) {
-      if (obj?.type === 'textbox') {
+      if (obj.type === 'textbox') {
         this.setTextStyle(obj as fabric.Textbox, 'fill', value);
       }
     }
@@ -61,7 +61,7 @@ export class ZenToolbarTextComponent {
 
   setFont(font: string) {
     for (const obj of this.canvas.getActiveObjects()) {
-      if (obj?.type === 'textbox') {
+      if (obj.type === 'textbox') {
         const myfont = new FontFaceObserver(font);
         myfont
           .load()
