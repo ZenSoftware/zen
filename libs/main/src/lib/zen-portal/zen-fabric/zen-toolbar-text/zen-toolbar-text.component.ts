@@ -25,12 +25,13 @@ export class ZenToolbarTextComponent {
   }
 
   setFill(value: string) {
-    const textbox = this.canvas.getActiveObject() as fabric.Textbox;
-
-    if (textbox?.type === 'textbox') {
-      this.setTextStyle(textbox, 'fill', value);
-      this.canvas.renderAll();
+    for (const obj of this.canvas.getActiveObjects()) {
+      if (obj?.type === 'textbox') {
+        this.setTextStyle(obj as fabric.Textbox, 'fill', value);
+      }
     }
+
+    this.canvas.renderAll();
   }
 
   setTextStyle(object: fabric.IText & Record<string, any>, styleName: string, value: any) {
@@ -59,20 +60,20 @@ export class ZenToolbarTextComponent {
   }
 
   setFont(font: string) {
-    const textbox = this.canvas.getActiveObject() as fabric.Textbox;
-
-    if (textbox?.type === 'textbox') {
-      const myfont = new FontFaceObserver(font);
-      myfont
-        .load()
-        .then(() => {
-          this.setTextStyle(textbox, 'fontFamily', font);
-          this.canvas.requestRenderAll();
-        })
-        .catch(function (e) {
-          console.log(e);
-          alert('font loading failed ' + font);
-        });
+    for (const obj of this.canvas.getActiveObjects()) {
+      if (obj?.type === 'textbox') {
+        const myfont = new FontFaceObserver(font);
+        myfont
+          .load()
+          .then(() => {
+            this.setTextStyle(obj as fabric.Textbox, 'fontFamily', font);
+            this.canvas.requestRenderAll();
+          })
+          .catch(function (e) {
+            console.log(e);
+            alert('font loading failed ' + font);
+          });
+      }
     }
   }
 }
