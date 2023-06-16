@@ -70,8 +70,7 @@ export class ZenToolbarTextComponent {
             this.canvas.requestRenderAll();
           })
           .catch(function (e) {
-            console.log(e);
-            alert('font loading failed ' + font);
+            console.error(`font loading failed ${font}`, e);
           });
       }
     }
