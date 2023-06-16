@@ -150,6 +150,18 @@
   "overrides": {
     "@casl/angular": {
       "@angular/core": "$@angular/core"
+    },
+    "@nestjs-modules/mailer": {
+      "@nestjs/common": "$@nestjs/common",
+      "@nestjs/core": "$@nestjs/core"
+    },
+    "@nestjs/apollo": {
+      "@nestjs/common": "$@nestjs/common",
+      "@nestjs/core": "$@nestjs/core"
+    },
+    "@nestjs/graphql": {
+      "@nestjs/common": "$@nestjs/common",
+      "@nestjs/core": "$@nestjs/core"
     }
   },
   "config": {
