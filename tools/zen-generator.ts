@@ -6,7 +6,7 @@ import { promisify } from 'node:util';
 
 import { Generator as PalGenerator } from '@paljs/generator';
 import { Config as PalConfig } from '@paljs/types';
-import glob from 'glob-promise';
+import { glob } from 'glob';
 
 import {
   CaslPrismaSubjectsTemplate,
