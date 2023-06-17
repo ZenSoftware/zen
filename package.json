@@ -29,10 +29,10 @@
     "@casl/prisma": "~1.4.0",
     "@graphql-tools/merge": "^9.0.0",
     "@nestjs-modules/mailer": "^1.8.1",
-    "@nestjs/apollo": "^11.0.6",
+    "@nestjs/apollo": "^12.0.1",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
-    "@nestjs/graphql": "^11.0.6",
+    "@nestjs/graphql": "^12.0.1",
     "@nestjs/jwt": "^10.1.0",
     "@nestjs/passport": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
@@ -41,7 +41,7 @@
     "@prisma/client": "~4.15.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
-    "dotenv": "^16.2.0",
+    "dotenv": "^16.3.0",
     "express": "^4.18.2",
     "graphql": "~16.6.0",
     "graphql-subscriptions": "^2.0.0",
@@ -128,7 +128,7 @@
     "bootswatch": "~5.3.0",
     "cypress": "^12.14.0",
     "cz-customizable": "^7.0.0",
-    "eslint": "~8.42.0",
+    "eslint": "~8.43.0",
     "eslint-config-prettier": "~8.8.0",
     "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-storybook": "^0.6.12",
@@ -159,14 +159,6 @@
       "@angular/core": "$@angular/core"
     },
     "@nestjs-modules/mailer": {
-      "@nestjs/common": "$@nestjs/common",
-      "@nestjs/core": "$@nestjs/core"
-    },
-    "@nestjs/apollo": {
-      "@nestjs/common": "$@nestjs/common",
-      "@nestjs/core": "$@nestjs/core"
-    },
-    "@nestjs/graphql": {
       "@nestjs/common": "$@nestjs/common",
       "@nestjs/core": "$@nestjs/core"
     }
