@@ -7,16 +7,17 @@ import { PrismaService } from './app/prisma';
 import { environment } from './environments/environment';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: environment.cors });
+  const nestApp = await NestFactory.create(AppModule, { cors: environment.cors });
+  nestApp.enableShutdownHooks();
 
-  const prisma: PrismaService = app.get(PrismaService);
-  prisma.enableShutdownHooks(app);
+  const prisma: PrismaService = nestApp.get(PrismaService);
+  prisma.enableShutdownHooks(nestApp);
 
-  if (environment.production) app.use(helmet());
+  if (environment.production) nestApp.use(helmet());
 
   const port = process.env.PORT || environment.expressPort;
 
-  await app.listen(port, () => {
+  await nestApp.listen(port, () => {
     Logger.log(`GraphQL server running at http://localhost:${port}/graphql`);
   });
 }
