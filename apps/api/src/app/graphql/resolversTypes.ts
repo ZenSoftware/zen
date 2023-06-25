@@ -146,7 +146,7 @@ export interface FindFirstUserArgs {
   cursor?: UserWhereUniqueInput | null;
   take?: number | null;
   skip?: number | null;
-  distinct?: UserScalarFieldEnum[] | null;
+  distinct?: UserScalarFieldEnum | null;
 }
 
 export interface FindFirstUserOrThrowArgs {
@@ -155,7 +155,7 @@ export interface FindFirstUserOrThrowArgs {
   cursor?: UserWhereUniqueInput | null;
   take?: number | null;
   skip?: number | null;
-  distinct?: UserScalarFieldEnum[] | null;
+  distinct?: UserScalarFieldEnum | null;
 }
 
 export interface FindManyUserArgs {
@@ -164,7 +164,7 @@ export interface FindManyUserArgs {
   cursor?: UserWhereUniqueInput;
   take?: number;
   skip?: number;
-  distinct?: UserScalarFieldEnum[];
+  distinct?: UserScalarFieldEnum;
 }
 
 export interface AggregateUserArgs {
@@ -255,12 +255,12 @@ export interface UserWhereInput {
 export interface UserOrderByWithRelationInput {
   id?: SortOrder;
   createdAt?: SortOrder;
-  username?: SortOrder;
-  password?: SortOrder;
+  username?: SortOrderInput;
+  password?: SortOrderInput;
   email?: SortOrder;
   roles?: SortOrder;
-  googleId?: SortOrder;
-  googleProfile?: SortOrder;
+  googleId?: SortOrderInput;
+  googleProfile?: SortOrderInput;
 }
 
 export interface UserWhereUniqueInput {
@@ -273,12 +273,12 @@ export interface UserWhereUniqueInput {
 export interface UserOrderByWithAggregationInput {
   id?: SortOrder;
   createdAt?: SortOrder;
-  username?: SortOrder;
-  password?: SortOrder;
+  username?: SortOrderInput;
+  password?: SortOrderInput;
   email?: SortOrder;
   roles?: SortOrder;
-  googleId?: SortOrder;
-  googleProfile?: SortOrder;
+  googleId?: SortOrderInput;
+  googleProfile?: SortOrderInput;
   _count?: UserCountOrderByAggregateInput;
   _max?: UserMaxOrderByAggregateInput;
   _min?: UserMinOrderByAggregateInput;
@@ -438,6 +438,11 @@ export interface JsonNullableFilter {
   gt?: any;
   gte?: any;
   not?: any;
+}
+
+export interface SortOrderInput {
+  sort: SortOrder;
+  nulls?: NullsOrder;
 }
 
 export interface UserCountOrderByAggregateInput {
@@ -684,23 +689,6 @@ export interface NestedJsonNullableFilter {
   not?: any;
 }
 
-export enum JsonNullValueFilter {
-  DbNull = 'DbNull',
-  JsonNull = 'JsonNull',
-  AnyNull = 'AnyNull',
-}
-export enum NullableJsonNullValueInput {
-  DbNull = 'DbNull',
-  JsonNull = 'JsonNull',
-}
-export enum QueryMode {
-  default = 'default',
-  insensitive = 'insensitive',
-}
-export enum SortOrder {
-  asc = 'asc',
-  desc = 'desc',
-}
 export enum TransactionIsolationLevel {
   ReadUncommitted = 'ReadUncommitted',
   ReadCommitted = 'ReadCommitted',
@@ -716,4 +704,25 @@ export enum UserScalarFieldEnum {
   roles = 'roles',
   googleId = 'googleId',
   googleProfile = 'googleProfile',
+}
+export enum SortOrder {
+  asc = 'asc',
+  desc = 'desc',
+}
+export enum NullableJsonNullValueInput {
+  DbNull = 'DbNull',
+  JsonNull = 'JsonNull',
+}
+export enum QueryMode {
+  default = 'default',
+  insensitive = 'insensitive',
+}
+export enum JsonNullValueFilter {
+  DbNull = 'DbNull',
+  JsonNull = 'JsonNull',
+  AnyNull = 'AnyNull',
+}
+export enum NullsOrder {
+  first = 'first',
+  last = 'last',
 }
