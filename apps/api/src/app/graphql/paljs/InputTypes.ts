@@ -6,27 +6,6 @@ export default gql`
     count: Int!
   }
 
-  enum JsonNullValueFilter {
-    DbNull
-    JsonNull
-    AnyNull
-  }
-
-  enum NullableJsonNullValueInput {
-    DbNull
-    JsonNull
-  }
-
-  enum QueryMode {
-    default
-    insensitive
-  }
-
-  enum SortOrder {
-    asc
-    desc
-  }
-
   enum TransactionIsolationLevel {
     ReadUncommitted
     ReadCommitted
@@ -43,6 +22,32 @@ export default gql`
     roles
     googleId
     googleProfile
+  }
+
+  enum SortOrder {
+    asc
+    desc
+  }
+
+  enum NullableJsonNullValueInput {
+    DbNull
+    JsonNull
+  }
+
+  enum QueryMode {
+    default
+    insensitive
+  }
+
+  enum JsonNullValueFilter {
+    DbNull
+    JsonNull
+    AnyNull
+  }
+
+  enum NullsOrder {
+    first
+    last
   }
 
   input UserWhereInput {
@@ -62,12 +67,12 @@ export default gql`
   input UserOrderByWithRelationInput {
     id: SortOrder
     createdAt: SortOrder
-    username: SortOrder
-    password: SortOrder
+    username: SortOrderInput
+    password: SortOrderInput
     email: SortOrder
     roles: SortOrder
-    googleId: SortOrder
-    googleProfile: SortOrder
+    googleId: SortOrderInput
+    googleProfile: SortOrderInput
   }
 
   input UserWhereUniqueInput {
@@ -80,12 +85,12 @@ export default gql`
   input UserOrderByWithAggregationInput {
     id: SortOrder
     createdAt: SortOrder
-    username: SortOrder
-    password: SortOrder
+    username: SortOrderInput
+    password: SortOrderInput
     email: SortOrder
     roles: SortOrder
-    googleId: SortOrder
-    googleProfile: SortOrder
+    googleId: SortOrderInput
+    googleProfile: SortOrderInput
     _count: UserCountOrderByAggregateInput
     _max: UserMaxOrderByAggregateInput
     _min: UserMinOrderByAggregateInput
@@ -245,6 +250,11 @@ export default gql`
     gt: Json
     gte: Json
     not: Json
+  }
+
+  input SortOrderInput {
+    sort: SortOrder!
+    nulls: NullsOrder
   }
 
   input UserCountOrderByAggregateInput {
