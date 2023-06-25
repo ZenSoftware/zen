@@ -11,7 +11,7 @@ export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> =
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string | number; output: string; }
+  ID: { input: string; output: string; }
   String: { input: string; output: string; }
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
@@ -369,6 +369,11 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: InputMaybe<Scalars['String']['input']>;
 };
 
+export enum NullsOrder {
+  First = 'first',
+  Last = 'last'
+}
+
 export type Query = {
   __typename?: 'Query';
   accountInfo: AccountInfo;
@@ -410,7 +415,7 @@ export type QueryAuthPasswordResetRequestArgs = {
 
 export type QueryFindFirstUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
+  distinct?: InputMaybe<UserScalarFieldEnum>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -420,7 +425,7 @@ export type QueryFindFirstUserArgs = {
 
 export type QueryFindManyUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
+  distinct?: InputMaybe<UserScalarFieldEnum>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -430,7 +435,7 @@ export type QueryFindManyUserArgs = {
 
 export type QueryFindManyUserCountArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
+  distinct?: InputMaybe<UserScalarFieldEnum>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -456,6 +461,11 @@ export enum SortOrder {
   Asc = 'asc',
   Desc = 'desc'
 }
+
+export type SortOrderInput = {
+  nulls?: InputMaybe<NullsOrder>;
+  sort: SortOrder;
+};
 
 export type StringFieldUpdateOperationsInput = {
   set?: InputMaybe<Scalars['String']['input']>;
@@ -654,23 +664,23 @@ export type UserOrderByWithAggregationInput = {
   _min?: InputMaybe<UserMinOrderByAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
-  googleId?: InputMaybe<SortOrder>;
-  googleProfile?: InputMaybe<SortOrder>;
+  googleId?: InputMaybe<SortOrderInput>;
+  googleProfile?: InputMaybe<SortOrderInput>;
   id?: InputMaybe<SortOrder>;
-  password?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrderInput>;
   roles?: InputMaybe<SortOrder>;
-  username?: InputMaybe<SortOrder>;
+  username?: InputMaybe<SortOrderInput>;
 };
 
 export type UserOrderByWithRelationInput = {
   createdAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
-  googleId?: InputMaybe<SortOrder>;
-  googleProfile?: InputMaybe<SortOrder>;
+  googleId?: InputMaybe<SortOrderInput>;
+  googleProfile?: InputMaybe<SortOrderInput>;
   id?: InputMaybe<SortOrder>;
-  password?: InputMaybe<SortOrder>;
+  password?: InputMaybe<SortOrderInput>;
   roles?: InputMaybe<SortOrder>;
-  username?: InputMaybe<SortOrder>;
+  username?: InputMaybe<SortOrderInput>;
 };
 
 export enum UserScalarFieldEnum {
@@ -852,7 +862,7 @@ export type FindFirstUserVariables = Exact<{
   cursor?: InputMaybe<UserWhereUniqueInput>;
   take?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
-  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
+  distinct?: InputMaybe<UserScalarFieldEnum>;
 }>;
 
 
@@ -864,7 +874,7 @@ export type FindManyUserVariables = Exact<{
   cursor?: InputMaybe<UserWhereUniqueInput>;
   take?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
-  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
+  distinct?: InputMaybe<UserScalarFieldEnum>;
 }>;
 
 
@@ -876,7 +886,7 @@ export type FindManyUserCountVariables = Exact<{
   cursor?: InputMaybe<UserWhereUniqueInput>;
   take?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
-  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
+  distinct?: InputMaybe<UserScalarFieldEnum>;
 }>;
 
 
@@ -1132,7 +1142,7 @@ export const FindUniqueUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindFirstUserDocument = /*#__PURE__*/ gql`
-    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
+    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: UserScalarFieldEnum) {
   findFirstUser(
     where: $where
     orderBy: $orderBy
@@ -1157,7 +1167,7 @@ export const FindFirstUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserDocument = /*#__PURE__*/ gql`
-    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
+    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: UserScalarFieldEnum) {
   findManyUser(
     where: $where
     orderBy: $orderBy
@@ -1182,7 +1192,7 @@ export const FindManyUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserCountDocument = /*#__PURE__*/ gql`
-    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
+    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: UserScalarFieldEnum) {
   findManyUserCount(
     where: $where
     orderBy: $orderBy
