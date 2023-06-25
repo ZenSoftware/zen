@@ -48,7 +48,7 @@ dependencies:
     specifier: 5.3.3
     version: 5.3.3(@prisma/client@4.16.1)(graphql@16.7.1)
   '@prisma/client':
-    specifier: ~4.16.1
+    specifier: ^4.16.1
     version: 4.16.1(prisma@4.16.1)
   class-transformer:
     specifier: ^0.5.1
@@ -99,7 +99,7 @@ dependencies:
     specifier: ^4.0.1
     version: 4.0.1
   prisma:
-    specifier: ~4.16.1
+    specifier: ^4.16.1
     version: 4.16.1
   reflect-metadata:
     specifier: ^0.1.13
@@ -137,7 +137,7 @@ devDependencies:
     specifier: ~16.1.2
     version: 16.1.2(@angular/common@16.1.2)(@angular/core@16.1.2)(rxjs@7.8.1)
   '@angular/cli':
-    specifier: ~16.1.0
+    specifier: ~16.1.1
     version: 16.1.1
   '@angular/common':
     specifier: ~16.1.2
@@ -4989,7 +4989,7 @@ packages:
       chalk: 4.1.2
       collect-v8-coverage: 1.0.1
       exit: 0.1.2
-      glob: 7.2.3
+      glob: 7.1.4
       graceful-fs: 4.2.11
       istanbul-lib-coverage: 3.2.0
       istanbul-lib-instrument: 5.2.1
@@ -6125,7 +6125,7 @@ packages:
     resolution: {integrity: sha512-7kZUAaLscfgbwBQRbvdMYaZOWyMEcPTH/tJjnyAWJ/dvvs9Ef+CERx/qJb9GExJpl1qipaDGn7KqHnFGGixd0w==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      semver: 7.5.3
+      semver: 7.5.1
     dev: true
 
   /@npmcli/git@4.1.0:
@@ -6138,7 +6138,7 @@ packages:
       proc-log: 3.0.0
       promise-inflight: 1.0.1
       promise-retry: 2.0.1
-      semver: 7.5.3
+      semver: 7.5.1
       which: 3.0.1
     transitivePeerDependencies:
       - bluebird
@@ -10425,7 +10425,7 @@ packages:
   /builtins@5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
     dependencies:
-      semver: 7.5.3
+      semver: 7.5.1
     dev: true
 
   /busboy@1.6.0:
@@ -11250,7 +11250,7 @@ packages:
       postcss-modules-scope: 3.0.0(postcss@8.4.24)
       postcss-modules-values: 4.0.0(postcss@8.4.24)
       postcss-value-parser: 4.2.0
-      semver: 7.5.3
+      semver: 7.5.1
       webpack: 5.86.0(esbuild@0.17.19)
     dev: true
 
@@ -11267,7 +11267,7 @@ packages:
       postcss-modules-scope: 3.0.0(postcss@8.4.24)
       postcss-modules-values: 4.0.0(postcss@8.4.24)
       postcss-value-parser: 4.2.0
-      semver: 7.5.3
+      semver: 7.5.1
       webpack: 5.88.0(esbuild@0.17.19)
     dev: true
 
@@ -13163,7 +13163,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.1.2
+      minimatch: 3.0.5
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: true
@@ -14656,7 +14656,7 @@ packages:
       chalk: 4.1.2
       ci-info: 3.8.0
       deepmerge: 4.3.1
-      glob: 7.2.3
+      glob: 7.1.4
       graceful-fs: 4.2.11
       jest-circus: 29.5.0
       jest-environment-node: 29.5.0
@@ -16710,7 +16710,7 @@ packages:
       nopt: 6.0.0
       npmlog: 6.0.2
       rimraf: 3.0.2
-      semver: 7.5.3
+      semver: 7.5.1
       tar: 6.1.15
       which: 2.0.2
     transitivePeerDependencies:
@@ -16756,7 +16756,7 @@ packages:
     dependencies:
       hosted-git-info: 6.1.1
       is-core-module: 2.12.1
-      semver: 7.5.3
+      semver: 7.5.1
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -16798,7 +16798,7 @@ packages:
     resolution: {integrity: sha512-dH3GmQL4vsPtld59cOn8uY0iOqRmqKvV+DLGwNXV/Q7MDgD2QfOADWd/mFXcIE5LVhYYGjA3baz6W9JneqnuCw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      semver: 7.5.3
+      semver: 7.5.1
     dev: true
 
   /npm-normalize-package-bin@2.0.0:
@@ -16816,7 +16816,7 @@ packages:
     dependencies:
       hosted-git-info: 6.1.1
       proc-log: 3.0.0
-      semver: 7.5.3
+      semver: 7.5.1
       validate-npm-package-name: 5.0.0
     dev: true
 
@@ -16844,7 +16844,7 @@ packages:
       npm-install-checks: 6.1.1
       npm-normalize-package-bin: 3.0.1
       npm-package-arg: 10.1.0
-      semver: 7.5.3
+      semver: 7.5.1
     dev: true
 
   /npm-registry-fetch@14.0.5:
@@ -17672,7 +17672,7 @@ packages:
       jiti: 1.18.2
       klona: 2.0.6
       postcss: 8.4.24
-      semver: 7.5.3
+      semver: 7.5.1
       webpack: 5.86.0(esbuild@0.17.19)
     dev: true
 
