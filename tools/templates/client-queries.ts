@@ -16,7 +16,7 @@ export default gql\`
     $cursor: ${name}WhereUniqueInput
     $take: Int
     $skip: Int
-    $distinct: [${name}ScalarFieldEnum]
+    $distinct: ${name}ScalarFieldEnum
   ) {
     findFirst${name}(
       where: $where
@@ -36,7 +36,7 @@ export default gql\`
     $cursor: ${name}WhereUniqueInput
     $take: Int
     $skip: Int
-    $distinct: [${name}ScalarFieldEnum]
+    $distinct: ${name}ScalarFieldEnum
   ) {
     findMany${name}(
       where: $where
@@ -56,7 +56,7 @@ export default gql\`
     $cursor: ${name}WhereUniqueInput
     $take: Int
     $skip: Int
-    $distinct: [${name}ScalarFieldEnum]
+    $distinct: ${name}ScalarFieldEnum
   ) {
     findMany${name}Count(
       where: $where
