@@ -1,5 +1,5 @@
+import { Client, Room } from '@colyseus/core';
 import { Logger } from '@nestjs/common';
-import { Client, Room } from 'colyseus';
 
 import { AuthService } from '../../auth';
 import { MyRoomState, Player } from './room-state';

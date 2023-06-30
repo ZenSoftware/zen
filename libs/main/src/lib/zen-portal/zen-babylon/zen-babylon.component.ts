@@ -84,7 +84,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     ground.position.y = -17;
     ground.rotation.x = Math.PI / 2;
 
-    const colyseusSDK = new Client('ws://localhost:7081');
+    const colyseusSDK = new Client('ws://localhost:7080');
     colyseusSDK.joinOrCreate('MainRoom', { token: token() }).then(room => {
       console.log(`Connected to roomId: ${room.roomId}`);
 

@@ -1,7 +1,8 @@
 import * as http from 'http';
 
+import { Room, Server } from '@colyseus/core';
+import { WebSocketTransport } from '@colyseus/ws-transport';
 import { Injectable, Logger, OnApplicationShutdown } from '@nestjs/common';
-import { Room, Server } from 'colyseus';
 
 import { AuthService } from '../auth';
 
@@ -18,7 +19,11 @@ export class GameService implements OnApplicationShutdown {
   createServer(httpServer: http.Server) {
     if (this.server) return;
 
-    this.server = new Server({ server: httpServer });
+    this.server = new Server({
+      transport: new WebSocketTransport({
+        server: httpServer,
+      }),
+    });
   }
 
   defineRoom(name: string, room: Type<Room<any, any>>) {
