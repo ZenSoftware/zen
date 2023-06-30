@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "nx serve portal --host=127.0.0.1",
+    "start": "nx serve portal",
     "start:api": "nx serve api",
     "cap:add:android": "cap add android",
     "cap:run:android": "nx build portal & cap sync & cap open android",
