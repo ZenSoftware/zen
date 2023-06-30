@@ -74,10 +74,10 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     light.intensity = 0.7;
 
     // Our built-in 'sphere' shape.
-    // const sphere = MeshBuilder.CreateSphere('sphere', { diameter: 1, segments: 32 }, scene);
-    // sphere.position.y = -9;
-    // sphere.material = new StandardMaterial('kaka-material', scene);
-    // (<StandardMaterial>sphere.material).emissiveColor = Color3.FromHexString('#ff9900');
+    const sphere = MeshBuilder.CreateSphere('sphere', { diameter: 1, segments: 32 }, scene);
+    sphere.position.y = -9;
+    sphere.material = new StandardMaterial('kaka-material', scene);
+    (<StandardMaterial>sphere.material).emissiveColor = Color3.FromHexString('#ff9900');
 
     // Our built-in 'ground' shape.
     const ground = MeshBuilder.CreatePlane('ground', { size: 500 }, scene);
@@ -85,6 +85,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     ground.rotation.x = Math.PI / 2;
 
     const colyseusSDK = new Client('ws://localhost:7080');
+
     colyseusSDK.joinOrCreate('MainRoom', { token: token() }).then(room => {
       console.log(`Connected to roomId: ${room.roomId}`);
 
@@ -93,9 +94,8 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
         // this.playerEntities = state.players;
       });
 
-      console.log('CURRENT STATE', room.state);
-
       const players = (<any>room.state).players as MapSchema<any>;
+      console.log('players', players.values());
       players.onAdd((player: any, sessionId: string) => {
         console.log('player added', player);
         const isCurrentPlayer = sessionId === room.sessionId;
