@@ -5,7 +5,7 @@
   "private": true,
   "main": "apps/portal/src/electron.js",
   "scripts": {
-    "start": "nx serve portal --host=127.0.0.1",
+    "start": "nx serve portal",
     "start:electron": "nx build --project portal --configuration=development --outputHashing=all --base-href=./ && electron .",
     "start:api": "nx serve api",
     "e2e:portal": "nx e2e portal-e2e --watch",
