@@ -15,7 +15,7 @@ export class MainRoom extends Room<MyRoomState> {
   }
 
   async onCreate(options: any) {
-    logger.log('MainRoom created');
+    logger.log('Created');
     this.auth = options.auth;
 
     this.onMessage('updatePosition', (client, data) => {
@@ -29,7 +29,7 @@ export class MainRoom extends Room<MyRoomState> {
 
   async onJoin(client: Client, options: { token: string }) {
     const user = await this.auth.authorizeJwt(options.token);
-    logger.log(`MainRoom - User with id ${user?.id} joined`);
+    logger.log(`Joined: ${user?.id} `);
 
     const player = new Player();
 

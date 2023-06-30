@@ -25,12 +25,11 @@ async function bootstrap() {
   gameSvc.createServer(nestApp.getHttpServer());
 
   ROOMS.forEach(r => {
-    console.info(`Registering room: ${r.name}`);
     gameSvc.defineRoom(r.name, r);
   });
 
   await nestApp.listen(port, () => {
-    Logger.log(`Colyseus server running at http://localhost:${port}/monitor`);
+    Logger.log(`Colyseus monitor running at http://localhost:${port}/monitor`);
     Logger.log(`GraphQL server running at http://localhost:${port}/graphql`);
   });
 }
