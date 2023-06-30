@@ -9,9 +9,13 @@ import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } fr
 import { FreeCamera } from '@babylonjs/core/Cameras/freeCamera';
 import { Engine } from '@babylonjs/core/Engines/engine';
 import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight';
-import { Vector3 } from '@babylonjs/core/Maths/math';
+import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial';
+import { Color3, Vector3 } from '@babylonjs/core/Maths/math';
 import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder';
 import { Scene } from '@babylonjs/core/scene';
+import { MapSchema } from '@colyseus/schema';
+import { token } from '@zen/auth';
+import { Client } from 'colyseus.js';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
 
 @Component({
@@ -24,6 +28,8 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>; // Used to calculate width
   @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
   #subs: Subscription[] = [];
+  playerEntities: Record<string, any> = {};
+  playerNextPosition: Record<string, any> = {};
 
   constructor(private ngZone: NgZone) {}
 
@@ -68,13 +74,105 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     light.intensity = 0.7;
 
     // Our built-in 'sphere' shape.
-    const sphere = MeshBuilder.CreateSphere('sphere', { diameter: 2, segments: 32 }, scene);
-
-    // Move the sphere upward 1/2 its height
-    sphere.position.y = 1;
+    // const sphere = MeshBuilder.CreateSphere('sphere', { diameter: 1, segments: 32 }, scene);
+    // sphere.position.y = -9;
+    // sphere.material = new StandardMaterial('kaka-material', scene);
+    // (<StandardMaterial>sphere.material).emissiveColor = Color3.FromHexString('#ff9900');
 
     // Our built-in 'ground' shape.
-    const ground = MeshBuilder.CreateGround('ground', { width: 6, height: 6 }, scene);
+    const ground = MeshBuilder.CreatePlane('ground', { size: 500 }, scene);
+    ground.position.y = -17;
+    ground.rotation.x = Math.PI / 2;
+
+    const colyseusSDK = new Client('ws://localhost:7081');
+    colyseusSDK.joinOrCreate('MainRoom', { token: token() }).then(room => {
+      console.log(`Connected to roomId: ${room.roomId}`);
+
+      room.onStateChange((state: any) => {
+        console.log(`${room.name} new state:`, state.players.values());
+        // this.playerEntities = state.players;
+      });
+
+      console.log('CURRENT STATE', room.state);
+
+      const players = (<any>room.state).players as MapSchema<any>;
+      players.onAdd((player: any, sessionId: string) => {
+        console.log('player added', player);
+        const isCurrentPlayer = sessionId === room.sessionId;
+
+        // create player Sphere
+        const sphere = MeshBuilder.CreateSphere(
+          `player-${sessionId}`,
+          {
+            segments: 8,
+            diameter: 40,
+          },
+          scene
+        );
+
+        // set player spawning position
+        sphere.position.set(player.x, player.y, player.z);
+
+        // set material to differentiate CURRENT player and OTHER players
+        sphere.material = new StandardMaterial(`player-material-${sessionId}`);
+
+        if (isCurrentPlayer) {
+          // highlight current player
+          (<StandardMaterial>sphere.material).emissiveColor = Color3.FromHexString('#ff9900');
+        } else {
+          // other players are gray colored
+          (<StandardMaterial>sphere.material).emissiveColor = Color3.Gray();
+        }
+
+        player.onChange(() => {
+          // this.playerEntities[sessionId].position.set(player.x, player.y, player.z);
+        });
+
+        console.log(`created player (${player.x}, ${player.y}, ${player.z})`);
+      });
+
+      (<any>room.state).players.onRemove((player: any, sessionId: string) => {
+        this.playerEntities[sessionId].dispose();
+        delete this.playerEntities[sessionId];
+      });
+
+      scene.onPointerDown = (event, pointer) => {
+        if (event.button == 0) {
+          // const targetPosition = (<Vector3>pointer.pickedPoint)?.clone();
+
+          // // Position adjustments for the current play ground.
+          // // Prevent spheres from moving all around the screen other than on the ground mesh.
+          // targetPosition.y = -1;
+          // if (targetPosition.x > 245) targetPosition.x = 245;
+          // else if (targetPosition.x < -245) targetPosition.x = -245;
+          // if (targetPosition.z > 245) targetPosition.z = 245;
+          // else if (targetPosition.z < -245) targetPosition.z = -245;
+
+          // console.log('sending new position');
+          // // Send position update to the server
+          // room.send('updatePosition', {
+          //   x: targetPosition.x,
+          //   y: targetPosition.y,
+          //   z: targetPosition.z,
+          // });
+
+          console.log('sending new position');
+          room.send('updatePosition', {
+            x: 1,
+            y: -1,
+            z: 2,
+          });
+        }
+      };
+    });
+
+    scene.registerBeforeRender(() => {
+      for (const sessionId in this.playerEntities) {
+        const entity = this.playerEntities[sessionId];
+        const targetPosition = this.playerNextPosition[sessionId];
+        entity.position = Vector3.Lerp(entity.position, targetPosition, 0.05);
+      }
+    });
 
     return scene;
   }
