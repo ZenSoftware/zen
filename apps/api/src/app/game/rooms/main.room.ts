@@ -29,7 +29,6 @@ export class MainRoom extends Room<MyRoomState> {
 
   async onJoin(client: Client, options: { token: string }) {
     const user = await this.auth.authorizeJwt(options.token);
-    logger.log(`Joined: ${user?.id} `);
 
     const player = new Player();
 
@@ -40,11 +39,13 @@ export class MainRoom extends Room<MyRoomState> {
     player.z = -(FLOOR_SIZE / 2) + Math.random() * FLOOR_SIZE;
 
     this.state.players.set(client.sessionId, player);
+
+    logger.log(`Joined: ${user?.id} `);
   }
 
   async onLeave(client: Client, options: any) {
-    logger.log(`Client ${client.sessionId} left`);
     this.state.players.delete(client.sessionId);
+    logger.log(`Client ${client.sessionId} left`);
   }
 
   async onDispose() {
