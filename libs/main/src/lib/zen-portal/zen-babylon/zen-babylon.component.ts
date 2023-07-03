@@ -29,6 +29,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   #subs: Subscription[] = [];
   playerEntities: Record<string, any> = {};
   playerNextPosition: Record<string, any> = {};
+  engine!: Engine;
 
   constructor(private ngZone: NgZone) {}
 
@@ -44,10 +45,10 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => this.updateDimensions());
 
     this.ngZone.runOutsideAngular(() => {
-      const engine = new Engine(this.canvasElement.nativeElement);
-      const scene = this.createScene(engine);
+      this.engine = new Engine(this.canvasElement.nativeElement);
+      const scene = this.createScene(this.engine);
 
-      engine.runRenderLoop(() => {
+      this.engine.runRenderLoop(() => {
         scene.render();
       });
     });
@@ -61,12 +62,6 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
 
     const light = new HemisphericLight('light', new Vector3(0, 1, 0), scene);
     light.intensity = 0.7;
-
-    // Our built-in 'sphere' shape.
-    // const sphere = MeshBuilder.CreateSphere('sphere', { segments: 8, diameter: 40 }, scene);
-    // sphere.position.y = -1;
-    // sphere.material = new StandardMaterial('kaka-material', scene);
-    // (<StandardMaterial>sphere.material).emissiveColor = Color3.FromHexString('#ff9900');
 
     const ground = MeshBuilder.CreatePlane('ground', { size: 500 }, scene);
     ground.position.y = -15;
@@ -156,6 +151,8 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   updateDimensions() {
     this.canvasElement.nativeElement.width = this.getWidth();
     this.canvasElement.nativeElement.height = this.getHeight();
+
+    this.engine.resize();
   }
 
   ngOnDestroy() {
