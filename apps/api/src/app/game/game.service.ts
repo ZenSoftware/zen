@@ -27,13 +27,7 @@ export class GameService implements OnApplicationShutdown {
   }
 
   defineRoom(name: string, room: Type<Room<any, any>>) {
-    const regHand = this.server.define(name, room);
-    regHand.options = { auth: this.auth };
-  }
-
-  listen(port: number): Promise<unknown> | undefined {
-    if (!this.server) return;
-    return this.server.listen(port);
+    this.server.define(name, room, { auth: this.auth });
   }
 
   onApplicationShutdown(sig: any) {

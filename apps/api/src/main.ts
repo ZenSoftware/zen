@@ -10,25 +10,25 @@ import { environment } from './environments/environment';
 const ROOMS = [MainRoom];
 
 async function bootstrap() {
-  const nestApp = await NestFactory.create(AppModule, { cors: environment.cors });
-  nestApp.enableShutdownHooks();
+  const app = await NestFactory.create(AppModule, { cors: environment.cors });
+  app.enableShutdownHooks();
 
-  const prisma: PrismaService = nestApp.get(PrismaService);
-  prisma.enableShutdownHooks(nestApp);
+  const prisma: PrismaService = app.get(PrismaService);
+  prisma.enableShutdownHooks(app);
 
-  if (environment.production) nestApp.use(helmet());
+  if (environment.production) app.use(helmet());
 
   const port = process.env.PORT || environment.expressPort;
 
-  const gameSvc = nestApp.get(GameService);
+  const gameSvc = app.get(GameService);
 
-  gameSvc.createServer(nestApp.getHttpServer());
+  gameSvc.createServer(app.getHttpServer());
 
-  ROOMS.forEach(r => {
-    gameSvc.defineRoom(r.name, r);
-  });
+  for (const room of ROOMS) {
+    gameSvc.defineRoom(room.name, room);
+  }
 
-  await nestApp.listen(port, () => {
+  await app.listen(port, () => {
     Logger.log(`Colyseus monitor running at http://localhost:${port}/monitor`);
     Logger.log(`GraphQL server running at http://localhost:${port}/graphql`);
   });

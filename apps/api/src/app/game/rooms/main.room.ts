@@ -11,12 +11,12 @@ export class MainRoom extends Room<MyRoomState> {
 
   constructor() {
     super();
-    this.setState(new MyRoomState());
   }
 
   async onCreate(options: any) {
-    logger.log('Created');
     this.auth = options.auth;
+
+    this.setState(new MyRoomState());
 
     this.onMessage('updatePosition', (client, data) => {
       logger.log('UPDATE POSITION', data);
@@ -25,6 +25,8 @@ export class MainRoom extends Room<MyRoomState> {
       player.y = data.y;
       player.z = data.z;
     });
+
+    logger.log('Created');
   }
 
   async onJoin(client: Client, options: { token: string }) {
