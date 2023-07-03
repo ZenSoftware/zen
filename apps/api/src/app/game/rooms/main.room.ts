@@ -19,7 +19,6 @@ export class MainRoom extends Room<MyRoomState> {
     this.setState(new MyRoomState());
 
     this.onMessage('updatePosition', (client, data) => {
-      logger.log('UPDATE POSITION', data);
       const player = this.state.players.get(client.sessionId) as Player;
       player.x = data.x;
       player.y = data.y;
@@ -30,6 +29,7 @@ export class MainRoom extends Room<MyRoomState> {
   }
 
   async onJoin(client: Client, options: { token: string }) {
+    // get the RequestUser from the JWT token
     const user = await this.auth.authorizeJwt(options.token);
 
     const player = new Player();
@@ -42,12 +42,12 @@ export class MainRoom extends Room<MyRoomState> {
 
     this.state.players.set(client.sessionId, player);
 
-    logger.log(`Joined: ${user?.id} `);
+    logger.log(`Joined: ${client.sessionId} `);
   }
 
   async onLeave(client: Client, options: any) {
     this.state.players.delete(client.sessionId);
-    logger.log(`Client ${client.sessionId} left`);
+    logger.log(`Left: ${client.sessionId} `);
   }
 
   async onDispose() {

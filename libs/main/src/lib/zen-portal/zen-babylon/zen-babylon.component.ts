@@ -4,6 +4,7 @@ import '@babylonjs/core/Materials/standardMaterial';
 import '@babylonjs/core/Meshes/Builders/sphereBuilder';
 import '@babylonjs/core/Meshes/Builders/boxBuilder';
 import '@babylonjs/core/Meshes/Builders/groundBuilder';
+// Side-effects only imports for ray support.
 import '@babylonjs/core/Culling/ray';
 
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } from '@angular/core';
@@ -75,12 +76,8 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     this.room = await colyseusSDK.joinOrCreate<any>('MainRoom', { token: token() });
     console.log(`Connected to roomId: ${this.room.roomId}`);
 
-    this.room.onStateChange((state: any) => {
-      console.log(`${this.room.name} new state:`, state.players.values());
-    });
-
     this.room.state.players.onAdd((player: any, sessionId: string) => {
-      console.log('player added', player);
+      console.log('player added');
 
       const isCurrentPlayer = sessionId === this.room.sessionId;
 
@@ -136,8 +133,6 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
           y: targetPosition.y,
           z: targetPosition.z,
         });
-
-        console.log('updatePosition');
       }
     });
 
