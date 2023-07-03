@@ -4,10 +4,12 @@ import '@babylonjs/core/Materials/standardMaterial';
 import '@babylonjs/core/Meshes/Builders/sphereBuilder';
 import '@babylonjs/core/Meshes/Builders/boxBuilder';
 import '@babylonjs/core/Meshes/Builders/groundBuilder';
+import '@babylonjs/core/Culling/ray';
 
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera';
 import { Engine } from '@babylonjs/core/Engines/engine';
+import { PointerEventTypes } from '@babylonjs/core/Events/pointerEvents';
 import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight';
 import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial';
 import { Color3, Vector3 } from '@babylonjs/core/Maths/math';
@@ -100,6 +102,12 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
       }
 
       this.playerEntities[sessionId] = sphere;
+      this.playerNextPosition[sessionId] = sphere.position.clone();
+
+      // listen for individual player changes
+      player.onChange(() => {
+        this.playerNextPosition[sessionId].set(player.x, player.y, player.z);
+      });
     });
 
     this.room.state.players.onRemove((player: any, sessionId: string) => {
@@ -108,39 +116,38 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
       delete this.playerNextPosition[sessionId];
     });
 
-    scene.onPointerDown = (event, pointer) => {
-      if (event.button == 0) {
-        // const targetPosition = (<Vector3>pointer.pickedPoint).clone();
+    scene.onPointerObservable.add(pointerInfo => {
+      if (pointerInfo.type === PointerEventTypes.POINTERDOWN && pointerInfo.pickInfo?.hit) {
+        const targetPosition = (<Vector3>pointerInfo.pickInfo.pickedPoint).clone();
 
-        // // Position adjustments for the current play ground.
-        // targetPosition.y = -1;
-        // if (targetPosition.x > 245) targetPosition.x = 245;
-        // else if (targetPosition.x < -245) targetPosition.x = -245;
-        // if (targetPosition.z > 245) targetPosition.z = 245;
-        // else if (targetPosition.z < -245) targetPosition.z = -245;
+        // Position adjustments for the current play ground.
+        targetPosition.y = -1;
+        if (targetPosition.x > 245) targetPosition.x = 245;
+        else if (targetPosition.x < -245) targetPosition.x = -245;
+        if (targetPosition.z > 245) targetPosition.z = 245;
+        else if (targetPosition.z < -245) targetPosition.z = -245;
 
-        // // set current player's next position immediatelly
-        // this.playerNextPosition[this.room.sessionId] = targetPosition;
+        // set current player's next position immediatelly
+        this.playerNextPosition[this.room.sessionId] = targetPosition;
 
-        // // Send position update to the server
-        // this.room.send('updatePosition', {
-        //   x: targetPosition.x,
-        //   y: targetPosition.y,
-        //   z: targetPosition.z,
-        // });
+        // Send position update to the server
+        this.room.send('updatePosition', {
+          x: targetPosition.x,
+          y: targetPosition.y,
+          z: targetPosition.z,
+        });
 
-        this.room.send('updatePosition', { x: 1, y: 2, z: 3 });
         console.log('updatePosition');
       }
-    };
+    });
 
-    // scene.registerBeforeRender(() => {
-    //   for (const sessionId in this.playerEntities) {
-    //     const entity = this.playerEntities[sessionId];
-    //     const targetPosition = this.playerNextPosition[sessionId];
-    //     entity.position = Vector3.Lerp(entity.position, targetPosition, 0.05);
-    //   }
-    // });
+    scene.registerBeforeRender(() => {
+      for (const sessionId in this.playerEntities) {
+        const entity = this.playerEntities[sessionId];
+        const targetPosition = this.playerNextPosition[sessionId];
+        entity.position = Vector3.Lerp(entity.position, targetPosition, 0.05);
+      }
+    });
 
     return scene;
   }
