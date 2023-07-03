@@ -27,7 +27,7 @@ export class GameService implements OnApplicationShutdown {
   }
 
   defineRoom(name: string, room: Type<Room<any, any>>) {
-    this.server.define(name, room, { auth: this.auth });
+    return this.server.define(name, room, { auth: this.auth });
   }
 
   onApplicationShutdown(sig: any) {

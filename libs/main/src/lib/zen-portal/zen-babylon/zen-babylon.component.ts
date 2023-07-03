@@ -77,10 +77,9 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     colyseusSDK.joinOrCreate<any>('MainRoom', { token: token() }).then(room => {
       console.log(`Connected to roomId: ${room.roomId}`);
 
-      // room.onStateChange((state: any) => {
-      //   console.log(`${room.name} new state:`, state.players.values());
-      //   // this.playerEntities = state.players;
-      // });
+      room.onStateChange((state: any) => {
+        console.log(`${room.name} new state:`, state.players.values());
+      });
 
       room.state.players.onAdd((player: any, sessionId: string) => {
         console.log('player added', player);
