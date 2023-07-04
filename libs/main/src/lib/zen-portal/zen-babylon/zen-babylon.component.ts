@@ -8,6 +8,7 @@ import '@babylonjs/core/Meshes/Builders/groundBuilder';
 import '@babylonjs/core/Culling/ray';
 import '@babylonjs/core/Engines/WebGPU/Extensions/engine.uniformBuffer';
 
+import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { WebGPUEngine } from '@babylonjs/core';
 import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera';
@@ -19,6 +20,7 @@ import { Color3, Vector3 } from '@babylonjs/core/Maths/math';
 import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder';
 import { Scene } from '@babylonjs/core/scene';
 import { token } from '@zen/auth';
+import { ZenLoadingComponent } from '@zen/components';
 import { Client, Room } from 'colyseus.js';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
 
@@ -27,6 +29,7 @@ import { Subscription, debounce, fromEvent, interval } from 'rxjs';
   templateUrl: 'zen-babylon.component.html',
   styleUrls: ['zen-babylon.component.scss'],
   standalone: true,
+  imports: [ZenLoadingComponent, NgIf],
 })
 export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>; // Used to calculate width
@@ -36,6 +39,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   playerNextPosition: Record<string, any> = {};
   engine!: WebGPUEngine | Engine;
   room!: Room;
+  loading = true;
 
   constructor(private ngZone: NgZone) {}
 
@@ -61,6 +65,10 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
       }
 
       const scene = await this.createScene(this.engine);
+
+      this.ngZone.run(() => {
+        this.loading = false;
+      });
 
       this.engine.runRenderLoop(() => {
         scene.render();
