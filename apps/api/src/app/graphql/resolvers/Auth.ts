@@ -24,6 +24,8 @@ import {
   AuthRegisterInput,
 } from '../models';
 
+const logger = new Logger('AuthResolver');
+
 export const typeDefs = gql`
   extend type Query {
     authLogin(data: AuthLoginInput!): AuthSession!
@@ -255,6 +257,7 @@ export class AuthResolver {
       },
     });
 
+    // Intended to be tailored to the site
     if (this.config.production) {
       this.mail.sendGeneral({
         to: user.email,
@@ -271,7 +274,7 @@ export class AuthResolver {
       });
     }
 
-    Logger.log(`Registered new user: ${user.username}`);
+    logger.log(`Registered new user: ${user.username}`);
 
     return this.auth.getAuthSession(user);
   }
