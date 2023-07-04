@@ -1,6 +1,5 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "zen",
   "affected": {
     "defaultBase": "master"
   },
