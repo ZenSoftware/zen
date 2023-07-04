@@ -9,7 +9,7 @@ import { CASL_POLICY_KEY, CaslPolicyHandler } from '../decorators/casl-policy.de
 
 /**
  * Guard that is used in conjunction with `CaslAbility`, `CaslAccessible` and `CaslPolicy` decorators.
- * Works with either HTTP or GraphQL requests.
+ * REST controllers or GraphQL resolvers.
  * @example
  * ```ts
  * ＠UseGuards(CaslGuard)
@@ -68,7 +68,7 @@ export class CaslGuard extends AuthGuard('jwt') {
     return policies.every(handler => handler(req.ability));
   }
 
-  getRequest(context: ExecutionContext) {
+  override getRequest(context: ExecutionContext) {
     const type = context.getType() as ContextType | 'graphql';
     if (type === 'http') {
       return context.switchToHttp().getRequest();
