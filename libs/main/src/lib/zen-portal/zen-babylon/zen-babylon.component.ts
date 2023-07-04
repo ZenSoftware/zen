@@ -6,6 +6,7 @@ import '@babylonjs/core/Meshes/Builders/boxBuilder';
 import '@babylonjs/core/Meshes/Builders/groundBuilder';
 // Side-effects only imports for ray support.
 import '@babylonjs/core/Culling/ray';
+// Side-effects only imports for WebGPU extensions.
 import '@babylonjs/core/Engines/WebGPU/Extensions/engine.uniformBuffer';
 
 import { NgIf } from '@angular/common';
@@ -37,7 +38,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   #subs: Subscription[] = [];
   playerEntities: Record<string, any> = {};
   playerNextPosition: Record<string, any> = {};
-  engine!: WebGPUEngine | Engine;
+  engine?: WebGPUEngine | Engine;
   room!: Room;
   loading = true;
 
@@ -68,7 +69,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
         this.loading = false;
       });
 
-      this.engine.runRenderLoop(() => {
+      this.engine!.runRenderLoop(() => {
         scene.render();
       });
     });
