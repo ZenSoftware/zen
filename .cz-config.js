@@ -34,6 +34,7 @@ module.exports = {
     { name: 'portal' },
     { name: 'prisma' },
     { name: 'socketio' },
+    { name: 'babylon' },
   ],
   allowCustomScopes: true,
   skipQuestions: ['body', 'footer'],
