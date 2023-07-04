@@ -4,10 +4,10 @@
 
 Zen is a starter kit to build web portals as a stateful single-page application.  This kit has everything needed for building a customized user experience utilizing only TypeScript & GraphQL.  The project has end-to-end typings and this is achieved by combining several code generation packages together.
 
-Specifically, this is an [Nx](https://nx.dev/) integrated monorepo, utilizing [Angular](https://angular.io/) for the frontend, [Nest](https://nestjs.com/) for the backend, and [Prisma](https://www.prisma.io/) for the data layer.
+Specifically, this is an [Nx](https://nx.dev/) integrated monorepo, utilizing [Angular](https://angular.io/) for the frontend, [Nest](https://nestjs.com/) for the backend, and [Prisma](https://www.prisma.io/) for the data persistence solution.
 [Apollo](https://www.apollographql.com/) is deeply integrated throughout the entire tech stack, enabling for a modern approach to communication between the client and the server via GraphQL.
 
-The project implements a fully featured authentication & authorization system with a minimalistic implementation.  This includes a login component, registration component, password change component and a fully featured password reset flow.  All of this while only having 1 model in the `schema.prisma` file, the `User` model. Guards & directives are also integrated for both [RBAC](https://docs.nestjs.com/guards#role-based-authentication) & [ABAC](https://casl.js.org/v6/en/guide/intro) authorization schemes and can be used in conjunction.  Everything needed for a malleable and robust user managment system has been wired up for you.
+The project implements a fully featured authentication & authorization system with a minimalistic implementation.  This includes a login component, registration component, password change component and a fully featured password reset flow.  All of this while only having 1 model in the `schema.prisma` file, the `User` model. Guards & directives are also integrated for both [RBAC](https://docs.nestjs.com/guards#role-based-authentication) & [ABAC](https://casl.js.org/v6/en/guide/intro) authorization schemes and can be used in conjunction.  Everything needed for a malleable and robust user management system has been wired up for you.
 
 ## Key Features
 
@@ -119,7 +119,7 @@ npm start
 ### 🎏 Optional Tech Integrations
 
 - [x] [Electron](https://www.electronjs.org/) branch with new npm script `npm run start:electron` to launch the app within Electron.
-- [x] [Capacitor](https://capacitorjs.com/) branch - planned
+- [x] [Capacitor](https://capacitorjs.com/) branch.
 - [x] [SocketIO](https://socket.io/) branch demonstrates how to implement a Nest WebSocket Gateway with user authentication.
 - [x] [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/grid/) branch - which includes [@zen/grid](https://github.com/ZenSoftware/zen/tree/kendo/libs/grid).  `<zen-grid>` renders robust and reliable data grids over all of the Prisma models within the project, with minimal configuration needed.
 - [x] [OpenTelemetry](https://opentelemetry.io/) branch demonstrates how to integrate and expose telemetry data for the API server.
@@ -130,7 +130,7 @@ npm start
 
 - [x] [Nx for project management](https://nx.dev/angular) to allow for the use of [Nx Console extensions for VSCode](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console). Nx Console is a GUI interface for monorepos that adds a lot of modern developer conveniences. It also helps to simplify the use of the various Angular & Nest code generation schematics available in the ecosystem.
 - [x] [Angular Language Service for VSCode](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) for modern IDE tooling.
-- [x] npm scripts for versioned releases of the Nest **api** server as a containerized Docker image. [node:18-alpine](https://hub.docker.com/_/node?tab=description&ref=hackernoon.com) is used as the Docker container base image and the appropriate `tsconfig.app.json` configurations are being applied for the Nest app.
+- [x] npm scripts for versioned releases of the Nest **api** server as a containerized Docker image. [node:20-alpine](https://hub.docker.com/_/node?tab=description&ref=hackernoon.com) is used as the Docker container base image and the appropriate `tsconfig.app.json` configurations are being applied for the Nest app.
 - [x] Example [Kubernetes](https://kubernetes.io/) deployment scripts.
 - [x] Enforced code formatting via [Prettier](https://prettier.io/) & [import-sort](https://www.npmjs.com/package/prettier-plugin-import-sort), guaranteeing all contributions to the project are standardized with predictable structure and clear legibility.
 - [x] [Commitizen](https://github.com/commitizen/cz-cli) for standardizing git commits.
