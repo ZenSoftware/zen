@@ -29,8 +29,8 @@ async function bootstrap() {
   }
 
   await app.listen(port, () => {
-    Logger.log(`Colyseus monitor running at http://localhost:${port}/monitor`);
     Logger.log(`GraphQL server running at http://localhost:${port}/graphql`);
+    Logger.log(`Colyseus monitor running at http://localhost:${port}/monitor`);
   });
 }
 
