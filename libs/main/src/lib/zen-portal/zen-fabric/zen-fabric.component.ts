@@ -99,21 +99,21 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     this.contextMenu.setMenu(menu, this.canvas);
 
     // Open contextmenu on right click
-    this.canvas.on('mouse:down', event => {
-      if (event.button === 3 && event.target) {
-        this.contextMenu.open(event.e, event.target);
-        this.canvas.setActiveObject(event.target);
+    this.canvas.on('mouse:down', ev => {
+      if (ev.button === 3 && ev.target) {
+        this.contextMenu.open(ev.e, ev.target);
+        this.canvas.setActiveObject(ev.target);
         this.canvas.renderAll();
       }
     });
 
     // Log selection
-    this.canvas.on('selection:created', event => {
+    this.canvas.on('selection:created', ev => {
       const selection = this.canvas.getActiveObject();
       console.log('selection:created', selection);
     });
 
-    this.canvas.on('selection:updated', event => {
+    this.canvas.on('selection:updated', ev => {
       const selection = this.canvas.getActiveObject();
       console.log('selection:updated', selection);
     });
