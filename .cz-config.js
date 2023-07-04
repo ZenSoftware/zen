@@ -26,6 +26,7 @@ module.exports = {
   scopes: [
     { name: 'api' },
     { name: 'auth' },
+    { name: 'babylon' },
     { name: 'capacitor' },
     { name: 'deps' },
     { name: 'electron' },
@@ -34,7 +35,6 @@ module.exports = {
     { name: 'portal' },
     { name: 'prisma' },
     { name: 'socketio' },
-    { name: 'babylon' },
   ],
   allowCustomScopes: true,
   skipQuestions: ['body', 'footer'],
