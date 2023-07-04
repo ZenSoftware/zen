@@ -20,10 +20,9 @@ async function bootstrap() {
 
   const port = process.env.PORT || environment.expressPort;
 
+  // Setup Colyseus
   const gameSvc = app.get(GameService);
-
   gameSvc.createServer(app.getHttpServer());
-
   for (const room of ROOMS) {
     gameSvc.defineRoom(room.name, room);
   }
