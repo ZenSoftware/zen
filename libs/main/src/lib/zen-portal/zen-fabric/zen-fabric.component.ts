@@ -108,12 +108,12 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
     });
 
     // Log selection
-    this.canvas.on('selection:created', ev => {
+    this.canvas.on('selection:created', event => {
       const selection = this.canvas.getActiveObject();
       console.log('selection:created', selection);
     });
 
-    this.canvas.on('selection:updated', ev => {
+    this.canvas.on('selection:updated', event => {
       const selection = this.canvas.getActiveObject();
       console.log('selection:updated', selection);
     });
