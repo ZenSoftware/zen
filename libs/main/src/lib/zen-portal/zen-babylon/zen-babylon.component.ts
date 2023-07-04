@@ -169,7 +169,6 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   updateDimensions() {
     this.canvasElement.nativeElement.width = this.getWidth();
     this.canvasElement.nativeElement.height = this.getHeight();
-
     this.engine?.resize(true);
   }
 
