@@ -47,9 +47,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     // Update canvas dimensions on resize
     const sub = fromEvent(window, 'resize')
       .pipe(debounce(() => interval(200)))
-      .subscribe(() => {
-        this.updateDimensions();
-      });
+      .subscribe(() => this.updateDimensions());
     this.#subs.push(sub);
 
     setTimeout(() => this.updateDimensions());
