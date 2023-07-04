@@ -6,8 +6,10 @@ import '@babylonjs/core/Meshes/Builders/boxBuilder';
 import '@babylonjs/core/Meshes/Builders/groundBuilder';
 // Side-effects only imports for ray support.
 import '@babylonjs/core/Culling/ray';
+import '@babylonjs/core/Engines/WebGPU/Extensions/engine.uniformBuffer';
 
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } from '@angular/core';
+import { WebGPUEngine } from '@babylonjs/core';
 import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera';
 import { Engine } from '@babylonjs/core/Engines/engine';
 import { PointerEventTypes } from '@babylonjs/core/Events/pointerEvents';
@@ -32,7 +34,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   #subs: Subscription[] = [];
   playerEntities: Record<string, any> = {};
   playerNextPosition: Record<string, any> = {};
-  engine!: Engine;
+  engine!: WebGPUEngine | Engine;
   room!: Room;
 
   constructor(private ngZone: NgZone) {}
@@ -49,7 +51,15 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => this.updateDimensions());
 
     this.ngZone.runOutsideAngular(async () => {
-      this.engine = new Engine(this.canvasElement.nativeElement);
+      const webGPUSupported = await WebGPUEngine.IsSupportedAsync;
+
+      if (webGPUSupported) {
+        this.engine = new WebGPUEngine(this.canvasElement.nativeElement);
+        await (<WebGPUEngine>this.engine).initAsync();
+      } else {
+        this.engine = new Engine(this.canvasElement.nativeElement) as any;
+      }
+
       const scene = await this.createScene(this.engine);
 
       this.engine.runRenderLoop(() => {
@@ -154,7 +164,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     this.canvasElement.nativeElement.width = this.getWidth();
     this.canvasElement.nativeElement.height = this.getHeight();
 
-    this.engine.resize();
+    this.engine?.resize(true);
   }
 
   ngOnDestroy() {
