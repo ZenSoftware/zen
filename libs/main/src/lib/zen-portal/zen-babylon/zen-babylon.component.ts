@@ -159,34 +159,31 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     });
 
     scene.onPointerObservable.add(pointerInfo => {
-      if (pointerInfo.type === PointerEventTypes.POINTERDOWN && pointerInfo.pickInfo?.hit) {
-        const targetPosition = (<Vector3>pointerInfo.pickInfo.pickedPoint).clone();
-
-        // Position adjustments for the current play ground.
-        targetPosition.y = -1;
-        if (targetPosition.x > 245) targetPosition.x = 245;
-        else if (targetPosition.x < -245) targetPosition.x = -245;
-        if (targetPosition.z > 245) targetPosition.z = 245;
-        else if (targetPosition.z < -245) targetPosition.z = -245;
-
-        // set current player's next position immediatelly
-        this.playerNextPosition[this.room.sessionId] = targetPosition;
-
-        // Send position update to the server
-        this.room.send('updatePosition', {
-          x: targetPosition.x,
-          y: targetPosition.y,
-          z: targetPosition.z,
-        });
-      }
+      // if (pointerInfo.type === PointerEventTypes.POINTERDOWN && pointerInfo.pickInfo?.hit) {
+      //   const targetPosition = (<Vector3>pointerInfo.pickInfo.pickedPoint).clone();
+      //   // Position adjustments for the current play ground.
+      //   targetPosition.y = -1;
+      //   if (targetPosition.x > 45) targetPosition.x = 45;
+      //   else if (targetPosition.x < -45) targetPosition.x = -45;
+      //   if (targetPosition.z > 45) targetPosition.z = 45;
+      //   else if (targetPosition.z < -45) targetPosition.z = -45;
+      //   // set current player's next position immediatelly
+      //   this.playerNextPosition[this.room.sessionId] = targetPosition;
+      //   // Send position update to the server
+      //   this.room.send('updatePosition', {
+      //     x: targetPosition.x,
+      //     y: targetPosition.y,
+      //     z: targetPosition.z,
+      //   });
+      // }
     });
 
     scene.registerBeforeRender(() => {
-      for (const sessionId in this.playerEntities) {
-        const entity = this.playerEntities[sessionId];
-        const targetPosition = this.playerNextPosition[sessionId];
-        entity.position = Vector3.Lerp(entity.position, targetPosition, 0.05);
-      }
+      // for (const sessionId in this.playerEntities) {
+      //   const entity = this.playerEntities[sessionId];
+      //   const targetPosition = this.playerNextPosition[sessionId];
+      //   entity.position = Vector3.Lerp(entity.position, targetPosition, 0.05);
+      // }
     });
 
     return scene;
