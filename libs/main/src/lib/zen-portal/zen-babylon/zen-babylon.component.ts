@@ -8,6 +8,7 @@ import '@babylonjs/core/Meshes/Builders/groundBuilder';
 import '@babylonjs/core/Culling/ray';
 // Side-effects only imports for WebGPU extensions.
 import '@babylonjs/core/Engines/WebGPU/Extensions/engine.uniformBuffer';
+import '@babylonjs/core/Physics/physicsEngineComponent';
 
 import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } from '@angular/core';
@@ -19,11 +20,17 @@ import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight';
 import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial';
 import { Color3, Vector3 } from '@babylonjs/core/Maths/math';
 import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder';
+import { PhysicsShapeType } from '@babylonjs/core/Physics/v2/IPhysicsEnginePlugin';
+import { PhysicsAggregate } from '@babylonjs/core/Physics/v2/physicsAggregate';
+import { HavokPlugin } from '@babylonjs/core/Physics/v2/Plugins/havokPlugin';
 import { Scene } from '@babylonjs/core/scene';
+// import HavokPhysics from '@babylonjs/havok';
 import { token } from '@zen/auth';
 import { ZenLoadingComponent } from '@zen/components';
 import { Client, Room } from 'colyseus.js';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
+
+declare const HavokPhysics: () => Promise<unknown>;
 
 @Component({
   selector: 'zen-babylon',
@@ -78,6 +85,15 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   async createScene(engine: any) {
     const scene = new Scene(engine);
 
+    const havokInterface = await HavokPhysics();
+
+    const plugin = new HavokPlugin(
+      undefined /* or the value that fits your usecase */,
+      havokInterface
+    );
+
+    scene.enablePhysics(new Vector3(0, -9.81, 0), plugin);
+
     const camera = new ArcRotateCamera('camera', Math.PI / 2, 1.0, 550, Vector3.Zero(), scene);
     camera.setTarget(Vector3.Zero());
 
@@ -87,6 +103,8 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     const ground = MeshBuilder.CreatePlane('ground', { size: 500 }, scene);
     ground.position.y = -15;
     ground.rotation.x = Math.PI / 2;
+
+    const groundAggregate = new PhysicsAggregate(ground, PhysicsShapeType.BOX, { mass: 0 }, scene);
 
     const colyseusSDK = new Client('ws://localhost:7080');
 
@@ -107,10 +125,17 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
       // set player spawning position
       sphere.position.set(player.x, player.y, player.z);
 
+      const sphereAggregate = new PhysicsAggregate(
+        sphere,
+        PhysicsShapeType.SPHERE,
+        { mass: 100, restitution: 1 },
+        scene
+      );
+
       sphere.material = new StandardMaterial(`player-material-${sessionId}`);
 
       if (isCurrentPlayer) {
-        (<StandardMaterial>sphere.material).emissiveColor = Color3.FromHexString('#ff9900');
+        (<StandardMaterial>sphere.material).emissiveColor = Color3.FromHexString('#00ffff');
       } else {
         (<StandardMaterial>sphere.material).emissiveColor = Color3.Gray();
       }

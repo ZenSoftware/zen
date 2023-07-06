@@ -37,7 +37,7 @@ export class MainRoom extends Room<MyRoomState> {
     // place Player at a random position
     const FLOOR_SIZE = 500;
     player.x = -(FLOOR_SIZE / 2) + Math.random() * FLOOR_SIZE;
-    player.y = -1;
+    player.y = 200;
     player.z = -(FLOOR_SIZE / 2) + Math.random() * FLOOR_SIZE;
 
     this.state.players.set(client.sessionId, player);
