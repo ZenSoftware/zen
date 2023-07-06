@@ -94,14 +94,14 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
 
     scene.enablePhysics(new Vector3(0, -9.81, 0), plugin);
 
-    const camera = new ArcRotateCamera('camera', Math.PI / 2, 1.0, 550, Vector3.Zero(), scene);
+    const camera = new ArcRotateCamera('camera', Math.PI / 2, 1.0, 50, Vector3.Zero(), scene);
     camera.setTarget(Vector3.Zero());
 
     const light = new HemisphericLight('light', new Vector3(0, 1, 0), scene);
     light.intensity = 0.7;
 
-    const ground = MeshBuilder.CreatePlane('ground', { size: 500 }, scene);
-    ground.position.y = -15;
+    const ground = MeshBuilder.CreatePlane('ground', { size: 50 }, scene);
+    ground.position.y = -10;
     ground.rotation.x = Math.PI / 2;
 
     const groundAggregate = new PhysicsAggregate(ground, PhysicsShapeType.BOX, { mass: 0 }, scene);
@@ -118,8 +118,8 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
 
       // create player Sphere
       const sphere = MeshBuilder.CreateSphere(`player-${sessionId}`, {
-        segments: 8,
-        diameter: 40,
+        segments: 32,
+        diameter: 2,
       });
 
       // set player spawning position
@@ -128,7 +128,10 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
       const sphereAggregate = new PhysicsAggregate(
         sphere,
         PhysicsShapeType.SPHERE,
-        { mass: 100, restitution: 1 },
+        {
+          mass: 1,
+          restitution: 0.7,
+        },
         scene
       );
 
