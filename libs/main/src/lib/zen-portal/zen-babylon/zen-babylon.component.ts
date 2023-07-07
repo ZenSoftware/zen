@@ -12,13 +12,12 @@ import '@babylonjs/core/Physics/physicsEngineComponent';
 
 import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } from '@angular/core';
-import { WebGPUEngine } from '@babylonjs/core';
-import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera';
+import { KeyboardEventTypes, Mesh, WebGPUEngine } from '@babylonjs/core';
+import { FollowCamera } from '@babylonjs/core/Cameras/followCamera';
 import { Engine } from '@babylonjs/core/Engines/engine';
-import { PointerEventTypes } from '@babylonjs/core/Events/pointerEvents';
 import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight';
 import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial';
-import { Color3, Vector3 } from '@babylonjs/core/Maths/math';
+import { Color3, Quaternion, Vector3 } from '@babylonjs/core/Maths/math';
 import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder';
 import { PhysicsShapeType } from '@babylonjs/core/Physics/v2/IPhysicsEnginePlugin';
 import { PhysicsAggregate } from '@babylonjs/core/Physics/v2/physicsAggregate';
@@ -94,96 +93,240 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
 
     scene.enablePhysics(new Vector3(0, -9.81, 0), plugin);
 
-    const camera = new ArcRotateCamera('camera', Math.PI / 2, 1.0, 50, Vector3.Zero(), scene);
+    const camera = new FollowCamera('camera1', new Vector3(0, 5, -10), scene);
+
+    // This targets the camera to scene origin
     camera.setTarget(Vector3.Zero());
+
+    // This attaches the camera to the canvas
+    camera.attachControl(true);
 
     const light = new HemisphericLight('light', new Vector3(0, 1, 0), scene);
     light.intensity = 0.7;
 
-    const ground = MeshBuilder.CreatePlane('ground', { size: 50 }, scene);
-    ground.position.y = -10;
-    ground.rotation.x = Math.PI / 2;
+    const ground = MeshBuilder.CreateGround(
+      'ground1',
+      {
+        width: 160,
+        height: 160,
+        subdivisions: 2,
+      },
+      scene
+    );
+    ground.position.y = -5;
 
-    const groundAggregate = new PhysicsAggregate(ground, PhysicsShapeType.BOX, { mass: 0 }, scene);
+    const groundAggregate = new PhysicsAggregate(
+      ground,
+      PhysicsShapeType.BOX,
+      { mass: 0, friction: 0.5, restitution: 0.7 },
+      scene
+    );
+
+    const box = MeshBuilder.CreateBox('box', { size: 2 }, scene);
+    box.position.y = 1;
+
+    const boxPhysicsAgg = new PhysicsAggregate(
+      box,
+      PhysicsShapeType.BOX,
+      { mass: 1, restitution: 0.9 },
+      scene
+    );
+    box.material = new StandardMaterial('s-mat', scene);
+    (<StandardMaterial>box.material)['diffuseColor'] = new Color3(0, 0, 1);
 
     const colyseusSDK = new Client('ws://localhost:7080');
+
+    let sessionId: string;
+
+    let isUpdateBox = false;
 
     this.room = await colyseusSDK.joinOrCreate<any>('MainRoom', { token: token() });
     console.log(`Connected to roomId: ${this.room.roomId}`);
 
-    this.room.state.players.onAdd((player: any, sessionId: string) => {
-      console.log('player added');
+    const playerViews: { [id: string]: Mesh } = {};
 
-      const isCurrentPlayer = sessionId === this.room.sessionId;
+    this.room.state.players.onAdd((player: any, key: string) => {
+      playerViews[key] = MeshBuilder.CreateSphere('sphere1', { segments: 16, diameter: 2 }, scene);
+      console.log('player added', playerViews[key]);
 
-      // create player Sphere
-      const sphere = MeshBuilder.CreateSphere(`player-${sessionId}`, {
-        segments: 32,
-        diameter: 2,
+      player.position.onChange(() => {
+        if (key != this.room.sessionId) {
+          if (
+            Math.abs(playerViews[key].position.x) < 0.2 &&
+            Math.abs(playerViews[key].position.y) < 0.5 &&
+            Math.abs(playerViews[key].position.x) < 0.2
+          ) {
+            playerViews[key].position = new Vector3(
+              player.position.x,
+              player.position.y,
+              player.position.z
+            );
+          } else {
+            playerViews[key].physicsBody!.setLinearVelocity(
+              new Vector3(
+                (player.position.x - playerViews[key].position.x) * 10,
+                (player.position.y - playerViews[key].position.y) * 10,
+                (player.position.z - playerViews[key].position.z) * 10
+              )
+            );
+            playerViews[key].rotationQuaternion = Quaternion.Slerp(
+              playerViews[key].rotationQuaternion!,
+              new Quaternion(
+                player.quaternion.x,
+                player.quaternion.y,
+                player.quaternion.z,
+                player.quaternion.w
+              ),
+              0.4
+            );
+          }
+        }
       });
 
-      // set player spawning position
-      sphere.position.set(player.x, player.y, player.z);
+      // Set camera to follow current player
+      if (key === this.room.sessionId) {
+        sessionId = key;
+        playerViews[key].position = new Vector3(4 * Math.random(), 0, 3 * Math.random());
+        const playerViewPhysicsAgg = new PhysicsAggregate(
+          playerViews[key],
+          PhysicsShapeType.SPHERE,
+          { mass: 1, restitution: 0.9 },
+          scene
+        );
+        // playerViews[key].physicsImpostor!.physicsBody.setActivationState(4);
+        playerViews[key].material = new StandardMaterial('s-mat', scene);
+        (<StandardMaterial>playerViews[key].material)['diffuseColor'] = new Color3(1, 0, 0);
+        box.physicsBody?.setCollisionCallbackEnabled(true);
 
-      const sphereAggregate = new PhysicsAggregate(
-        sphere,
-        PhysicsShapeType.SPHERE,
-        {
-          mass: 1,
-          restitution: 0.7,
-        },
-        scene
-      );
-
-      sphere.material = new StandardMaterial(`player-material-${sessionId}`);
-
-      if (isCurrentPlayer) {
-        (<StandardMaterial>sphere.material).emissiveColor = Color3.FromHexString('#00ffff');
+        box.physicsBody?.getCollisionObservable().add(ev => {
+          this.room.send('boxUpdate', {
+            targetId: sessionId,
+            position: { x: box.position.x, y: box.position.y, z: box.position.z },
+            quaternion: {
+              x: box.rotationQuaternion!.x,
+              y: box.rotationQuaternion!.y,
+              z: box.rotationQuaternion!.z,
+              w: box.rotationQuaternion!.w,
+            },
+          });
+        });
       } else {
-        (<StandardMaterial>sphere.material).emissiveColor = Color3.Gray();
+        playerViews[key].position = new Vector3(0, 0, 0);
+        const playerViewPhysicsAgg = new PhysicsAggregate(
+          playerViews[key],
+          PhysicsShapeType.SPHERE,
+          { mass: 1, restitution: 0 },
+          scene
+        );
+        // playerViews[key].physicsImpostor!.physicsBody.setActivationState(4);
+        playerViews[key].material = new StandardMaterial('s-mat', scene);
+        (<StandardMaterial>playerViews[key].material)['diffuseColor'] = new Color3(0, 1, 0);
       }
-
-      this.playerEntities[sessionId] = sphere;
-      this.playerNextPosition[sessionId] = sphere.position.clone();
-
-      // listen for individual player changes
-      player.onChange(() => {
-        this.playerNextPosition[sessionId].set(player.x, player.y, player.z);
-      });
     });
 
-    this.room.state.players.onRemove((player: any, sessionId: string) => {
-      this.playerEntities[sessionId].dispose();
-      delete this.playerEntities[sessionId];
-      delete this.playerNextPosition[sessionId];
+    this.room.onMessage('boxUpdate', message => {
+      if (message.targetId == null || message.targetId == sessionId) {
+        isUpdateBox = true;
+        (<StandardMaterial>box.material)['diffuseColor'] = new Color3(1, 0, 0);
+      } else {
+        isUpdateBox = false;
+        (<StandardMaterial>box.material)['diffuseColor'] = new Color3(0, 1, 0);
+        box.position = Vector3.Lerp(
+          box.position,
+          new Vector3(message.position.x, message.position.y, message.position.z),
+          0.5
+        );
+        box.rotationQuaternion = Quaternion.Slerp(
+          box.rotationQuaternion as Quaternion,
+          new Quaternion(
+            message.quaternion.x,
+            message.quaternion.y,
+            message.quaternion.z,
+            message.quaternion.w
+          ),
+          0.4
+        );
+      }
     });
 
-    scene.onPointerObservable.add(pointerInfo => {
-      // if (pointerInfo.type === PointerEventTypes.POINTERDOWN && pointerInfo.pickInfo?.hit) {
-      //   const targetPosition = (<Vector3>pointerInfo.pickInfo.pickedPoint).clone();
-      //   // Position adjustments for the current play ground.
-      //   targetPosition.y = -1;
-      //   if (targetPosition.x > 45) targetPosition.x = 45;
-      //   else if (targetPosition.x < -45) targetPosition.x = -45;
-      //   if (targetPosition.z > 45) targetPosition.z = 45;
-      //   else if (targetPosition.z < -45) targetPosition.z = -45;
-      //   // set current player's next position immediatelly
-      //   this.playerNextPosition[this.room.sessionId] = targetPosition;
-      //   // Send position update to the server
-      //   this.room.send('updatePosition', {
-      //     x: targetPosition.x,
-      //     y: targetPosition.y,
-      //     z: targetPosition.z,
-      //   });
-      // }
+    scene.onKeyboardObservable.add(keyboardInfo => {
+      const keyboard = { x: 0, y: 0 };
+
+      if (keyboardInfo.type === KeyboardEventTypes.KEYDOWN) {
+        switch (keyboardInfo.event.code) {
+          case 'ArrowLeft':
+            keyboard.x = -10;
+            break;
+          case 'ArrowRight':
+            keyboard.x = 10;
+            break;
+          case 'ArrowUp':
+            keyboard.y = 10;
+            break;
+          case 'ArrowDown':
+            keyboard.y = -10;
+            break;
+        }
+
+        playerViews[sessionId].physicsBody!.setLinearVelocity(
+          new Vector3(keyboard.x, 0, keyboard.y)
+        );
+      } else if (keyboardInfo.type === KeyboardEventTypes.KEYUP) {
+        switch (keyboardInfo.event.code) {
+          case 'ArrowLeft':
+            keyboard.x = 0;
+            break;
+          case 'ArrowRight':
+            keyboard.x = 0;
+            break;
+          case 'ArrowUp':
+            keyboard.y = 0;
+            break;
+          case 'ArrowDown':
+            keyboard.y = 0;
+            break;
+        }
+
+        playerViews[sessionId].physicsBody!.setLinearVelocity(new Vector3(0, 0, 0));
+      }
     });
 
-    scene.registerBeforeRender(() => {
-      // for (const sessionId in this.playerEntities) {
-      //   const entity = this.playerEntities[sessionId];
-      //   const targetPosition = this.playerNextPosition[sessionId];
-      //   entity.position = Vector3.Lerp(entity.position, targetPosition, 0.05);
-      // }
+    this.room.state.players.onRemove((player: any, key: string) => {
+      console.log('player removed');
+      scene.removeMesh(playerViews[key]);
+      delete playerViews[key];
+    });
+
+    engine.runRenderLoop(() => {
+      if (this.room && playerViews[sessionId]) {
+        // camera.setTarget(playerViews[sessionId].position);
+        this.room.send('playData', {
+          position: {
+            x: playerViews[sessionId].position.x,
+            y: playerViews[sessionId].position.y,
+            z: playerViews[sessionId].position.z,
+          },
+          quaternion: {
+            x: playerViews[sessionId].rotationQuaternion!.x,
+            y: playerViews[sessionId].rotationQuaternion!.y,
+            z: playerViews[sessionId].rotationQuaternion!.z,
+            w: playerViews[sessionId].rotationQuaternion!.w,
+          },
+        });
+
+        if (isUpdateBox) {
+          this.room.send('boxUpdate', {
+            targetId: sessionId,
+            position: { x: box.position.x, y: box.position.y, z: box.position.z },
+            quaternion: {
+              x: box.rotationQuaternion!.x,
+              y: box.rotationQuaternion!.y,
+              z: box.rotationQuaternion!.z,
+              w: box.rotationQuaternion!.w,
+            },
+          });
+        }
+      }
     });
 
     return scene;
