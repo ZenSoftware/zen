@@ -1,9 +1,8 @@
 import { Client, Room } from '@colyseus/core';
 import { Logger } from '@nestjs/common';
+import { MyRoomState, Player } from '@zen/common';
 
 import { AuthService } from '../../auth';
-import { Player } from '../entities';
-import { MyRoomState } from './room-state';
 
 const logger = new Logger('MainRoom');
 

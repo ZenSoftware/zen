@@ -25,6 +25,7 @@ import { HavokPlugin } from '@babylonjs/core/Physics/v2/Plugins/havokPlugin';
 import { Scene } from '@babylonjs/core/scene';
 // import HavokPhysics from '@babylonjs/havok';
 import { token } from '@zen/auth';
+import { MyRoomState } from '@zen/common';
 import { ZenLoadingComponent } from '@zen/components';
 import { Client, Room } from 'colyseus.js';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
@@ -42,10 +43,8 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>; // Used to calculate width
   @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
   #subs: Subscription[] = [];
-  playerEntities: Record<string, any> = {};
-  playerNextPosition: Record<string, any> = {};
   engine?: WebGPUEngine | Engine;
-  room!: Room;
+  room!: Room<MyRoomState>;
   loading = true;
 
   constructor(private ngZone: NgZone) {}
@@ -315,6 +314,11 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
         });
 
         if (isUpdateBox) {
+          // const linearVel = new Vector3();
+          // box.physicsBody!.getLinearVelocityToRef(linearVel);
+          // const angularVel = new Vector3();
+          // box.physicsBody!.getAngularVelocityToRef(angularVel);
+
           this.room.send('boxUpdate', {
             targetId: sessionId,
             position: { x: box.position.x, y: box.position.y, z: box.position.z },
@@ -324,6 +328,8 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
               z: box.rotationQuaternion!.z,
               w: box.rotationQuaternion!.w,
             },
+            // linearVelocity: { x: linearVel.x, y: linearVel.y, z: linearVel.z },
+            // angularVelocity: { x: angularVel.x, y: angularVel.y, z: angularVel.z },
           });
         }
       }

@@ -7,3 +7,4 @@ export * from './lib/enum-helper';
 export * from './lib/environment';
 export * from './lib/role';
 export * from './lib/trim-object-strings';
+export * from './lib/game-schema';
