@@ -195,6 +195,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
         // playerViews[key].physicsImpostor!.physicsBody.setActivationState(4);
         playerViews[key].material = new StandardMaterial('s-mat', scene);
         (<StandardMaterial>playerViews[key].material)['diffuseColor'] = new Color3(1, 0, 0);
+
         box.physicsBody?.setCollisionCallbackEnabled(true);
 
         box.physicsBody?.getCollisionObservable().add(ev => {
