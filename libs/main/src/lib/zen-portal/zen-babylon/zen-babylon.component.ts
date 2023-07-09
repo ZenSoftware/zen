@@ -9,6 +9,7 @@ import '@babylonjs/core/Culling/ray';
 // Side-effects only imports for WebGPU extensions.
 import '@babylonjs/core/Engines/WebGPU/Extensions/engine.uniformBuffer';
 import '@babylonjs/core/Physics/physicsEngineComponent';
+import '@babylonjs/core/Helpers/sceneHelpers';
 
 import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } from '@angular/core';
@@ -19,13 +20,14 @@ import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight';
 import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial';
 import { Color3, Quaternion, Vector3 } from '@babylonjs/core/Maths/math';
 import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder';
+import { PhysicsHelper } from '@babylonjs/core/Physics/physicsHelper';
 import { PhysicsShapeType } from '@babylonjs/core/Physics/v2/IPhysicsEnginePlugin';
 import { PhysicsAggregate } from '@babylonjs/core/Physics/v2/physicsAggregate';
 import { HavokPlugin } from '@babylonjs/core/Physics/v2/Plugins/havokPlugin';
 import { Scene } from '@babylonjs/core/scene';
 // import HavokPhysics from '@babylonjs/havok';
 import { token } from '@zen/auth';
-import { MyRoomState } from '@zen/common';
+import { MyRoomState, Player } from '@zen/common';
 import { ZenLoadingComponent } from '@zen/components';
 import { Client, Room } from 'colyseus.js';
 import { Subscription, debounce, fromEvent, interval } from 'rxjs';
@@ -46,6 +48,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   engine?: WebGPUEngine | Engine;
   room!: Room<MyRoomState>;
   loading = true;
+  physicsHelper!: PhysicsHelper;
 
   constructor(private ngZone: NgZone) {}
 
@@ -62,14 +65,13 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
       const webGPUSupported = await WebGPUEngine.IsSupportedAsync;
 
       if (webGPUSupported) {
-        this.engine = new WebGPUEngine(this.canvasElement.nativeElement);
+        this.engine = new WebGPUEngine(this.canvasElement.nativeElement, { antialias: true });
         await (<WebGPUEngine>this.engine).initAsync();
       } else {
-        this.engine = new Engine(this.canvasElement.nativeElement) as any;
+        this.engine = new Engine(this.canvasElement.nativeElement, true);
       }
 
       const scene = await this.createScene(this.engine);
-
       this.ngZone.run(() => {
         this.loading = false;
       });
@@ -91,6 +93,24 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
     );
 
     scene.enablePhysics(new Vector3(0, -9.81, 0), plugin);
+
+    // this.physicsHelper = new PhysicsHelper(scene);
+    // const vortexOrigin = new Vector3(0, -5, 0);
+    // const vortexEvent = this.physicsHelper.vortex(vortexOrigin, 5, 40, 30);
+
+    // console.log('Enabling Vortex', vortexEvent);
+    // vortexEvent?.enable();
+
+    // const cylinder = MeshBuilder.CreateCylinder('debug', {
+    //   height: 30,
+    //   diameter: 10,
+    // });
+
+    // cylinder.position = vortexOrigin.add(new Vector3(0, 15, 0));
+
+    // const cylinderMaterial = new StandardMaterial('cylinderMaterial', scene);
+    // cylinderMaterial.alpha = 0.5;
+    // cylinder.material = cylinderMaterial;
 
     const camera = new FollowCamera('camera1', new Vector3(0, 5, -10), scene);
 
@@ -144,28 +164,31 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
 
     const playerViews: { [id: string]: Mesh } = {};
 
-    this.room.state.players.onAdd((player: any, key: string) => {
+    this.room.state.players.onAdd((player: Player, key: string) => {
       playerViews[key] = MeshBuilder.CreateSphere('sphere1', { segments: 16, diameter: 2 }, scene);
       console.log('player added', playerViews[key]);
 
       player.position.onChange(() => {
         if (key != this.room.sessionId) {
+          // Prevent jitter caused by linear speed
           if (
-            Math.abs(playerViews[key].position.x) < 0.2 &&
-            Math.abs(playerViews[key].position.y) < 0.5 &&
-            Math.abs(playerViews[key].position.x) < 0.2
+            Math.abs(playerViews[key].position.x - player.position.x) < 0.2 &&
+            Math.abs(playerViews[key].position.y - player.position.y) < 0.2 &&
+            Math.abs(playerViews[key].position.z - player.position.z) < 0.2
           ) {
             playerViews[key].position = new Vector3(
               player.position.x,
               player.position.y,
               player.position.z
             );
+            console.log('LOCK', playerViews[key]);
           } else {
+            const VELOCITY = 10;
             playerViews[key].physicsBody!.setLinearVelocity(
               new Vector3(
-                (player.position.x - playerViews[key].position.x) * 10,
-                (player.position.y - playerViews[key].position.y) * 10,
-                (player.position.z - playerViews[key].position.z) * 10
+                (player.position.x - playerViews[key].position.x) * VELOCITY,
+                (player.position.y - playerViews[key].position.y) * VELOCITY,
+                (player.position.z - playerViews[key].position.z) * VELOCITY
               )
             );
             playerViews[key].rotationQuaternion = Quaternion.Slerp(
@@ -291,7 +314,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
       }
     });
 
-    this.room.state.players.onRemove((player: any, key: string) => {
+    this.room.state.players.onRemove((player: Player, key: string) => {
       console.log('player removed');
       scene.removeMesh(playerViews[key]);
       delete playerViews[key];
@@ -315,11 +338,6 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
         });
 
         if (isUpdateBox) {
-          // const linearVel = new Vector3();
-          // box.physicsBody!.getLinearVelocityToRef(linearVel);
-          // const angularVel = new Vector3();
-          // box.physicsBody!.getAngularVelocityToRef(angularVel);
-
           this.room.send('boxUpdate', {
             targetId: sessionId,
             position: { x: box.position.x, y: box.position.y, z: box.position.z },
@@ -329,8 +347,6 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
               z: box.rotationQuaternion!.z,
               w: box.rotationQuaternion!.w,
             },
-            // linearVelocity: { x: linearVel.x, y: linearVel.y, z: linearVel.z },
-            // angularVelocity: { x: angularVel.x, y: angularVel.y, z: angularVel.z },
           });
         }
       }

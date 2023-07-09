@@ -6,7 +6,7 @@ export class Vec3 extends Schema {
   @type('number') z = 0;
 }
 
-export class Quaternion extends Schema {
+export class Vec4 extends Schema {
   @type('number') x = 0;
   @type('number') y = 0;
   @type('number') z = 0;
@@ -16,7 +16,7 @@ export class Quaternion extends Schema {
 export class Player extends Schema {
   @type('string') name = '';
   @type(Vec3) position = new Vec3();
-  @type(Quaternion) quaternion = new Quaternion();
+  @type(Vec4) quaternion = new Vec4();
   // @type(Vec3) linearVelocity = new Vec3();
   // @type(Vec3) angularVelocity = new Vec3();
 
