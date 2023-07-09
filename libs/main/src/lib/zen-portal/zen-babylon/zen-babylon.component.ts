@@ -172,9 +172,9 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
         if (key != this.room.sessionId) {
           // Prevent jitter caused by linear speed
           if (
-            Math.abs(playerViews[key].position.x - player.position.x) < 0.2 &&
-            Math.abs(playerViews[key].position.y - player.position.y) < 0.2 &&
-            Math.abs(playerViews[key].position.z - player.position.z) < 0.2
+            Math.abs(playerViews[key].position.x) < 0.2 &&
+            Math.abs(playerViews[key].position.y) < 0.5
+            // Math.abs(playerViews[key].position.z) < 0.2
           ) {
             playerViews[key].position = new Vector3(
               player.position.x,
@@ -310,7 +310,7 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
             break;
         }
 
-        playerViews[sessionId].physicsBody!.setLinearVelocity(new Vector3(0, 0, 0));
+        playerViews[sessionId].physicsBody!.setLinearVelocity(new Vector3());
       }
     });
 
