@@ -80,6 +80,13 @@ export default gql`
     username: String
     email: String
     googleId: String
+    AND: [UserWhereInput!]
+    OR: [UserWhereInput!]
+    NOT: [UserWhereInput!]
+    createdAt: DateTimeFilter
+    password: StringNullableFilter
+    roles: StringNullableListFilter
+    googleProfile: JsonNullableFilter
   }
 
   input UserOrderByWithAggregationInput {
