@@ -42,6 +42,7 @@ The project implements a fully featured authentication & authorization system wi
 
 - [Node v20](https://nodejs.org/)
 - [Docker](https://www.docker.com/) or [Rancher Desktop](https://rancherdesktop.io/)
+- [pnpm](https://pnpm.io/installation)
 
 ```bash
 # Project setup steps
@@ -51,23 +52,23 @@ cd zen
 # Make a copy of the .env file
 cp .env.example .env
 
-# Substitute npm for pnpm if you are using that
-npm i
+# Install node modules
+pnpm i
 
 # Start the PostgreSQL server
 docker-compose up -d
 
 # Run the initial Prisma migration
-npm run prisma:migrate
+pnpm prisma:migrate
 ```
 ---
 
 ```bash
 # Start the Nest API
-npm run start:api
+pnpm start:api
 
 # Start the Angular app at localhost:4200
-npm start
+pnpm start
 ```
 
 ---
