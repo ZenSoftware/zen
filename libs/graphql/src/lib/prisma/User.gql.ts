@@ -15,7 +15,7 @@ export default gql`
     $cursor: UserWhereUniqueInput
     $take: Int
     $skip: Int
-    $distinct: UserScalarFieldEnum
+    $distinct: [UserScalarFieldEnum]
   ) {
     findFirstUser(
       where: $where
@@ -35,7 +35,7 @@ export default gql`
     $cursor: UserWhereUniqueInput
     $take: Int
     $skip: Int
-    $distinct: UserScalarFieldEnum
+    $distinct: [UserScalarFieldEnum]
   ) {
     findManyUser(
       where: $where
@@ -55,7 +55,7 @@ export default gql`
     $cursor: UserWhereUniqueInput
     $take: Int
     $skip: Int
-    $distinct: UserScalarFieldEnum
+    $distinct: [UserScalarFieldEnum]
   ) {
     findManyUserCount(
       where: $where
