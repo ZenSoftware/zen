@@ -415,7 +415,7 @@ export type QueryAuthPasswordResetRequestArgs = {
 
 export type QueryFindFirstUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  distinct?: InputMaybe<UserScalarFieldEnum>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -425,7 +425,7 @@ export type QueryFindFirstUserArgs = {
 
 export type QueryFindManyUserArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  distinct?: InputMaybe<UserScalarFieldEnum>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -435,7 +435,7 @@ export type QueryFindManyUserArgs = {
 
 export type QueryFindManyUserCountArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
-  distinct?: InputMaybe<UserScalarFieldEnum>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>>>;
   orderBy?: InputMaybe<Array<InputMaybe<UserOrderByWithRelationInput>>>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -783,9 +783,16 @@ export type UserWhereInput = {
 };
 
 export type UserWhereUniqueInput = {
+  AND?: InputMaybe<Array<UserWhereInput>>;
+  NOT?: InputMaybe<Array<UserWhereInput>>;
+  OR?: InputMaybe<Array<UserWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<Scalars['String']['input']>;
   googleId?: InputMaybe<Scalars['String']['input']>;
+  googleProfile?: InputMaybe<JsonNullableFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<StringNullableFilter>;
+  roles?: InputMaybe<StringNullableListFilter>;
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -862,7 +869,7 @@ export type FindFirstUserVariables = Exact<{
   cursor?: InputMaybe<UserWhereUniqueInput>;
   take?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
-  distinct?: InputMaybe<UserScalarFieldEnum>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
 
@@ -874,7 +881,7 @@ export type FindManyUserVariables = Exact<{
   cursor?: InputMaybe<UserWhereUniqueInput>;
   take?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
-  distinct?: InputMaybe<UserScalarFieldEnum>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
 
@@ -886,7 +893,7 @@ export type FindManyUserCountVariables = Exact<{
   cursor?: InputMaybe<UserWhereUniqueInput>;
   take?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
-  distinct?: InputMaybe<UserScalarFieldEnum>;
+  distinct?: InputMaybe<Array<InputMaybe<UserScalarFieldEnum>> | InputMaybe<UserScalarFieldEnum>>;
 }>;
 
 
@@ -1142,7 +1149,7 @@ export const FindUniqueUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindFirstUserDocument = /*#__PURE__*/ gql`
-    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: UserScalarFieldEnum) {
+    query FindFirstUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
   findFirstUser(
     where: $where
     orderBy: $orderBy
@@ -1167,7 +1174,7 @@ export const FindFirstUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserDocument = /*#__PURE__*/ gql`
-    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: UserScalarFieldEnum) {
+    query FindManyUser($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
   findManyUser(
     where: $where
     orderBy: $orderBy
@@ -1192,7 +1199,7 @@ export const FindManyUserDocument = /*#__PURE__*/ gql`
     }
   }
 export const FindManyUserCountDocument = /*#__PURE__*/ gql`
-    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: UserScalarFieldEnum) {
+    query FindManyUserCount($where: UserWhereInput, $orderBy: [UserOrderByWithRelationInput], $cursor: UserWhereUniqueInput, $take: Int, $skip: Int, $distinct: [UserScalarFieldEnum]) {
   findManyUserCount(
     where: $where
     orderBy: $orderBy

@@ -1,7 +1,6 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { AuthService } from '@zen/auth';
-import { ZenAccountInfoComponent, ZenPasswordChangeComponent } from '@zen/auth';
+import { AuthService, ZenAccountInfoComponent, ZenPasswordChangeComponent } from '@zen/auth';
 
 @Component({
   selector: 'zen-settings',

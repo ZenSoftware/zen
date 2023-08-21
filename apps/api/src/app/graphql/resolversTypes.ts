@@ -146,7 +146,7 @@ export interface FindFirstUserArgs {
   cursor?: UserWhereUniqueInput | null;
   take?: number | null;
   skip?: number | null;
-  distinct?: UserScalarFieldEnum | null;
+  distinct?: UserScalarFieldEnum[] | null;
 }
 
 export interface FindFirstUserOrThrowArgs {
@@ -155,7 +155,7 @@ export interface FindFirstUserOrThrowArgs {
   cursor?: UserWhereUniqueInput | null;
   take?: number | null;
   skip?: number | null;
-  distinct?: UserScalarFieldEnum | null;
+  distinct?: UserScalarFieldEnum[] | null;
 }
 
 export interface FindManyUserArgs {
@@ -164,7 +164,7 @@ export interface FindManyUserArgs {
   cursor?: UserWhereUniqueInput;
   take?: number;
   skip?: number;
-  distinct?: UserScalarFieldEnum;
+  distinct?: UserScalarFieldEnum[];
 }
 
 export interface AggregateUserArgs {
@@ -206,7 +206,7 @@ export interface UpsertOneUserArgs {
 }
 
 export interface CreateManyUserArgs {
-  data: UserCreateManyInput;
+  data: UserCreateManyInput[];
   skipDuplicates?: boolean;
 }
 
@@ -268,6 +268,13 @@ export interface UserWhereUniqueInput {
   username?: string;
   email?: string;
   googleId?: string;
+  AND?: UserWhereInput[];
+  OR?: UserWhereInput[];
+  NOT?: UserWhereInput[];
+  createdAt?: DateTimeFilter;
+  password?: StringNullableFilter | null;
+  roles?: StringNullableListFilter;
+  googleProfile?: JsonNullableFilter;
 }
 
 export interface UserOrderByWithAggregationInput {
@@ -304,9 +311,9 @@ export interface UserCreateInput {
   username?: string | null;
   password?: string | null;
   email: string;
-  roles?: UserCreaterolesInput;
+  roles?: string[];
   googleId?: string | null;
-  googleProfile?: NullableJsonNullValueInput;
+  googleProfile?: any;
 }
 
 export interface UserUncheckedCreateInput {
@@ -315,9 +322,9 @@ export interface UserUncheckedCreateInput {
   username?: string | null;
   password?: string | null;
   email: string;
-  roles?: UserCreaterolesInput;
+  roles?: string[];
   googleId?: string | null;
-  googleProfile?: NullableJsonNullValueInput;
+  googleProfile?: any;
 }
 
 export interface UserUpdateInput {
@@ -326,9 +333,9 @@ export interface UserUpdateInput {
   username?: string | null;
   password?: string | null;
   email?: string;
-  roles?: UserUpdaterolesInput;
+  roles?: string[];
   googleId?: string | null;
-  googleProfile?: NullableJsonNullValueInput;
+  googleProfile?: any;
 }
 
 export interface UserUncheckedUpdateInput {
@@ -337,9 +344,9 @@ export interface UserUncheckedUpdateInput {
   username?: string | null;
   password?: string | null;
   email?: string;
-  roles?: UserUpdaterolesInput;
+  roles?: string[];
   googleId?: string | null;
-  googleProfile?: NullableJsonNullValueInput;
+  googleProfile?: any;
 }
 
 export interface UserCreateManyInput {
@@ -348,9 +355,9 @@ export interface UserCreateManyInput {
   username?: string | null;
   password?: string | null;
   email: string;
-  roles?: UserCreaterolesInput;
+  roles?: string[];
   googleId?: string | null;
-  googleProfile?: NullableJsonNullValueInput;
+  googleProfile?: any;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -359,9 +366,9 @@ export interface UserUpdateManyMutationInput {
   username?: string | null;
   password?: string | null;
   email?: string;
-  roles?: UserUpdaterolesInput;
+  roles?: string[];
   googleId?: string | null;
-  googleProfile?: NullableJsonNullValueInput;
+  googleProfile?: any;
 }
 
 export interface UserUncheckedUpdateManyInput {
@@ -370,9 +377,9 @@ export interface UserUncheckedUpdateManyInput {
   username?: string | null;
   password?: string | null;
   email?: string;
-  roles?: UserUpdaterolesInput;
+  roles?: string[];
   googleId?: string | null;
-  googleProfile?: NullableJsonNullValueInput;
+  googleProfile?: any;
 }
 
 export interface StringFilter {
@@ -561,7 +568,7 @@ export interface NullableStringFieldUpdateOperationsInput {
 
 export interface UserUpdaterolesInput {
   set?: string[];
-  push?: string;
+  push?: string[];
 }
 
 export interface NestedStringFilter {
