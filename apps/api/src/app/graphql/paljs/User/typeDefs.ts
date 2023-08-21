@@ -20,7 +20,7 @@ export default gql`
       cursor: UserWhereUniqueInput
       take: Int
       skip: Int
-      distinct: UserScalarFieldEnum
+      distinct: [UserScalarFieldEnum]
     ): User
     findManyUser(
       where: UserWhereInput
@@ -28,7 +28,7 @@ export default gql`
       cursor: UserWhereUniqueInput
       take: Int
       skip: Int
-      distinct: UserScalarFieldEnum
+      distinct: [UserScalarFieldEnum]
     ): [User!]
     findManyUserCount(
       where: UserWhereInput
@@ -36,7 +36,7 @@ export default gql`
       cursor: UserWhereUniqueInput
       take: Int
       skip: Int
-      distinct: UserScalarFieldEnum
+      distinct: [UserScalarFieldEnum]
     ): Int!
     aggregateUser(
       where: UserWhereInput
