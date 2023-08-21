@@ -10,14 +10,12 @@ body {
   font-family: font.$zen-default;
 }
 
-// Angular Material sidenav background
-.mat-sidenav-container,
-.mat-sidenav {
-  background-color: $body-bg;
-}
+:root {
+  // Angular Material sidenav background colors
+  --mat-sidenav-container-background-color: #{$gray-900};
+  --mat-sidenav-content-background-color: #{$gray-900};
 
-// Angular Material dialog background
-.mat-mdc-dialog-container {
+  // Angular Material dialog background
   --mdc-dialog-container-color: #{$gray-800};
 }
 
@@ -34,6 +32,7 @@ body {
 // Bootstrap card header font & no margins on header HTML elements
 .card-header {
   font-family: font.$zen-heading;
+
   h1,
   h2,
   h3,

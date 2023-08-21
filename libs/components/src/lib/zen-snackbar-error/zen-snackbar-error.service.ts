@@ -58,7 +58,7 @@ export class ZenSnackbarError implements OnDestroy {
           clipboardText = JSON.stringify(error, null, 2);
         }
 
-        if (mergedConfig.message) {
+        if (mergedConfig.message && mergedConfig.message !== 'ERROR') {
           clipboardText = mergedConfig.message + '\n' + clipboardText;
         }
 
