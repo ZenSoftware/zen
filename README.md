@@ -42,7 +42,8 @@ The project implements a fully featured authentication & authorization system wi
 
 - [Node v20](https://nodejs.org/)
 - [Docker](https://www.docker.com/) or [Rancher Desktop](https://rancherdesktop.io/)
-- [pnpm](https://pnpm.io/installation)
+
+We are utilizing pnpm as our package manager.  Though, you can utilize npm if you prefer by simply deleting the `pnpm-lock.yaml` file and running the equivalent npm commands.
 
 ```bash
 # Project setup steps
@@ -88,7 +89,7 @@ pnpm start
 - [x] Custom npm scripts to code generate the Nest GraphQL api on Prisma schema changes.
 - [x] [@graphql-codegen/typescript-apollo-angular](https://graphql-code-generator.com/docs/plugins/typescript-apollo-angular) of [apollo-angular](https://www.apollographql.com/docs/angular/) services to enable simple, type safe access to the GraphQL API within Angular. 🎀 Modern dev tooling configured for the project, allowing for [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/) to provide auto-completion within `gql` tags for all `.ts` files.
 - [x] An Angular `GraphQLModule` to simplify the configuration of the `ApolloClient` to enable/disable the varying `ApolloLink` features.
-  - [x] [HttpBatchLink](https://apollo-angular.com/docs/data/network#httpclient-1) for batching several GraphQL requests that occur within a short debounce interval. This really helps to alleviate network congestion.
+  - [x] [HttpBatchLink](https://apollo-angular.com/docs/data/network#httpclient-1) for batching several GraphQL requests that occur within a short time interval. This really helps to alleviate network congestion.
   - [x] [UploadLink](https://www.npmjs.com/package/apollo-upload-client) to give `ApolloClient` HTTP multi-part form requests capabilities. Enabling the uploading of files via [GraphQLUpload](https://github.com/jaydenseric/graphql-upload).
   - [x] [GraphQLWsLink](https://www.apollographql.com/docs/react/data/subscriptions/#2-initialize-a-graphqlwslink) for GraphQL subscriptions over websockets.
 
@@ -124,6 +125,7 @@ pnpm start
 - [x] [SocketIO](https://socket.io/) branch demonstrates how to implement a Nest WebSocket Gateway with user authentication.
 - [x] [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/grid/) branch - which includes [@zen/grid](https://github.com/ZenSoftware/zen/tree/kendo/libs/grid).  `<zen-grid>` renders robust and reliable data grids over all of the Prisma models within the project, with minimal configuration needed.
 - [x] [OpenTelemetry](https://opentelemetry.io/) branch demonstrates how to integrate and expose telemetry data for the API server.
+- [x] HTML canvas branch demonstrating integration of [babylon.js](https://www.babylonjs.com/) & [Fabric.js](http://fabricjs.com/).
 
 ---
 
