@@ -120,7 +120,7 @@ pnpm start
 
 ### 🎏 Optional Tech Integrations
 
-- [x] [Electron](https://www.electronjs.org/) branch with new npm script `npm run start:electron` to launch the app within Electron.
+- [x] [Electron](https://www.electronjs.org/) branch with new npm script `start:electron` to launch the app within Electron.
 - [x] [Capacitor](https://capacitorjs.com/) branch.
 - [x] [SocketIO](https://socket.io/) branch demonstrates how to implement a Nest WebSocket Gateway with user authentication.
 - [x] [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/grid/) branch - which includes [@zen/grid](https://github.com/ZenSoftware/zen/tree/kendo/libs/grid).  `<zen-grid>` renders robust and reliable data grids over all of the Prisma models within the project, with minimal configuration needed.
