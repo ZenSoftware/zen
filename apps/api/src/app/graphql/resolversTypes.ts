@@ -141,21 +141,21 @@ export type UserMaxAggregateOutputType = {
 };
 
 export interface FindFirstUserArgs {
-  where?: UserWhereInput | null;
-  orderBy?: UserOrderByWithRelationInput[] | null;
-  cursor?: UserWhereUniqueInput | null;
-  take?: number | null;
-  skip?: number | null;
-  distinct?: UserScalarFieldEnum[] | null;
+  where?: UserWhereInput;
+  orderBy?: UserOrderByWithRelationInput[];
+  cursor?: UserWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: UserScalarFieldEnum[];
 }
 
 export interface FindFirstUserOrThrowArgs {
-  where?: UserWhereInput | null;
-  orderBy?: UserOrderByWithRelationInput[] | null;
-  cursor?: UserWhereUniqueInput | null;
-  take?: number | null;
-  skip?: number | null;
-  distinct?: UserScalarFieldEnum[] | null;
+  where?: UserWhereInput;
+  orderBy?: UserOrderByWithRelationInput[];
+  cursor?: UserWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: UserScalarFieldEnum[];
 }
 
 export interface FindManyUserArgs {
@@ -188,11 +188,11 @@ export interface GroupByUserArgs {
 }
 
 export interface FindUniqueUserArgs {
-  where: UserWhereUniqueInput | null;
+  where: UserWhereUniqueInput;
 }
 
 export interface FindUniqueUserOrThrowArgs {
-  where: UserWhereUniqueInput | null;
+  where: UserWhereUniqueInput;
 }
 
 export interface CreateOneUserArgs {
@@ -211,12 +211,12 @@ export interface CreateManyUserArgs {
 }
 
 export interface DeleteOneUserArgs {
-  where: UserWhereUniqueInput | null;
+  where: UserWhereUniqueInput;
 }
 
 export interface UpdateOneUserArgs {
-  data: UserUpdateInput | null;
-  where: UserWhereUniqueInput | null;
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
 }
 
 export interface UpdateManyUserArgs {
