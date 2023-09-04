@@ -29,7 +29,7 @@ export default gql`
       take: Int
       skip: Int
       distinct: [UserScalarFieldEnum]
-    ): [User!]
+    ): [User!]!
     findManyUserCount(
       where: UserWhereInput
       orderBy: [UserOrderByWithRelationInput]
