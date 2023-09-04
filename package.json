@@ -46,7 +46,7 @@
     "@opentelemetry/semantic-conventions": "^1.15.2",
     "@paljs/plugins": "6.0.5",
     "@prisma/client": "^5.2.0",
-    "@prisma/instrumentation": "~4.16.2",
+    "@prisma/instrumentation": "^5.2.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "dotenv": "^16.3.1",
