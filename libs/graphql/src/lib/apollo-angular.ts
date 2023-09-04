@@ -382,7 +382,7 @@ export type Query = {
   authLogin: AuthSession;
   authPasswordResetRequest?: Maybe<Scalars['Boolean']['output']>;
   findFirstUser?: Maybe<User>;
-  findManyUser?: Maybe<Array<User>>;
+  findManyUser: Array<User>;
   findManyUserCount: Scalars['Int']['output'];
   findUniqueUser?: Maybe<User>;
   sample: Scalars['Boolean']['output'];
@@ -885,7 +885,7 @@ export type FindManyUserVariables = Exact<{
 }>;
 
 
-export type FindManyUser = { __typename?: 'Query', findManyUser?: Array<{ __typename?: 'User', id: string, username?: string | null, email: string, createdAt: any, roles: Array<string>, rules: Array<any> }> | null };
+export type FindManyUser = { __typename?: 'Query', findManyUser: Array<{ __typename?: 'User', id: string, username?: string | null, email: string }> };
 
 export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;

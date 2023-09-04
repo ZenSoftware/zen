@@ -4,7 +4,6 @@ import helmet from 'helmet';
 
 import { AppModule } from './app/app.module';
 import { GameService, MainRoom } from './app/game';
-import { PrismaService } from './app/prisma';
 import { environment } from './environments/environment';
 
 const ROOMS = [MainRoom];
@@ -12,9 +11,6 @@ const ROOMS = [MainRoom];
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: environment.cors });
   app.enableShutdownHooks();
-
-  const prisma: PrismaService = app.get(PrismaService);
-  prisma.enableShutdownHooks(app);
 
   if (environment.production) app.use(helmet());
 
