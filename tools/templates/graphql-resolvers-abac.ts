@@ -5,7 +5,6 @@ export function GraphQLResolversABACTemplate(name: string) {
 import { subject } from '@casl/ability';
 import { ForbiddenException, Inject, NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
-import type { NonNullableFields } from '@zen/common';
 import { CaslAbility, CaslGuard, CaslPolicy } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
@@ -50,7 +49,7 @@ export class ${name}Resolver {
   @Query()
   @CaslPolicy(ability => ability.can('read', '${name}'))
   async findUnique${name}(
-    @Args() args: NonNullableFields<FindUnique${name}Args>,
+    @Args() args: FindUnique${name}Args,
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
@@ -64,7 +63,7 @@ export class ${name}Resolver {
   @Query()
   @CaslPolicy(ability => ability.can('read', '${name}'))
   async findFirst${name}(
-    @Args() args: NonNullableFields<FindFirst${name}Args>,
+    @Args() args: FindFirst${name}Args,
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
@@ -122,7 +121,7 @@ export class ${name}Resolver {
   @Mutation()
   @CaslPolicy(ability => ability.can('update', '${name}'))
   async updateOne${name}(
-    @Args() args: NonNullableFields<UpdateOne${name}Args>,
+    @Args() args: UpdateOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
@@ -180,7 +179,7 @@ export class ${name}Resolver {
   @Mutation()
   @CaslPolicy(ability => ability.can('delete', '${name}'))
   async deleteOne${name}(
-    @Args() args: NonNullableFields<DeleteOne${name}Args>,
+    @Args() args: DeleteOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
