@@ -3,7 +3,6 @@ const lowercase = (name: string) => name.charAt(0).toLowerCase() + name.slice(1)
 export function GraphQLResolversRBACTemplate(name: string, role: string) {
   return `import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
-import type { NonNullableFields } from '@zen/common';
 import { RolesGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 
@@ -43,18 +42,12 @@ export class ${name}Resolver {
   ) {}
 
   @Query()
-  async findUnique${name}(
-    @Args() args: NonNullableFields<FindUnique${name}Args>,
-    @Info() info: GraphQLResolveInfo
-  ) {
+  async findUnique${name}(@Args() args: FindUnique${name}Args, @Info() info: GraphQLResolveInfo) {
     return this.prisma.${lowercase(name)}.findUnique(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
-  async findFirst${name}(
-    @Args() args: NonNullableFields<FindFirst${name}Args>,
-    @Info() info: GraphQLResolveInfo
-  ) {
+  async findFirst${name}(@Args() args: FindFirst${name}Args, @Info() info: GraphQLResolveInfo) {
     return this.prisma.${lowercase(name)}.findFirst(this.prismaSelect.getArgs(info, args));
   }
 
@@ -79,10 +72,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  async updateOne${name}(
-    @Args() args: NonNullableFields<UpdateOne${name}Args>,
-    @Info() info: GraphQLResolveInfo
-  ) {
+  async updateOne${name}(@Args() args: UpdateOne${name}Args, @Info() info: GraphQLResolveInfo) {
     return this.prisma.${lowercase(name)}.update(this.prismaSelect.getArgs(info, args));
   }
 
@@ -97,10 +87,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  async deleteOne${name}(
-    @Args() args: NonNullableFields<DeleteOne${name}Args>,
-    @Info() info: GraphQLResolveInfo
-  ) {
+  async deleteOne${name}(@Args() args: DeleteOne${name}Args, @Info() info: GraphQLResolveInfo) {
     return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
   }
 
