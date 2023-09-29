@@ -97,7 +97,7 @@ export const typeDefs = gql`
 
 @Resolver()
 @UseGuards(GqlThrottlerGuard)
-@Throttle()
+@Throttle({ default: { limit: 5, ttl: 30_000 } })
 export class AuthResolver {
   constructor(
     private readonly auth: AuthService,
