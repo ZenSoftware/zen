@@ -24,7 +24,7 @@ describe('AuthService', () => {
   let ability: Ability;
   let router: Router;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([{ path: 'login', component: ZenLoginPageComponent }]),
@@ -50,7 +50,7 @@ describe('AuthService', () => {
     apollo = TestBed.inject(ApolloTestingController);
     ability = TestBed.inject(Ability);
     router = TestBed.inject(Router);
-  }));
+  });
 
   it('evaluates rolesEqual correctly', () => {
     // Should evaluate to equal
