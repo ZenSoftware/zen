@@ -365,7 +365,8 @@ export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.#subs.forEach(sub => sub.unsubscribe());
+    this.engine?.stopRenderLoop();
     this.room?.leave();
+    this.#subs.forEach(sub => sub.unsubscribe());
   }
 }
