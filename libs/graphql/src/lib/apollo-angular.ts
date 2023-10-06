@@ -885,7 +885,7 @@ export type FindManyUserVariables = Exact<{
 }>;
 
 
-export type FindManyUser = { __typename?: 'Query', findManyUser: Array<{ __typename?: 'User', id: string, username?: string | null, email: string }> };
+export type FindManyUser = { __typename?: 'Query', findManyUser: Array<{ __typename?: 'User', id: string, username?: string | null, email: string, createdAt: any, roles: Array<string>, rules: Array<any> }> };
 
 export type FindManyUserCountVariables = Exact<{
   where?: InputMaybe<UserWhereInput>;
