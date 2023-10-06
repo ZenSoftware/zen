@@ -33,7 +33,7 @@
     "@nestjs/platform-express": "^10.2.7",
     "@nestjs/platform-socket.io": "^10.2.7",
     "@nestjs/throttler": "^5.0.0",
-    "@nestjs/websockets": "^10.2.6",
+    "@nestjs/websockets": "^10.2.7",
     "@paljs/plugins": "6.0.7",
     "@prisma/client": "~5.4.1",
     "class-transformer": "^0.5.1",
