@@ -122,7 +122,7 @@
     "bootswatch": "~5.3.2",
     "cypress": "^13.3.0",
     "cz-customizable": "^7.0.0",
-    "electron": "^26.0.0",
+    "electron": "^26.3.0",
     "eslint": "8.46.0",
     "eslint-config-prettier": "~8.10.0",
     "eslint-plugin-cypress": "2.13.4",
