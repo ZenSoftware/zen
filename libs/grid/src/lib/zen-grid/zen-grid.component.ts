@@ -48,7 +48,7 @@ import {
 } from '@zen/components';
 import * as Apollo from 'apollo-angular';
 import { format } from 'date-fns';
-import { cloneDeep, merge, omit } from 'lodash-es';
+import { cloneDeep, omit } from 'lodash-es';
 import { Observable, Subscription, map } from 'rxjs';
 
 import {
@@ -69,7 +69,7 @@ export enum GridMode {
 
 export interface ZenGridSettings<T extends object> {
   typename: string;
-  findManyGQL: Apollo.Query;
+  findManyGQL: Apollo.Query<any, any>;
   findManyCountGQL: Apollo.Query<any, any>;
   deleteOneGQL?: Apollo.Mutation;
   defaultSettings: KendoGridSettings<T>;
@@ -512,7 +512,8 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   // }
 
   saveAsJSON() {
-    const filename = this.excelFileName.replace('.xlsx', '.json');
+    let filename = this.excelFileName;
+    filename = filename.substring(0, filename.length - 4) + 'json';
     const fields = this.visibleFields;
 
     if (this.settings.process === 'local') {
