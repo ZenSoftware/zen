@@ -2,7 +2,6 @@
 
 /.env
 /apps/**/prisma/generated/
-.angular
 **/cypress/downloads
 /uploads/
 
