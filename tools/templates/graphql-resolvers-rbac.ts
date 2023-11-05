@@ -58,7 +58,7 @@ export class ${name}Resolver {
 
   @Query()
   async findMany${name}Count(@Args() args: FindMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(info, args) as any);
   }
 
   @Query()
@@ -77,8 +77,8 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  async updateMany${name}(@Args() args: UpdateMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.updateMany(this.prismaSelect.getArgs(info, args));
+  async deleteOne${name}(@Args() args: DeleteOne${name}Args, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -87,13 +87,13 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  async deleteOne${name}(@Args() args: DeleteOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
+  async deleteMany${name}(@Args() args: DeleteMany${name}Args, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.${lowercase(name)}.deleteMany(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
-  async deleteMany${name}(@Args() args: DeleteMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.deleteMany(this.prismaSelect.getArgs(info, args));
+  async updateMany${name}(@Args() args: UpdateMany${name}Args, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.${lowercase(name)}.updateMany(this.prismaSelect.getArgs(info, args));
   }
 }
 `;
