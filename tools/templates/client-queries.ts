@@ -80,9 +80,9 @@ export default gql\`
     }
   }
 
-  mutation UpdateMany${name}($data: ${name}UpdateManyMutationInput!, $where: ${name}WhereInput!) {
-    updateMany${name}(data: $data, where: $where) {
-      count
+  mutation DeleteOne${name}($where: ${name}WhereUniqueInput!) {
+    deleteOne${name}(where: $where) {
+      id
     }
   }
 
@@ -96,18 +96,19 @@ export default gql\`
     }
   }
 
-  mutation DeleteOne${name}($where: ${name}WhereUniqueInput!) {
-    deleteOne${name}(where: $where) {
-      id
-    }
-  }
-
   mutation DeleteMany${name}($where: ${name}WhereInput!) {
     deleteMany${name}(where: $where) {
       count
     }
   }
 
+  mutation UpdateMany${name}($data: ${name}UpdateManyMutationInput!, $where: ${name}WhereInput!) {
+    updateMany${name}(data: $data, where: $where) {
+      count
+    }
+  }
+
   \${${name}Fields}
-\`;\n`;
+\`;
+`;
 }
