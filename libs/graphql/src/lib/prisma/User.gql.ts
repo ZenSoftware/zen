@@ -79,9 +79,9 @@ export default gql`
     }
   }
 
-  mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput!) {
-    updateManyUser(data: $data, where: $where) {
-      count
+  mutation DeleteOneUser($where: UserWhereUniqueInput!) {
+    deleteOneUser(where: $where) {
+      id
     }
   }
 
@@ -95,14 +95,14 @@ export default gql`
     }
   }
 
-  mutation DeleteOneUser($where: UserWhereUniqueInput!) {
-    deleteOneUser(where: $where) {
-      id
+  mutation DeleteManyUser($where: UserWhereInput!) {
+    deleteManyUser(where: $where) {
+      count
     }
   }
 
-  mutation DeleteManyUser($where: UserWhereInput!) {
-    deleteManyUser(where: $where) {
+  mutation UpdateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput!) {
+    updateManyUser(data: $data, where: $where) {
       count
     }
   }

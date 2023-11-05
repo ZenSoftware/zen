@@ -1,6 +1,5 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import type { NonNullableFields } from '@zen/common';
 import { RolesGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
 import gql from 'graphql-tag';
@@ -47,18 +46,12 @@ export class UserResolver {
   }
 
   @Query()
-  async findUniqueUser(
-    @Args() args: NonNullableFields<FindUniqueUserArgs>,
-    @Info() info: GraphQLResolveInfo
-  ) {
+  async findUniqueUser(@Args() args: FindUniqueUserArgs, @Info() info: GraphQLResolveInfo) {
     return this.prisma.user.findUnique(this.prismaSelect.getArgs(info, args));
   }
 
   @Query()
-  async findFirstUser(
-    @Args() args: NonNullableFields<FindFirstUserArgs>,
-    @Info() info: GraphQLResolveInfo
-  ) {
+  async findFirstUser(@Args() args: FindFirstUserArgs, @Info() info: GraphQLResolveInfo) {
     return this.prisma.user.findFirst(this.prismaSelect.getArgs(info, args));
   }
 
@@ -69,7 +62,7 @@ export class UserResolver {
 
   @Query()
   async findManyUserCount(@Args() args: FindManyUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.count(this.prismaSelect.getArgs(info, args));
+    return this.prisma.user.count(this.prismaSelect.getArgs(info, args) as any);
   }
 
   @Query()
@@ -83,16 +76,13 @@ export class UserResolver {
   }
 
   @Mutation()
-  async updateOneUser(
-    @Args() args: NonNullableFields<UpdateOneUserArgs>,
-    @Info() info: GraphQLResolveInfo
-  ) {
+  async updateOneUser(@Args() args: UpdateOneUserArgs, @Info() info: GraphQLResolveInfo) {
     return this.prisma.user.update(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
-  async updateManyUser(@Args() args: UpdateManyUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.updateMany(this.prismaSelect.getArgs(info, args));
+  async deleteOneUser(@Args() args: DeleteOneUserArgs, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.user.delete(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -101,15 +91,12 @@ export class UserResolver {
   }
 
   @Mutation()
-  async deleteOneUser(
-    @Args() args: NonNullableFields<DeleteOneUserArgs>,
-    @Info() info: GraphQLResolveInfo
-  ) {
-    return this.prisma.user.delete(this.prismaSelect.getArgs(info, args));
+  async deleteManyUser(@Args() args: DeleteManyUserArgs, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.user.deleteMany(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
-  async deleteManyUser(@Args() args: DeleteManyUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.deleteMany(this.prismaSelect.getArgs(info, args));
+  async updateManyUser(@Args() args: UpdateManyUserArgs, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.user.updateMany(this.prismaSelect.getArgs(info, args));
   }
 }

@@ -13,7 +13,7 @@ dependencies:
     version: 6.5.0
   '@casl/prisma':
     specifier: ~1.4.1
-    version: 1.4.1(@casl/ability@6.5.0)(@prisma/client@5.4.2)
+    version: 1.4.1(@casl/ability@6.5.0)(@prisma/client@5.5.2)
   '@graphql-tools/merge':
     specifier: ^9.0.0
     version: 9.0.0(graphql@16.8.1)
@@ -46,10 +46,10 @@ dependencies:
     version: 5.0.1(@nestjs/common@10.2.8)(@nestjs/core@10.2.8)(reflect-metadata@0.1.13)
   '@paljs/plugins':
     specifier: 6.0.7
-    version: 6.0.7(@prisma/client@5.4.2)(graphql@16.8.1)
+    version: 6.0.7(@prisma/client@5.5.2)(graphql@16.8.1)
   '@prisma/client':
-    specifier: ~5.4.2
-    version: 5.4.2(prisma@5.4.2)
+    specifier: ~5.5.2
+    version: 5.5.2(prisma@5.5.2)
   class-transformer:
     specifier: ^0.5.1
     version: 0.5.1
@@ -99,8 +99,8 @@ dependencies:
     specifier: ^4.0.1
     version: 4.0.1
   prisma:
-    specifier: ~5.4.2
-    version: 5.4.2
+    specifier: ~5.5.2
+    version: 5.5.2
   reflect-metadata:
     specifier: ^0.1.13
     version: 0.1.13
@@ -3639,14 +3639,14 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@casl/prisma@1.4.1(@casl/ability@6.5.0)(@prisma/client@5.4.2):
+  /@casl/prisma@1.4.1(@casl/ability@6.5.0)(@prisma/client@5.5.2):
     resolution: {integrity: sha512-WTFcWhYnoEc8fRHMzlqd3MU6WXOtT1cfoHmxSyB14gVeRHWvOyWdVaGxueLySgBOb08kIiZdjOBYNJRTzlAqBA==}
     peerDependencies:
       '@casl/ability': ^5.3.0 || ^6.0.0
       '@prisma/client': ^2.14.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
     dependencies:
       '@casl/ability': 6.5.0
-      '@prisma/client': 5.4.2(prisma@5.4.2)
+      '@prisma/client': 5.5.2(prisma@5.5.2)
       '@ucast/core': 1.10.2
       '@ucast/js': 3.0.3
     dev: false
@@ -6036,7 +6036,7 @@ packages:
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.9
-      '@types/react': 18.2.34
+      '@types/react': 18.2.35
       react: 18.2.0
     dev: true
 
@@ -7456,7 +7456,7 @@ packages:
       - supports-color
     dev: true
 
-  /@paljs/plugins@6.0.7(@prisma/client@5.4.2)(graphql@16.8.1):
+  /@paljs/plugins@6.0.7(@prisma/client@5.5.2)(graphql@16.8.1):
     resolution: {integrity: sha512-8mQmSfto3qt8q9BwpoDw0hYj4IOmvKNy0FxWQQTujYEFLtasHLQVrQsO9R2HFFR0NZbQCiANyy4ctR6uBW/C4w==}
     peerDependencies:
       '@prisma/client': ^5
@@ -7464,7 +7464,7 @@ packages:
     dependencies:
       '@paljs/types': 6.0.7
       '@paljs/utils': 6.0.7
-      '@prisma/client': 5.4.2(prisma@5.4.2)
+      '@prisma/client': 5.5.2(prisma@5.5.2)
       graphql: 16.8.1
       graphql-parse-resolve-info: 4.13.0(graphql@16.8.1)
       graphql-tag: 2.12.6(graphql@16.8.1)
@@ -7543,8 +7543,8 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: true
 
-  /@prisma/client@5.4.2(prisma@5.4.2):
-    resolution: {integrity: sha512-2xsPaz4EaMKj1WS9iW6MlPhmbqtBsXAOeVttSePp8vTFTtvzh2hZbDgswwBdSCgPzmmwF+tLB259QzggvCmJqA==}
+  /@prisma/client@5.5.2(prisma@5.5.2):
+    resolution: {integrity: sha512-54XkqR8M+fxbzYqe+bIXimYnkkcGqgOh0dn0yWtIk6CQT4IUCAvNFNcQZwk2KqaLU+/1PHTSWrcHtx4XjluR5w==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -7553,8 +7553,8 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574
-      prisma: 5.4.2
+      '@prisma/engines-version': 5.5.1-1.aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a
+      prisma: 5.5.2
     dev: false
 
   /@prisma/debug@5.5.2:
@@ -7566,13 +7566,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@prisma/engines-version@5.4.1-2.ac9d7041ed77bcc8a8dbd2ab6616b39013829574:
-    resolution: {integrity: sha512-wvupDL4AA1vf4TQNANg7kR7y98ITqPsk6aacfBxZKtrJKRIsWjURHkZCGcQliHdqCiW/hGreO6d6ZuSv9MhdAA==}
-    dev: false
-
-  /@prisma/engines@5.4.2:
-    resolution: {integrity: sha512-fqeucJ3LH0e1eyFdT0zRx+oETLancu5+n4lhiYECyEz6H2RDskPJHJYHkVc0LhkU4Uv7fuEnppKU3nVKNzMh8g==}
-    requiresBuild: true
+  /@prisma/engines-version@5.5.1-1.aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a:
+    resolution: {integrity: sha512-O+qHFnZvAyOFk1tUco2/VdiqS0ym42a3+6CYLScllmnpbyiTplgyLt2rK/B9BTjYkSHjrgMhkG47S0oqzdIckA==}
     dev: false
 
   /@prisma/engines@5.5.2:
@@ -9793,8 +9788,8 @@ packages:
       csstype: 3.1.2
     dev: true
 
-  /@types/react@18.2.34:
-    resolution: {integrity: sha512-U6eW/alrRk37FU/MS2RYMjx0Va2JGIVXELTODaTIYgvWGCV4Y4TfTUzG8DdmpDNIT0Xpj/R7GfyHOJJrDttcvg==}
+  /@types/react@18.2.35:
+    resolution: {integrity: sha512-LG3xpFZ++rTndV+/XFyX5vUP7NI9yxyk+MQvBDq+CVs8I9DLSc3Ymwb1Vmw5YDoeNeHN4PDZa3HylMKJYT9PNQ==}
     dependencies:
       '@types/prop-types': 15.7.9
       '@types/scheduler': 0.16.5
@@ -19276,13 +19271,13 @@ packages:
       uuid: 9.0.1
     dev: false
 
-  /prisma@5.4.2:
-    resolution: {integrity: sha512-GDMZwZy7mysB2oXU+angQqJ90iaPFdD0rHaZNkn+dio5NRkGLmMqmXs31//tg/qXT3iB0cTQwnGGQNuirhSTZg==}
+  /prisma@5.5.2:
+    resolution: {integrity: sha512-WQtG6fevOL053yoPl6dbHV+IWgKo25IRN4/pwAGqcWmg7CrtoCzvbDbN9fXUc7QS2KK0LimHIqLsaCOX/vHl8w==}
     engines: {node: '>=16.13'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 5.4.2
+      '@prisma/engines': 5.5.2
     dev: false
 
   /proc-log@3.0.0:
