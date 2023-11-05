@@ -13,3 +13,4 @@
 *.yaml
 *.md
 *.hbs
+/.nx/cache
