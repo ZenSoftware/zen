@@ -93,7 +93,7 @@ export class ${name}Resolver {
   @Query()
   @CaslPolicy(ability => ability.can('read', '${name}'))
   async findMany${name}Count(@Args() args: FindMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(info, args) as any);
   }
 
   @Query()
@@ -135,20 +135,18 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  @CaslPolicy(ability => ability.can('update', '${name}'))
-  async updateMany${name}(
-    @Args() args: UpdateMany${name}Args,
+  @CaslPolicy(ability => ability.can('delete', '${name}'))
+  async deleteOne${name}(
+    @Args() args: DeleteOne${name}Args,
     @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
-    const records = await this.prisma.${lowercase(name)}.findMany({
+    const record = await this.prisma.${lowercase(name)}.findUnique({
       where: args.where,
       select: this.authFields.${name},
     });
-    for (const record of records) {
-      if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
-    }
-    return this.prisma.${lowercase(name)}.updateMany(this.prismaSelect.getArgs(info, args));
+    if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
+    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -178,21 +176,6 @@ export class ${name}Resolver {
 
   @Mutation()
   @CaslPolicy(ability => ability.can('delete', '${name}'))
-  async deleteOne${name}(
-    @Args() args: DeleteOne${name}Args,
-    @Info() info: GraphQLResolveInfo,
-    @CaslAbility() ability: AppAbility
-  ) {
-    const record = await this.prisma.${lowercase(name)}.findUnique({
-      where: args.where,
-      select: this.authFields.${name},
-    });
-    if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
-  }
-
-  @Mutation()
-  @CaslPolicy(ability => ability.can('delete', '${name}'))
   async deleteMany${name}(
     @Args() args: DeleteMany${name}Args,
     @Info() info: GraphQLResolveInfo,
@@ -206,6 +189,23 @@ export class ${name}Resolver {
       if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
     }
     return this.prisma.${lowercase(name)}.deleteMany(this.prismaSelect.getArgs(info, args));
+  }
+
+  @Mutation()
+  @CaslPolicy(ability => ability.can('update', '${name}'))
+  async updateMany${name}(
+    @Args() args: UpdateMany${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
+    const records = await this.prisma.${lowercase(name)}.findMany({
+      where: args.where,
+      select: this.authFields.${name},
+    });
+    for (const record of records) {
+      if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
+    }
+    return this.prisma.${lowercase(name)}.updateMany(this.prismaSelect.getArgs(info, args));
   }
 }
 `;
