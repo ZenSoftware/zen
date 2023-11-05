@@ -5,7 +5,12 @@ module.exports = {
       url: 'http://localhost:7080/graphql',
     },
 
-    includes: ['apps/portal/src/**/*.ts', 'libs/**/*.ts'],
+    includes: [
+      'apps/portal/src/**/*.ts',
+      'apps/portal/src/**/*.graphql',
+      'libs/**/*.ts',
+      'libs/**/*.graphql',
+    ],
     excludes: [
       'libs/graphql/src/lib/apollo-angular.ts',
       '**/*.test.ts',
