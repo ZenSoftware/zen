@@ -14,7 +14,7 @@ export const environment: EnvironmentBase = {
   publicRegistration: true,
   cors: { credentials: true, origin: true },
   socketio: {
-    port: +(process.env.SOCKETIO_PORT as string),
+    port: 7081,
   },
   graphql: {
     subscriptions: true,
