@@ -494,8 +494,16 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     }
   };
 
+  getExportFileName() {
+    let result = format(Date.now(), 'yyyy-MM-dd') + ' ';
+    if (this.settings?.typename)
+      result += this.settings.typename ? this.settings.typename + ' ' : '';
+    result += `${this.gridData?.total} items`;
+    return result;
+  }
+
   // saveAsCSV() {
-  //   const filename = this.excelFileName.replace('.xlsx', '.csv');
+  //   const filename = this.getExportFileName() + '.csv';
   //   const fields = this.visibleFields;
 
   //   if (this.settings.process === 'local') {
@@ -512,8 +520,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   // }
 
   saveAsJSON() {
-    let filename = this.excelFileName;
-    filename = filename.substring(0, filename.length - 4) + 'json';
+    const filename = this.getExportFileName() + '.json';
     const fields = this.visibleFields;
 
     if (this.settings.process === 'local') {
@@ -530,11 +537,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   }
 
   get excelFileName() {
-    let result = format(Date.now(), 'yyyy-MM-dd') + ' ';
-    if (this.settings?.typename)
-      result += this.settings.typename ? this.settings.typename + ' ' : '';
-    result += `${this.gridData?.total} items.xlsx`;
-    return result;
+    return this.getExportFileName() + '.xlsx';
   }
 
   get visibleFields() {
