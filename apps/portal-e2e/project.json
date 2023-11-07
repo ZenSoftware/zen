@@ -1,23 +1,14 @@
 {
   "name": "portal-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/portal-e2e/src",
   "projectType": "application",
+  "sourceRoot": "apps/portal-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nx/cypress:cypress",
+      "executor": "@nx/playwright:playwright",
+      "outputs": ["{workspaceRoot}/dist/.playwright/apps/portal-e2e"],
       "options": {
-        "cypressConfig": "apps/portal-e2e/cypress.config.ts",
-        "devServerTarget": "portal:serve:development",
-        "testingType": "e2e"
-      },
-      "configurations": {
-        "production": {
-          "devServerTarget": "portal:serve:production"
-        },
-        "ci": {
-          "devServerTarget": "portal:serve-static"
-        }
+        "config": "apps/portal-e2e/playwright.config.ts"
       }
     },
     "lint": {
@@ -28,6 +19,5 @@
       }
     }
   },
-  "tags": [],
   "implicitDependencies": ["portal"]
 }
