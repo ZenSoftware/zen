@@ -8,6 +8,7 @@
     "apollographql.vscode-apollo",
     "Prisma.prisma",
     "KnisterPeter.vscode-commitizen",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "ms-playwright.playwright"
   ]
 }

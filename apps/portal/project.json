@@ -49,7 +49,8 @@
           "sourceMap": true,
           "namedChunks": true
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
@@ -88,12 +89,6 @@
           "ci": true,
           "codeCoverage": true
         }
-      }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "portal:build"
       }
     }
   }
