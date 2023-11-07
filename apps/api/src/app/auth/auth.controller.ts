@@ -12,7 +12,10 @@ import { EmailTakenExceptionFilter } from './strategies/email-taken-exception.fi
 @Controller('auth')
 @UseFilters(EmailTakenExceptionFilter)
 export class AuthController {
-  constructor(private readonly auth: AuthService, private readonly config: ConfigService) {}
+  constructor(
+    private readonly auth: AuthService,
+    private readonly config: ConfigService
+  ) {}
 
   @Get('google')
   @UseGuards(AuthGuard('google'))

@@ -1,5 +1,5 @@
 {
-  "name": "nest-auth",
+  "name": "@zen/nest-auth",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/nest-auth/src",
   "projectType": "library",

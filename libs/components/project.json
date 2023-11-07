@@ -1,5 +1,5 @@
 {
-  "name": "components",
+  "name": "@zen/components",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/components/src",
   "prefix": "zen",
@@ -32,7 +32,7 @@
       "options": {
         "port": 4400,
         "configDir": "libs/components/.storybook",
-        "browserTarget": "components:build-storybook",
+        "browserTarget": "@zen/components:build-storybook",
         "compodoc": false,
         "styles": ["apps/portal/src/styles.scss"]
       },
@@ -46,15 +46,33 @@
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "outputDir": "dist/storybook/components",
+        "outputDir": "dist/storybook/@zen/components",
         "configDir": "libs/components/.storybook",
-        "browserTarget": "components:build-storybook",
+        "browserTarget": "@zen/components:build-storybook",
         "compodoc": false,
         "styles": ["apps/portal/src/styles.scss"]
       },
       "configurations": {
         "ci": {
           "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/components/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "@zen/components:build-storybook",
+        "staticFilePath": "dist/storybook/@zen/components"
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "@zen/components:build-storybook:ci"
         }
       }
     }

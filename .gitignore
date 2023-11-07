@@ -2,7 +2,6 @@
 
 /.env
 /apps/**/prisma/generated/
-**/cypress/downloads
 /uploads/
 
 # compiled output
