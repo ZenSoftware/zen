@@ -1,14 +1,24 @@
 {
-  "name": "common",
+  "name": "@zen/common",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/common/src",
   "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/common",
+        "main": "libs/common/src/index.ts",
+        "tsConfig": "libs/common/tsconfig.lib.json",
+        "assets": ["libs/common/*.md"]
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/common/**/*.ts"]
+        "lintFilePatterns": ["libs/common/**/*.ts", "libs/common/package.json"]
       }
     },
     "test": {

@@ -7,6 +7,8 @@
 /apps/api/src/app/auth/casl/generated.ts
 /libs/graphql/src/lib/client/possible-types.ts
 /libs/graphql/src/lib/apollo-angular.ts
+/theme/bootstrap/_light-variables.scss
+/theme/bootstrap/_dark-variables.scss
 .angular
 *.html
 *.yml

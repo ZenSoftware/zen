@@ -97,12 +97,6 @@
           "codeCoverage": true
         }
       }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "portal:build"
-      }
     }
   }
 }
