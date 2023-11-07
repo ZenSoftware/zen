@@ -74,7 +74,10 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
     }),
   });
 
-  constructor(private authPasswordChangeGQL: AuthPasswordChangeGQL, public router: Router) {
+  constructor(
+    private authPasswordChangeGQL: AuthPasswordChangeGQL,
+    public router: Router
+  ) {
     const sub = this.oldPassword.valueChanges.subscribe(() => {
       this.#incorrectPassword = false;
       this.newPassword.updateValueAndValidity();
