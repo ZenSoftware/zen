@@ -70,7 +70,11 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
     rememberMe: new FormControl(false, { nonNullable: true }),
   });
 
-  constructor(private route: ActivatedRoute, private auth: AuthService, public env: Environment) {}
+  constructor(
+    private route: ActivatedRoute,
+    private auth: AuthService,
+    public env: Environment
+  ) {}
 
   ngOnInit(): void {
     const sub = this.route.queryParamMap

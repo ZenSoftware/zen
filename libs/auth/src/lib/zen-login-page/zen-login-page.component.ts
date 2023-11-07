@@ -15,7 +15,10 @@ import { ZenLoginFormComponent } from '../zen-login-form/zen-login-form.componen
   imports: [IfPublicRegistrationDirective, MatButtonModule, RouterLink, ZenLoginFormComponent],
 })
 export class ZenLoginPageComponent {
-  constructor(private router: Router, private env: Environment) {}
+  constructor(
+    private router: Router,
+    private env: Environment
+  ) {}
 
   onLoggedIn() {
     this.router.navigateByUrl(this.env.url.loginRedirect);

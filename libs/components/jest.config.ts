@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'components',
+  displayName: '@zen/components',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/libs/components',

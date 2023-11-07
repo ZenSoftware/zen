@@ -9,7 +9,10 @@ import { EmailTakenException } from './email-taken-exception.filter';
 
 @Injectable()
 export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
-  constructor(config: ConfigService, private readonly prisma: PrismaService) {
+  constructor(
+    config: ConfigService,
+    private readonly prisma: PrismaService
+  ) {
     super(config.oauth!.google);
   }
 

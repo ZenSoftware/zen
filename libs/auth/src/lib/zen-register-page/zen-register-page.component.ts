@@ -12,7 +12,10 @@ import { ZenRegisterComponent } from '../zen-register/zen-register.component';
   imports: [ZenRegisterComponent],
 })
 export class ZenRegisterPageComponent {
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService
+  ) {}
 
   registered(authSession: AuthSession) {
     this.auth.setSession(authSession);
