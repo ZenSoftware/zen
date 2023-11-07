@@ -27,7 +27,10 @@ import { CASL_POLICY_KEY, CaslPolicyHandler } from '../decorators/casl-policy.de
  */
 @Injectable()
 export class CaslGuard extends AuthGuard('jwt') {
-  constructor(private readonly reflector: Reflector, private readonly caslFactory: CaslFactory) {
+  constructor(
+    private readonly reflector: Reflector,
+    private readonly caslFactory: CaslFactory
+  ) {
     super();
   }
 
