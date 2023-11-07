@@ -20,7 +20,10 @@ export class ZenLayoutComponent implements OnDestroy {
   isMobile = false;
   #subs: Subscription[] = [];
 
-  constructor(private breakpointObserver: BreakpointObserver, router: Router) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    router: Router
+  ) {
     const routerSub = router.events.subscribe((event: Event) => {
       if (this.isMobile && event instanceof NavigationStart) {
         this.drawer.close();
