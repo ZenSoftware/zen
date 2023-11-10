@@ -14,11 +14,6 @@
     "noFallthroughCasesInSwitch": true,
     "useDefineForClassFields": false
   },
-  "exclude": [
-    "jest.config.ts",
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts",
-    "src/app/graphql/paljs/**/resolvers.ts"
-  ],
+  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
   "include": ["src/**/*.ts"]
 }
