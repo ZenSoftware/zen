@@ -22,7 +22,7 @@ kubectl port-forward <POSTGRES_POD> 5446:5432
 
 # Set the port for the DATABASE_URL in the .env file to 5446
 # Run Prisma Migrate
-npx prisma migrate deploy --schema apps/api/prisma/schema.prisma
+pnpm prisma migrate deploy --schema apps/api/prisma/schema.prisma
 
 # Connect to the DB via psql to verify succesful DB deployment
 psql -h localhost -U zenadmin -p 5446
