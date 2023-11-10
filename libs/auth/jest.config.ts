@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'auth',
+  displayName: '@zen/auth',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/libs/auth',
