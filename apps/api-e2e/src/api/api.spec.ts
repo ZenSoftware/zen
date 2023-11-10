@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 describe('Sample test', () => {
   it('should succeed', async () => {

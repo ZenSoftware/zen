@@ -1,8 +1,5 @@
 # Add files here to ignore them from prettier formatting
 
-/dist
-/coverage
-/doc-*
 /apps/api/src/app/prisma/generated/
 /apps/api/src/app/auth/casl/generated.ts
 /libs/graphql/src/lib/client/possible-types.ts
@@ -15,4 +12,7 @@
 *.yaml
 *.md
 *.hbs
+
+/dist
+/coverage
 /.nx/cache

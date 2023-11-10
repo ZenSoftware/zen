@@ -46,7 +46,7 @@
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "outputDir": "dist/storybook/auth",
+        "outputDir": "dist/storybook/@zen/auth",
         "configDir": "libs/auth/.storybook",
         "browserTarget": "@zen/auth:build-storybook",
         "compodoc": false,
