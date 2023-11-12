@@ -9,7 +9,14 @@ export const authInterceptorFn: HttpInterceptorFn = (
   next: HttpHandlerFn
 ) => {
   const env = inject(Environment);
-  const reqHost = new URL(req.url).host;
+
+  let reqBaseURL;
+  // Check if the request URL is relative, if so utilize a base URL
+  if (!(req.url.indexOf('://') > 0 || req.url.indexOf('//') === 0)) {
+    reqBaseURL = document.baseURI;
+  }
+
+  const reqHost = new URL(req.url, reqBaseURL).host;
   const apiHost = new URL(env.url.api).host;
   const gqlHost = new URL(env.url.graphql).host;
 
