@@ -8,11 +8,4 @@ import { ZenPasswordResetRequestComponent } from '../zen-password-reset-request/
   standalone: true,
   imports: [ZenPasswordResetRequestComponent],
 })
-export class ZenPasswordResetRequestPageComponent {
-  onSent() {
-    /**
-     * You can further customize logic after a successful request that triggers
-     * the password reset e-mail with a link to `zen-password-reset-confirmation-page`
-     */
-  }
-}
+export class ZenPasswordResetRequestPageComponent {}
