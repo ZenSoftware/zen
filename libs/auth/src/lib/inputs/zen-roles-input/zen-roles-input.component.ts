@@ -67,7 +67,7 @@ export class ZenRolesInputComponent implements ControlValueAccessor, OnDestroy {
       this.control.setValue([...this.control.value, value]);
     }
 
-    event.chipInput!.clear();
+    event.chipInput.clear();
   }
 
   remove(role: string): void {
