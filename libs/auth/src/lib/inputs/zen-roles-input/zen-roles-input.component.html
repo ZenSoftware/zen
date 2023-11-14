@@ -1,13 +1,11 @@
 <mat-form-field class="example-chip-list" class="w-100">
   <mat-label>{{label}}</mat-label>
   
-  <mat-chip-grid #chipGrid aria-label="Enter roles">
+  <mat-chip-grid #chipGrid>
 
-    <mat-chip-row *ngFor="let role of control.value"
-                  (removed)="remove(role)"
-                  [aria-description]="'press enter to edit ' + role">
+    <mat-chip-row *ngFor="let role of control.value" (removed)="remove(role)">
       {{role}}
-      <button matChipRemove [attr.aria-label]="'remove ' + role">
+      <button matChipRemove>
         <mat-icon>cancel</mat-icon>
       </button>
     </mat-chip-row>
