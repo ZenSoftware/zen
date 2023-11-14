@@ -10,6 +10,7 @@ const config: StorybookConfig = {
   docs: {
     autodocs: false,
   },
+  staticDirs: [{ from: '../../../apps/portal/src/assets', to: '/assets' }],
 };
 
 export default config;
