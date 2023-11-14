@@ -55,7 +55,6 @@ interface FormType {
 export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ZenUsernameInputComponent;
   @ViewChild('passwordInput') passwordInput!: ZenPasswordInputComponent;
-  @Input() doneMessage = 'Redirecting...';
   @Input() doneMessageVisible = true;
   @Output() loggedIn = new EventEmitter();
 
