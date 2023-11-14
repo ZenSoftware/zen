@@ -27,7 +27,7 @@
   <mat-form-field hideRequiredMarker class="w-100 mb-2">
     <mat-label>Confirm Password</mat-label>
     <input matInput autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" [formControl]="passwordConfirm">
-    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="Toggle show password" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="Toggle show password">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
     <mat-error *ngIf="passwordConfirm.hasError('required')">Required</mat-error>
