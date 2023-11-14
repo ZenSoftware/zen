@@ -12,7 +12,6 @@ export const Primary = {
     props: args,
   }),
   args: {
-    doneMessage: 'Redirecting...',
     doneMessageVisible: true,
   },
 };
