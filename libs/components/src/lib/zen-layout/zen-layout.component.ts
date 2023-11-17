@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +13,7 @@ import { tap } from 'rxjs/operators';
   selector: 'zen-layout',
   templateUrl: './zen-layout.component.html',
   standalone: true,
-  imports: [AsyncPipe, MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule, NgIf],
+  imports: [AsyncPipe, MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule],
 })
 export class ZenLayoutComponent implements OnDestroy {
   @ViewChild('drawer') drawer!: MatSidenav;
