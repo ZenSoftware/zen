@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
@@ -18,7 +17,7 @@ export interface ZenMenuItem {
   selector: 'zen-contextmenu',
   templateUrl: 'zen-contextmenu.component.html',
   standalone: true,
-  imports: [MatListModule, MatMenuModule, NgFor, NgIf],
+  imports: [MatListModule, MatMenuModule],
 })
 export class ZenContextmenuComponent {
   @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;

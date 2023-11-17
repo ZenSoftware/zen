@@ -23,7 +23,7 @@
     "@apollo/server": "^4.9.5",
     "@casl/ability": "~6.5.0",
     "@casl/prisma": "~1.4.1",
-    "@colyseus/core": "^0.15.10",
+    "@colyseus/core": "^0.15.12",
     "@colyseus/monitor": "^0.15.2",
     "@colyseus/schema": "^2.0.24",
     "@colyseus/ws-transport": "^0.15.1",

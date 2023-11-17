@@ -11,7 +11,6 @@ import '@babylonjs/core/Engines/WebGPU/Extensions/engine.uniformBuffer';
 import '@babylonjs/core/Physics/physicsEngineComponent';
 import '@babylonjs/core/Helpers/sceneHelpers';
 
-import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { KeyboardEventTypes, Mesh, WebGPUEngine } from '@babylonjs/core';
 import { FollowCamera } from '@babylonjs/core/Cameras/followCamera';
@@ -39,7 +38,7 @@ declare const HavokPhysics: () => Promise<unknown>;
   templateUrl: 'zen-babylon.component.html',
   styleUrls: ['zen-babylon.component.scss'],
   standalone: true,
-  imports: [ZenLoadingComponent, NgIf],
+  imports: [ZenLoadingComponent],
 })
 export class ZenBabylonComponent implements AfterViewInit, OnDestroy {
   @ViewChild('stubDiv') stubDiv!: ElementRef<HTMLDivElement>; // Used to calculate width

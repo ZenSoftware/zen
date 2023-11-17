@@ -1,10 +1,13 @@
 Fill:
-<kendo-colorpicker [value]="fill" (valueChange)="setFill($event)" (close)="fillClosed()">
-</kendo-colorpicker>
+<kendo-colorpicker [value]="fill" (valueChange)="setFill($event)" (close)="fillClosed()"></kendo-colorpicker>
 
 <mat-form-field>
   <mat-label>Font</mat-label>
   <mat-select #fontSelect (closed)="setFont(fontSelect.value)" [style.font-family]="fontSelect.value">
-    <mat-option *ngFor="let font of fonts" [value]="font" [style.font-family]="font">{{font}}</mat-option>
+    @for(font of fonts; track font) {
+      <mat-option [value]="font" [style.font-family]="font">
+        {{font}}
+      </mat-option>
+    }
   </mat-select>
 </mat-form-field>

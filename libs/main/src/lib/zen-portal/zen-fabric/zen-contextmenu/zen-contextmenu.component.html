@@ -5,9 +5,12 @@
 </div>
 <mat-menu #contextMenu="matMenu">
 	<ng-template matMenuContent let-data="data">
-    <ng-container *ngFor="let item of menuItems">
-      <hr *ngIf="item.type === 'divider'" class="m-0">
-      <button mat-menu-item *ngIf="item.type !== 'divider'" (click)="action(item, data)" >{{item.label}}</button>
-    </ng-container>
+    @for(item of menuItems; track item) {
+      @if(item.type === 'divider') {
+        <hr class="m-0">
+      } @else {
+        <button mat-menu-item (click)="action(item, data)" >{{item.label}}</button>
+      }
+    }
 	</ng-template>
 </mat-menu>

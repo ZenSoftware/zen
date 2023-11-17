@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { ColorPickerModule } from '@progress/kendo-angular-inputs';
@@ -9,7 +8,7 @@ import FontFaceObserver from 'fontfaceobserver';
   templateUrl: 'zen-toolbar-text.component.html',
   styleUrls: ['zen-toolbar-text.component.scss'],
   standalone: true,
-  imports: [ColorPickerModule, MatSelectModule, NgFor],
+  imports: [ColorPickerModule, MatSelectModule],
 })
 export class ZenToolbarTextComponent {
   @Input() canvas!: fabric.Canvas;
