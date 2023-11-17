@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -38,7 +37,6 @@ import { emailValidator } from '../../validators';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    NgIf,
     ReactiveFormsModule,
   ],
 })

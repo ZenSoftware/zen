@@ -14,15 +14,16 @@
   
   <mat-sidenav-content style="height: 100vh">
     <mat-toolbar class="bg-primary">
-      <button
+      @if(!this.drawer.opened || this.drawer.mode === 'over') {
+        <button
         class="me-3"
         type="button"
         mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="!this.drawer.opened || this.drawer.mode === 'over'">
+        (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-
+      }
+      
       <div class="d-inline-block me-auto">
         <ng-content select="[slot=toolbar-start]"></ng-content>
       </div>

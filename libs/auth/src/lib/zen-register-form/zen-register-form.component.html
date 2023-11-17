@@ -1,7 +1,9 @@
 <form @verticalAccordionLeave [formGroup]="form" (ngSubmit)="onSubmit()">
-  <zen-loading *ngIf="loading"/>
+  @if(loading) {
+    <zen-loading/>
+  }
 
-  <ng-container *ngIf="env.enableGoogleOAuth">
+  @if(env.enableGoogleOAuth) {
     <button type="button" (click)="loginWithGoogle()" mat-raised-button class="w-100 fs-4 py-1 my-2" [disabled]="loading" style="background:#4F86EC">
       <i class="fa-brands fa-fw fa-google me-1"></i>
       Sign up with Google
@@ -10,7 +12,7 @@
     <hr>
   
     <h1 class="text-center">Or sign up with e-mail</h1>
-  </ng-container>
+  }
   
   <div class="mb-2">
     <zen-username-input #usernameInput [formControl]="username" required/>
@@ -30,13 +32,22 @@
     <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="Toggle show password">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
-    <mat-error *ngIf="passwordConfirm.hasError('required')">Required</mat-error>
-    <mat-error *ngIf="passwordConfirm.hasError('notMatching')">Password confirmation does not match</mat-error>
+
+    @if(passwordConfirm.hasError('required')) {
+      <mat-error>Required</mat-error>
+    }
+
+    @if(passwordConfirm.hasError('notMatching')) {
+      <mat-error>Password confirmation does not match</mat-error>
+    }
   </mat-form-field>
 
   <div class="mb-4">
     <mat-checkbox color="primary" [formControl]="acceptTerms">I accept the terms and conditions</mat-checkbox>
-    <mat-error *ngIf="acceptTerms.invalid && acceptTerms.touched">Accept the terms and conditions</mat-error>
+    
+    @if(acceptTerms.invalid && acceptTerms.touched) {
+      <mat-error>Accept the terms and conditions</mat-error>
+    }
   </div>
 
   <button type="submit" mat-raised-button color="primary" class="w-100 fs-4 py-1" [disabled]="!form.valid">
@@ -44,8 +55,10 @@
     Submit
   </button>
 
-  <mat-error @verticalAccordion *ngIf="generalError" class="text-center mt-3">
-    There was a problem with your registration.<br>
-    If this continues, please contact us
-  </mat-error>
+  @if(generalError) {
+    <mat-error @verticalAccordion class="text-center mt-3">
+      There was a problem with your registration.<br>
+      If this continues, please contact us
+    </mat-error>
+  }
 </form>

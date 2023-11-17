@@ -1,5 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <zen-loading *ngIf="loading"/>
+  @if(loading) {
+    <zen-loading/>
+  }
 
   <div class="mb-2">
     <zen-username-input #usernameInput [formControl]="username" required/>
@@ -16,11 +18,13 @@
     Login
   </button>
 
-  <mat-error @verticalAccordion *ngIf="generalError" class="text-center my-3">
-    There was a problem logging you in. If this continues, please contact us.
-  </mat-error>
-
-  <ng-container *ngIf="env.enableGoogleOAuth" >
+  @if(generalError) {
+    <mat-error @verticalAccordion class="text-center my-3">
+      There was a problem logging you in. If this continues, please contact us.
+    </mat-error>
+  }
+  
+  @if(env.enableGoogleOAuth) {
     <hr>
 
     <h1 class="text-center">OR</h1>
@@ -30,15 +34,19 @@
       <i class="fa-brands fa-fw fa-google me-1"></i>
       Sign in with Google
     </button>
-  </ng-container>
+  }
 
-  <mat-error @verticalAccordion *ngIf="emailTakenError" class="text-center my-3">
-    There is an existing account associated with the e-mail address you attempted to log in with.
-    Log into your existing account to associate your third-party authentication from there.
-  </mat-error>
+  @if(emailTakenError) {
+    <mat-error @verticalAccordion class="text-center my-3">
+      There is an existing account associated with the e-mail address you attempted to log in with.
+      Log into your existing account to associate your third-party authentication from there.
+    </mat-error>
+  }
 
-  <div @verticalAccordion *ngIf="done && doneMessageVisible" class="text-center my-3">
-    Redirecting...
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  </div>
+  @if(done && doneMessageVisible) {
+    <div @verticalAccordion class="text-center my-3">
+      Redirecting...
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+  }
 </form>
