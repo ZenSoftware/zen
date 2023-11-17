@@ -7,14 +7,15 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/portal",
         "index": "apps/portal/src/index.html",
-        "main": "apps/portal/src/main.ts",
+        "browser": "apps/portal/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/portal/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
         "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
         "styles": ["apps/portal/src/styles.scss"],
         "scripts": []
@@ -42,12 +43,9 @@
           "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
+          "sourceMap": true
         }
       }
     },
