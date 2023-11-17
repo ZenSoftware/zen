@@ -1,8 +1,20 @@
 <mat-form-field hideRequiredMarker class="w-100">
   <mat-label>{{label}}</mat-label>
   <input #emailInput type="email" matInput placeholder="enter@email.com" autocomplete="email" [formControl]="control" maxlength="254" hideRequiredMarker="true">
-  <mat-error *ngIf="control.hasError('required')">Required</mat-error>
-  <mat-error *ngIf="control.hasError('email')">Not a valid email</mat-error>
-  <mat-error *ngIf="control.hasError('emailTaken')">E-mail is already taken</mat-error>
-  <mat-error *ngIf="control.hasError('custom')">{{customErrorMessage}}</mat-error>
+  
+  @if(control.hasError('required')) {
+    <mat-error>Required</mat-error>
+  }
+  
+  @if(control.hasError('email')) {
+    <mat-error>Not a valid email</mat-error>
+  }
+
+  @if(control.hasError('emailTaken')) {
+    <mat-error>E-mail is already taken</mat-error>
+  }
+  
+  @if(control.hasError('custom')) {
+    <mat-error>{{customErrorMessage}}</mat-error>
+  }
 </mat-form-field>

@@ -1,11 +1,16 @@
-<div *ngIf="accountInfo.username">
-  <i class="fa-solid fa-fw fa-user me-2"></i>
-  <strong class="me-2">User:</strong>
-  <span class="text-muted">{{accountInfo.username}}</span>
-</div>
+@if(accountInfo.username) {
+  <div>
+    <i class="fa-solid fa-fw fa-user me-2"></i>
+    <strong class="me-2">User:</strong>
+    <span class="text-muted">{{accountInfo.username}}</span>
+  </div>
+}
 
-<div *ngIf="accountInfo.googleProfile">
-  <img *ngIf="accountInfo.googleProfile.picture" src="{{accountInfo.googleProfile.picture}}" referrerpolicy="no-referrer"
-    class="me-2" style="max-width: 100px; max-height: 100px;">
-  {{accountInfo.googleProfile.email}}
-</div>
+@if(accountInfo.googleProfile) {
+  <div>
+    @if(accountInfo.googleProfile.picture) {
+      <img src="{{accountInfo.googleProfile.picture}}" referrerpolicy="no-referrer" class="me-2" style="max-width: 100px; max-height: 100px;">
+    }
+    {{accountInfo.googleProfile.email}}
+  </div>
+}
