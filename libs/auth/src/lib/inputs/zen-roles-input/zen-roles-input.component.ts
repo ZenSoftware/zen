@@ -1,5 +1,4 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { NgFor } from '@angular/common';
 import { Component, Input, OnDestroy } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -27,7 +26,6 @@ import { Subscription } from 'rxjs';
     MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
-    NgFor,
     ReactiveFormsModule,
     ZenSnackbarModule,
   ],

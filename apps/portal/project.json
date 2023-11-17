@@ -7,14 +7,15 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/portal",
         "index": "apps/portal/src/index.html",
-        "main": "apps/portal/src/main.ts",
+        "browser": "apps/portal/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/portal/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
         "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
         "styles": ["apps/portal/src/styles.scss"],
         "scripts": []
@@ -42,12 +43,9 @@
           "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
+          "sourceMap": true
         }
       }
     },
@@ -55,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "portal:build:production"
+          "buildTarget": "portal:build:production"
         },
         "development": {
-          "browserTarget": "portal:build:development"
+          "buildTarget": "portal:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -66,7 +64,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "portal:build"
+        "buildTarget": "portal:build"
       }
     },
     "lint": {
@@ -80,14 +78,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/portal/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "jestConfig": "apps/portal/jest.config.ts"
       }
     }
   }

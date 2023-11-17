@@ -2,10 +2,11 @@ import {
   Directive,
   EmbeddedViewRef,
   Input,
+  OnDestroy,
   TemplateRef,
   ViewContainerRef,
-  effect,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 
@@ -13,19 +14,17 @@ import { AuthService } from '../auth.service';
   selector: '[ifLoggedIn]',
   standalone: true,
 })
-export class IfLoggedInDirective {
+export class IfLoggedInDirective implements OnDestroy {
   #embededViewRef: EmbeddedViewRef<unknown> | undefined;
   #ifLoggedIn?: boolean;
+  #sub: Subscription;
 
   constructor(
     private templateRef: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
     private auth: AuthService
   ) {
-    effect(() => {
-      auth.loggedIn();
-      this.update();
-    });
+    this.#sub = auth.loggedIn$.subscribe(() => this.update());
   }
 
   @Input()
@@ -39,7 +38,7 @@ export class IfLoggedInDirective {
   }
 
   update() {
-    if ((this.ifLoggedIn && this.auth.loggedIn()) || (!this.ifLoggedIn && !this.auth.loggedIn())) {
+    if ((this.ifLoggedIn && this.auth.loggedIn) || (!this.ifLoggedIn && !this.auth.loggedIn)) {
       this.render();
     } else {
       this.clear();
@@ -54,5 +53,9 @@ export class IfLoggedInDirective {
   clear() {
     this.viewContainer.clear();
     this.#embededViewRef = undefined;
+  }
+
+  ngOnDestroy() {
+    this.#sub.unsubscribe();
   }
 }

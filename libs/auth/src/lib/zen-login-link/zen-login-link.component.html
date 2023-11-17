@@ -1,13 +1,13 @@
-<ng-container *ngIf="displayLogout">
+@if(displayLogout) {
   <span *ifLoggedIn="true" (click)="auth.logout()" style="cursor: pointer;">
     <i class="fa-solid fa-lock me-2"></i>
     Logout
   </span>
-</ng-container>
+}
 
-<ng-container *ngIf="displayLogin$ | async">
+@if(displayLogin$ | async) {
   <a *ifLoggedIn="false" routerLink="/login">
     <i class="fa-solid fa-sign-in-alt me-2"></i>
     Login
   </a>
-</ng-container>
+}

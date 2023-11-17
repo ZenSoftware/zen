@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApolloError } from '@apollo/client/errors';
 import { Ability } from '@casl/ability';
@@ -12,7 +12,7 @@ import {
 } from '@zen/graphql';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
-import { Subscription, interval, map, share, throwError, timer } from 'rxjs';
+import { BehaviorSubject, Subscription, interval, map, share, throwError, timer } from 'rxjs';
 import { retry, tap } from 'rxjs/operators';
 
 import { token } from './token.signal';
@@ -30,9 +30,6 @@ export enum LocalStorageKey {
   providedIn: 'root',
 })
 export class AuthService {
-  readonly loggedIn = signal(false);
-  readonly userRoles = signal<string[]>([]);
-
   #exchangeIntervalSubscription?: Subscription;
 
   #userId: AuthSession['userId'] | null = null;
@@ -43,6 +40,26 @@ export class AuthService {
   #accountInfo$;
   get accountInfo$() {
     return this.#accountInfo$;
+  }
+
+  #loggedIn = false;
+  get loggedIn() {
+    return this.#loggedIn;
+  }
+
+  #loggedIn$ = new BehaviorSubject(false);
+  get loggedIn$() {
+    return this.#loggedIn$.asObservable();
+  }
+
+  #userRoles: string[] = [];
+  get userRoles() {
+    return this.#userRoles;
+  }
+
+  #userRoles$ = new BehaviorSubject<string[]>([]);
+  get userRoles$() {
+    return this.#userRoles$.asObservable();
   }
 
   constructor(
@@ -63,8 +80,10 @@ export class AuthService {
       try {
         // Initialize Apollo client state
         const roles = ls.get<string[]>(LocalStorageKey.roles, { decrypt: true });
-        this.userRoles.set(roles ? roles : []);
-        this.loggedIn.set(roles ? true : false);
+        this.#userRoles = roles ? roles : [];
+        this.#userRoles$.next([...this.#userRoles]);
+        this.#loggedIn = roles ? true : false;
+        this.#loggedIn$.next(this.#loggedIn);
         this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
 
         const rules: Array<any> | null = ls.get(LocalStorageKey.rules, { decrypt: true });
@@ -128,15 +147,17 @@ export class AuthService {
     token.set(authSession.token);
 
     if (
-      !this.rolesEqual(this.userRoles(), authSession.roles) ||
-      this.userRoles() === null ||
-      this.userRoles() === undefined
+      !this.rolesEqual(this.#userRoles, authSession.roles) ||
+      this.#userRoles === null ||
+      this.#userRoles === undefined
     ) {
-      this.userRoles.set(authSession.roles);
+      this.#userRoles = authSession.roles;
+      this.#userRoles$.next([...this.#userRoles]);
     }
 
-    if (!this.loggedIn()) {
-      this.loggedIn.set(true);
+    if (!this.#loggedIn) {
+      this.#loggedIn = true;
+      this.#loggedIn$.next(true);
     }
 
     this.startExchangeInterval();
@@ -170,16 +191,16 @@ export class AuthService {
 
   userHasRole(role: string | string[]) {
     if (role) {
-      if (typeof role === 'string') return this.userRoles().some(r => r === role);
-      else return this.userRoles().some(r => role.includes(r));
+      if (typeof role === 'string') return this.#userRoles.some(r => r === role);
+      else return this.#userRoles.some(r => role.includes(r));
     }
     return false;
   }
 
   userNotInRole(role: string | string[]) {
     if (role) {
-      if (typeof role === 'string') return !this.userRoles().some(r => r === role);
-      return this.userRoles().filter(r => role.includes(r)).length === 0;
+      if (typeof role === 'string') return !this.#userRoles.some(r => r === role);
+      return this.#userRoles.filter(r => role.includes(r)).length === 0;
     }
     return true;
   }
@@ -214,8 +235,10 @@ export class AuthService {
     this.#userId = null;
     this.ability.update([]);
     token.set(null);
-    this.userRoles.set([]);
-    this.loggedIn.set(false);
+    this.#userRoles = [];
+    this.#userRoles$.next([]);
+    this.#loggedIn = false;
+    this.#loggedIn$.next(false);
     this.apollo.client.cache.reset();
   }
 
@@ -236,7 +259,7 @@ export class AuthService {
       .subscribe({
         next: ({ data: { authExchangeToken } }) => {
           this.setSession(authExchangeToken);
-          console.log('Exchanged token');
+          if (!this.env.production) console.log('Exchanged token');
         },
         error: (error: ApolloError) => {
           this.logout();
