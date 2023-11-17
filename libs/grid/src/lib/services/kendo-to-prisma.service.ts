@@ -120,7 +120,7 @@ export class KendoToPrismaService {
             const field = fieldSplit[i];
 
             if (i === fieldSplit.length - 1) {
-              next[field] = sort.dir;
+              next[field] = { sort: sort.dir };
             } else {
               next[field] = {};
               next = next[field];
