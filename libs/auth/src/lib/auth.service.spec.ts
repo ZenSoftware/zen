@@ -70,28 +70,76 @@ describe('AuthService', () => {
     expect(service.rolesEqual(['Editor'], ['Editor', 'Admin'])).toEqual(false);
   });
 
-  it('evaluates userHasRole correctly', () => {
-    service.userRoles.set(['Editor']);
+  it('evaluates userHasRole correctly', done => {
+    const data: AuthLogin = {
+      authLogin: {
+        __typename: 'AuthSession',
+        userId: '',
+        expiresIn: 0,
+        rememberMe: true,
+        roles: ['Editor'],
+        token: '',
+        rules: [],
+      },
+    };
 
-    expect(service.userHasRole('Editor')).toEqual(true);
-    expect(service.userHasRole(['Editor'])).toEqual(true);
-    expect(service.userHasRole(['Admin', 'Editor'])).toEqual(true);
+    service
+      .login({
+        username: '',
+        password: '',
+        rememberMe: true,
+      })
+      .subscribe(() => {
+        expect(service.userHasRole('Editor')).toEqual(true);
+        expect(service.userHasRole(['Editor'])).toEqual(true);
+        expect(service.userHasRole(['Admin', 'Editor'])).toEqual(true);
 
-    expect(service.userHasRole([])).toEqual(false);
-    expect(service.userHasRole('Admin')).toEqual(false);
-    expect(service.userHasRole(['Admin'])).toEqual(false);
+        expect(service.userHasRole([])).toEqual(false);
+        expect(service.userHasRole('Admin')).toEqual(false);
+        expect(service.userHasRole(['Admin'])).toEqual(false);
+
+        done();
+      });
+
+    const op = apollo.expectOne(AuthLoginDocument);
+    op.flush({ data });
+    apollo.verify();
   });
 
-  it('evaluates userNotInRole correctly', () => {
-    service.userRoles.set(['Editor']);
+  it('evaluates userNotInRole correctly', done => {
+    const data: AuthLogin = {
+      authLogin: {
+        __typename: 'AuthSession',
+        userId: '',
+        expiresIn: 0,
+        rememberMe: true,
+        roles: ['Editor'],
+        token: '',
+        rules: [],
+      },
+    };
 
-    expect(service.userNotInRole('Editor')).toEqual(false);
-    expect(service.userNotInRole(['Editor'])).toEqual(false);
-    expect(service.userNotInRole(['Admin', 'Editor'])).toEqual(false);
+    service
+      .login({
+        username: '',
+        password: '',
+        rememberMe: true,
+      })
+      .subscribe(() => {
+        expect(service.userNotInRole('Editor')).toEqual(false);
+        expect(service.userNotInRole(['Editor'])).toEqual(false);
+        expect(service.userNotInRole(['Admin', 'Editor'])).toEqual(false);
 
-    expect(service.userNotInRole([])).toEqual(true);
-    expect(service.userNotInRole('Admin')).toEqual(true);
-    expect(service.userNotInRole(['Admin'])).toEqual(true);
+        expect(service.userNotInRole([])).toEqual(true);
+        expect(service.userNotInRole('Admin')).toEqual(true);
+        expect(service.userNotInRole(['Admin'])).toEqual(true);
+
+        done();
+      });
+
+    const op = apollo.expectOne(AuthLoginDocument);
+    op.flush({ data });
+    apollo.verify();
   });
 
   it('login & logout correctly', done => {
@@ -126,8 +174,8 @@ describe('AuthService', () => {
         expect(ability.rules).toEqual(data.authLogin.rules);
         expect(service.userId).toEqual(data.authLogin.userId);
         expect(token()).toEqual(data.authLogin.token);
-        expect(service.userRoles()).toEqual(data.authLogin.roles);
-        expect(service.loggedIn()).toEqual(true);
+        expect(service.userRoles).toEqual(data.authLogin.roles);
+        expect(service.loggedIn).toEqual(true);
 
         const routerSpy = jest.spyOn(router, 'navigateByUrl');
 
@@ -143,8 +191,8 @@ describe('AuthService', () => {
         expect(ability.rules).toEqual([]);
         expect(service.userId).toEqual(null);
         expect(token()).toEqual(null);
-        expect(service.userRoles()).toEqual([]);
-        expect(service.loggedIn()).toEqual(false);
+        expect(service.userRoles).toEqual([]);
+        expect(service.loggedIn).toEqual(false);
 
         expect(routerSpy).toHaveBeenCalledWith('/login');
 

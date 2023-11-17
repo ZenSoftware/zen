@@ -12,5 +12,5 @@ export const LoginPageGuard: CanMatchFn = () => {
   const router = inject(Router);
   const env = inject(Environment);
   const auth = inject(AuthService);
-  return auth.loggedIn() ? router.parseUrl(env.url.loginRedirect) : true;
+  return auth.loggedIn ? router.parseUrl(env.url.loginRedirect) : true;
 };
