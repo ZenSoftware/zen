@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ElementRef, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,14 +18,7 @@ gql`
   styleUrls: ['zen-sample-upload.component.scss'],
   templateUrl: 'zen-sample-upload.component.html',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatSnackBarModule,
-    NgClass,
-    NgIf,
-    ZenLoadingComponent,
-    ZenSnackbarModule,
-  ],
+  imports: [MatButtonModule, MatSnackBarModule, NgClass, ZenLoadingComponent, ZenSnackbarModule],
 })
 export class ZenSampleUploadComponent {
   @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;

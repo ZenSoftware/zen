@@ -2,11 +2,12 @@ import {
   Directive,
   EmbeddedViewRef,
   Input,
+  OnDestroy,
   TemplateRef,
   ViewContainerRef,
-  effect,
 } from '@angular/core';
 import { Role } from '@zen/common';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 
@@ -14,19 +15,17 @@ import { AuthService } from '../auth.service';
   selector: '[notRoles]',
   standalone: true,
 })
-export class NotRolesDirective {
+export class NotRolesDirective implements OnDestroy {
   #roles?: string | string[];
   #embededViewRef: EmbeddedViewRef<unknown> | undefined;
+  #sub: Subscription;
 
   constructor(
     private templateRef: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
     private auth: AuthService
   ) {
-    effect(() => {
-      this.auth.userRoles();
-      this.update();
-    });
+    this.#sub = this.auth.userRoles$.subscribe(() => this.update());
   }
 
   @Input()
@@ -55,5 +54,9 @@ export class NotRolesDirective {
   clear() {
     this.viewContainer.clear();
     this.#embededViewRef = undefined;
+  }
+
+  ngOnDestroy() {
+    this.#sub.unsubscribe();
   }
 }
