@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -42,7 +41,6 @@ interface FormType {
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    NgIf,
     ReactiveFormsModule,
     ZenLoadingComponent,
   ],
