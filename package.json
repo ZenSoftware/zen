@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nx serve portal",
     "start:api": "nx serve api",
-    "e2e:portal": "nx e2e portal-e2e --ui --skipInstall",
+    "e2e:portal": "nx e2e portal-e2e --ui",
     "e2e:api": "nx e2e api-e2e",
     "gen:frontend": "graphql-codegen -c tools/apollo-angular.yml && graphql-codegen -c tools/apollo-possible-types.yml",
     "gen:api": "prisma generate --schema apps/api/prisma/schema.prisma && ts-node --project tools/tsconfig.json tools/generate.ts",
