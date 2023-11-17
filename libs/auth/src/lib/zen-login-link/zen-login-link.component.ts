@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Observable, filter, map } from 'rxjs';
@@ -10,7 +10,7 @@ import { IfLoggedInDirective } from '../directives/if-logged-in.directive';
   selector: 'zen-login-link',
   templateUrl: 'zen-login-link.component.html',
   standalone: true,
-  imports: [AsyncPipe, IfLoggedInDirective, NgIf, RouterLink],
+  imports: [AsyncPipe, IfLoggedInDirective, RouterLink],
 })
 export class ZenLoginLinkComponent {
   @Input() displayLogout = true;
