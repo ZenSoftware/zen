@@ -1,32 +1,39 @@
 <mat-dialog-content>
-  <zen-loading *ngIf="loading" [backdrop]="false"></zen-loading>
+  @if(loading) {
+    <zen-loading [backdrop]="false"></zen-loading>
+  }
 
-  <zen-register-form *ngIf="data.action === 'create'" (registered)="registered()"></zen-register-form>
+  @if(data.action === 'create') {
+    <zen-register-form (registered)="registered()"></zen-register-form>
+  }
 
-  <form id="user-form" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="data.action === 'edit'">
+  @if(data.action === 'edit') {
+    <form id="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <div class="row">
-      <div class="col pe-2">
-        <zen-username-input [formControl]="username" required/>
+      <div class="row">
+        <div class="col pe-2">
+          <zen-username-input [formControl]="username" required/>
+        </div>
+        <div class="col">
+          <zen-email-input [formControl]="email" required/>
+        </div>
       </div>
-      <div class="col">
-        <zen-email-input [formControl]="email" required/>
-      </div>
-    </div>
 
-    <zen-roles-input [formControl]="roles"/>
+      <zen-roles-input [formControl]="roles"/>
 
-  </form>
+    </form>
+  }
 </mat-dialog-content>
 
 <mat-dialog-actions class="d-flex justify-content-between">
-  <button type="submit" form="user-form"
+  @if(data.action === 'edit') {
+    <button type="submit" form="user-form"
     mat-raised-button color="primary"
-    *ngIf="data.action === 'edit'"
     [disabled]="loading || form.invalid">
-    <i class="fa-solid fa-fw fa-save"></i>
-    Save
-  </button>
+      <i class="fa-solid fa-fw fa-save"></i>
+      Save
+    </button>
+  }
 
   <!-- <button mat-raised-button (click)="form.markAllAsTouched()" [disabled]="loading">
     <i class="fa-solid fa-fw fa-clipboard-list"></i>

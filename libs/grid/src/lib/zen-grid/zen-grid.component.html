@@ -1,6 +1,6 @@
-<kendo-grid
+@if(gridSettings) {
+  <kendo-grid
   #grid
-  *ngIf="gridSettings"
   [data]="gridData"
   [pageable]="showPager" [pageSize]="take" [skip]="skip"
   [sortable]="sortable" [sort]="sort"
@@ -27,149 +27,178 @@
   (add)="addHandler($event)"
   (edit)="editHandler($event)"
   (remove)="removeHandler($event)"
->
-  <ng-template *ngIf="showToolbar" kendoGridToolbarTemplate>
-    <div class="row m-0 w-100">
-      <div class="col-auto p-0">
-        <button kendoGridAddCommand title="New"
-        *ngIf="showAdd" [disabled]="loading || disableAdd" [ngClass]="{'k-primary': !disableAdd}" class="me-2">
-          <i class="fa-solid fa-fw fa-plus"></i>
-        </button>
-    
-        <button (click)="gridSettings.showGroups = !gridSettings.showGroups" title="Toggle Group Visibility"
-        matBadge="{{groupLength}}" matBadgeSize="small" matBadgeColor="accent"
-        class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2" [ngClass]="{'k-primary': groupLength > 0 && !disableGroupButton}"
-        *ngIf="showGroupButton" [disabled]="loading || disableGroupButton">
-          <i class="fa-solid fa-fw fa-layer-group"></i>
-        </button>
+  >
+    @if(showToolbar) {
+      <ng-template kendoGridToolbarTemplate>
+        <div class="row m-0 w-100">
+          <div class="col-auto p-0">
+            @if(showAdd) {
+              <button kendoGridAddCommand title="New" [disabled]="loading || disableAdd" [ngClass]="{'k-primary': !disableAdd}" class="me-2">
+                <i class="fa-solid fa-fw fa-plus"></i>
+              </button>
+            }
 
+            @if(showGroupButton) {
+              <button (click)="gridSettings.showGroups = !gridSettings.showGroups" title="Toggle Group Visibility"
+              matBadge="{{groupLength}}" matBadgeSize="small" matBadgeColor="accent"
+              class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2" [ngClass]="{'k-primary': groupLength > 0 && !disableGroupButton}"
+              [disabled]="loading || disableGroupButton">
+                <i class="fa-solid fa-fw fa-layer-group"></i>
+              </button>
+            }
 
-        <button [matMenuTriggerFor]="menu" title="Export"
-        class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
-        *ngIf="showExports" [disabled]="loading || disableExports">
-          <i class="fa-solid fa-fw fa-file-export"></i>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="grid.saveAsExcel()">Excel</button>
-          <!-- <button mat-menu-item (click)="saveAsCSV()">CSV</button> -->
-          <button mat-menu-item (click)="saveAsJSON()">JSON</button>
-        </mat-menu>
+            @if(showExports) {
+              <button [matMenuTriggerFor]="menu" title="Export"
+              class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
+              [disabled]="loading || disableExports">
+                <i class="fa-solid fa-fw fa-file-export"></i>
+              </button>
+            }
 
-        <ng-content select="[toolbar-left]"></ng-content>
-      </div>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="grid.saveAsExcel()">Excel</button>
+              <button mat-menu-item (click)="saveAsJSON()">JSON</button>
+              <!-- <button mat-menu-item (click)="saveAsCSV()">CSV</button> -->
+            </mat-menu>
 
-      <div class="col p-0 text-end">
-        <ng-content select="[toolbar-right]"></ng-content>
+            <ng-content select="[toolbar-left]"></ng-content>
+          </div>
 
-        <button (click)="refresh()" title="Refresh"
-        class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
-        *ngIf="showRefresh" [disabled]="loading || disableRefresh">
-          <i class="fa-solid fa-fw fa-sync"></i>
-        </button>
+          <div class="col p-0 text-end">
+            <ng-content select="[toolbar-right]"></ng-content>
 
-        <button (click)="autoFitCols()" title="AutoFit Columns"
-        class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
-        *ngIf="showAutoFitColsButton" [disabled]="disableAutoFitColsButton">
-          <i class="fa-solid fa-fw fa-compress"></i>
-        </button>
+            @if(showRefresh) {
+              <button (click)="refresh()" title="Refresh"
+              class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
+              [disabled]="loading || disableRefresh">
+                <i class="fa-solid fa-fw fa-sync"></i>
+              </button>
+            }
 
-        <button (click)="resetClick()" title="Reset"
-        class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
-        *ngIf="showReset" [disabled]="disableReset">
-          <i class="fa-solid fa-fw fa-eraser"></i>
-        </button>
-      </div>
-    </div>
-  </ng-template>
+            @if(showAutoFitColsButton) {
+              <button (click)="autoFitCols()" title="AutoFit Columns"
+              class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
+              [disabled]="disableAutoFitColsButton">
+                <i class="fa-solid fa-fw fa-compress"></i>
+              </button>
+            }
 
-  <kendo-grid-checkbox-column *ngIf="mode === GridMode.SelectMany || mode === GridMode.SelectOne" [width]="65"></kendo-grid-checkbox-column>
-
-  <kendo-grid-command-column *ngIf="showEdit" [width]="48" class="text-center px-0">
-    <ng-template kendoGridCellTemplate let-dataItem>
-      <button kendoGridEditCommand [primary]="true" *ngIf="showEditIf(dataItem)" [disabled]="disableEdit" title="Edit" class="px-2 my-0 ms-0 me-1">
-        <i class="fa-solid fa-fw fa-pencil-alt"></i>
-      </button>
-    </ng-template>
-  </kendo-grid-command-column>
-
-  <kendo-grid-column *ngFor="let col of columnsConfig"
-    [autoSize]="col.autoSize"
-    [field]="col.field"
-    [filter]="col.filter"
-    [filterable]="col.filterable ?? true"
-    [format]="col.format"
-    [hidden]="col.hidden ?? false"
-    [sortable]="col.sortable ?? true"
-    [title]="col.title"
-    [width]="col._width">
-
-    <ng-template #customTemp kendoGridCellTemplate let-dataItem>
-      <ng-container *ngIf="!col.custom?.display">
-        <ng-container *ngTemplateOutlet="colTemp; context:{$implicit: getValue(dataItem, col.field)}"></ng-container>
-      </ng-container>
-
-      <ng-container *ngIf="isString(col.custom?.display)">
-        <ng-container *ngTemplateOutlet="colTemp; context:{$implicit: getValue(dataItem, col.custom.display)}"></ng-container>
-      </ng-container>
-
-      <ng-container *ngIf="isFunction(col.custom?.display)">
-        <ng-container *ngTemplateOutlet="colTemp; context:{$implicit: col.custom.display(dataItem)}"></ng-container>
-      </ng-container>
-
-      <ng-template #colTemp let-colValue>
-        <ng-container *ngIf="!col.custom?.preformatted && !col.custom?.html && !col.custom?.currency && col.filter !== 'date' && col.filter !== 'boolean'">
-          {{ colValue }}
-        </ng-container>
-
-        <ng-container *ngIf="col.filter === 'date' && !col.custom?.display">
-          {{ colValue | date:'short' }}
-        </ng-container>
-
-        <ng-container *ngIf="col.filter === 'date' && col.custom?.display">
-          {{ colValue }}
-        </ng-container>
-
-        <ng-container *ngIf="col.custom?.preformatted">
-          <pre>{{ colValue }}</pre>
-        </ng-container>
-    
-        <ng-container *ngIf="col.custom?.html">
-          <div class="zen-html" [innerHTML]="colValue | safeHtml"></div>
-        </ng-container>
-
-        <ng-container *ngIf="col.filter === 'boolean'">
-          <input type="checkbox" [checked]="colValue" *ngIf="isBool(colValue) else notBool" disabled/>
-          <ng-template #notBool>{{colValue}}</ng-template>
-        </ng-container>
-
-        <ng-container *ngIf="col.custom?.currency">
-          <ng-container *ngIf="col.custom?.currency === 'cents'; else dollarsTemp">
-            {{ colValue | centsToDollars | currency }}
-          </ng-container>
-    
-          <ng-template #dollarsTemp>
-            {{ colValue | currency }}
-          </ng-template>
-        </ng-container>
+            @if(showReset) {
+              <button (click)="resetClick()" title="Reset"
+              class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
+              [disabled]="disableReset">
+                <i class="fa-solid fa-fw fa-eraser"></i>
+              </button>
+            }
+          </div>
+        </div>
       </ng-template>
+    }
+
+    @if(mode === GridMode.SelectMany || mode === GridMode.SelectOne) {
+      <kendo-grid-checkbox-column [width]="65"></kendo-grid-checkbox-column>
+    }
+
+    @if(showEdit) {
+      <kendo-grid-command-column [width]="48" class="text-center px-0">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          @if(showEditIf(dataItem)) {
+            <button kendoGridEditCommand [primary]="true" [disabled]="disableEdit" title="Edit" class="px-2 my-0 ms-0 me-1">
+              <i class="fa-solid fa-fw fa-pencil-alt"></i>
+            </button>
+          }
+        </ng-template>
+      </kendo-grid-command-column>
+    }
+
+    @for(col of columnsConfig; track col) {
+      <kendo-grid-column
+      [autoSize]="col.autoSize"
+      [field]="col.field"
+      [filter]="col.filter"
+      [filterable]="col.filterable ?? true"
+      [format]="col.format"
+      [hidden]="col.hidden ?? false"
+      [sortable]="col.sortable ?? true"
+      [title]="col.title"
+      [width]="col._width">
+
+        <ng-template #customTemp kendoGridCellTemplate let-dataItem>
+          @if(!col.custom?.display) {
+            <ng-container *ngTemplateOutlet="colTemp; context:{$implicit: getValue(dataItem, col.field)}"></ng-container>
+          }
+
+          @if(isString(col.custom?.display)) {
+            <ng-container *ngTemplateOutlet="colTemp; context:{$implicit: getValue(dataItem, col.custom.display)}"></ng-container>
+          }
+
+          @if(isFunction(col.custom?.display)) {
+            <ng-container *ngTemplateOutlet="colTemp; context:{$implicit: col.custom.display(dataItem)}"></ng-container>
+          }
+
+          <ng-template #colTemp let-colValue>
+            @if(!col.custom?.preformatted && !col.custom?.html && !col.custom?.currency && col.filter !== 'date' && col.filter !== 'boolean') {
+              {{ colValue }}
+            }
+
+            @if(col.filter === 'date' && !col.custom?.display) {
+              {{ colValue | date:'short' }}
+            }
+
+            @if(col.filter === 'date' && col.custom?.display) {
+              {{ colValue }}
+            }
+
+            @if(col.custom?.preformatted) {
+              <pre>{{ colValue }}</pre>
+            }
+
+            @if(col.custom?.html) {
+              <div class="zen-html" [innerHTML]="colValue | safeHtml"></div>
+            }
+
+            @if(col.filter === 'boolean') {
+              @if(isBool(colValue)) {
+                <input type="checkbox" [checked]="colValue" disabled/>
+              } @else {
+                {{colValue}}
+              }
+            }
+
+            @if(col.custom?.currency) {
+              @if(col.custom?.currency === 'cents') {
+                {{ colValue | centsToDollars | currency }}
+              } @else {
+                {{ colValue | currency }}
+              }
+            }
+          </ng-template>
+
+        </ng-template>
+      </kendo-grid-column>
+    }
+
+    @if(details) {
+      <ng-template kendoGridDetailTemplate let-dataItem [kendoGridDetailTemplateShowIf]="showDetailsIf">
+        <ng-container [ngTemplateOutlet]="details.host" [ngTemplateOutletContext]="{ $implicit: dataItem }"></ng-container>
+      </ng-template>
+    }
       
-    </ng-template>
-  </kendo-grid-column>
+    @if(showDelete) {
+      <kendo-grid-command-column [width]="48" class="text-center px-0">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          @if(showDeleteIf(dataItem)) {
+            <button kendoGridRemoveCommand [disabled]="disableDelete" title="Delete" class="px-2 m-0">
+              <i class="fa-solid fa-fw fa-trash-alt"></i>
+            </button>
+          }
+        </ng-template>
+      </kendo-grid-command-column>
+    }
 
-  <ng-template *ngIf="details" kendoGridDetailTemplate let-dataItem [kendoGridDetailTemplateShowIf]="showDetailsIf">
-    <ng-container [ngTemplateOutlet]="details.host" [ngTemplateOutletContext]="{ $implicit: dataItem }"></ng-container>
-  </ng-template>
-
-  <kendo-grid-command-column *ngIf="showDelete" [width]="48" class="text-center px-0">
-    <ng-template kendoGridCellTemplate let-dataItem>
-      <button kendoGridRemoveCommand *ngIf="showDeleteIf(dataItem)" [disabled]="disableDelete" title="Delete" class="px-2 m-0">
-        <i class="fa-solid fa-fw fa-trash-alt"></i>
-      </button>
-    </ng-template>
-  </kendo-grid-command-column>
-
-  <kendo-grid-excel [fileName]="excelFileName" [fetchData]="allData"></kendo-grid-excel>
-</kendo-grid>
+    <kendo-grid-excel [fileName]="excelFileName" [fetchData]="allData"></kendo-grid-excel>
+  </kendo-grid>
+}
 
 <ng-template #errorTemplate>
   Error retrieving data

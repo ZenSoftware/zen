@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CurrencyPipe, DatePipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectorRef,
@@ -104,7 +104,8 @@ const DEFAULT_TAKE = 10;
   standalone: true,
   imports: [
     CentsToDollarsPipe,
-    CommonModule,
+    CurrencyPipe,
+    DatePipe,
     ExcelModule,
     GridModule,
     InputsModule,
@@ -112,6 +113,8 @@ const DEFAULT_TAKE = 10;
     MatButtonModule,
     MatMenuModule,
     MatSnackBarModule,
+    NgClass,
+    NgTemplateOutlet,
     ReactiveFormsModule,
     SafeHtmlPipe,
     ZenConfirmModalModule,
