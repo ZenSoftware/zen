@@ -126,6 +126,7 @@ pnpm start
 - [x] [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/grid/) branch - which includes [@zen/grid](https://github.com/ZenSoftware/zen/tree/kendo/libs/grid).  `<zen-grid>` renders robust and reliable data grids over all of the Prisma models within the project, with minimal configuration needed.
 - [x] [OpenTelemetry](https://opentelemetry.io/) branch demonstrates how to integrate and expose telemetry data for the API server.
 - [x] HTML canvas branch demonstrating integration of [babylon.js](https://www.babylonjs.com/) & [Fabric.js](http://fabricjs.com/).
+- [x] Internationalization branch with all text extracted into JSON files ready to be translated. [@ngx-translate](https://github.com/ngx-translate/core) was chosen over [@angular/localize](https://angular.io/api/localize) due to @angular/localize inability to change languages at runtime.
 
 ---
 
