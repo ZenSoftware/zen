@@ -36,7 +36,7 @@ declare const HavokPhysics: () => Promise<unknown>;
 @Component({
   selector: 'zen-babylon',
   templateUrl: 'zen-babylon.component.html',
-  styleUrls: ['zen-babylon.component.scss'],
+  styleUrl: 'zen-babylon.component.scss',
   standalone: true,
   imports: [ZenLoadingComponent],
 })

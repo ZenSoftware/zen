@@ -6,7 +6,7 @@ import FontFaceObserver from 'fontfaceobserver';
 @Component({
   selector: 'zen-toolbar-text',
   templateUrl: 'zen-toolbar-text.component.html',
-  styleUrls: ['zen-toolbar-text.component.scss'],
+  styleUrl: 'zen-toolbar-text.component.scss',
   standalone: true,
   imports: [ColorPickerModule, MatSelectModule],
 })

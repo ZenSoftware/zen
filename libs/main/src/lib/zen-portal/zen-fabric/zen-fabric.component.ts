@@ -15,7 +15,7 @@ import { ZenToolbarTextComponent } from './zen-toolbar-text';
 @Component({
   selector: 'zen-fabric',
   templateUrl: 'zen-fabric.component.html',
-  styleUrls: ['zen-fabric.component.scss'],
+  styleUrl: 'zen-fabric.component.scss',
   standalone: true,
   imports: [ZenContextmenuComponent, ZenToolbarTextComponent],
 })

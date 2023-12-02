@@ -5,7 +5,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'zen-loading',
   templateUrl: 'zen-loading.component.html',
-  styleUrls: ['zen-loading.component.scss'],
+  styleUrl: 'zen-loading.component.scss',
   standalone: true,
   imports: [MatProgressSpinnerModule, NgClass],
 })
