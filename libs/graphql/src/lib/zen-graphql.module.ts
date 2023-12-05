@@ -82,9 +82,7 @@ export function createApollo(
 
       const upload_batch_link = split(
         ({ query }) =>
-          (options.uploadOptions?.mutationNames as string[])?.includes(
-            getOperationName(query) as string
-          ),
+          options.uploadOptions!.mutationNames.includes(getOperationName(query) as string),
         upload_link,
         batch_link
       );
@@ -111,9 +109,7 @@ export function createApollo(
 
       const upload_websocket_batch_link = split(
         ({ query }) =>
-          (options.uploadOptions?.mutationNames as string[])?.includes(
-            getOperationName(query) as string
-          ),
+          options.uploadOptions!.mutationNames.includes(getOperationName(query) as string),
         upload_link,
         websocket_batch_link
       );
