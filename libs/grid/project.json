@@ -22,10 +22,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/grid/**/*.ts", "libs/grid/**/*.html"]
-      }
+      "outputs": ["{options.outputFile}"]
     }
   }
 }
