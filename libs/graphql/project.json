@@ -15,7 +15,10 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/graphql/**/*.ts", "libs/graphql/**/*.html"]
+      }
     }
   }
 }
