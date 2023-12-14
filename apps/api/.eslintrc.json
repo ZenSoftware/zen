@@ -1,11 +1,6 @@
 {
   "extends": ["../../.eslintrc.json"],
-  "ignorePatterns": [
-    "!**/*",
-    "src/app/prisma/generated",
-    "src/app/graphql/resolversTypes.ts",
-    "webpack.config.js"
-  ],
+  "ignorePatterns": ["!**/*", "src/app/prisma/generated", "src/app/graphql/resolversTypes.ts"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
