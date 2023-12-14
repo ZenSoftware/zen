@@ -16,7 +16,10 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/common/**/*.ts", "libs/common/package.json"]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",

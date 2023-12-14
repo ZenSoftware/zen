@@ -77,7 +77,10 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/portal/**/*.ts", "apps/portal/**/*.html"]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",
