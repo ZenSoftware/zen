@@ -6,6 +6,8 @@ export const CASL_POLICY_KEY = 'CaslPolicy';
 
 /**
  * Decorator to be applied to a class or method to specify authorization.
+ * Works with Nest controllers and GraphQL resolvers.
+ *
  * @example
  * ```ts
  * ＠UseGuards(CaslGuard)
