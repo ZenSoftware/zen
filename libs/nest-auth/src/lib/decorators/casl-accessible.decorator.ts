@@ -14,7 +14,10 @@ const accessibleBy = createAccessibleByFactory();
  * Parameter decorator that provides a CASL `accessibleBy` result for the current user.
  * Requires a string as a paramater that is a Prisma model name. It will provide the
  * Prisma `WhereInput` for the specified subject which can be used within a Prisma query
- * to filter the results. Works with either HTTP or GraphQL requests.
+ * to filter the results.
+ *
+ * Works with Nest controllers and GraphQL resolvers.
+ *
  * ```ts
  * ＠UseGuards(CaslGuard)
  * async getBlogs(＠CaslAccessible('Blog') accessibleBlogs: Prisma.BlogWhereInput) { ... }
