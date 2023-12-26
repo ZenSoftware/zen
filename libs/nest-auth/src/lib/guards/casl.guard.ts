@@ -9,7 +9,7 @@ import { CASL_POLICY_KEY, CaslPolicyHandler } from '../decorators/casl-policy.de
 
 /**
  * Guard that is used in conjunction with `CaslAbility`, `CaslAccessible` and `CaslPolicy` decorators.
- * REST controllers or GraphQL resolvers.
+ * Works with Nest controllers and GraphQL resolvers.
  * @example
  * ```ts
  * ＠UseGuards(CaslGuard)
