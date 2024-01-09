@@ -1,10 +1,10 @@
 <mat-dialog-content>
   @if(loading) {
-    <zen-loading [backdrop]="false"></zen-loading>
+    <zen-loading [backdrop]="false"/>
   }
 
   @if(data.action === 'create') {
-    <zen-register-form (registered)="registered()"></zen-register-form>
+    <zen-register-form (registered)="registered()"/>
   }
 
   @if(data.action === 'edit') {
