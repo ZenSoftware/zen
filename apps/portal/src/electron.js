@@ -4,7 +4,7 @@ const URL = require('url').URL;
 
 let INDEX_PATH;
 if (app.isPackaged) INDEX_PATH = 'index.html';
-else INDEX_PATH = path.join(__dirname, `../../../dist/apps/portal/index.html`);
+else INDEX_PATH = path.join(__dirname, `../../../dist/apps/portal/browser/index.html`);
 
 function createWindow() {
   const win = new BrowserWindow({

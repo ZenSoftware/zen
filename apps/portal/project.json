@@ -7,15 +7,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-builders/custom-webpack:browser",
-      "customWebpackConfig": {
-        "path": "apps/portal/extra-webpack.config.js",
-        "mergeRules": {
-          "resolve": {
-            "rules": "merge"
-          }
-        }
-      },
+      "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/portal",
