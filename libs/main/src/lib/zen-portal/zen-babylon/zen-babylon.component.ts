@@ -7,9 +7,9 @@ import '@babylonjs/core/Meshes/Builders/groundBuilder';
 // Side-effects only imports for ray support.
 import '@babylonjs/core/Culling/ray';
 // Side-effects only imports for WebGPU extensions.
-import '@babylonjs/core/Engines/WebGPU/Extensions/engine.uniformBuffer';
 import '@babylonjs/core/Physics/physicsEngineComponent';
 import '@babylonjs/core/Helpers/sceneHelpers';
+import '@babylonjs/core/Engines/Extensions/engine.uniformBuffer';
 
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { KeyboardEventTypes, Mesh, WebGPUEngine } from '@babylonjs/core';
