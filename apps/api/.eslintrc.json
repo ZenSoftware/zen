@@ -4,7 +4,7 @@
     "!**/*",
     "src/app/prisma/generated",
     "src/app/graphql/resolversTypes.ts",
-    "webpack.config.js"
+    "webpack.config.ts"
   ],
   "overrides": [
     {
