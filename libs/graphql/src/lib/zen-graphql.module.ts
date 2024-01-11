@@ -17,14 +17,14 @@ import { getMainDefinition, getOperationName } from '@apollo/client/utilities';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { ApolloModule } from 'apollo-angular';
 import { BatchOptions, HttpBatchLink, HttpBatchLinkHandler } from 'apollo-angular/http';
-import { createUploadLink } from 'apollo-upload-client';
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { OperationDefinitionNode } from 'graphql';
 import { ClientOptions, createClient } from 'graphql-ws';
 
 export abstract class GraphQLOptions {
   resolvers?: ApolloClientOptions<NormalizedCacheObject>['resolvers'];
   cacheOptions?: InMemoryCacheConfig;
-  uploadOptions?: createUploadLink.UploadLinkOptions & { mutationNames: string[] };
+  uploadOptions?: Parameters<typeof createUploadLink>[0] & { mutationNames: string[] };
   batchOptions?: BatchOptions;
   websocketOptions?: ClientOptions;
 }
