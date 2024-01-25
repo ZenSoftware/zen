@@ -9,7 +9,7 @@ COPY apps/api/prisma/schema.prisma ./schema.prisma
 
 RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" && chmod +x /bin/pnpm
 RUN pnpm i --prod --frozen-lockfile
-RUN cp /usr/src/api/node_modules/prisma/libquery_engine-linux-musl-openssl-3.0.x.so.node ./
+RUN cp /usr/src/api/node_modules/prisma/libquery_engine-linux-musl.so.node ./
 
 # ENV DATABASE_URL=postgresql://user:pass@localhost:5432/database
 
