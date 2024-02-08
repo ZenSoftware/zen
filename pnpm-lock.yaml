@@ -13,7 +13,7 @@ dependencies:
     version: 6.5.0
   '@casl/prisma':
     specifier: ~1.4.1
-    version: 1.4.1(@casl/ability@6.5.0)(@prisma/client@5.8.1)
+    version: 1.4.1(@casl/ability@6.5.0)(@prisma/client@5.9.1)
   '@graphql-tools/merge':
     specifier: ^9.0.1
     version: 9.0.1(graphql@16.8.1)
@@ -46,13 +46,13 @@ dependencies:
     version: 5.1.1(@nestjs/common@10.3.2)(@nestjs/core@10.3.2)(reflect-metadata@0.1.14)
   '@paljs/plugins':
     specifier: 6.0.7
-    version: 6.0.7(@prisma/client@5.8.1)(graphql@16.8.1)
+    version: 6.0.7(@prisma/client@5.9.1)(graphql@16.8.1)
   '@prisma/client':
-    specifier: ~5.8.1
-    version: 5.8.1(prisma@5.8.1)
+    specifier: ~5.9.1
+    version: 5.9.1(prisma@5.9.1)
   axios:
-    specifier: 1.6.0
-    version: 1.6.0
+    specifier: ^1.6.7
+    version: 1.6.7
   class-transformer:
     specifier: ^0.5.1
     version: 0.5.1
@@ -102,8 +102,8 @@ dependencies:
     specifier: ^4.0.1
     version: 4.0.1
   prisma:
-    specifier: ~5.8.1
-    version: 5.8.1
+    specifier: ~5.9.1
+    version: 5.9.1
   reflect-metadata:
     specifier: ^0.1.14
     version: 0.1.14
@@ -173,8 +173,8 @@ devDependencies:
     specifier: ^17.1.3
     version: 17.1.3(@angular/common@17.1.3)(@angular/core@17.1.3)(@angular/platform-browser@17.1.3)(rxjs@7.8.1)
   '@apollo/client':
-    specifier: ~3.8.10
-    version: 3.8.10(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ~3.9.4
+    version: 3.9.4(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
   '@casl/angular':
     specifier: ~8.2.3
     version: 8.2.3(@angular/core@17.1.3)(@casl/ability@6.5.0)(rxjs@7.8.1)(tslib@2.6.2)
@@ -318,10 +318,10 @@ devDependencies:
     version: 6.13.2(eslint@8.48.0)(typescript@5.3.3)
   apollo-angular:
     specifier: ~6.0.0
-    version: 6.0.0(@angular/core@17.1.3)(@apollo/client@3.8.10)(graphql@16.8.1)(rxjs@7.8.1)
+    version: 6.0.0(@angular/core@17.1.3)(@apollo/client@3.9.4)(graphql@16.8.1)(rxjs@7.8.1)
   apollo-upload-client:
     specifier: ^17.0.0
-    version: 17.0.0(@apollo/client@3.8.10)(graphql@16.8.1)
+    version: 17.0.0(@apollo/client@3.9.4)(graphql@16.8.1)
   bootstrap:
     specifier: ~5.3.2
     version: 5.3.2(@popperjs/core@2.11.8)
@@ -962,10 +962,10 @@ packages:
       graphql: 16.8.1
     dev: false
 
-  /@apollo/client@3.8.10(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-p/22RZ8ehHyvySnC20EHPPe0gdu8Xp6ZCiXOfdEe1ZORw5cUteD/TLc66tfKv8qu8NLIfbiWoa+6s70XnKvxqg==}
+  /@apollo/client@3.9.4(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Ip6dxjshDT2Dp6foLASTnKBW45Fytew/5JZutZwgc78hVrrGpO9UtZA9xteHXYdap0wIgCxCfeIQwbSu1ZdQpw==}
     peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+      graphql: ^15.0.0 || ^16.0.0
       graphql-ws: ^5.5.5
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -981,6 +981,7 @@ packages:
         optional: true
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
+      '@wry/caches': 1.0.1
       '@wry/equality': 0.5.7
       '@wry/trie': 0.5.0
       graphql: 16.8.1
@@ -991,11 +992,14 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+      rehackt: 0.0.4(react@18.2.0)
       response-iterator: 0.2.6
       symbol-observable: 4.0.0
       ts-invariant: 0.10.3
       tslib: 2.6.2
       zen-observable-ts: 1.2.5
+    transitivePeerDependencies:
+      - '@types/react'
     dev: true
 
   /@apollo/protobufjs@1.2.7:
@@ -3638,14 +3642,14 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@casl/prisma@1.4.1(@casl/ability@6.5.0)(@prisma/client@5.8.1):
+  /@casl/prisma@1.4.1(@casl/ability@6.5.0)(@prisma/client@5.9.1):
     resolution: {integrity: sha512-WTFcWhYnoEc8fRHMzlqd3MU6WXOtT1cfoHmxSyB14gVeRHWvOyWdVaGxueLySgBOb08kIiZdjOBYNJRTzlAqBA==}
     peerDependencies:
       '@casl/ability': ^5.3.0 || ^6.0.0
       '@prisma/client': ^2.14.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
     dependencies:
       '@casl/ability': 6.5.0
-      '@prisma/client': 5.8.1(prisma@5.8.1)
+      '@prisma/client': 5.9.1(prisma@5.9.1)
       '@ucast/core': 1.10.2
       '@ucast/js': 3.0.4
     dev: false
@@ -7588,7 +7592,7 @@ packages:
       - supports-color
     dev: true
 
-  /@paljs/plugins@6.0.7(@prisma/client@5.8.1)(graphql@16.8.1):
+  /@paljs/plugins@6.0.7(@prisma/client@5.9.1)(graphql@16.8.1):
     resolution: {integrity: sha512-8mQmSfto3qt8q9BwpoDw0hYj4IOmvKNy0FxWQQTujYEFLtasHLQVrQsO9R2HFFR0NZbQCiANyy4ctR6uBW/C4w==}
     peerDependencies:
       '@prisma/client': ^5
@@ -7596,7 +7600,7 @@ packages:
     dependencies:
       '@paljs/types': 6.0.7
       '@paljs/utils': 6.0.7
-      '@prisma/client': 5.8.1(prisma@5.8.1)
+      '@prisma/client': 5.9.1(prisma@5.9.1)
       graphql: 16.8.1
       graphql-parse-resolve-info: 4.13.0(graphql@16.8.1)
       graphql-tag: 2.12.6(graphql@16.8.1)
@@ -7680,8 +7684,8 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: true
 
-  /@prisma/client@5.8.1(prisma@5.8.1):
-    resolution: {integrity: sha512-xQtMPfbIwLlbm0VVIVQY2yqQVOxPwRQhvIp7Z3m2900g1bu/zRHKhYZJQWELqmjl6d8YwBy0K2NvMqh47v1ubw==}
+  /@prisma/client@5.9.1(prisma@5.9.1):
+    resolution: {integrity: sha512-caSOnG4kxcSkhqC/2ShV7rEoWwd3XrftokxJqOCMVvia4NYV/TPtJlS9C2os3Igxw/Qyxumj9GBQzcStzECvtQ==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -7690,32 +7694,14 @@ packages:
       prisma:
         optional: true
     dependencies:
-      prisma: 5.8.1
-    dev: false
-
-  /@prisma/debug@5.8.1:
-    resolution: {integrity: sha512-tjuw7eA0Us3T42jx9AmAgL58rzwzpFGYc3R7Y4Ip75EBYrKMBA1YihuWMcBC92ILmjlQ/u3p8VxcIE0hr+fZfg==}
+      prisma: 5.9.1
     dev: false
 
   /@prisma/debug@5.9.1:
     resolution: {integrity: sha512-yAHFSFCg8KVoL0oRUno3m60GAjsUKYUDkQ+9BA2X2JfVR3kRVSJFc/GpQ2fSORi4pSHZR9orfM4UC9OVXIFFTA==}
 
-  /@prisma/engines-version@5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2:
-    resolution: {integrity: sha512-f5C3JM3l9yhGr3cr4FMqWloFaSCpNpMi58Om22rjD2DOz3owci2mFdFXMgnAGazFPKrCbbEhcxdsRfspEYRoFQ==}
-    dev: false
-
   /@prisma/engines-version@5.9.0-32.23fdc5965b1e05fc54e5f26ed3de66776b93de64:
     resolution: {integrity: sha512-HFl7275yF0FWbdcNvcSRbbu9JCBSLMcurYwvWc8WGDnpu7APxQo2ONtZrUggU3WxLxUJ2uBX+0GOFIcJeVeOOQ==}
-
-  /@prisma/engines@5.8.1:
-    resolution: {integrity: sha512-TJgYLRrZr56uhqcXO4GmP5be+zjCIHtLDK20Cnfg+o9d905hsN065QOL+3Z0zQAy6YD31Ol4u2kzSfRmbJv/uA==}
-    requiresBuild: true
-    dependencies:
-      '@prisma/debug': 5.8.1
-      '@prisma/engines-version': 5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2
-      '@prisma/fetch-engine': 5.8.1
-      '@prisma/get-platform': 5.8.1
-    dev: false
 
   /@prisma/engines@5.9.1:
     resolution: {integrity: sha512-gkdXmjxQ5jktxWNdDA5aZZ6R8rH74JkoKq6LD5mACSvxd2vbqWeWIOV0Py5wFC8vofOYShbt6XUeCIUmrOzOnQ==}
@@ -7725,14 +7711,6 @@ packages:
       '@prisma/engines-version': 5.9.0-32.23fdc5965b1e05fc54e5f26ed3de66776b93de64
       '@prisma/fetch-engine': 5.9.1
       '@prisma/get-platform': 5.9.1
-
-  /@prisma/fetch-engine@5.8.1:
-    resolution: {integrity: sha512-+bgjjoSFa6uYEbAPlklfoVSStOEfcpheOjoBoNsNNSQdSzcwE2nM4Q0prun0+P8/0sCHo18JZ9xqa8gObvgOUw==}
-    dependencies:
-      '@prisma/debug': 5.8.1
-      '@prisma/engines-version': 5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2
-      '@prisma/get-platform': 5.8.1
-    dev: false
 
   /@prisma/fetch-engine@5.9.1:
     resolution: {integrity: sha512-l0goQOMcNVOJs1kAcwqpKq3ylvkD9F04Ioe1oJoCqmz05mw22bNAKKGWuDd3zTUoUZr97va0c/UfLNru+PDmNA==}
@@ -7745,12 +7723,6 @@ packages:
     resolution: {integrity: sha512-WMdEUPpPYxUGruRQM6e6IVTWXFjt1hHdF/m2TO7pWxhPo7/ZeoTOF9fH8JsvVSV78DYLOQkx9osjFLXZu447Kw==}
     dependencies:
       '@prisma/debug': 5.9.1
-
-  /@prisma/get-platform@5.8.1:
-    resolution: {integrity: sha512-wnA+6HTFcY+tkykMokix9GiAkaauPC5W/gg0O5JB0J8tCTNWrqpnQ7AsaGRfkYUbeOIioh6woDjQrGTTRf1Zag==}
-    dependencies:
-      '@prisma/debug': 5.8.1
-    dev: false
 
   /@prisma/get-platform@5.9.1:
     resolution: {integrity: sha512-6OQsNxTyhvG+T2Ksr8FPFpuPeL4r9u0JF0OZHUBI/Uy9SS43sPyAIutt4ZEAyqWQt104ERh70EZedkHZKsnNbg==}
@@ -9637,10 +9609,11 @@ packages:
   /@types/apollo-upload-client@17.0.5(graphql-ws@5.14.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-rPKHaE4QNd06LNtBgz6hfntVO+pOQMS2yTcynrzBPg9+a/nbtJ2gus5KgzRp2rqfzmnKEc/sRGjLen/9Ot0Z2A==}
     dependencies:
-      '@apollo/client': 3.8.10(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@apollo/client': 3.9.4(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@types/extract-files': 13.0.1
       graphql: 16.8.1
     transitivePeerDependencies:
+      - '@types/react'
       - graphql-ws
       - react
       - react-dom
@@ -11018,7 +10991,7 @@ packages:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  /apollo-angular@6.0.0(@angular/core@17.1.3)(@apollo/client@3.8.10)(graphql@16.8.1)(rxjs@7.8.1):
+  /apollo-angular@6.0.0(@angular/core@17.1.3)(@apollo/client@3.9.4)(graphql@16.8.1)(rxjs@7.8.1):
     resolution: {integrity: sha512-Ys4MLCOSBpNZ411R+xw2XcUSUZo3Az/r/PujZZM9ZEvBhCHlqxAmXacRBda+MGc34NYqkXO0yxLwF+UXPHogkg==}
     engines: {node: '>=16'}
     peerDependencies:
@@ -11028,20 +11001,20 @@ packages:
       rxjs: ^6.0.0 || ^7.0.0
     dependencies:
       '@angular/core': 17.1.3(rxjs@7.8.1)(zone.js@0.14.3)
-      '@apollo/client': 3.8.10(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@apollo/client': 3.9.4(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       graphql: 16.8.1
       rxjs: 7.8.1
       tslib: 2.6.2
     dev: true
 
-  /apollo-upload-client@17.0.0(@apollo/client@3.8.10)(graphql@16.8.1):
+  /apollo-upload-client@17.0.0(@apollo/client@3.9.4)(graphql@16.8.1):
     resolution: {integrity: sha512-pue33bWVbdlXAGFPkgz53TTmxVMrKeQr0mdRcftNY+PoHIdbGZD0hoaXHvO6OePJAkFz7OiCFUf98p1G/9+Ykw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >= 16.0.0}
     peerDependencies:
       '@apollo/client': ^3.0.0
       graphql: 14 - 16
     dependencies:
-      '@apollo/client': 3.8.10(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@apollo/client': 3.9.4(graphql-ws@5.14.3)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       extract-files: 11.0.0
       graphql: 16.8.1
     dev: true
@@ -11234,15 +11207,6 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axios@1.6.0:
-    resolution: {integrity: sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==}
-    dependencies:
-      follow-redirects: 1.15.5
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-
   /axios@1.6.7:
     resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
     dependencies:
@@ -11251,7 +11215,6 @@ packages:
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
-    dev: true
 
   /axobject-query@4.0.0:
     resolution: {integrity: sha512-+60uv1hiVFhHZeO+Lz0RYzsVHy5Wr1ayX0mwda9KPDVLNJgZ1T9Ny7VmFbLDzxsH0D87I86vgj3gFrjTJUYznw==}
@@ -18331,7 +18294,7 @@ packages:
       '@yarnpkg/lockfile': 1.1.0
       '@yarnpkg/parsers': 3.0.0-rc.46
       '@zkochan/js-yaml': 0.0.6
-      axios: 1.6.0
+      axios: 1.6.7
       chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-spinners: 2.6.1
@@ -19645,13 +19608,13 @@ packages:
       uuid: 9.0.1
     dev: false
 
-  /prisma@5.8.1:
-    resolution: {integrity: sha512-N6CpjzECnUHZ5beeYpDzkt2rYpEdAeqXX2dweu6BoQaeYkNZrC/WJHM+5MO/uidFHTak8QhkPKBWck1o/4MD4A==}
+  /prisma@5.9.1:
+    resolution: {integrity: sha512-Hy/8KJZz0ELtkw4FnG9MS9rNWlXcJhf98Z2QMqi0QiVMoS8PzsBkpla0/Y5hTlob8F3HeECYphBjqmBxrluUrQ==}
     engines: {node: '>=16.13'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 5.8.1
+      '@prisma/engines': 5.9.1
     dev: false
 
   /proc-log@3.0.0:
@@ -20212,6 +20175,20 @@ packages:
     hasBin: true
     dependencies:
       jsesc: 0.5.0
+    dev: true
+
+  /rehackt@0.0.4(react@18.2.0):
+    resolution: {integrity: sha512-xFroSGCbMEK/cTJVhq+c8l/AzIeMeojVyLqtZmr2jmIAFvePjapkCSGg9MnrcNk68HPaMxGf+Ndqozotu78ITw==}
+    peerDependencies:
+      '@types/react': '*'
+      react: '*'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
     dev: true
 
   /relateurl@0.2.7:
