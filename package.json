@@ -32,9 +32,9 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.3.2",
-    "@nestjs/platform-socket.io": "^10.2.8",
+    "@nestjs/platform-socket.io": "^10.3.2",
     "@nestjs/throttler": "^5.1.2",
-    "@nestjs/websockets": "^10.2.8",
+    "@nestjs/websockets": "^10.3.2",
     "@paljs/plugins": "6.0.7",
     "@prisma/client": "~5.9.1",
     "axios": "^1.6.7",
@@ -57,7 +57,7 @@
     "prisma": "~5.9.1",
     "reflect-metadata": "^0.1.14",
     "rxjs": "~7.8.1",
-    "socket.io": "^4.7.2",
+    "socket.io": "^4.7.4",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
