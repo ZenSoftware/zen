@@ -131,9 +131,9 @@
     "@storybook/jest": "^0.2.3",
     "@storybook/test-runner": "^0.16.0",
     "@storybook/testing-library": "^0.2.2",
-    "@swc-node/register": "1.8.0",
+    "@swc-node/register": "~1.8.0",
     "@swc/core": "~1.3.107",
-    "@swc/helpers": "^0.5.6",
+    "@swc/helpers": "~0.5.6",
     "@types/apollo-upload-client": "^17.0.5",
     "@types/express": "^4.17.21",
     "@types/graphql-upload": "15.0.2",
@@ -151,8 +151,7 @@
     "bootswatch": "~5.3.2",
     "cz-customizable": "^7.0.0",
     "date-fns": "^3.3.1",
-    "esbuild": "^0.19.12",
-    "eslint": "8.48.0",
+    "eslint": "~8.48.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-playwright": "^0.22.2",
     "eslint-plugin-storybook": "^0.6.15",
@@ -190,4 +189,3 @@
     }
   }
 }
-
