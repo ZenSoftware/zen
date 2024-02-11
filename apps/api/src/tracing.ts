@@ -9,6 +9,7 @@ import { Resource } from '@opentelemetry/resources';
 import {
   ConsoleMetricExporter,
   MeterProvider,
+  MetricReader,
   PeriodicExportingMetricReader,
 } from '@opentelemetry/sdk-metrics';
 import {
@@ -50,16 +51,18 @@ if (environment.openTelemetry) {
       }`
     );
   }
+  tracerProvider?.register();
 
   /**
    * Metrics
    */
   const useMeter =
     environment.openTelemetry.exporters?.meterConsole || environment.openTelemetry.exporters?.meter;
-  const meterProvider = useMeter ? new MeterProvider({ resource }) : undefined;
+
+  const readers: MetricReader[] = [];
 
   if (environment.openTelemetry.exporters?.meterConsole) {
-    meterProvider?.addMetricReader(
+    readers.push(
       new PeriodicExportingMetricReader({
         exporter: new ConsoleMetricExporter(),
         // exportIntervalMillis: 3000,
@@ -69,7 +72,7 @@ if (environment.openTelemetry) {
   }
 
   if (environment.openTelemetry.exporters?.meter) {
-    meterProvider?.addMetricReader(
+    readers.push(
       new PeriodicExportingMetricReader({
         exporter: new OTLPMetricExporter(environment.openTelemetry.exporters.meter),
         // exportIntervalMillis: 3000,
@@ -82,8 +85,9 @@ if (environment.openTelemetry) {
     );
   }
 
+  const meterProvider = useMeter ? new MeterProvider({ resource, readers }) : undefined;
+
   registerInstrumentations({
-    tracerProvider,
     meterProvider,
     instrumentations: [
       new HttpInstrumentation(),
