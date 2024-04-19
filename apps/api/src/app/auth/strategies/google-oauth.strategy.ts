@@ -26,6 +26,7 @@ export class GoogleOAuthStrategy extends PassportStrategy(Strategy, 'google') {
         where: {
           email: { equals: googleEmail, mode: 'insensitive' },
         },
+        select: { id: true },
       });
 
       if (existingUserWithGoogleEmail) {
