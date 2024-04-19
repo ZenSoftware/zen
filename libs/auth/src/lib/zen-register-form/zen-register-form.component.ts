@@ -100,9 +100,10 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
       this.usernameInput.select();
     });
 
-    this.password.valueChanges.subscribe(() => {
+    const sub = this.password.valueChanges.subscribe(() => {
       this.passwordConfirm.updateValueAndValidity();
     });
+    this.#subs.push(sub);
   }
 
   get username() {
