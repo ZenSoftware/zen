@@ -257,7 +257,9 @@ export class AuthResolver {
       },
     });
 
-    // Intended to be tailored to the site
+    /**
+     * @todo This is intended to be tailored to the site
+     */
     if (this.config.production) {
       this.mail.sendGeneral({
         to: user.email,
