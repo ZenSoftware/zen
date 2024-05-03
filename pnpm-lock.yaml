@@ -175,8 +175,8 @@ importers:
         specifier: ^17.3.7
         version: 17.3.7(@angular/common@17.3.7(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5))(@angular/platform-browser@17.3.7(@angular/animations@17.3.7(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5)))(@angular/common@17.3.7(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5)))(rxjs@7.8.1)
       '@apollo/client':
-        specifier: ~3.9.11
-        version: 3.9.11(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))
+        specifier: ~3.10.1
+        version: 3.10.1(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))
       '@casl/angular':
         specifier: ~8.2.3
         version: 8.2.3(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5))(@casl/ability@6.7.1)(rxjs@7.8.1)(tslib@2.6.2)
@@ -319,11 +319,11 @@ importers:
         specifier: ^7.8.0
         version: 7.8.0(eslint@8.57.0)(typescript@5.4.5)
       apollo-angular:
-        specifier: ~6.0.0
-        version: 6.0.0(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5))(@apollo/client@3.9.11(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1)))(graphql@16.8.1)(rxjs@7.8.1)
+        specifier: ~7.0.1
+        version: 7.0.1(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5))(@apollo/client@3.10.1(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1)))(graphql@16.8.1)(rxjs@7.8.1)
       apollo-upload-client:
         specifier: ^17.0.0
-        version: 17.0.0(@apollo/client@3.9.11(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1)))(graphql@16.8.1)
+        version: 17.0.0(@apollo/client@3.10.1(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1)))(graphql@16.8.1)
       bootstrap:
         specifier: ~5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
@@ -637,8 +637,8 @@ packages:
     peerDependencies:
       graphql: 14.x || 15.x || 16.x
 
-  '@apollo/client@3.9.11':
-    resolution: {integrity: sha512-H7e9m7cRcFO93tokwzqrsbnfKorkpV24xU30hFH5u2g6B+c1DMo/ouyF/YrBPdrTzqxQCjTUmds/FLmJ7626GA==}
+  '@apollo/client@3.10.1':
+    resolution: {integrity: sha512-QNacQBZzJla5UQ/LLBXJWM7/1v1C5cfpMQPAFjW4hg4T54wHWbg4Dr+Dp6N+hy/ygu8tepdM+/y/5VFLZhovlQ==}
     peerDependencies:
       graphql: ^15.0.0 || ^16.0.0
       graphql-ws: ^5.5.5
@@ -4628,8 +4628,8 @@ packages:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
 
-  apollo-angular@6.0.0:
-    resolution: {integrity: sha512-Ys4MLCOSBpNZ411R+xw2XcUSUZo3Az/r/PujZZM9ZEvBhCHlqxAmXacRBda+MGc34NYqkXO0yxLwF+UXPHogkg==}
+  apollo-angular@7.0.1:
+    resolution: {integrity: sha512-DTZ2xJEtjDaLE+mkVonlrdyW8MFNw3eVlhpvmjQ43VY5BxIPErBGvkI9jGnuM5/tgqx/dSQXmb07fxqPLNWOJQ==}
     engines: {node: '>=16'}
     peerDependencies:
       '@angular/core': ^17.0.0
@@ -9466,8 +9466,8 @@ packages:
     resolution: {integrity: sha512-dQUtn90WanSNl+7mQKcXAgZxvUe7Z0SqXlgzv0za4LwiUhyzBC58yQO3liFoUgu8GiJVInAhJjkj1N0EtQ5nkQ==}
     hasBin: true
 
-  rehackt@0.0.6:
-    resolution: {integrity: sha512-l3WEzkt4ntlEc/IB3/mF6SRgNHA6zfQR7BlGOgBTOmx7IJJXojDASav+NsgXHFjHn+6RmwqsGPFgZpabWpeOdw==}
+  rehackt@0.1.0:
+    resolution: {integrity: sha512-7kRDOuLHB87D/JESKxQoRwv4DzbIdwkAGQ7p6QKGdVlY1IZheUnVhlk/4UZlNUVxdAXpyxikE3URsG067ybVzw==}
     peerDependencies:
       '@types/react': '*'
       react: '*'
@@ -11445,7 +11445,7 @@ snapshots:
     dependencies:
       graphql: 16.8.1
 
-  '@apollo/client@3.9.11(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))':
+  '@apollo/client@3.10.1(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
       '@wry/caches': 1.0.1
@@ -11456,7 +11456,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       optimism: 0.18.0
       prop-types: 15.8.1
-      rehackt: 0.0.6(@types/react@18.3.1)(react@18.3.1)
+      rehackt: 0.1.0(@types/react@18.3.1)(react@18.3.1)
       response-iterator: 0.2.6
       symbol-observable: 4.0.0
       ts-invariant: 0.10.3
@@ -17345,7 +17345,7 @@ snapshots:
 
   '@types/apollo-upload-client@17.0.5(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))':
     dependencies:
-      '@apollo/client': 3.9.11(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))
+      '@apollo/client': 3.10.1(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))
       '@types/extract-files': 13.0.1
       graphql: 16.8.1
     transitivePeerDependencies:
@@ -18150,17 +18150,17 @@ snapshots:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  apollo-angular@6.0.0(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5))(@apollo/client@3.9.11(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1)))(graphql@16.8.1)(rxjs@7.8.1):
+  apollo-angular@7.0.1(@angular/core@17.3.7(rxjs@7.8.1)(zone.js@0.14.5))(@apollo/client@3.10.1(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1)))(graphql@16.8.1)(rxjs@7.8.1):
     dependencies:
       '@angular/core': 17.3.7(rxjs@7.8.1)(zone.js@0.14.5)
-      '@apollo/client': 3.9.11(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))
+      '@apollo/client': 3.10.1(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))
       graphql: 16.8.1
       rxjs: 7.8.1
       tslib: 2.6.2
 
-  apollo-upload-client@17.0.0(@apollo/client@3.9.11(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1)))(graphql@16.8.1):
+  apollo-upload-client@17.0.0(@apollo/client@3.10.1(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1)))(graphql@16.8.1):
     dependencies:
-      '@apollo/client': 3.9.11(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))
+      '@apollo/client': 3.10.1(@types/react@18.3.1)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(subscriptions-transport-ws@0.11.0(graphql@16.8.1))
       extract-files: 11.0.0
       graphql: 16.8.1
 
@@ -24288,7 +24288,7 @@ snapshots:
     dependencies:
       jsesc: 0.5.0
 
-  rehackt@0.0.6(@types/react@18.3.1)(react@18.3.1):
+  rehackt@0.1.0(@types/react@18.3.1)(react@18.3.1):
     optionalDependencies:
       '@types/react': 18.3.1
       react: 18.3.1
