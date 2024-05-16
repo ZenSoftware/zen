@@ -6,7 +6,7 @@
   "main": "apps/portal/src/electron.js",
   "scripts": {
     "start": "nx serve portal",
-    "start:electron": "nx build --project portal --configuration=development --outputHashing=all --base-href=./ && electron .",
+    "start:electron": "pnpm nx build portal --outputHashing=all --base-href=./ && electron .",
     "start:api": "nx serve api",
     "e2e:portal": "nx e2e portal-e2e --ui",
     "e2e:api": "nx e2e api-e2e",
