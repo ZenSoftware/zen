@@ -454,6 +454,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
     let result: { [key: string]: any } = dataItem;
 
     for (const key of field.split('.')) {
+      if (result === null || result === undefined) break;
       result = result[key];
     }
 

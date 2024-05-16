@@ -72,8 +72,13 @@ export class KendoToPrismaService {
         next[field] = this.evalOperator(descriptor);
         if (typeof descriptor.value === 'string') next[field]['mode'] = 'insensitive';
       } else {
-        next[field] = {};
-        next = next[field];
+        if (typeof descriptor.value === 'string') {
+          next[field] = { is: {} };
+          next = next[field].is;
+        } else {
+          next[field] = {};
+          next = next[field];
+        }
       }
     }
 
@@ -121,7 +126,7 @@ export class KendoToPrismaService {
               const columnSettings = settings.columnsConfig.find(x => x.field === sort.field);
 
               if (columnSettings?.nullable) {
-                next[field] = { sort: sort.dir, nulls: 'last' };
+                next[field] = { sort: sort.dir };
               } else {
                 next[field] = sort.dir;
               }
