@@ -30,6 +30,39 @@ describe('KendoToPrismaService where variables', () => {
     });
   });
 
+  /**
+   * https://www.prisma.io/docs/orm/prisma-client/queries/relation-queries#filter-on--to-one-relations
+   */
+  it('should construct -to-one relation query', () => {
+    const filter: CompositeFilterDescriptor = {
+      filters: [
+        {
+          field: 'sample.newJeans.haerin',
+          operator: 'contains',
+          value: 'zen',
+        },
+      ],
+      logic: 'and',
+    };
+
+    const result = service.evalWhere(filter);
+
+    expect(result).toEqual({
+      sample: {
+        is: {
+          newJeans: {
+            is: {
+              haerin: {
+                contains: 'zen',
+                mode: 'insensitive',
+              },
+            },
+          },
+        },
+      },
+    });
+  });
+
   it('should construct OR array', () => {
     const filter: CompositeFilterDescriptor = {
       filters: [
