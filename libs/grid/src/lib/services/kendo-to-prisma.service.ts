@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  CompositeFilterDescriptor,
-  FilterDescriptor,
-  SortDescriptor,
-  State,
-} from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
+
+import { KendoGridSettings } from './kendo-grid-settings.interface';
 
 @Injectable()
 export class KendoToPrismaService {
@@ -106,7 +103,8 @@ export class KendoToPrismaService {
     }
   }
 
-  evalOrderBy(sorts: Array<SortDescriptor> | undefined) {
+  evalOrderBy(settings: KendoGridSettings<any>) {
+    const sorts = settings.state?.sort;
     const orderBy = [];
 
     if (sorts) {
@@ -120,7 +118,13 @@ export class KendoToPrismaService {
             const field = fieldSplit[i];
 
             if (i === fieldSplit.length - 1) {
-              next[field] = { sort: sort.dir };
+              const columnSettings = settings.columnsConfig.find(x => x.field === sort.field);
+
+              if (columnSettings?.nullable) {
+                next[field] = { sort: sort.dir, nulls: 'last' };
+              } else {
+                next[field] = sort.dir;
+              }
             } else {
               next[field] = {};
               next = next[field];
@@ -139,12 +143,12 @@ export class KendoToPrismaService {
   /**
    * @description Data query adapter that converts a Kendo grid `State` object into a valid Prisma query
    */
-  getVariables(state: State) {
+  getVariables(settings: KendoGridSettings<any>) {
     return {
-      where: this.evalWhere(state?.filter),
-      orderBy: this.evalOrderBy(state?.sort),
-      skip: state?.skip,
-      take: state?.take,
+      where: this.evalWhere(settings.state?.filter),
+      orderBy: this.evalOrderBy(settings),
+      skip: settings.state?.skip,
+      take: settings.state?.take,
     };
   }
 }

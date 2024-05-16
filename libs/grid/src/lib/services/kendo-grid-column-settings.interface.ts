@@ -4,6 +4,10 @@ export interface KendoGridColumnSettings<T extends object> {
   field: NestedKeyOf<T>;
   title?: string;
   filter?: 'string' | 'numeric' | 'date' | 'boolean';
+  /**
+   * Set to true if the field is nullable.  Sorting will not work if not set correctly.
+   **/
+  nullable?: boolean;
   format?: string;
   width?: number;
   _width?: number;

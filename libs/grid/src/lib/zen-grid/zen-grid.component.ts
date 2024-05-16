@@ -388,7 +388,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
         });
       }
     } else {
-      const variables = this.kendoToPrisma.getVariables(this.gridSettings.state);
+      const variables = this.kendoToPrisma.getVariables(this.gridSettings);
 
       if (this.#countSub) this.#countSub.unsubscribe();
 
@@ -484,7 +484,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
         group: this.groups,
       };
     } else {
-      let variables: any = this.kendoToPrisma.getVariables(this.gridSettings.state);
+      let variables: any = this.kendoToPrisma.getVariables(this.gridSettings);
       variables = omit(variables, ['take', 'skip']);
 
       const allData$ = this.settings.findManyGQL.fetch(variables).pipe(
