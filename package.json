@@ -159,7 +159,6 @@
     "colyseus.js": "^0.15.17",
     "cz-customizable": "^7.0.0",
     "date-fns": "^3.3.1",
-    "esbuild": "^0.19.12",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-playwright": "^0.15.3",
