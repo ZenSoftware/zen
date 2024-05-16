@@ -24,6 +24,7 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
     {
       field: 'username',
       title: 'Username',
+      nullable: true,
     },
     {
       field: 'email',
