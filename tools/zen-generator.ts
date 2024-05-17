@@ -204,8 +204,8 @@ export class ZenGenerator {
 
         const exportScript = `export * from './${prismaName}.gql';`;
         if (!fieldsIndexSource.includes(exportScript)) {
-          await appendFile(fieldsIndexPath, exportScript + '/n');
-          fieldsIndexSource += exportScript + '/n';
+          await appendFile(fieldsIndexPath, exportScript + `\n`);
+          fieldsIndexSource += exportScript + '\n';
         }
 
         await writeFile(
