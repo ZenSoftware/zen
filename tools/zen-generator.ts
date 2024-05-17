@@ -184,15 +184,6 @@ export class ZenGenerator {
       if (!existsSync(fieldsPath)) await mkdir(fieldsPath);
       if (!existsSync(queriesPath)) await mkdir(queriesPath);
 
-      const fieldsIndexPath = path.join(fieldsPath, `index.ts`);
-
-      if (!existsSync(fieldsIndexPath)) {
-        await writeFile(fieldsIndexPath, '');
-        console.log(`- Wrote: ${fieldsIndexPath}`);
-      }
-
-      let fieldsIndexSource = (await readFile(fieldsIndexPath)).toString();
-
       for (const prismaName of prismaNames) {
         const fieldsOutPath = path.join(fieldsPath, `${prismaName}.gql.ts`);
         const queriesOutPath = path.join(queriesPath, `${prismaName}.gql.ts`);
@@ -202,18 +193,23 @@ export class ZenGenerator {
           console.log(`- Wrote: ${fieldsOutPath}`);
         }
 
-        const exportScript = `export * from './${prismaName}.gql';`;
-        if (!fieldsIndexSource.includes(exportScript)) {
-          await appendFile(fieldsIndexPath, exportScript + '/n');
-          fieldsIndexSource += exportScript + '/n';
-        }
-
         await writeFile(
           queriesOutPath,
           ClientQueriesTemplate(prismaName, this.config.frontend.fieldsFolderName)
         );
         console.log(`- Wrote: ${queriesOutPath}`);
       }
+
+      // Build frontend fields index.ts file
+      let fieldsIndexSource = '';
+      let fieldsFileNames = await this.getFileNames(fieldsPath);
+      fieldsFileNames = fieldsFileNames.sort();
+      for (let fileName of fieldsFileNames) {
+        fieldsIndexSource += `export * from './${fileName}';\n`;
+      }
+      const fieldsIndexPath = path.join(fieldsPath, `index.ts`);
+      await writeFile(fieldsIndexPath, fieldsIndexSource);
+      console.log(`- Wrote: ${fieldsIndexPath}`);
     }
   }
 
@@ -223,12 +219,14 @@ export class ZenGenerator {
   async getFileNames(directory: string) {
     return (await readdir(directory, { withFileTypes: true }))
       .filter(dirent => dirent.isFile())
-      .filter(
-        f =>
-          path.basename(f.name) !== 'index.ts' &&
-          !path.basename(f.name).endsWith('.spec.ts') &&
-          !path.basename(f.name).endsWith('.test.ts')
-      )
+      .filter(f => {
+        const fileName = path.basename(f.name);
+        return (
+          fileName !== 'index.ts' &&
+          !fileName.endsWith('.spec.ts') &&
+          !fileName.endsWith('.test.ts')
+        );
+      })
       .map(f => path.basename(f.name, '.ts')); // Remove `.ts` extension
   }
 
