@@ -72,9 +72,9 @@ export class KendoToPrismaService {
         next[field] = this.evalOperator(descriptor);
         if (typeof descriptor.value === 'string') next[field]['mode'] = 'insensitive';
       } else {
-        if (typeof descriptor.value === 'string') {
+        if (fieldSplit.length > 1) {
           next[field] = { is: {} };
-          next = next[field].is;
+          next = next[field]['is'];
         } else {
           next[field] = {};
           next = next[field];
