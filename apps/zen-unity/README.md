@@ -32,7 +32,9 @@ git pull zen unity
 ```
 
 ### Setup the API server
+
 The following will get your system setup to be able to run the GraphQL API server.
+
 ```bash
 # Make a copy of the .env file
 cp .env.example .env
@@ -46,6 +48,7 @@ docker-compose up -d
 # Run the initial Prisma migration
 pnpm prisma:migrate
 ```
+
 ## Setting up your system to compile
 
 Within Unity Hub, add the directory `apps/zen-unity` to open the project within the Unity Editor. All of the dependencies described by `apps/zen-unity/Packages/manifest.json` and `apps/zen-unity/Assets/packages.config` will be installed.
