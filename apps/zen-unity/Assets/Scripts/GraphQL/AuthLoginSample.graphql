@@ -1,0 +1,6 @@
+query AuthLoginSample($data: AuthLoginInput!) {
+  authLogin(data: $data) {
+    token
+    userId
+  }
+}

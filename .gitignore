@@ -3,6 +3,8 @@
 /.env
 /apps/**/prisma/generated/
 /uploads/
+/apps/portal/src/assets/unity/
+/apps/zen-unity_clone*
 
 # compiled output
 dist

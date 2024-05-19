@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GraphQL.Client.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="M:GraphQL.Client.Abstractions.IGraphQLClient.CreateSubscriptionStream``1(GraphQL.GraphQLRequest)">
+            <summary>
+            Creates a subscription to a GraphQL server. The connection is not established until the first actual subscription is made.<br/>
+            All subscriptions made to this stream share the same hot observable.<br/>
+            The stream must be recreated completely after an error has occurred within its logic (i.e. a <see cref="T:System.Net.WebSockets.WebSocketException"/>)
+            </summary>
+            <param name="request">the GraphQL request for this subscription</param>
+            <returns>an observable stream for the specified subscription</returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.IGraphQLClient.CreateSubscriptionStream``1(GraphQL.GraphQLRequest,System.Action{System.Exception})">
+            <summary>
+            Creates a subscription to a GraphQL server. The connection is not established until the first actual subscription is made.<br/>
+            All subscriptions made to this stream share the same hot observable.<br/>
+            All <see cref="T:System.Exception"/>s are passed to the <paramref name="exceptionHandler"/> to be handled externally.<br/>
+            If the <paramref name="exceptionHandler"/> completes normally, the subscription is recreated with a new connection attempt.<br/>
+            Any exception thrown by <paramref name="exceptionHandler"/> will cause the sequence to fail.
+            </summary>
+            <param name="request">the GraphQL request for this subscription</param>
+            <param name="exceptionHandler">an external handler for all <see cref="T:System.Exception"/>s occurring within the sequence</param>
+            <returns>an observable stream for the specified subscription</returns>
+        </member>
+        <member name="T:GraphQL.Client.Abstractions.Utilities.StringExtensions">
+            <summary>
+            Copied from https://github.com/jquense/StringUtils
+            </summary>
+        </member>
+        <member name="T:GraphQL.Client.Abstractions.Utilities.StringUtils">
+            <summary>
+            Copied from https://github.com/jquense/StringUtils
+            </summary>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.StripIndent(System.String)">
+            <summary>
+            Removes the leading indent from a multi-line string
+            </summary>
+            <param name="str">String</param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToWords(System.String)">
+            <summary>
+            Split a cased string into a series of "words" excluding the seperator.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToUpperFirst(System.String)">
+            <summary>
+            Uppercase the first character in a string, leaving the rest of the string as is
+            </summary>
+            <param name="str"></param>
+            <returns>a string with the first character uppercased</returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToLowerFirst(System.String)">
+            <summary>
+            Lowercase the first character in a string, leaving the rest of the string as is
+            </summary>
+            <param name="str"></param>
+            <returns>a string with the first character lowercased</returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.Capitalize(System.String)">
+            <summary>
+            Capitalizes a string, lowercasing the entire string and uppercasing the first character
+            </summary>
+            <param name="str"></param>
+            <returns>a capitalized string</returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToCamelCase(System.String)">
+            <summary>
+            Converts a string to camelCase.
+            </summary>
+            <example>
+                <code>StringUtils.ToCamelCase("FOOBAR")  // "foobar"</code>
+                <code>StringUtils.ToCamelCase("FOO_BAR") // "fooBar"</code>
+                <code>StringUtils.ToCamelCase("FooBar")  // "fooBar"</code>
+                <code>StringUtils.ToCamelCase("foo bar") // "fooBar"</code>
+            </example>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToConstantCase(System.String)">
+            <summary>
+            Convert a string to CONSTANT_CASE
+            </summary>
+            <example>
+                <code>StringUtils.ToConstantCase("fOo BaR") // "FOO_BAR"</code>
+                <code>StringUtils.ToConstantCase("FooBar")  // "FOO_BAR"</code>
+                <code>StringUtils.ToConstantCase("Foo Bar") // "FOO_BAR"</code>
+            </example>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToUpperCase(System.String)">
+            <summary>
+            Convert a string to UPPERCASE
+            </summary>
+            <example>
+                <code>StringUtils.ToUpperCase("foobar")  // "FOOBAR"</code>
+                <code>StringUtils.ToUpperCase("FOO_BAR") // "FOO BAR"</code>
+                <code>StringUtils.ToUpperCase("FooBar")  // "FOO BAR"</code>
+                <code>StringUtils.ToUpperCase("Foo Bar") // "FOO BAR"</code>
+            </example>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToLowerCase(System.String)">
+            <summary>
+            Convert a string to lowercase
+            </summary>
+            <example>
+                <code>StringUtils.ToLowerCase("FOOBAR")  // "foobar"</code>
+                <code>StringUtils.ToLowerCase("FOO_BAR") // "foo bar"</code>
+                <code>StringUtils.ToLowerCase("FooBar")  // "foo bar"</code>
+                <code>StringUtils.ToLowerCase("Foo Bar") // "foo bar"</code>
+            </example>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToPascalCase(System.String)">
+            <summary>
+            convert a string to PascalCase
+            </summary>
+            <example>
+                <code>StringUtils.ToPascalCase("FOOBAR")  // "FooBar"</code>
+                <code>StringUtils.ToPascalCase("FOO_BAR") // "FooBar"</code>
+                <code>StringUtils.ToPascalCase("fooBar")  // "FooBar"</code>
+                <code>StringUtils.ToPascalCase("Foo Bar") // "FooBar"</code>
+            </example>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToKebabCase(System.String)">
+            <summary>
+            convert a string to kebab-case
+            </summary>
+            <example>
+                <code>StringUtils.ToKebabCase("FOOBAR")  // "foo-bar"</code>
+                <code>StringUtils.ToKebabCase("FOO_BAR") // "foo-bar"</code>
+                <code>StringUtils.ToKebabCase("fooBar")  // "foo-bar"</code>
+                <code>StringUtils.ToKebabCase("Foo Bar") // "foo-bar"</code>
+            </example>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ToSnakeCase(System.String)">
+            <summary>
+            convert a string to snake_case
+            </summary>
+            <example>
+                <code>StringUtils.ToSnakeCase("FOOBAR")  // "foo_bar"</code>
+                <code>StringUtils.ToSnakeCase("FOO_BAR") // "foo_bar"</code>
+                <code>StringUtils.ToSnakeCase("fooBar")  // "foo_bar"</code>
+                <code>StringUtils.ToSnakeCase("Foo Bar") // "foo_bar"</code>
+            </example>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.Client.Abstractions.Utilities.StringUtils.ChangeCase(System.String,System.String,System.Func{System.String,System.Int32,System.String})">
+            <summary>
+            Convert a string to a new case
+            </summary>
+            <example>
+            Convert a string to inverse camelCase: CAMELcASE
+                <code>
+                    StringUtils.ChangeCase("my string", "", (word, index) => {
+                        word = word.ToUpperInvariant();
+                        if (index > 0)
+                            word = StringUtils.toLowerFirst(word);
+                        return word
+                    });
+                    // "MYsTRING"
+                </code>
+            </example>
+            <param name="str">an input string </param>
+            <param name="sep">a seperator string used between "words" in the string</param>
+            <param name="composer">a function that converts individual words to a new case</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

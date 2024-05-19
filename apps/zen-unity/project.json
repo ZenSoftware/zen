@@ -1,0 +1,58 @@
+{
+  "name": "zen-unity",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/zen-unity",
+  "targets": {
+    "build": {
+      "executor": "@zen/nx-unity-plugin:build",
+      "options": {
+        "configuration": "Debug",
+        "executeMethod": "Builder.BuildWebGLDevelopment",
+        "unityProjectPath": "apps/zen-unity",
+        "outputPath": "apps/portal/src/assets/unity"
+      },
+      "configurations": {
+        "production": {
+          "configuration": "Release",
+          "executeMethod": "Builder.BuildWebGLProduction",
+          "outputPath": "dist/apps/portal/assets/unity"
+        }
+      }
+    },
+    "test": {
+      "executor": "@zen/nx-unity-plugin:test"
+    },
+    "lint": {
+      "executor": "@zen/nx-unity-plugin:format",
+      "options": {
+        "verifyNoChanges": true,
+        "projects": [
+          "apps/zen-unity/Assembly-CSharp-Editor.csproj",
+          "apps/zen-unity/Assembly-CSharp.csproj"
+        ]
+      }
+    },
+    "format": {
+      "executor": "@zen/nx-unity-plugin:format",
+      "options": {
+        "projects": [
+          "apps/zen-unity/Assembly-CSharp-Editor.csproj",
+          "apps/zen-unity/Assembly-CSharp.csproj"
+        ]
+      }
+    },
+    "generate-graphql": {
+      "executor": "@zen/nx-unity-plugin:generate-graphql",
+      "options": {
+        "schema": "http://localhost:7080/graphql",
+        "outputPath": "apps/zen-unity/Assets/Scripts/GraphQL/Generated",
+        "documents": "apps/zen-unity/Assets/Scripts/**/*.graphql",
+        "namespaceName": "Zen.GraphQL",
+        "overwrite": true,
+        "scalars": { "DateTime": "DateTime", "Json": "object", "Upload": "object" }
+      }
+    }
+  },
+  "tags": []
+}

@@ -31,6 +31,7 @@ module.exports = {
     { name: 'nx' },
     { name: 'portal' },
     { name: 'prisma' },
+    { name: 'unity' },
   ],
   allowCustomScopes: true,
   skipQuestions: ['body', 'footer'],
