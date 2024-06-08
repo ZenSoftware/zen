@@ -4,7 +4,7 @@ export function ClientFieldsTemplate(name: string) {
 export const ${name}Fields = gql\`
   fragment ${name}Fields on ${name} {
     id
-    # TODO: Add fields
+    # @todo Add fields
   }
 \`;\n`;
 }
