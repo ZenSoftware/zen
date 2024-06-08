@@ -1,6 +1,6 @@
 import { exec } from 'node:child_process';
 import { existsSync } from 'node:fs';
-import { appendFile, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import * as path from 'node:path';
 import { promisify } from 'node:util';
 
