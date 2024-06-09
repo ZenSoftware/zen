@@ -73,6 +73,18 @@ export default gql`
     }
   }
 
+  mutation CreateManyUser($data: [UserCreateManyInput!]!) {
+    createManyUser(data: $data) {
+      count
+    }
+  }
+
+  mutation CreateManyUserAndReturn($data: [UserCreateManyInput!]!) {
+    createManyUserAndReturn(data: $data) {
+      ...UserFields
+    }
+  }
+
   mutation UpdateOneUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
     updateOneUser(data: $data, where: $where) {
       ...UserFields

@@ -1,7 +1,7 @@
 export function ClientQueriesTemplate(name: string, fieldsFolderName: string) {
   return `import gql from 'graphql-tag';
 
-import { ${name}Fields } from '../${fieldsFolderName}';
+import { ${name}Fields } from '../fields';
 
 export default gql\`
   query FindUnique${name}($where: ${name}WhereUniqueInput!) {
@@ -70,6 +70,18 @@ export default gql\`
 
   mutation CreateOne${name}($data: ${name}CreateInput!) {
     createOne${name}(data: $data) {
+      ...${name}Fields
+    }
+  }
+
+  mutation CreateMany${name}($data: [${name}CreateManyInput!]!) {
+    createMany${name}(data: $data) {
+      count
+    }
+  }
+
+  mutation CreateMany${name}AndReturn($data: [${name}CreateManyInput!]!) {
+    createMany${name}AndReturn(data: $data) {
       ...${name}Fields
     }
   }
