@@ -44,22 +44,22 @@ export class ${name}Resolver {
 
   @Query()
   async findUnique${name}(@Args() args: FindUnique${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.findUnique(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.findUnique(this.prismaSelect.getArgs(args, info));
   }
 
   @Query()
   async findFirst${name}(@Args() args: FindFirst${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.findFirst(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.findFirst(this.prismaSelect.getArgs(args, info));
   }
 
   @Query()
   async findMany${name}(@Args() args: FindMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.findMany(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.findMany(this.prismaSelect.getArgs(args, info));
   }
 
   @Query()
   async findMany${name}Count(@Args() args: FindMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(info, args) as any);
+    return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Query()
@@ -69,7 +69,7 @@ export class ${name}Resolver {
 
   @Mutation()
   async createOne${name}(@Args() args: CreateOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.create(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.create(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
@@ -79,22 +79,22 @@ export class ${name}Resolver {
 
   @Mutation()
   async createManyAndReturn(@Args() args: CreateMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.createManyAndReturn(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.createManyAndReturn(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
   async updateOne${name}(@Args() args: UpdateOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.update(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.update(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
   async upsertOne${name}(@Args() args: UpsertOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.upsert(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.upsert(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
   async deleteOne${name}(@Args() args: DeleteOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
@@ -104,7 +104,7 @@ export class ${name}Resolver {
 
   @Mutation()
   async updateMany${name}(@Args() args: UpdateMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.updateMany(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.updateMany(this.prismaSelect.getArgs(args, info));
   }
 }
 `;
