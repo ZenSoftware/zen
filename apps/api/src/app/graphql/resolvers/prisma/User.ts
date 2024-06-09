@@ -82,7 +82,10 @@ export class UserResolver {
   }
 
   @Mutation()
-  async createManyAndReturn(@Args() args: CreateManyUserArgs, @Info() info: GraphQLResolveInfo) {
+  async createManyUserAndReturn(
+    @Args() args: CreateManyUserArgs,
+    @Info() info: GraphQLResolveInfo
+  ) {
     return this.prisma.user.createManyAndReturn(this.prismaSelect.getArgs(args, info));
   }
 
