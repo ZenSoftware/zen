@@ -80,8 +80,8 @@ export default gql\`
     }
   }
 
-  mutation CreateManyAndReturn($data: [${name}CreateManyInput!]!) {
-    createManyAndReturn(data: $data) {
+  mutation CreateMany${name}AndReturn($data: [${name}CreateManyInput!]!) {
+    createMany${name}AndReturn(data: $data) {
       ...${name}Fields
     }
   }
