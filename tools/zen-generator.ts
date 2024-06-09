@@ -17,6 +17,7 @@ import {
   GraphQLPrismaIndexTemplate,
   GraphQLResolversABACTemplate,
   GraphQLResolversRBACTemplate,
+  GraphQLSchemaExtensionsTemplate,
   PaljsTypeDefsTemplate,
 } from './templates';
 
@@ -99,6 +100,10 @@ export class ZenGenerator {
     const palTypeDefsFilePath = path.join(palOutPath, 'typeDefs.ts');
     await writeFile(palTypeDefsFilePath, PaljsTypeDefsTemplate(prismaNames));
     console.log(`- Wrote: ${palTypeDefsFilePath}`);
+
+    const schemaExtensionsPath = path.join(palOutPath, 'SchemaExtensions.ts');
+    await writeFile(schemaExtensionsPath, GraphQLSchemaExtensionsTemplate(prismaNames));
+    console.log(`- Wrote: ${schemaExtensionsPath}`);
 
     if (this.config.pal7Fix) {
       /** Fix for missing `createManyAndReturn` type */
