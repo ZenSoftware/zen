@@ -78,7 +78,7 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  async createManyAndReturn(@Args() args: CreateMany${name}Args, @Info() info: GraphQLResolveInfo) {
+  async createMany${name}AndReturn(@Args() args: CreateMany${name}Args, @Info() info: GraphQLResolveInfo) {
     return this.prisma.${lowercase(name)}.createManyAndReturn(this.prismaSelect.getArgs(args, info));
   }
 
