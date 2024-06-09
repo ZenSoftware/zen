@@ -2,6 +2,7 @@ export function PaljsTypeDefsTemplate(names: string[]) {
   let accum = `import { mergeTypeDefs } from '@graphql-tools/merge';
 
 import InputTypes from './InputTypes';
+import SchemaExtensions from './SchemaExtensions';
 `;
 
   for (const name of names) {
@@ -9,7 +10,8 @@ import InputTypes from './InputTypes';
   }
 
   accum += `\nexport default mergeTypeDefs([
-  InputTypes,`;
+  InputTypes,
+  SchemaExtensions,\n`;
 
   for (const name of names) {
     accum += `  ${name},\n`;

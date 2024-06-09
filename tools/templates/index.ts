@@ -6,4 +6,5 @@ export * from './graphql-api-index';
 export * from './graphql-prisma-index';
 export * from './graphql-resolvers-abac';
 export * from './graphql-resolvers-rbac';
+export * from './graphql-schema-extensions';
 export * from './paljs-type-defs';
