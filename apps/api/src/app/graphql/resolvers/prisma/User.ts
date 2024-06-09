@@ -92,13 +92,13 @@ export class UserResolver {
   }
 
   @Mutation()
-  async deleteOneUser(@Args() args: DeleteOneUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.delete(this.prismaSelect.getArgs(info, args));
+  async upsertOneUser(@Args() args: UpsertOneUserArgs, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.user.upsert(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
-  async upsertOneUser(@Args() args: UpsertOneUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.upsert(this.prismaSelect.getArgs(info, args));
+  async deleteOneUser(@Args() args: DeleteOneUserArgs, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.user.delete(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
