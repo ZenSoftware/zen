@@ -88,13 +88,13 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  async deleteOne${name}(@Args() args: DeleteOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
+  async upsertOne${name}(@Args() args: UpsertOne${name}Args, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.${lowercase(name)}.upsert(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
-  async upsertOne${name}(@Args() args: UpsertOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.upsert(this.prismaSelect.getArgs(info, args));
+  async deleteOne${name}(@Args() args: DeleteOne${name}Args, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
