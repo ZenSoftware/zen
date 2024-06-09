@@ -178,8 +178,8 @@ export type Mutation = {
   authPasswordChange?: Maybe<Scalars['Boolean']['output']>;
   authPasswordResetConfirmation: AuthSession;
   authRegister: AuthSession;
-  createManyAndReturn: Array<User>;
   createManyUser?: Maybe<BatchPayload>;
+  createManyUserAndReturn: Array<User>;
   createOneUser: User;
   deleteManyUser?: Maybe<BatchPayload>;
   deleteOneUser?: Maybe<User>;
@@ -206,12 +206,12 @@ export type MutationAuthRegisterArgs = {
 };
 
 
-export type MutationCreateManyAndReturnArgs = {
+export type MutationCreateManyUserArgs = {
   data: Array<UserCreateManyInput>;
 };
 
 
-export type MutationCreateManyUserArgs = {
+export type MutationCreateManyUserAndReturnArgs = {
   data: Array<UserCreateManyInput>;
 };
 
@@ -952,12 +952,12 @@ export type CreateManyUserVariables = Exact<{
 
 export type CreateManyUser = { __typename?: 'Mutation', createManyUser?: { __typename?: 'BatchPayload', count: number } | null };
 
-export type CreateManyAndReturnVariables = Exact<{
+export type CreateManyUserAndReturnVariables = Exact<{
   data: Array<UserCreateManyInput> | UserCreateManyInput;
 }>;
 
 
-export type CreateManyAndReturn = { __typename?: 'Mutation', createManyAndReturn: Array<{ __typename?: 'User', id: string, username?: string | null, email: string }> };
+export type CreateManyUserAndReturn = { __typename?: 'Mutation', createManyUserAndReturn: Array<{ __typename?: 'User', id: string, username?: string | null, email: string }> };
 
 export type UpdateOneUserVariables = Exact<{
   data: UserUpdateInput;
@@ -1310,9 +1310,9 @@ export const CreateManyUserDocument = /*#__PURE__*/ gql`
       super(apollo);
     }
   }
-export const CreateManyAndReturnDocument = /*#__PURE__*/ gql`
-    mutation CreateManyAndReturn($data: [UserCreateManyInput!]!) {
-  createManyAndReturn(data: $data) {
+export const CreateManyUserAndReturnDocument = /*#__PURE__*/ gql`
+    mutation CreateManyUserAndReturn($data: [UserCreateManyInput!]!) {
+  createManyUserAndReturn(data: $data) {
     ...UserFields
   }
 }
@@ -1321,8 +1321,8 @@ export const CreateManyAndReturnDocument = /*#__PURE__*/ gql`
   @Injectable({
     providedIn: ZenGraphQLModule
   })
-  export class CreateManyAndReturnGQL extends Apollo.Mutation<CreateManyAndReturn, CreateManyAndReturnVariables> {
-    override document = CreateManyAndReturnDocument;
+  export class CreateManyUserAndReturnGQL extends Apollo.Mutation<CreateManyUserAndReturn, CreateManyUserAndReturnVariables> {
+    override document = CreateManyUserAndReturnDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

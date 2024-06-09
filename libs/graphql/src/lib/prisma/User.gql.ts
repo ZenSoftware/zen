@@ -79,8 +79,8 @@ export default gql`
     }
   }
 
-  mutation CreateManyAndReturn($data: [UserCreateManyInput!]!) {
-    createManyAndReturn(data: $data) {
+  mutation CreateManyUserAndReturn($data: [UserCreateManyInput!]!) {
+    createManyUserAndReturn(data: $data) {
       ...UserFields
     }
   }
