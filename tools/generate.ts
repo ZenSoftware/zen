@@ -11,6 +11,8 @@ async function main() {
         doNotUseFieldUpdateOperationsInput: true,
       },
     },
+    prismaClientPath: 'apps/api/src/app/prisma/generated',
+    pal7Fix: true,
     auth: {
       scheme: 'RBAC',
       defaultRBACRole: 'Prisma',

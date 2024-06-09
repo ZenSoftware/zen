@@ -81,6 +81,18 @@ export type BatchPayload = {
   count: Scalars['Int']['output'];
 };
 
+export type CreateManyUserAndReturnOutputType = {
+  __typename?: 'CreateManyUserAndReturnOutputType';
+  createdAt: Scalars['DateTime']['output'];
+  email: Scalars['String']['output'];
+  googleId?: Maybe<Scalars['String']['output']>;
+  googleProfile?: Maybe<Scalars['Json']['output']>;
+  id: Scalars['String']['output'];
+  password?: Maybe<Scalars['String']['output']>;
+  roles?: Maybe<Array<Scalars['String']['output']>>;
+  username?: Maybe<Scalars['String']['output']>;
+};
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -166,6 +178,8 @@ export type Mutation = {
   authPasswordChange?: Maybe<Scalars['Boolean']['output']>;
   authPasswordResetConfirmation: AuthSession;
   authRegister: AuthSession;
+  createManyAndReturn: Array<User>;
+  createManyUser?: Maybe<BatchPayload>;
   createOneUser: User;
   deleteManyUser?: Maybe<BatchPayload>;
   deleteOneUser?: Maybe<User>;
@@ -189,6 +203,16 @@ export type MutationAuthPasswordResetConfirmationArgs = {
 
 export type MutationAuthRegisterArgs = {
   data: AuthRegisterInput;
+};
+
+
+export type MutationCreateManyAndReturnArgs = {
+  data: Array<UserCreateManyInput>;
+};
+
+
+export type MutationCreateManyUserArgs = {
+  data: Array<UserCreateManyInput>;
 };
 
 
@@ -620,6 +644,21 @@ export type UserCreaterolesInput = {
   set: Array<Scalars['String']['input']>;
 };
 
+export type UserGroupByOutputType = {
+  __typename?: 'UserGroupByOutputType';
+  _count?: Maybe<UserCountAggregateOutputType>;
+  _max?: Maybe<UserMaxAggregateOutputType>;
+  _min?: Maybe<UserMinAggregateOutputType>;
+  createdAt: Scalars['DateTime']['output'];
+  email: Scalars['String']['output'];
+  googleId?: Maybe<Scalars['String']['output']>;
+  googleProfile?: Maybe<Scalars['Json']['output']>;
+  id: Scalars['String']['output'];
+  password?: Maybe<Scalars['String']['output']>;
+  roles?: Maybe<Array<Scalars['String']['output']>>;
+  username?: Maybe<Scalars['String']['output']>;
+};
+
 export type UserMaxAggregateOutputType = {
   __typename?: 'UserMaxAggregateOutputType';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -905,6 +944,20 @@ export type CreateOneUserVariables = Exact<{
 
 
 export type CreateOneUser = { __typename?: 'Mutation', createOneUser: { __typename?: 'User', id: string, username?: string | null, email: string, createdAt: any, roles: Array<string>, rules: Array<any> } };
+
+export type CreateManyUserVariables = Exact<{
+  data: Array<UserCreateManyInput> | UserCreateManyInput;
+}>;
+
+
+export type CreateManyUser = { __typename?: 'Mutation', createManyUser?: { __typename?: 'BatchPayload', count: number } | null };
+
+export type CreateManyAndReturnVariables = Exact<{
+  data: Array<UserCreateManyInput> | UserCreateManyInput;
+}>;
+
+
+export type CreateManyAndReturn = { __typename?: 'Mutation', createManyAndReturn: Array<{ __typename?: 'User', id: string, username?: string | null, email: string }> };
 
 export type UpdateOneUserVariables = Exact<{
   data: UserUpdateInput;
@@ -1234,6 +1287,42 @@ export const CreateOneUserDocument = /*#__PURE__*/ gql`
   })
   export class CreateOneUserGQL extends Apollo.Mutation<CreateOneUser, CreateOneUserVariables> {
     override document = CreateOneUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateManyUserDocument = /*#__PURE__*/ gql`
+    mutation CreateManyUser($data: [UserCreateManyInput!]!) {
+  createManyUser(data: $data) {
+    count
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class CreateManyUserGQL extends Apollo.Mutation<CreateManyUser, CreateManyUserVariables> {
+    override document = CreateManyUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateManyAndReturnDocument = /*#__PURE__*/ gql`
+    mutation CreateManyAndReturn($data: [UserCreateManyInput!]!) {
+  createManyAndReturn(data: $data) {
+    ...UserFields
+  }
+}
+    ${UserFields}`;
+
+  @Injectable({
+    providedIn: ZenGraphQLModule
+  })
+  export class CreateManyAndReturnGQL extends Apollo.Mutation<CreateManyAndReturn, CreateManyAndReturnVariables> {
+    override document = CreateManyAndReturnDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

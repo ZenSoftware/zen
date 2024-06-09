@@ -17,6 +17,7 @@ import {
   GraphQLPrismaIndexTemplate,
   GraphQLResolversABACTemplate,
   GraphQLResolversRBACTemplate,
+  GraphQLSchemaExtensionsTemplate,
   PaljsTypeDefsTemplate,
 } from './templates';
 
@@ -24,6 +25,9 @@ const execAsync = promisify(exec);
 
 export type ZenGeneratorConfig = {
   palConfig: PalConfig;
+  prismaClientPath: string;
+  /** [GitHub Issue: createManyAndReturn types not what Pal.js is expecting](https://github.com/paljs/prisma-tools/issues/335#issuecomment-2155972868) */
+  pal7Fix?: boolean;
   apiOutPath: string;
   auth?: {
     /**
@@ -56,7 +60,7 @@ export class ZenGenerator {
 
   async run() {
     console.log(`------------------------ @paljs/generator ------------------------`);
-    const palConfig = this.config.palConfig as any;
+    const palConfig = this.config.palConfig;
     const palOutPath = palConfig.backend.output
       ? palConfig.backend.output
       : path.join(this.config.apiOutPath, 'paljs');
@@ -97,6 +101,31 @@ export class ZenGenerator {
     await writeFile(palTypeDefsFilePath, PaljsTypeDefsTemplate(prismaNames));
     console.log(`- Wrote: ${palTypeDefsFilePath}`);
 
+    const schemaExtensionsPath = path.join(palOutPath, 'SchemaExtensions.ts');
+    await writeFile(schemaExtensionsPath, GraphQLSchemaExtensionsTemplate(prismaNames));
+    console.log(`- Wrote: ${schemaExtensionsPath}`);
+
+    if (this.config.pal7Fix) {
+      /** Fix for missing `createManyAndReturn` type */
+      const prismaTypeFilePath = this.config.prismaClientPath + '/index.d.ts';
+      const prismaTypeFile = (await readFile(prismaTypeFilePath)).toString();
+      const prismaNamespaceTemplate = 'export namespace Prisma {';
+      const prismaNamespaceIndex =
+        prismaTypeFile.indexOf(prismaNamespaceTemplate) + prismaNamespaceTemplate.length;
+      let prismaTypeFileFirstHalf = prismaTypeFile.slice(0, prismaNamespaceIndex);
+      let prismaTypeFileSecondHalf = prismaTypeFile.slice(prismaNamespaceIndex);
+
+      prismaTypeFileFirstHalf += '\n';
+
+      for (const typeName of prismaNames) {
+        const createManyTemplate = `  export type CreateMany${typeName}AndReturnOutputType = Prisma.PrismaPromise<$Result.GetResult<Prisma.$${typeName}Payload<ExtArgs>, T, 'createManyAndReturn'>>;\n`;
+        prismaTypeFileFirstHalf += createManyTemplate;
+      }
+
+      const prismaTypeFileReConcatenated = prismaTypeFileFirstHalf + prismaTypeFileSecondHalf;
+      await writeFile(prismaTypeFilePath, prismaTypeFileReConcatenated);
+      console.log(`- Wrote fix for createManyAndReturn in: ${prismaTypeFilePath}`);
+    }
     console.log(`---------------- Nest GraphQL resolvers generated ----------------`);
     const apiResolversPath = path.join(this.config.apiOutPath, 'resolvers');
     if (!existsSync(apiResolversPath)) {

@@ -8,6 +8,7 @@ import { AuthService } from '../../../auth';
 import { PrismaSelectService, PrismaService, User } from '../../../prisma';
 import type {
   AggregateUserArgs,
+  CreateManyUserArgs,
   CreateOneUserArgs,
   DeleteManyUserArgs,
   DeleteOneUserArgs,
@@ -66,13 +67,23 @@ export class UserResolver {
   }
 
   @Query()
-  async aggregateUser(@Args() args: AggregateUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.aggregate(this.prismaSelect.getArgs(info, args));
+  async aggregateUser(@Args() args: AggregateUserArgs) {
+    return this.prisma.user.aggregate(args);
   }
 
   @Mutation()
   async createOneUser(@Args() args: CreateOneUserArgs, @Info() info: GraphQLResolveInfo) {
     return this.prisma.user.create(this.prismaSelect.getArgs(info, args));
+  }
+
+  @Mutation()
+  async createManyUser(@Args() args: CreateManyUserArgs) {
+    return this.prisma.user.createMany(args);
+  }
+
+  @Mutation()
+  async createManyAndReturn(@Args() args: CreateManyUserArgs, @Info() info: GraphQLResolveInfo) {
+    return this.prisma.user.createManyAndReturn(this.prismaSelect.getArgs(info, args));
   }
 
   @Mutation()
@@ -91,8 +102,8 @@ export class UserResolver {
   }
 
   @Mutation()
-  async deleteManyUser(@Args() args: DeleteManyUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.deleteMany(this.prismaSelect.getArgs(info, args));
+  async deleteManyUser(@Args() args: DeleteManyUserArgs) {
+    return this.prisma.user.deleteMany(args);
   }
 
   @Mutation()

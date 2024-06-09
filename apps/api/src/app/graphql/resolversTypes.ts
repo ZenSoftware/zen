@@ -1,3 +1,4 @@
+import { GetAggregateResult } from '@prisma/client/runtime/library';
 import { GraphQLResolveInfo } from 'graphql';
 
 import * as Client from '../prisma';
@@ -24,6 +25,7 @@ export type Resolvers = {
   [key: string]: { [key: string]: Resolver<any, any, any> };
 } & {
   User?: User;
+  CreateManyUserAndReturnOutputType?: CreateManyUserAndReturnOutputType;
   Query?: Query;
   Mutation?: Mutation;
   AggregateUser?: AggregateUser;
@@ -45,6 +47,19 @@ export type User = { [key: string]: Resolver<any, any, any> } & {
   googleProfile?: Resolver<Client.User, {}, any | null>;
 };
 
+export type CreateManyUserAndReturnOutputType = {
+  [key: string]: Resolver<any, any, any>;
+} & {
+  id?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string>;
+  createdAt?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, Date>;
+  username?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string | null>;
+  password?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string | null>;
+  email?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string>;
+  roles?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string[] | null>;
+  googleId?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string | null>;
+  googleProfile?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, any | null>;
+};
+
 export type Query = { [key: string]: Resolver<any, any, any> } & {
   findFirstUser?: Resolver<{}, FindFirstUserArgs, Client.User | null>;
   findFirstUserOrThrow?: Resolver<{}, FindFirstUserOrThrowArgs, Client.User | null>;
@@ -53,7 +68,7 @@ export type Query = { [key: string]: Resolver<any, any, any> } & {
   aggregateUser?: Resolver<
     {},
     AggregateUserArgs,
-    Client.Prisma.GetUserAggregateType<AggregateUserArgs>
+    GetAggregateResult<Client.Prisma.$UserPayload, AggregateUserArgs>
   >;
   groupByUser?: Resolver<{}, GroupByUserArgs, Client.Prisma.UserGroupByOutputType[]>;
   findUniqueUser?: Resolver<{}, FindUniqueUserArgs, Client.User | null>;
@@ -64,6 +79,11 @@ export type Mutation = { [key: string]: Resolver<any, any, any> } & {
   createOneUser?: Resolver<{}, CreateOneUserArgs, Client.User>;
   upsertOneUser?: Resolver<{}, UpsertOneUserArgs, Client.User>;
   createManyUser?: Resolver<{}, CreateManyUserArgs, Client.Prisma.BatchPayload>;
+  createManyUserAndReturn?: Resolver<
+    {},
+    CreateManyUserAndReturnArgs,
+    Client.Prisma.CreateManyUserAndReturnOutputType[]
+  >;
   deleteOneUser?: Resolver<{}, DeleteOneUserArgs, Client.User | null>;
   updateOneUser?: Resolver<{}, UpdateOneUserArgs, Client.User | null>;
   updateManyUser?: Resolver<{}, UpdateManyUserArgs, Client.Prisma.BatchPayload>;
@@ -216,6 +236,11 @@ export type UpsertOneUserArgs = {
 };
 
 export type CreateManyUserArgs = {
+  data: UserCreateManyInput[];
+  skipDuplicates?: boolean;
+};
+
+export type CreateManyUserAndReturnArgs = {
   data: UserCreateManyInput[];
   skipDuplicates?: boolean;
 };
