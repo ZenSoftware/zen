@@ -514,6 +514,20 @@ export default gql`
     _max: UserMaxAggregateOutputType
   }
 
+  type UserGroupByOutputType {
+    id: String!
+    createdAt: DateTime!
+    username: String
+    password: String
+    email: String!
+    roles: [String!]
+    googleId: String
+    googleProfile: Json
+    _count: UserCountAggregateOutputType
+    _min: UserMinAggregateOutputType
+    _max: UserMaxAggregateOutputType
+  }
+
   type UserCountAggregateOutputType {
     id: Int!
     createdAt: Int!
@@ -542,5 +556,16 @@ export default gql`
     password: String
     email: String
     googleId: String
+  }
+
+  type CreateManyUserAndReturnOutputType {
+    id: String!
+    createdAt: DateTime!
+    username: String
+    password: String
+    email: String!
+    roles: [String!]
+    googleId: String
+    googleProfile: Json
   }
 `;
