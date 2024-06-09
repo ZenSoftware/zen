@@ -93,13 +93,13 @@ export class ${name}Resolver {
   @Query()
   @CaslPolicy(ability => ability.can('read', '${name}'))
   async findMany${name}Count(@Args() args: FindMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(info, args) as any);
+    return this.prisma.${lowercase(name)}.count(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Query()
   @CaslPolicy(ability => ability.can('read', '${name}'))
   async aggregate${name}(@Args() args: Aggregate${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${lowercase(name)}.aggregate(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.aggregate(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
@@ -131,7 +131,7 @@ export class ${name}Resolver {
     });
     if (!record) throw new NotFoundException();
     if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.update(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.update(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
@@ -146,7 +146,7 @@ export class ${name}Resolver {
       select: this.authFields.${name},
     });
     if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
@@ -188,7 +188,7 @@ export class ${name}Resolver {
     for (const record of records) {
       if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
     }
-    return this.prisma.${lowercase(name)}.deleteMany(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.deleteMany(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
@@ -205,7 +205,7 @@ export class ${name}Resolver {
     for (const record of records) {
       if (ability.cannot('update', subject('${name}', record as ${name}))) throw new ForbiddenException();
     }
-    return this.prisma.${lowercase(name)}.updateMany(this.prismaSelect.getArgs(info, args));
+    return this.prisma.${lowercase(name)}.updateMany(this.prismaSelect.getArgs(args, info));
   }
 }
 `;
