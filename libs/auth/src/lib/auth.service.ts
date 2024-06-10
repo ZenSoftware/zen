@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApolloError } from '@apollo/client/errors';
 import { Ability } from '@casl/ability';
-import { Environment } from '@zen/common';
+import { ApiError, Environment } from '@zen/common';
 import {
   AuthExchangeTokenGQL,
   AuthLoginGQL,
@@ -250,7 +250,7 @@ export class AuthService {
       )
       .pipe(
         retry({
-          delay: retryStrategy({
+          delay: this.#retryStrategy({
             excludeStatusCodes: ['FORBIDDEN', 'UNAUTHENTICATED', 'INTERNAL_SERVER_ERROR'],
             delay: this.env.auth.retryExchangeTokenDelay,
           }),
@@ -261,7 +261,7 @@ export class AuthService {
           this.setSession(authExchangeToken);
           if (!this.env.production) console.log('Exchanged token');
         },
-        error: (error: ApolloError) => {
+        error: (error: ApolloError | string) => {
           this.logout();
           console.error('Exchange token failed', error);
         },
@@ -285,29 +285,33 @@ export class AuthService {
       this.#exchangeIntervalSubscription = undefined;
     }
   }
-}
 
-function retryStrategy({
-  maxAttempts = Infinity,
-  delay = 5000,
-  excludeStatusCodes = [],
-}: {
-  maxAttempts?: number;
-  delay?: number;
-  excludeStatusCodes?: string[];
-}) {
-  return (error: ApolloError, retryCount: number) => {
-    const excludedStatusFound = !!excludeStatusCodes.find(exclude => exclude === error.message);
+  #retryStrategy({
+    maxAttempts = Infinity,
+    delay = 5000,
+    excludeStatusCodes = [],
+  }: {
+    maxAttempts?: number;
+    delay?: number;
+    excludeStatusCodes?: string[];
+  }) {
+    return (error: ApolloError, retryCount: number) => {
+      const excludedStatusFound = !!excludeStatusCodes.find(exclude => exclude === error.message);
 
-    if (retryCount > maxAttempts || excludedStatusFound) {
-      return throwError(() => error);
-    }
+      if (error?.message === ApiError.Codes.USER_NOT_FOUND) {
+        return throwError(() => error);
+      }
 
-    console.warn(
-      `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}s`,
-      error
-    );
+      if (retryCount > maxAttempts || excludedStatusFound) {
+        return throwError(() => error);
+      }
 
-    return timer(delay);
-  };
+      console.warn(
+        `Exchange token attempt ${retryCount}. Retrying in ${Math.round(delay / 1000)}s`,
+        error
+      );
+
+      return timer(delay);
+    };
+  }
 }

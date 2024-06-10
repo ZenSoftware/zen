@@ -1,21 +1,21 @@
-export enum Nest {
+export enum Codes {
+  USER_NOT_FOUND = 'User not found',
   THROTTLE = 'ThrottlerException: Too Many Requests',
 }
 
 export enum AuthLogin {
-  USER_NOT_FOUND = 'USER_NOT_FOUND',
-  INCORRECT_PASSWORD = 'INCORRECT_PASSWORD',
+  INCORRECT_PASSWORD = 'Incorrect Password',
 }
 
-export enum AuthPasswordResetRequest {
-  USER_NOT_FOUND = 'USER_NOT_FOUND',
+export enum AuthPasswordResetConfirmation {
+  JWT_FAILED = 'JWT failed verification',
 }
 
 export enum AuthRegister {
-  USERNAME_TAKEN = 'USERNAME_TAKEN',
-  EMAIL_TAKEN = 'EMAIL_TAKEN',
+  USERNAME_TAKEN = 'Username taken',
+  EMAIL_TAKEN = 'Email taken',
 }
 
 export enum AuthPasswordChange {
-  WRONG_PASSWORD = 'WRONG_PASSWORD',
+  WRONG_PASSWORD = 'Wrong password',
 }
