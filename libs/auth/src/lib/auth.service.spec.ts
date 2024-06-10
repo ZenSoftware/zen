@@ -54,6 +54,8 @@ describe('AuthService', () => {
     expect(service.rolesEqual(['Editor'], 'Editor')).toEqual(true);
     expect(service.rolesEqual(['Admin', 'Editor'], ['Editor', 'Admin'])).toEqual(true);
     expect(service.rolesEqual([], [])).toEqual(true);
+    expect(service.rolesEqual(undefined, undefined)).toEqual(true);
+    expect(service.rolesEqual(null, null)).toEqual(true);
     expect(service.rolesEqual(undefined, null)).toEqual(true);
     expect(service.rolesEqual(null, undefined)).toEqual(true);
     expect(service.rolesEqual(null, [])).toEqual(true);
