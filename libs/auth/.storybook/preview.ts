@@ -1,7 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Ability } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -20,20 +19,7 @@ function createTranslateLoader(http: HttpClient) {
 const preview: Preview = {
   decorators: [
     moduleMetadata({
-      imports: [
-        BrowserAnimationsModule,
-        ApolloTestingModule,
-        RouterTestingModule,
-        HttpClientModule,
-        TranslateModule.forRoot({
-          defaultLanguage: 'en',
-          loader: {
-            provide: TranslateLoader,
-            useFactory: createTranslateLoader,
-            deps: [HttpClient],
-          },
-        }),
-      ],
+      imports: [BrowserAnimationsModule, ApolloTestingModule],
       providers: [
         { provide: Environment, useValue: EnvironmentDev },
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
