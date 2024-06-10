@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Ability } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
 import { Environment, EnvironmentDev } from '@zen/common';
@@ -16,7 +15,6 @@ import ls from 'localstorage-slim';
 
 import { AuthService, LocalStorageKey } from './auth.service';
 import { token } from './token.signal';
-import { ZenLoginPageComponent } from './zen-login-page/zen-login-page.component';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -26,10 +24,7 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([{ path: 'login', component: ZenLoginPageComponent }]),
-        ApolloTestingModule,
-      ],
+      imports: [ApolloTestingModule],
       declarations: [],
       providers: [
         AuthService,
@@ -59,6 +54,8 @@ describe('AuthService', () => {
     expect(service.rolesEqual(['Editor'], 'Editor')).toEqual(true);
     expect(service.rolesEqual(['Admin', 'Editor'], ['Editor', 'Admin'])).toEqual(true);
     expect(service.rolesEqual([], [])).toEqual(true);
+    expect(service.rolesEqual(undefined, undefined)).toEqual(true);
+    expect(service.rolesEqual(null, null)).toEqual(true);
     expect(service.rolesEqual(undefined, null)).toEqual(true);
     expect(service.rolesEqual(null, undefined)).toEqual(true);
     expect(service.rolesEqual(null, [])).toEqual(true);
