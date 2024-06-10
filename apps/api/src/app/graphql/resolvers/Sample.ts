@@ -58,6 +58,12 @@ interval(1000).subscribe(i =>
 @Resolver()
 @UseGuards(RolesGuard('Super'))
 export class SampleResolver {
+  @Subscription()
+  async sampleSubscription(@CurrentUser() user: RequestUser) {
+    logger.log(`sampleSubscription subscribed to by user with id ${user.id}`);
+    return pubSub.asyncIterator('sampleSubscription');
+  }
+
   @Mutation()
   async sampleUpload(@Args('file', { type: () => GraphQLUpload }) file: Upload) {
     /**
@@ -110,11 +116,5 @@ export class SampleResolver {
         });
       })
     );
-  }
-
-  @Subscription()
-  async sampleSubscription(@CurrentUser() user: RequestUser) {
-    logger.log(`sampleSubscription subscribed to by user with id ${user.id}`);
-    return pubSub.asyncIterator('sampleSubscription');
   }
 }
