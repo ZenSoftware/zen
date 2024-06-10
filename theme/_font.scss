@@ -1,12 +1,12 @@
-$zen-heading: 'zen-heading';
-$zen-default: 'zen-default';
+$zen-brand: 'zen-brand';
+$zen-plain: 'zen-plain';
 
 @font-face {
-  font-family: 'zen-heading';
+  font-family: 'zen-brand';
   src: url('/assets/font/euro-ext.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'zen-default';
+  font-family: 'zen-plain';
   src: url('/assets/font/euro-ukr.woff2') format('woff2');
 }

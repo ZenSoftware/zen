@@ -7,7 +7,7 @@
 
 body {
   min-height: 100vh;
-  font-family: font.$zen-default;
+  font-family: font.$zen-plain;
 }
 
 :root {
@@ -31,7 +31,7 @@ body {
 
 // Bootstrap card header font & no margins on header HTML elements
 .card-header {
-  font-family: font.$zen-heading;
+  font-family: font.$zen-brand;
 
   h1,
   h2,
