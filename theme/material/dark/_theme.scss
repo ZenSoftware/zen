@@ -135,8 +135,8 @@ $dark-theme: mat.define-theme(
       tertiary: $_tertiary,
     ),
     typography: (
-      plain-family: font.$zen-default,
-      brand-family: font.$zen-heading,
+      plain-family: font.$zen-plain,
+      brand-family: font.$zen-brand,
     ),
   )
 );
