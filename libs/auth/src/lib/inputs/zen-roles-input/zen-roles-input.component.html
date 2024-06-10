@@ -1,8 +1,8 @@
 <mat-form-field class="example-chip-list" class="w-100">
-  <mat-label>{{label}}</mat-label>
+  <mat-label>{{labelTranslationKey | translate}}</mat-label>
   
   <mat-chip-grid #chipGrid>
-
+    
     @for(role of control.value; track role) {
       <mat-chip-row (removed)="remove(role)">
         {{role}}
@@ -12,7 +12,7 @@
       </mat-chip-row>
     }
     
-    <input placeholder="New role..." #roleInput
+    <input [placeholder]="'NEW_ROLE' | translate" #roleInput
       [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       (matChipInputTokenEnd)="add($event)"/>

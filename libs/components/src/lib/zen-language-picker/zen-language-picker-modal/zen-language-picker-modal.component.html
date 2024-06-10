@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+  <h2>
+    {{ 'SELECT_LANGUAGE' | translate}}
+  </h2>
+
+  <mat-form-field>
+    <mat-select [(value)]="selected">
+      @for(language of languages; track language.value) {
+        <mat-option [value]="language.value">
+          {{language.englishSpelling}}
+          
+          @if(language.englishSpelling !== 'English') {
+            - {{language.nativeSpelling}}
+          }
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>

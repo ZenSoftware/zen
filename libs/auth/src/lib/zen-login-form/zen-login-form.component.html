@@ -10,41 +10,42 @@
   <zen-password-input #passwordInput [formControl]="password" required/>
   
   <div class="mb-4">
-    <mat-checkbox color="primary" [formControl]="rememberMe">Remember me</mat-checkbox>
+    <mat-checkbox color="primary" [formControl]="rememberMe">
+      {{'REMEMBER_ME' | translate}}
+    </mat-checkbox>
   </div>
 
   <button type="submit" mat-raised-button color="primary" class="w-100 fs-4 py-1" [disabled]="!form.valid">
     <i class="fa-solid fa-fw fa-sign-in-alt me-1"></i>
-    Login
+    {{'LOGIN' | translate}}
   </button>
 
   @if(generalError) {
     <mat-error @verticalAccordion class="text-center my-3">
-      There was a problem logging you in. If this continues, please contact us.
+      {{'PROBLEM_LOGGING_IN' | translate}}
     </mat-error>
   }
   
   @if(env.enableGoogleOAuth) {
     <hr>
 
-    <h2 class="text-center">OR</h2>
+    <h2 class="text-center">{{'OR' | translate}}</h2>
 
     <button type="button" (click)="loginWithGoogle()" mat-raised-button class="w-100 fs-4 py-1" [disabled]="loading">
       <i class="fa-brands fa-fw fa-google me-1"></i>
-      Sign in with Google
+      {{'SIGN_IN_WITH_GOOGLE' | translate}}
     </button>
   }
 
   @if(emailTakenError) {
     <mat-error @verticalAccordion class="text-center my-3">
-      There is an existing account associated with the e-mail address you attempted to log in with.
-      Log into your existing account to associate your third-party authentication from there.
+      {{'EXISTING_ACCOUNT_ERROR' | translate}}
     </mat-error>
   }
 
   @if(done && doneMessageVisible) {
     <div @verticalAccordion class="text-center my-3">
-      Redirecting...
+      {{'REDIRECTING' | translate}}
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
   }

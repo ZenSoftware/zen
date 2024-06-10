@@ -5,6 +5,7 @@ import {
   OnDestroy,
   Output,
   ViewChild,
+  inject,
 } from '@angular/core';
 import {
   FormControl,
@@ -19,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { ApolloError } from '@apollo/client/errors';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ZenLoadingComponent } from '@zen/components';
 import { verticalAccordion } from '@zen/components/animations';
 import { ApiError, AuthPasswordChangeGQL, AuthPasswordChangeInput } from '@zen/graphql';
@@ -46,6 +48,7 @@ interface FormType {
     MatInputModule,
     ReactiveFormsModule,
     RouterLink,
+    TranslateModule,
     ZenLoadingComponent,
     ZenPasswordInputComponent,
   ],
@@ -56,6 +59,7 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
 
   #subs: Subscription[] = [];
   #incorrectPassword = false;
+  translate = inject(TranslateService);
   loading = false;
   completed = false;
   generalError = false;
@@ -167,7 +171,9 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
             if (error.message === ApiError.AuthPasswordChange.WRONG_PASSWORD) {
               this.generalError = false;
               this.#incorrectPassword = true;
-              this.oldPasswordInput.customErrorMessage = 'Incorrect password';
+              this.translate.get('INCORRECT_PASSWORD').subscribe(translation => {
+                this.oldPasswordInput.customErrorMessage = translation;
+              });
               this.oldPasswordInput.select();
             }
           },

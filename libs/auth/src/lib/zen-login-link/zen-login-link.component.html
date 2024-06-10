@@ -1,13 +1,13 @@
 @if(displayLogout) {
   <span *ifLoggedIn="true" (click)="auth.logout()" style="cursor: pointer;">
     <i class="fa-solid fa-lock me-2"></i>
-    Logout
+    {{'LOGOUT' | translate}}
   </span>
 }
 
 @if(displayLogin$ | async) {
   <a *ifLoggedIn="false" routerLink="/login">
     <i class="fa-solid fa-sign-in-alt me-2"></i>
-    Login
+    {{'LOGIN' | translate}}
   </a>
 }

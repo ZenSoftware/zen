@@ -11,7 +11,4 @@ export const Primary = {
   render: (args: ZenRolesInputComponent) => ({
     props: args,
   }),
-  args: {
-    label: 'Roles',
-  },
 };

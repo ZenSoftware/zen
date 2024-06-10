@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, ViewChild, inject } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 import { usernameValidator } from '../../validators';
@@ -38,12 +39,15 @@ import { usernameValidator } from '../../validators';
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
 })
 export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestroy {
   @ViewChild('usernameInput') usernameInput!: ElementRef<HTMLInputElement>;
 
   private showCustomError = false;
+  translate = inject(TranslateService);
+
   #customErrorMessage = '';
   @Input() set customErrorMessage(value: string) {
     this.showCustomError = !!value;
@@ -55,7 +59,7 @@ export class ZenUsernameInputComponent implements ControlValueAccessor, OnDestro
     return this.#customErrorMessage;
   }
 
-  @Input() label = 'Username';
+  @Input() labelTranslationKey = 'USERNAME';
 
   @Input() set required(value: boolean | string | undefined) {
     const isRequired = value !== 'false' && value !== false;

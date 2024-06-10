@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, ViewChild, inject } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 import { passwordValidatorFn } from '../../validators';
@@ -26,6 +27,7 @@ import { passwordValidatorFn } from '../../validators';
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   providers: [
     {
@@ -43,6 +45,7 @@ import { passwordValidatorFn } from '../../validators';
 export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestroy {
   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
 
+  translate = inject(TranslateService);
   control = new FormControl('', {
     validators: [passwordValidatorFn, this.customErrorValidator()],
     nonNullable: true,
@@ -52,7 +55,7 @@ export class ZenPasswordInputComponent implements ControlValueAccessor, OnDestro
   #subs: Subscription[] = [];
   private showCustomError = false;
 
-  @Input() label = 'Password';
+  @Input() labelTranslationKey = 'PASSWORD';
 
   #customErrorMessage = '';
   @Input() set customErrorMessage(value: string) {

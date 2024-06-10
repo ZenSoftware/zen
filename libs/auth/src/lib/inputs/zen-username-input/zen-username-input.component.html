@@ -1,21 +1,21 @@
 <mat-form-field hideRequiredMarker class="w-100">
-  <mat-label>{{label}}</mat-label>
-  <input #usernameInput matInput placeholder="Username" autocomplete="username" [formControl]="control" hideRequiredMarker="true" maxlength="254">
+  <mat-label>{{labelTranslationKey | translate}}</mat-label>
+  <input #usernameInput matInput [placeholder]="labelTranslationKey | translate" autocomplete="username" [formControl]="control" hideRequiredMarker="true" maxlength="254">
   
   @if(control.hasError('required')) {
-    <mat-error>Required</mat-error>
+    <mat-error>{{'REQUIRED' | translate}}</mat-error>
   }
 
   @if(control.hasError('minlength')) {
-    <mat-error>Minimum length of {{control.getError('minlength')?.['requiredLength']}} characters</mat-error>
+    <mat-error>{{'MIN_LENGTH_ERROR' | translate:control.getError('minlength')}}</mat-error>
   }
 
   @if(control.hasError('maxlength')) {
-    <mat-error>Maximum length of {{control.getError('maxlength')?.['requiredLength']}} characters</mat-error>
+    <mat-error>{{'MAX_LENGTH_ERROR' | translate:control.getError('maxlength')}}</mat-error>
   }
 
   @if(control.hasError('includesSpace')) {
-    <mat-error>Cannot contain spaces</mat-error>
+    <mat-error>{{'CANNOT_CONTAIN_SPACES' | translate}}</mat-error>
   }
 
   @if(control.hasError('custom')) {

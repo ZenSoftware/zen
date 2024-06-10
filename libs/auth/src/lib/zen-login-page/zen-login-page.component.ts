@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Environment } from '@zen/common';
 import { verticalAccordion } from '@zen/components/animations';
 
@@ -12,7 +13,13 @@ import { ZenLoginFormComponent } from '../zen-login-form/zen-login-form.componen
   templateUrl: 'zen-login-page.component.html',
   animations: [...verticalAccordion],
   standalone: true,
-  imports: [IfPublicRegistrationDirective, MatButtonModule, RouterLink, ZenLoginFormComponent],
+  imports: [
+    IfPublicRegistrationDirective,
+    MatButtonModule,
+    RouterLink,
+    TranslateModule,
+    ZenLoginFormComponent,
+  ],
 })
 export class ZenLoginPageComponent {
   constructor(

@@ -5,46 +5,47 @@
   </div>
 
   <div slot="toolbar-end">
+    <zen-language-picker class="me-4"/>
     <zen-login-link [displayLogout]="false"/>
   </div>
 
   <div slot="menu-toolbar" class="text-white">
-    Menu
+    {{ 'MENU' | translate }}
   </div>
 
   <div slot="menu-content">
     <mat-nav-list *ifLoggedIn="false">
       <a mat-list-item routerLink="/">
         <i class="fa-solid fa-fw fa-home me-2"></i>
-        Home
+        {{ 'HOME' | translate }}
       </a>
       <a mat-list-item routerLink="/login">
         <i class="fa-solid fa-fw fa-key me-2"></i>
-        Login
+        {{ 'LOGIN' | translate }}
       </a>
     </mat-nav-list>
 
     <mat-nav-list *ifLoggedIn="true">
       <a mat-list-item routerLink="/portal/dashboard">
         <i class="fa-solid fa-fw fa-desktop me-2"></i>
-        Dashboard
+        {{ 'DASHBOARD' | translate }}
       </a>
 
       <a mat-list-item routerLink="/portal/settings">
         <i class="fa-solid fa-fw fa-gear me-2"></i>
-        Settings
+        {{ 'SETTINGS' | translate }}
       </a>
 
       <a mat-list-item routerLink="/portal/super" *roles="'Super'">
         <i class="fa-solid fa-fw fa-user-shield me-2"></i>
-        Super
+        {{ 'SUPER' | translate }}
       </a>
 
       <hr>
 
       <a mat-list-item (click)="auth.logout()">
         <i class="fa-solid fa-fw fa-sign-in-alt me-2"></i>
-        Logout
+        {{ 'LOGOUT' | translate }}
       </a>
     </mat-nav-list>
   </div>

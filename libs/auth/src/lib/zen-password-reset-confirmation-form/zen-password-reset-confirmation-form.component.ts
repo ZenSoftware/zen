@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { ZenLoadingComponent } from '@zen/components';
 import { verticalAccordion } from '@zen/components/animations';
 import {
@@ -54,6 +55,7 @@ interface FormType {
     MatProgressBarModule,
     ReactiveFormsModule,
     RouterLink,
+    TranslateModule,
     ZenLoadingComponent,
   ],
 })

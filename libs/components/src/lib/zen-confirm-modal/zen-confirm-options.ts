@@ -1,5 +1,5 @@
 export interface ZenConfirmOptions {
-  title?: string;
-  confirmText?: string;
-  cancelText?: string;
+  titleTranslationKey?: string;
+  confirmTranslationKey?: string;
+  cancelTranslationKey?: string;
 }

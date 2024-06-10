@@ -1,17 +1,17 @@
 <mat-form-field hideRequiredMarker class="w-100">
-  <mat-label>{{label}}</mat-label>
+  <mat-label>{{labelTranslationKey | translate}}</mat-label>
   <input #emailInput type="email" matInput placeholder="enter@email.com" autocomplete="email" [formControl]="control" maxlength="254" hideRequiredMarker="true">
   
   @if(control.hasError('required')) {
-    <mat-error>Required</mat-error>
+    <mat-error>{{'REQUIRED' | translate}}</mat-error>
   }
   
   @if(control.hasError('email')) {
-    <mat-error>Not a valid email</mat-error>
+    <mat-error>{{'NOT_VALID_EMAIL' | translate}}</mat-error>
   }
 
   @if(control.hasError('emailTaken')) {
-    <mat-error>E-mail is already taken</mat-error>
+    <mat-error>{{'EMAIL_ALREADY_TAKEN' | translate}}</mat-error>
   }
   
   @if(control.hasError('custom')) {

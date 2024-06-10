@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -9,6 +9,8 @@ import {
 } from '@angular/router';
 import { Ability, PureAbility } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { authInterceptorFn, token } from '@zen/auth';
 import { Environment } from '@zen/common';
 import { ZenGraphQLModule } from '@zen/graphql';
@@ -16,6 +18,10 @@ import { possibleTypes, typePolicies } from '@zen/graphql/client';
 
 import { environment } from '../environments/environment';
 import { APP_ROUTES } from './app.routes';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -55,6 +61,14 @@ export const appConfig: ApplicationConfig = {
           connectionParams: () => ({ token: token() }),
           shouldRetry: () => true,
           retryAttempts: Infinity,
+        },
+      }),
+      TranslateModule.forRoot({
+        defaultLanguage: environment.defaultLanguage,
+        loader: {
+          provide: TranslateLoader,
+          useFactory: createTranslateLoader,
+          deps: [HttpClient],
         },
       })
     ),

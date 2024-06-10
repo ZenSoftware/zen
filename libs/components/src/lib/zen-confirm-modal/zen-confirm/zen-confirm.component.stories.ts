@@ -27,9 +27,4 @@ export const Primary = {
   render: (args: ZenConfirmComponent) => ({
     props: args,
   }),
-  args: {
-    title: 'Are you sure?',
-    confirmText: 'Yes',
-    cancelText: 'No',
-  },
 };

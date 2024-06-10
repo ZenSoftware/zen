@@ -6,12 +6,12 @@
   @if(env.enableGoogleOAuth) {
     <button type="button" (click)="loginWithGoogle()" mat-raised-button class="w-100 fs-4 py-1 my-2" [disabled]="loading">
       <i class="fa-brands fa-fw fa-google me-1"></i>
-      Sign up with Google
+      {{'SIGN_UP_WITH_GOOGLE' | translate}}
     </button>
   
     <hr>
   
-    <h2 class="text-center">Or sign up with e-mail</h2>
+    <h2 class="text-center">{{'OR_SIGN_UP_WITH_E_MAIL' | translate}}</h2>
   }
   
   <div class="mb-2">
@@ -27,38 +27,37 @@
   </div>
 
   <mat-form-field hideRequiredMarker class="w-100 mb-2">
-    <mat-label>Confirm Password</mat-label>
+    <mat-label>{{'CONFIRM_PASSWORD' | translate}}</mat-label>
     <input matInput autocomplete="new-password" [type]="hidePassword ? 'password' : 'text'" [formControl]="passwordConfirm">
-    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="Toggle show password">
+    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1" title="{{'TOGGLE_SHOW_PASSWORD' | translate}}">
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
 
     @if(passwordConfirm.hasError('required')) {
-      <mat-error>Required</mat-error>
+      <mat-error>{{'REQUIRED' | translate}}</mat-error>
     }
 
     @if(passwordConfirm.hasError('notMatching')) {
-      <mat-error>Password confirmation does not match</mat-error>
+      <mat-error>{{'PASSWORD_DOES_NOT_MATCH' | translate}}</mat-error>
     }
   </mat-form-field>
 
   <div class="mb-4">
-    <mat-checkbox color="primary" [formControl]="acceptTerms">I accept the terms and conditions</mat-checkbox>
-    
+    <mat-checkbox color="primary" [formControl]="acceptTerms">{{'I_ACCEPT_THE_TERMS' | translate}}</mat-checkbox>
+
     @if(acceptTerms.invalid && acceptTerms.touched) {
-      <mat-error>Accept the terms and conditions</mat-error>
+      <mat-error>{{'ACCEPT_THE_TERMS' | translate}}</mat-error>
     }
   </div>
 
   <button type="submit" mat-raised-button color="primary" class="w-100 fs-4 py-1" [disabled]="!form.valid">
     <i class="fa-solid fa-fw fa-cloud-upload-alt me-1"></i>
-    Submit
+    {{'SUBMIT' | translate}}
   </button>
 
   @if(generalError) {
     <mat-error @verticalAccordion class="text-center mt-3">
-      There was a problem with your registration.<br>
-      If this continues, please contact us
+      {{'REGISTRATION_PROBLEM' | translate}}
     </mat-error>
   }
 </form>

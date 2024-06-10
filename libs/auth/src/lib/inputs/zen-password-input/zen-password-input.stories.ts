@@ -13,7 +13,6 @@ export const Primary = {
   }),
   args: {
     required: false,
-    label: 'Password',
     customErrorMessage: '',
   },
 };

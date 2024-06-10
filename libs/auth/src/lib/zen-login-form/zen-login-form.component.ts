@@ -8,6 +8,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
 import { ApolloError } from '@apollo/client/errors';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Environment } from '@zen/common';
 import { ZenLoadingComponent } from '@zen/components';
 import { verticalAccordion } from '@zen/components/animations';
@@ -45,6 +47,7 @@ interface FormType {
     MatInputModule,
     MatProgressBarModule,
     ReactiveFormsModule,
+    TranslateModule,
     ZenLoadingComponent,
     ZenPasswordInputComponent,
     ZenUsernameInputComponent,
@@ -57,6 +60,7 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
   @Output() loggedIn = new EventEmitter();
 
   #subs: Subscription[] = [];
+  translate = inject(TranslateService);
   loading = false;
   done = false;
   generalError = false;
@@ -125,11 +129,15 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
 
             if (error.message === ApiError.AuthLogin.INCORRECT_PASSWORD) {
               this.generalError = false;
-              this.passwordInput.customErrorMessage = 'Incorrect password';
+              this.translate.get('INCORRECT_PASSWORD').subscribe(translation => {
+                this.passwordInput.customErrorMessage = translation;
+              });
               this.passwordInput.select();
             } else if (error.message === ApiError.Codes.USER_NOT_FOUND) {
               this.generalError = false;
-              this.usernameInput.customErrorMessage = 'User not found';
+              this.translate.get('USER_NOT_FOUND').subscribe(translation => {
+                this.usernameInput.customErrorMessage = translation;
+              });
               this.usernameInput.select();
             }
           },

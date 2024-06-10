@@ -1,10 +1,15 @@
 <div class="m-3">
   <div class="text-center">
-    <h2>{{title}}</h2>
+    <h2>{{titleTranslationKey | translate}}</h2>
   </div>
 
   <div class="d-flex justify-content-center">
-    <button mat-raised-button #confirmBtn color="primary" class="me-5" (click)="dialogRef.close(true)">{{confirmText}}</button>
-    <button mat-raised-button (click)="dialogRef.close(false)">{{cancelText}}</button>
+    <button mat-raised-button #confirmBtn color="primary" class="me-5" (click)="dialogRef.close(true)">
+      {{confirmTranslationKey | translate}}
+    </button>
+
+    <button mat-raised-button (click)="dialogRef.close(false)">
+      {{cancelTranslationKey | translate}}
+    </button>
   </div>
 </div>

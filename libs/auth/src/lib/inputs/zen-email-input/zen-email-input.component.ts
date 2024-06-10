@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, ViewChild, inject } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 import { emailValidator } from '../../validators';
@@ -38,6 +39,7 @@ import { emailValidator } from '../../validators';
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
 })
 export class ZenEmailInputComponent implements ControlValueAccessor, OnDestroy {
@@ -55,7 +57,7 @@ export class ZenEmailInputComponent implements ControlValueAccessor, OnDestroy {
     return this.#customErrorMessage;
   }
 
-  @Input() label = 'E-mail';
+  @Input() labelTranslationKey = 'EMAIL';
 
   @Input() set required(value: boolean | string | undefined) {
     const isRequired = value !== 'false' && value !== false;
@@ -67,6 +69,7 @@ export class ZenEmailInputComponent implements ControlValueAccessor, OnDestroy {
     }
   }
 
+  translate = inject(TranslateService);
   #subs: Subscription[] = [];
   touchedListeners: Array<() => unknown> = [];
   control = new FormControl('', {
