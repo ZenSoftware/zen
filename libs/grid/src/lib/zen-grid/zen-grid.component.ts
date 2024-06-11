@@ -366,6 +366,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   refresh() {
     this.apollo.client.cache.evict({ fieldName: `findMany${this.settings.typename}` });
     this.apollo.client.cache.evict({ fieldName: `findMany${this.settings.typename}Count` });
+    this.snackBar.open('Refreshed', '', { duration: 1500 });
   }
 
   groupChangeHandler(groups: GroupDescriptor[]): void {
