@@ -175,10 +175,9 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
     this.#defaultSettings = cloneDeep(value.defaultSettings);
     this.#defaultSettings.state = this.#defaultSettings.state ?? ({} as any);
-    (<State>this.#defaultSettings.state).skip = (<State>this.#defaultSettings.state).skip ?? 0;
-    (<State>this.#defaultSettings.state).take =
-      (<State>this.#defaultSettings.state).take ?? DEFAULT_TAKE;
-    (<State>this.#defaultSettings.state).sort = (<State>this.#defaultSettings.state).sort ?? [];
+    this.#defaultSettings.state!.skip = this.#defaultSettings.state!.skip ?? 0;
+    this.#defaultSettings.state!.take = this.#defaultSettings.state!.take ?? DEFAULT_TAKE;
+    this.#defaultSettings.state!.sort = this.#defaultSettings.state!.sort ?? [];
 
     Object.freeze(this.#defaultSettings);
 
