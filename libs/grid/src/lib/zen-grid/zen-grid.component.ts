@@ -162,7 +162,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() showRefresh = true;
   @Input() showReset = true;
   @Input() showToolbar = true;
-  @Input() sortable: SortSettings = { mode: 'single' };
+  @Input() sortable: SortSettings = { mode: 'multiple' };
   @Input() useGlobalState = true;
 
   #defaultSettings!: KendoGridSettings<T>;
