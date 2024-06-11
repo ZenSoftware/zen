@@ -88,7 +88,6 @@ export class ZenUserGridComponent {
     this.dialog.open(ZenUserInputComponent, {
       data,
       disableClose: true,
-      width: '100%',
     });
   }
 }
