@@ -19,6 +19,7 @@ export interface KendoGridColumnSettings<T extends object> {
 
   /** Custom <zen-grid> column settings */
   custom?: {
+    /** @comment set this to true when fields are nullable on the Prisma model */
     nullable?: boolean;
     currency?: boolean | 'cents';
     preformatted?: boolean;
