@@ -18,14 +18,13 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
     {
       field: 'id',
       title: 'ID',
-      filter: 'text',
       hidden: true,
     },
     {
       field: 'username',
       title: 'Username',
       custom: {
-        /** @comment set this to true when fields are nullable on the Prisma model */
+        /** @comment set this to true when fields are nullable as defined within the Prisma schema */
         nullable: true,
       },
     },
