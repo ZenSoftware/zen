@@ -51,8 +51,7 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
     {
       field: 'id',
       title: 'ID',
-      /** @comment set this to the type of id defined in the schema.prisma file */
-      filter: 'string',
+      filter: 'text',
       hidden: true,
     },
     {
