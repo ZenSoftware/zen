@@ -159,7 +159,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() showFilters = true;
   @Input() showGroupButton = false;
   @Input() showPager = true;
-  @Input() showRefresh = true;
+  @Input() showRefresh = false;
   @Input() showReset = true;
   @Input() showToolbar = true;
   @Input() sortable: SortSettings = { mode: 'single' };
