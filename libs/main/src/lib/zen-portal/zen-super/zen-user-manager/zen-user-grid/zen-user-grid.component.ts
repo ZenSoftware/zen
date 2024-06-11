@@ -18,6 +18,7 @@ const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
     {
       field: 'id',
       title: 'ID',
+      filter: 'text',
       hidden: true,
     },
     {
