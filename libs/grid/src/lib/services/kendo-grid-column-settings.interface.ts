@@ -19,6 +19,7 @@ export interface KendoGridColumnSettings<T extends object> {
 
   /** Custom <zen-grid> column settings */
   custom?: {
+    nullable?: boolean;
     currency?: boolean | 'cents';
     preformatted?: boolean;
     html?: boolean;
