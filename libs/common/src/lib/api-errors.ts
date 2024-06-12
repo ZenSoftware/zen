@@ -19,3 +19,8 @@ export enum AuthRegister {
 export enum AuthPasswordChange {
   WRONG_PASSWORD = 'Wrong password',
 }
+
+export enum JwtErrors {
+  NO_HEADER = 'No Authorization header found',
+  NO_BEARER = `No 'Bearer ' in Authorization header found`,
+}
