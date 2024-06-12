@@ -24,7 +24,7 @@ export abstract class EnvironmentBase {
   readonly throttle: ThrottlerModuleOptions;
   readonly bcrypt?: {
     /** @default 12 */
-    costFactor: number;
+    costFactor?: number;
     /**
      * In bytes (there are 8 bits in a byte)
      * @default 16 (128 bits)
