@@ -57,12 +57,15 @@ export const environment: EnvironmentBase = {
     ignoreUserAgents: [/googlebot/gi, /bingbot/gi],
     throttlers: [
       {
-        limit: 5,
+        limit: 10,
         ttl: 30_000,
       },
     ],
   },
-  bcryptCost: 12,
+  bcrypt: {
+    costFactor: 12,
+    saltSize: 16,
+  },
   oauth: {
     loginConfirmedURL: 'http://localhost:4200/#/login-confirmed',
     google: {
