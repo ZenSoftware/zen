@@ -22,6 +22,7 @@ export abstract class EnvironmentBase {
   readonly expiresInRememberMe: number;
   readonly mail: Omit<MailerOptions, 'template'>;
   readonly throttle: ThrottlerModuleOptions;
+  /** We are utilizing [hash-wasm](https://github.com/Daninet/hash-wasm) for our implementation of bcrypt */
   readonly bcrypt?: {
     /** @default 12 */
     costFactor?: number;
