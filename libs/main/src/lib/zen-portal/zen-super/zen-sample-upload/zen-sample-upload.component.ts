@@ -41,7 +41,7 @@ export class ZenSampleUploadComponent {
 
   private reset() {
     this.fileName = '';
-    (<any>this.fileInput.nativeElement).value = null;
+    this.fileInput.nativeElement.value = null as any;
   }
 
   upload() {
