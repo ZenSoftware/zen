@@ -22,7 +22,15 @@ export abstract class EnvironmentBase {
   readonly expiresInRememberMe: number;
   readonly mail: Omit<MailerOptions, 'template'>;
   readonly throttle: ThrottlerModuleOptions;
-  readonly bcryptCost: number;
+  readonly bcrypt?: {
+    /** @default 12 */
+    costFactor: number;
+    /**
+     * In bytes (there are 8 bits in a byte)
+     * @default 16 (128 bits)
+     **/
+    saltSize?: number;
+  };
   readonly oauth?: {
     loginConfirmedURL: string;
     google?: GoogleStrategyOptions;

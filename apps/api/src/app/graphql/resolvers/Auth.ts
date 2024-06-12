@@ -313,9 +313,13 @@ export class AuthResolver {
 
   private async hashPassword(password: string) {
     return bcrypt({
-      costFactor: this.config.bcryptCost,
+      // @default 12 bytes
+      costFactor: this.config.bcrypt?.costFactor ? this.config.bcrypt.costFactor : 12,
       password,
-      salt: crypto.getRandomValues(new Uint8Array(16)),
+      salt: crypto.getRandomValues(
+        // @default 16 bytes
+        new Uint8Array(this.config.bcrypt?.saltSize ? this.config.bcrypt.saltSize : 16)
+      ),
     });
   }
 }

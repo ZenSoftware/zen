@@ -59,7 +59,10 @@ export const environment: EnvironmentBase = {
       },
     ],
   },
-  bcryptCost: 12,
+  bcrypt: {
+    costFactor: 12,
+    saltSize: 16,
+  },
   oauth: {
     loginConfirmedURL: 'http://localhost:4200/#/login-confirmed',
     google: {
