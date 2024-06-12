@@ -125,7 +125,7 @@ export class KendoToPrismaService {
             if (i === fieldSplit.length - 1) {
               const columnSettings = settings.columnsConfig.find(x => x.field === sort.field);
 
-              if (columnSettings?.nullable) {
+              if (columnSettings?.custom?.nullable) {
                 next[field] = { sort: sort.dir };
               } else {
                 next[field] = sort.dir;

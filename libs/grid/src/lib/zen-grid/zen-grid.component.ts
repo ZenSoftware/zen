@@ -162,7 +162,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() showRefresh = true;
   @Input() showReset = true;
   @Input() showToolbar = true;
-  @Input() sortable: SortSettings = { mode: 'single' };
+  @Input() sortable: SortSettings = { mode: 'multiple' };
   @Input() useGlobalState = true;
 
   #defaultSettings!: KendoGridSettings<T>;
@@ -175,10 +175,9 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
     this.#defaultSettings = cloneDeep(value.defaultSettings);
     this.#defaultSettings.state = this.#defaultSettings.state ?? ({} as any);
-    (<State>this.#defaultSettings.state).skip = (<State>this.#defaultSettings.state).skip ?? 0;
-    (<State>this.#defaultSettings.state).take =
-      (<State>this.#defaultSettings.state).take ?? DEFAULT_TAKE;
-    (<State>this.#defaultSettings.state).sort = (<State>this.#defaultSettings.state).sort ?? [];
+    this.#defaultSettings.state!.skip = this.#defaultSettings.state!.skip ?? 0;
+    this.#defaultSettings.state!.take = this.#defaultSettings.state!.take ?? DEFAULT_TAKE;
+    this.#defaultSettings.state!.sort = this.#defaultSettings.state!.sort ?? [];
 
     Object.freeze(this.#defaultSettings);
 
@@ -367,6 +366,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   refresh() {
     this.apollo.client.cache.evict({ fieldName: `findMany${this.settings.typename}` });
     this.apollo.client.cache.evict({ fieldName: `findMany${this.settings.typename}Count` });
+    this.snackBar.open('Refreshed', '', { duration: 1500 });
   }
 
   groupChangeHandler(groups: GroupDescriptor[]): void {
