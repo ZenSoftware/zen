@@ -23,7 +23,16 @@ export abstract class EnvironmentBase {
   readonly expiresInRememberMe: number;
   readonly mail: Omit<MailerOptions, 'template'>;
   readonly throttle: ThrottlerModuleOptions;
-  readonly bcryptCost: number;
+  /** We are utilizing [hash-wasm](https://github.com/Daninet/hash-wasm) for our implementation of bcrypt */
+  readonly bcrypt?: {
+    /** @default 12 */
+    costFactor?: number;
+    /**
+     * In bytes (there are 8 bits in a byte)
+     * @default 16 (128 bits)
+     **/
+    saltSize?: number;
+  };
   readonly oauth?: {
     loginConfirmedURL: string;
     google?: GoogleStrategyOptions;
