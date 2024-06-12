@@ -54,7 +54,7 @@ export const environment: EnvironmentBase = {
     ignoreUserAgents: [/googlebot/gi, /bingbot/gi],
     throttlers: [
       {
-        limit: 5,
+        limit: 10,
         ttl: 30_000,
       },
     ],
