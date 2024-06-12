@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
+import { ApiError } from '@zen/common';
 import { JwtPayload, RequestUser } from '@zen/nest-auth';
 import { Request } from 'express';
 import { Strategy } from 'passport-jwt';
@@ -21,8 +22,10 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         // HTTP request
         let authHeader = req.header('Authorization');
         if (!authHeader) authHeader = req.header('authorization');
-        if (!authHeader) throw new UnauthorizedException('No Authorization header found');
+        if (!authHeader) throw new UnauthorizedException(ApiError.JwtErrors.NO_HEADER);
 
+        if (authHeader.slice(0, 7) !== 'Bearer ')
+          throw new UnauthorizedException(ApiError.JwtErrors.NO_BEARER);
         // Strips `'Bearer '` and returns only the token
         return authHeader.substring(7);
       },
