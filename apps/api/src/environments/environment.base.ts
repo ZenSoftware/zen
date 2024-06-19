@@ -3,6 +3,7 @@ import { NestApplicationOptions } from '@nestjs/common';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
 import { UploadOptions } from 'graphql-upload/graphqlUploadExpress.js';
+import { HelmetOptions } from 'helmet';
 import { StrategyOptions as GoogleStrategyOptions } from 'passport-google-oauth20';
 
 export abstract class EnvironmentBase {
@@ -10,6 +11,7 @@ export abstract class EnvironmentBase {
   readonly production: boolean;
   readonly expressPort: string | number;
   readonly cors?: NestApplicationOptions['cors'];
+  readonly helmet?: boolean | HelmetOptions;
   readonly socketio: {
     port: number;
   };
