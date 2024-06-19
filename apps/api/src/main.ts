@@ -9,7 +9,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: environment.cors });
   app.enableShutdownHooks();
 
-  if (environment.production) app.use(helmet());
+  if (environment.helmet) {
+    if (typeof environment.helmet === 'object') app.use(helmet(environment.helmet));
+    else app.use(helmet());
+    Logger.log('Using helmet');
+  }
 
   const port = process.env.PORT || environment.expressPort;
 
