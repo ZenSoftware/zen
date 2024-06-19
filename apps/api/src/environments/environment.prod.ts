@@ -9,6 +9,7 @@ export const environment: EnvironmentBase = {
   siteUrl: 'https://site.com/#',
   production: true,
   expressPort: process.env.PORT as string,
+  helmet: true,
   publicRegistration: true,
   graphql: {
     subscriptions: true,

@@ -5,6 +5,7 @@ import { ThrottlerModuleOptions } from '@nestjs/throttler';
 import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-http';
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { UploadOptions } from 'graphql-upload/graphqlUploadExpress.js';
+import { HelmetOptions } from 'helmet';
 import { StrategyOptions as GoogleStrategyOptions } from 'passport-google-oauth20';
 
 export abstract class EnvironmentBase {
@@ -12,6 +13,7 @@ export abstract class EnvironmentBase {
   readonly production: boolean;
   readonly expressPort: string | number;
   readonly cors?: NestApplicationOptions['cors'];
+  readonly helmet?: boolean | HelmetOptions;
   readonly graphql: {
     readonly subscriptions?: boolean;
     readonly sandbox?: boolean;
