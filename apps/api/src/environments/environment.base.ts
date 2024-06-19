@@ -1,16 +1,17 @@
 import { MailerOptions } from '@nestjs-modules/mailer';
 import { NestApplicationOptions } from '@nestjs/common';
-import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { ThrottlerModuleOptions } from '@nestjs/throttler';
 import { UploadOptions } from 'graphql-upload/graphqlUploadExpress.js';
+import { HelmetOptions } from 'helmet';
 import { StrategyOptions as GoogleStrategyOptions } from 'passport-google-oauth20';
 
 export abstract class EnvironmentBase {
   readonly siteUrl: string;
   readonly production: boolean;
   readonly expressPort: string | number;
-  readonly cors?: CorsOptions;
+  readonly cors?: NestApplicationOptions['cors'];
+  readonly helmet?: boolean | HelmetOptions;
   readonly graphql: {
     readonly subscriptions?: boolean;
     readonly sandbox?: boolean;

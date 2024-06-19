@@ -11,6 +11,7 @@ export const environment: EnvironmentBase = {
   siteUrl: 'http://localhost:4200/#',
   production: false,
   expressPort: 7080,
+  helmet: false,
   publicRegistration: true,
   cors: { credentials: true, origin: true },
   graphql: {
