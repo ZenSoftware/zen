@@ -18,7 +18,7 @@ import {
   SimpleSpanProcessor,
 } from '@opentelemetry/sdk-trace-base';
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
-import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
+import { SEMRESATTRS_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
 import { PrismaInstrumentation } from '@prisma/instrumentation';
 
 import { environment } from './environments/environment';
@@ -28,7 +28,7 @@ const logger = new Logger('OTLP');
 if (environment.openTelemetry) {
   const resource = Resource.default().merge(
     new Resource({
-      [SemanticResourceAttributes.SERVICE_NAME]: environment.openTelemetry.serviceName,
+      [SEMRESATTRS_SERVICE_NAME]: environment.openTelemetry.serviceName,
     })
   );
 
