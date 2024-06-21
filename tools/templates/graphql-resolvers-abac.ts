@@ -116,7 +116,32 @@ export class ${name}Resolver {
     });
   }
 
-  /** @todo Implement createMany${name} and createMany${name}AndReturn */
+  @Mutation()
+  @CaslPolicy(ability => ability.can('create', '${name}'))
+  async createMany${name}(@Args() args: CreateOne${name}Args, @CaslAbility() ability: AppAbility) {
+    return this.prisma.$transaction(async tx => {
+      const records = await tx.${lowercase(name)}.createManyAndReturn(args);
+      for (const record of records) {
+        if (ability.cannot('create', subject('${name}', record))) throw new ForbiddenException();
+      }
+      return { count: records.length };
+    });
+  }
+
+  @Mutation()
+  @CaslPolicy(ability => ability.can('create', '${name}'))
+  async createMany${name}AndReturn(
+    @Args() args: CreateOne${name}Args,
+    @CaslAbility() ability: AppAbility
+  ) {
+    return this.prisma.$transaction(async tx => {
+      const records = await tx.${lowercase(name)}.createManyAndReturn(args);
+      for (const record of records) {
+        if (ability.cannot('create', subject('${name}', record))) throw new ForbiddenException();
+      }
+      return records;
+    });
+  }
 
   @Mutation()
   @CaslPolicy(ability => ability.can('update', '${name}'))
