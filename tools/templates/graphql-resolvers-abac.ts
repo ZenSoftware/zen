@@ -118,9 +118,15 @@ export class ${name}Resolver {
 
   @Mutation()
   @CaslPolicy(ability => ability.can('create', '${name}'))
-  async createMany${name}(@Args() args: CreateOne${name}Args, @CaslAbility() ability: AppAbility) {
+  async createMany${name}(
+    @Args() args: CreateOne${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
     return this.prisma.$transaction(async tx => {
-      const records = await tx.${lowercase(name)}.createManyAndReturn(args);
+      const records = await tx.${lowercase(name)}.createManyAndReturn(
+        this.prismaSelect.getArgs(args, info, this.authFields)
+      );
       for (const record of records) {
         if (ability.cannot('create', subject('${name}', record))) throw new ForbiddenException();
       }
@@ -132,10 +138,13 @@ export class ${name}Resolver {
   @CaslPolicy(ability => ability.can('create', '${name}'))
   async createMany${name}AndReturn(
     @Args() args: CreateOne${name}Args,
+    @Info() info: GraphQLResolveInfo,
     @CaslAbility() ability: AppAbility
   ) {
     return this.prisma.$transaction(async tx => {
-      const records = await tx.${lowercase(name)}.createManyAndReturn(args);
+      const records = await tx.${lowercase(name)}.createManyAndReturn(
+        this.prismaSelect.getArgs(args, info, this.authFields)
+      );
       for (const record of records) {
         if (ability.cannot('create', subject('${name}', record))) throw new ForbiddenException();
       }
