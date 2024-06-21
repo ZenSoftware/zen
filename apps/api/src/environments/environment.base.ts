@@ -40,6 +40,7 @@ export abstract class EnvironmentBase {
     loginConfirmedURL: string;
     google?: GoogleStrategyOptions;
   };
+  /** @see `deploy/README_OTLP.md` for details */
   readonly openTelemetry?:
     | false
     | {
