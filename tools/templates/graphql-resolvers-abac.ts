@@ -54,7 +54,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findUnique(
-      this.prismaSelect.getArgs(info, args, this.authFields)
+      this.prismaSelect.getArgs(args, info, this.authFields)
     );
     if (record && ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
     return record;
@@ -68,7 +68,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const record = await this.prisma.${lowercase(name)}.findFirst(
-      this.prismaSelect.getArgs(info, args, this.authFields)
+      this.prismaSelect.getArgs(args, info, this.authFields)
     );
     if (record && ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
     return record;
@@ -82,7 +82,7 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     const records = await this.prisma.${lowercase(name)}.findMany(
-      this.prismaSelect.getArgs(info, args, this.authFields)
+      this.prismaSelect.getArgs(args, info, this.authFields)
     );
     for (const record of records) {
       if (ability.cannot('read', subject('${name}', record))) throw new ForbiddenException();
@@ -110,13 +110,13 @@ export class ${name}Resolver {
     @CaslAbility() ability: AppAbility
   ) {
     return this.prisma.$transaction(async tx => {
-      const record = await tx.${lowercase(
-        name
-      )}.create(this.prismaSelect.getArgs(info, args, this.authFields));
+      const record = await tx.${lowercase(name)}.create(this.prismaSelect.getArgs(args, info, this.authFields));
       if (ability.cannot('create', subject('${name}', record))) throw new ForbiddenException();
       return record;
     });
   }
+
+  /** @todo Implement createMany${name} and createMany${name}AndReturn */
 
   @Mutation()
   @CaslPolicy(ability => ability.can('update', '${name}'))
@@ -135,21 +135,6 @@ export class ${name}Resolver {
   }
 
   @Mutation()
-  @CaslPolicy(ability => ability.can('delete', '${name}'))
-  async deleteOne${name}(
-    @Args() args: DeleteOne${name}Args,
-    @Info() info: GraphQLResolveInfo,
-    @CaslAbility() ability: AppAbility
-  ) {
-    const record = await this.prisma.${lowercase(name)}.findUnique({
-      where: args.where,
-      select: this.authFields.${name},
-    });
-    if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
-    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(args, info));
-  }
-
-  @Mutation()
   @CaslPolicy(ability => ability.can('create', '${name}') && ability.can('update', '${name}'))
   async upsertOne${name}(
     @Args() args: UpsertOne${name}Args,
@@ -165,13 +150,26 @@ export class ${name}Resolver {
       throw new ForbiddenException();
 
     return this.prisma.$transaction(async tx => {
-      const record = await tx.${lowercase(
-        name
-      )}.upsert(this.prismaSelect.getArgs(info, args, this.authFields));
+      const record = await tx.${lowercase(name)}.upsert(this.prismaSelect.getArgs(args, info, this.authFields));
       if (!existingRecord && ability.cannot('create', subject('${name}', record)))
         throw new ForbiddenException();
       return record;
     });
+  }
+
+  @Mutation()
+  @CaslPolicy(ability => ability.can('delete', '${name}'))
+  async deleteOne${name}(
+    @Args() args: DeleteOne${name}Args,
+    @Info() info: GraphQLResolveInfo,
+    @CaslAbility() ability: AppAbility
+  ) {
+    const record = await this.prisma.${lowercase(name)}.findUnique({
+      where: args.where,
+      select: this.authFields.${name},
+    });
+    if (ability.cannot('delete', subject('${name}', record as ${name}))) throw new ForbiddenException();
+    return this.prisma.${lowercase(name)}.delete(this.prismaSelect.getArgs(args, info));
   }
 
   @Mutation()
