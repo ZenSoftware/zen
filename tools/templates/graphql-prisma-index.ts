@@ -1,6 +1,5 @@
 export function GraphQLPrismaIndexTemplate(names: string[]) {
-  let indexSource = `// This file is generated automatically. Do not edit it manually.
-import { DocumentNode } from 'graphql';\n\n`;
+  let indexSource = `// This file is generated automatically. Do not edit it manually.\n\n`;
 
   // Construct the "resolvers" directory's "index.ts"
   indexSource += names
@@ -18,7 +17,7 @@ import { DocumentNode } from 'graphql';\n\n`;
     .map(n => `${n}TypeDefs`)
     .toString()
     .replace(/,/g, ',\n  ');
-  indexSource += `\n\nexport const PRISMA_TYPE_DEFS = [\n  ${bulkTypeDefExportString}\n].filter(x => x) as DocumentNode[];\n\n`;
+  indexSource += `\n\nexport const PRISMA_TYPE_DEFS: any[] = [\n  ${bulkTypeDefExportString}\n].filter(x => x)\n\n`;
 
   return indexSource;
 }
