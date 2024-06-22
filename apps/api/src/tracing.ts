@@ -32,36 +32,27 @@ if (environment.openTelemetry) {
     })
   );
 
-  const useTracer =
-    environment.openTelemetry.exporters?.traceConsole || environment.openTelemetry.exporters?.trace;
+  const options = environment.openTelemetry.exporters;
+  const useTracer = options?.traceConsole || options?.trace;
   const tracerProvider = useTracer ? new NodeTracerProvider({ resource }) : undefined;
 
-  if (environment.openTelemetry.exporters?.traceConsole) {
+  if (options?.traceConsole) {
     tracerProvider?.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
     logger.log('exporting traces to console');
   }
 
-  if (environment.openTelemetry.exporters?.trace) {
-    tracerProvider?.addSpanProcessor(
-      new BatchSpanProcessor(new OTLPTraceExporter(environment.openTelemetry.exporters.trace))
-    );
-    logger.log(
-      `exporting traces to ${
-        environment.openTelemetry.exporters.trace.url ?? 'http://localhost:4318/v1/traces'
-      }`
-    );
+  if (options?.trace) {
+    tracerProvider?.addSpanProcessor(new BatchSpanProcessor(new OTLPTraceExporter(options.trace)));
+    logger.log(`exporting traces to ${options.trace.url ?? 'http://localhost:4318/v1/traces'}`);
   }
   tracerProvider?.register();
 
   /**
    * Metrics
    */
-  const useMeter =
-    environment.openTelemetry.exporters?.meterConsole || environment.openTelemetry.exporters?.meter;
-
   const readers: MetricReader[] = [];
 
-  if (environment.openTelemetry.exporters?.meterConsole) {
+  if (options?.meterConsole) {
     readers.push(
       new PeriodicExportingMetricReader({
         exporter: new ConsoleMetricExporter(),
@@ -71,20 +62,17 @@ if (environment.openTelemetry) {
     logger.log('exporting metrics to console');
   }
 
-  if (environment.openTelemetry.exporters?.meter) {
+  if (options?.meter) {
     readers.push(
       new PeriodicExportingMetricReader({
-        exporter: new OTLPMetricExporter(environment.openTelemetry.exporters.meter),
+        exporter: new OTLPMetricExporter(options.meter),
         // exportIntervalMillis: 3000,
       })
     );
-    logger.log(
-      `exporting metrics to ${
-        environment.openTelemetry.exporters.meter.url ?? 'http://localhost:4318/v1/metrics'
-      }`
-    );
+    logger.log(`exporting metrics to ${options.meter.url ?? 'http://localhost:4318/v1/metrics'}`);
   }
 
+  const useMeter = options?.meterConsole || options?.meter;
   const meterProvider = useMeter ? new MeterProvider({ resource, readers }) : undefined;
 
   registerInstrumentations({
