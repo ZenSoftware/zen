@@ -74,11 +74,11 @@ export const environment: EnvironmentBase = {
   openTelemetry: {
     serviceName: 'zen-api',
     exporters: {
-      traceConsole: true,
+      traceConsole: false,
       trace: {
         url: 'http://localhost:4318/v1/traces',
       },
-      meterConsole: true,
+      meterConsole: false,
       meter: {
         url: 'http://localhost:4318/v1/metrics',
       },
