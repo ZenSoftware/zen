@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.cysharp.r3": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity#1.1.11",
+    "com.cysharp.r3": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity#1.1.12",
     "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
     "com.tayx.graphy": "https://github.com/Tayx94/graphy.git",
     "com.unity.addressables": "2.1.0",

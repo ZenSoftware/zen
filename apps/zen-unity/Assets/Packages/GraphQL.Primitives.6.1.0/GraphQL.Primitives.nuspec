@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>GraphQL.Primitives</id>
+    <version>6.1.0</version>
+    <authors>Deinok,Alexander Rose,graphql-dotnet</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>logo.64x64.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/graphql-dotnet/graphql-client</projectUrl>
+    <description>GraphQL basic types</description>
+    <tags>GraphQL</tags>
+    <repository type="git" url="https://github.com/graphql-dotnet/graphql-client" branch="tags/v6.1.0" commit="6236c9b2c6f3568f96a9f8e12aa6fb367321c068" />
+    <dependencies>
+      <group targetFramework="net6.0" />
+      <group targetFramework="net7.0" />
+      <group targetFramework="net8.0" />
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Buffers" version="4.5.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

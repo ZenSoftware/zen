@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GraphQL.Primitives</name>
+    </assembly>
+    <members>
+        <member name="T:GraphQL.GraphQLError">
+            <summary>
+            Represents a GraphQL Error of a GraphQL Query
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLError.Locations">
+            <summary>
+            The locations of the error
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLError.Message">
+            <summary>
+            The message of the error
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLError.Path">
+            <summary>
+            The Path of the error
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLError.Extensions">
+            <summary>
+            The extensions of the error
+            </summary>
+        </member>
+        <member name="M:GraphQL.GraphQLError.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object
+            </summary>
+            <param name="obj">The object to compare with this instance</param>
+            <returns>true if obj is an instance of <see cref="T:GraphQL.GraphQLError"/> and equals the value of the instance; otherwise, false</returns>
+        </member>
+        <member name="M:GraphQL.GraphQLError.Equals(GraphQL.GraphQLError)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object
+            </summary>
+            <param name="other">The object to compare with this instance</param>
+            <returns>true if obj is an instance of <see cref="T:GraphQL.GraphQLError"/> and equals the value of the instance; otherwise, false</returns>
+        </member>
+        <member name="M:GraphQL.GraphQLError.GetHashCode">
+            <summary>
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="M:GraphQL.GraphQLError.op_Equality(GraphQL.GraphQLError,GraphQL.GraphQLError)">
+            <summary>
+            Tests whether two specified <see cref="T:GraphQL.GraphQLError"/> instances are equivalent
+            </summary>
+            <param name="left">The <see cref="T:GraphQL.GraphQLError"/> instance that is to the left of the equality operator</param>
+            <param name="right">The <see cref="T:GraphQL.GraphQLError"/> instance that is to the right of the equality operator</param>
+            <returns>true if left and right are equal; otherwise, false</returns>
+        </member>
+        <member name="M:GraphQL.GraphQLError.op_Inequality(GraphQL.GraphQLError,GraphQL.GraphQLError)">
+            <summary>
+            Tests whether two specified <see cref="T:GraphQL.GraphQLError"/> instances are not equal
+            </summary>
+            <param name="left">The <see cref="T:GraphQL.GraphQLError"/> instance that is to the left of the not equal operator</param>
+            <param name="right">The <see cref="T:GraphQL.GraphQLError"/> instance that is to the right of the not equal operator</param>
+            <returns>true if left and right are unequal; otherwise, false</returns>
+        </member>
+        <member name="T:GraphQL.GraphQLLocation">
+            <summary>
+            Represents a GraphQL Location of a GraphQL Query
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLLocation.Column">
+            <summary>
+            The Column
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLLocation.Line">
+            <summary>
+            The Line
+            </summary>
+        </member>
+        <member name="M:GraphQL.GraphQLLocation.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object
+            </summary>
+            <param name="obj">The object to compare with this instance</param>
+            <returns>true if obj is an instance of <see cref="T:GraphQL.GraphQLLocation"/> and equals the value of the instance; otherwise, false</returns>
+        </member>
+        <member name="M:GraphQL.GraphQLLocation.Equals(GraphQL.GraphQLLocation)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object
+            </summary>
+            <param name="other">The object to compare with this instance</param>
+            <returns>true if obj is an instance of <see cref="T:GraphQL.GraphQLLocation"/> and equals the value of the instance; otherwise, false</returns>
+        </member>
+        <member name="M:GraphQL.GraphQLLocation.GetHashCode">
+            <summary>
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="M:GraphQL.GraphQLLocation.op_Equality(GraphQL.GraphQLLocation,GraphQL.GraphQLLocation)">
+            <summary>
+            Tests whether two specified <see cref="T:GraphQL.GraphQLLocation"/> instances are equivalent
+            </summary>
+            <param name="left">The <see cref="T:GraphQL.GraphQLLocation"/> instance that is to the left of the equality operator</param>
+            <param name="right">The <see cref="T:GraphQL.GraphQLLocation"/> instance that is to the right of the equality operator</param>
+            <returns>true if left and right are equal; otherwise, false</returns>
+        </member>
+        <member name="M:GraphQL.GraphQLLocation.op_Inequality(GraphQL.GraphQLLocation,GraphQL.GraphQLLocation)">
+            <summary>
+            Tests whether two specified <see cref="T:GraphQL.GraphQLLocation"/> instances are not equal
+            </summary>
+            <param name="left">The <see cref="T:GraphQL.GraphQLLocation"/> instance that is to the left of the not equal operator</param>
+            <param name="right">The <see cref="T:GraphQL.GraphQLLocation"/> instance that is to the right of the not equal operator</param>
+            <returns>true if left and right are unequal; otherwise, false</returns>
+        </member>
+        <member name="T:GraphQL.GraphQLQuery">
+            <summary>
+            Value object representing a GraphQL query string and storing the corresponding APQ hash. <br />
+            Use this to hold query strings you want to use more than once.
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLQuery.Text">
+            <summary>
+            The actual query string
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLQuery.Sha256Hash">
+            <summary>
+            The SHA256 hash used for the automatic persisted queries feature (APQ)
+            </summary>
+        </member>
+        <member name="T:GraphQL.GraphQLRequest">
+            <summary>
+            A GraphQL request
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLRequest.Query">
+            <summary>
+            The query string
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLRequest.OperationName">
+            <summary>
+            The operation to execute
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLRequest.Variables">
+            <summary>
+            Represents the request variables
+            </summary>
+        </member>
+        <member name="P:GraphQL.GraphQLRequest.Extensions">
+            <summary>
+            Represents the request extensions
+            </summary>
+        </member>
+        <member name="M:GraphQL.GraphQLRequest.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object
+            </summary>
+            <param name="obj">The object to compare with this instance</param>
+            <returns>true if obj is an instance of <see cref="T:GraphQL.GraphQLRequest"/> and equals the value of the instance; otherwise, false</returns>
+        </member>
+        <member name="M:GraphQL.GraphQLRequest.Equals(GraphQL.GraphQLRequest)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object
+            </summary>
+            <param name="other">The object to compare with this instance</param>
+            <returns>true if obj is an instance of <see cref="T:GraphQL.GraphQLRequest"/> and equals the value of the instance; otherwise, false</returns>
+        </member>
+        <member name="M:GraphQL.GraphQLRequest.GetHashCode">
+            <summary>
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="M:GraphQL.GraphQLRequest.op_Equality(GraphQL.GraphQLRequest,GraphQL.GraphQLRequest)">
+            <summary>
+            Tests whether two specified <see cref="T:GraphQL.GraphQLRequest"/> instances are equivalent
+            </summary>
+            <param name="left">The <see cref="T:GraphQL.GraphQLRequest"/> instance that is to the left of the equality operator</param>
+            <param name="right">The <see cref="T:GraphQL.GraphQLRequest"/> instance that is to the right of the equality operator</param>
+            <returns>true if left and right are equal; otherwise, false</returns>
+        </member>
+        <member name="M:GraphQL.GraphQLRequest.op_Inequality(GraphQL.GraphQLRequest,GraphQL.GraphQLRequest)">
+            <summary>
+            Tests whether two specified <see cref="T:GraphQL.GraphQLRequest"/> instances are not equal
+            </summary>
+            <param name="left">The <see cref="T:GraphQL.GraphQLRequest"/> instance that is to the left of the not equal operator</param>
+            <param name="right">The <see cref="T:GraphQL.GraphQLRequest"/> instance that is to the right of the not equal operator</param>
+            <returns>true if left and right are unequal; otherwise, false</returns>
+        </member>
+        <member name="T:GraphQL.Map">
+            <summary>
+            A type equivalent to a javascript map. Create a custom json converter for this class to customize your serializers behaviour
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute">
+            <summary>Stub version of the StringSyntaxAttribute, which was introduced in .NET 7</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String)">
+            <summary>Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"/> with the identifier of the syntax used.</summary>
+            <param name="syntax">The syntax identifier.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String,System.Object[])">
+            <summary>Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"/> with the identifier of the syntax used.</summary>
+            <param name="syntax">The syntax identifier.</param>
+            <param name="arguments">Optional arguments associated with the specific syntax employed.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Syntax">
+            <summary>Gets the identifier of the syntax used.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Arguments">
+            <summary>Optional arguments associated with the specific syntax employed.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CompositeFormat">
+            <summary>The syntax identifier for strings containing composite formats for string formatting.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateOnlyFormat">
+            <summary>The syntax identifier for strings containing date format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateTimeFormat">
+            <summary>The syntax identifier for strings containing date and time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.EnumFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Enum"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.GuidFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Guid"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Json">
+            <summary>The syntax identifier for strings containing JavaScript Object Notation (JSON).</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.NumericFormat">
+            <summary>The syntax identifier for strings containing numeric format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex">
+            <summary>The syntax identifier for strings containing regular expressions.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeOnlyFormat">
+            <summary>The syntax identifier for strings containing time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeSpanFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.TimeSpan"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Uri">
+            <summary>The syntax identifier for strings containing URIs.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Xml">
+            <summary>The syntax identifier for strings containing XML.</summary>
+        </member>
+    </members>
+</doc>
