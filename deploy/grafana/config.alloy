@@ -1,0 +1,10 @@
+local.file_match "local_files" {
+    path_targets = [{"__path__" = "C:\\z\\Misc\\EverQuest\\Logs\\*.txt"}]
+    sync_period = "5s"
+}
+
+loki.source.file "log_scrape" {
+    targets    = local.file_match.local_files.targets
+    forward_to = [loki.write.grafana_loki.receiver]
+    tail_from_end = true
+}
