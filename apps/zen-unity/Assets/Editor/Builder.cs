@@ -8,19 +8,9 @@ public class Builder
 {
     static void BuildWebGL(BuildPlayerOptions buildPlayerOptions)
     {
-        // Construct the output path
-        var unityProjectPath = Directory.GetCurrentDirectory();
-        var appsDir = Path.DirectorySeparatorChar + "apps" + Path.DirectorySeparatorChar;
-        var pathIndex = unityProjectPath.LastIndexOf(appsDir);
-        var rootPath = unityProjectPath.Substring(0, pathIndex);
-        var projectName = unityProjectPath.Substring(pathIndex + 6);
-        var endIndex = projectName.IndexOf(Path.DirectorySeparatorChar);
-        if (endIndex > 0)
-            projectName = projectName.Substring(0, projectName.IndexOf(Path.DirectorySeparatorChar));
-        var outputPath = Path.Combine(rootPath, "dist", "apps", projectName);
-
-        FileUtil.DeleteFileOrDirectory("ServerData/WebGL");
+        var outputPath = GetOutputPath();
         FileUtil.DeleteFileOrDirectory(outputPath);
+        FileUtil.DeleteFileOrDirectory("ServerData/WebGL");
 
         // Build web player
         buildPlayerOptions.locationPathName = outputPath;
@@ -32,6 +22,26 @@ public class Builder
             Debug.Log("Build succeeded: " + report.summary.totalSize + " bytes");
         else if (report.summary.result == BuildResult.Failed)
             Debug.Log("Build player failed");
+    }
+
+    /// <summary>
+    /// Constructs the output path presuming the Unity project resides within an Nx apps folder.
+    /// The monorepo usually places built items within the `dist` folder at the root.
+    /// This script gets the string that is the output path for built artifacts to be placed.
+    /// </summary>
+    /// <returns>The output path as a string</returns>
+    private static string GetOutputPath()
+    {
+        var unityProjectPath = Directory.GetCurrentDirectory();
+        var appsDir = Path.DirectorySeparatorChar + "apps" + Path.DirectorySeparatorChar;
+        var pathIndex = unityProjectPath.LastIndexOf(appsDir);
+        var rootPath = unityProjectPath.Substring(0, pathIndex);
+        var projectName = unityProjectPath.Substring(pathIndex + 6);
+        var endIndex = projectName.IndexOf(Path.DirectorySeparatorChar);
+        if (endIndex > 0)
+            projectName = projectName.Substring(0, projectName.IndexOf(Path.DirectorySeparatorChar));
+        var outputPath = Path.Combine(rootPath, "dist", "apps", projectName);
+        return outputPath;
     }
 
     [MenuItem("Build/Build WebGL Development")]
