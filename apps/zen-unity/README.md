@@ -55,7 +55,7 @@ Within Unity Hub, add the directory `apps/zen-unity` to open the project within 
 
 The Unity project must be open within the Unity Editor at least once for the command `pnpm dev:unity` to be able to compile the Unity app successfully.
 
-The NodeJS script that performs the compilation is expecting the `Unity` executable to exist within your system environment paths. Please ensure that you have added the Unity Editor's path to your environment paths. For my system running Windows 11, I added `C:\Program Files\Unity\Hub\Editor\6000.0.8f1\Editor` to my environment paths. Notice that the editor installed on your system should match the Unity project's version. The current version of the Unity project can be found at `apps/zen-unity/ProjectSettings/ProjectVersion.txt`.
+The NodeJS script that performs the compilation is expecting the `Unity` executable to exist within your system environment paths. Please ensure that you have added the Unity Editor's path to your environment paths. For my system running Windows 11, I added `C:\Program Files\Unity\Hub\Editor\6000.0.7f1\Editor` to my environment paths. Notice that the editor installed on your system should match the Unity project's version. The current version of the Unity project can be found at `apps/zen-unity/ProjectSettings/ProjectVersion.txt`.
 
 Once the project has been open within the Unity Editor at least once, close the Unity Editor and run the command `pnpm dev:unity`. This will compile the project and copy the compiled assets to `apps/portal/src/assets/unity`. Note that the Unity project cannot be open within the Unity Editor when compiling the project. Please ensure that it is closed before compiling.
 
