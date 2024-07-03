@@ -10,16 +10,12 @@ import { print } from 'graphql';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
 
 import { ConfigService } from '../config';
-import { PrismaService } from '../prisma';
 import { IContext } from './models';
 import { ALL_TYPE_DEFS } from './resolvers';
 
 @Injectable()
 export class GqlConfigService implements GqlOptionsFactory {
-  constructor(
-    private readonly config: ConfigService,
-    private readonly prisma: PrismaService
-  ) {}
+  constructor(private readonly config: ConfigService) {}
 
   createGqlOptions(): ApolloDriverConfig {
     const plugins: ApolloServerPlugin[] = [];
