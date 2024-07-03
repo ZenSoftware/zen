@@ -34,11 +34,11 @@ export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
   }
 
   getUserByClientId(clientId: string) {
-    return this.clientIdToUserMap.get(clientId) as UserWithAbility;
+    return this.clientIdToUserMap.get(clientId)!;
   }
 
   getClientsByUserId(userId: RequestUser['id']) {
-    return this.userIdToClientsMap.get(userId) as Socket[];
+    return this.userIdToClientsMap.get(userId)!;
   }
 
   afterInit() {
