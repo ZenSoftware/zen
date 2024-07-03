@@ -80,11 +80,10 @@ export class BaseGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
         ability,
       };
 
-      if (!user) throw new WsException('User not found');
       this.clientIdToUserMap.set(client.id, user);
 
       const userClients = this.userIdToClientsMap.get(user.id);
-      if (!userClients || userClients.length === 0) {
+      if (!userClients) {
         // Initialize user's client list
         this.userIdToClientsMap.set(user.id, [client]);
       } else {
