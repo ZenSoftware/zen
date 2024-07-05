@@ -50,14 +50,34 @@ export type User = { [key: string]: Resolver<any, any, any> } & {
 export type CreateManyUserAndReturnOutputType = {
   [key: string]: Resolver<any, any, any>;
 } & {
-  id?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string>;
-  createdAt?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, Date>;
-  username?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string | null>;
-  password?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string | null>;
-  email?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string>;
-  roles?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string[] | null>;
-  googleId?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, string | null>;
-  googleProfile?: Resolver<Client.Prisma.CreateManyUserAndReturnOutputType, {}, any | null>;
+  id?: Resolver<ReturnType<Client.Prisma.UserDelegate['createManyAndReturn']>, {}, string>;
+  createdAt?: Resolver<ReturnType<Client.Prisma.UserDelegate['createManyAndReturn']>, {}, Date>;
+  username?: Resolver<
+    ReturnType<Client.Prisma.UserDelegate['createManyAndReturn']>,
+    {},
+    string | null
+  >;
+  password?: Resolver<
+    ReturnType<Client.Prisma.UserDelegate['createManyAndReturn']>,
+    {},
+    string | null
+  >;
+  email?: Resolver<ReturnType<Client.Prisma.UserDelegate['createManyAndReturn']>, {}, string>;
+  roles?: Resolver<
+    ReturnType<Client.Prisma.UserDelegate['createManyAndReturn']>,
+    {},
+    string[] | null
+  >;
+  googleId?: Resolver<
+    ReturnType<Client.Prisma.UserDelegate['createManyAndReturn']>,
+    {},
+    string | null
+  >;
+  googleProfile?: Resolver<
+    ReturnType<Client.Prisma.UserDelegate['createManyAndReturn']>,
+    {},
+    any | null
+  >;
 };
 
 export type Query = { [key: string]: Resolver<any, any, any> } & {
@@ -82,7 +102,7 @@ export type Mutation = { [key: string]: Resolver<any, any, any> } & {
   createManyUserAndReturn?: Resolver<
     {},
     CreateManyUserAndReturnArgs,
-    Client.Prisma.CreateManyUserAndReturnOutputType[]
+    ReturnType<Client.Prisma.UserDelegate['createManyAndReturn']>
   >;
   deleteOneUser?: Resolver<{}, DeleteOneUserArgs, Client.User | null>;
   updateOneUser?: Resolver<{}, UpdateOneUserArgs, Client.User | null>;
