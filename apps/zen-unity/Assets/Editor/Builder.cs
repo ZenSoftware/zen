@@ -25,11 +25,10 @@ public class Builder
     }
 
     /// <summary>
-    /// Constructs the output path presuming the Unity project resides within an Nx apps folder.
-    /// The monorepo usually places built items within the `dist` folder at the root.
-    /// This script gets the string that is the output path for built artifacts to be placed.
+    /// Constructs the output path presuming the Unity project resides within an Nx `apps` folder.
+    /// Nx monorepos usually place built items within the `dist` folder at the root.
     /// </summary>
-    /// <returns>The output path as a string</returns>
+    /// <returns>The string that is the output path for build artifacts</returns>
     private static string GetOutputPath()
     {
         var unityProjectPath = Directory.GetCurrentDirectory();
