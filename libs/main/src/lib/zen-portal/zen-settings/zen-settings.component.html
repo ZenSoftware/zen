@@ -5,21 +5,22 @@
 
 <hr>
 
-@if(auth.accountInfo$ | async; as accountInfo) {
-  <div class="row">
-    <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-  
-      <div class="card mb-4 fs-4">
-        <div class="card-body">
-          <zen-account-info [accountInfo]="accountInfo"/>
-        </div>
-      </div>
-  
-      <div class="mb-4">
-        @if(accountInfo.hasPassword) {
-          <zen-password-change/>
-        }
+<div class="row">
+  <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+
+    <div class="card mb-4 fs-4">
+      <div class="card-body">
+        <zen-account-info/>
       </div>
     </div>
+    
+    @if(auth.accountInfo$ | async; as accountInfo) {
+      @if(accountInfo.hasPassword) {
+        <div class="mb-4">
+          <zen-password-change/>
+        </div>
+      }
+    }
+
   </div>
-}
+</div>
