@@ -1,16 +1,18 @@
-@if(accountInfo.username) {
-  <div>
-    <i class="fa-solid fa-fw fa-user me-2"></i>
-    <strong class="me-2">{{'USER_COLON' | translate}}</strong>
-    <span class="text-muted">{{accountInfo.username}}</span>
-  </div>
-}
+@if(auth.accountInfo$ | async; as accountInfo) {
+  @if(accountInfo.username) {
+    <div>
+      <i class="fa-solid fa-fw fa-user me-2"></i>
+      <strong class="me-2">{{'USER_COLON' | translate}}</strong>
+      <span class="text-muted">{{accountInfo.username}}</span>
+    </div>
+  }
 
-@if(accountInfo.googleProfile) {
-  <div>
-    @if(accountInfo.googleProfile.picture) {
-      <img src="{{accountInfo.googleProfile.picture}}" referrerpolicy="no-referrer" class="me-2" style="max-width: 100px; max-height: 100px;">
-    }
-    {{accountInfo.googleProfile.email}}
-  </div>
+  @if(accountInfo.googleProfile) {
+    <div>
+      @if(accountInfo.googleProfile.picture) {
+        <img src="{{accountInfo.googleProfile.picture}}" referrerpolicy="no-referrer" class="me-2" style="max-width: 100px; max-height: 100px;">
+      }
+      {{accountInfo.googleProfile.email}}
+    </div>
+  }
 }

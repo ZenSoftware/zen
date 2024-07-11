@@ -1,13 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { AccountInfo } from '@zen/graphql';
+
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'zen-account-info',
   templateUrl: 'zen-account-info.component.html',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [AsyncPipe, TranslateModule],
 })
 export class ZenAccountInfoComponent {
-  @Input({ required: true }) accountInfo!: AccountInfo;
+  constructor(public auth: AuthService) {}
 }
