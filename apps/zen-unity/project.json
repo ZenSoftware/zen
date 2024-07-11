@@ -46,8 +46,8 @@
       "executor": "@zen/nx-unity-plugin:generate-graphql",
       "options": {
         "schema": "http://localhost:7080/graphql",
-        "outputPath": "apps/zen-unity/Assets/_Project/GraphQL/Generated",
-        "documents": "apps/zen-unity/Assets/_Project/**/*.graphql",
+        "outputPath": "apps/zen-unity/Assets/_Project/Scripts/GraphQL/Generated",
+        "documents": "apps/zen-unity/Assets/_Project/Scripts/**/*.graphql",
         "namespace": "Zen.GraphQL",
         "overwrite": true,
         "scalars": { "DateTime": "DateTime", "Json": "object", "Upload": "object" }

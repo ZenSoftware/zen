@@ -286,6 +286,36 @@ namespace Zen.GraphQL {
     }
     #endregion
     
+    #region CreateManyUserAndReturnOutputType
+    public class CreateManyUserAndReturnOutputType {
+      #region members
+      [JsonProperty("createdAt")]
+      public DateTime createdAt { get; set; }
+    
+      [JsonProperty("email")]
+      public string email { get; set; }
+    
+      [JsonProperty("googleId")]
+      public string googleId { get; set; }
+    
+      [JsonProperty("googleProfile")]
+      public object googleProfile { get; set; }
+    
+      [JsonProperty("id")]
+      public string id { get; set; }
+    
+      [JsonProperty("password")]
+      public string password { get; set; }
+    
+      [JsonProperty("roles")]
+      public List<string> roles { get; set; }
+    
+      [JsonProperty("username")]
+      public string username { get; set; }
+      #endregion
+    }
+    #endregion
+    
     #region DateTimeFieldUpdateOperationsInput
     public class DateTimeFieldUpdateOperationsInput {
       #region members
@@ -565,6 +595,12 @@ namespace Zen.GraphQL {
     
       [JsonProperty("authRegister")]
       public AuthSession authRegister { get; set; }
+    
+      [JsonProperty("createManyUser")]
+      public BatchPayload createManyUser { get; set; }
+    
+      [JsonProperty("createManyUserAndReturn")]
+      public List<User> createManyUserAndReturn { get; set; }
     
       [JsonProperty("createOneUser")]
       public User createOneUser { get; set; }
@@ -1701,6 +1737,45 @@ namespace Zen.GraphQL {
         }
         return d;
       }
+      #endregion
+    }
+    #endregion
+    
+    #region UserGroupByOutputType
+    public class UserGroupByOutputType {
+      #region members
+      [JsonProperty("_count")]
+      public UserCountAggregateOutputType _count { get; set; }
+    
+      [JsonProperty("_max")]
+      public UserMaxAggregateOutputType _max { get; set; }
+    
+      [JsonProperty("_min")]
+      public UserMinAggregateOutputType _min { get; set; }
+    
+      [JsonProperty("createdAt")]
+      public DateTime createdAt { get; set; }
+    
+      [JsonProperty("email")]
+      public string email { get; set; }
+    
+      [JsonProperty("googleId")]
+      public string googleId { get; set; }
+    
+      [JsonProperty("googleProfile")]
+      public object googleProfile { get; set; }
+    
+      [JsonProperty("id")]
+      public string id { get; set; }
+    
+      [JsonProperty("password")]
+      public string password { get; set; }
+    
+      [JsonProperty("roles")]
+      public List<string> roles { get; set; }
+    
+      [JsonProperty("username")]
+      public string username { get; set; }
       #endregion
     }
     #endregion
