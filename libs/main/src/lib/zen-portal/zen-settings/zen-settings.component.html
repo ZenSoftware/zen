@@ -14,13 +14,7 @@
       </div>
     </div>
     
-    @if(auth.accountInfo$ | async; as accountInfo) {
-      @if(accountInfo.hasPassword) {
-        <div class="mb-4">
-          <zen-password-change/>
-        </div>
-      }
-    }
+    <zen-password-change/>
 
   </div>
 </div>
