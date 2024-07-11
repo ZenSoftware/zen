@@ -2,7 +2,7 @@ export interface GenerateGqlExecutorSchema {
   outputPath?: string;
   schema?: string;
   documents?: string[];
-  namespaceName?: string;
+  namespace?: string;
   overwrite?: boolean;
   scalars?: object;
 }

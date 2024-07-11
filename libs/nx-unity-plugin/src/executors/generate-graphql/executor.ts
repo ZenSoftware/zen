@@ -16,7 +16,7 @@ export default async function runExecutor(options: GenerateGqlExecutorSchema) {
     schema: options.schema,
     documents: options.documents,
     config: {
-      namespaceName: options.namespaceName,
+      namespace: options.namespace,
     },
     generates: {
       [OPERATIONS_PATH]: {

@@ -48,7 +48,7 @@
         "schema": "http://localhost:7080/graphql",
         "outputPath": "apps/zen-unity/Assets/Scripts/GraphQL/Generated",
         "documents": "apps/zen-unity/Assets/Scripts/**/*.graphql",
-        "namespaceName": "Zen.GraphQL",
+        "namespace": "Zen.GraphQL",
         "overwrite": true,
         "scalars": { "DateTime": "DateTime", "Json": "object", "Upload": "object" }
       }
