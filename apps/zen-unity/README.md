@@ -12,7 +12,7 @@ cd zen
 git remote remove origin
 git remote add zen https://github.com/ZenSoftware/zen.git
 
-# Fetch add checkout the unity branch
+# Fetch and checkout the unity branch
 git fetch zen unity
 git checkout unity
 
