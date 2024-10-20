@@ -1,5 +1,5 @@
 {
-  "name": "@zen/main",
+  "name": "main",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/main/src",
   "prefix": "zen",

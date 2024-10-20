@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: '@zen/nest-auth',
+  displayName: 'nest-auth',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

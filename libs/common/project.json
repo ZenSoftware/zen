@@ -1,5 +1,5 @@
 {
-  "name": "@zen/common",
+  "name": "common",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/common/src",
   "projectType": "library",
