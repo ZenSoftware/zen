@@ -1,10 +1,10 @@
 {
-  "name": "@zen/auth",
+  "name": "auth",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/auth/src",
   "prefix": "zen",
-  "tags": [],
   "projectType": "library",
+  "tags": [],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -14,15 +14,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
       "options": {
         "port": 4400,
         "configDir": "libs/auth/.storybook",
-        "browserTarget": "@zen/auth:build-storybook",
+        "browserTarget": "auth:build-storybook",
         "compodoc": false,
         "styles": ["apps/portal/src/styles.scss"]
       },
@@ -36,9 +35,9 @@
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "outputDir": "dist/storybook/@zen/auth",
+        "outputDir": "dist/storybook/auth",
         "configDir": "libs/auth/.storybook",
-        "browserTarget": "@zen/auth:build-storybook",
+        "browserTarget": "auth:build-storybook",
         "compodoc": false,
         "styles": ["apps/portal/src/styles.scss"]
       },
@@ -52,18 +51,6 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "test-storybook -c libs/auth/.storybook --url=http://localhost:4400"
-      }
-    },
-    "static-storybook": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "@zen/auth:build-storybook",
-        "staticFilePath": "dist/storybook/@zen/auth"
-      },
-      "configurations": {
-        "ci": {
-          "buildTarget": "@zen/auth:build-storybook:ci"
-        }
       }
     }
   }

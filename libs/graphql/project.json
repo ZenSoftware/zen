@@ -1,10 +1,10 @@
 {
-  "name": "@zen/graphql",
+  "name": "graphql",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/graphql/src",
   "prefix": "zen",
-  "tags": [],
   "projectType": "library",
+  "tags": [],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -14,8 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     }
   }
 }
