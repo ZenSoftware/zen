@@ -3,7 +3,7 @@ import { SampleSubscriptionGQL } from '@zen/graphql';
 import gql from 'graphql-tag';
 import { Subscription } from 'rxjs';
 
-gql`
+const SampleSubscriptionDoc = gql`
   subscription SampleSubscription {
     sampleSubscription {
       message
