@@ -7,7 +7,7 @@ import { ZenLoadingComponent, ZenSnackbarError, ZenSnackbarModule } from '@zen/c
 import { SampleUploadGQL } from '@zen/graphql';
 import gql from 'graphql-tag';
 
-gql`
+const SampleUploadDoc = gql`
   mutation SampleUpload($file: Upload!) {
     sampleUpload(file: $file)
   }
