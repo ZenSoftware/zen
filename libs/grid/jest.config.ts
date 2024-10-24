@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'grid',
   preset: '../../jest.preset.js',

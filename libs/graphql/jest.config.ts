@@ -1,6 +1,5 @@
-/* eslint-disable */
 export default {
-  displayName: '@zen/graphql',
+  displayName: 'graphql',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/libs/graphql',
