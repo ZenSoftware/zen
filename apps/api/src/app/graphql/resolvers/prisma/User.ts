@@ -1,4 +1,4 @@
-import { UseGuards } from '@nestjs/common';
+import { HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { RolesGuard } from '@zen/nest-auth';
 import { GraphQLResolveInfo } from 'graphql';
@@ -42,6 +42,11 @@ export class UserResolver {
 
   @ResolveField()
   async rules(@Parent() parent: User) {
+    if (parent.roles === undefined)
+      throw new HttpException(
+        "User's CASL rules requires the roles field to be selected for within the query. The user's roles field is undefined and thus cannot construct the user's CASL rules.",
+        HttpStatus.PRECONDITION_REQUIRED
+      );
     const ability = await this.auth.createAbility(parent);
     return ability.rules;
   }

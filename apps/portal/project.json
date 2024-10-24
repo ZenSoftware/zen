@@ -16,7 +16,13 @@
         "polyfills": ["zone.js", "@angular/localize/init"],
         "tsConfig": "apps/portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
+        "assets": [
+          "apps/portal/src/assets",
+          {
+            "glob": "**/*",
+            "input": "apps/portal/public"
+          }
+        ],
         "styles": ["apps/portal/src/styles.scss"],
         "scripts": []
       },
@@ -47,7 +53,8 @@
           "extractLicenses": false,
           "sourceMap": true
         }
-      }
+      },
+      "defaultConfiguration": "production"
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
@@ -68,14 +75,22 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/portal/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "portal:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/portal/browser",
+        "spa": true
       }
     }
   }

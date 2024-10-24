@@ -1,13 +1,10 @@
 {
-  "name": "@zen/nest-auth",
+  "name": "nest-auth",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/nest-auth/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -15,6 +12,5 @@
         "jestConfig": "libs/nest-auth/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }
