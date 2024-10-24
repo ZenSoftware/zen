@@ -26,13 +26,13 @@ namespace Zen.GraphQL {
     public class AggregateUser {
       #region members
       [JsonProperty("_count")]
-      public UserCountAggregateOutputType _count { get; set; }
+      public UserCountAggregateOutputType count { get; set; }
     
       [JsonProperty("_max")]
-      public UserMaxAggregateOutputType _max { get; set; }
+      public UserMaxAggregateOutputType max { get; set; }
     
       [JsonProperty("_min")]
-      public UserMinAggregateOutputType _min { get; set; }
+      public UserMinAggregateOutputType min { get; set; }
       #endregion
     }
     #endregion
@@ -393,11 +393,11 @@ namespace Zen.GraphQL {
     #region DateTimeWithAggregatesFilter
     public class DateTimeWithAggregatesFilter {
       #region members
-      public NestedIntFilter _count { get; set; }
+      public NestedIntFilter count { get; set; }
     
-      public NestedDateTimeFilter _max { get; set; }
+      public NestedDateTimeFilter max { get; set; }
     
-      public NestedDateTimeFilter _min { get; set; }
+      public NestedDateTimeFilter min { get; set; }
     
       public DateTime? equals { get; set; }
     
@@ -447,10 +447,10 @@ namespace Zen.GraphQL {
       public string email { get; set; }
     
       [JsonProperty("family_name")]
-      public string family_name { get; set; }
+      public string familyName { get; set; }
     
       [JsonProperty("given_name")]
-      public string given_name { get; set; }
+      public string givenName { get; set; }
     
       [JsonProperty("locale")]
       public string locale { get; set; }
@@ -473,11 +473,11 @@ namespace Zen.GraphQL {
     #region JsonNullableFilter
     public class JsonNullableFilter {
       #region members
-      public object array_contains { get; set; }
+      public object arrayContains { get; set; }
     
-      public object array_ends_with { get; set; }
+      public object arrayEndsWith { get; set; }
     
-      public object array_starts_with { get; set; }
+      public object arrayStartsWith { get; set; }
     
       public object equals { get; set; }
     
@@ -493,11 +493,11 @@ namespace Zen.GraphQL {
     
       public List<string> path { get; set; }
     
-      public string string_contains { get; set; }
+      public string stringContains { get; set; }
     
-      public string string_ends_with { get; set; }
+      public string stringEndsWith { get; set; }
     
-      public string string_starts_with { get; set; }
+      public string stringStartsWith { get; set; }
       #endregion
     
       #region methods
@@ -527,17 +527,17 @@ namespace Zen.GraphQL {
     #region JsonNullableWithAggregatesFilter
     public class JsonNullableWithAggregatesFilter {
       #region members
-      public NestedIntNullableFilter _count { get; set; }
+      public NestedIntNullableFilter count { get; set; }
     
-      public NestedJsonNullableFilter _max { get; set; }
+      public NestedJsonNullableFilter max { get; set; }
     
-      public NestedJsonNullableFilter _min { get; set; }
+      public NestedJsonNullableFilter min { get; set; }
     
-      public object array_contains { get; set; }
+      public object arrayContains { get; set; }
     
-      public object array_ends_with { get; set; }
+      public object arrayEndsWith { get; set; }
     
-      public object array_starts_with { get; set; }
+      public object arrayStartsWith { get; set; }
     
       public object equals { get; set; }
     
@@ -553,11 +553,11 @@ namespace Zen.GraphQL {
     
       public List<string> path { get; set; }
     
-      public string string_contains { get; set; }
+      public string stringContains { get; set; }
     
-      public string string_ends_with { get; set; }
+      public string stringEndsWith { get; set; }
     
-      public string string_starts_with { get; set; }
+      public string stringStartsWith { get; set; }
       #endregion
     
       #region methods
@@ -676,11 +676,11 @@ namespace Zen.GraphQL {
     #region NestedDateTimeWithAggregatesFilter
     public class NestedDateTimeWithAggregatesFilter {
       #region members
-      public NestedIntFilter _count { get; set; }
+      public NestedIntFilter count { get; set; }
     
-      public NestedDateTimeFilter _max { get; set; }
+      public NestedDateTimeFilter max { get; set; }
     
-      public NestedDateTimeFilter _min { get; set; }
+      public NestedDateTimeFilter min { get; set; }
     
       public DateTime? equals { get; set; }
     
@@ -814,11 +814,11 @@ namespace Zen.GraphQL {
     #region NestedJsonNullableFilter
     public class NestedJsonNullableFilter {
       #region members
-      public object array_contains { get; set; }
+      public object arrayContains { get; set; }
     
-      public object array_ends_with { get; set; }
+      public object arrayEndsWith { get; set; }
     
-      public object array_starts_with { get; set; }
+      public object arrayStartsWith { get; set; }
     
       public object equals { get; set; }
     
@@ -834,11 +834,11 @@ namespace Zen.GraphQL {
     
       public List<string> path { get; set; }
     
-      public string string_contains { get; set; }
+      public string stringContains { get; set; }
     
-      public string string_ends_with { get; set; }
+      public string stringEndsWith { get; set; }
     
-      public string string_starts_with { get; set; }
+      public string stringStartsWith { get; set; }
       #endregion
     
       #region methods
@@ -968,11 +968,11 @@ namespace Zen.GraphQL {
     #region NestedStringNullableWithAggregatesFilter
     public class NestedStringNullableWithAggregatesFilter {
       #region members
-      public NestedIntNullableFilter _count { get; set; }
+      public NestedIntNullableFilter count { get; set; }
     
-      public NestedStringNullableFilter _max { get; set; }
+      public NestedStringNullableFilter max { get; set; }
     
-      public NestedStringNullableFilter _min { get; set; }
+      public NestedStringNullableFilter min { get; set; }
     
       public string contains { get; set; }
     
@@ -1024,11 +1024,11 @@ namespace Zen.GraphQL {
     #region NestedStringWithAggregatesFilter
     public class NestedStringWithAggregatesFilter {
       #region members
-      public NestedIntFilter _count { get; set; }
+      public NestedIntFilter count { get; set; }
     
-      public NestedStringFilter _max { get; set; }
+      public NestedStringFilter max { get; set; }
     
-      public NestedStringFilter _min { get; set; }
+      public NestedStringFilter min { get; set; }
     
       public string contains { get; set; }
     
@@ -1378,11 +1378,11 @@ namespace Zen.GraphQL {
     #region StringNullableWithAggregatesFilter
     public class StringNullableWithAggregatesFilter {
       #region members
-      public NestedIntNullableFilter _count { get; set; }
+      public NestedIntNullableFilter count { get; set; }
     
-      public NestedStringNullableFilter _max { get; set; }
+      public NestedStringNullableFilter max { get; set; }
     
-      public NestedStringNullableFilter _min { get; set; }
+      public NestedStringNullableFilter min { get; set; }
     
       public string contains { get; set; }
     
@@ -1436,11 +1436,11 @@ namespace Zen.GraphQL {
     #region StringWithAggregatesFilter
     public class StringWithAggregatesFilter {
       #region members
-      public NestedIntFilter _count { get; set; }
+      public NestedIntFilter count { get; set; }
     
-      public NestedStringFilter _max { get; set; }
+      public NestedStringFilter max { get; set; }
     
-      public NestedStringFilter _min { get; set; }
+      public NestedStringFilter min { get; set; }
     
       public string contains { get; set; }
     
@@ -1544,7 +1544,7 @@ namespace Zen.GraphQL {
     public class UserCountAggregateOutputType {
       #region members
       [JsonProperty("_all")]
-      public int _all { get; set; }
+      public int all { get; set; }
     
       [JsonProperty("createdAt")]
       public int createdAt { get; set; }
@@ -1745,13 +1745,13 @@ namespace Zen.GraphQL {
     public class UserGroupByOutputType {
       #region members
       [JsonProperty("_count")]
-      public UserCountAggregateOutputType _count { get; set; }
+      public UserCountAggregateOutputType count { get; set; }
     
       [JsonProperty("_max")]
-      public UserMaxAggregateOutputType _max { get; set; }
+      public UserMaxAggregateOutputType max { get; set; }
     
       [JsonProperty("_min")]
-      public UserMinAggregateOutputType _min { get; set; }
+      public UserMinAggregateOutputType min { get; set; }
     
       [JsonProperty("createdAt")]
       public DateTime createdAt { get; set; }
@@ -1911,11 +1911,11 @@ namespace Zen.GraphQL {
     #region UserOrderByWithAggregationInput
     public class UserOrderByWithAggregationInput {
       #region members
-      public UserCountOrderByAggregateInput _count { get; set; }
+      public UserCountOrderByAggregateInput count { get; set; }
     
-      public UserMaxOrderByAggregateInput _max { get; set; }
+      public UserMaxOrderByAggregateInput max { get; set; }
     
-      public UserMinOrderByAggregateInput _min { get; set; }
+      public UserMinOrderByAggregateInput min { get; set; }
     
       public SortOrder? createdAt { get; set; }
     
@@ -2016,11 +2016,11 @@ namespace Zen.GraphQL {
     #region UserScalarWhereWithAggregatesInput
     public class UserScalarWhereWithAggregatesInput {
       #region members
-      public List<UserScalarWhereWithAggregatesInput> AND { get; set; }
+      public List<UserScalarWhereWithAggregatesInput> and { get; set; }
     
-      public List<UserScalarWhereWithAggregatesInput> NOT { get; set; }
+      public List<UserScalarWhereWithAggregatesInput> not { get; set; }
     
-      public List<UserScalarWhereWithAggregatesInput> OR { get; set; }
+      public List<UserScalarWhereWithAggregatesInput> or { get; set; }
     
       public DateTimeWithAggregatesFilter createdAt { get; set; }
     
@@ -2320,11 +2320,11 @@ namespace Zen.GraphQL {
     #region UserWhereInput
     public class UserWhereInput {
       #region members
-      public List<UserWhereInput> AND { get; set; }
+      public List<UserWhereInput> and { get; set; }
     
-      public List<UserWhereInput> NOT { get; set; }
+      public List<UserWhereInput> not { get; set; }
     
-      public List<UserWhereInput> OR { get; set; }
+      public List<UserWhereInput> or { get; set; }
     
       public DateTimeFilter createdAt { get; set; }
     
@@ -2370,11 +2370,11 @@ namespace Zen.GraphQL {
     #region UserWhereUniqueInput
     public class UserWhereUniqueInput {
       #region members
-      public List<UserWhereInput> AND { get; set; }
+      public List<UserWhereInput> and { get; set; }
     
-      public List<UserWhereInput> NOT { get; set; }
+      public List<UserWhereInput> not { get; set; }
     
-      public List<UserWhereInput> OR { get; set; }
+      public List<UserWhereInput> or { get; set; }
     
       public DateTimeFilter createdAt { get; set; }
     

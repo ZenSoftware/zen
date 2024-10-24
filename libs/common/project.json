@@ -1,8 +1,9 @@
 {
-  "name": "@zen/common",
+  "name": "common",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/common/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
@@ -14,10 +15,6 @@
         "assets": ["libs/common/*.md"]
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
-    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -25,6 +22,5 @@
         "jestConfig": "libs/common/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

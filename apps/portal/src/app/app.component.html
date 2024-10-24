@@ -53,7 +53,7 @@
 
       <hr>
 
-      <a mat-list-item (click)="auth.logout()">
+      <a mat-list-item (click)="auth.logout()" (keydown.enter)="auth.logout()" tabindex="0">
         <i class="fa-solid fa-fw fa-sign-in-alt me-2"></i>
         Logout
       </a>

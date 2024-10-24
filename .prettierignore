@@ -6,7 +6,6 @@
 /libs/graphql/src/lib/apollo-angular.ts
 /theme/bootstrap/_light-variables.scss
 /theme/bootstrap/_dark-variables.scss
-.angular
 *.html
 *.yml
 *.yaml
@@ -17,3 +16,4 @@
 /coverage
 /.nx/cache
 /.nx/workspace-data
+.angular

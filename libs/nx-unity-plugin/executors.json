@@ -1,24 +1,24 @@
 {
   "executors": {
     "build": {
-      "implementation": "./src/executors/build/executor",
-      "schema": "./src/executors/build/schema.json",
+      "implementation": "./src/build/executor",
+      "schema": "./src/build/schema.json",
       "description": "build executor"
     },
-    "test": {
-      "implementation": "./src/executors/test/executor",
-      "schema": "./src/executors/test/schema.json",
-      "description": "test executor"
-    },
     "format": {
-      "implementation": "./src/executors/format/executor",
-      "schema": "./src/executors/format/schema.json",
+      "implementation": "./src/format/executor",
+      "schema": "./src/format/schema.json",
       "description": "format executor"
     },
     "generate-graphql": {
-      "implementation": "./src/executors/generate-graphql/executor",
-      "schema": "./src/executors/generate-graphql/schema.json",
+      "implementation": "./src/generate-graphql/executor",
+      "schema": "./src/generate-graphql/schema.json",
       "description": "generate-graphql executor"
+    },
+    "test": {
+      "implementation": "./src/test/executor",
+      "schema": "./src/test/schema.json",
+      "description": "test executor"
     }
   }
 }
