@@ -4,11 +4,10 @@
     "outDir": "../../dist/out-tsc",
     "declaration": true,
     "types": ["node"],
-    "emitDecoratorMetadata": true,
     "target": "ES2022",
-    "lib": ["ES2022"],
+    "strictNullChecks": true,
     "noImplicitAny": true,
-    "strict": true,
+    "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true
   },
