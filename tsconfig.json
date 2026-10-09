@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/portal-e2e"
+    }
+  ],
+  "compilerOptions": {}
+}

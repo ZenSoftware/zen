@@ -1,7 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test(`submit button has 'Login' for text`, async ({ page }) => {
-  await page.goto('/login');
+test('has title', async ({ page }) => {
+  await page.goto('/');
 
-  expect(await page.locator('[type=submit]').innerText()).toContain('Login');
+  // Expect h1 to contain a substring.
+  expect(await page.locator('h1').innerText()).toContain('Welcome');
 });

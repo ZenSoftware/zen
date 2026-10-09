@@ -1,4 +1,5 @@
 # See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
 .env
 apps/**/prisma/generated
 uploads
@@ -46,4 +47,15 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
+.claude/worktrees
+.claude/settings.local.json
+.nx/polygraph
+.nx/self-healing
+.nx/migrate-runs
 .angular
+
+__screenshots__/
+
+test-output
+vitest.config.*.timestamp*
+.vitest

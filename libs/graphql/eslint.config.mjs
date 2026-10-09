@@ -1,13 +1,10 @@
 import nx from '@nx/eslint-plugin';
-import { globalIgnores } from 'eslint/config';
-
 import baseConfig from '../../eslint.config.mjs';
 
 export default [
-  globalIgnores(['libs/graphql/src/lib/apollo-angular.ts']),
-  ...baseConfig,
   ...nx.configs['flat/angular'],
   ...nx.configs['flat/angular-template'],
+  ...baseConfig,
   {
     files: ['**/*.ts'],
     rules: {
