@@ -22,7 +22,12 @@
             "input": "apps/portal/public"
           }
         ],
-        "styles": ["apps/portal/src/styles.scss"]
+        "styles": ["apps/portal/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "sass": {
+            "silenceDeprecations": ["color-functions", "global-builtin", "import"]
+          }
+        }
       },
       "configurations": {
         "production": {
