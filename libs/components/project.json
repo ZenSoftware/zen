@@ -8,6 +8,43 @@
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/components/.storybook",
+        "browserTarget": "components:build-storybook",
+        "compodoc": false,
+        "styles": ["apps/portal/src/styles.scss"]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/components",
+        "configDir": "libs/components/.storybook",
+        "browserTarget": "components:build-storybook",
+        "compodoc": false,
+        "styles": ["apps/portal/src/styles.scss"]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/components/.storybook --url=http://localhost:4400"
+      }
     }
   }
 }
