@@ -1,8 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('/');
+test(`submit button has 'Login' for text`, async ({ page }) => {
+  await page.goto('/login');
 
-  // Expect h1 to contain a substring.
-  expect(await page.locator('h1').innerText()).toContain('Welcome');
+  expect(await page.locator('[type=submit]').innerText()).toContain('Login');
 });
