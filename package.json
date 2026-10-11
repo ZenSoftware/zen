@@ -119,7 +119,7 @@
     "@types/apollo-upload-client": "^17.0.5",
     "@types/express": "^5.0.6",
     "@types/graphql-upload": "^17.0.0",
-    "@types/node": "^24.19.1",
+    "@types/node": "^24.19.2",
     "@types/nodemailer": "^6.4.24",
     "@types/passport": "^1.0.17",
     "@types/passport-google-oauth20": "^2.0.17",
