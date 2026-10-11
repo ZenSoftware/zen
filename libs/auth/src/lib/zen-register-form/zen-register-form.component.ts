@@ -20,7 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { ApolloError } from '@apollo/client/errors';
+import { ServerError } from '@apollo/client/errors';
 import { Environment } from '@zen/common';
 import { ZenLoadingComponent } from '@zen/components';
 import { verticalAccordion } from '@zen/components/animations';
@@ -140,23 +140,23 @@ export class ZenRegisterFormComponent implements AfterContentInit, OnDestroy {
       this.generalError = false;
 
       this.authRegisterGQL
-        .mutate(
-          {
+        .mutate({
+          variables: {
             data: {
               username: this.username.value.trim(),
               email: this.email.value.trim(),
               password: this.password.value,
             },
           },
-          { fetchPolicy: 'no-cache' }
-        )
+          fetchPolicy: 'no-cache',
+        })
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
             this.registered.emit((<AuthRegister>data).authRegister);
           },
 
-          error: (error: ApolloError) => {
+          error: (error: ServerError) => {
             this.loading = false;
             this.form.enable();
 

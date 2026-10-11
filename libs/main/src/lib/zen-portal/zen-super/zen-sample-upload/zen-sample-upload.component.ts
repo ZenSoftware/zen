@@ -48,7 +48,9 @@ export class ZenSampleUploadComponent {
 
     this.sampleUploadGQL
       .mutate({
-        file: this.file,
+        variables: {
+          file: this.file,
+        },
       })
       .subscribe({
         next: () => {
