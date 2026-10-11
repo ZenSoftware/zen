@@ -12,7 +12,7 @@ import {
 } from '@zen/graphql';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
-import { BehaviorSubject, Subscription, interval, map, share, throwError, timer } from 'rxjs';
+import { BehaviorSubject, Subscription, interval, map, throwError, timer } from 'rxjs';
 import { retry, tap } from 'rxjs/operators';
 
 import { token } from './token.signal';
@@ -71,10 +71,9 @@ export class AuthService {
   #env = inject(Environment);
 
   constructor() {
-    this.#accountInfo$ = this.#getAccountInfoGQL.watch().valueChanges.pipe(
-      map(({ data }) => data?.accountInfo),
-      share()
-    );
+    this.#accountInfo$ = this.#getAccountInfoGQL
+      .watch()
+      .valueChanges.pipe(map(({ data }) => data?.accountInfo));
 
     if (this.#validSession) {
       try {
