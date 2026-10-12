@@ -156,7 +156,7 @@
     "@typescript-eslint/utils": "^8.71.1",
     "@vitest/coverage-v8": "^4.1.11",
     "@vitest/ui": "^4.1.11",
-    "angular-eslint": "^22.5.0",
+    "angular-eslint": "^22.6.0",
     "apollo-angular": "^14.2.0",
     "apollo-upload-client": "^20.0.0",
     "bootstrap": "~5.3.8",
