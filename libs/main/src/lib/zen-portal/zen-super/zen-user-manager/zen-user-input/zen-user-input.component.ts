@@ -91,8 +91,10 @@ export class ZenUserInputComponent {
 
         this.updateOneUserGQL
           .mutate({
-            where: { id: this.data.item.id },
-            data: updateInput,
+            variables: {
+              where: { id: this.data.item.id },
+              data: updateInput,
+            },
           })
           .subscribe({
             next: () => {

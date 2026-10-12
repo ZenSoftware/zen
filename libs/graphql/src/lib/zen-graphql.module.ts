@@ -1,30 +1,23 @@
 /* eslint-disable  @typescript-eslint/no-non-null-assertion */
 
 import { ModuleWithProviders, NgModule, Optional, SkipSelf, inject } from '@angular/core';
-import {
-  ApolloClientOptions,
-  ApolloLink,
-  InMemoryCache,
-  InMemoryCacheConfig,
-  NormalizedCacheObject,
-  split,
-} from '@apollo/client/core';
+import { ApolloClient, ApolloLink, InMemoryCache, InMemoryCacheConfig } from '@apollo/client/core';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
-import { getMainDefinition, getOperationName } from '@apollo/client/utilities';
+import { getMainDefinition } from '@apollo/client/utilities';
+import { getOperationName } from '@apollo/client/utilities/internal';
 import { provideApollo } from 'apollo-angular';
-import { BatchOptions, HttpBatchLink, HttpBatchLinkHandler } from 'apollo-angular/http';
-import { createUploadLink } from 'apollo-upload-client';
+import { HttpBatchLink, HttpBatchLinkHandler } from 'apollo-angular/http';
+import UploadHttpLink from 'apollo-upload-client/UploadHttpLink.mjs';
 import { OperationDefinitionNode } from 'graphql';
 import { ClientOptions, createClient } from 'graphql-ws';
 
 export abstract class GraphQLOptions {
-  resolvers?: ApolloClientOptions<NormalizedCacheObject>['resolvers'];
   cacheOptions?: InMemoryCacheConfig;
-  uploadOptions?: createUploadLink.UploadLinkOptions & {
+  uploadOptions?: ConstructorParameters<typeof UploadHttpLink>[0] & {
     /** An array of operation names to be sent via the upload link. */
     operationNames: string[];
   };
-  batchOptions?: BatchOptions;
+  batchOptions?: HttpBatchLink.Options;
   websocketOptions?: ClientOptions;
 }
 
@@ -51,7 +44,7 @@ export class ZenGraphQLModule {
   }
 }
 
-export function createApollo(): ApolloClientOptions<NormalizedCacheObject> {
+export function createApollo(): ApolloClient.Options {
   const httpBatchLink = inject(HttpBatchLink);
   const options = inject(GraphQLOptions);
 
@@ -70,9 +63,9 @@ export function createApollo(): ApolloClientOptions<NormalizedCacheObject> {
           'GraphQLOptions.uploadOptions.operationNames required when providing uploadOptions to filter the operations to be sent as multi-part requests.'
         );
 
-      const upload_link = createUploadLink(options.uploadOptions);
+      const upload_link = new UploadHttpLink(options.uploadOptions);
 
-      const upload_batch_link = split(
+      const upload_batch_link = ApolloLink.split(
         ({ query }) =>
           options.uploadOptions!.operationNames.includes(getOperationName(query) as string),
         upload_link,
@@ -85,7 +78,7 @@ export function createApollo(): ApolloClientOptions<NormalizedCacheObject> {
     const wsClient = createClient(options.websocketOptions);
     const websocket_link = new GraphQLWsLink(wsClient);
 
-    const websocket_batch_link = split(
+    const websocket_batch_link = ApolloLink.split(
       ({ query }) => {
         const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
         return kind === 'OperationDefinition' && operation === 'subscription';
@@ -97,9 +90,9 @@ export function createApollo(): ApolloClientOptions<NormalizedCacheObject> {
     if (!options.uploadOptions) {
       link = websocket_batch_link;
     } else {
-      const upload_link = createUploadLink(options.uploadOptions);
+      const upload_link = new UploadHttpLink(options.uploadOptions);
 
-      const upload_websocket_batch_link = split(
+      const upload_websocket_batch_link = ApolloLink.split(
         ({ query }) =>
           options.uploadOptions!.operationNames.includes(getOperationName(query) as string),
         upload_link,
@@ -113,6 +106,5 @@ export function createApollo(): ApolloClientOptions<NormalizedCacheObject> {
   return {
     link,
     cache: new InMemoryCache(options.cacheOptions),
-    resolvers: options.resolvers,
   };
 }

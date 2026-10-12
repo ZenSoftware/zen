@@ -71,7 +71,7 @@ export interface ZenGridSettings<T extends object> {
   typename: string;
   findManyGQL: Apollo.Query<any, any>;
   findManyCountGQL: Apollo.Query<any, any>;
-  deleteOneGQL?: Apollo.Mutation;
+  deleteOneGQL?: Apollo.Mutation<any, any>;
   defaultSettings: KendoGridSettings<T>;
 
   /**
@@ -239,10 +239,12 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
           next: ({ data, loading }) => {
             this.loading = loading;
 
-            const result = Object.values(data)[0] as T[];
-            this.#data = result ?? [];
-            this.dataStateChangeHandler();
-            this.changeDetectorRef.detectChanges();
+            if (data) {
+              const result = Object.values(data)[0] as T[];
+              this.#data = result ?? [];
+              this.dataStateChangeHandler();
+              this.changeDetectorRef.detectChanges();
+            }
           },
           error: e => {
             this.loading = false;
@@ -281,10 +283,10 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
           this.loading = true;
 
           this.settings.deleteOneGQL
-            ?.mutate(
-              { where: { id: event.dataItem[this.settings.keyField as string] } },
-              {
-                update: cache => {
+            ?.mutate({
+              variables: {
+                where: { id: event.dataItem[this.settings.keyField as string] },
+                update: (cache: any) => {
                   if (this.settings.process === 'local') {
                     const data = cache.readQuery({
                       query: this.settings.findManyGQL.document,
@@ -321,8 +323,8 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
                     });
                   }
                 },
-              }
-            )
+              },
+            })
             .subscribe({
               next: () => {
                 this.snackBar.open('Deleted', '', { duration: 1500 });
@@ -389,20 +391,22 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       if (this.#countSub) this.#countSub.unsubscribe();
 
       this.#countSub = this.settings.findManyCountGQL
-        .watch({ where: variables.where })
+        .watch({ variables: { where: variables.where } })
         .valueChanges.subscribe(({ data }) => {
-          this.gridData.total = Object.values(data)[0] as number;
+          if (data) this.gridData.total = Object.values(data)[0] as number;
         });
 
       if (this.#querySub) this.#querySub.unsubscribe();
 
       this.loading = true;
 
-      this.#querySub = this.settings.findManyGQL.watch(variables).valueChanges.subscribe({
+      this.#querySub = this.settings.findManyGQL.watch({ variables }).valueChanges.subscribe({
         next: ({ data, loading }) => {
           this.loading = loading;
-          this.gridData.data = Object.values(data)[0] as T[];
-          this.changeDetectorRef.detectChanges();
+          if (data) {
+            this.gridData.data = Object.values(data)[0] as T[];
+            this.changeDetectorRef.detectChanges();
+          }
         },
         error: e => {
           this.loading = false;

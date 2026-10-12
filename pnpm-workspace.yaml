@@ -1,0 +1,17 @@
+packages:
+  - 'packages/*'
+allowBuilds:
+  '@swc/core': true
+  nx: true
+  esbuild: false
+  lmdb: false
+  msgpackr-extract: false
+  '@parcel/watcher': false
+  unrs-resolver: true
+  '@nestjs/core': false
+  '@apollo/protobufjs': true
+  '@prisma/client': true
+  '@prisma/engines': true
+  prisma: true
+  yarn: true
+  '@progress/kendo-licensing': true

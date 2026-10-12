@@ -103,7 +103,7 @@
       <kendo-grid-command-column [width]="48" class="text-center px-0">
         <ng-template kendoGridCellTemplate let-dataItem>
           @if(showEditIf(dataItem)) {
-            <button kendoGridEditCommand [primary]="true" [disabled]="disableEdit" title="Edit" class="px-2 my-0 ms-0 me-1">
+            <button kendoGridEditCommand [disabled]="disableEdit" title="Edit" class="px-2 my-0 ms-0 me-1">
               <i class="fa-solid fa-fw fa-pencil-alt"></i>
             </button>
           }

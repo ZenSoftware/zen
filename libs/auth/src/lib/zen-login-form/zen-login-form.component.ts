@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
-import { ApolloError } from '@apollo/client/errors';
+import { ServerError } from '@apollo/client/errors';
 import { Environment } from '@zen/common';
 import { ZenLoadingComponent } from '@zen/components';
 import { verticalAccordion } from '@zen/components/animations';
@@ -116,7 +116,7 @@ export class ZenLoginFormComponent implements OnInit, AfterContentInit, OnDestro
             this.loggedIn.emit();
           },
 
-          error: (error: ApolloError) => {
+          error: (error: ServerError) => {
             this.loading = false;
             this.generalError = true;
             this.form.enable();
