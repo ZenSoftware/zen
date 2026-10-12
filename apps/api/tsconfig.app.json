@@ -8,6 +8,11 @@
     "emitDecoratorMetadata": true,
     "target": "es2021",
     "moduleResolution": "bundler",
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
     "strictPropertyInitialization": false
   },
   "include": ["src/**/*.ts"],
