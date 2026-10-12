@@ -15,3 +15,4 @@ allowBuilds:
   prisma: true
   yarn: true
   '@progress/kendo-licensing': true
+  canvas: true
