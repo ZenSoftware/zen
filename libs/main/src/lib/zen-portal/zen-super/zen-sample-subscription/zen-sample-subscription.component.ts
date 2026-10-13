@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, OnDestroy, inject, signal } from '@angular/core';
 import { SampleSubscriptionGQL } from '@zen/graphql';
 import gql from 'graphql-tag';
 import { Subscription } from 'rxjs';
@@ -18,13 +18,13 @@ gql`
   standalone: true,
 })
 export class ZenSampleSubscriptionComponent implements OnDestroy {
-  recentValue?: string;
+  recentValue = signal<string | undefined>('');
   #sub: Subscription;
   private sampleSubscriptionGQL = inject(SampleSubscriptionGQL);
 
   constructor() {
     this.#sub = this.sampleSubscriptionGQL.subscribe().subscribe(({ data }) => {
-      this.recentValue = data?.sampleSubscription.message;
+      this.recentValue.set(data?.sampleSubscription.message);
     });
   }
 

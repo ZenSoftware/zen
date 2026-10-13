@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApolloError } from '@apollo/client/errors';
+import { ServerError } from '@apollo/client/errors';
 import { PureAbility } from '@casl/ability';
 import { ApiError, Environment } from '@zen/common';
 import {
@@ -12,7 +12,7 @@ import {
 } from '@zen/graphql';
 import { Apollo } from 'apollo-angular';
 import ls from 'localstorage-slim';
-import { BehaviorSubject, Subscription, interval, map, share, throwError, timer } from 'rxjs';
+import { BehaviorSubject, Subscription, interval, map, throwError, timer } from 'rxjs';
 import { retry, tap } from 'rxjs/operators';
 
 import { token } from './token.signal';
@@ -71,10 +71,9 @@ export class AuthService {
   #env = inject(Environment);
 
   constructor() {
-    this.#accountInfo$ = this.#getAccountInfoGQL.watch().valueChanges.pipe(
-      map(({ data }) => data.accountInfo),
-      share()
-    );
+    this.#accountInfo$ = this.#getAccountInfoGQL
+      .watch()
+      .valueChanges.pipe(map(({ data }) => data?.accountInfo));
 
     if (this.#validSession) {
       try {
@@ -120,9 +119,9 @@ export class AuthService {
   }
 
   login(data: AuthLoginInput) {
-    return this.#authLoginGQL.fetch({ data }, { fetchPolicy: 'no-cache' }).pipe(
-      tap(({ data: { authLogin } }) => {
-        this.setSession(authLogin);
+    return this.#authLoginGQL.fetch({ variables: { data }, fetchPolicy: 'no-cache' }).pipe(
+      tap(({ data }) => {
+        if (data) this.setSession(data.authLogin);
       })
     );
   }
@@ -146,7 +145,7 @@ export class AuthService {
 
     this.#userId = authSession.userId;
 
-    this.#ability.update(authSession.rules);
+    this.#ability.update(authSession.rules as any);
 
     token.set(authSession.token);
 
@@ -248,10 +247,12 @@ export class AuthService {
 
   #exchangeToken() {
     this.#authExchangeTokenGQL
-      .fetch(
-        { data: { rememberMe: !!ls.get<boolean>(LocalStorageKey.rememberMe) } },
-        { fetchPolicy: 'no-cache' }
-      )
+      .fetch({
+        variables: {
+          data: { rememberMe: !!ls.get<boolean>(LocalStorageKey.rememberMe) },
+        },
+        fetchPolicy: 'no-cache',
+      })
       .pipe(
         retry({
           delay: this.#retryStrategy({
@@ -261,11 +262,13 @@ export class AuthService {
         })
       )
       .subscribe({
-        next: ({ data: { authExchangeToken } }) => {
-          this.setSession(authExchangeToken);
-          if (!this.#env.production) console.log('Exchanged token');
+        next: ({ data }) => {
+          if (data) {
+            this.setSession(data.authExchangeToken);
+            if (!this.#env.production) console.log('Exchanged token');
+          }
         },
-        error: (error: ApolloError | string) => {
+        error: (error: ServerError | string) => {
           console.error('Exchange token failed', error);
           this.logout();
         },
@@ -299,7 +302,7 @@ export class AuthService {
     delay?: number;
     excludeStatusCodes?: string[];
   }) {
-    return (error: ApolloError, retryCount: number) => {
+    return (error: ServerError, retryCount: number) => {
       const excludedStatusFound = !!excludeStatusCodes.find(exclude => exclude === error.message);
 
       if (error?.message === ApiError.Codes.USER_NOT_FOUND) {

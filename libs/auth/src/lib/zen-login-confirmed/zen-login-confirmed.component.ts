@@ -31,18 +31,18 @@ export class ZenLoginConfirmedComponent {
     token.set(queryToken);
 
     this.authExchangeTokenGQL
-      .fetch(
-        {
+      .fetch({
+        variables: {
           data: { rememberMe: true },
         },
-        {
-          fetchPolicy: 'no-cache',
-        }
-      )
+        fetchPolicy: 'no-cache',
+      })
       .subscribe({
-        next: ({ data: { authExchangeToken } }) => {
-          this.auth.setSession(authExchangeToken);
-          this.router.navigateByUrl(this.env.url.loginRedirect);
+        next: ({ data }) => {
+          if (data) {
+            this.auth.setSession(data.authExchangeToken);
+            this.router.navigateByUrl(this.env.url.loginRedirect);
+          }
         },
         error: e => {
           this.snackbarError.open(e);
