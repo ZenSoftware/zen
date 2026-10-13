@@ -2,10 +2,25 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": [],
-    "moduleResolution": "bundler"
+    "types": []
   },
-  "files": ["src/main.ts"],
-  "include": ["src/**/*.d.ts"],
-  "exclude": ["jest.config.ts", "src/**/*.test.ts", "src/**/*.spec.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"],
+  "references": [
+    {
+      "path": "../../libs/main"
+    },
+    {
+      "path": "../../libs/graphql"
+    },
+    {
+      "path": "../../libs/common"
+    },
+    {
+      "path": "../../libs/components"
+    },
+    {
+      "path": "../../libs/auth"
+    }
+  ]
 }

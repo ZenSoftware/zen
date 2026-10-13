@@ -58,8 +58,8 @@ export class ZenGenerator {
   async run() {
     console.log(`------------------------ @paljs/generator ------------------------`);
     const palConfig = this.config.palConfig;
-    const palOutPath = palConfig.backend.output
-      ? palConfig.backend.output
+    const palOutPath = palConfig.backend!.output
+      ? palConfig.backend!.output
       : path.join(this.config.apiOutPath, 'paljs');
 
     if (existsSync(palOutPath)) {
@@ -67,7 +67,7 @@ export class ZenGenerator {
     }
 
     const pal = new PalGenerator(
-      { name: palConfig.backend.generator, schemaPath: palConfig.schema },
+      { name: palConfig.backend!.generator, schemaPath: palConfig.schema as string },
       palConfig.backend
     );
     await pal.run();
@@ -113,7 +113,7 @@ export class ZenGenerator {
     }
 
     let wroteCount = 0;
-    if (this.config.auth.scheme === 'ABAC') {
+    if (this.config.auth!.scheme === 'ABAC') {
       for (const prismaName of prismaNames) {
         const outFile = path.join(prismaResolversPath, `${prismaName}.ts`);
 
