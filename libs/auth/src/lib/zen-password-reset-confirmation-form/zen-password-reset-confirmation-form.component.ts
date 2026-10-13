@@ -135,15 +135,15 @@ export class ZenPasswordResetConfirmationFormComponent implements AfterContentIn
       this.generalError = false;
 
       this.authPasswordResetConfirmationGQL
-        .mutate(
-          {
+        .mutate({
+          variables: {
             data: {
               newPassword: this.password.value,
               token: this.token as string,
             },
           },
-          { fetchPolicy: 'no-cache' }
-        )
+          fetchPolicy: 'no-cache',
+        })
         .subscribe({
           next: ({ data }) => {
             this.loading = false;
