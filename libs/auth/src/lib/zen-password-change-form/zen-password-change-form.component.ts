@@ -18,7 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { ApolloError } from '@apollo/client/errors';
+import { ServerError } from '@apollo/client/errors';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ZenLoadingComponent } from '@zen/components';
 import { verticalAccordion } from '@zen/components/animations';
@@ -144,22 +144,22 @@ export class ZenPasswordChangeFormComponent implements OnDestroy {
       this.generalError = false;
 
       this.authPasswordChangeGQL
-        .mutate(
-          {
+        .mutate({
+          variables: {
             data: {
               oldPassword: this.oldPassword.value,
               newPassword: this.newPassword.value,
             },
           },
-          { fetchPolicy: 'no-cache' }
-        )
+          fetchPolicy: 'no-cache',
+        })
         .subscribe({
           next: () => {
             this.loading = false;
             this.completed = true;
             this.changed.emit();
           },
-          error: (error: ApolloError) => {
+          error: (error: ServerError) => {
             this.generalError = true;
             this.loading = false;
             this.form.enable();

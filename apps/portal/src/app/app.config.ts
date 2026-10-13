@@ -22,7 +22,7 @@ import { environment } from '../environments/environment';
 import { APP_ROUTES } from './app.routes';
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, 'i18n/', '.json');
 }
 
 const currentLang = ls.get<string>(CURRENT_LANG_LS_KEY);

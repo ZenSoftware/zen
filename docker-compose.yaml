@@ -1,12 +1,12 @@
 services:
   postgres:
-    image: postgres:17
+    image: postgres:18
     restart: always
     environment:
       POSTGRES_USER: zenadmin
       POSTGRES_PASSWORD: temp
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql
     ports:
       - "5433:5432"
 volumes:

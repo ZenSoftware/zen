@@ -1,14 +1,8 @@
 {
   "recommendations": [
-    "Angular.ng-template",
     "nrwl.angular-console",
     "esbenp.prettier-vscode",
-    "firsttris.vscode-jest-runner",
     "dbaeumer.vscode-eslint",
-    "apollographql.vscode-apollo",
-    "Prisma.prisma",
-    "KnisterPeter.vscode-commitizen",
-    "eamodio.gitlens",
     "ms-playwright.playwright"
   ]
 }

@@ -2,15 +2,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "nest",
+      "name": "Debug api",
       "type": "node",
       "request": "attach",
       "port": 9229,
       "restart": true
     },
     {
-      "name": "angular",
-      "type": "chrome",
+      "name": "Debug portal",
+      "type": "msedge",
       "request": "launch",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}"

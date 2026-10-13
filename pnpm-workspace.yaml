@@ -1,0 +1,15 @@
+packages:
+  - "packages/*"
+allowBuilds:
+  "@apollo/protobufjs": true
+  "@parcel/watcher": true
+  "@prisma/client": true
+  "@prisma/engines": true
+  "@swc/core": true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true
+  nx: true
+  prisma: true
+  unrs-resolver: true
+  yarn: true
