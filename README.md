@@ -128,11 +128,6 @@ pnpm start
 - [x] HTML canvas branch demonstrating integration of [babylon.js](https://www.babylonjs.com/) & [Fabric.js](http://fabricjs.com/).
 - [x] Internationalization branch with all text extracted into JSON files ready to be translated. [@ngx-translate](https://github.com/ngx-translate/core) was chosen over [@angular/localize](https://angular.io/api/localize) due to @angular/localize inability to change languages at runtime.
 - [x] Unity branch demonstrating how to compile a [Unity WebGL](https://docs.unity3d.com/6000.1/Documentation/Manual/webgl-intro.html) web player as an Angular component.
-  * The payload for the Unity app is currently weighing in at ~109MB uncompressed and ~12.8MB compressed with brotli.
-  * Custom Nx scripts have been integrated to generate C# GraphQL types for communicating with the API server via GraphQL.  This enables end-to-end typings.
-  * The user management system has been unified across the entire monorepo and thus simplifies the creation of unique user experiences as a real-time web application.  This starter kit now has the ability to render real-time scenes and load in models dynamically at runtime via Unity's Addressable system.  It has never been easier to create exceptional enterprise grade metaverse experiences that are wired up to your own fleet of game servers delivering content on-demand.
-  * A project management tool and game engine like Unity is necessary for complex projects that scales well as the number of team members grows.  Unity is continuing to invest heavily into the web and has recently integrated experimental support for the new WebGPU standard that is nearing completion in being fully standardized.  This enables utilizing Compute Shaders to tap into the massive parallelization power of the GPU.
-  * The development experience is exquisite via the included recommended set of VSCode extensions and Unity as an Nx C# project.  Making for a cross-platform development experience that is extraordinarily simple to set up and maintain.
 
 ---
 

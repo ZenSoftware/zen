@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { ElementRef, ViewChild, inject } from '@angular/core';
+import { ElementRef, ViewChild, inject, signal } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -24,7 +24,7 @@ gql`
 export class ZenSampleUploadComponent {
   @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
   fileName = '';
-  isUploading = false;
+  isUploading = signal(false);
   private snackbar = inject(MatSnackBar);
   private snackbarError = inject(ZenSnackbarError);
   private sampleUploadGQL = inject(SampleUploadGQL);
@@ -44,21 +44,23 @@ export class ZenSampleUploadComponent {
   }
 
   upload() {
-    this.isUploading = true;
+    this.isUploading.set(true);
 
     this.sampleUploadGQL
       .mutate({
-        file: this.file,
+        variables: {
+          file: this.file,
+        },
       })
       .subscribe({
         next: () => {
-          this.isUploading = false;
+          this.isUploading.set(false);
           this.snackbar.open(`Uploaded: ${this.fileName}`, undefined, { duration: 3000 });
           this.reset();
         },
 
         error: e => {
-          this.isUploading = false;
+          this.isUploading.set(false);
           this.snackbarError.open(e);
         },
       });

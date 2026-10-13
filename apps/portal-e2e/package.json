@@ -1,0 +1,8 @@
+{
+  "name": "@zen/portal-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "portal-e2e"
+  }
+}
