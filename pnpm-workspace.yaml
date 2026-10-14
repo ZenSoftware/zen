@@ -13,5 +13,5 @@ allowBuilds:
   prisma: true
   unrs-resolver: true
   yarn: true
-  '@progress/kendo-licensing': true
-  canvas: true
+  "@progress/kendo-licensing": true
+  core-js: true
