@@ -15,3 +15,4 @@ allowBuilds:
   yarn: true
   "@progress/kendo-licensing": true
   core-js: true
+  canvas: true
