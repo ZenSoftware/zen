@@ -17,7 +17,7 @@
     drag: mode === GridMode.SelectMany
   }"
   [selectedKeys]="selection" [kendoGridSelectBy]="selectBy" 
-  [loading]="loading"
+  [loading]="loading()"
   [rowClass]="rowClass"
   [groupable]="!!gridSettings.showGroups" [group]="groups"
   [kendoGridExpandDetailsBy]="expandDetailsBy"
@@ -33,7 +33,7 @@
         <div class="row m-0 w-100">
           <div class="col-auto p-0">
             @if(showAdd) {
-              <button kendoGridAddCommand title="New" [disabled]="loading || disableAdd" [ngClass]="{'k-primary': !disableAdd}" class="me-2">
+              <button kendoGridAddCommand title="New" [disabled]="loading() || disableAdd" [ngClass]="{'k-primary': !disableAdd}" class="me-2">
                 <i class="fa-solid fa-fw fa-plus"></i>
               </button>
             }
@@ -42,7 +42,7 @@
               <button (click)="gridSettings.showGroups = !gridSettings.showGroups" title="Toggle Group Visibility"
               matBadge="{{groupLength}}" matBadgeSize="small" matBadgeColor="accent"
               class="k-button k-button-md k-rounded-md k-button-rectangle k-button-solid-base k-button-solid me-2" [ngClass]="{'k-primary': groupLength > 0 && !disableGroupButton}"
-              [disabled]="loading || disableGroupButton">
+              [disabled]="loading() || disableGroupButton">
                 <i class="fa-solid fa-fw fa-layer-group"></i>
               </button>
             }
@@ -50,7 +50,7 @@
             @if(showExports) {
               <button [matMenuTriggerFor]="menu" title="Export"
               class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
-              [disabled]="loading || disableExports">
+              [disabled]="loading() || disableExports">
                 <i class="fa-solid fa-fw fa-file-export"></i>
               </button>
             }
@@ -70,7 +70,7 @@
             @if(showRefresh) {
               <button (click)="refresh()" title="Refresh"
               class="k-primary k-button k-grid-add-command k-button-md k-rounded-md k-button-solid-base k-button-solid me-2"
-              [disabled]="loading || disableRefresh">
+              [disabled]="loading() || disableRefresh">
                 <i class="fa-solid fa-fw fa-sync"></i>
               </button>
             }

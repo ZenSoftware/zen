@@ -11,6 +11,7 @@ import {
   TemplateRef,
   ViewChild,
   inject,
+  signal,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -18,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ApolloCache } from '@apollo/client';
 import { PureAbility } from '@casl/ability';
 import {
   AddEvent,
@@ -143,7 +145,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() disableRefresh = false;
   @Input() disableReset = false;
   @Input() height = 680;
-  @Input() loading = true;
+  @Input() loading = signal(true);
   @Input() mode = GridMode.Default;
   @Input() reorderable = true;
   @Input() resizable = true;
@@ -220,7 +222,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
   ngAfterContentInit() {
     if (!this.settings) {
-      this.loading = false;
+      this.loading.set(false);
       this.showToolbar = false;
       console.warn('No <zen-grid> settings provided');
     } else {
@@ -237,7 +239,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
       if (this.settings.process === 'local') {
         this.#querySub = this.settings.findManyGQL.watch().valueChanges.subscribe({
           next: ({ data, loading }) => {
-            this.loading = loading;
+            this.loading.set(loading);
 
             if (data) {
               const result = Object.values(data)[0] as T[];
@@ -247,7 +249,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
             }
           },
           error: e => {
-            this.loading = false;
+            this.loading.set(false);
             this.grid.noRecordsTemplate = new NoRecordsTemplateDirective(this.errorTemplate);
             console.error(e);
           },
@@ -275,64 +277,64 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   removeHandler(event: RemoveEvent) {
     this.remove.emit(event);
 
-    if (!this.loading && this.settings.deleteOneGQL) {
+    if (!this.loading() && this.settings.deleteOneGQL) {
       if (this.#confirmDeleteSub) this.#confirmDeleteSub.unsubscribe();
 
       this.#confirmDeleteSub = this.zenConfirmModal.open().subscribe(confirmed => {
         if (confirmed) {
-          this.loading = true;
+          this.loading.set(true);
 
           this.settings.deleteOneGQL
             ?.mutate({
               variables: {
                 where: { id: event.dataItem[this.settings.keyField as string] },
-                update: (cache: any) => {
-                  if (this.settings.process === 'local') {
-                    const data = cache.readQuery({
+              },
+              update: (cache: ApolloCache) => {
+                if (this.settings.process === 'local') {
+                  const data = cache.readQuery({
+                    query: this.settings.findManyGQL.document,
+                  });
+
+                  const key = Object.keys(data)[0];
+
+                  if (key) {
+                    const newData = data[key].filter(
+                      (item: { [key: string]: any }) =>
+                        item[this.settings!.keyField as string] !==
+                        event.dataItem[this.settings.keyField as string]
+                    );
+
+                    const updateData = {
                       query: this.settings.findManyGQL.document,
-                    }) as any;
+                      data: {} as { [key: string]: unknown },
+                    };
 
-                    const key = Object.keys(data)[0];
+                    updateData.data[key] = newData;
 
-                    if (key) {
-                      const newData = data[key].filter(
-                        (item: { [key: string]: any }) =>
-                          item[this.settings.keyField as string] !==
-                          event.dataItem[this.settings.keyField as string]
-                      );
-
-                      const updateData = {
-                        query: this.settings.findManyGQL.document,
-                        data: {} as { [key: string]: unknown },
-                      };
-
-                      updateData.data[key] = newData;
-
-                      cache.writeQuery(updateData);
-                    }
-                  } else {
-                    cache.evict({
-                      id:
-                        this.settings.typename +
-                        ':' +
-                        event.dataItem[this.settings.keyField as string],
-                    });
-
-                    cache.evict({
-                      fieldName: `findMany${this.settings.typename}Count`,
-                    });
+                    cache.writeQuery(updateData);
                   }
-                },
+                } else {
+                  cache.evict({
+                    id:
+                      this.settings.typename +
+                      ':' +
+                      event.dataItem[this.settings.keyField as string],
+                  });
+
+                  cache.evict({
+                    fieldName: `findMany${this.settings.typename}Count`,
+                  });
+                }
               },
             })
             .subscribe({
               next: () => {
                 this.snackBar.open('Deleted', '', { duration: 1500 });
-                this.loading = false;
+                this.loading.set(false);
               },
               error: e => {
                 this.snackBarError.open(e);
-                this.loading = false;
+                this.loading.set(false);
               },
             });
         }
@@ -398,18 +400,18 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
 
       if (this.#querySub) this.#querySub.unsubscribe();
 
-      this.loading = true;
+      this.loading.set(true);
 
       this.#querySub = this.settings.findManyGQL.watch({ variables }).valueChanges.subscribe({
         next: ({ data, loading }) => {
-          this.loading = loading;
+          this.loading.set(loading);
           if (data) {
             this.gridData.data = Object.values(data)[0] as T[];
             this.changeDetectorRef.detectChanges();
           }
         },
         error: e => {
-          this.loading = false;
+          this.loading.set(false);
           this.grid.noRecordsTemplate = new NoRecordsTemplateDirective(this.errorTemplate);
           console.error(e);
         },
