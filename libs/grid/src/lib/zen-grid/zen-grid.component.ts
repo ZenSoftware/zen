@@ -143,7 +143,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
   @Input() disableGroupButton = false;
   @Input() disableRefresh = false;
   @Input() disableReset = false;
-  @Input() height = 680;
+  @Input() height = 800;
   @Input() loading = signal(true);
   @Input() mode = GridMode.Default;
   @Input() reorderable = true;
