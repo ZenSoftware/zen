@@ -8,12 +8,13 @@ import { GridMode, KendoGridSettings, ZenGridComponent, ZenGridSettings } from '
 import { DialogData, ZenUserInputComponent } from '../zen-user-input';
 
 const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
-  rowColorStyles: [
-    {
-      condition: row => row.roles.includes('Super'),
-      hexColor: '#003333',
-    },
-  ],
+  // Note: Using the row color syles is buggy as the background color does not apply to alternate rows
+  // rowColorStyles: [
+  //   {
+  //     condition: row => row.roles.includes('Super'),
+  //     hexColor: '#003333',
+  //   },
+  // ],
   columnsConfig: [
     {
       field: 'id',
