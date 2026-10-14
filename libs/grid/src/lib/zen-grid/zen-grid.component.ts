@@ -19,7 +19,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ApolloCache } from '@apollo/client';
 import { PureAbility } from '@casl/ability';
 import {
   AddEvent,
@@ -289,7 +288,7 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
               variables: {
                 where: { id: event.dataItem[this.settings.keyField as string] },
               },
-              update: (cache: ApolloCache) => {
+              update: cache => {
                 if (this.settings.process === 'local') {
                   const data = cache.readQuery({
                     query: this.settings.findManyGQL.document,
