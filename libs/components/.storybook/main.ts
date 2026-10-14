@@ -11,7 +11,7 @@ const config: StorybookConfig = {
       },
     },
   },
-  staticDirs: [{ from: '../../../apps/portal/src/assets', to: '/assets' }],
+  staticDirs: [{ from: '../../../apps/portal/public', to: '/' }],
 };
 
 export default config;
