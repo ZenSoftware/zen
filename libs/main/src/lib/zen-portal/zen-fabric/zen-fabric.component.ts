@@ -136,7 +136,7 @@ export class ZenFabricComponent implements AfterViewInit, OnDestroy {
       left: 250,
       top: 300,
       width: 300,
-      fontFamily: 'zen-default',
+      fontFamily: 'zen-plain',
       editable: true,
       textAlign: 'center',
     });

@@ -13,7 +13,7 @@ import FontFaceObserver from 'fontfaceobserver';
 export class ZenToolbarTextComponent {
   @Input() canvas!: fabric.Canvas;
   fill = '#000000';
-  fonts = ['Pacifico', 'zen-default', 'zen-heading'];
+  fonts = ['Pacifico', 'zen-plain', 'zen-brand'];
 
   fillClosed() {
     const textbox = this.canvas.getActiveObject() as fabric.Textbox;
