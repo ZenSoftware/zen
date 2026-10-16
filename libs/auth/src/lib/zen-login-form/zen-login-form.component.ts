@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
 import { ServerError } from '@apollo/client/errors';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Environment } from '@zen/common';
 import { ZenLoadingComponent } from '@zen/components';
 import { verticalAccordion } from '@zen/components/animations';
@@ -47,7 +47,7 @@ interface FormType {
     MatInputModule,
     MatProgressBarModule,
     ReactiveFormsModule,
-    TranslateModule,
+    TranslatePipe,
     ZenLoadingComponent,
     ZenPasswordInputComponent,
     ZenUsernameInputComponent,

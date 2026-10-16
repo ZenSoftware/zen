@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Environment } from '@zen/common';
 import { verticalAccordion } from '@zen/components/animations';
 
@@ -17,7 +17,7 @@ import { ZenLoginFormComponent } from '../zen-login-form/zen-login-form.componen
     IfPublicRegistrationDirective,
     MatButtonModule,
     RouterLink,
-    TranslateModule,
+    TranslatePipe,
     ZenLoginFormComponent,
   ],
 })

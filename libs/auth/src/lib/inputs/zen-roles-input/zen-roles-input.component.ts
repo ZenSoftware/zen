@@ -13,7 +13,7 @@ import {
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Role } from '@zen/common';
 import { ZenSnackbarError, ZenSnackbarModule } from '@zen/components';
 import { Subscription } from 'rxjs';
@@ -28,7 +28,7 @@ import { Subscription } from 'rxjs';
     MatFormFieldModule,
     MatIconModule,
     ReactiveFormsModule,
-    TranslateModule,
+    TranslatePipe,
     ZenSnackbarModule,
   ],
   providers: [

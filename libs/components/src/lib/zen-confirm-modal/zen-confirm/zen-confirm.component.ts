@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, Input, ViewChild, inject } from '@angular/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { ZenConfirmOptions } from '../zen-confirm-options';
 
@@ -9,7 +9,7 @@ import { ZenConfirmOptions } from '../zen-confirm-options';
   selector: 'zen-confirm',
   templateUrl: 'zen-confirm.component.html',
   standalone: true,
-  imports: [MatButtonModule, TranslateModule],
+  imports: [MatButtonModule, TranslatePipe],
 })
 export class ZenConfirmComponent implements AfterContentInit {
   @ViewChild('confirmBtn') confirmBtn!: MatButton;

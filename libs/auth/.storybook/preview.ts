@@ -1,20 +1,15 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PureAbility } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Preview, moduleMetadata } from '@storybook/angular';
 import { Environment, EnvironmentDev } from '@zen/common';
 import { AuthExchangeTokenGQL, AuthLoginGQL, GetAccountInfoGQL } from '@zen/graphql';
 import { ApolloTestingModule } from 'apollo-angular/testing';
 
 import { AuthService } from '../src/lib/auth.service';
-
-function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
-}
 
 const preview: Preview = {
   decorators: [
@@ -29,11 +24,14 @@ const preview: Preview = {
             detectSubjectType: object => object['__typename'],
           }),
         },
+        provideTranslateService({
+          loader: provideTranslateHttpLoader({ prefix: 'i18n/', suffix: '.json' }),
+          fallbackLang: 'en',
+        }),
         AuthService,
         AuthLoginGQL,
         AuthExchangeTokenGQL,
         GetAccountInfoGQL,
-        TranslateService,
       ],
     }),
   ],

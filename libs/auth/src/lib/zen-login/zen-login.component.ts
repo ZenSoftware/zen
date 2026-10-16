@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { ZenLoginFormComponent } from '../zen-login-form/zen-login-form.component';
 
@@ -7,7 +7,7 @@ import { ZenLoginFormComponent } from '../zen-login-form/zen-login-form.componen
   selector: 'zen-login',
   templateUrl: 'zen-login.component.html',
   standalone: true,
-  imports: [TranslateModule, ZenLoginFormComponent],
+  imports: [TranslatePipe, ZenLoginFormComponent],
 })
 export class ZenLoginComponent {
   @Output() loggedIn = new EventEmitter<never>();

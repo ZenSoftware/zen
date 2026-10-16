@@ -4,7 +4,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { languages } from '@zen/common';
 import ls from 'localstorage-slim';
 
@@ -20,7 +20,7 @@ export const CURRENT_LANG_LS_KEY = 'currentLang';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    TranslateModule,
+    TranslatePipe,
   ],
 })
 export class ZenLanguagePickerModalComponent {
@@ -29,7 +29,7 @@ export class ZenLanguagePickerModalComponent {
   languages = languages;
 
   constructor() {
-    this.#selected = this.translate.currentLang;
+    this.#selected = this.translate.getCurrentLang()!;
   }
 
   #selected: string;

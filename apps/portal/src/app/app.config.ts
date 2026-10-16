@@ -1,4 +1,4 @@
-import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -9,23 +9,15 @@ import {
 } from '@angular/router';
 import { PureAbility } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { authInterceptorFn, token } from '@zen/auth';
 import { Environment } from '@zen/common';
-import { CURRENT_LANG_LS_KEY } from '@zen/components';
 import { ZenGraphQLModule } from '@zen/graphql';
 import { possibleTypes, typePolicies } from '@zen/graphql/client';
-import ls from 'localstorage-slim';
 
 import { environment } from '../environments/environment';
 import { APP_ROUTES } from './app.routes';
-
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'i18n/', '.json');
-}
-
-const currentLang = ls.get<string>(CURRENT_LANG_LS_KEY);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,6 +32,10 @@ export const appConfig: ApplicationConfig = {
         detectSubjectType: object => object['__typename'],
       }),
     },
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({ prefix: 'i18n/', suffix: '.json' }),
+      fallbackLang: environment.defaultLanguage,
+    }),
     importProvidersFrom(
       ZenGraphQLModule.forRoot({
         cacheOptions: {
@@ -65,14 +61,6 @@ export const appConfig: ApplicationConfig = {
           connectionParams: () => ({ token: token() }),
           shouldRetry: () => true,
           retryAttempts: Infinity,
-        },
-      }),
-      TranslateModule.forRoot({
-        defaultLanguage: currentLang ? currentLang : environment.defaultLanguage,
-        loader: {
-          provide: TranslateLoader,
-          useFactory: createTranslateLoader,
-          deps: [HttpClient],
         },
       })
     ),
