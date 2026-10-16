@@ -1,6 +1,6 @@
 <mat-form-field hideRequiredMarker class="w-100">
   <mat-label>{{label}}</mat-label>
-  <input #emailInput type="email" matInput placeholder="enter@email.com" autocomplete="email" [formControl]="control" maxlength="254" hideRequiredMarker="true">
+  <input #emailInput type="email" matInput autocomplete="email" [formControl]="control" maxlength="254" hideRequiredMarker="true">
   
   @if(control.hasError('required')) {
     <mat-error>Required</mat-error>
