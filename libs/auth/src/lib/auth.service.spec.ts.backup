@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { PureAbility } from '@casl/ability';
+import { Ability } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
 import { Environment, EnvironmentDev } from '@zen/common';
 import {
@@ -19,7 +19,7 @@ import { token } from './token.signal';
 describe('AuthService', () => {
   let service: AuthService;
   let apollo: ApolloTestingController;
-  let ability: PureAbility;
+  let ability: Ability;
   let router: Router;
 
   beforeEach(() => {
@@ -33,7 +33,7 @@ describe('AuthService', () => {
         GetAccountInfoGQL,
         { provide: Environment, useValue: EnvironmentDev },
         {
-          provide: PureAbility,
+          provide: Ability,
           useValue: createPrismaAbility(undefined, {
             detectSubjectType: object => object['__typename'],
           }),
@@ -43,7 +43,7 @@ describe('AuthService', () => {
 
     service = TestBed.inject(AuthService);
     apollo = TestBed.inject(ApolloTestingController);
-    ability = TestBed.inject(PureAbility);
+    ability = TestBed.inject(Ability);
     router = TestBed.inject(Router);
   });
 
