@@ -1,8 +1,8 @@
-import { PureAbility } from '@casl/ability';
+import { Ability } from '@casl/ability';
 import { SetMetadata } from '@nestjs/common';
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-export type CaslPolicyHandler = (ability: PureAbility<any, any>) => boolean;
+export type CaslPolicyHandler = (ability: Ability<any, any>) => boolean;
 export const CASL_POLICY_KEY = 'CaslPolicy';
 
 /**

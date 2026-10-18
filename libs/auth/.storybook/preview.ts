@@ -1,6 +1,6 @@
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PureAbility } from '@casl/ability';
+import { Ability } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -19,7 +19,7 @@ const preview: Preview = {
         { provide: Environment, useValue: EnvironmentDev },
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
         {
-          provide: PureAbility,
+          provide: Ability,
           useValue: createPrismaAbility(undefined, {
             detectSubjectType: object => object['__typename'],
           }),

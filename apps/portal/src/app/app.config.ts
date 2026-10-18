@@ -7,7 +7,7 @@ import {
   withEnabledBlockingInitialNavigation,
   withHashLocation,
 } from '@angular/router';
-import { PureAbility } from '@casl/ability';
+import { Ability } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
     { provide: Environment, useValue: environment },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     {
-      provide: PureAbility,
+      provide: Ability,
       useValue: createPrismaAbility(undefined, {
         detectSubjectType: object => object['__typename'],
       }),
