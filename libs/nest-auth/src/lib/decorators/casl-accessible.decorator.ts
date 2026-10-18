@@ -1,4 +1,4 @@
-import { createAccessibleByFactory } from '@casl/prisma/runtime';
+import { accessibleBy } from '@casl/prisma/runtime';
 import {
   ContextType,
   ExecutionContext,
@@ -7,8 +7,6 @@ import {
   createParamDecorator,
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
-
-const accessibleBy = createAccessibleByFactory();
 
 /**
  * Parameter decorator that provides a CASL `accessibleBy` result for the current user.

@@ -1,47 +1,31 @@
 /**
  * Custom PrismaClient output path requires a custom casl-prisma.ts file
- * Code copied from https://casl.js.org/v6/en/package/casl-prisma
+ * Code copied from https://casl.js.org/v7/en/package/casl-prisma
  */
 
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-import { hkt } from '@casl/ability';
 import {
-  ExtractModelName,
-  Model,
-  createAbilityFactory,
-  createAccessibleByFactory,
+  accessibleBy,
+  createPrismaAbility,
+  ParsingQueryError,
+  PrismaModel,
+  prismaQuery,
+  type Model,
+  type PrismaQueryOf,
+  type Subjects,
+  type WhereInputOf,
 } from '@casl/prisma/runtime';
+import type { Prisma, User } from '../../prisma/generated';
+import { Ability } from '@casl/ability';
+import { Action } from '@zen/common';
 
-import { Prisma, PrismaClient } from '../../prisma';
+export { accessibleBy, createPrismaAbility, ParsingQueryError, prismaQuery };
 
-type ModelName = Prisma.ModelName;
-type ModelWhereInput = {
-  [K in Prisma.ModelName]: Uncapitalize<K> extends keyof PrismaClient
-    ? Extract<Parameters<PrismaClient[Uncapitalize<K>]['findFirst']>[0], { where?: any }>['where']
-    : never;
-};
+export type PrismaQuery<T extends PrismaModel = Model<any, any>> =
+  PrismaQueryOf<Prisma.TypeMap, T>;
+export type WhereInput<TModelName extends Prisma.ModelName> =
+  WhereInputOf<Prisma.TypeMap, TModelName>;
+export type AppSubjects = Subjects<{
+  User: User,
+}>;
 
-type WhereInput<TModelName extends Prisma.ModelName> = Extract<
-  ModelWhereInput[TModelName],
-  Record<any, any>
->;
-
-interface PrismaQueryTypeFactory extends hkt.GenericFactory {
-  produce: WhereInput<ExtractModelName<this[0], ModelName>>;
-}
-
-type PrismaModel = Model<Record<string, any>, string>;
-// Higher Order type that allows to infer passed in Prisma Model name
-export type PrismaQuery<T extends PrismaModel = PrismaModel> = WhereInput<
-  ExtractModelName<T, ModelName>
-> &
-  hkt.Container<PrismaQueryTypeFactory>;
-
-export type WhereInputPerModel = {
-  [K in ModelName]: WhereInput<K>;
-};
-
-const createPrismaAbility = createAbilityFactory<ModelName, PrismaQuery>();
-const accessibleBy = createAccessibleByFactory<WhereInputPerModel, PrismaQuery>();
-
-export { createPrismaAbility, accessibleBy };
+export type AppAbility = Ability<[Action, 'all' | AppSubjects], PrismaQuery>
