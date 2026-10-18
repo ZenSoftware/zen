@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanMatchFn, Router } from '@angular/router';
-import { PureAbility, Subject } from '@casl/ability';
+import { Ability, Subject } from '@casl/ability';
 import { Action } from '@zen/common';
 
 /**
@@ -12,8 +12,7 @@ export class CaslGuard {
    * Redirects to the login page otherwise.
    */
   static can(action: Action, subject: Subject): CanMatchFn {
-    return () =>
-      inject(PureAbility).can(action, subject) ? true : inject(Router).parseUrl('/login');
+    return () => (inject(Ability).can(action, subject) ? true : inject(Router).parseUrl('/login'));
   }
 
   /**
@@ -22,6 +21,6 @@ export class CaslGuard {
    */
   static cannot(action: Action, subject: Subject): CanMatchFn {
     return () =>
-      inject(PureAbility).cannot(action, subject) ? true : inject(Router).parseUrl('/login');
+      inject(Ability).cannot(action, subject) ? true : inject(Router).parseUrl('/login');
   }
 }

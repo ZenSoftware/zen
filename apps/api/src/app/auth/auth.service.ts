@@ -4,8 +4,7 @@ import { CaslFactory, JwtPayload, RequestUser } from '@zen/nest-auth';
 import { ConfigService } from '../config';
 import { AuthSession } from '../graphql/models/auth-session';
 import { JwtService } from '../jwt';
-import { accessibleBy } from './casl/casl-prisma';
-import { AppAbility } from './casl/casl.factory';
+import { AppAbility, accessibleBy } from './casl/casl-prisma';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Injectable()
