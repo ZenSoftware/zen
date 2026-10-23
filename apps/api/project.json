@@ -5,6 +5,27 @@
   "projectType": "application",
   "tags": [],
   "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "webpack-cli build",
+        "args": ["node-env=production"],
+        "assets": ["apps/api/src/assets"]
+      },
+      "configurations": {
+        "development": {
+          "args": ["node-env=development"]
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/api/src/environments/environment.ts",
+              "with": "apps/api/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
     "prune-lockfile": {
       "dependsOn": ["build"],
       "cache": true,

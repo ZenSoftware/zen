@@ -1,6 +1,5 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import { ApolloServerPlugin } from '@apollo/server';
 import {
   ApolloServerPluginLandingPageLocalDefault,
   ApolloServerPluginLandingPageProductionDefault,
@@ -20,7 +19,7 @@ export class GqlConfigService implements GqlOptionsFactory {
   constructor(private readonly config: ConfigService) {}
 
   createGqlOptions(): ApolloDriverConfig {
-    const plugins: ApolloServerPlugin[] = [];
+    const plugins: any[] = [];
     if (this.config.graphql.sandbox && !this.config.production)
       plugins.push(ApolloServerPluginLandingPageLocalDefault());
     if (this.config.graphql.sandbox && this.config.production)
