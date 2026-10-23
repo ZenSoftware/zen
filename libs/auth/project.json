@@ -7,10 +7,21 @@
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.mjs",
+        "{workspaceRoot}/tools/eslint-rules/**/*",
+        {
+          "externalDependencies": ["eslint"]
+        }
+      ]
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
+      "continuous": true,
       "options": {
         "port": 4400,
         "configDir": "libs/auth/.storybook",
@@ -22,6 +33,10 @@
         "ci": {
           "quiet": true
         }
+      },
+      "readyWhen": {
+        "port": "{env.SBCONFIG_PORT ?? options.port ?? 9009}",
+        "host": "{env.SBCONFIG_HOSTNAME ?? options.host ?? localhost}"
       }
     },
     "build-storybook": {

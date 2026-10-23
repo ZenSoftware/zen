@@ -1,61 +1,168 @@
 {
   "migrations": [
     {
-      "cli": "nx",
-      "version": "21.2.0-beta.3",
-      "description": "Update workspace to use Storybook v9",
-      "implementation": "./src/migrations/update-21-1-0/update-sb-9",
+      "version": "24.0.0-beta.0",
+      "description": "Finds local executors that declare a custom hasher, which is deprecated and will be removed in Nx 25. Rewriting a hasher as target inputs means reading what its code hashes, so the rewrite is driven by an AI prompt; the generator only reports each hasher.",
+      "implementation": "./dist/src/migrations/update-24-0-0/find-custom-hashers",
+      "prompt": "tools/ai-migrations/nx/24.0.0/move-custom-hashers-to-inputs.md",
+      "documentation": "./dist/src/migrations/update-24-0-0/find-custom-hashers.md",
+      "package": "nx",
+      "name": "24-0-0-move-custom-hashers-to-inputs"
+    },
+    {
+      "version": "24.0.0-beta.3",
+      "description": "Sets affected.legacy to true in nx.json so nx affected keeps selecting whole projects. Nx 24 selects individual affected tasks by default.",
+      "implementation": "./dist/src/migrations/update-24-0-0/enable-legacy-affected",
+      "documentation": "./dist/src/migrations/update-24-0-0/enable-legacy-affected.md",
+      "package": "nx",
+      "name": "24-0-0-enable-legacy-affected"
+    },
+    {
+      "version": "24.0.0-beta.3",
+      "description": "Renames the ultracache target options \"ignoredReads\" and \"ignoredWrites\" to \"ignoreReads\" and \"ignoreWrites\", and renames .nx/workflows/sandboxing-config.yaml to ultracache-config.yaml with its \"exclude-reads\" and \"exclude-writes\" keys renamed to \"ignore-reads\" and \"ignore-writes\".",
+      "implementation": "./dist/src/migrations/update-24-0-0/rename-ultracache-ignore-options",
+      "documentation": "./dist/src/migrations/update-24-0-0/rename-ultracache-ignore-options.md",
+      "package": "nx",
+      "name": "24-0-0-rename-ultracache-ignore-options"
+    },
+    {
+      "version": "24.0.0-beta.3",
+      "description": "Converts targets using the removed `@nx/vitest` executors to inferred tasks; an AI prompt finishes the targets the converter cannot convert safely and validates the project graph.",
+      "implementation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors",
+      "prompt": "tools/ai-migrations/@nx/vitest/24.0.0/finish-inferred-conversion.md",
+      "documentation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors.md",
+      "package": "@nx/vitest",
+      "name": "remove-deprecated-executors"
+    },
+    {
+      "version": "24.0.0-beta.3",
+      "description": "Converts targets using the removed `@nx/eslint` executors to inferred tasks; an AI prompt finishes the targets the converter cannot convert safely and validates the project graph.",
+      "implementation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors",
+      "prompt": "tools/ai-migrations/@nx/eslint/24.0.0/finish-inferred-conversion.md",
+      "documentation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors.md",
+      "package": "@nx/eslint",
+      "name": "remove-deprecated-executors"
+    },
+    {
+      "version": "24.0.0-beta.5",
+      "description": "Replaces the removed `setParserOptionsProject` generator option with `enableTypedLinting` in the generator defaults of `nx.json` and project configuration, so generators resolve typed linting as before.",
+      "implementation": "./dist/src/migrations/update-24-0-0/replace-set-parser-options-project",
+      "documentation": "./dist/src/migrations/update-24-0-0/replace-set-parser-options-project.md",
+      "package": "@nx/eslint",
+      "name": "update-24-0-0-replace-set-parser-options-project"
+    },
+    {
+      "version": "24.0.0-beta.3",
+      "description": "Converts targets using the removed `@nx/webpack` executors to inferred tasks; an AI prompt finishes the targets the converter cannot convert safely and validates the project graph.",
+      "implementation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors",
+      "prompt": "tools/ai-migrations/@nx/webpack/24.0.0/finish-inferred-conversion.md",
+      "documentation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors.md",
+      "package": "@nx/webpack",
+      "name": "remove-deprecated-executors"
+    },
+    {
+      "version": "24.0.0-beta.3",
+      "description": "Converts webpack configs that use the removed `composePlugins`, `withNx`, `withWeb` and `withReact` helpers with `@nx/webpack:convert-config-to-webpack-plugin`, then hands an AI prompt the projects it could not convert and the `.old` configs it left behind.",
+      "implementation": "./dist/src/migrations/update-24-0-0/migrate-compose-plugins",
+      "prompt": "tools/ai-migrations/@nx/webpack/24.0.0/migrate-compose-plugins.md",
+      "package": "@nx/webpack",
+      "name": "update-24-0-0-migrate-compose-plugins"
+    },
+    {
+      "version": "24.0.0-beta.3",
+      "description": "Converts targets using the removed `@nx/storybook` executors to inferred tasks; an AI prompt finishes the targets the converter cannot convert safely and validates the project graph.",
+      "implementation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors",
+      "prompt": "tools/ai-migrations/@nx/storybook/24.0.0/finish-inferred-conversion.md",
+      "documentation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors.md",
       "package": "@nx/storybook",
-      "name": "update-21-2-0-migrate-storybook-v9"
+      "name": "remove-deprecated-executors"
     },
     {
-      "cli": "nx",
-      "version": "21.2.0-beta.3",
-      "description": "Remove deprecated Storybook addon dependencies",
-      "implementation": "./src/migrations/update-21-2-0/remove-addon-dependencies",
+      "version": "24.0.0-beta.5",
+      "description": "Sets a `readyWhen` that waits for the Storybook port on `@storybook/angular:start-storybook` targets that get no `readyWhen` from their own configuration or `targetDefaults`, so tasks that depend on them with `waitFor: 'ready'` start once Storybook is listening. Also sets `continuous: true` on those targets when neither they nor `targetDefaults` set `continuous` and they don't set `smokeTest`.",
+      "implementation": "./dist/src/migrations/update-24-0-0/add-start-storybook-ready-when",
+      "documentation": "./dist/src/migrations/update-24-0-0/add-start-storybook-ready-when.md",
       "package": "@nx/storybook",
-      "name": "update-21-2-0-remove-addon-dependencies"
+      "name": "update-24-0-0-add-start-storybook-ready-when"
     },
     {
-      "cli": "nx",
-      "version": "21.2.0-beta.3",
-      "requires": { "@angular/core": ">=20.0.0" },
-      "description": "Update the @angular/cli package version to ~20.0.0.",
-      "factory": "./src/migrations/update-21-2-0/update-angular-cli",
-      "package": "@nx/angular",
-      "name": "update-angular-cli-version-20-0-0"
+      "version": "24.0.0-beta.3",
+      "description": "Converts targets using the removed `@nx/playwright` executors to inferred tasks; an AI prompt finishes the targets the converter cannot convert safely and validates the project graph.",
+      "implementation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors",
+      "prompt": "tools/ai-migrations/@nx/playwright/24.0.0/finish-inferred-conversion.md",
+      "documentation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors.md",
+      "package": "@nx/playwright",
+      "name": "remove-deprecated-executors"
     },
     {
-      "version": "21.2.0-beta.3",
-      "requires": { "@angular/core": ">=20.0.0" },
-      "description": "Migrate imports of `provideServerRendering` from `@angular/platform-server` to `@angular/ssr`.",
-      "factory": "./src/migrations/update-21-2-0/migrate-provide-server-rendering-import",
-      "package": "@nx/angular",
-      "name": "migrate-provide-server-rendering-import"
+      "version": "24.0.0-beta.3",
+      "description": "Converts targets using the removed `@nx/vite` executors, and `@nx/vitest:test` targets, to inferred tasks; an AI prompt finishes the targets the converter cannot convert safely and validates the project graph.",
+      "implementation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors",
+      "prompt": "tools/ai-migrations/@nx/vite/24.0.0/finish-inferred-conversion.md",
+      "documentation": "./dist/src/migrations/update-24-0-0/remove-deprecated-executors.md",
+      "package": "@nx/vite",
+      "name": "remove-deprecated-executors"
     },
     {
-      "version": "21.2.0-beta.3",
-      "requires": { "@angular/core": ">=20.0.0" },
-      "description": "Replace `provideServerRouting` and `provideServerRoutesConfig` with `provideServerRendering` using `withRoutes`.",
-      "factory": "./src/migrations/update-21-2-0/replace-provide-server-routing",
-      "package": "@nx/angular",
-      "name": "replace-provide-server-routing"
+      "version": "24.0.0-beta.3",
+      "description": "Replace `nxViteTsPaths` with Vite's native `resolve.tsconfigPaths`, then migrate the remaining deprecated vite configuration helpers while preserving custom behavior.",
+      "implementation": "./dist/src/migrations/update-24-0-0/migrate-nx-vite-ts-paths",
+      "prompt": "tools/ai-migrations/@nx/vite/24.0.0/migrate-config-helpers.md",
+      "package": "@nx/vite",
+      "name": "update-24-0-0-migrate-config-helpers"
     },
     {
-      "version": "21.2.0-beta.3",
-      "requires": { "@angular/core": ">=20.0.0" },
-      "description": "Update the generator defaults to maintain the previous style guide behavior.",
-      "factory": "./src/migrations/update-21-2-0/set-generator-defaults-for-previous-style-guide",
-      "package": "@nx/angular",
-      "name": "set-generator-defaults-for-previous-style-guide"
+      "version": "24.0.0-beta.3",
+      "description": "Register @nx/js/typescript with its typecheck target in workspaces that use @nx/vite/plugin without it, since @nx/vite/plugin no longer infers typecheck targets except for Vue projects.",
+      "implementation": "./dist/src/migrations/update-24-0-0/register-typescript-plugin-for-typecheck",
+      "documentation": "./dist/src/migrations/update-24-0-0/register-typescript-plugin-for-typecheck.md",
+      "package": "@nx/vite",
+      "name": "update-24-0-0-register-typescript-plugin-for-typecheck"
     },
     {
-      "version": "21.2.0-beta.3",
-      "requires": { "@angular/core": ">=20.0.0" },
-      "description": "Update 'moduleResolution' to 'bundler' in TypeScript configurations. You can read more about this here: https://www.typescriptlang.org/tsconfig/#moduleResolution.",
-      "factory": "./src/migrations/update-21-2-0/update-module-resolution",
+      "version": "24.0.0-beta.5",
+      "description": "Add the `nxReadySignal()` plugin to the Vite configs of application projects, so that `@nx/vite/plugin` infers `readyWhen: { signal: true }` for their dev and preview targets; an AI prompt finishes the configs the codemod cannot edit safely.",
+      "implementation": "./dist/src/migrations/update-24-0-0/add-ready-signal-plugin",
+      "prompt": "tools/ai-migrations/@nx/vite/24.0.0/finish-ready-signal-plugin.md",
+      "documentation": "./dist/src/migrations/update-24-0-0/add-ready-signal-plugin.md",
+      "package": "@nx/vite",
+      "name": "update-24-0-0-add-ready-signal-plugin"
+    },
+    {
+      "version": "24.0.0-beta.5",
+      "description": "Sets `readyWhen: { signal: true }` on `@nx/web:file-server` targets that get no `readyWhen` from their own configuration or `targetDefaults`, so tasks that depend on them with `waitFor: 'ready'` start once the server is listening. Those targets also get their build target as a dependency.",
+      "implementation": "./dist/src/migrations/update-24-0-0/add-ready-when-signal",
+      "documentation": "./dist/src/migrations/update-24-0-0/add-ready-when-signal.md",
+      "package": "@nx/web",
+      "name": "update-24-0-0-add-ready-when-signal"
+    },
+    {
+      "version": "24.0.0-beta.4",
+      "requires": {
+        "@angular/core": ">=22.1.0 <22.2.0"
+      },
+      "optionalUpdate": true,
+      "description": "Update the Angular packages to 22.2 unless the workspace uses Cypress component testing or webpack Module Federation in an Angular project, which break with the webpack-dev-server and webpack versions Angular 22.2 installs.",
+      "factory": "./dist/src/migrations/update-24-0-0/upgrade-to-angular-22-2",
+      "documentation": "./dist/src/migrations/update-24-0-0/upgrade-to-angular-22-2.md",
       "package": "@nx/angular",
-      "name": "update-module-resolution"
+      "name": "update-24-0-0-upgrade-to-angular-22-2"
+    },
+    {
+      "version": "24.0.0-beta.5",
+      "description": "Sets `readyWhen: { signal: true }` on `@angular/build:dev-server`, `@angular-devkit/build-angular:dev-server`, `@angular-devkit/build-angular:ssr-dev-server` and `@nx/angular:dev-server` targets that get no `readyWhen` from their own configuration or `targetDefaults`, so tasks that depend on them with `waitFor: 'ready'` start once the server is listening.",
+      "implementation": "./dist/src/migrations/update-24-0-0/add-ready-when-signal",
+      "documentation": "./dist/src/migrations/update-24-0-0/add-ready-when-signal.md",
+      "package": "@nx/angular",
+      "name": "update-24-0-0-add-ready-when-signal"
+    },
+    {
+      "version": "24.0.0-beta.5",
+      "description": "Removes generator defaults for the removed `@nx/angular:scam`, `@nx/angular:scam-directive`, `@nx/angular:scam-pipe`, and `@nx/angular:scam-to-standalone` generators from `nx.json` and project configurations.",
+      "implementation": "./dist/src/migrations/update-24-0-0/remove-scam-generator-defaults",
+      "documentation": "./dist/src/migrations/update-24-0-0/remove-scam-generator-defaults.md",
+      "package": "@nx/angular",
+      "name": "update-24-0-0-remove-scam-generator-defaults"
     }
   ]
 }

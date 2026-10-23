@@ -19,7 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { PureAbility } from '@casl/ability';
+import { Ability } from '@casl/ability';
 import {
   AddEvent,
   ColumnMenuSettings,
@@ -94,7 +94,7 @@ export interface ZenGridSettings<T extends object> {
    * const showDelete = row => ability.can('delete', row);
    * ```
    */
-  ability?: PureAbility;
+  ability?: Ability;
 }
 
 const DEFAULT_TAKE = 10;
@@ -289,41 +289,8 @@ export class ZenGridComponent<T extends object> implements AfterContentInit, OnD
                 where: { id: event.dataItem[this.settings.keyField as string] },
               },
               update: cache => {
-                if (this.settings.process === 'local') {
-                  const data = cache.readQuery({
-                    query: this.settings.findManyGQL.document,
-                  });
-
-                  const key = Object.keys(data)[0];
-
-                  if (key) {
-                    const newData = data[key].filter(
-                      (item: { [key: string]: any }) =>
-                        item[this.settings!.keyField as string] !==
-                        event.dataItem[this.settings.keyField as string]
-                    );
-
-                    const updateData = {
-                      query: this.settings.findManyGQL.document,
-                      data: {} as { [key: string]: unknown },
-                    };
-
-                    updateData.data[key] = newData;
-
-                    cache.writeQuery(updateData);
-                  }
-                } else {
-                  cache.evict({
-                    id:
-                      this.settings.typename +
-                      ':' +
-                      event.dataItem[this.settings.keyField as string],
-                  });
-
-                  cache.evict({
-                    fieldName: `findMany${this.settings.typename}Count`,
-                  });
-                }
+                cache.evict({ fieldName: `findMany${this.settings.typename}` });
+                cache.evict({ fieldName: `findMany${this.settings.typename}Count` });
               },
             })
             .subscribe({
