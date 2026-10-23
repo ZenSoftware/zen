@@ -3,11 +3,10 @@ FROM node:24-alpine
 WORKDIR /usr/src/api
 
 COPY dist/apps/api ./
-COPY package.json ./
-COPY pnpm-lock.yaml ./
 COPY apps/api/prisma/schema.prisma ./schema.prisma
 
-RUN wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" && chmod +x /bin/pnpm
+COPY --from=ghcr.io/pnpm/pnpm:12-alpine /opt/pnpm /opt/pnpm
+RUN ln -s /opt/pnpm/pnpm /usr/local/bin/pnpm
 RUN pnpm i --prod --frozen-lockfile
 RUN cp /usr/src/api/node_modules/prisma/libquery_engine-linux-musl.so.node ./
 
