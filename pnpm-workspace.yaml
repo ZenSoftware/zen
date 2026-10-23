@@ -1,5 +1,3 @@
-packages:
-  - "packages/*"
 allowBuilds:
   "@apollo/protobufjs": true
   "@parcel/watcher": true
