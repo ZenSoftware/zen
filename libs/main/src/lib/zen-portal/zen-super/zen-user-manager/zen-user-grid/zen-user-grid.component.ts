@@ -1,7 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
-import { PureAbility } from '@casl/ability';
+import { Ability } from '@casl/ability';
 import { DeleteOneUserGQL, FindManyUserCountGQL, FindManyUserGQL, UserFields } from '@zen/graphql';
 import { GridMode, KendoGridSettings, ZenGridComponent, ZenGridSettings } from '@zen/grid';
 
@@ -61,7 +61,7 @@ export class ZenUserGridComponent {
   findManyUserGQL = inject(FindManyUserGQL);
   findManyUserCountGQL = inject(FindManyUserCountGQL);
   deleteOneUserGQL = inject(DeleteOneUserGQL);
-  ability = inject(PureAbility);
+  ability = inject(Ability);
   private dialog = inject(MatDialog);
 
   constructor() {

@@ -19,7 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { PureAbility } from '@casl/ability';
+import { Ability } from '@casl/ability';
 import {
   AddEvent,
   ColumnMenuSettings,
@@ -94,7 +94,7 @@ export interface ZenGridSettings<T extends object> {
    * const showDelete = row => ability.can('delete', row);
    * ```
    */
-  ability?: PureAbility;
+  ability?: Ability;
 }
 
 const DEFAULT_TAKE = 10;

@@ -34,19 +34,13 @@ The grid provides end-to-end type safety for its configuration, from the Prisma 
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
-import { PureAbility } from '@casl/ability';
+import { Ability } from '@casl/ability';
 import { DeleteOneUserGQL, FindManyUserCountGQL, FindManyUserGQL, UserFields } from '@zen/graphql';
 import { GridMode, KendoGridSettings, ZenGridComponent, ZenGridSettings } from '@zen/grid';
 
 import { DialogData, ZenUserInputComponent } from '../zen-user-input';
 
 const DEFAULT_SETTINGS: KendoGridSettings<UserFields> = {
-  rowColorStyles: [
-    {
-      condition: row => row.roles.includes('Super'),
-      hexColor: '#003333',
-    },
-  ],
   columnsConfig: [
     {
       field: 'id',
@@ -95,7 +89,7 @@ export class ZenUserGridComponent {
     findManyUserGQL: FindManyUserGQL,
     findManyUserCountGQL: FindManyUserCountGQL,
     deleteOneUserGQL: DeleteOneUserGQL,
-    ability: PureAbility,
+    ability: Ability,
     private dialog: MatDialog
   ) {
     this.settings = {
