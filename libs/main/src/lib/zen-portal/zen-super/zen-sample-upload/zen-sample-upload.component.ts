@@ -23,7 +23,7 @@ gql`
 })
 export class ZenSampleUploadComponent {
   @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
-  fileName = '';
+  fileName = signal('');
   isUploading = signal(false);
   private snackbar = inject(MatSnackBar);
   private snackbarError = inject(ZenSnackbarError);
@@ -34,13 +34,12 @@ export class ZenSampleUploadComponent {
   }
 
   fileChange() {
-    this.fileName = this.file ? this.file.name : '';
+    this.fileName.set(this.file ? this.file.name : '');
   }
 
   private reset() {
-    this.fileName = '';
-    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-    this.fileInput.nativeElement.value = null as any;
+    this.fileName.set('');
+    this.fileInput.nativeElement.value = '';
   }
 
   upload() {
@@ -55,7 +54,7 @@ export class ZenSampleUploadComponent {
       .subscribe({
         next: () => {
           this.isUploading.set(false);
-          this.snackbar.open(`Uploaded: ${this.fileName}`, undefined, { duration: 3000 });
+          this.snackbar.open(`Uploaded: ${this.fileName()}`, undefined, { duration: 3000 });
           this.reset();
         },
 
