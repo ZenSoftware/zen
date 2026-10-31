@@ -11,6 +11,7 @@ import { print } from 'graphql';
 import GraphQLUpload from 'graphql-upload/GraphQLUpload.mjs';
 
 import { ConfigService } from '../config';
+import { GraphQLDecimal } from './graphql-scalar-decimal';
 import { IContext } from './models';
 import { ALL_TYPE_DEFS } from './resolvers';
 
@@ -27,7 +28,10 @@ export class GqlConfigService implements GqlOptionsFactory {
 
     return {
       typeDefs: print(ALL_TYPE_DEFS),
-      resolvers: { Upload: GraphQLUpload },
+      resolvers: {
+        Upload: GraphQLUpload,
+        Decimal: GraphQLDecimal,
+      },
       playground: false,
       plugins,
       introspection: !!this.config.graphql.introspection,
