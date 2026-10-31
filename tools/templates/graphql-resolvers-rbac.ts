@@ -44,17 +44,17 @@ export class ${name}Resolver {
 
   @Query()
   async findUnique${name}(@Args() args: FindUnique${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${camel(name)}.findUnique(this.prismaSelect.getArgs(args, info));
+    return this.prisma.${camel(name)}.findUnique(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Query()
   async findFirst${name}(@Args() args: FindFirst${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${camel(name)}.findFirst(this.prismaSelect.getArgs(args, info));
+    return this.prisma.${camel(name)}.findFirst(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Query()
   async findMany${name}(@Args() args: FindMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${camel(name)}.findMany(this.prismaSelect.getArgs(args, info));
+    return this.prisma.${camel(name)}.findMany(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Query()
@@ -64,47 +64,47 @@ export class ${name}Resolver {
 
   @Query()
   async aggregate${name}(@Args() args: Aggregate${name}Args) {
-    return this.prisma.${camel(name)}.aggregate(args);
+    return this.prisma.${camel(name)}.aggregate(args as any);
   }
 
   @Mutation()
   async createOne${name}(@Args() args: CreateOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${camel(name)}.create(this.prismaSelect.getArgs(args, info));
+    return this.prisma.${camel(name)}.create(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async createMany${name}(@Args() args: CreateMany${name}Args) {
-    return this.prisma.${camel(name)}.createMany(args);
+    return this.prisma.${camel(name)}.createMany(args as any);
   }
 
   @Mutation()
   async createMany${name}AndReturn(@Args() args: CreateMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${camel(name)}.createManyAndReturn(this.prismaSelect.getArgs(args, info));
+    return this.prisma.${camel(name)}.createManyAndReturn(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async updateOne${name}(@Args() args: UpdateOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${camel(name)}.update(this.prismaSelect.getArgs(args, info));
+    return this.prisma.${camel(name)}.update(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async upsertOne${name}(@Args() args: UpsertOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${camel(name)}.upsert(this.prismaSelect.getArgs(args, info));
+    return this.prisma.${camel(name)}.upsert(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async deleteOne${name}(@Args() args: DeleteOne${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${camel(name)}.delete(this.prismaSelect.getArgs(args, info));
+    return this.prisma.${camel(name)}.delete(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async deleteMany${name}(@Args() args: DeleteMany${name}Args) {
-    return this.prisma.${camel(name)}.deleteMany(args);
+    return this.prisma.${camel(name)}.deleteMany(args as any);
   }
 
   @Mutation()
   async updateMany${name}(@Args() args: UpdateMany${name}Args, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.${camel(name)}.updateMany(this.prismaSelect.getArgs(args, info));
+    return this.prisma.${camel(name)}.updateMany(this.prismaSelect.getArgs(args, info) as any);
   }
 }
 `;
