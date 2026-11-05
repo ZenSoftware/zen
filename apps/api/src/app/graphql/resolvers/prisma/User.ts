@@ -53,17 +53,17 @@ export class UserResolver {
 
   @Query()
   async findUniqueUser(@Args() args: FindUniqueUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.findUnique(this.prismaSelect.getArgs(args, info));
+    return this.prisma.user.findUnique(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Query()
   async findFirstUser(@Args() args: FindFirstUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.findFirst(this.prismaSelect.getArgs(args, info));
+    return this.prisma.user.findFirst(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Query()
   async findManyUser(@Args() args: FindManyUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.findMany(this.prismaSelect.getArgs(args, info));
+    return this.prisma.user.findMany(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Query()
@@ -73,17 +73,17 @@ export class UserResolver {
 
   @Query()
   async aggregateUser(@Args() args: AggregateUserArgs) {
-    return this.prisma.user.aggregate(args);
+    return this.prisma.user.aggregate(args as any);
   }
 
   @Mutation()
   async createOneUser(@Args() args: CreateOneUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.create(this.prismaSelect.getArgs(args, info));
+    return this.prisma.user.create(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async createManyUser(@Args() args: CreateManyUserArgs) {
-    return this.prisma.user.createMany(args);
+    return this.prisma.user.createMany(args as any);
   }
 
   @Mutation()
@@ -91,31 +91,31 @@ export class UserResolver {
     @Args() args: CreateManyUserArgs,
     @Info() info: GraphQLResolveInfo
   ) {
-    return this.prisma.user.createManyAndReturn(this.prismaSelect.getArgs(args, info));
+    return this.prisma.user.createManyAndReturn(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async updateOneUser(@Args() args: UpdateOneUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.update(this.prismaSelect.getArgs(args, info));
+    return this.prisma.user.update(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async upsertOneUser(@Args() args: UpsertOneUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.upsert(this.prismaSelect.getArgs(args, info));
+    return this.prisma.user.upsert(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async deleteOneUser(@Args() args: DeleteOneUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.delete(this.prismaSelect.getArgs(args, info));
+    return this.prisma.user.delete(this.prismaSelect.getArgs(args, info) as any);
   }
 
   @Mutation()
   async deleteManyUser(@Args() args: DeleteManyUserArgs) {
-    return this.prisma.user.deleteMany(args);
+    return this.prisma.user.deleteMany(args as any);
   }
 
   @Mutation()
   async updateManyUser(@Args() args: UpdateManyUserArgs, @Info() info: GraphQLResolveInfo) {
-    return this.prisma.user.updateMany(this.prismaSelect.getArgs(args, info));
+    return this.prisma.user.updateMany(this.prismaSelect.getArgs(args, info) as any);
   }
 }
